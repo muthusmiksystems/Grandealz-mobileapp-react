@@ -50,7 +50,7 @@ const ForgetPassword = () => {
             // customLabelStyle={{ ...styles.textPassword, ...{ color: (errorLogin || errorEmail) ? "red" : COLORS.black, } }}
             // onChangeText={e => { handleChange(e, "loginpassword"), setErrorLogin(""), setPassword(e), setErrorPassword(null) }}
           /> */}
-          <Text style={{width:horizontalScale(300),textAlign:"justify",fontSize:16,marginTop:verticalScale(30)}}>
+          <Text style={{width:horizontalScale(300),fontSize:16,marginTop:verticalScale(30)}}>
             Enter your registered email address and we will send you a link to reset your password: 
           </Text>
           <TextInput

@@ -13,14 +13,14 @@ import {
   TouchableOpacity,
   // Button
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { horizontalScale, verticalScale } from "../constants/metrices";
 import { loginicon } from "../constants/icons";
-import InputBox from 'react-native-floating-label-inputbox';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { useNavigation } from "@react-navigation/native";
+// import InputBox from 'react-native-floating-label-inputbox';
+// import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const Login = () => {
-  const navigation=useNavigation();
+  const navigation=useNavigation()
   return (
     <SafeAreaView style={{ width: "100%", height: "100%", backgroundColor: "#f1f1f1" }}>
       <StatusBar
@@ -64,14 +64,14 @@ const Login = () => {
         </View>
         <View style={{ flexDirection: "row", marginTop: "4%" }}>
           <Text style={{ flexDirection: "column", left: 42, alignSelf: "flex-start", color: "#E70736" }}>Remember Me</Text>
-          <TouchableOpacity style={{ alignSelf: "flex-end", flexDirection: "column", left: 110, }}  onPressIn={()=>navigation.navigate("ForgetPassword")}><Text style={{ color: "#E70736" }}>Forget Password?</Text></TouchableOpacity>
+          <TouchableOpacity style={{ alignSelf: "flex-end", flexDirection: "column", left: 110, }} onPress={()=>navigation.navigate('ForgetPassword')}><Text style={{ color: "#E70736" }}>Forget Password?</Text></TouchableOpacity>
         </View>
-        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: verticalScale(200), padding: "4%" }}  onPressIn={()=>navigation.navigate("DataPage")}>
+        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: verticalScale(200), padding: "4%" }} onPress={()=>navigation.navigate('Tabs')}>
           <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold" }}>Log In</Text>
         </TouchableOpacity>
         <View style={{ flexDirection: "row", marginTop: "14%", alignSelf: "center" }}>
           <Text style={{ flexDirection: "column", alignSelf: "flex-start" }}>New User? </Text>
-          <TouchableOpacity style={{ alignSelf: "flex-end", flexDirection: "column" }} onPressIn={()=>navigation.navigate("Signup")}><Text style={{ color: "#E70736" }}>Create New Account</Text></TouchableOpacity>
+          <TouchableOpacity style={{ alignSelf: "flex-end", flexDirection: "column" }} onPress={()=>navigation.navigate('ForgetPassword')}><Text style={{ color: "#E70736" }}>Create New Account</Text></TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>

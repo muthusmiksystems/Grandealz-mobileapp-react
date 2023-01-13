@@ -46,7 +46,7 @@ const data = [
 const Carsold = () => {
     return (
         <SafeAreaView >
-            <View style={{bottom:80,paddingBottom:"40%"}} >
+            <View style={{bottom:80,paddingBottom:"5%"}} >
                 <FlatList
                     data={data}
                     contentContainerStyle={{}}
