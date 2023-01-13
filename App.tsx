@@ -25,6 +25,12 @@ import DataPage from './src/screens/Home/dataPage';
 import Tabs from './src/screens/navigationTabs/tab';
 import Signup from './src/screens/signup';
 import Login from './src/screens/login';
+import ChangeMobileNumber from './src/screens/changeMobileNumber';
+
+import WishList from './src/screens/wishList';
+import OtpPage from './src/screens/otpPage';
+import PriceDetails from './src/screens/PriceDetails';
+import ProductDetails from './src/screens/productdetails';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const App = () => {
   return (
@@ -37,9 +43,11 @@ const App = () => {
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
         <Stack.Screen name="DataPage" component={DataPage} />
-
-
-
+        <Stack.Screen name="OtpPage" component={OtpPage} />
+        <Stack.Screen name="ChangeMobileNumber" component={ChangeMobileNumber} />
+        <Stack.Screen name="WishList" component={WishList} />
+        <Stack.Screen name="PriceDetails" component={PriceDetails} />
+        <Stack.Screen name="ProductDetails" component={ProductDetails} />
         < Stack.Screen
                     name="Tabs"
                     component={Tabs}

@@ -48,6 +48,49 @@ const data = [
     to: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
     date: "20 october, 08:20PM"
   },
+  {
+    id: '5',
+    imag: image.cash,
+    from: "Lorem Ipsum is simply dummy ",
+    to: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    date: "20 october, 08:20PM"
+  },
+  {
+    id: '6',
+    imag: image.cash,
+    from: "Lorem Ipsum is simply dummy ",
+    to: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    date: "20 october, 08:20PM"
+  },
+  {
+    id: '7',
+    imag: image.cash,
+    from: "Lorem Ipsum is simply dummy ",
+    to: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    date: "20 october, 08:20PM"
+  },
+  {
+    id: '8',
+    imag: image.cash,
+    from: "Lorem Ipsum is simply dummy ",
+    to: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    date: "20 october, 08:20PM"
+  },
+  {
+    id: '9',
+    imag: image.cash,
+    from: "Lorem Ipsum is simply dummy ",
+    to: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    date: "20 october, 08:20PM"
+  },
+  {
+    id: '10',
+    imag: image.cash,
+    from: "Lorem Ipsum is simply dummy ",
+    to: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    date: "20 october, 08:20PM"
+  },
+
 
 ];
 const NotificationList = () => {
@@ -105,9 +148,9 @@ const NotificationList = () => {
                   </View>
                   <View style={{ flexDirection: "column", width: "70%" }}>
 
-                    <Text style={{fontSize:16,fontWeight:"bold",margin:"2%",...FONTS.lexendregular}}>{item.from}</Text>
-                    <Text style={{fontSize:14,fontWeight:"200",margin:"2%",...FONTS.lexendregular}}>{item.to}</Text>
-                    <Text style={{fontSize:14,fontWeight:"200",marginTop:"3%",...FONTS.lexendregular}}>{item.date}</Text>
+                    <Text style={{fontSize:16,fontWeight:"bold",margin:"2%",...FONTS.lexendregular,color:"#000"}}>{item.from}</Text>
+                    <Text style={{fontSize:14,fontWeight:"200",margin:"2%",...FONTS.lexendregular,color:"#000"}}>{item.to}</Text>
+                    <Text style={{fontSize:14,fontWeight:"200",marginTop:"3%",...FONTS.lexendregular,color:"#000"}}>{item.date}</Text>
 
                   </View>
                   <View style={{ flexDirection: "column", width: "20%" }}>

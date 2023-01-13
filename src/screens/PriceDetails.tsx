@@ -16,16 +16,18 @@ import ClosingSoon from '../component/closingdata';
 import Product from '../component/Products';
 import icons from '../constants/icons';
 import image from '../constants/image';
-import { FONTS } from '../constants';
+import { COLORS, FONTS } from '../constants';
+import { useNavigation } from '@react-navigation/native';
 const PriceDetails = () => {
+  const navigation=useNavigation();
   return (
-    <ScrollView style={{ flex: 1 }} >
-    
-        <View style={{ flex: 0.8 }}>
-          <StatusBar
+    <View style={{flex:1}} >
+     <StatusBar
             animated={true}
             backgroundColor={"#0a0127"}
           />
+        <View style={{flex:1.8}}>
+         
           <View
             style={{
               backgroundColor: "#0a0127",
@@ -65,13 +67,15 @@ const PriceDetails = () => {
                     }}
                   />
                 </View>
-                <View style={{ flexDirection: "column", marginLeft: "2%" ,...FONTS.lexendregular}}>
-                  <Text>Max Draw Date: September 05,2022</Text>
-                  <Text>Or earlier if the campaign is sold out</Text>
+                <View style={{ flexDirection: "column", marginLeft: "2%" }}>
+                  <Text style={{color:COLORS.black,...FONTS.lexendregular}}>Max Draw Date: September 05,2022</Text>
+                  <Text style={{color:COLORS.black,...FONTS.lexendregular}}>Or earlier if the campaign is sold out</Text>
                 </View>
               </View>
+              <View style={{borderWidth:0.5,width:"100%",borderColor:"lightgrey",marginTop:"2%"}}/>
+
               <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8 }}>
-                <View style={{ flexDirection: 'column', padding: 10 }}>
+                <View style={{ flexDirection: 'column', padding:60 }}>
                   <Image
                     source={image.inputcash}
                     style={{
@@ -83,24 +87,24 @@ const PriceDetails = () => {
             </View>
             <View style={{ marginLeft: 5, padding: 10, backgroundColor: "#D8D8D8 " }}>
               <View style={{ flexDirection: "row", marginVertical: "2%", justifyContent: "space-evenly" }}>
-                <TouchableOpacity style={{ flexDirection: "column", marginLeft: 5, borderWidth: 1 }}>
-                  <Text style={{ fontSize: 20, padding: 10, backgroundColor: "#E70736", color: "white" ,...FONTS.lexendregular}}> Prize Details</Text>
+                <TouchableOpacity style={{ flexDirection: "column", marginLeft: 5, borderWidth: 1,borderRadius:10}}>
+                  <Text style={{ fontSize: 20, padding: 10, backgroundColor: "#E70736", color: "white" ,...FONTS.lexendregular,borderRadius:8}}> Prize Details</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, }}>
-                  <Text style={{ fontSize: 20, padding: 10, backgroundColor: "#fff", color: "#000",...FONTS.lexendregular }}>
+                <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1,borderRadius:10 }} onPressIn={()=>{navigation.navigate("ProductDetails")}}>
+                  <Text style={{ fontSize: 20, padding: 10, backgroundColor: "#fff", color: "#000",...FONTS.lexendregular,borderRadius:8 }}>
                     Product Details
                   </Text>
                 </TouchableOpacity>
               </View>
-              <Text style={{ margin: "1%", fontSize: 16,...FONTS.lexendregular }}>Get a chance to win </Text>
+              <Text style={{ margin: "1%", fontSize: 16,...FONTS.lexendregular,color:COLORS.black, }}>Get a chance to win </Text>
               <Text style={{ color: "#E70736", margin: "1%", fontSize: 16 ,...FONTS.lexendregular}}>₹1,50,000 Cash</Text>
-              <Text style={{ margin: "2%", fontSize: 12 ,...FONTS.lexendregular}}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</Text>
+              <Text style={{ margin: "2%", fontSize: 12 ,...FONTS.lexendregular,color:COLORS.black,}}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</Text>
               <View style={{ flexDirection: "row", marginVertical: "2%", justifyContent: "space-evenly" }}>
-                <TouchableOpacity style={{ flexDirection: "column", marginLeft: 5, borderWidth: 1 }}>
-                  <Text style={{ fontSize: 20, padding: 10, backgroundColor: "#fff", color: "#000",...FONTS.lexendregular }}> Go To Home </Text>
+                <TouchableOpacity style={{ flexDirection: "column", marginLeft: 5, borderWidth: 1,borderRadius:10 }}>
+                  <Text style={{ fontSize: 20, padding: 10, backgroundColor: "#fff", color: "#000",...FONTS.lexendregular,borderRadius:10 }}> Go To Home </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, }}>
-                  <Text style={{ fontSize: 20, padding: 10, backgroundColor: "#fff", color: "#000",...FONTS.lexendregular }}>View Card</Text>
+                <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1,borderRadius:10 }}>
+                  <Text style={{ fontSize: 20, padding: 10, backgroundColor: "#fff", color: "#000",...FONTS.lexendregular,borderRadius:10 }}>View Card</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -108,17 +112,17 @@ const PriceDetails = () => {
 
 
         </View>
-        <View style={{ flex: 0.1 }}>
-          <View style={{ flexDirection: "row", margin: "10%", justifyContent: "space-evenly" }}>
-            <TouchableOpacity style={{ flexDirection: "column", marginLeft: 5, borderWidth: 1 }}>
-              <Text style={{ fontSize: 20, padding: 10, backgroundColor: "#E70736", color: "#fff",...FONTS.lexendregular }}>ADD TO CART </Text>
+        <View style={{flex:0.2,paddingTop:"9%"}}>
+          <View style={{ flexDirection: "row", marginHorizontal: "10%", justifyContent: "space-evenly" }}>
+            <TouchableOpacity style={{ flexDirection: "column", marginLeft: 5, borderWidth: 1,borderRadius:10 }}>
+              <Text style={{ fontSize: 20, padding: 10, backgroundColor: "#E70736", color: "#fff",...FONTS.lexendregular,borderRadius:10 }}>ADD TO CART </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, }}>
-              <Text style={{ fontSize: 20, padding: 10, backgroundColor: "#fff", color: "#000",...FONTS.lexendregular }}>BUY NOW</Text>
+            <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1,borderRadius:10 }}>
+              <Text style={{ fontSize: 20, padding: 10, backgroundColor: "#fff", color: "#000",...FONTS.lexendregular,borderRadius:10 }}>BUY NOW</Text>
             </TouchableOpacity>
           </View>
         </View>
-    </ScrollView>
+    </View>
   )
 }
 const styles = StyleSheet.create({

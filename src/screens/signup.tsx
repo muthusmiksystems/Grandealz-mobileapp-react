@@ -15,8 +15,8 @@ import {
 } from "react-native";
 import { horizontalScale, verticalScale } from "../constants/metrices";
 import { loginicon } from "../constants/icons";
-import InputBox from 'react-native-floating-label-inputbox';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+// import InputBox from 'react-native-floating-label-inputbox';
+// import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { useNavigation } from "@react-navigation/native";
 
 const Signup = () => {
@@ -38,10 +38,11 @@ const Signup = () => {
           }}
         >
         </Image>
-        <Text style={{ fontSize: 30, color: "white" }}>Grandealz</Text>
+        <Text style={{ fontSize: 35, color: "white",fontFamily:"Lexend-Regular" }}>Grandealz</Text>
       </View>
       <View style={styles.subdivTwo}>
-        <Text style={{ fontSize: 25, color: "black", textAlign: "center", marginTop: verticalScale(20) }}>Register</Text>
+        <ScrollView>
+        <Text style={{ fontSize: 25, color: "black", textAlign: "center", marginTop: verticalScale(10),fontFamily:"Lexend-SemiBold" }}>Register</Text>
         <View style={{ alignItems: "center" }}>
           {/* <InputBox
             // inputOutLine
@@ -56,44 +57,52 @@ const Signup = () => {
           /> */}
           <TextInput
             placeholder="Fisrt Name"
-            style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: verticalScale(320), marginTop: verticalScale(20) }}
+            placeholderStyle={{ fontFamily: "Lexend-Regular" }}
+            placeholderTextColor={"black"}
+            style={{ borderWidth: 1, paddingStart: 15, borderColor:"#c4c4c2", borderRadius: 8, width: verticalScale(320), marginTop: verticalScale(20) }}
           />
           <TextInput
             placeholder="Last Name"
-            style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: verticalScale(320), marginTop: verticalScale(20) }}
+            placeholderTextColor={"black"}
+            style={{ borderWidth: 1, paddingStart: 15, borderColor:"#c4c4c2", borderRadius: 8, width: verticalScale(320), marginTop: verticalScale(20) }}
           />
            <TextInput
             placeholder="Email"
-            style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: verticalScale(320), marginTop: verticalScale(20) }}
+            placeholderTextColor={"black"}
+            style={{ borderWidth: 1, paddingStart: 15, borderColor:"#c4c4c2", borderRadius: 8, width: verticalScale(320), marginTop: verticalScale(20) }}
           />
           <View style={{flexDirection:"row"}}>
           <TextInput
             placeholder="+91"
-            style={{ borderWidth: 1,flexDirection:"column", paddingStart: 10, borderRadius: 8, width: verticalScale(50), marginTop: verticalScale(20) }}
+            placeholderTextColor={"black"}
+            style={{ borderWidth: 1,flexDirection:"column", borderColor:"#c4c4c2", paddingStart: 10, borderRadius: 8, width: verticalScale(50), marginTop: verticalScale(20) }}
           />
           <TextInput
             placeholder="Phone"
-            style={{ borderWidth: 1, paddingStart: 15,flexDirection:"column", borderRadius: 8, width: verticalScale(261),marginLeft:"2%", marginTop: verticalScale(20) }}
+            placeholderTextColor={"black"}
+            style={{ borderWidth: 1, paddingStart: 15, borderColor:"#c4c4c2",flexDirection:"column", borderRadius: 8, width: verticalScale(261),marginLeft:"2%", marginTop: verticalScale(20) }}
           />
           </View>
           
-           <TextInput
+          <TextInput
             placeholder="Password"
-            style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: verticalScale(320), marginTop: verticalScale(20) }}
+            placeholderTextColor={"black"}
+            style={{ borderWidth: 1, paddingStart: 15, borderColor:"#c4c4c2", borderRadius: 8, width: verticalScale(320), marginTop: verticalScale(20) }}
           />
           {/* <CheckBox>Remember Me</CheckBox> */}
         </View>
         <View style={{ flexDirection: "row", marginTop: "4%",alignSelf:"center" }}>
-          <Text style={{ flexDirection: "column", alignSelf: "flex-start" }}>I agree to </Text><Text style={{color: "#E70736", textDecorationLine: "underline" }}>Usage Terms</Text><Text> and </Text><Text style={{color: "#E70736", textDecorationLine: "underline" }}>Privacy Policy</Text>
+          <Text style={{ flexDirection: "column", alignSelf: "flex-start",fontFamily:"Lexend-Regular", color:"black" }}>I agree to </Text><Text style={{color: "#E70736", textDecorationLine: "underline",fontFamily:"Lexend-Regular" }}>Usage Terms</Text><Text style={{fontFamily:"Lexend-Regular",color:"black"}}> and </Text><Text style={{color: "#E70736", textDecorationLine: "underline", fontFamily:"Lexend-Regular" }}>Privacy Policy</Text>
           {/* <TouchableOpacity style={{ alignSelf: "flex-end", flexDirection: "column", left: 110, }}><Text style={{ color: "#E70736" }}>Forget Password?</Text></TouchableOpacity> */}
         </View>
-        <TouchableOpacity style={{ alignSelf: "center", marginTop: "6%", borderWidth: 1, borderRadius: 8, width: verticalScale(200), padding: "4%" }}>
-          <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold" }}>Register</Text>
+        <TouchableOpacity style={{ alignSelf: "center", marginTop: "6%", borderWidth: 1, borderRadius: 8, width: verticalScale(200), padding: "3%" }} onPress={()=>navigation.navigate("OtpPage")}>
+          <Text style={{ textAlign: "center", fontSize: 16,fontFamily:"Lexend-SemiBold",color:"black" }}>Register</Text>
         </TouchableOpacity>
-        <View style={{ flexDirection: "row", marginTop: "3%", alignSelf: "center" }}>
-          <Text style={{ flexDirection: "column", alignSelf: "flex-start" }}>Existing User </Text>
-          <TouchableOpacity style={{ alignSelf: "flex-end", flexDirection: "column" }} onPressIn={()=>navigation.navigate("login")}><Text style={{ color: "#E70736" }}>Log in</Text></TouchableOpacity>
+        <View style={{ flexDirection: "row", marginTop: "4%", alignSelf: "center" }}>
+          <Text style={{ flexDirection: "column", alignSelf: "flex-start",fontFamily:"Lexend-Regular",color:"black" }}>Existing User </Text>
+          <TouchableOpacity style={{ alignSelf: "flex-end", flexDirection: "column" }} onPressIn={()=>navigation.navigate("login")}><Text style={{ color: "#E70736", fontFamily:"Lexend-Regular" }}>Log in</Text></TouchableOpacity>
         </View>
+        </ScrollView>
       </View>
     </SafeAreaView>
   )
@@ -101,7 +110,7 @@ const Signup = () => {
 const styles = StyleSheet.create({
   subdivOne: {
     width: horizontalScale(375),
-    height: verticalScale(350),
+    height: verticalScale(265),
     backgroundColor: "#0a0127",
     alignItems: "center",
   },
@@ -109,7 +118,7 @@ const styles = StyleSheet.create({
     width: horizontalScale(350),
     height: verticalScale(580),
     backgroundColor: "white",
-    bottom: verticalScale(150),
+    bottom: verticalScale(60),
     alignSelf: "center",
     borderRadius: 25
   }

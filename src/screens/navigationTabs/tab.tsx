@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
 
 import DataPage from "../Home/dataPage";
-import Draws from "../Tickets/tickets";
+import Draws from "../Draws/draws";
 import NotificationList from "../Home/notificationList";
 import Tickets from "../Tickets/tickets";
 import Cart from "../Cart/cart";
@@ -52,35 +52,35 @@ const Tabs = () => {
                             return (
                                 <>
                                 <BrandIcons name="notifications-outline" size={30} color={tintColor} />
-                                <Text>Notification</Text>
+                                <Text style={{color:tintColor}}>Notification</Text>
                                 </>
                             );
                         case "Draws":
                             return (
                                 <>
                                 <SLIcon name="drawer" size={30} color={tintColor} />
-                                <Text>Draws</Text>
+                                <Text style={{color:tintColor}}>Draws</Text>
                                 </>
                             );
                         case "DataPage":
                             return (
                               <>
                                 <EntypoIcons name="home" size={30} color={tintColor} />
-                                <Text>Home</Text>
+                                <Text style={{color:tintColor}}>Home</Text>
                             </>
                             );
                         case "Tickets":
                             return (
                                 <>
                                 <MCIcon name="ticket-percent-outline" size={30} color={tintColor} />
-                                <Text>Tickets</Text>
+                                <Text style={{color:tintColor}}>Tickets</Text>
                                 </>
                             );
                             case "Cart":
                                 return (
                                     <>
                                     <BrandIcons name="cart-outline" size={30} color={tintColor} />
-                                    <Text>Cart</Text>
+                                    <Text style={{color:tintColor}}>Cart</Text>
                                     </>
 
                                 );
@@ -118,24 +118,24 @@ const Tabs = () => {
              <Tab.Screen
                 name="Draws"
                 component={Draws}
-                options={{
-                    title: "Draws",
-                    headerLeft: () => (
-                        <TouchableOpacity style={{ marginLeft: "20%",borderWidth:0 }} onPress={() => navigation.navigate('Home',{screen:'Search'})}>
-                            <MCIcon name="keyboard-backspace" size={RFValue(25)} color={COLORS.white} />
-                        </TouchableOpacity>
-                    ),
-                    headerStyle: {
-                        backgroundColor: COLORS.primary,
-                        // borderBottomStartRadius: 30, 
-                        // borderBottomEndRadius: 30
-                    },
-                    headerTitleStyle: {
-                        color: COLORS.white,
-                        ...FONTS.lexendregular,
-                        right:"115%",
-                        fontSize: RFValue(16, 580)
-                    }
+                options={{headerShown: false
+                    // title: "Draws",
+                    // headerLeft: () => (
+                    //     <TouchableOpacity style={{ marginLeft: "20%",borderWidth:0 }} onPress={() => navigation.navigate('Home',{screen:'Search'})}>
+                    //         <MCIcon name="keyboard-backspace" size={RFValue(25)} color={COLORS.white} />
+                    //     </TouchableOpacity>
+                    // ),
+                    // headerStyle: {
+                    //     backgroundColor: COLORS.primary,
+                    //     // borderBottomStartRadius: 30, 
+                    //     // borderBottomEndRadius: 30
+                    // },
+                    // headerTitleStyle: {
+                    //     color: COLORS.white,
+                    //     ...FONTS.lexendregular,
+                    //     right:"115%",
+                    //     fontSize: RFValue(16, 580)
+                    // }
                 }}
             />
                 <Tab.Screen
@@ -156,50 +156,50 @@ const Tabs = () => {
             <Tab.Screen
                 name="Tickets"
                 component={Tickets}
-                options={{
-                    title: "Tickets",
-                    headerLeft: () => (
-                        <TouchableOpacity style={{ marginLeft: "20%",borderWidth:0 }} onPress={() => navigation.navigate('Home',{screen:'Search'})}>
-                            <MCIcon name="keyboard-backspace" size={RFValue(25)} color={COLORS.white} />
-                        </TouchableOpacity>
-                    ),
-                    headerStyle: {
-                        backgroundColor: COLORS.primary,
-                        // borderBottomStartRadius: 30, 
-                        // borderBottomEndRadius: 30
-                    },
-                    headerTitleStyle: {
-                        color: COLORS.white,
-                        ...FONTS.robotoregular,
-                        right:"115%",
-                        fontSize: RFValue(16, 580)
-                    }
+                options={{headerShown: false 
+                    // title: "Tickets",
+                    // headerLeft: () => (
+                    //     <TouchableOpacity style={{ marginLeft: "20%",borderWidth:0 }} onPress={() => navigation.navigate('Home',{screen:'Search'})}>
+                    //         <MCIcon name="keyboard-backspace" size={RFValue(25)} color={COLORS.white} />
+                    //     </TouchableOpacity>
+                    // ),
+                    // headerStyle: {
+                    //     backgroundColor: COLORS.primary,
+                    //     // borderBottomStartRadius: 30, 
+                    //     // borderBottomEndRadius: 30
+                    // },
+                    // headerTitleStyle: {
+                    //     color: COLORS.white,
+                    //     ...FONTS.lexendregular,
+                    //     right:"115%",
+                    //     fontSize: RFValue(16, 580)
+                    // }
                 }}
             />
            
             <Tab.Screen
                 name="Cart"
                 component={Cart}
-                options={{
-                    title: <Text>MyCourses <Text style={{fontSize:8}}>and</Text> WishLists</Text>,
-                    headerLeft: () => (
-                        <TouchableOpacity style={{ marginLeft: "20%",borderWidth:0}} onPress={() => navigation.navigate('Home',{screen:'Search'})}>
-                            <MCIcon name="keyboard-backspace" size={RFValue(25)} color={COLORS.white} />
-                        </TouchableOpacity>
-                    ),
-                    headerStyle: {
-                        backgroundColor: COLORS.primary,
-                        // borderBottomStartRadius: 30, 
-                        // borderBottomEndRadius: 30
-                    },
-                    headerTitleStyle: {
-                        color: COLORS.white,
-                        // marginRight: "25%",
-                        right:"30%",
-                        ...FONTS.robotoregular,
-                        borderWidth:0,
-                        fontSize: RFValue(16, 580)
-                    }
+                options={{ headerShown: false 
+                    // title: <Text>MyCourses <Text style={{fontSize:8}}>and</Text> WishLists</Text>,
+                    // headerLeft: () => (
+                    //     <TouchableOpacity style={{ marginLeft: "20%",borderWidth:0}} onPress={() => navigation.navigate('Home',{screen:'Search'})}>
+                    //         <MCIcon name="keyboard-backspace" size={RFValue(25)} color={COLORS.white} />
+                    //     </TouchableOpacity>
+                    // ),
+                    // headerStyle: {
+                    //     backgroundColor: COLORS.primary,
+                    //     // borderBottomStartRadius: 30, 
+                    //     // borderBottomEndRadius: 30
+                    // },
+                    // headerTitleStyle: {
+                    //     color: COLORS.white,
+                    //     // marginRight: "25%",
+                    //     right:"30%",
+                    //     ...FONTS.robotoregular,
+                    //     borderWidth:0,
+                    //     fontSize: RFValue(16, 580)
+                    // }
                 }}
 
             />

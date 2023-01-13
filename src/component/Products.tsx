@@ -13,7 +13,8 @@ import {
 } from 'react-native';
 import image from '../constants/image';
 import icons from '../constants/icons';
-
+import { COLORS,FONTS } from '../constants';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 const data = [
     {
@@ -67,9 +68,9 @@ const Product = () => {
                                     </View>
                                 </View>
                                 <View style={{ marginLeft: 5, padding: 10 }}>
-                                    <Text style={{ fontSize: 30, color: "red" }}>Win</Text>
-                                    <Text style={{ fontSize: 20, color: "black" }}>One Campaign ,Two Winners </Text>
-                                    <Text style={{ fontSize: 16, color: "black" }}>Buy Resso set for : <Text style={{ color: "red" }}>₹1500</Text> </Text>
+                                    <Text style={{ fontSize: 30, color: "red",...FONTS.lexendregular,color:COLORS.black }}>Win</Text>
+                                    <Text style={{ fontSize: 20, color: "black" ,...FONTS.lexendregular,color:COLORS.black}}>One Campaign ,Two Winners </Text>
+                                    <Text style={{ fontSize: 16, color: "black",...FONTS.lexendregular,color:COLORS.black }}>Buy Resso set for : <Text style={{ color: "red" }}>₹1500</Text> </Text>
                                     <TouchableOpacity style={{ padding: "5%", borderWidth: 1, marginTop: 5 }}>
                                         <Text style={{ textAlign: "center", color: "black", fontSize: 18 }}>Add to Cart</Text>
                                     </TouchableOpacity>
@@ -85,7 +86,7 @@ const Product = () => {
                                     </View>
 
                                     <View style={{ flexDirection: "column" }}>
-                                        <Text style={{ fontSize: 10,marginLeft:6 }}>
+                                        <Text style={{ fontSize: RFValue(10) ,marginLeft:6,...FONTS.lexendregular,color:COLORS.black }}>
                                             Max Draw Date :September 05,2023 {"\n"}
                                             Or Earlier if the Campaign is Sold Out
                                         </Text>

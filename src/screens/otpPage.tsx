@@ -15,10 +15,19 @@ import {
 } from "react-native";
 import { horizontalScale, verticalScale } from "../constants/metrices";
 import { loginicon } from "../constants/icons";
-import InputBox from 'react-native-floating-label-inputbox';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import OTPTextView from 'react-native-otp-textinput';
+import { useNavigation } from "@react-navigation/native";
 
 const OtpPage = () => {
+
+  const navigation = useNavigation();
+  const containerStyle = {
+    fontFamily: "Lexend-Regular",
+    borderBottomWidth: 3,
+    width: horizontalScale(40),
+    marginTop:verticalScale(15)
+  }
+
   return (
     <SafeAreaView style={{ width: "100%", height: "100%", backgroundColor: "#f1f1f1" }}>
       <StatusBar
@@ -30,50 +39,36 @@ const OtpPage = () => {
           source={loginicon}
           resizeMode='contain'
           style={{
-            marginTop: verticalScale(80)
+            marginTop: verticalScale(50)
           }}
         >
         </Image>
-        <Text style={{ fontSize: 35, color: "white" }}>Grandealz</Text>
+        <Text style={{ fontSize: 35, color: "white", fontFamily: "Lexend-Regular" }}>Grandealz</Text>
       </View>
       <View style={styles.subdivTwo}>
-        <Text style={{ fontSize: 25, color: "black", textAlign: "center", marginTop: verticalScale(20) }}>Forget Password</Text>
+        <Text style={{ fontSize: 25, color: "black", textAlign: "center", fontFamily: "Lexend-SemiBold", marginTop: verticalScale(20) }}>Confirm OTP</Text>
         <View style={{ alignItems: "center" }}>
-          {/* <InputBox
-            // inputOutLine
-            label={"Password"}
-            // value={password}
-            // secureTextEntry={errorPassword ? false : true}
-            rightIcon={<FontAwesome5 name={'eye'} size={38} />}
-            passHideIcon={<FontAwesome5 name={'eye-slash'} size={38} />}
-            // labelStyle={{ ...FONTS.robotoregular }}
-            // customLabelStyle={{ ...styles.textPassword, ...{ color: (errorLogin || errorEmail) ? "red" : COLORS.black, } }}
-            // onChangeText={e => { handleChange(e, "loginpassword"), setErrorLogin(""), setPassword(e), setErrorPassword(null) }}
-          /> */}
-          <Text style={{width:horizontalScale(300),textAlign:"justify",fontSize:16,marginTop:verticalScale(30)}}>
-            Enter your registered email address and we will send you a link to reset your password: 
+          <Text style={{ width: horizontalScale(300), textAlign: "justify", fontSize: 14, color: "black", marginTop: verticalScale(20), fontFamily: "Lexend-Regular" }}>
+            Please enter the verification code that we have sent to the mobile number +91 9549878945
           </Text>
-          <TextInput
-            placeholder="Email"
-            style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: verticalScale(320), marginTop: verticalScale(30) }}
+          <OTPTextView
+            // handleTextChange={(value) => {setOtp(value) }}
+            textInputStyle={containerStyle}
+            inputCount={4}
+            inputCellLength={1}
+            tintColor={"#0a0127"}
           />
-          {/* <TextInput
-            placeholder="Password"
-            style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: verticalScale(320), marginTop: verticalScale(30) }}
-          /> */}
-          {/* <CheckBox>Remember Me</CheckBox> */}
+          <View style={{flexDirection:"row",marginTop:"2%"}}>
+          <Text style={{ color: "black", fontFamily: "Lexend-Regular" }}>Time Remaining 2:00</Text>
+          <TouchableOpacity><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular" }}>     Resend</Text></TouchableOpacity>
+          </View>
         </View>
-        {/* <View style={{ flexDirection: "row", marginTop: "4%" }}>
-          <Text style={{ flexDirection: "column", left: 42, alignSelf: "flex-start", color: "#E70736" }}>Remember Me</Text>
-          <TouchableOpacity style={{ alignSelf: "flex-end", flexDirection: "column", left: 110, }}><Text style={{ color: "#E70736" }}>Forget Password?</Text></TouchableOpacity>
-        </View> */}
-        <TouchableOpacity style={{ alignSelf: "center", marginTop: "18%", borderWidth: 1, borderRadius: 8, width: verticalScale(200), padding: "4%" }}>
-          <Text style={{ textAlign: "center", fontSize: 16, fontWeight: "bold" }}>Submit</Text>
+        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: verticalScale(200), padding: "4%" }}>
+          <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-SemiBold", color: "black" }}>Verify</Text>
         </TouchableOpacity>
-        {/* <View style={{ flexDirection: "row", marginTop: "14%", alignSelf: "center" }}>
-          <Text style={{ flexDirection: "column", alignSelf: "flex-start" }}>New User? </Text>
-          <TouchableOpacity style={{ alignSelf: "flex-end", flexDirection: "column" }}><Text style={{ color: "#E70736" }}>Create New Account</Text></TouchableOpacity>
-        </View> */}
+        <View style={{ flexDirection: "row", marginTop: "6%", alignSelf: "center" }}>
+          <TouchableOpacity onPress={() => navigation.navigate("ChangeMobileNumber")} style={{ flexDirection: "column" }}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular" }}>Change Mobile Number</Text></TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   )
@@ -81,13 +76,13 @@ const OtpPage = () => {
 const styles = StyleSheet.create({
   subdivOne: {
     width: horizontalScale(375),
-    height: verticalScale(350),
+    height: verticalScale(310),
     backgroundColor: "#0a0127",
     alignItems: "center",
   },
   subdivTwo: {
     width: horizontalScale(350),
-    height: verticalScale(430),
+    height: verticalScale(400),
     backgroundColor: "white",
     bottom: verticalScale(100),
     alignSelf: "center",

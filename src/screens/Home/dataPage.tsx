@@ -14,10 +14,12 @@ import Banner from '../../component/banner';
 import Carsold from '../../component/Carsold';
 import ClosingSoon from '../../component/closingdata';
 import Product from '../../component/Products';
-import { FONTS } from '../../constants';
+import { COLORS, FONTS } from '../../constants';
 import icons from '../../constants/icons';
 import image from '../../constants/image';
+import { useNavigation } from '@react-navigation/native';
 const DataPage = () => {
+  const navigation=useNavigation();
   return (
     <ScrollView >
       <View style={{height:"100%"}}>
@@ -63,7 +65,7 @@ const DataPage = () => {
             <Banner/>
           </View>
           <View style={{ padding:"1%"}}>
-            <Text style={{fontSize:20,marginLeft:"4%", ...FONTS.lexendregular,}}>Closing Soon</Text>
+            <Text style={{fontSize:20,marginLeft:"4%", ...FONTS.lexendregular,color:COLORS.black}}>Closing Soon</Text>
             <View>
                 <ClosingSoon/>
             </View>
@@ -72,10 +74,10 @@ const DataPage = () => {
             </View>
             <View>
             <View style={{padding:5,backgroundColor:"red",height:150,}}>
-              <Text style={{color:"white",marginLeft:25,...FONTS.lexendregular}}>
+              <Text style={{color:"white",marginLeft:25,...FONTS.lexendregular,color:COLORS.black}}>
                   SOLD OUT
               </Text>
-              <Text style={{color:"white",marginLeft:25,...FONTS.lexendregular}}>
+              <Text style={{color:"white",marginLeft:25,...FONTS.lexendregular,color:COLORS.black}}>
               Lorem Ipsum is simply dummy text of the printing and typesetting industry.
               </Text>
               

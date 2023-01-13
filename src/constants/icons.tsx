@@ -4,11 +4,17 @@ export const user=require("../assests/icons/user.png")
 export const back=require("../assests/icons/left.png")
 export const rect=require("../assests/icons/Rectangle.png")
 export const vectoricon=require("../assests/icons/Vector.png");
+export const shoppingCart=require("../assests/icons/shopping-cart.png")
+export const love=require("../assests/icons/love.png")
+
 export default{
     loginicon,
  stsicon,
     user,
-    back,
+     shoppingCart,
+     love,
+     back,
     rect,
-    vectoricon
+    vectoricon,
+    
 }

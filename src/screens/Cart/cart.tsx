@@ -1,52 +1,66 @@
-import React, { useEffect,useState } from "react";
+import React from "react";
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  // CheckBox,
-  useColorScheme,
-  TextInput,
-  View,
-  Image,
-  TouchableOpacity,
-  // Button
-} from "react-native";
+    Text,
+    View,
+    StatusBar,
+    SafeAreaView,
+    ScrollView,
+    StyleSheet,
+    Image,
+    TouchableOpacity
+} from 'react-native';
+import { horizontalScale, verticalScale } from "../../constants/metrices";
+import { shoppingCart } from "../../constants/icons";
+import EntypoIcons from "react-native-vector-icons/Entypo";
 import { useNavigation } from "@react-navigation/native";
-import { horizontalScale, verticalScale } from "../constants/metrices";
-// import InputBox from 'react-native-floating-label-inputbox';
-// import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { loginicon } from "../../constants/icons";
+import { FONTS } from "../../constants";
+const Cart = () => {
 
+    const navigation=useNavigation();
 
+    return (
+        <SafeAreaView>
+            <StatusBar
+                animated={true}
+                backgroundColor="#0a0127"
+            />
+            <View style={styles.subdivOne}>
+                <TouchableOpacity onPress={()=>navigation.navigate("WishList")} style={{marginLeft:horizontalScale(30)}}>
+                    <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
+                </TouchableOpacity>
+                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: 20,marginLeft:horizontalScale(124) }}>Cart</Text>
+            </View>
+            <View style={styles.subdivTwo}>
+                <Image
+                    source={shoppingCart}
+                    resizeMode='contain'
+                    style={{
+                        width: horizontalScale(80),
+                        height: verticalScale(80),
+                    }}
+                >
 
-
-
-const Cart = (props: Props) => {
-    
-
-
-   
-return(
-<View style={styles.root}>
-  <Image
-        source={loginicon}
-        resizeMode="contain"
-        style={{
-          width: '50%',
-          height: '10%',
-        }}
-/>
-</View>
-)
+                </Image>
+                <Text style={{ fontFamily: "Lexend-Regular", color: "black", fontSize: 16, marginTop: 20 }}>Your cart in empty</Text>
+            </View>
+        </SafeAreaView>
+    );
 }
 const styles = StyleSheet.create({
-    root: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor:'white'
+    subdivOne: {
+        width: horizontalScale(375),
+        height: verticalScale(65),
+        backgroundColor: "#0a0127",
+        alignItems: "center",
+        // justifyContent: 'center',
+        flexDirection: "row"
     },
-  });
+    subdivTwo: {
+        height: verticalScale(748),
+        alignItems: "center",
+        justifyContent: "center",
+        // borderWidth:2
+    }
+
+})
 export default Cart;

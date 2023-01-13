@@ -13,6 +13,8 @@ import {
 } from 'react-native';
 import image from '../constants/image';
 import icons from '../constants/icons';
+import { COLORS,FONTS } from '../constants';
+import {useNavigation } from '@react-navigation/native';
 
 const data = [
   {
@@ -43,6 +45,7 @@ const data = [
 
 ];
 const ClosingSoon = () => {
+  const navigation=useNavigation();
   return (
     <SafeAreaView >
       <View style={{ paddingVertical: "5%" }}>
@@ -53,7 +56,7 @@ const ClosingSoon = () => {
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
             <View style={{ padding: '1%' }}>
-              <TouchableOpacity style={{ borderWidth: 1, borderRadius: 9, borderTopWidth: 4, borderTopColor: "red", backgroundColor: "white", height: 182, width: 180 }}>
+              <TouchableOpacity style={{ borderWidth: 1, borderRadius: 9, borderTopWidth: 4, borderTopColor: "red", backgroundColor: "white", height: 182, width: 180 ,}} onPress={()=>navigation.navigate("PriceDetails")}>
                 <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8 }}>
                   <View style={{ flexDirection: 'column', padding: 10 }}>
                     <Image
@@ -65,10 +68,10 @@ const ClosingSoon = () => {
                   </View>
                 </View>
                 <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 5, padding: 10 }}>
-                  <Text style={{ fontSize: 14 }}>{item.from}</Text>
+                  <Text style={{ fontSize: 14 ,color:COLORS.black,...FONTS.lexendregular}}>{item.from}</Text>
                 </View>
                 <View>
-                  <Text style={{ fontSize: 10, textAlign: "center" }}>{item.to}</Text>
+                  <Text style={{ fontSize: 10, textAlign: "center",color:COLORS.black,...FONTS.lexendregular }}>{item.to}</Text>
                 </View>
               </TouchableOpacity>
             </View>
