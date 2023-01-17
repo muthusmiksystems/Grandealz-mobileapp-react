@@ -25,10 +25,10 @@ const Cart = () => {
                 backgroundColor="#0a0127"
             />
             <View style={styles.subdivOne}>
-                <TouchableOpacity onPress={()=>navigation.navigate("WishList")} style={{marginLeft:horizontalScale(30)}}>
+                <TouchableOpacity onPress={()=>navigation.navigate("WishList")} style={{marginLeft:horizontalScale(14)}}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: 20,marginLeft:horizontalScale(124) }}>Cart</Text>
+                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: 20,marginLeft:horizontalScale(118) }}>Cart</Text>
             </View>
             <View style={styles.subdivTwo}>
                 <Image

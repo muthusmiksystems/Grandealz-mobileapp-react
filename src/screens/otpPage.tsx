@@ -17,6 +17,8 @@ import { horizontalScale, verticalScale } from "../constants/metrices";
 import { loginicon } from "../constants/icons";
 import OTPTextView from 'react-native-otp-textinput';
 import { useNavigation } from "@react-navigation/native";
+import { RFValue } from "react-native-responsive-fontsize";
+import EntypoIcons from "react-native-vector-icons/Entypo";
 
 const OtpPage = () => {
 
@@ -35,21 +37,26 @@ const OtpPage = () => {
         backgroundColor="#0a0127"
       />
       <View style={styles.subdivOne}>
+      <TouchableOpacity onPress={() => navigation.goBack()} style={{ flexDirection: "column", marginTop: verticalScale(18), marginLeft: horizontalScale(18) }}>
+          <EntypoIcons name="chevron-left" size={30} color={"white"} />
+        </TouchableOpacity>
+        <View style={{flexDirection:"column",marginLeft:horizontalScale(78),marginTop:verticalScale(45)}}>
         <Image
           source={loginicon}
           resizeMode='contain'
           style={{
-            marginTop: verticalScale(50)
+            // marginTop: verticalScale(50)
           }}
-        >
-        </Image>
-        <Text style={{ fontSize: 35, color: "white", fontFamily: "Lexend-Regular" }}>Grandealz</Text>
+        
+        />
+        </View>
+        {/* <Text style={{ fontSize: 35, color: "white", fontFamily: "Lexend-Regular" }}>Grandealz</Text> */}
       </View>
       <View style={styles.subdivTwo}>
-        <Text style={{ fontSize: 25, color: "black", textAlign: "center", fontFamily: "Lexend-SemiBold", marginTop: verticalScale(20) }}>Confirm OTP</Text>
+        <Text style={{ fontSize:  RFValue(26), color: "black", textAlign: "center", fontFamily: "Lexend-SemiBold", marginTop: verticalScale(14) }}>Confirm OTP</Text>
         <View style={{ alignItems: "center" }}>
-          <Text style={{ width: horizontalScale(300), textAlign: "justify", fontSize: 14, color: "black", marginTop: verticalScale(20), fontFamily: "Lexend-Regular" }}>
-            Please enter the verification code that we have sent to the mobile number +91 9549878945
+          <Text style={{ width: horizontalScale(320), textAlign: "justify", fontSize: RFValue(13), color: "black", marginTop: verticalScale(27), fontFamily: "Lexend-Regular" }}>
+            Please enter the verification code that we have sent to the mobile number +919549878945
           </Text>
           <OTPTextView
             // handleTextChange={(value) => {setOtp(value) }}
@@ -76,15 +83,15 @@ const OtpPage = () => {
 const styles = StyleSheet.create({
   subdivOne: {
     width: horizontalScale(375),
-    height: verticalScale(310),
+    height: verticalScale(300),
     backgroundColor: "#0a0127",
-    alignItems: "center",
+    flexDirection: "row"
   },
   subdivTwo: {
-    width: horizontalScale(350),
-    height: verticalScale(400),
+    width: horizontalScale(342),
+    height: verticalScale(380),
     backgroundColor: "white",
-    bottom: verticalScale(100),
+    bottom: verticalScale(85),
     alignSelf: "center",
     borderRadius: 25
   }

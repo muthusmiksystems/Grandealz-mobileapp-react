@@ -45,51 +45,51 @@ const Tabs = () => {
             tabBarOptions={tabOptions}
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused }) => {
-                    const tintColor = focused ? COLORS.element: COLORS.gray;
+                    const tintColor = focused ? COLORS.element : COLORS.gray;
 
                     switch (route.name) {
                         case "Notification":
                             return (
                                 <>
-                                <BrandIcons name="notifications-outline" size={30} color={tintColor} />
-                                <Text style={{color:tintColor}}>Notification</Text>
+                                    <BrandIcons name="notifications-outline" size={30} color={tintColor} />
+                                    <Text style={{ color: tintColor,...FONTS.lexendregular,fontSize:RFValue(10) }}>Notifications</Text>
                                 </>
                             );
                         case "Draws":
                             return (
                                 <>
-                                <SLIcon name="drawer" size={30} color={tintColor} />
-                                <Text style={{color:tintColor}}>Draws</Text>
+                                    <SLIcon name="drawer" size={30} color={tintColor} />
+                                    <Text style={{ color: tintColor,...FONTS.lexendregular,fontSize:RFValue(10) }}>Draws</Text>
                                 </>
                             );
                         case "DataPage":
                             return (
-                              <>
-                                <EntypoIcons name="home" size={30} color={tintColor} />
-                                <Text style={{color:tintColor}}>Home</Text>
-                            </>
+                                <>
+                                    <EntypoIcons name="home" size={30} color={tintColor} />
+                                    <Text style={{ color: tintColor,...FONTS.lexendregular,fontSize:RFValue(10) }}>Home</Text>
+                                </>
                             );
                         case "Tickets":
                             return (
                                 <>
-                                <MCIcon name="ticket-percent-outline" size={30} color={tintColor} />
-                                <Text style={{color:tintColor}}>Tickets</Text>
+                                    <MCIcon name="ticket-percent-outline" size={30} color={tintColor} />
+                                    <Text style={{ color: tintColor,...FONTS.lexendregular,fontSize:RFValue(10) }}>Tickets</Text>
                                 </>
                             );
-                            case "Cart":
-                                return (
-                                    <>
+                        case "Cart":
+                            return (
+                                <>
                                     <BrandIcons name="cart-outline" size={30} color={tintColor} />
-                                    <Text style={{color:tintColor}}>Cart</Text>
-                                    </>
+                                    <Text style={{ color: tintColor,...FONTS.lexendregular,fontSize:RFValue(10) }}>Cart</Text>
+                                </>
 
-                                );
+                            );
 
                     }
                 }
             })}
         >
-          <Tab.Screen
+            <Tab.Screen
                 name="Notification"
                 component={NotificationList}
                 options={{ headerShown: false }}
@@ -115,10 +115,11 @@ const Tabs = () => {
             // ),
             //}}
             />
-             <Tab.Screen
+            <Tab.Screen
                 name="Draws"
                 component={Draws}
-                options={{headerShown: false
+                options={{
+                    headerShown: false
                     // title: "Draws",
                     // headerLeft: () => (
                     //     <TouchableOpacity style={{ marginLeft: "20%",borderWidth:0 }} onPress={() => navigation.navigate('Home',{screen:'Search'})}>
@@ -138,7 +139,7 @@ const Tabs = () => {
                     // }
                 }}
             />
-                <Tab.Screen
+            <Tab.Screen
                 name="DataPage"
                 component={DataPage}
                 options={{ headerShown: false }}
@@ -156,7 +157,8 @@ const Tabs = () => {
             <Tab.Screen
                 name="Tickets"
                 component={Tickets}
-                options={{headerShown: false 
+                options={{
+                    headerShown: false
                     // title: "Tickets",
                     // headerLeft: () => (
                     //     <TouchableOpacity style={{ marginLeft: "20%",borderWidth:0 }} onPress={() => navigation.navigate('Home',{screen:'Search'})}>
@@ -176,11 +178,12 @@ const Tabs = () => {
                     // }
                 }}
             />
-           
+
             <Tab.Screen
                 name="Cart"
                 component={Cart}
-                options={{ headerShown: false 
+                options={{
+                    headerShown: false
                     // title: <Text>MyCourses <Text style={{fontSize:8}}>and</Text> WishLists</Text>,
                     // headerLeft: () => (
                     //     <TouchableOpacity style={{ marginLeft: "20%",borderWidth:0}} onPress={() => navigation.navigate('Home',{screen:'Search'})}>
@@ -203,7 +206,7 @@ const Tabs = () => {
                 }}
 
             />
-          
+
 
         </Tab.Navigator>
     );

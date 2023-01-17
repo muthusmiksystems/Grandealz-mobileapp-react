@@ -4,7 +4,7 @@ export const inputcash = require("../assests/images/inputcash.png");
 export const calander = require("../assests/images/calendar.png");
 export const whitecar = require("../assests/images/whitecar.png");
 export const pencil = require("../assests/images/pencil.png");
-
+export const draws = require("../assests/images/drawHimage.png");
 
 
 export default {
@@ -14,4 +14,5 @@ export default {
     calander,
     whitecar,
     pencil,
+    draws
 }
