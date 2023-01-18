@@ -29,14 +29,7 @@ const WishList = () => {
                 <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: 20, marginLeft: horizontalScale(115) }}>Wishlist</Text>
             </View>
             <View style={styles.subdivTwo}>
-                <Image
-                    source={love}
-                    resizeMode='contain'
-                    style={{
-                        width: horizontalScale(80),
-                        height: verticalScale(80),
-                    }}
-                >
+                
 
                 </Image>
                 <Text style={{ fontFamily: "Lexend-Regular", color: "black", fontSize: 16, marginTop: 20 }}>Your wishlist in empty</Text>
