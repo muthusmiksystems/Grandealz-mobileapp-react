@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -18,11 +18,30 @@ import { loginicon } from "../constants/icons";
 // import InputBox from 'react-native-floating-label-inputbox';
 // import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { useNavigation } from "@react-navigation/native";
+import CheckBox from "@react-native-community/checkbox";
+import { RFValue } from "react-native-responsive-fontsize";
+import EntypoIcons from "react-native-vector-icons/Entypo";
+
 
 const Signup = () => {
 
-  const navigation=useNavigation();
-
+  const navigation = useNavigation();
+  const CheckBoxes = () => {
+    const [isSelected, setSelection] = useState(false);
+    return (
+      <View style={{ flexDirection: "row", right: horizontalScale(4) }}>
+        <CheckBox
+          value={isSelected}
+          onValueChange={setSelection}
+          style={styles.checkBox}
+        // tintColors={{true: COLORS.primary}}
+        />
+        <View style={{ flexDirection: "column", alignSelf: "center" }}>
+          <Text style={{ fontFamily: "Lexend-Regular", color: "black", fontSize: RFValue(12) }}>I agree to <Text style={styles.underLineText}>Usage Terms</Text> and <Text style={styles.underLineText}>Privacy Policy</Text></Text>
+        </View>
+      </View>
+    )
+  }
   return (
     <SafeAreaView style={{ width: "100%", height: "100%", backgroundColor: "#f1f1f1" }}>
       <StatusBar
@@ -30,21 +49,29 @@ const Signup = () => {
         backgroundColor="#0a0127"
       />
       <View style={styles.subdivOne}>
-        <Image
-          source={loginicon}
-          resizeMode='contain'
-          style={{
-            marginTop: verticalScale(50)
-          }}
-        >
-        </Image>
-        <Text style={{ fontSize: 35, color: "white",fontFamily:"Lexend-Regular" }}>Grandealz</Text>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={{ flexDirection: "column", marginTop: verticalScale(18), marginLeft: horizontalScale(18) }}>
+          <EntypoIcons name="chevron-left" size={30} color={"white"} />
+        </TouchableOpacity>
+        <View style={{flexDirection:"column",marginLeft:horizontalScale(78),marginTop:verticalScale(45)}}>
+          <Image
+            source={loginicon}
+            resizeMode='contain'
+            style={{
+              // marginTop: verticalScale(50),
+              // flexDirection: "column",
+              // marginLeft: verticalScale(90)
+              // justifyContent:"center"
+            }}
+          />
+        </View>
+
+        {/* <Text style={{ fontSize: 35, color: "white", fontFamily: "Lexend-Regular" }}>Grandealz</Text> */}
       </View>
       <View style={styles.subdivTwo}>
-        <ScrollView>
-        <Text style={{ fontSize: 25, color: "black", textAlign: "center", marginTop: verticalScale(10),fontFamily:"Lexend-SemiBold" }}>Register</Text>
-        <View style={{ alignItems: "center" }}>
-          {/* <InputBox
+        <ScrollView style={{paddingBottom:"80%"}}>
+          <Text style={{ fontSize: RFValue(26), color: "black", textAlign: "center", marginTop: verticalScale(10), fontFamily: "Lexend-SemiBold" }}>Register</Text>
+          <View style={{ alignItems: "center" }}>
+            {/* <InputBox
             // inputOutLine
             label={"Password"}
             // value={password}
@@ -55,53 +82,55 @@ const Signup = () => {
             // customLabelStyle={{ ...styles.textPassword, ...{ color: (errorLogin || errorEmail) ? "red" : COLORS.black, } }}
             // onChangeText={e => { handleChange(e, "loginpassword"), setErrorLogin(""), setPassword(e), setErrorPassword(null) }}
           /> */}
-          <TextInput
-            placeholder="Fisrt Name"
-            placeholderStyle={{ fontFamily: "Lexend-Regular" }}
-            placeholderTextColor={"black"}
-            style={{ borderWidth: 1, paddingStart: 15, borderColor:"#c4c4c2", borderRadius: 8, width: verticalScale(320), marginTop: verticalScale(20) }}
-          />
-          <TextInput
-            placeholder="Last Name"
-            placeholderTextColor={"black"}
-            style={{ borderWidth: 1, paddingStart: 15, borderColor:"#c4c4c2", borderRadius: 8, width: verticalScale(320), marginTop: verticalScale(20) }}
-          />
-           <TextInput
-            placeholder="Email"
-            placeholderTextColor={"black"}
-            style={{ borderWidth: 1, paddingStart: 15, borderColor:"#c4c4c2", borderRadius: 8, width: verticalScale(320), marginTop: verticalScale(20) }}
-          />
-          <View style={{flexDirection:"row"}}>
-          <TextInput
-            placeholder="+91"
-            placeholderTextColor={"black"}
-            style={{ borderWidth: 1,flexDirection:"column", borderColor:"#c4c4c2", paddingStart: 10, borderRadius: 8, width: verticalScale(50), marginTop: verticalScale(20) }}
-          />
-          <TextInput
-            placeholder="Phone"
-            placeholderTextColor={"black"}
-            style={{ borderWidth: 1, paddingStart: 15, borderColor:"#c4c4c2",flexDirection:"column", borderRadius: 8, width: verticalScale(261),marginLeft:"2%", marginTop: verticalScale(20) }}
-          />
+            <TextInput
+              placeholder="First Name"
+              // placeholderStyle={{ fontFamily: "Lexend-Regular" }}
+              placeholderTextColor={"black"}
+              style={{ borderWidth: 1, paddingStart: 15, borderColor: "#c4c4c2", borderRadius: 8, width: verticalScale(332), marginTop: verticalScale(30) }}
+            />
+            <TextInput
+              placeholder="Last Name"
+              placeholderTextColor={"black"}
+              style={{ borderWidth: 1, paddingStart: 15, borderColor: "#c4c4c2", borderRadius: 8, width: verticalScale(332), marginTop: verticalScale(18) }}
+            />
+            <TextInput
+              placeholder="Email"
+              placeholderTextColor={"black"}
+              style={{ borderWidth: 1, paddingStart: 15, borderColor: "#c4c4c2", borderRadius: 8, width: verticalScale(332), marginTop: verticalScale(18) }}
+            />
+            <View style={{ flexDirection: "row" }}>
+              <TextInput
+                placeholder="+91"
+                maxLength={3}
+                keyboardType="phone-pad"
+                placeholderTextColor={"black"}
+                style={{ borderWidth: 1, flexDirection: "column", borderColor: "#c4c4c2", paddingStart: 10, borderRadius: 8, width: verticalScale(50), marginTop: verticalScale(18) }}
+              />
+              <TextInput
+                keyboardType={"phone-pad"}
+                placeholder="Phone"
+                maxLength={10}
+                placeholderTextColor={"black"}
+                style={{ borderWidth: 1, paddingStart: 15, borderColor: "#c4c4c2", flexDirection: "column", borderRadius: 8, width: verticalScale(272), marginLeft: "2%", marginTop: verticalScale(18) }}
+              />
+            </View>
+
+            <TextInput
+              placeholder="Password"
+              placeholderTextColor={"black"}
+              style={{ borderWidth: 1, paddingStart: 15, borderColor: "#c4c4c2", borderRadius: 8, width: verticalScale(332), marginTop: verticalScale(18) }}
+            />
           </View>
-          
-          <TextInput
-            placeholder="Password"
-            placeholderTextColor={"black"}
-            style={{ borderWidth: 1, paddingStart: 15, borderColor:"#c4c4c2", borderRadius: 8, width: verticalScale(320), marginTop: verticalScale(20) }}
-          />
-          {/* <CheckBox>Remember Me</CheckBox> */}
-        </View>
-        <View style={{ flexDirection: "row", marginTop: "4%",alignSelf:"center" }}>
-          <Text style={{ flexDirection: "column", alignSelf: "flex-start",fontFamily:"Lexend-Regular", color:"black" }}>I agree to </Text><Text style={{color: "#E70736", textDecorationLine: "underline",fontFamily:"Lexend-Regular" }}>Usage Terms</Text><Text style={{fontFamily:"Lexend-Regular",color:"black"}}> and </Text><Text style={{color: "#E70736", textDecorationLine: "underline", fontFamily:"Lexend-Regular" }}>Privacy Policy</Text>
-          {/* <TouchableOpacity style={{ alignSelf: "flex-end", flexDirection: "column", left: 110, }}><Text style={{ color: "#E70736" }}>Forget Password?</Text></TouchableOpacity> */}
-        </View>
-        <TouchableOpacity style={{ alignSelf: "center", marginTop: "6%", borderWidth: 1, borderRadius: 8, width: verticalScale(200), padding: "3%" }} onPress={()=>navigation.navigate("OtpPage")}>
-          <Text style={{ textAlign: "center", fontSize: 16,fontFamily:"Lexend-SemiBold",color:"black" }}>Register</Text>
-        </TouchableOpacity>
-        <View style={{ flexDirection: "row", marginTop: "4%", alignSelf: "center" }}>
-          <Text style={{ flexDirection: "column", alignSelf: "flex-start",fontFamily:"Lexend-Regular",color:"black" }}>Existing User </Text>
-          <TouchableOpacity style={{ alignSelf: "flex-end", flexDirection: "column" }} onPressIn={()=>navigation.navigate("login")}><Text style={{ color: "#E70736", fontFamily:"Lexend-Regular" }}>Log in</Text></TouchableOpacity>
-        </View>
+          <View style={{ alignSelf: "center" }}>
+            <CheckBoxes />
+          </View>
+          <TouchableOpacity style={{ alignSelf: "center", marginTop: "6%", borderWidth: 1, borderRadius: 8, width: verticalScale(200), padding: "3%" }} onPress={() => navigation.navigate("OtpPage")}>
+            <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-SemiBold", color: "black" }}>Register</Text>
+          </TouchableOpacity>
+          <View style={{ flexDirection: "row", marginTop: "4%", alignSelf: "center" }}>
+            <Text style={{ flexDirection: "column", alignSelf: "flex-start", fontFamily: "Lexend-Regular", color: "black" }}>Existing User </Text>
+            <TouchableOpacity style={{ alignSelf: "flex-end", flexDirection: "column" }} onPressIn={() => navigation.navigate("login")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular" }}>Log in</Text></TouchableOpacity>
+          </View>
         </ScrollView>
       </View>
     </SafeAreaView>
@@ -110,17 +139,26 @@ const Signup = () => {
 const styles = StyleSheet.create({
   subdivOne: {
     width: horizontalScale(375),
-    height: verticalScale(265),
+    height: verticalScale(300),
     backgroundColor: "#0a0127",
-    alignItems: "center",
+    flexDirection: "row"
   },
   subdivTwo: {
-    width: horizontalScale(350),
+    width: horizontalScale(342),
     height: verticalScale(580),
     backgroundColor: "white",
-    bottom: verticalScale(60),
+    bottom: verticalScale(82),
     alignSelf: "center",
     borderRadius: 25
+  },
+  checkBox: {
+    alignSelf: "center",
+    flexDirection: "column",
+  },
+  underLineText: {
+    color: "#E70736",
+    textDecorationLine: "underline",
+    fontFamily: "Lexend-Regular"
   }
 })
 export default Signup;

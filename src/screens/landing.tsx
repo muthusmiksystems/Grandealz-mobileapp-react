@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -24,42 +24,42 @@ import { loginicon } from "../constants/icons";
 
 
 const Landing = (props: Props) => {
-    const [authLoaded, setAuthLoaded] = useState(false);
-    const [animationLoaded, setAnimationLoaded] = useState(false);
+  const [authLoaded, setAuthLoaded] = useState(false);
+  const [animationLoaded, setAnimationLoaded] = useState(false);
 
 
-    useEffect(() => {
-      
-        setTimeout(() => {
-            setAuthLoaded(true);
-            setAnimationLoaded(true);
-        }, 2000);
-      }, []);
-      useEffect(() => {
-        if (authLoaded && animationLoaded) {
+  useEffect(() => {
 
-            props.navigation.replace('login');
-          }
-      }, [authLoaded, animationLoaded, props.navigation]);
-return(
-<View style={styles.root}>
-  <Image
+    setTimeout(() => {
+      setAuthLoaded(true);
+      setAnimationLoaded(true);
+    }, 5000);
+  }, []);
+  useEffect(() => {
+    if (authLoaded && animationLoaded) {
+
+      props.navigation.replace('login');
+    }
+  }, [authLoaded, animationLoaded, props.navigation]);
+  return (
+    <View style={styles.root}>
+      <Image
         source={loginicon}
         resizeMode="contain"
         style={{
           width: '50%',
-          height: '10%',
+          height: '18%',
         }}
-/>
-</View>
-)
+      />
+    </View>
+  )
 }
 const styles = StyleSheet.create({
-    root: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor:'#0a0127'
-    },
-  });
+  root: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#0a0127'
+  },
+});
 export default Landing;
