@@ -13,6 +13,8 @@ import {
 } from 'react-native';
 import image from '../constants/image';
 import icons from '../constants/icons';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { FONTS } from '../constants';
 
 
 const data = [
@@ -53,7 +55,7 @@ const Carsold = () => {
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => (
                         <View style={{ padding: '5%' }}>
-                            <TouchableOpacity style={{  borderRadius: 9, borderTopWidth: 4, borderTopColor: "red", backgroundColor: "white" }}>
+                            <TouchableOpacity style={{  borderRadius: 9,backgroundColor: "white" }}>
                                 <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8 }}>
                                     <View style={{ flexDirection: 'column', padding: 10 }}>
                                         <Image
@@ -68,8 +70,8 @@ const Carsold = () => {
                                 </View>
                                 <View style={{ marginLeft: 5, padding: 10 }}>
                                     
-                                    <Text style={{ fontSize: 20, color: "black" }}>Campaign:- range Rover V8 GCC </Text>
-                                    <Text style={{ fontSize: 16, color: "black" }}>EL-00990</Text>
+                                    <Text style={{  ...FONTS.lexendsemibold,fontSize: RFValue(14), color: "black" }}>Campaign:- range Rover V8 GCC </Text>
+                                    <Text style={{ ...FONTS.lexendregular,fontSize: 16, color: "black" }}>EL-00990</Text>
                                     <Text style={{ fontSize: 16, color: "red" }}>Draw date to be announced</Text>
                                 </View>
                                 
