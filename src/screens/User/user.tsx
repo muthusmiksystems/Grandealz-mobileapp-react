@@ -73,7 +73,7 @@ const User = () => {
 
                     </TouchableOpacity>
                     <View style={styles.divider} />
-                    <TouchableOpacity style={styles.touchButton}>
+                    <TouchableOpacity style={styles.touchButton} onPress={()=>{navigation.navigate("WishList")}}>
                         <Image
                             source={icons.userHeart}
                             resizeMode="contain"
@@ -88,7 +88,7 @@ const User = () => {
 
                     </TouchableOpacity>
                     <View style={styles.divider} />
-                    <TouchableOpacity style={styles.touchButton}>
+                    <TouchableOpacity style={styles.touchButton}  onPress={()=>navigation.navigate("MyOrders")}>
                         <Image
                             source={icons.userBox}
                             resizeMode="contain"
@@ -184,7 +184,7 @@ const User = () => {
 
                     </TouchableOpacity>
                     <View style={styles.divider} />
-                    <TouchableOpacity style={styles.touchButton}>
+                    <TouchableOpacity style={styles.touchButton}  onPress={() => navigation.navigate("OurProducts")}>
                         <Image
                             source={icons.userShirt}
                             resizeMode="contain"

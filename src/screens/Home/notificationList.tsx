@@ -20,6 +20,7 @@ import image from '../../constants/image';
 import { COLORS, FONTS } from '../../constants';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { verticalScale } from '../../constants/metrices';
+import { useNavigation } from '@react-navigation/native';
 
 const data = [
   {
@@ -96,6 +97,7 @@ const data = [
 
 ];
 const NotificationList = () => {
+  const navigation=useNavigation();
   return (
     <SafeAreaView style={{ flex: 1 }} >
 
