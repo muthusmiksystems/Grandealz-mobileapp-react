@@ -73,7 +73,11 @@ const Product = () => {
                                     <Text style={{ fontSize: 30, color: "red",...FONTS.lexendregular,color:COLORS.black }}>Win</Text>
                                     <Text style={{ fontSize: 16, color: "black" ,...FONTS.lexendsemibold,color:COLORS.black}}>One Campaign ,Two Winners </Text>
                                     <Text style={{ fontSize: 14, color: "black",...FONTS.lexendregular,color:COLORS.black }}>Buy Resso set for : <Text style={{ color: "red" }}>₹1500</Text> </Text>
+<<<<<<< HEAD
                                     <TouchableOpacity onPress={()=>navigation.navigate("MyOrders")} style={{ padding: "5%", borderWidth: 1, margin: 10}}>
+=======
+                                    <TouchableOpacity style={{ padding: "5%", borderWidth: 1, margin: 10}}>
+>>>>>>> 49efdccfb68e10749d902fd277bafc7195a315ed
                                         <Text style={{ textAlign: "center", color: "black", fontSize: 18 }}>Add to Cart</Text>
                                     </TouchableOpacity>
                                 </View>

@@ -24,7 +24,9 @@ import icons from "../../constants/icons";
 import { COLORS, FONTS } from "../../constants";
 import { RFValue } from "react-native-responsive-fontsize";
 import DrawsHeader from "./drawsListHorizontal";
+
 import DrawsMain from "./drawsMain";
+
 
 const Draws = (props: Props) => {
     
@@ -50,7 +52,9 @@ return(
         <Text style={{ color: COLORS.textHeader, fontSize: RFValue(20),  bottom: 8, ...FONTS.lexendregular,borderBottomColor:COLORS.element2,borderBottomWidth:3,width:"20%" }}>Draws</Text>
       </View>
             <DrawsHeader/>
+
             <DrawsMain />
+
         </ScrollView >
 
 )

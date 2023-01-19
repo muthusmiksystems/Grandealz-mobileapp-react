@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 	export const loginicon = require("../assests/icons/grandealzIconWithLetter.png");
+=======
+export const loginicon = require("../assests/icons/grandealzIconWithLetter.png");
+>>>>>>> 49efdccfb68e10749d902fd277bafc7195a315ed
 export const stsicon = require("../assests/icons/grandealzsts.png")
 export const user = require("../assests/icons/user.png")
 export const back = require("../assests/icons/left.png")
@@ -6,6 +10,7 @@ export const rect = require("../assests/icons/Rectangle.png")
 export const vectoricon = require("../assests/icons/Vector.png");
 export const shoppingCart = require("../assests/icons/shopping-cart.png")
 export const love = require("../assests/icons/love.png")
+<<<<<<< HEAD
 export const search = require("../assests/icons/search.png")
 export const next = require("../assests/icons/next.png")
 export const ticketicon = require("../assests/icons/ticketgrandealz.png")
@@ -35,10 +40,20 @@ export default {
     netBanking,
     stsicon,
     filter,
+=======
+
+export const ticketicon = require("../assests/icons/ticketgrandealz.png")
+export const filter=require("../assests/icons/filter.png")
+export default {
+    loginicon,
+    stsicon,filter,
+
+>>>>>>> 49efdccfb68e10749d902fd277bafc7195a315ed
     user,
     shoppingCart,
     love,
     back,
+<<<<<<< HEAD
     rect,    
     next,
    search,
@@ -59,4 +74,12 @@ export default {
     userWhatsapp,
     userLinkedin,
     userInstagram
+=======
+    rect,
+    vectoricon,
+
+    ticketicon
+
+
+>>>>>>> 49efdccfb68e10749d902fd277bafc7195a315ed
 }

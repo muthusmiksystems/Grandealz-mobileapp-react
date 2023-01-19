@@ -42,7 +42,11 @@ const Tickets = () => {
 const styles = StyleSheet.create({
     subdivOne: {
         width: horizontalScale(375),
+<<<<<<< HEAD
         height: verticalScale(80),
+=======
+        height: verticalScale(75),
+>>>>>>> 49efdccfb68e10749d902fd277bafc7195a315ed
         backgroundColor: "#0a0127",
         // alignItems: "center",
         justifyContent: 'center',
