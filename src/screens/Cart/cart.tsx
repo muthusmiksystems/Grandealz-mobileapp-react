@@ -33,12 +33,12 @@ const Cart = () => {
             />
             <View style={styles.subdivOne}>
 
-                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize:RFValue(22),marginStart:"15%" }}>Cart</Text>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), textAlign: "center" }}>Cart</Text>
 
             </View>
             <ScrollView style={{ height: "80%" }}>
-                <View style={{ width: "95%", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", marginTop: "5%" }}>
-                    <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "2%" }}>
+                <View style={{ width: "92%", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", marginTop: "5%",alignSelf:"center" }}>
+                    <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "2%",alignItems:"center",marginLeft:"3%" }}>
                         <View style={{ flexDirection: "column", width: "85%", }}>
                             <View style={{ flexDirection: "row" }}>
                                 <Image
@@ -49,16 +49,16 @@ const Cart = () => {
                                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular, marginStart: "5%" }}>Apply Coupon Code</Text>
                             </View>
                         </View>
-                        <MCIcon name="chevron-right" size={44} style={{ flexDirection: "column", width: "75%", color: COLORS.textHeader, fontSize: RFValue(12), ...FONTS.lexendregular, }} />
+                        <MCIcon name="chevron-right" size={25} style={{ flexDirection: "column", width: "75%" }} />
                     </View>
-                    <View style={{ flexDirection: "row", width: "100%", borderBottomStartRadius: 18, borderBottomEndRadius: 18, padding: "2%", backgroundColor: "#FFCACD" }}>
+                    <View style={{ flexDirection: "row", width: "100%", borderBottomStartRadius: 18, borderBottomEndRadius: 18, padding: "2%", backgroundColor: "#FFCACD",alignItems:"center" }}>
                         <Text style={{ flexDirection: "column", width: "85%", color: COLORS.textHeader, fontSize: RFValue(12), ...FONTS.lexendregular, padding: "3%" }}>FREE delivery Applied!</Text>
                         <Text style={{ flexDirection: "column", width: "15%", color: COLORS.textHeader, fontSize: RFValue(10), ...FONTS.lexendregular, }}>-₹10.00{"\n"}
                             <Text style={{ color: COLORS.element, fontSize: RFValue(10), ...FONTS.lexendregular, }}>Remove</Text></Text>
                     </View>
                 </View>
 
-                <View style={{ width: "95%", borderRadius: 20, backgroundColor: "#0B0029", margin: "2%", }}>
+                <View style={{ width: "92%", borderRadius: 20, backgroundColor: "#0B0029", margin: "2%",alignSelf:"center" }}>
                     <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "3%" }}>
                         <View style={{ flexDirection: "column", width: "55%", }}>
                             <View style={{ flexDirection: "row" }}>
@@ -98,12 +98,12 @@ const Cart = () => {
                 <Text style={{ fontFamily: "Lexend-Regular", color: "black", fontSize: 16, marginTop: 20 }}>Your cart in empty</Text>
             </View> */}
             </ScrollView>
-            <View style={{ flexDirection: "row", height: "7%", backgroundColor: COLORS.white }}>
-                <TouchableOpacity style={{ flexDirection: "column", width: "45%", marginHorizontal: "3%", marginVertical: "1%", borderRadius: 5, borderWidth: 1, justifyContent: "center", alignItems: "center" }}>
-                    <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular }}>Continue to Shopping</Text>
+            <View style={{ flexDirection: "row", height: "8%", backgroundColor: COLORS.white ,padding:"2%"}}>
+                <TouchableOpacity style={{ flexDirection: "column", width: "45%", borderRadius: 5, borderWidth: 1, justifyContent: "center", alignItems: "center",marginLeft:"3%" }}>
+                    <Text style={{ color: COLORS.textHeader, fontSize: RFValue(12), ...FONTS.lexendregular }}>Continue to Shopping</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ flexDirection: "column", width: "45%", marginHorizontal: "3%", marginVertical: "1%", backgroundColor: COLORS.element, borderRadius: 5, justifyContent: "center", alignItems: "center" }} onPress={()=>navigation.navigate("Delivery")}>
-                    <Text style={{ color: COLORS.white, fontSize: RFValue(14), ...FONTS.lexendregular }} >Process to Checkout </Text>
+                <TouchableOpacity style={{ flexDirection: "column", width: "45%", backgroundColor: COLORS.element, borderRadius: 5, justifyContent: "center", alignItems: "center",marginLeft:"4%" }} onPress={()=>navigation.navigate("Delivery")}>
+                    <Text style={{ color: COLORS.white, fontSize: RFValue(12), ...FONTS.lexendregular }} >Process to Checkout </Text>
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
@@ -112,11 +112,11 @@ const Cart = () => {
 const styles = StyleSheet.create({
     subdivOne: {
         width: horizontalScale(375),
-        height:"10%",
+        height:verticalScale(75),
         backgroundColor: "#0a0127",
-        alignItems: "center",
-        // justifyContent: 'center',
-        flexDirection: "row",
+        // alignItems: "center",
+        justifyContent: 'center',
+        // flexDirection: "row",
 
         
     },

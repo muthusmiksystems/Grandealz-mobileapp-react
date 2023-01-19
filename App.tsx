@@ -43,6 +43,7 @@ import PaymentOptions from './src/screens/Payments/paymentOptions';
 import ChangePassword from './src/screens/changePassword';
 import MyOrders from './src/screens/Myorders/myOrders';
 import OrderDetails from './src/screens/Myorders/orderDetails';
+import PersonalDetails from './src/component/personalDetails';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const App = () => {
   return (
@@ -73,6 +74,7 @@ const App = () => {
         <Stack.Screen name="ChangePassword" component={ChangePassword} />
 	  <Stack.Screen name="MyOrders" component={MyOrders}/>
 	   <Stack.Screen name="OrderDetails" component={OrderDetails}/>
+	   <Stack.Screen name="PersonalDetails" component={PersonalDetails} />
         < Stack.Screen
                     name="Tabs"
                     component={Tabs}

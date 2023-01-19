@@ -27,7 +27,7 @@ const CartProducts = () => {
     const data = ["all", "hello", "everybody", "world"]
     return (
 
-        <View style={{ width: "95%", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", }}>
+        <View style={{ width: "92%", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%",alignSelf:"center" }}>
 
             {data.map((item, index) => {
                 return (
@@ -52,7 +52,7 @@ const CartProducts = () => {
 
                                 </View>
                             </View>
-                            <View style={{ flexDirection: "column", width: "15%" }}>
+                            <View style={{ flexDirection: "column", width: "15%",alignSelf:"center" }}>
                                 <TouchableOpacity><AntIcon name="plussquare" size={28} color={COLORS.element} style={{ marginBottom: "10%" }} /></TouchableOpacity>
                                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular, marginStart: "15%" }}>2</Text>
                                 <TouchableOpacity><AntIcon name="minussquare" size={28} color={COLORS.element} style={{ marginTop: "10%" }} /></TouchableOpacity>

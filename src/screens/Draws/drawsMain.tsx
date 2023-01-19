@@ -18,41 +18,42 @@ import { useNavigation } from '@react-navigation/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import Winners from './winners';
 import UpcomingDraws from './upcomingDraws';
+import { verticalScale } from '../../constants/metrices';
 const DrawsMain = () => {
     const [showWinners, setShowWinners] = useState(true);
     const navigation = useNavigation();
     return (
         <SafeAreaView style={{ marginHorizontal: "2%" }}>
-            <View style={{ flexDirection: "row", width: "98%", marginHorizontal: "1%",}}>
+            <View style={{ flexDirection: "row", width: "100%", marginHorizontal: "1%",height:verticalScale(55) }}>
 
-                <View style={{ flexDirection: "row", width: "75%", marginHorizontal: "2%", backgroundColor: "white", borderRadius: 10, }}>
-                    <TouchableOpacity style={{ backgroundColor:showWinners? COLORS.element: "white", flexDirection: "column", width: "50%", paddingVertical: "5%", borderRadius: 10, justifyContent: "center", alignItems: "center" }} onPress={() => setShowWinners(!showWinners)}>
-                        <Text style={{ color:showWinners? "white":COLORS.textHeader , fontSize: RFValue(15), ...FONTS.lexendregular, }}>Winners</Text>
+                <View style={{ flexDirection: "row", width: "80%", marginHorizontal: "1%", backgroundColor: "white", borderRadius: 10, }}>
+                    <TouchableOpacity style={{ backgroundColor: showWinners ? COLORS.element : "white", flexDirection: "column", width: "50%", paddingVertical: "5%", borderRadius: 10, justifyContent: "center", alignItems: "center" }} onPress={() => setShowWinners(!showWinners)}>
+                        <Text style={{ color: showWinners ? "white" : COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular, }}>Winners</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{ backgroundColor:!showWinners? COLORS.element: "white", flexDirection: "column", width: "50%", paddingVertical: "5%", borderRadius: 10, justifyContent: "center", alignItems: "center" }} onPress={() => setShowWinners(!showWinners)}>
-                        <Text style={{ color: !showWinners? "white":COLORS.textHeader, fontSize: RFValue(15), ...FONTS.lexendregular, }}>Upcoming Draws</Text>
+                    <TouchableOpacity style={{ backgroundColor: !showWinners ? COLORS.element : "white", flexDirection: "column", width: "50%", paddingVertical: "5%", borderRadius: 10, justifyContent: "center", alignItems: "center" }} onPress={() => setShowWinners(!showWinners)}>
+                        <Text style={{ color: !showWinners ? "white" : COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular, }}>Upcoming Draws</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={{ flexDirection: "row", width: "15%", marginHorizontal: "2%", backgroundColor: "white", borderRadius: 10, }}>
+                <View style={{ flexDirection: "row", width: "15%", marginHorizontal: "1%", backgroundColor: "white", borderRadius: 10, }}>
                     <TouchableOpacity style={{ backgroundColor: "white", flexDirection: "column", width: "95%", paddingVertical: "5%", borderRadius: 10, justifyContent: "center", alignItems: "center" }} >
-                      <Image
-                        source={icons.filter}
-                        resizeMode={"contain"}
-                        style={{height:30,width:35}}
-                      />
+                        <Image
+                            source={icons.filter}
+                            resizeMode={"contain"}
+                            style={{ height: 30, width: 35 }}
+                        />
                     </TouchableOpacity>
                 </View>
 
 
             </View>
-            <View style={{marginVertical:"5%",position:"relative"}}>
+            <View style={{ marginVertical: "1%", position: "relative" }}>
                 {showWinners ?
-                <View>
-                    <Winners/>
-                </View> :
-                <View>
-                    <UpcomingDraws />
-                </View>}
+                    <View>
+                        <Winners />
+                    </View> :
+                    <View>
+                        <UpcomingDraws />
+                    </View>}
             </View>
 
 

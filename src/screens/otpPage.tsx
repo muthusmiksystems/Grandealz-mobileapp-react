@@ -55,7 +55,7 @@ const OtpPage = () => {
       <View style={styles.subdivTwo}>
         <Text style={{ fontSize:  RFValue(26), color: "black", textAlign: "center", fontFamily: "Lexend-SemiBold", marginTop: verticalScale(14) }}>Confirm OTP</Text>
         <View style={{ alignItems: "center" }}>
-          <Text style={{ width: horizontalScale(320), textAlign: "justify", fontSize: RFValue(13), color: "black", marginTop: verticalScale(27), fontFamily: "Lexend-Regular" }}>
+          <Text style={{ width: horizontalScale(300), textAlign: "justify", fontSize: RFValue(12), color: "black", marginTop: verticalScale(27), fontFamily: "Lexend-Regular" }}>
             Please enter the verification code that we have sent to the mobile number +919549878945
           </Text>
           <OTPTextView
@@ -70,7 +70,7 @@ const OtpPage = () => {
           <TouchableOpacity><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular" }}>     Resend</Text></TouchableOpacity>
           </View>
         </View>
-        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: verticalScale(200), padding: "4%" }}>
+        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(200), padding: "4%" }}>
           <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-SemiBold", color: "black" }}>Verify</Text>
         </TouchableOpacity>
         <View style={{ flexDirection: "row", marginTop: "6%", alignSelf: "center" }}>
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   },
   subdivTwo: {
     width: horizontalScale(342),
-    height: verticalScale(380),
+    height: verticalScale(395),
     backgroundColor: "white",
     bottom: verticalScale(85),
     alignSelf: "center",

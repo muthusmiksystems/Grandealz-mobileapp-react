@@ -6,7 +6,7 @@ export const COLORS = {
     // base colors
     primary: "#8830c4", // purple
     secondary: "#cacfd9",   // Gray
-
+    topBackground:"#0a0127", //background
     // colors
     black: "#1E1F20",
     white: "#FFFFFF",
@@ -18,8 +18,8 @@ export const COLORS = {
     element3:"#FF006D",
     elementBase:"#FF0D0D",
     elementBase2:"#FF0000",
-    textHeader:"#000000"
-
+    textHeader:"#000000",
+    pagebackground:"#f1f1f1",
 };
 export const SIZES = {
     // global sizes

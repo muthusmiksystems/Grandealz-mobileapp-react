@@ -69,18 +69,22 @@ const CartRelated = () => {
     return (
 
         <View>
-            <View style={{ marginHorizontal: "3%", marginVertical: "5%", }}>
+            <View style={{ margin: "4%", marginVertical: "5%"}}>
                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular, }}>People Have also bought this together</Text>
             </View>
+        {/* <View style={{borderWidth:2}}> */}
             <FlatList
                 horizontal={true}
                 data={data}
                 showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{ marginLeft:horizontalScale(20),paddingRight:"180%"}}
+                contentContainerStyle={{ marginLeft:"4%",paddingRight:"100%" }}
                 keyExtractor={item => item.id}
                 renderItem={({ item }) => (
-                    <View style={{ backgroundColor: Colors.white, borderRadius: 5,paddingBottom:verticalScale(10)}}>
-                        <TouchableOpacity style={{ backgroundColor: "white", margin: moderateScale(3) }} onPress={() => navigation.navigate("PriceDetails")}>
+                    <View style={{ backgroundColor: COLORS.white, borderRadius: 14,paddingBottom:verticalScale(13)}}>
+                        <TouchableOpacity style={{ margin:3 }} onPress={() => navigation.navigate("PriceDetails")}>
+                            {/* <View style={{}}>
+
+                            </View> */}
                             <View style={{ backgroundColor: "#F9F9F9", padding: "2%", margin: 10 }}>
                                 <Image
                                     source={image.money}
@@ -104,6 +108,7 @@ const CartRelated = () => {
                     </View>
                 )}
             />
+        {/* </View> */}
         </View>
 
     )

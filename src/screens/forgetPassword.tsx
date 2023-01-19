@@ -20,7 +20,7 @@ import { useNavigation } from "@react-navigation/native";
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import EntypoIcons from "react-native-vector-icons/Entypo";
 import { RFValue } from "react-native-responsive-fontsize";
-
+import { FONTS } from "../constants";
 
 const ForgetPassword = () => {
 
@@ -51,19 +51,19 @@ const ForgetPassword = () => {
       <View style={styles.subdivTwo}>
         <Text style={{ fontSize: 25, color: "black", textAlign: "center", marginTop: verticalScale(20), fontFamily: "Lexend-SemiBold" }}>Forgot Password</Text>
         <View style={{ alignItems: "center" }}>
-          <Text style={{ width: horizontalScale(310), textAlign: "justify", fontSize: RFValue(13), color: "black", marginTop: verticalScale(26), fontFamily: "Lexend-Regular" }}>
+          <Text style={{ width: horizontalScale(300), textAlign: "justify", fontSize: RFValue(13), color: "black", marginTop: verticalScale(26), fontFamily: "Lexend-Regular" }}>
             Enter your registered email address and we will send you a link to reset your password :
           </Text>
-          <View style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: verticalScale(332), marginTop: verticalScale(35), color: "#000" }}>
+          <View style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), marginTop: verticalScale(32), color: "#000" }}>
             <TextInput
               placeholder="Email"
               placeholderTextColor={"black"}
-              style={{ flexDirection: "column", width: horizontalScale(250) }}
+              style={{ flexDirection: "column", width: horizontalScale(250),...FONTS.lexendregular,fontSize:RFValue(14) }}
             />
             <Fontisto name='email' size={30} style={{ alignSelf: "center" }} />
           </View>
         </View>
-        <TouchableOpacity style={{ alignSelf: "center", marginTop: "14%", borderWidth: 1, borderRadius: 8, width: verticalScale(200), padding: "3%" }}
+        <TouchableOpacity style={{ alignSelf: "center", marginTop: "12%", borderWidth: 1, borderRadius: 8, width: horizontalScale(200), padding: "4%" }}
           onPress={() => navigation.navigate("OtpPage")}
         >
           <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-SemiBold", color: "black" }}>Submit</Text>

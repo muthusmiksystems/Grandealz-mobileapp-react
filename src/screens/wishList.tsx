@@ -36,9 +36,7 @@ const WishList = () => {
                         width: horizontalScale(80),
                         height: verticalScale(80),
                     }}
-                >
-
-                </Image>
+                />
                 <Text style={{ fontFamily: "Lexend-Regular", color: "black", fontSize: 16, marginTop: 20 }}>Your wishlist in empty</Text>
             </View>
         </SafeAreaView>

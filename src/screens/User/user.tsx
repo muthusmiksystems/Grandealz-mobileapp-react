@@ -58,7 +58,7 @@ const User = () => {
                     <Text style={{ ...FONTS.lexendregular, fontSize: RFValue(14) }}>info@gmail.com</Text>
                 </View>
                 <View style={styles.viewBox}>
-                    <TouchableOpacity style={styles.touchButton}>
+                    <TouchableOpacity style={styles.touchButton} onPress={()=>navigation.navigate("PersonalDetails")}>
                         <Image
                             source={icons.userIcon}
                             resizeMode="contain"

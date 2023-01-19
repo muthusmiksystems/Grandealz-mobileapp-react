@@ -19,6 +19,7 @@ import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import image from "../../constants/image";
 // import { RadioButton } from "react-native-paper";
 import icons from "../../constants/icons";
+
 const Delivery = () => {
 
     const navigation = useNavigation();
@@ -30,25 +31,14 @@ const Delivery = () => {
                 backgroundColor="#0a0127"
             />
             <View style={styles.subdivOne}>
-                <TouchableOpacity
-                    style={{ margin: "5.5%" }}
-                    onPress={()=>navigation.goBack()}
-                >
-                    <Image
-                        source={icons.back}
-                        resizeMode="contain"
-                        style={{
-                            width: 20,
-                            height: 20,
-
-                        }}
-                    />
+                <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18) }}>
+                    <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: RFValue(22), marginStart: "15%" }}>Delivery</Text>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), textAlign: "center", width:horizontalScale(260) }}>Delivery</Text>
             </View>
             <ScrollView style={{ height: "80%" }}>
                 {/* <RadioButton.Group onValueChange={newValue => { setValue(newValue), parentCallback(newValue) }} value={value} > */}
-                <View style={{ width: "95%", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", marginTop: "5%",padding: "2%"  }}>
+                <View style={{ width: "95%", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", marginTop: "5%", padding: "2%" }}>
                     <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "2%" }}>
                         <View style={{ flexDirection: "column", width: "15%", }}>
                             <View style={{ flexDirection: "row" }}>
@@ -64,8 +54,8 @@ const Delivery = () => {
                             <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendsemibold, margin: "3%" }}>Deliver at your door step</Text>
 
                             <Text style={{ color: COLORS.gray, fontSize: RFValue(10), ...FONTS.lexendregular, margin: "5%" }}>For INR 50.00 your product(s) delivered to you and your ticker(s) will be used for draws.</Text>
-                            <TouchableOpacity style={{width:"40%",justifyContent:"center",alignItems:"center",borderRadius:5,borderWidth:1,padding:"2%",marginStart:"5%"}}>
-                                    <Text style={{textAlign:"center",color: COLORS.textHeader, fontSize: RFValue(10), ...FONTS.lexendsemibold}} onPress={()=>navigation.navigate("Address")}>Address</Text>
+                            <TouchableOpacity style={{ width: "40%", justifyContent: "center", alignItems: "center", borderRadius: 5, borderWidth: 1, padding: "2%", marginStart: "5%" }}>
+                                <Text style={{ textAlign: "center", color: COLORS.textHeader, fontSize: RFValue(10), ...FONTS.lexendsemibold }} onPress={() => navigation.navigate("Address")}>Address</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={{ flexDirection: "column", width: "20%", justifyContent: "center", alignItems: "center" }}>
@@ -77,7 +67,7 @@ const Delivery = () => {
                         </View>
                     </View>
                 </View>
-                <View style={{ width: "95%", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", marginTop: "5%",padding: "2%"  }}>
+                <View style={{ width: "95%", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", marginTop: "5%", padding: "2%" }}>
                     <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "2%" }}>
                         <View style={{ flexDirection: "column", width: "15%", }}>
                             <View style={{ flexDirection: "row" }}>
@@ -93,7 +83,7 @@ const Delivery = () => {
                             <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendsemibold, margin: "3%" }}>Self Pickup From Our Outlet</Text>
 
                         </View>
-                        
+
                     </View>
                 </View>
 
@@ -106,7 +96,7 @@ const Delivery = () => {
 const styles = StyleSheet.create({
     subdivOne: {
         width: horizontalScale(375),
-        height: "10%",
+        height: verticalScale(75),
         backgroundColor: "#0a0127",
         alignItems: "center",
         // justifyContent: 'center',

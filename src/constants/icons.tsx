@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-	export const loginicon = require("../assests/icons/grandealzIconWithLetter.png");
-=======
 export const loginicon = require("../assests/icons/grandealzIconWithLetter.png");
->>>>>>> 49efdccfb68e10749d902fd277bafc7195a315ed
 export const stsicon = require("../assests/icons/grandealzsts.png")
 export const user = require("../assests/icons/user.png")
 export const back = require("../assests/icons/left.png")
@@ -10,10 +6,9 @@ export const rect = require("../assests/icons/Rectangle.png")
 export const vectoricon = require("../assests/icons/Vector.png");
 export const shoppingCart = require("../assests/icons/shopping-cart.png")
 export const love = require("../assests/icons/love.png")
-<<<<<<< HEAD
 export const search = require("../assests/icons/search.png")
 export const next = require("../assests/icons/next.png")
-export const ticketicon = require("../assests/icons/ticketgrandealz.png")
+export const ticketicon = require("../assests/icons/ticketimag.png")
 export const userGrand=require("../assests/icons/usergrandealz.png")
 export const userIcon = require("../assests/icons/usericon.png")
 export const filter=require("../assests/icons/filter.png")
@@ -27,12 +22,23 @@ export const userLocation = require("../assests/icons/placeholder.png")
 export const userChangePassword = require("../assests/icons/padlock.png")
 export const userTicket = require("../assests/icons/ticket.png")
 export const userShirt = require("../assests/icons/tshirt.png")
-export const userInfo=require("../assests/icons/info.png")
-export const userTwitter=require("../assests/icons/twitter.png")
-export const userWhatsapp=require("../assests/icons/whatsapp.png")
-export const userLinkedin=require("../assests/icons/linkedin.png")
-export const userFacebook=require("../assests/icons/facebook.png")
-export const userInstagram=require("../assests/icons/instagram.png")
+export const userInfo = require("../assests/icons/info.png")
+export const userTwitter = require("../assests/icons/twitter.png")
+export const userWhatsapp = require("../assests/icons/whatsapp.png")
+export const userLinkedin = require("../assests/icons/linkedin.png")
+export const userFacebook = require("../assests/icons/facebook.png")
+export const userInstagram = require("../assests/icons/instagram.png")
+export const tabBellColor = require("../assests/icons/bellColor.png")
+export const tabBellNoColor = require("../assests/icons/bellNoColor.png")
+export const tabDrawColor = require("../assests/icons/drawColor.png")
+export const tabDrawNoColor = require("../assests/icons/drawNoColor.png")
+export const tabHomeColor = require("../assests/icons/homeColor.png")
+export const tabHomeNoColor = require("../assests/icons/homeNoColor.png")
+export const tabTicketColor = require("../assests/icons/ticketColor.png")
+export const tabTicketNoColor = require("../assests/icons/ticketNoColor.png")
+export const tabTrolleyColor = require("../assests/icons/trolley-color.png")
+export const tabTrolleyNoColor = require("../assests/icons/trolley-noColor.png")
+export const tabTopSlide = require("../assests/icons/recUp.png")
 export default {
     loginicon,
     crcard,
@@ -40,23 +46,13 @@ export default {
     netBanking,
     stsicon,
     filter,
-=======
-
-export const ticketicon = require("../assests/icons/ticketgrandealz.png")
-export const filter=require("../assests/icons/filter.png")
-export default {
-    loginicon,
-    stsicon,filter,
-
->>>>>>> 49efdccfb68e10749d902fd277bafc7195a315ed
     user,
     shoppingCart,
     love,
     back,
-<<<<<<< HEAD
     rect,    
     next,
-   search,
+    search,
     vectoricon,
     ticketicon,
     userGrand,
@@ -73,13 +69,16 @@ export default {
     userTwitter,
     userWhatsapp,
     userLinkedin,
-    userInstagram
-=======
-    rect,
-    vectoricon,
-
-    ticketicon
-
-
->>>>>>> 49efdccfb68e10749d902fd277bafc7195a315ed
+    userInstagram,
+    tabBellColor,
+    tabBellNoColor,
+    tabTrolleyNoColor,
+    tabTopSlide,
+    tabTrolleyColor,
+    tabTicketNoColor,
+    tabTicketColor,
+    tabHomeNoColor,
+    tabHomeColor,
+    tabDrawNoColor,
+    tabDrawColor,
 }

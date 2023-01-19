@@ -108,11 +108,9 @@ const NotificationList = () => {
           style={{
             backgroundColor: "#0a0127",
           }}>
-<<<<<<< HEAD
-          <View style={{height:verticalScale(80),justifyContent:'center'}}>
-=======
+
           <View style={{height:verticalScale(75),justifyContent:'center'}}>
->>>>>>> 49efdccfb68e10749d902fd277bafc7195a315ed
+
             {/* <TouchableOpacity
               style={{ margin: "5.5%" }}
             >
@@ -135,7 +133,7 @@ const NotificationList = () => {
         <View style={{ padding: "1%",height:verticalScale(690) }}>
           <FlatList
             data={data}
-            contentContainerStyle={{}}
+            contentContainerStyle={{paddingBottom:"6%"}}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
               <View style={{ padding: '3%' }}>
