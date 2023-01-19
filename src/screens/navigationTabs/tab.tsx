@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Text, Button, TouchableOpacity } from 'react-native';
+import { Image, View, Text, Button, TouchableOpacity } from 'react-native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
 
@@ -24,7 +24,7 @@ const tabOptions = {
     tabStyle:
         [{ backgroundColor: COLORS.white }],
     style: {
-        height: 90,
+        height: 95,
         shadowColor: COLORS.white,
         shadowOffset: {
             width: 0,
@@ -45,51 +45,52 @@ const Tabs = () => {
             tabBarOptions={tabOptions}
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused }) => {
-                    const tintColor = focused ? COLORS.element: COLORS.gray;
-
+                    const tintColor = focused ? COLORS.element : COLORS.gray;
+                    const borderFocus = focused ? COLORS.element : COLORS.white;
+                    const borderWidthFocus = focused ? 4 : 0;
                     switch (route.name) {
                         case "Notification":
                             return (
-                                <>
-                                <BrandIcons name="notifications-outline" size={30} color={tintColor} />
-                                <Text style={{color:tintColor}}>Notification</Text>
-                                </>
+                                <View style={{ borderTopColor: borderFocus, borderTopWidth: borderWidthFocus,alignItems:"center" }}>
+                                    <BrandIcons name="notifications-outline" size={30} color={tintColor} />
+                                    <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(10) }}>Notifications</Text>
+                                </View>
                             );
                         case "Draws":
                             return (
-                                <>
-                                <SLIcon name="drawer" size={30} color={tintColor} />
-                                <Text style={{color:tintColor}}>Draws</Text>
-                                </>
+                                <View style={{ borderTopColor: borderFocus, borderTopWidth: borderWidthFocus,alignItems:"center" }}>
+                                    <SLIcon name="drawer" size={30} color={tintColor} />
+                                    <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(10) }}>Draws</Text>
+                                </View>
                             );
                         case "DataPage":
                             return (
-                              <>
-                                <EntypoIcons name="home" size={30} color={tintColor} />
-                                <Text style={{color:tintColor}}>Home</Text>
-                            </>
+                                <View style={{ borderTopColor: borderFocus, borderTopWidth: borderWidthFocus ,alignItems:"center"}}>
+                                    <EntypoIcons name="home" size={30} color={tintColor} />
+                                    <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(10) }}>Home</Text>
+                                </View>
                             );
                         case "Tickets":
                             return (
-                                <>
-                                <MCIcon name="ticket-percent-outline" size={30} color={tintColor} />
-                                <Text style={{color:tintColor}}>Tickets</Text>
-                                </>
+                                <View style={{ borderTopColor: borderFocus, borderTopWidth: borderWidthFocus ,alignItems:"center"}}>
+                                    <MCIcon name="ticket-percent-outline" size={30} color={tintColor} />
+                                    <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(10) }}>Tickets</Text>
+                                </View>
                             );
-                            case "Cart":
-                                return (
-                                    <>
+                        case "Cart":
+                            return (
+                                <View style={{ borderTopColor: borderFocus, borderTopWidth: borderWidthFocus,alignItems:"center" }}>
                                     <BrandIcons name="cart-outline" size={30} color={tintColor} />
-                                    <Text style={{color:tintColor}}>Cart</Text>
-                                    </>
+                                    <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(10) }}>Cart</Text>
+                                </View>
 
-                                );
+                            );
 
                     }
                 }
             })}
         >
-          <Tab.Screen
+            <Tab.Screen
                 name="Notification"
                 component={NotificationList}
                 options={{ headerShown: false }}
@@ -115,10 +116,11 @@ const Tabs = () => {
             // ),
             //}}
             />
-             <Tab.Screen
+            <Tab.Screen
                 name="Draws"
                 component={Draws}
-                options={{headerShown: false
+                options={{
+                    headerShown: false
                     // title: "Draws",
                     // headerLeft: () => (
                     //     <TouchableOpacity style={{ marginLeft: "20%",borderWidth:0 }} onPress={() => navigation.navigate('Home',{screen:'Search'})}>
@@ -138,7 +140,7 @@ const Tabs = () => {
                     // }
                 }}
             />
-                <Tab.Screen
+            <Tab.Screen
                 name="DataPage"
                 component={DataPage}
                 options={{ headerShown: false }}
@@ -156,7 +158,8 @@ const Tabs = () => {
             <Tab.Screen
                 name="Tickets"
                 component={Tickets}
-                options={{headerShown: false 
+                options={{
+                    headerShown: false
                     // title: "Tickets",
                     // headerLeft: () => (
                     //     <TouchableOpacity style={{ marginLeft: "20%",borderWidth:0 }} onPress={() => navigation.navigate('Home',{screen:'Search'})}>
@@ -176,11 +179,12 @@ const Tabs = () => {
                     // }
                 }}
             />
-           
+
             <Tab.Screen
                 name="Cart"
                 component={Cart}
-                options={{ headerShown: false 
+                options={{
+                    headerShown: false
                     // title: <Text>MyCourses <Text style={{fontSize:8}}>and</Text> WishLists</Text>,
                     // headerLeft: () => (
                     //     <TouchableOpacity style={{ marginLeft: "20%",borderWidth:0}} onPress={() => navigation.navigate('Home',{screen:'Search'})}>
@@ -203,7 +207,7 @@ const Tabs = () => {
                 }}
 
             />
-          
+
 
         </Tab.Navigator>
     );

@@ -69,12 +69,12 @@ const Cart = () => {
                                 <Text style={{ color: COLORS.white, fontSize: RFValue(10), ...FONTS.lexendregular, marginTop: "1.5%", marginHorizontal: "4%" }}>-₹ 20</Text>
                             </View>
                         </View>
-                        <View style={{ flexDirection: "column", width: "45%", }}>
-                            <View style={{ flexDirection: "row", backgroundColor: COLORS.element, borderRadius: 5, alignItems: "center", justifyContent: "center" }}>
+                        <View style={{ flexDirection: "column", width: "35%", }}>
+                            <TouchableOpacity style={{ flexDirection: "row", backgroundColor: COLORS.element, borderRadius: 5, alignItems: "center", justifyContent: "center" }}>
 
                                 <Text style={{ color: COLORS.white, fontSize: RFValue(14), ...FONTS.lexendregular, marginStart: "5%", padding: "2%" }}>Remove</Text>
 
-                            </View>
+                            </TouchableOpacity>
                         </View>
 
                     </View>
@@ -100,7 +100,7 @@ const Cart = () => {
                 <TouchableOpacity style={{ flexDirection: "column", width: "45%", marginHorizontal: "3%", marginVertical: "1%", borderRadius: 5, borderWidth: 1, justifyContent: "center", alignItems: "center" }}>
                     <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular }}>Continue to Shopping</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ flexDirection: "column", width: "45%", marginHorizontal: "3%", marginVertical: "1%", backgroundColor: COLORS.element, borderRadius: 5, justifyContent: "center", alignItems: "center" }}>
+                <TouchableOpacity style={{ flexDirection: "column", width: "45%", marginHorizontal: "3%", marginVertical: "1%", backgroundColor: COLORS.element, borderRadius: 5, justifyContent: "center", alignItems: "center" }} onPress={()=>navigation.navigate("Delivery")}>
                     <Text style={{ color: COLORS.white, fontSize: RFValue(14), ...FONTS.lexendregular }} >Process to Checkout </Text>
                 </TouchableOpacity>
             </View>

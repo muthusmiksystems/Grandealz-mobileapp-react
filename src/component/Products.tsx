@@ -15,6 +15,7 @@ import image from '../constants/image';
 import icons from '../constants/icons';
 import { COLORS,FONTS } from '../constants';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { useNavigation } from '@react-navigation/native';
 
 const data = [
     {
@@ -45,6 +46,7 @@ const data = [
 
 ];
 const Product = () => {
+    const navigation=useNavigation();
     return (
         <SafeAreaView >
             <View >
@@ -60,23 +62,23 @@ const Product = () => {
                                         <Image
                                             source={item.imag}
                                             style={{
-
+                                                marginTop:"15%",
                                                 height: 150,
                                                 borderWidth: 1,
                                             }}
                                         />
                                     </View>
                                 </View>
-                                <View style={{ marginLeft: 5, padding: 10 }}>
+                                <View style={{ margin: 5, padding: 10 }}>
                                     <Text style={{ fontSize: 30, color: "red",...FONTS.lexendregular,color:COLORS.black }}>Win</Text>
-                                    <Text style={{ fontSize: 20, color: "black" ,...FONTS.lexendregular,color:COLORS.black}}>One Campaign ,Two Winners </Text>
-                                    <Text style={{ fontSize: 16, color: "black",...FONTS.lexendregular,color:COLORS.black }}>Buy Resso set for : <Text style={{ color: "red" }}>₹1500</Text> </Text>
-                                    <TouchableOpacity style={{ padding: "5%", borderWidth: 1, marginTop: 5 }}>
+                                    <Text style={{ fontSize: 16, color: "black" ,...FONTS.lexendsemibold,color:COLORS.black}}>One Campaign ,Two Winners </Text>
+                                    <Text style={{ fontSize: 14, color: "black",...FONTS.lexendregular,color:COLORS.black }}>Buy Resso set for : <Text style={{ color: "red" }}>₹1500</Text> </Text>
+                                    <TouchableOpacity onPress={()=>navigation.navigate("MyOrders")} style={{ padding: "5%", borderWidth: 1, margin: 10}}>
                                         <Text style={{ textAlign: "center", color: "black", fontSize: 18 }}>Add to Cart</Text>
                                     </TouchableOpacity>
                                 </View>
                                 <View style={{ flexDirection: "row", marginVertical: "2%" }}>
-                                    <View style={{ flexDirection: "column", marginLeft: 5 }}>
+                                    <View style={{ flexDirection: "column", marginLeft: 15 }}>
                                         <Image
                                             source={image.calander}
                                             style={{

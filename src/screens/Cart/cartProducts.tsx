@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     Text,
     View,
@@ -23,6 +23,7 @@ import image from "../../constants/image";
 const CartProducts = () => {
 
     const navigation = useNavigation();
+    const [toggle,setToggle]=useState(false);
     const data = ["all", "hello", "everybody", "world"]
     return (
 
@@ -65,18 +66,16 @@ const CartProducts = () => {
             })}
 
             <View style={{ flexDirection: "row", width: "100%", borderBottomStartRadius: 10, borderBottomEndRadius: 10, backgroundColor: COLORS.element }}>
-
+                <View style={{marginTop:"5%",marginLeft:"3%"}}>
                 <ToggleSwitch
-                    isOn={false}
-                    onColor="red"
+                    isOn={toggle}
+                    onColor="#0a0127"
                     offColor="#FF777F"
-                    // label="Example label"
-                    // labelStyle={{ color: "black", fontWeight: "900" }}
                     size="small"
-                    onToggle={isOn => console.log("changed to : ", isOn)}
+                    onToggle={isOn => setToggle(!toggle)}
                 />
-                <Text style={{ color: COLORS.white, fontSize: RFValue(14), ...FONTS.lexendregular, marginStart: "5%", padding: "5%" }}>Donate Product(s) & Double Your Tickets</Text>
-
+                </View>
+                <Text style={{ color: COLORS.white, fontSize: RFValue(12), ...FONTS.lexendregular, padding: "5%" }}>Donate Product(s) & Double Your Tickets</Text>
             </View>
         </View>
 

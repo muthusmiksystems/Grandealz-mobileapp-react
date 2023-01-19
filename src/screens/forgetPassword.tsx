@@ -17,12 +17,14 @@ import { horizontalScale, verticalScale } from "../constants/metrices";
 import { loginicon } from "../constants/icons";
 import { useNavigation } from "@react-navigation/native";
 // import InputBox from 'react-native-floating-label-inputbox';
-// import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import EntypoIcons from "react-native-vector-icons/Entypo";
+import { RFValue } from "react-native-responsive-fontsize";
 
 
 const ForgetPassword = () => {
 
-  const navigation=useNavigation();
+  const navigation = useNavigation();
 
   return (
     <SafeAreaView style={{ width: "100%", height: "100%", backgroundColor: "#f1f1f1" }}>
@@ -31,48 +33,40 @@ const ForgetPassword = () => {
         backgroundColor="#0a0127"
       />
       <View style={styles.subdivOne}>
-        <Image
-          source={loginicon}
-          resizeMode='contain'
-          style={{
-            marginTop: verticalScale(50)
-          }}
-        >
-        </Image>
-        <Text style={{ fontSize: 35, color: "white",fontFamily:"Lexend-Regular" }}>Grandealz</Text>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={{ flexDirection: "column", marginTop: verticalScale(18), marginLeft: horizontalScale(18) }}>
+          <EntypoIcons name="chevron-left" size={30} color={"white"} />
+        </TouchableOpacity>
+        <View style={{ flexDirection: "column", marginLeft: horizontalScale(78), marginTop: verticalScale(45) }}>
+
+          <Image
+            source={loginicon}
+            resizeMode='contain'
+            style={{
+              // marginTop: verticalScale(50)
+            }}
+          />
+        </View>
+        {/* <Text style={{ fontSize: 35, color: "white",fontFamily:"Lexend-Regular" }}>Grandealz</Text> */}
       </View>
       <View style={styles.subdivTwo}>
-        <Text style={{ fontSize: 25, color: "black", textAlign: "center", marginTop: verticalScale(20), fontFamily:"Lexend-SemiBold"}}>Forgot Password</Text>
+        <Text style={{ fontSize: 25, color: "black", textAlign: "center", marginTop: verticalScale(20), fontFamily: "Lexend-SemiBold" }}>Forgot Password</Text>
         <View style={{ alignItems: "center" }}>
-          {/* <InputBox
-            // inputOutLine
-            label={"Password"}
-            // value={password}
-            // secureTextEntry={errorPassword ? false : true}
-            rightIcon={<FontAwesome5 name={'eye'} size={38} />}
-            passHideIcon={<FontAwesome5 name={'eye-slash'} size={38} />}
-            // labelStyle={{ ...FONTS.robotoregular }}
-            // customLabelStyle={{ ...styles.textPassword, ...{ color: (errorLogin || errorEmail) ? "red" : COLORS.black, } }}
-            // onChangeText={e => { handleChange(e, "loginpassword"), setErrorLogin(""), setPassword(e), setErrorPassword(null) }}
-          /> */}
-          <Text style={{width:horizontalScale(300),textAlign:"justify",fontSize:14,color:"black",marginTop:verticalScale(30),fontFamily:"Lexend-Regular"}}>
-            Enter your registered email address and we will send you a link to reset your password : 
+          <Text style={{ width: horizontalScale(310), textAlign: "justify", fontSize: RFValue(13), color: "black", marginTop: verticalScale(26), fontFamily: "Lexend-Regular" }}>
+            Enter your registered email address and we will send you a link to reset your password :
           </Text>
-          <TextInput
-            placeholder="Email"
-            placeholderTextColor={"black"}
-            style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8,borderColor:"#c4c4c2", width: verticalScale(320), marginTop: verticalScale(30) }}
-          />
-          {/* <TextInput
-            placeholder="Password"
-            style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: verticalScale(320), marginTop: verticalScale(30) }}
-          /> */}
-          {/* <CheckBox>Remember Me</CheckBox> */}
+          <View style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: verticalScale(332), marginTop: verticalScale(35), color: "#000" }}>
+            <TextInput
+              placeholder="Email"
+              placeholderTextColor={"black"}
+              style={{ flexDirection: "column", width: horizontalScale(250) }}
+            />
+            <Fontisto name='email' size={30} style={{ alignSelf: "center" }} />
+          </View>
         </View>
         <TouchableOpacity style={{ alignSelf: "center", marginTop: "14%", borderWidth: 1, borderRadius: 8, width: verticalScale(200), padding: "3%" }}
-          onPress={()=>navigation.navigate("OtpPage")}
+          onPress={() => navigation.navigate("OtpPage")}
         >
-          <Text style={{ textAlign: "center", fontSize: 16,fontFamily:"Lexend-SemiBold",color:"black" }}>Submit</Text>
+          <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-SemiBold", color: "black" }}>Submit</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -81,15 +75,15 @@ const ForgetPassword = () => {
 const styles = StyleSheet.create({
   subdivOne: {
     width: horizontalScale(375),
-    height: verticalScale(310),
+    height: verticalScale(300),
     backgroundColor: "#0a0127",
-    alignItems: "center",
+    flexDirection: "row"
   },
   subdivTwo: {
-    width: horizontalScale(350),
+    width: horizontalScale(342),
     height: verticalScale(350),
     backgroundColor: "white",
-    bottom: verticalScale(90),
+    bottom: verticalScale(85),
     alignSelf: "center",
     borderRadius: 25
   }

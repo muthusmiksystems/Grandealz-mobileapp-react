@@ -9,7 +9,10 @@ export const drawsCar = require("../assests/images/car.png");
 export const coupon = require("../assests/images/coupon.png");
 export const coin = require("../assests/images/coin.png");
 export const money = require("../assests/images/money.png");
+export const busDelivery = require("../assests/images/BusDelivery.png");
+
 export default {
+ 
     cars,
     cash,
     inputcash,
@@ -20,5 +23,6 @@ export default {
     drawsCar,
     coupon,
     coin,
-    money
+    money,
+    busDelivery
 }

@@ -45,7 +45,7 @@ const DataPage = () => {
               />
             </View>
             <View style={{ flexDirection: "column" }}>
-
+                <TouchableOpacity onPress={()=>navigation.navigate('User')}>
               <Image
                 source={icons.user}
                 resizeMode="contain"
@@ -55,7 +55,7 @@ const DataPage = () => {
                   marginTop: "2%"
                 }}
               />
-
+</TouchableOpacity>
             </View>
           </View>
         </View>

@@ -1,76 +1,57 @@
-import React, { useEffect,useState } from "react";
+import React from "react";
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  // CheckBox,
-  useColorScheme,
-  TextInput,
-  View,
-  Image,
-  TouchableOpacity,
-  // Button
-} from "react-native";
+    Text,
+    View,
+    StatusBar,
+    SafeAreaView,
+    ScrollView,
+    StyleSheet,
+    Image,
+    TouchableOpacity
+} from 'react-native';
+import { verticalScale,horizontalScale } from "../../constants/metrices";
+import { shoppingCart } from "../../constants/icons";
+import EntypoIcons from "react-native-vector-icons/Entypo";
 import { useNavigation } from "@react-navigation/native";
-import { horizontalScale, verticalScale } from "../../constants/metrices";
-// import InputBox from 'react-native-floating-label-inputbox';
-// import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import TicketDetails from "../../component/ticketDetails";
+import { RFValue } from "react-native-responsive-fontsize";
+import { COLORS } from "../../constants";
 
-import icons from "../../constants/icons";
-import { FONTS } from "../../constants";
+const Tickets = () => {
 
+    const navigation=useNavigation();
 
-
-const Tickets = (props: Props) => {
-    
-
-
-   
-return(
-  <ScrollView style={{ flex: 1 }} >
-
-  <View style={{ flex: 0.8 }}>
-    <StatusBar
-      animated={true}
-      backgroundColor={"#0a0127"}
-    />
-    <View
-      style={{
-        backgroundColor: "#0a0127",
-
-      }}>
-      <View style={{ flexDirection: 'row', alignItems: "center" }}>
-        <TouchableOpacity
-          style={{ margin: "5.5%" }}
-        >
-          <Image
-            source={icons.back}
-            resizeMode="contain"
-            style={{
-              width: 20,
-              height: 20,
-
-            }}
-          />
-        </TouchableOpacity>
-
-        <View style={{ marginTop: "4%", flexDirection: 'row', justifyContent: "center" }}>
-          <Text style={{ color: "white", fontSize: 20, marginLeft: "25%", bottom: 8, ...FONTS.lexendregular}}>Tickets</Text>
-        </View>
-      </View>
-    </View>
-    </View>
-    </ScrollView >
-)
+    return (
+        <SafeAreaView>
+            <StatusBar
+                animated={true}
+                backgroundColor="#0a0127"
+            />
+            <View style={styles.subdivOne}>
+                {/* <TouchableOpacity onPress={()=>navigation.goBack()} style={{marginLeft:horizontalScale(14)}}>
+                    <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
+                </TouchableOpacity> */}
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20),textAlign:"center" }}>Active Tickets</Text>
+            </View>
+            <View style={styles.subdivTwo}>
+                <TicketDetails/>
+            </View>
+        </SafeAreaView>
+    );
 }
 const styles = StyleSheet.create({
-    root: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor:'white'
+    subdivOne: {
+        width: horizontalScale(375),
+        height: verticalScale(80),
+        backgroundColor: "#0a0127",
+        // alignItems: "center",
+        justifyContent: 'center',
+        // flexDirection: "row"
     },
-  });
+    subdivTwo: {
+        // height: verticalScale(748),
+        backgroundColor:COLORS.lightGray    
+    }
+
+})
 export default Tickets;

@@ -26,11 +26,23 @@ import Tabs from './src/screens/navigationTabs/tab';
 import Signup from './src/screens/signup';
 import Login from './src/screens/login';
 import ChangeMobileNumber from './src/screens/changeMobileNumber';
-
+import User from './src/screens/User/user';
 import WishList from './src/screens/wishList';
 import OtpPage from './src/screens/otpPage';
 import PriceDetails from './src/screens/PriceDetails';
 import ProductDetails from './src/screens/productdetails';
+import Delivery from './src/screens/Cart/delivery';
+import Address from './src/screens/Cart/address';
+import AddAddress from './src/screens/Cart/addAddress';
+import PaymentGate from './src/screens/Cart/payPage';
+import AddNewPayee from './src/screens/Cart/addNewPayee';
+import PrivacyPolicy from './src/screens/privacyPolicy';
+import UserAgreement from './src/screens/userAgreement';
+import Faq from './src/screens/faq';
+import PaymentOptions from './src/screens/Payments/paymentOptions';
+import ChangePassword from './src/screens/changePassword';
+import MyOrders from './src/screens/Myorders/myOrders';
+import OrderDetails from './src/screens/Myorders/orderDetails';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const App = () => {
   return (
@@ -48,6 +60,19 @@ const App = () => {
         <Stack.Screen name="WishList" component={WishList} />
         <Stack.Screen name="PriceDetails" component={PriceDetails} />
         <Stack.Screen name="ProductDetails" component={ProductDetails} />
+	      <Stack.Screen name="User" component={User} />
+        <Stack.Screen name="Delivery" component={Delivery} />
+        <Stack.Screen name="Address" component={Address} />
+        <Stack.Screen name="AddAddress" component={AddAddress} />
+        <Stack.Screen name="PayPage" component={PaymentGate} />
+        <Stack.Screen name="AddNewPayee" component={AddNewPayee} />
+        <Stack.Screen name="Faq" component={Faq} />
+        <Stack.Screen name="UserAgreement" component={UserAgreement} />
+        <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
+        <Stack.Screen name="PaymentOptions" component={PaymentOptions} />
+        <Stack.Screen name="ChangePassword" component={ChangePassword} />
+	  <Stack.Screen name="MyOrders" component={MyOrders}/>
+	   <Stack.Screen name="OrderDetails" component={OrderDetails}/>
         < Stack.Screen
                     name="Tabs"
                     component={Tabs}

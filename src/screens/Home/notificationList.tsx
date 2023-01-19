@@ -17,7 +17,9 @@ import ClosingSoon from '../../component/closingdata';
 import Product from '../../component/Products';
 import icons from '../../constants/icons';
 import image from '../../constants/image';
-import { FONTS } from '../../constants';
+import { COLORS, FONTS } from '../../constants';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { verticalScale } from '../../constants/metrices';
 
 const data = [
   {
@@ -95,7 +97,7 @@ const data = [
 ];
 const NotificationList = () => {
   return (
-    <ScrollView style={{ flex: 1 }} >
+    <SafeAreaView style={{ flex: 1 }} >
 
       <View style={{ flex: 0.8 }}>
         <StatusBar
@@ -105,10 +107,9 @@ const NotificationList = () => {
         <View
           style={{
             backgroundColor: "#0a0127",
-
           }}>
-          <View style={{ flexDirection: 'row', alignItems: "center" }}>
-            <TouchableOpacity
+          <View style={{height:verticalScale(80),justifyContent:'center'}}>
+            {/* <TouchableOpacity
               style={{ margin: "5.5%" }}
             >
               <Image
@@ -117,18 +118,17 @@ const NotificationList = () => {
                 style={{
                   width: 20,
                   height: 20,
-
                 }}
               />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
-            <View style={{ marginTop: "4%", flexDirection: 'row', justifyContent: "center" }}>
-              <Text style={{ color: "white", fontSize: 20, marginLeft: "25%", bottom: 8, ...FONTS.lexendregular}}>Notifications</Text>
-            </View>
+            {/* <View style={{ marginTop: "4%", flexDirection: 'row', justifyContent: "center" }}> */}
+              <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20),textAlign:"center" }}>Notifications</Text>
+            {/* </View> */}
           </View>
         </View>
 
-        <View style={{ padding: "2%" }}>
+        <View style={{ padding: "1%",height:verticalScale(690) }}>
           <FlatList
             data={data}
             contentContainerStyle={{}}
@@ -136,32 +136,29 @@ const NotificationList = () => {
             renderItem={({ item }) => (
               <View style={{ padding: '3%' }}>
                 <TouchableOpacity style={{ backgroundColor: "white",borderRadius:5,elevation:1, flexDirection: "row",padding:"1%" }}>
-                  <View style={{ flexDirection: "column",marginTop:"2%" }}>
+                  <View style={{ flexDirection: "column",marginTop:"2.5%" }}>
                     <Image
                       source={icons.rect}
                       resizeMode="contain"
                       style={{
                        borderWidth:1
-
                       }}
                     />
                   </View>
                   <View style={{ flexDirection: "column", width: "70%" }}>
-
-                    <Text style={{fontSize:16,fontWeight:"bold",margin:"2%",...FONTS.lexendregular,color:"#000"}}>{item.from}</Text>
-                    <Text style={{fontSize:14,fontWeight:"200",margin:"2%",...FONTS.lexendregular,color:"#000"}}>{item.to}</Text>
-                    <Text style={{fontSize:14,fontWeight:"200",marginTop:"3%",...FONTS.lexendregular,color:"#000"}}>{item.date}</Text>
-
+                    <Text style={{fontSize:RFValue(13),...FONTS.lexendsemibold,margin:"2%",color:COLORS.black}}>{item.from}</Text>
+                    <Text style={{fontSize:RFValue(11),margin:"2%",...FONTS.lexendregular,color:"#000"}}>{item.to}</Text>
+                    <Text style={{fontSize:RFValue(13),...FONTS.lexendregular,color:COLORS.gray,marginHorizontal:"2%",paddingBottom:"2%"}}>{item.date}</Text>
                   </View>
-                  <View style={{ flexDirection: "column", width: "20%" }}>
+                  <View style={{ flexDirection: "column", width: "15%" }}>
                     <Image
                       source={item.imag}
                       resizeMode="contain"
                       style={{
                         borderWidth: 1,
                         top:25,
-                        right:15,
-                        backgroundColor:"#F8F9F9"
+                        // right:15,
+                        // backgroundColor:"#F8F9F9"
                       }}
                     />
                   </View>
@@ -169,13 +166,9 @@ const NotificationList = () => {
               </View>
             )}
           />
-
-
         </View>
-
-
       </View>
-    </ScrollView>
+    </SafeAreaView>
   )
 }
 const styles = StyleSheet.create({

@@ -76,7 +76,7 @@ const CartRelated = () => {
                 horizontal={true}
                 data={data}
                 showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{ marginLeft:horizontalScale(20),paddingRight:"150%"}}
+                contentContainerStyle={{ marginLeft:horizontalScale(20),paddingRight:"180%"}}
                 keyExtractor={item => item.id}
                 renderItem={({ item }) => (
                     <View style={{ backgroundColor: Colors.white, borderRadius: 5,paddingBottom:verticalScale(10)}}>
