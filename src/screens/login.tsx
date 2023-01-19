@@ -79,11 +79,7 @@ const Login = () => {
             placeholderTextColor={"black"}
             style={{ flexDirection:"column",width:horizontalScale(250) }}
           />
-<<<<<<< HEAD
           <TouchableOpacity style={{alignSelf:"center",flexDirection:"column"}} onPress={()=>setPassShow(!passShow)}>
-=======
-          <TouchableOpacity style={{alignSelf:"center",flexDirection:"column"}} onPress={()=>setPassShow(passShow)}>
->>>>>>> 49efdccfb68e10749d902fd277bafc7195a315ed
             {passShow ? <Ionicons name="eye-outline" size={30} /> :
             <Ionicons name='eye-off-outline' size={30} /> }
           </TouchableOpacity>

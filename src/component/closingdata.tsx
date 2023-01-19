@@ -20,26 +20,26 @@ const data = [
   {
     id: '1',
     imag: image.cash,
-    from: "Lorem ipsum dolor sit amet, consectetur",
+    from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
     to: "1689 soul out 1985"
 
   },
   {
     id: '2',
     imag: image.cash,
-    from: "Lorem ipsum dolor sit amet, consectetur",
+    from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
     to: "1689 soul out 1985"
   },
   {
     id: '3',
     imag: image.cash,
-    from: "Lorem ipsum dolor sit amet, consectetur",
+    from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
     to: "1689 soul out 1985"
   },
   {
     id: '4',
     imag: image.cash,
-    from: "Lorem ipsum dolor sit amet, consectetur",
+    from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
     to: "1689 soul out 1985"
   },
 
@@ -56,7 +56,7 @@ const ClosingSoon = () => {
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
             <View style={{ padding: '1%' }}>
-              <TouchableOpacity style={{borderRadius: 9, borderTopWidth: 4, borderTopColor: "red", backgroundColor: "white", height: 182, width: 180 ,}} onPress={()=>navigation.navigate("PriceDetails")}>
+              <TouchableOpacity style={{ borderWidth: 1, borderRadius: 9, borderTopWidth: 4, borderTopColor: "red", backgroundColor: "white", height: 182, width: 180 ,}} onPress={()=>navigation.navigate("PriceDetails")}>
                 <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8 }}>
                   <View style={{ flexDirection: 'column', padding: 10 }}>
                     <Image
@@ -73,10 +73,6 @@ const ClosingSoon = () => {
                 <View>
                   <Text style={{ fontSize: 10, textAlign: "center",color:COLORS.black,...FONTS.lexendregular }}>{item.to}</Text>
                 </View>
-                <View style={{width:"80%",height:"4%",borderColor:"#F1F1F1",borderWidth:1,margin:10,borderRadius:12}}>
-                  <Text style={{backgroundColor:"red",width:"80%",borderRadius:12}}></Text>
-                </View>
-                
               </TouchableOpacity>
             </View>
           )}

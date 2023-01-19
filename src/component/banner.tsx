@@ -41,9 +41,9 @@ return(
        <View style={{ backgroundColor: "#070022", borderRadius: 8}}>
               <View style={{ padding: "10%", flexDirection: "row", justifyContent: "space-between" }}>
                 <View style={{ flexDirection: "column", width: "70%" }}>
-                  <Text style={{ color: "white", fontSize: 6 }}>Lorem Ipsum is simply dummy text of the printing.</Text>
-                  <Text style={{ color: "white", fontSize: 12 }}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </Text>
-                  <Text style={{ color: "white", fontSize: 6, marginTop: "9%" }}>Lorem Ipsum is simply dummy text of the printing. Lorem Ipsum is simply dummy text of the printing. Lorem Ipsum is simply dummy text of the printing.</Text>
+                  <Text style={{ color: "white", fontSize: 8 }}>Lorem ipsum dolor sit amet,</Text>
+                  <Text style={{ color: "white", fontSize: 14 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor </Text>
+                  <Text style={{ color: "white", fontSize: 8, marginTop: "9%" }}>Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectet</Text>
                   <TouchableOpacity style={{ borderWidth: 1, borderRadius: 8, borderColor: "white", marginTop: "6%", width: "50%", height: "20%" }}>
                     <Text style={{ color: "white", fontSize: 12, textAlign: "center", padding: "3%" }}>See Details</Text>
                   </TouchableOpacity>

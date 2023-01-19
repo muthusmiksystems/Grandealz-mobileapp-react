@@ -150,6 +150,21 @@ const User = () => {
                         <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
 
                     </TouchableOpacity>
+                    <View style={styles.divider} />
+                    <TouchableOpacity style={styles.touchButton} onPress={()=>navigation.navigate("Coins")}>
+                        <Image
+                            source={icons.coinDollar}
+                            resizeMode="contain"
+                            style={{
+                                width: 30,
+                                height: 30,
+                                flexDirection: "column"
+                            }}
+                        />
+                        <Text style={styles.fontSizeStyle}>Coins</Text>
+                        <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
+
+                    </TouchableOpacity>
                 </View>
                 <Text style={styles.fontHeadStyle}>General</Text>
                 <View style={{ borderTopWidth: 4, width: "13%", borderTopColor: COLORS.element, marginLeft: "6%", paddingBottom: "2%" }} />

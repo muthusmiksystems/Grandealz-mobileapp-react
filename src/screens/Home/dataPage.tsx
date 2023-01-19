@@ -18,7 +18,6 @@ import { COLORS, FONTS } from '../../constants';
 import icons from '../../constants/icons';
 import image from '../../constants/image';
 import { useNavigation } from '@react-navigation/native';
-import { RFValue } from 'react-native-responsive-fontsize';
 const DataPage = () => {
   const navigation=useNavigation();
   return (
@@ -39,6 +38,7 @@ const DataPage = () => {
                 source={icons.stsicon}
                 resizeMode="contain"
                 style={{
+                  width: 100,
                   height: 50,
                   marginLeft: "5%"
                 }}
@@ -51,7 +51,7 @@ const DataPage = () => {
                 resizeMode="contain"
                 style={{
                   width: 100,
-                  height: 40,
+                  height: 30,
                   marginTop: "2%"
                 }}
               />
@@ -73,12 +73,11 @@ const DataPage = () => {
               <Product/>
             </View>
             <View>
-            <View style={{padding:5,backgroundColor:"#D10359",height:150,}}>
-              <Text style={{color:"white",marginLeft:25,...FONTS.lexendregular,color:COLORS.white, fontSize: RFValue(18)}}>
+            <View style={{padding:5,backgroundColor:"red",height:150,}}>
+              <Text style={{color:"white",marginLeft:25,...FONTS.lexendregular,color:COLORS.black}}>
                   SOLD OUT
               </Text>
-              <View style={{marginLeft:"7%",width:"15%",height:"2%",borderColor:"white",backgroundColor:"black"}}/>
-              <Text style={{color:"white",marginLeft:25,...FONTS.lexendregular,color:COLORS.white}}>
+              <Text style={{color:"white",marginLeft:25,...FONTS.lexendregular,color:COLORS.black}}>
               Lorem Ipsum is simply dummy text of the printing and typesetting industry.
               </Text>
               

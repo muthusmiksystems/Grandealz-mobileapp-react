@@ -32,9 +32,7 @@ const Cart = () => {
                 backgroundColor="#0a0127"
             />
             <View style={styles.subdivOne}>
-
                 <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize:RFValue(22),marginStart:"15%" }}>Cart</Text>
-
             </View>
             <ScrollView style={{ height: "80%" }}>
                 <View style={{ width: "95%", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", marginTop: "5%" }}>

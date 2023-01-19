@@ -46,7 +46,6 @@ const Tabs = () => {
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused }) => {
                     const tintColor = focused ? COLORS.element : COLORS.gray;
-<<<<<<< HEAD
                     const borderFocus = focused ? COLORS.element : COLORS.white;
                     const borderWidthFocus = focused ? 4 : 0;
                     switch (route.name) {
@@ -84,44 +83,6 @@ const Tabs = () => {
                                     <BrandIcons name="cart-outline" size={30} color={tintColor} />
                                     <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(10) }}>Cart</Text>
                                 </View>
-=======
-
-                    switch (route.name) {
-                        case "Notification":
-                            return (
-                                <>
-                                    <BrandIcons name="notifications-outline" size={30} color={tintColor} />
-                                    <Text style={{ color: tintColor,...FONTS.lexendregular,fontSize:RFValue(10) }}>Notifications</Text>
-                                </>
-                            );
-                        case "Draws":
-                            return (
-                                <>
-                                    <SLIcon name="drawer" size={30} color={tintColor} />
-                                    <Text style={{ color: tintColor,...FONTS.lexendregular,fontSize:RFValue(10) }}>Draws</Text>
-                                </>
-                            );
-                        case "DataPage":
-                            return (
-                                <>
-                                    <EntypoIcons name="home" size={30} color={tintColor} />
-                                    <Text style={{ color: tintColor,...FONTS.lexendregular,fontSize:RFValue(10) }}>Home</Text>
-                                </>
-                            );
-                        case "Tickets":
-                            return (
-                                <>
-                                    <MCIcon name="ticket-percent-outline" size={30} color={tintColor} />
-                                    <Text style={{ color: tintColor,...FONTS.lexendregular,fontSize:RFValue(10) }}>Tickets</Text>
-                                </>
-                            );
-                        case "Cart":
-                            return (
-                                <>
-                                    <BrandIcons name="cart-outline" size={30} color={tintColor} />
-                                    <Text style={{ color: tintColor,...FONTS.lexendregular,fontSize:RFValue(10) }}>Cart</Text>
-                                </>
->>>>>>> 49efdccfb68e10749d902fd277bafc7195a315ed
 
                             );
 
