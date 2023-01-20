@@ -71,8 +71,8 @@ const Carsold = () => {
                                 <View style={{ marginLeft: 5, padding: 10 }}>
                                     
                                     <Text style={{  ...FONTS.lexendsemibold,fontSize: RFValue(14), color: "black" }}>Campaign:- range Rover V8 GCC </Text>
-                                    <Text style={{ ...FONTS.lexendregular,fontSize: 16, color: "black" }}>EL-00990</Text>
-                                    <Text style={{ fontSize: 16, color: "red" }}>Draw date to be announced</Text>
+                                    <Text style={{ ...FONTS.lexendregular,fontSize:RFValue(16), color: "black" }}>EL-00990</Text>
+                                    <Text style={{ ...FONTS.lexendregular,fontSize: RFValue(16), color: "red" }}>Draw date to be announced</Text>
                                 </View>
                                 
 
