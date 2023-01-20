@@ -5,6 +5,9 @@ export const calander = require("../assests/images/calendar.png");
 export const whitecar = require("../assests/images/whitecar.png");
 export const pencil = require("../assests/images/pencil.png");
 export const draws = require("../assests/images/drawHimage.png");
+export const bottel=require("../assests/images/bottel.png")
+export const cap=require("../assests/images/cap.png")
+export const tshirt=require("../assests/images/tshirt.png")
 export const drawsCar = require("../assests/images/car.png");
 export const coupon = require("../assests/images/coupon.png");
 export const coin = require("../assests/images/coin.png");
@@ -24,5 +27,9 @@ export default {
     coupon,
     coin,
     money,
-    busDelivery
+    busDelivery,
+     bottel,
+    tshirt,
+    cap,
+
 }

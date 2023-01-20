@@ -18,7 +18,7 @@ import { loginicon } from "../constants/icons";
 import { useNavigation } from "@react-navigation/native";
 import { RFValue } from "react-native-responsive-fontsize";
 import EntypoIcons from "react-native-vector-icons/Entypo";
-import { COLORS } from "../constants";
+import { COLORS, FONTS } from "../constants";
 
 const ChangeMobileNumber = () => {
 
@@ -54,10 +54,10 @@ const ChangeMobileNumber = () => {
             placeholder="Mobile Number"
             maxLength={10}
             placeholderTextColor={COLORS.black}
-            style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: horizontalScale(304), marginTop: verticalScale(45) }}
+            style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: horizontalScale(300), marginTop: verticalScale(40), ...FONTS.lexendregular, fontSize: RFValue(14) }}
           />
         </View>
-        <TouchableOpacity style={{ alignSelf: "center", marginTop: "18%", borderWidth: 1, borderRadius: 8, width: verticalScale(200), padding: "3%" }} onPress={() => navigation.navigate("OtpPage")}>
+        <TouchableOpacity style={{ alignSelf: "center", marginTop: "15%", borderWidth: 1, borderRadius: 8, width: horizontalScale(200), padding: "4%" }} onPress={() => navigation.navigate("OtpPage")}>
           <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-SemiBold", color: "black" }}>Request OTP</Text>
         </TouchableOpacity>
       </View>

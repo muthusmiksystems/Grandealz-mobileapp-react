@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -24,43 +24,49 @@ import icons from "../../constants/icons";
 import { COLORS, FONTS } from "../../constants";
 import { RFValue } from "react-native-responsive-fontsize";
 import DrawsHeader from "./drawsListHorizontal";
+
 import DrawsMain from "./drawsMain";
 
+
 const Draws = (props: Props) => {
-    
 
 
-   
-return(
-  
-  <ScrollView style={{ flex: 1 }} >
-       <StatusBar animated={true}  backgroundColor={"#0a0127"}/>
-          <View style={{ flexDirection: 'row', alignItems: "center",backgroundColor: "#0a0127",padding:"4%"}}>
-            {/* <TouchableOpacity style={{ margin: "5.5%" }}>
+
+
+  return (
+    <SafeAreaView>
+      <StatusBar animated={true} backgroundColor={"#0a0127"} />
+      <View style={{ height: verticalScale(75), justifyContent: 'center', backgroundColor: "#0a0127" }}>
+        {/* <TouchableOpacity style={{ margin: "5.5%" }}>
               <Image
                 source={icons.back}
                 resizeMode="contain"
                 style={{ width: 20,height: 20,}} />
             </TouchableOpacity> */}
-            <View style={{ marginTop: "4%", flexDirection: 'row', justifyContent: "center" }}>
-              <Text style={{ color: "white", fontSize:RFValue(20), marginLeft: "25%", bottom: 8, ...FONTS.lexendregular}}>Draws</Text>
-            </View>
-        </View>
-      <View style={{ marginHorizontal: "3%",marginTop:"5%",}}>
-        <Text style={{ color: COLORS.textHeader, fontSize: RFValue(20),  bottom: 8, ...FONTS.lexendregular,borderBottomColor:COLORS.element2,borderBottomWidth:3,width:"20%" }}>Draws</Text>
+        {/* <View style={{ marginTop: "4%", flexDirection: 'row', justifyContent: "center" }}> */}
+        <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), textAlign: "center" }}>Draws</Text>
+        {/* </View> */}
       </View>
-            <DrawsHeader/>
-            <DrawsMain />
-        </ScrollView >
+      <ScrollView style={{height:"90%"}}>
 
-)
+        <View style={{ marginHorizontal: "4%", marginTop: "2%", }}>
+          <Text style={{ color: COLORS.textHeader, fontSize: RFValue(20), ...FONTS.lexendregular }}>Draws</Text>
+          <View style={{ borderTopWidth: 4, width: "13%", borderTopColor: COLORS.element }} />
+        </View>
+        <DrawsHeader />
+
+        <DrawsMain />
+
+      </ScrollView >
+    </SafeAreaView>
+  )
 }
 const styles = StyleSheet.create({
-    root: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor:'white'
-    },
-  });
+  root: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white'
+  },
+});
 export default Draws;

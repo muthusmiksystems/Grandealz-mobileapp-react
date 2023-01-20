@@ -71,14 +71,14 @@ const DrawsHeader = () => {
           horizontal={true}
           data={data}
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ margin: "2%",  }}
+          contentContainerStyle={{ marginVertical: "4%",marginLeft:"4%",paddingRight:"50%"  }}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
-            <View >
-              <TouchableOpacity style={{ backgroundColor: "white",marginHorizontal:RFValue(3) }} onPress={()=>navigation.navigate("PriceDetails")}>
+            <View>
+              <TouchableOpacity style={{ backgroundColor: "white",marginHorizontal:"1%" }} onPress={()=>navigation.navigate("PriceDetails")}>
                     <Image
                       source={image.draws}
-                      resizeMode={'contain'}
+                      resizeMode="contain"
                       style={{
                         height:RFValue(90),
                         width:RFValue(90),

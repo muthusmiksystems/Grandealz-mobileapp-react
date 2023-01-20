@@ -23,14 +23,15 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import { useNavigation } from "@react-navigation/native";
 import CheckBox from "@react-native-community/checkbox";
 import { RFValue } from "react-native-responsive-fontsize";
-import { COLORS } from "../constants";
+import { COLORS, FONTS } from "../constants";
 
 
 const Login = () => {
   const navigation = useNavigation();
-  const [passShow,setPassShow]=useState("true");
-  console.log("PAss show",passShow);
-  
+  const [passShow, setPassShow] = useState("true");
+  console.log("PAss show", passShow);
+  const [isSelected, setSelection] = useState(false);
+
   const CheckBoxes = (props) => {
     const [isSelected, setSelection] = useState(false);
     return (
@@ -39,9 +40,8 @@ const Login = () => {
           value={isSelected}
           onValueChange={setSelection}
           style={styles.checkBox}
-        // tintColors={{true: COLORS.primary}}
+          tintColors={{ true: COLORS.element }}
         />
-        <Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", flexDirection: "column", alignSelf: "center" }}>{props.label}</Text>
       </View>
     )
   }
@@ -63,39 +63,48 @@ const Login = () => {
       </View>
       <View style={styles.subdivTwo}>
         <Text style={{ fontSize: RFValue(26), color: "black", textAlign: "center", fontFamily: "Lexend-SemiBold", marginTop: verticalScale(16) }}>Log In</Text>
-        <View style={{ alignSelf: "center",flexDirection:"row",borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: verticalScale(332), marginTop: verticalScale(40), color: "#000"  }}>
+        <View style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), marginTop: verticalScale(40), color: "#000" }}>
           <TextInput
             placeholder="Email"
             placeholderTextColor={"black"}
-            style={{ flexDirection:"column",width:horizontalScale(250)}}
+            style={{ flexDirection: "column", width: horizontalScale(250), ...FONTS.lexendregular, fontSize: RFValue(14) }}
           />
-          <Fontisto name='email' size={30} style={{alignSelf:"center"}}/>
+          <Fontisto name='email' size={30} style={{ alignSelf: "center" }} />
         </View>
 
-        <View style={{alignSelf:"center",flexDirection:"row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: verticalScale(332), marginTop: verticalScale(18), color: "#000"}}>
+        <View style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), marginTop: verticalScale(18), color: "#000" }}>
           <TextInput
             placeholder="Password"
             secureTextEntry={passShow ? true : false}
             placeholderTextColor={"black"}
-            style={{ flexDirection:"column",width:horizontalScale(250) }}
+            style={{ flexDirection: "column", width: horizontalScale(250), ...FONTS.lexendregular, fontSize: RFValue(14) }}
           />
-          <TouchableOpacity style={{alignSelf:"center",flexDirection:"column"}} onPress={()=>setPassShow(!passShow)}>
+          <TouchableOpacity style={{ alignSelf: "center", flexDirection: "column" }} onPress={() => setPassShow(!passShow)}>
             {passShow ? <Ionicons name="eye-outline" size={30} /> :
-            <Ionicons name='eye-off-outline' size={30} /> }
+              <Ionicons name='eye-off-outline' size={30} />}
           </TouchableOpacity>
         </View>
         <View style={{ flexDirection: "row", alignItems: "center", marginTop: "1%" }}>
-          <View style={{ flexDirection: "column" }}>
-            <CheckBoxes label="Remember Me" />
+          <View style={{ flexDirection: "column",marginLeft:horizontalScale(16) }}>
+            <View style={{ flexDirection: "row" }}>
+              <CheckBox
+                value={isSelected}
+                onValueChange={setSelection}
+                style={styles.checkBox}
+                
+                tintColors={{ true: COLORS.element }}
+              />
+              <Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", flexDirection: "column", alignSelf: "center",fontSize:RFValue(12) }}>Remember Me</Text>
+            </View>
           </View>
-          <TouchableOpacity style={{ alignItems: "flex-end", flexDirection: "column", left: horizontalScale(70) }} onPressIn={() => navigation.navigate("ForgetPassword")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular" }}>Forgot Password?</Text></TouchableOpacity>
+          <TouchableOpacity style={{ alignItems: "flex-end", flexDirection: "column", left: horizontalScale(75) }} onPressIn={() => navigation.navigate("ForgetPassword")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular",fontSize:RFValue(12) }}>Forgot Password?</Text></TouchableOpacity>
         </View>
-        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: verticalScale(200), padding: "3%" }} onPressIn={() => navigation.navigate("Tabs")}>
+        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(196), padding: "3%" }} onPressIn={() => navigation.navigate("Tabs")}>
           <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-SemiBold", color: "black" }}>Log In</Text>
         </TouchableOpacity>
-        <View style={{ flexDirection: "row", marginTop: "14%", alignSelf: "center" }}>
-          <Text style={{ flexDirection: "column", alignSelf: "flex-start", fontFamily: "Lexend-Regular", color: "#000" }}>New User? </Text>
-          <TouchableOpacity style={{ alignSelf: "flex-end", flexDirection: "column" }} onPressIn={() => navigation.navigate("Signup")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular" }}>Create New Account</Text></TouchableOpacity>
+        <View style={{ flexDirection: "row", marginTop: "10%", alignSelf: "center" }}>
+          <Text style={{ flexDirection: "column", alignSelf: "flex-start", fontFamily: "Lexend-Regular", color: "#000", fontSize: RFValue(12) }}>New User? </Text>
+          <TouchableOpacity style={{ alignSelf: "flex-end", flexDirection: "column" }} onPressIn={() => navigation.navigate("Signup")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", fontSize: RFValue(12) }}>Create New Account</Text></TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
@@ -119,6 +128,9 @@ const styles = StyleSheet.create({
   checkBox: {
     alignSelf: "center",
     flexDirection: "column",
+    borderWidth:0.2
+    // width:"20%",
+    // height:"30%"
   }
 })
 export default Login;

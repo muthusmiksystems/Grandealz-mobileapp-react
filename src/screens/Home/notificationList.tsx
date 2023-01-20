@@ -20,7 +20,6 @@ import image from '../../constants/image';
 import { COLORS, FONTS } from '../../constants';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { verticalScale } from '../../constants/metrices';
-import { useNavigation } from '@react-navigation/native';
 
 const data = [
   {
@@ -97,7 +96,6 @@ const data = [
 
 ];
 const NotificationList = () => {
-  const navigation=useNavigation();
   return (
     <SafeAreaView style={{ flex: 1 }} >
 
@@ -110,7 +108,9 @@ const NotificationList = () => {
           style={{
             backgroundColor: "#0a0127",
           }}>
-          <View style={{height:verticalScale(80),justifyContent:'center'}}>
+
+          <View style={{height:verticalScale(75),justifyContent:'center'}}>
+
             {/* <TouchableOpacity
               style={{ margin: "5.5%" }}
             >
@@ -133,7 +133,7 @@ const NotificationList = () => {
         <View style={{ padding: "1%",height:verticalScale(690) }}>
           <FlatList
             data={data}
-            contentContainerStyle={{}}
+            contentContainerStyle={{paddingBottom:"6%"}}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
               <View style={{ padding: '3%' }}>

@@ -44,43 +44,148 @@ const Tabs = () => {
             initialRouteName={'DataPage'}
             tabBarOptions={tabOptions}
             screenOptions={({ route }) => ({
+                tabBarStyle:{height:56},
                 tabBarIcon: ({ focused }) => {
                     const tintColor = focused ? COLORS.element : COLORS.gray;
-                    const borderFocus = focused ? COLORS.element : COLORS.white;
-                    const borderWidthFocus = focused ? 4 : 0;
+
                     switch (route.name) {
                         case "Notification":
                             return (
-                                <View style={{ borderTopColor: borderFocus, borderTopWidth: borderWidthFocus,alignItems:"center" }}>
-                                    <BrandIcons name="notifications-outline" size={30} color={tintColor} />
+                                <View style={{ alignItems: "center",bottom:"6%" }}>
+                                    <View>{focused? <Image source={icons.tabTopSlide}
+                                        resizeMode="contain"
+                                        style={{width:30,height:20}}
+                                    />: <View style={{width:30,height:20}}/>}</View>
+                                    <View>
+                                        {focused ? <Image
+                                            source={icons.tabBellColor}
+                                            resizeMode="contain"
+                                            style={{
+                                                width: 60,
+                                                height: 30
+                                            }}
+                                        /> :
+                                            <Image
+                                                source={icons.tabBellNoColor}
+                                                resizeMode="contain"
+                                                style={{
+                                                    width: 60,
+                                                    height: 30
+                                                }}
+                                            />}
+                                    </View>
                                     <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(10) }}>Notifications</Text>
                                 </View>
                             );
                         case "Draws":
                             return (
-                                <View style={{ borderTopColor: borderFocus, borderTopWidth: borderWidthFocus,alignItems:"center" }}>
-                                    <SLIcon name="drawer" size={30} color={tintColor} />
+                                <View style={{ alignItems: "center",bottom:"6%" }}>
+                                    <View>{focused? <Image source={icons.tabTopSlide}
+                                        resizeMode="contain"
+                                        style={{width:30,height:20}}
+                                    />: <View style={{width:30,height:20}}/>}</View>
+                                    <View>
+                                        {focused ? <Image
+                                            source={icons.tabDrawColor}
+                                            resizeMode="contain"
+                                            style={{
+                                                width: 60,
+                                                height: 30
+                                            }}
+                                        /> :
+                                            <Image
+                                                source={icons.tabDrawNoColor}
+                                                resizeMode="contain"
+                                                style={{
+                                                    width: 60,
+                                                    height: 30
+                                                }}
+                                            />}
+                                    </View>
                                     <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(10) }}>Draws</Text>
                                 </View>
                             );
                         case "DataPage":
                             return (
-                                <View style={{ borderTopColor: borderFocus, borderTopWidth: borderWidthFocus ,alignItems:"center"}}>
-                                    <EntypoIcons name="home" size={30} color={tintColor} />
+                                <View style={{ alignItems: "center",bottom:"6%" }}>
+                                    <View>{focused? <Image source={icons.tabTopSlide}
+                                        resizeMode="contain"
+                                        style={{width:30,height:20}}
+                                    />: <View style={{width:30,height:20}}/>}</View>
+                                    <View>
+                                        {focused ? <Image
+                                            source={icons.tabHomeColor}
+                                            resizeMode="contain"
+                                            style={{
+                                                width: 60,
+                                                height: 30
+                                            }}
+                                        /> :
+                                            <Image
+                                                source={icons.tabHomeNoColor}
+                                                resizeMode="contain"
+                                                style={{
+                                                    width: 60,
+                                                    height: 30
+                                                }}
+                                            />}
+                                    </View>
                                     <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(10) }}>Home</Text>
                                 </View>
                             );
                         case "Tickets":
                             return (
-                                <View style={{ borderTopColor: borderFocus, borderTopWidth: borderWidthFocus ,alignItems:"center"}}>
-                                    <MCIcon name="ticket-percent-outline" size={30} color={tintColor} />
+                                <View style={{ alignItems: "center",bottom:"6%" }}>
+                                    <View>{focused? <Image source={icons.tabTopSlide}
+                                        resizeMode="contain"
+                                        style={{width:30,height:20}}
+                                    />: <View style={{width:30,height:20}}/>}</View>
+                                    <View>
+                                        {focused ? <Image
+                                            source={icons.tabTicketColor}
+                                            resizeMode="contain"
+                                            style={{
+                                                width: 60,
+                                                height: 30,
+                                            }}
+                                        /> :
+                                            <Image
+                                                source={icons.tabTicketNoColor}
+                                                resizeMode="contain"
+                                                style={{
+                                                    width: 60,
+                                                    height: 30
+                                                }}
+                                            />}
+                                    </View>
                                     <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(10) }}>Tickets</Text>
                                 </View>
                             );
                         case "Cart":
                             return (
-                                <View style={{ borderTopColor: borderFocus, borderTopWidth: borderWidthFocus,alignItems:"center" }}>
-                                    <BrandIcons name="cart-outline" size={30} color={tintColor} />
+                                <View style={{ alignItems: "center",bottom:"6%" }}>
+                                    <View>{focused? <Image source={icons.tabTopSlide}
+                                        resizeMode="contain"
+                                        style={{width:30,height:20}}
+                                    />: <View style={{width:30,height:20}}/>}</View>
+                                    <View>
+                                        {focused ? <Image
+                                            source={icons.tabTrolleyColor}
+                                            resizeMode="contain"
+                                            style={{
+                                                width: 60,
+                                                height: 30
+                                            }}
+                                        /> :
+                                            <Image
+                                                source={icons.tabTrolleyNoColor}
+                                                resizeMode="contain"
+                                                style={{
+                                                    width: 60,
+                                                    height: 30
+                                                }}
+                                            />}
+                                    </View>
                                     <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(10) }}>Cart</Text>
                                 </View>
 
