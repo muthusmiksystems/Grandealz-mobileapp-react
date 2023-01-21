@@ -54,7 +54,7 @@ const ChangeMobileNumber = () => {
             placeholder="Mobile Number"
             maxLength={10}
             placeholderTextColor={COLORS.black}
-            style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: horizontalScale(300), marginTop: verticalScale(40), ...FONTS.lexendregular, fontSize: RFValue(14) }}
+            style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: horizontalScale(300), borderColor: "#c4c4c2", marginTop: verticalScale(40), ...FONTS.lexendregular, fontSize: RFValue(14) }}
           />
         </View>
         <TouchableOpacity style={{ alignSelf: "center", marginTop: "15%", borderWidth: 1, borderRadius: 8, width: horizontalScale(200), padding: "4%" }} onPress={() => navigation.navigate("OtpPage")}>

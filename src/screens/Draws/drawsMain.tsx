@@ -18,13 +18,13 @@ import { useNavigation } from '@react-navigation/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import Winners from './winners';
 import UpcomingDraws from './upcomingDraws';
-import { verticalScale } from '../../constants/metrices';
+import { horizontalScale, verticalScale } from '../../constants/metrices';
 const DrawsMain = () => {
     const [showWinners, setShowWinners] = useState(true);
     const navigation = useNavigation();
     return (
-        <SafeAreaView style={{ marginHorizontal: "2%" }}>
-            <View style={{ flexDirection: "row", width: "100%", marginHorizontal: "1%",height:verticalScale(55) }}>
+        <SafeAreaView>
+            <View style={{ flexDirection: "row", width: "92%",alignSelf:"center",height:verticalScale(55) }}>
 
                 <View style={{ flexDirection: "row", width: "80%", marginHorizontal: "1%", backgroundColor: "white", borderRadius: 10, }}>
                     <TouchableOpacity style={{ backgroundColor: showWinners ? COLORS.element : "white", flexDirection: "column", width: "50%", paddingVertical: "5%", borderRadius: 10, justifyContent: "center", alignItems: "center" }} onPress={() => setShowWinners(!showWinners)}>
@@ -34,8 +34,8 @@ const DrawsMain = () => {
                         <Text style={{ color: !showWinners ? "white" : COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular, }}>Upcoming Draws</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={{ flexDirection: "row", width: "15%", marginHorizontal: "1%", backgroundColor: "white", borderRadius: 10, }}>
-                    <TouchableOpacity style={{ backgroundColor: "white", flexDirection: "column", width: "95%", paddingVertical: "5%", borderRadius: 10, justifyContent: "center", alignItems: "center" }} >
+                <View style={{ flexDirection: "row", width: "16%", marginHorizontal: "1%", backgroundColor: "white", borderRadius: 10,alignItems:"center",padding:"2.8%" }}>
+                    <TouchableOpacity>
                         <Image
                             source={icons.filter}
                             resizeMode={"contain"}

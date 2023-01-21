@@ -20,7 +20,7 @@ import { useNavigation } from "@react-navigation/native";
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import EntypoIcons from "react-native-vector-icons/Entypo";
 import { RFValue } from "react-native-responsive-fontsize";
-
+import { COLORS, FONTS } from "../constants";
 
 const ChangePassword = () => {
 
@@ -51,32 +51,32 @@ const ChangePassword = () => {
       <View style={styles.subdivTwo}>
         <Text style={{ fontSize: 25, color: "black", textAlign: "center", marginTop: verticalScale(20), fontFamily: "Lexend-SemiBold" }}>Change Password</Text>
         <View style={{ alignItems: "center" }}>
-          <View style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: "89%", marginTop: "9%", color: "#000" }}>
+          <View style={{ alignSelf: "center" }}>
             <TextInput
               placeholder="Existing Password"
               placeholderTextColor={"black"}
-              style={{ flexDirection: "column", width: horizontalScale(250) }}
+              style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: horizontalScale(300), borderColor: "#c4c4c2", marginTop: verticalScale(40), ...FONTS.lexendregular, fontSize: RFValue(14) }}
             />
             {/* <Fontisto name='email' size={30} style={{ alignSelf: "center" }} /> */}
           </View>
-          <View style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: "89%", marginTop: "5%", color: "#000" }}>
+          <View style={{ alignSelf: "center" }}>
             <TextInput
               placeholder="New Password"
               placeholderTextColor={"black"}
-              style={{ flexDirection: "column", width: horizontalScale(250) }}
+              style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: horizontalScale(300), borderColor: "#c4c4c2", marginTop: verticalScale(20), ...FONTS.lexendregular, fontSize: RFValue(14) }}
             />
             {/* <Fontisto name='email' size={30} style={{ alignSelf: "center" }} /> */}
           </View>
-          <View style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: "89%", marginTop: "5%", color: "#000" }}>
+          <View style={{ alignSelf: "center" }}>
             <TextInput
               placeholder="Confirm Password"
               placeholderTextColor={"black"}
-              style={{ flexDirection: "column", width: horizontalScale(250) }}
+              style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: horizontalScale(300), borderColor: "#c4c4c2", marginTop: verticalScale(20), ...FONTS.lexendregular, fontSize: RFValue(14) }}
             />
             {/* <Fontisto name='email' size={30} style={{ alignSelf: "center" }} /> */}
           </View>
         </View>
-        <TouchableOpacity style={{ alignSelf: "center", marginTop: "14%", borderWidth: 1, borderRadius: 8, width: verticalScale(200), padding: "3%" }}
+        <TouchableOpacity style={{ alignSelf: "center", marginTop: "12%", borderWidth: 1, borderRadius: 8, width: verticalScale(200), padding: "3%" }}
           onPress={() => navigation.navigate("OtpPage")}
         >
           <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-SemiBold", color: "black" }}>Update</Text>

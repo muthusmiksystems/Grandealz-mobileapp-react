@@ -17,12 +17,15 @@ import { FONTS, COLORS } from "../../constants";
 import { RFValue } from "react-native-responsive-fontsize";
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import image from "../../constants/image";
+import { RadioButton } from "react-native-paper";
 // import { RadioButton } from "react-native-paper";
 import icons from "../../constants/icons";
 
 const Delivery = () => {
 
     const navigation = useNavigation();
+    const [checked, setChecked] = React.useState('Male');
+
 
     return (
         <SafeAreaView style={{ backgroundColor: "#F1F1F", height: "100%" }}>
@@ -34,22 +37,24 @@ const Delivery = () => {
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18) }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), textAlign: "center", width:horizontalScale(260) }}>Delivery</Text>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), textAlign: "center", width: "75%" }}>Delivery</Text>
             </View>
             <ScrollView style={{ height: "80%" }}>
                 {/* <RadioButton.Group onValueChange={newValue => { setValue(newValue), parentCallback(newValue) }} value={value} > */}
-                <View style={{ width: "95%", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", marginTop: "5%", padding: "2%" }}>
-                    <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "2%" }}>
-                        <View style={{ flexDirection: "column", width: "15%", }}>
+                <View style={{ width: "92%", borderRadius: 20, backgroundColor: COLORS.white, alignSelf: "center", marginTop: "4%",paddingVertical:"3%" }}>
+                    <View style={{ flexDirection: "row", width: "100%", borderRadius: 10 }}>
+                        <View style={{ flexDirection: "column" }}>
                             <View style={{ flexDirection: "row" }}>
-                                <Image
-                                    source={image.coupon}
-                                    resizeMode={"contain"}
-                                    style={{ height: 20, width: 20 }}
+                                <RadioButton
+                                    value="Male"
+                                    status={checked === 'Male' ? 'checked' : 'unchecked'}
+                                    onPress={() => setChecked('Male')}
+                                    uncheckedColor={COLORS.lightGray}
+                                    color={COLORS.element}
                                 />
                             </View>
                         </View>
-                        <View style={{ flexDirection: "column", width: "65%", }}>
+                        <View style={{ flexDirection: "column", width: "65%"}}>
 
                             <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendsemibold, margin: "3%" }}>Deliver at your door step</Text>
 
@@ -67,27 +72,24 @@ const Delivery = () => {
                         </View>
                     </View>
                 </View>
-                <View style={{ width: "95%", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", marginTop: "5%", padding: "2%" }}>
+                <View style={{ width: "92%",alignSelf:"center", borderRadius: 20, backgroundColor: COLORS.white, marginTop: "4%",paddingVertical:"3%" }}>
                     <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "2%" }}>
-                        <View style={{ flexDirection: "column", width: "15%", }}>
+                        <View style={{ flexDirection: "column" }}>
                             <View style={{ flexDirection: "row" }}>
-                                <Image
-                                    source={image.coupon}
-                                    resizeMode={"contain"}
-                                    style={{ height: 20, width: 20 }}
+                                <RadioButton
+                                    value="Female"
+                                    status={checked === 'Female' ? 'checked' : 'unchecked'}
+                                    onPress={() => setChecked('Female')}
+                                    uncheckedColor={COLORS.lightGray}
+                                    color={COLORS.element}
                                 />
                             </View>
                         </View>
                         <View style={{ flexDirection: "column", width: "65%", }}>
-
                             <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendsemibold, margin: "3%" }}>Self Pickup From Our Outlet</Text>
-
                         </View>
-
                     </View>
                 </View>
-
-                {/* </RadioButton.Group> */}
             </ScrollView>
 
         </SafeAreaView>
@@ -96,7 +98,7 @@ const Delivery = () => {
 const styles = StyleSheet.create({
     subdivOne: {
         width: horizontalScale(375),
-        height: verticalScale(75),
+        height: verticalScale(80),
         backgroundColor: "#0a0127",
         alignItems: "center",
         // justifyContent: 'center',

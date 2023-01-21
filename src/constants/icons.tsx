@@ -28,6 +28,7 @@ export const userWhatsapp = require("../assests/icons/whatsapp.png")
 export const userLinkedin = require("../assests/icons/linkedin.png")
 export const userFacebook = require("../assests/icons/facebook.png")
 export const userInstagram = require("../assests/icons/instagram.png")
+export const coinDollar=require("../assests/icons/coinDollar.png")
 export const tabBellColor = require("../assests/icons/bellColor.png")
 export const tabBellNoColor = require("../assests/icons/bellNoColor.png")
 export const tabDrawColor = require("../assests/icons/drawColor.png")
@@ -39,11 +40,14 @@ export const tabTicketNoColor = require("../assests/icons/ticketNoColor.png")
 export const tabTrolleyColor = require("../assests/icons/trolley-color.png")
 export const tabTrolleyNoColor = require("../assests/icons/trolley-noColor.png")
 export const tabTopSlide = require("../assests/icons/recUp.png")
+export const rupee=require("../assests/icons/rupee.png")
+export const download=require("../assests/icons/download.png")
 export default {
     loginicon,
     crcard,
     Upi,
     netBanking,
+ download,
     stsicon,
     filter,
     user,
@@ -81,4 +85,6 @@ export default {
     tabHomeColor,
     tabDrawNoColor,
     tabDrawColor,
+    coinDollar,
+    rupee
 }

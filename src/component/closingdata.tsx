@@ -15,6 +15,7 @@ import image from '../constants/image';
 import icons from '../constants/icons';
 import { COLORS,FONTS } from '../constants';
 import {useNavigation } from '@react-navigation/native';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 const data = [
   {
@@ -68,10 +69,10 @@ const ClosingSoon = () => {
                   </View>
                 </View>
                 <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 5, padding: 10 }}>
-                  <Text style={{ fontSize: 14 ,color:COLORS.black,...FONTS.lexendregular}}>{item.from}</Text>
+                  <Text style={{ fontSize:RFValue(14) ,color:COLORS.black,...FONTS.lexendregular}}>{item.from}</Text>
                 </View>
                 <View>
-                  <Text style={{ fontSize: 10, textAlign: "center",color:COLORS.black,...FONTS.lexendregular }}>{item.to}</Text>
+                  <Text style={{ fontSize: RFValue(10), textAlign: "center",color:COLORS.black,...FONTS.lexendregular }}>{item.to}</Text>
                 </View>
                 <View style={{width:"80%",height:"4%",borderColor:"#F1F1F1",borderWidth:1,margin:10,borderRadius:12}}>
                   <Text style={{backgroundColor:"red",width:"80%",borderRadius:12}}></Text>

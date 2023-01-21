@@ -19,33 +19,33 @@ import { RFValue } from "react-native-responsive-fontsize";
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import image from "../../constants/image";
 import OrderList from "./orderList";
-// import StepIndicator from 'react-native-step-indicator';
+import StepIndicator from 'react-native-step-indicator';
 
 const { width, height } = Dimensions.get("window");
-const labels = ["Cart","Delivery Address","Order Summary","Payment Method"];
+const labels = ["Cart", "Delivery Address", "Order Summary", "Payment Method"];
 const customStyles = {
     stepIndicatorSize: 25,
-    currentStepIndicatorSize:30,
+    currentStepIndicatorSize: 30,
     separatorStrokeWidth: 2,
     currentStepStrokeWidth: 3,
-    stepStrokeCurrentColor: '#ff3232',
+    stepStrokeCurrentColor: '#E70736',
     stepStrokeWidth: 3,
-    stepStrokeFinishedColor: '#ff3232',
+    stepStrokeFinishedColor: '#E70736',
     stepStrokeUnFinishedColor: '#000',
-    separatorFinishedColor: '#ff3232',
+    separatorFinishedColor: '#E70736',
     separatorUnFinishedColor: '#000',
-    stepIndicatorFinishedColor: '#ff3232',
+    stepIndicatorFinishedColor: '#E70736',
     stepIndicatorUnFinishedColor: '#ffffff',
     stepIndicatorCurrentColor: '#ffffff',
     stepIndicatorLabelFontSize: 13,
     currentStepIndicatorLabelFontSize: 13,
-    stepIndicatorLabelCurrentColor: '#ff3232',
+    stepIndicatorLabelCurrentColor: '#E70736',
     stepIndicatorLabelFinishedColor: '#ffffff',
     stepIndicatorLabelUnFinishedColor: '#000',
     labelColor: '#999999',
     labelSize: 13,
-    currentStepLabelColor: '#ff3232'
-  }
+    currentStepLabelColor: '#E70736'
+}
 const OrderDetails = () => {
     const [currentPosition,setCurrentPosition]= useState(3)
     const navigation = useNavigation();
@@ -74,20 +74,10 @@ const OrderDetails = () => {
                 backgroundColor="#0a0127"
             />
             <View style={styles.subdivOne}>
-                <TouchableOpacity
-                    style={{ margin: "5.5%" }}
-                    onPress={()=>navigation.goBack()}
-                >
-                    <Image
-                        source={icons.back}
-                        resizeMode="contain"
-                        style={{
-                            width: 20,
-                            height: 20,
-                        }}
-                    />
+            <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18), flexDirection: "column" }}>
+                    <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: RFValue(22), marginStart: "16%" }}>Order Deatils</Text>
+                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: RFValue(24), width: "78%", textAlign: "center" }}>Order Details</Text>
 
             </View>
             <ScrollView style={{ height: "80%" }}>
@@ -113,9 +103,9 @@ const OrderDetails = () => {
                             </View>
                         </View>
                         <View style={{ margin: 5, padding: 10 }}>
-                            <Text style={{ fontSize: 16, ...FONTS.lexendsemibold, color: COLORS.black }}>Pencil</Text>
-                            <Text style={{ fontSize: 14, ...FONTS.lexendregular, color: COLORS.black }}>Blanco Set</Text>
-                            <Text style={{ fontSize: 20, ...FONTS.lexendregular, color: "red", marginTop: 20 }}>₹100.00</Text>
+                            <Text style={{ fontSize:  RFValue(16), ...FONTS.lexendsemibold, color: COLORS.black }}>Pencil</Text>
+                            <Text style={{ fontSize:  RFValue(14), ...FONTS.lexendregular, color: COLORS.black }}>Blanco Set</Text>
+                            <Text style={{ fontSize:  RFValue(20), ...FONTS.lexendregular, color: "red", marginTop: 20 }}>₹100.00</Text>
                         </View>
                         <View style={{ flexDirection: "row", marginVertical: "2%" }}>
                             <View style={{ flexDirection: "column", marginLeft: 15, justifyContent: "flex-end", marginStart: 30 }}>
@@ -128,24 +118,109 @@ const OrderDetails = () => {
                     </View>
 
                 </TouchableOpacity>
-                {/* <View style={{ padding: 10 }}>
+                 <View style={{ padding: 10 }}>
                     <View style={{ backgroundColor: "#fff", borderRadius: 8 }}>
                         <StepIndicator
                             customStyles={customStyles}
                             currentPosition={currentPosition}
                             labels={labels}
+                            stepCount={4}
                             direction="vertical"
-                            renderLabel={({position,stepStatus,label,currentPosition}) =>{
-                                return(
-                                    <View style={{marginTop:30,padding:10,paddingLeft:5,width: width-100}}>
-                                        <Text style={{bottom:5}}>{Data[position]?.label}</Text>
-                                        <Text style={{marginBottom:25}}>{Data[position]?.datetime}</Text>
+                            renderLabel={({ position, stepStatus, label, currentPosition }) => {
+                                return (
+                                    <View style={{ padding: 10, paddingLeft: 5, width: width - 100 }}>
+                                        <Text style={{ ...FONTS.lexendsemibold, color: "black" }}>{Data[position]?.label}</Text>
+                                        <Text style={{}}>{Data[position]?.datetime}</Text>
                                     </View>
                                 )
                             }}
                         />
                     </View>
-                </View> */}
+                </View>
+                <View style={{ marginHorizontal: 10, borderRadius: 8, padding: 10, backgroundColor: "white", flexDirection: "row" }}>
+                    <Image
+                        source={icons.download}
+                        style={{
+                            borderWidth: 1,
+                            paddingLeft: 10,
+                            width: 20,
+                            height: 20,
+                            flexDirection: "column"
+                        }}
+                    />
+                    <Text style={{ flexDirection: "column", ...FONTS.lexendregular }}>  Invoice <Text style={{ color: "#E70736" }}>download</Text> </Text>
+                </View>
+                <View style={{ margin: 10, borderRadius: 8, padding: 10, backgroundColor: "white", flexDirection: "row" }}>
+                    <View style={{ padding: 10 }}>
+                        <Text style={{ ...FONTS.lexendsemibold, color: "black" }}>
+                            Shipping Details
+                        </Text>
+                        <Text style={{ marginTop: 10, ...FONTS.lexendregular, color: "black" }}>Davin connor</Text>
+                        <Text style={{ marginTop: 10, ...FONTS.lexendregular, color: "#616161" }}>120, Ipsum is simply dummy text of the printing and typesetting industry.</Text>
+                        <Text style={{ marginTop: 20, ...FONTS.lexendregular, color: "#616161" }}>Mobile:<Text style={{ marginTop: 10, ...FONTS.lexendregular, color: "black" }}> 9654896542 </Text></Text>
+                    </View>
+                </View>
+                <View style={{ margin: 10, borderRadius: 8, padding: 5, backgroundColor: "white", flexDirection: "row", }}>
+                    <View style={{ width: "100%" }}>
+                        <Text style={{ ...FONTS.lexendsemibold, color: "black", padding: 10 }}>
+                            Price Details
+                        </Text>
+                        <View style={{ borderWidth: 0.5, borderColor: "#616161", width: "100%" }} />
+                        <View style={{ flexDirection: "row", justifyContent: "space-between", padding: 10 }}>
+                            <View style={{ flexDirection: "column", ...FONTS.lexendregular }}>
+                                <Text>Total MRP</Text>
+                            </View>
+                            <View style={{ flexDirection: "column", ...FONTS.lexendregular }}>
+                                <Text>₹100.00</Text>
+                            </View>
+                        </View>
+                        <View style={{ flexDirection: "row", justifyContent: "space-between", padding: 10 }}>
+                            <View style={{ flexDirection: "column", ...FONTS.lexendregular }}>
+                                <Text>Tax (GST)</Text>
+                            </View>
+                            <View style={{ flexDirection: "column", ...FONTS.lexendregular }}>
+                                <Text>₹30.00</Text>
+                            </View>
+                        </View>
+                        <View style={{ flexDirection: "row", justifyContent: "space-between", padding: 10 }}>
+                            <View style={{ flexDirection: "column", ...FONTS.lexendregular }}>
+                                <Text>Promo Code</Text>
+                            </View>
+                            <View style={{ flexDirection: "column", ...FONTS.lexendregular }}>
+                                <Text>₹10.00</Text>
+                            </View>
+                        </View>
+                        <View style={{ flexDirection: "row", justifyContent: "space-between", padding: 10 }}>
+                            <View style={{ flexDirection: "column", ...FONTS.lexendregular }}>
+                                <Text>Coins</Text>
+                            </View>
+                            <View style={{ flexDirection: "column", ...FONTS.lexendregular }}>
+                                <Text>₹20.00</Text>
+                            </View>
+                        </View>
+                        <View style={{ borderWidth: 0.5, borderColor: "#616161", width: "100%" }} />
+                        <View style={{ flexDirection: "row", justifyContent: "space-between", padding: 10 }}>
+                            <View style={{ flexDirection: "column", ...FONTS.lexendregular }}>
+                                <Text>Total Amount</Text>
+                                <Text>Inclusive of Tax (GST)</Text>
+                            </View>
+                            <View style={{ flexDirection: "column", ...FONTS.lexendregular }}>
+                                <Text>₹70.00</Text>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+                <View style={{ margin: 10, borderRadius: 8, padding: 10, backgroundColor: "white", flexDirection: "row",marginBottom:20 }}>
+                        <View style={{ flexDirection: "row", justifyContent: "space-around",marginLeft:10 }}>
+                            <View style={{ flexDirection: "column", ...FONTS.lexendregular }}>
+                                <Text style={{ fontSize: RFValue(10), top: 4, color: "black" }}>{'\u2B24'}</Text>
+                            </View>
+                            <View style={{ flexDirection: "column", ...FONTS.lexendregular,marginLeft:5 }}>
+                                <Text style={{ ...FONTS.lexendsemibold, color: "black", fontSize: RFValue(15) }}> Debit Card ₹70.00
+                                </Text>
+                            </View>
+                        </View>
+                </View>
             </ScrollView>
             {/* <View style={{ flexDirection: "row", height: "7%", backgroundColor: COLORS.white }}>
                 <TouchableOpacity style={{ flexDirection: "column", width: "45%", marginHorizontal: "3%", marginVertical: "1%", borderRadius: 5, borderWidth: 1, justifyContent: "center", alignItems: "center" }}>
@@ -161,7 +236,7 @@ const OrderDetails = () => {
 const styles = StyleSheet.create({
     subdivOne: {
         width: horizontalScale(375),
-        height: "10%",
+        height: verticalScale(80),
         backgroundColor: "#0a0127",
         alignItems: "center",
         // justifyContent: 'center',

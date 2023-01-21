@@ -15,6 +15,7 @@ import image from '../../constants/image';
 import icons from '../../constants/icons';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { COLORS, FONTS } from '../../constants';
+import { verticalScale } from '../../constants/metrices';
 
 
 const data = [
@@ -62,20 +63,20 @@ const Winners = () => {
 
         <FlatList
             data={data}
-            contentContainerStyle={{ width: "100%" }}
+            contentContainerStyle={{ width: "91%",alignSelf:"center",marginTop:"2%" }}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
-                <View style={{ padding: '2%',paddingBottom:"5%" }}>
-                    <TouchableOpacity style={{ borderRadius: 9, backgroundColor: "white",paddingVertical:"3%" }}>
+                <View style={{ borderRadius: 9, backgroundColor: "white",alignItems:"center",paddingVertical:verticalScale(20),marginBottom:"5%" }}>
+                    <TouchableOpacity>
 
-                        <View style={{ width: "100%" }}>
+                        <View>
                             <Image
                                 source={image.drawsCar}
                                 resizeMode={"contain"}
-                                style={{ height: RFValue(150), width: RFValue(310), margin: "4%" }}
+                                style={{ height: RFValue(150), width: RFValue(310) }}
                             />
                         </View>
-                        <View style={{ marginLeft: "6%", paddingBottom: 10 }}>
+                        <View style={{ marginLeft: "2%" }}>
 
                             <Text style={{ fontSize: RFValue(16), color: COLORS.topBackground, ...FONTS.lexendsemibold, padding: "1%" }}>CONGRATULATIONS </Text>
                             <Text style={{ fontSize: RFValue(14), color: COLORS.textHeader, marginHorizontal: "1%", ...FONTS.lexendregular }}>
@@ -86,9 +87,6 @@ const Winners = () => {
                             <Text style={{ fontSize: RFValue(10), color: COLORS.gray, paddingTop: "5%", ...FONTS.lexendregular, marginHorizontal: "1%" }}>Announced on</Text>
                             <Text style={{ fontSize: RFValue(10), color: COLORS.gray, ...FONTS.lexendregular, marginHorizontal: "1%" }}>August 07.2022 8:05 PM</Text>
                         </View>
-
-
-
                     </TouchableOpacity>
                 </View>
             )}

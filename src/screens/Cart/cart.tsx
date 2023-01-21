@@ -32,9 +32,7 @@ const Cart = () => {
                 backgroundColor="#0a0127"
             />
             <View style={styles.subdivOne}>
-
-                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), textAlign: "center" }}>Cart</Text>
-
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), textAlign: "center" }}>Cart</Text>
             </View>
             <ScrollView style={{ height: "80%" }}>
                 <View style={{ width: "92%", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", marginTop: "5%",alignSelf:"center" }}>
@@ -112,7 +110,7 @@ const Cart = () => {
 const styles = StyleSheet.create({
     subdivOne: {
         width: horizontalScale(375),
-        height:verticalScale(75),
+        height:verticalScale(80),
         backgroundColor: "#0a0127",
         // alignItems: "center",
         justifyContent: 'center',

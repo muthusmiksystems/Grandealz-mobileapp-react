@@ -24,10 +24,12 @@ import { useNavigation } from "@react-navigation/native";
 import CheckBox from "@react-native-community/checkbox";
 import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS, FONTS } from "../constants";
-
+//import { useDispatch,useSelector } from "react-redux";
+import { loginHanlder } from "../store/reducers/login";
 
 const Login = () => {
   const navigation = useNavigation();
+  // const dispatch=useDispatch();
   const [passShow, setPassShow] = useState("true");
   console.log("PAss show", passShow);
   const [isSelected, setSelection] = useState(false);
@@ -84,9 +86,9 @@ const Login = () => {
               <Ionicons name='eye-off-outline' size={30} />}
           </TouchableOpacity>
         </View>
-        <View style={{ flexDirection: "row", alignItems: "center", marginTop: "1%" }}>
-          <View style={{ flexDirection: "column",marginLeft:horizontalScale(16) }}>
-            <View style={{ flexDirection: "row" }}>
+        <View style={{ flexDirection: "row", alignItems: "center",width:"90%",marginHorizontal:"5%" }}>
+          <View style={{ flexDirection: "column",width:"60%",marginStart:"1.5%"}}>
+            <View style={{ flexDirection: "row"}}>
               <CheckBox
                 value={isSelected}
                 onValueChange={setSelection}
@@ -97,7 +99,7 @@ const Login = () => {
               <Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", flexDirection: "column", alignSelf: "center",fontSize:RFValue(12) }}>Remember Me</Text>
             </View>
           </View>
-          <TouchableOpacity style={{ alignItems: "flex-end", flexDirection: "column", left: horizontalScale(75) }} onPressIn={() => navigation.navigate("ForgetPassword")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular",fontSize:RFValue(12) }}>Forgot Password?</Text></TouchableOpacity>
+          <TouchableOpacity style={{ flexDirection: "column",width:"40%",marginStart:"1.5%"}} onPressIn={() => navigation.navigate("ForgetPassword")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular",fontSize:RFValue(12) }}>Forgot Password?</Text></TouchableOpacity>
         </View>
         <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(196), padding: "3%" }} onPressIn={() => navigation.navigate("Tabs")}>
           <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-SemiBold", color: "black" }}>Log In</Text>
