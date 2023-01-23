@@ -45,34 +45,25 @@ const WishList = () => {
                 />
                 <Text style={{ fontFamily: "Lexend-Regular", color: "black", fontSize: 16, marginTop: 20 }}>Your wishlist in empty</Text>
             </View> */}
-	    <View style={styles.subdivOne}>
-            <TouchableOpacity
-                style={{ margin: "5.5%" }}
-            >
-                <Image
-                    source={icons.back}
-                    resizeMode="contain"
-                    style={{
-                        width: 20,
-                        height: 20,
-                    }}
-                />
-            </TouchableOpacity>
-            <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: RFValue(22), marginStart: "20%" }}>Wishlist</Text>
+            <View style={styles.subdivOne}>
+                <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18), flexDirection: "column" }}>
+                    <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
+                </TouchableOpacity>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), width: "75%", textAlign: "center" }}>Wishlist</Text>
 
-        </View>
-        <ScrollView style={{ height: "80%" }}>
-            <View style={{ flexDirection: "row" }}>
-             <WishlistData/>   
             </View>
-        </ScrollView>
-    </SafeAreaView>
+            <ScrollView style={styles.subdivTwo}>
+                <View style={{ flexDirection: "row" }}>
+                    <WishlistData />
+                </View>
+            </ScrollView>
+        </SafeAreaView>
     );
 }
 const styles = StyleSheet.create({
     subdivOne: {
         width: horizontalScale(375),
-        height: verticalScale(65),
+        height: verticalScale(80),
         backgroundColor: "#0a0127",
         alignItems: "center",
         // justifyContent: 'center',
@@ -80,8 +71,8 @@ const styles = StyleSheet.create({
     },
     subdivTwo: {
         height: verticalScale(748),
-        alignItems: "center",
-        justifyContent: "center",
+        // alignItems: "center",
+        // justifyContent: "center",
         // borderWidth:2
     }
 

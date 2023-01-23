@@ -72,7 +72,7 @@ const Delivery = () => {
                         </View>
                     </View>
                 </View>
-                <View style={{ width: "92%",alignSelf:"center", borderRadius: 20, backgroundColor: COLORS.white, marginTop: "4%",paddingVertical:"3%" }}>
+                <View style={{ width: "92%", alignSelf: "center", borderRadius: 20, backgroundColor: COLORS.white, marginTop: "4%", paddingVertical: "3%" }}>
                     <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "2%" }}>
                         <View style={{ flexDirection: "column" }}>
                             <View style={{ flexDirection: "row" }}>
@@ -86,15 +86,10 @@ const Delivery = () => {
                             </View>
                         </View>
                         <View style={{ flexDirection: "column", width: "65%", }}>
-
                             <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendsemibold, margin: "3%" }}>Self Pickup From Our Outlet</Text>
-
                         </View>
-
                     </View>
                 </View>
-
-                {/* </RadioButton.Group> */}
             </ScrollView>
 
         </SafeAreaView>
@@ -103,7 +98,7 @@ const Delivery = () => {
 const styles = StyleSheet.create({
     subdivOne: {
         width: horizontalScale(375),
-        height: verticalScale(75),
+        height: verticalScale(80),
         backgroundColor: "#0a0127",
         alignItems: "center",
         // justifyContent: 'center',

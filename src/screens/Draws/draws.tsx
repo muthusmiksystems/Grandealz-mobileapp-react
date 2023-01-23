@@ -32,7 +32,6 @@ const Draws = (props: Props) => {
 
 
 
-
   return (
     <SafeAreaView>
       <StatusBar animated={true} backgroundColor={"#0a0127"} />
@@ -47,7 +46,7 @@ const Draws = (props: Props) => {
         <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), textAlign: "center" }}>Draws</Text>
         {/* </View> */}
       </View>
-      <ScrollView style={{height:"90%"}}>
+      <ScrollView style={{ height: "90%" }}>
 
         <View style={{ marginHorizontal: "4%", marginTop: "2%", }}>
           <Text style={{ color: COLORS.textHeader, fontSize: RFValue(20), ...FONTS.lexendregular }}>Draws</Text>

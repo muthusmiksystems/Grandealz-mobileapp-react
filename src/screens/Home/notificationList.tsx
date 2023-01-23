@@ -117,7 +117,7 @@ const NotificationList = () => {
         <View style={{ padding: "1%", height: verticalScale(700) }}>
           <FlatList
             data={data}
-            contentContainerStyle={{ paddingBottom: verticalScale(40) }}
+            contentContainerStyle={{ paddingBottom: verticalScale(60) }}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
               <View style={{ paddingHorizontal: "3%", paddingTop: "3%" }}>
@@ -127,7 +127,7 @@ const NotificationList = () => {
                       source={icons.rect}
                       resizeMode="contain"
                       style={{
-                       borderWidth:1
+                        borderWidth: 1
                       }}
                     />
                   </View>
