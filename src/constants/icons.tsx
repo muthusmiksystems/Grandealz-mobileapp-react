@@ -42,6 +42,8 @@ export const tabTrolleyNoColor = require("../assests/icons/trolley-noColor.png")
 export const tabTopSlide = require("../assests/icons/recUp.png")
 export const rupee=require("../assests/icons/rupee.png")
 export const download=require("../assests/icons/download.png")
+export const share=require("../assests/icons/share.png")
+
 export default {
     loginicon,
     crcard,
@@ -52,6 +54,7 @@ export default {
     filter,
     user,
     shoppingCart,
+    share,
     love,
     back,
     rect,    

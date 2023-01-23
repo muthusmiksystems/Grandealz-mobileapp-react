@@ -49,7 +49,7 @@ const Draws = (props: Props) => {
       <ScrollView style={{ height: "90%" }}>
 
         <View style={{ marginHorizontal: "4%", marginTop: "2%", }}>
-          <Text style={{ color: COLORS.textHeader, fontSize: RFValue(20), ...FONTS.lexendregular }}>Draws</Text>
+          <Text style={{ color: COLORS.textHeader, fontSize: RFValue(16), ...FONTS.lexendsemibold }}>Draws</Text>
           <View style={{ borderTopWidth: 4, width: "13%", borderTopColor: COLORS.element }} />
         </View>
         <DrawsHeader />

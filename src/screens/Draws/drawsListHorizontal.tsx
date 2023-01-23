@@ -23,44 +23,44 @@ const data = [
     id: '1',
     imag: image.cash,
     from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-    to: "1689 soul out 1985"
+    to: "1689 sold out 1985"
 
   },
   {
     id: '2',
     imag: image.cash,
     from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-    to: "1689 soul out 1985"
+    to: "1689 sold out 1985"
   },
   {
     id: '3',
     imag: image.cash,
     from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-    to: "1689 soul out 1985"
+    to: "1689 sold out 1985"
   },
   {
     id: '4',
     imag: image.cash,
     from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-    to: "1689 soul out 1985"
+    to: "1689 sold out 1985"
   },
   {
     id: '5',
     imag: image.cash,
     from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-    to: "1689 soul out 1985"
+    to: "1689 sold out 1985"
   },
   {
     id: '6',
     imag: image.cash,
     from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-    to: "1689 soul out 1985"
+    to: "1689 sold out 1985"
   },
   {
     id: '7',
     imag: image.cash,
     from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-    to: "1689 soul out 1985"
+    to: "1689 sold out 1985"
   },
 ];
 const DrawsHeader = () => {
@@ -72,7 +72,7 @@ const DrawsHeader = () => {
           horizontal={true}
           data={data}
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ marginVertical: "4%",marginLeft:"4%",paddingRight:"75%"  }}
+          contentContainerStyle={{ marginVertical: "4%",marginLeft:"2%",paddingRight:"75%"  }}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
             <View>
@@ -81,14 +81,14 @@ const DrawsHeader = () => {
                       source={image.draws}
                       resizeMode="contain"
                       style={{
-                        height:RFValue(90),
-                        width:RFValue(90),
+                        height:RFValue(80),
+                        width:RFValue(80),
                       }}
                     />
               </TouchableOpacity>
               <View style={{justifyContent:"center",alignItems:"center",padding:"2%"}}>
-                <Text style={{ color: COLORS.textHeader, fontSize: RFValue(12), ...FONTS.lexendregular,}}>8th July 2022</Text>
-                <Text style={{ color: COLORS.textHeader, fontSize: RFValue(12), ...FONTS.lexendregular,}}>06:00 PM</Text>
+                <Text style={{ color: COLORS.textHeader, fontSize: RFValue(10), ...FONTS.lexendregular,}}>8th July 2022</Text>
+                <Text style={{ color: COLORS.textHeader, fontSize: RFValue(10), ...FONTS.lexendregular,}}>06:00 PM</Text>
               </View>
             </View>
           )}
