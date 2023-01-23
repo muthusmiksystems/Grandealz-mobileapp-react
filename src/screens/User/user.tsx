@@ -169,7 +169,7 @@ const User = () => {
                 <Text style={styles.fontHeadStyle}>General</Text>
                 <View style={{ borderTopWidth: 4, width: "13%", borderTopColor: COLORS.element, marginLeft: "6%", paddingBottom: "2%" }} />
                 <View style={styles.viewBox}>
-                    <TouchableOpacity style={styles.touchButton}>
+                    <TouchableOpacity style={styles.touchButton} onPress={()=>{navigation.navigate("HowItWorks")}}>
                         <Image
                             source={icons.userInfo}
                             resizeMode="contain"

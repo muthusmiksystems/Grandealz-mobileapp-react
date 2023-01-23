@@ -19,8 +19,9 @@ import icons from '../../constants/icons';
 import image from '../../constants/image';
 import { useNavigation } from '@react-navigation/native';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { verticalScale } from '../../constants/metrices';
 const DataPage = () => {
-  const navigation=useNavigation();
+  const navigation = useNavigation();
   return (
     <ScrollView >
       <View style={{height:"100%"}}>
@@ -28,10 +29,12 @@ const DataPage = () => {
           animated={true}
           backgroundColor={"#0a0127"}
         />
+      <View style={{ height: "100%" }}>
         <View
           style={{
             backgroundColor: "#0a0127",
-
+            height: verticalScale(80),
+            justifyContent:"center"
           }}>
           <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>
             <View style={{ flexDirection: "column" }}>
@@ -40,22 +43,22 @@ const DataPage = () => {
                 resizeMode="contain"
                 style={{
                   height: 50,
-                  marginLeft: "5%"
+                  marginLeft: "12%"
                 }}
               />
             </View>
             <View style={{ flexDirection: "column" }}>
-                <TouchableOpacity onPress={()=>navigation.navigate('User')}>
-              <Image
-                source={icons.user}
-                resizeMode="contain"
-                style={{
-                  width: 100,
-                  height: 30,
-                  marginTop: "2%"
-                }}
-              />
-</TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate('User')}>
+                <Image
+                  source={icons.user}
+                  resizeMode="contain"
+                  style={{
+                    width: 100,
+                    height: 40,
+                    marginTop: "3%"
+                  }}
+                />
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -87,6 +90,7 @@ const DataPage = () => {
             </View>
           </View>
         </View>
+      </View>
       </View>
     </ScrollView>
   )

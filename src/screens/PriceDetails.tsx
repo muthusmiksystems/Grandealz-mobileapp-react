@@ -19,6 +19,7 @@ import image from '../constants/image';
 import { COLORS, FONTS } from '../constants';
 import { useNavigation } from '@react-navigation/native';
 import { RFValue } from 'react-native-responsive-fontsize';
+import EntypoIcons from "react-native-vector-icons/Entypo";
 const PriceDetails = () => {
   const navigation = useNavigation();
   return (
@@ -35,23 +36,10 @@ const PriceDetails = () => {
 
           }}>
           <View style={{ flexDirection: 'row', alignItems: "center" }}>
-            <TouchableOpacity
-              style={{ margin: "5.5%" }}
-            >
-              <Image
-                source={icons.back}
-                resizeMode="contain"
-                style={{
-                  width: 20,
-                  height: 20,
-
-                }}
-              />
-            </TouchableOpacity>
-
-            <View style={{ marginTop: "4%", flexDirection: 'row', justifyContent: "center" }}>
-              <Text style={{ color: "white", fontSize: 20, marginLeft: "25%", bottom: 8, ...FONTS.lexendregular }}>Price Details</Text>
-            </View>
+          <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18) }}>
+                    <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
+                </TouchableOpacity>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), textAlign: "center", width: "75%" }}>Price Details</Text>
           </View>
         </View>
 

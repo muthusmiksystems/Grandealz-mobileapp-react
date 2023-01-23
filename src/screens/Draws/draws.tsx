@@ -36,7 +36,7 @@ const Draws = (props: Props) => {
   return (
     <SafeAreaView>
       <StatusBar animated={true} backgroundColor={"#0a0127"} />
-      <View style={{ height: verticalScale(75), justifyContent: 'center', backgroundColor: "#0a0127" }}>
+      <View style={{ height: verticalScale(80), justifyContent: 'center', backgroundColor: "#0a0127" }}>
         {/* <TouchableOpacity style={{ margin: "5.5%" }}>
               <Image
                 source={icons.back}
@@ -44,7 +44,7 @@ const Draws = (props: Props) => {
                 style={{ width: 20,height: 20,}} />
             </TouchableOpacity> */}
         {/* <View style={{ marginTop: "4%", flexDirection: 'row', justifyContent: "center" }}> */}
-        <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), textAlign: "center" }}>Draws</Text>
+        <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), textAlign: "center" }}>Draws</Text>
         {/* </View> */}
       </View>
       <ScrollView style={{height:"90%"}}>

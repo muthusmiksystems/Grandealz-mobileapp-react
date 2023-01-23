@@ -13,9 +13,30 @@ export const coupon = require("../assests/images/coupon.png");
 export const coin = require("../assests/images/coin.png");
 export const money = require("../assests/images/money.png");
 export const busDelivery = require("../assests/images/BusDelivery.png");
+export const Android= require("../assests/images/Android.png");
+export const arrowdown= require("../assests/images/arrowdown.png");
+export const arrowup= require("../assests/images/arrowup.png");
+export const bike= require("../assests/images/bike.png");
+export const audi= require("../assests/images/audi.png");
+export const book= require("../assests/images/book.png");
+export const bottleshow= require("../assests/images/bottleshow.png");
+export const capshow= require("../assests/images/capshow.png");
+export const tshirtblack= require("../assests/images/tshirtblack.png");
+export const tshirtgreen= require("../assests/images/tshirtgreen.png");
+export const watches= require("../assests/images/watches.png");
 
 export default {
- 
+    Android,
+    arrowdown,
+    arrowup,
+    bike,
+    bottleshow,
+    watches,
+    tshirtgreen,
+    tshirtblack,
+    capshow,
+    book,
+    audi,
     cars,
     cash,
     inputcash,

@@ -19,7 +19,7 @@ import icons from '../../constants/icons';
 import image from '../../constants/image';
 import { COLORS, FONTS } from '../../constants';
 import { RFValue } from 'react-native-responsive-fontsize';
-import { verticalScale } from '../../constants/metrices';
+import { horizontalScale, moderateScale, verticalScale } from '../../constants/metrices';
 
 const data = [
   {
@@ -109,36 +109,20 @@ const NotificationList = () => {
             backgroundColor: "#0a0127",
           }}>
 
-          <View style={{height:verticalScale(75),justifyContent:'center'}}>
-
-            {/* <TouchableOpacity
-              style={{ margin: "5.5%" }}
-            >
-              <Image
-                source={icons.back}
-                resizeMode="contain"
-                style={{
-                  width: 20,
-                  height: 20,
-                }}
-              />
-            </TouchableOpacity> */}
-
-            {/* <View style={{ marginTop: "4%", flexDirection: 'row', justifyContent: "center" }}> */}
-              <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20),textAlign:"center" }}>Notifications</Text>
-            {/* </View> */}
+          <View style={{ height: verticalScale(80), justifyContent: 'center' }}>
+            <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), textAlign: "center" }}>Notifications</Text>
           </View>
         </View>
 
-        <View style={{ padding: "1%",height:verticalScale(690) }}>
+        <View style={{ padding: "1%", height: verticalScale(700) }}>
           <FlatList
             data={data}
-            contentContainerStyle={{paddingBottom:"6%"}}
+            contentContainerStyle={{ paddingBottom: verticalScale(40) }}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
-              <View style={{ padding: '3%' }}>
-                <TouchableOpacity style={{ backgroundColor: "white",borderRadius:5,elevation:1, flexDirection: "row",padding:"1%" }}>
-                  <View style={{ flexDirection: "column",marginTop:"2.5%" }}>
+              <View style={{ paddingHorizontal: "3%", paddingTop: "3%" }}>
+                <TouchableOpacity style={{ backgroundColor: "white", borderRadius: 8, elevation: 1, flexDirection: "row", padding: "2%" }}>
+                  <View style={{ flexDirection: "column", marginTop: verticalScale(9) }}>
                     <Image
                       source={icons.rect}
                       resizeMode="contain"
@@ -147,20 +131,19 @@ const NotificationList = () => {
                       }}
                     />
                   </View>
-                  <View style={{ flexDirection: "column", width: "70%" }}>
-                    <Text style={{fontSize:RFValue(13),...FONTS.lexendsemibold,margin:"2%",color:COLORS.black}}>{item.from}</Text>
-                    <Text style={{fontSize:RFValue(11),margin:"2%",...FONTS.lexendregular,color:"#000"}}>{item.to}</Text>
-                    <Text style={{fontSize:RFValue(13),...FONTS.lexendregular,color:COLORS.gray,marginHorizontal:"2%",paddingBottom:"2%"}}>{item.date}</Text>
+                  <View style={{ flexDirection: "column", width: horizontalScale(240) }}>
+                    <Text style={{ fontSize: RFValue(14), ...FONTS.lexendsemibold, margin: "2%", color: COLORS.black }}>{item.from}</Text>
+                    <Text style={{ fontSize: RFValue(12), margin: "2%", ...FONTS.lexendregular, color: "#000" }}>{item.to}</Text>
+                    <Text style={{ fontSize: RFValue(14), ...FONTS.lexendregular, color: COLORS.gray, marginHorizontal: "2%", paddingBottom: "2%" }}>{item.date}</Text>
                   </View>
-                  <View style={{ flexDirection: "column", width: "15%" }}>
+                  <View style={{ flexDirection: "column", width: horizontalScale(70), backgroundColor: COLORS.lightGray, height: verticalScale(85), alignSelf: "center",borderRadius:10 }}>
                     <Image
                       source={item.imag}
                       resizeMode="contain"
                       style={{
-                        borderWidth: 1,
-                        top:25,
-                        // right:15,
-                        // backgroundColor:"#F8F9F9"
+                        width: 65,
+                        top:9,
+                        left:4
                       }}
                     />
                   </View>

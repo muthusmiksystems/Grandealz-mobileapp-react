@@ -14,6 +14,7 @@ import {
 import image from '../../constants/image';
 import icons from '../../constants/icons';
 import { COLORS, FONTS } from '../../constants';
+import { horizontalScale, verticalScale } from '../../constants/metrices';
 import { RFValue } from 'react-native-responsive-fontsize';
 const data = [
     {
@@ -60,21 +61,20 @@ const UpcomingDraws = () => {
 
         <FlatList
             data={data}
-            contentContainerStyle={{ width: "100%" }}
+            contentContainerStyle={{ width: "91%", alignSelf: "center", marginTop: "2%" }}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
-                <View style={{ padding: '2%',paddingBottom:"5%" }}>
-                    <TouchableOpacity style={{ borderRadius: 9, backgroundColor: "white",paddingVertical:"3%" }}>
+                <View style={{ borderRadius: 9, backgroundColor: "white", alignItems: "center", paddingVertical: verticalScale(20), marginBottom: "5%" }}>
+                    <TouchableOpacity>
 
-                        <View style={{  width: "100%" }}>
+                        <View>
                             <Image
                                 source={image.drawsCar}
                                 resizeMode={"contain"}
-                                style={{ height: RFValue(150), width: RFValue(310), margin: "4%" }}
+                                style={{ height:verticalScale(150), width: horizontalScale(310) }}
                             />
                         </View>
-                        <View style={{ marginLeft:"6%", paddingBottom: 10 }}>
-
+                        <View style={{ marginLeft: "2%" }}>
                             <Text style={{ fontSize: RFValue(16), color: COLORS.textHeader, ...FONTS.lexendsemibold, padding: "1%" }}>Campaign:- range Rover V8 GCC</Text>
 
                             <Text style={{ fontSize: RFValue(16), color: COLORS.textHeader, ...FONTS.lexendregular, marginHorizontal: "1%", paddingBottom: "1%" }}>EL-00990</Text>

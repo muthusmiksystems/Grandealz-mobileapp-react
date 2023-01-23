@@ -23,12 +23,29 @@ import WishlistData from "./wishListData";
 const WishList = () => {
     const navigation = useNavigation();
     return (
-        <SafeAreaView style={{ backgroundColor: "#F1F1F", height: "100%" }}>
-        <StatusBar
-            animated={true}
-            backgroundColor="#0a0127"
-        />
-        <View style={styles.subdivOne}>
+        <SafeAreaView>
+            <StatusBar
+                animated={true}
+                backgroundColor="#0a0127"
+            />
+            {/* <View style={styles.subdivOne}>
+                <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(30) }}>
+                    <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
+                </TouchableOpacity>
+                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: 20, marginLeft: horizontalScale(115) }}>Wishlist</Text>
+            </View>
+            <View style={styles.subdivTwo}>
+                <Image
+                    source={love}
+                    resizeMode='contain'
+                    style={{
+                        width: horizontalScale(80),
+                        height: verticalScale(80),
+                    }}
+                />
+                <Text style={{ fontFamily: "Lexend-Regular", color: "black", fontSize: 16, marginTop: 20 }}>Your wishlist in empty</Text>
+            </View> */}
+	    <View style={styles.subdivOne}>
             <TouchableOpacity
                 style={{ margin: "5.5%" }}
             >
