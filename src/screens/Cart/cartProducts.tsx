@@ -23,11 +23,11 @@ import image from "../../constants/image";
 const CartProducts = () => {
 
     const navigation = useNavigation();
-    const [toggle,setToggle]=useState(false);
+    const [toggle, setToggle] = useState(false);
     const data = ["all", "hello", "everybody", "world"]
     return (
 
-        <View style={{ width: "92%", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%",alignSelf:"center" }}>
+        <View style={{ width: "92%", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", alignSelf: "center" }}>
 
             {data.map((item, index) => {
                 return (
@@ -52,7 +52,7 @@ const CartProducts = () => {
 
                                 </View>
                             </View>
-                            <View style={{ flexDirection: "column", width: "15%",alignSelf:"center" }}>
+                            <View style={{ flexDirection: "column", width: "15%", alignSelf: "center" }}>
                                 <TouchableOpacity><AntIcon name="plussquare" size={28} color={COLORS.element} style={{ marginBottom: "10%" }} /></TouchableOpacity>
                                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular, marginStart: "15%" }}>2</Text>
                                 <TouchableOpacity><AntIcon name="minussquare" size={28} color={COLORS.element} style={{ marginTop: "10%" }} /></TouchableOpacity>
@@ -66,14 +66,14 @@ const CartProducts = () => {
             })}
 
             <View style={{ flexDirection: "row", width: "100%", borderBottomStartRadius: 10, borderBottomEndRadius: 10, backgroundColor: COLORS.element }}>
-                <View style={{marginTop:"5%",marginLeft:"3%"}}>
-                <ToggleSwitch
-                    isOn={toggle}
-                    onColor="#0a0127"
-                    offColor="#FF777F"
-                    size="small"
-                    onToggle={isOn => setToggle(!toggle)}
-                />
+                <View style={{ marginTop: "5%", marginLeft: "3%" }}>
+                    <ToggleSwitch
+                        isOn={toggle}
+                        onColor="#0a0127"
+                        offColor="#FF777F"
+                        size="small"
+                        onToggle={isOn => setToggle(!toggle)}
+                    />
                 </View>
                 <Text style={{ color: COLORS.white, fontSize: RFValue(12), ...FONTS.lexendregular, padding: "5%" }}>Donate Product(s) & Double Your Tickets</Text>
             </View>

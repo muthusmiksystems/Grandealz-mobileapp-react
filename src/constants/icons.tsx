@@ -1,4 +1,4 @@
-	export const loginicon = require("../assests/icons/grandealzIconWithLetter.png");
+export const loginicon = require("../assests/icons/grandealzIconWithLetter.png");
 export const stsicon = require("../assests/icons/grandealzsts.png")
 export const user = require("../assests/icons/user.png")
 export const back = require("../assests/icons/left.png")

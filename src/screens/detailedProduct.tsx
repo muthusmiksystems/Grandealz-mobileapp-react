@@ -31,34 +31,25 @@ const DetailedProduct = ({ route }) => {
                 backgroundColor="#0a0127"
             />
             <View style={styles.subdivOne}>
-                <TouchableOpacity
-                    style={{ margin: "5.5%" }}
-                >
-                    <Image
-                        source={icons.back}
-                        resizeMode="contain"
-                        style={{
-                            width: 20,
-                            height: 20,
-                        }}
-                    />
+                <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18), flexDirection: "column" }}>
+                    <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: RFValue(22), marginStart: "20%" }}>{value.item.name}</Text>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), textAlign: "center", width: "75%" }}>{value.item.name}</Text>
 
             </View>
-            <ScrollView style={{ height: "80%" }}>
-                <View style={{ padding: 20 }}>
-                    <View style={{ padding: 20, backgroundColor: COLORS.white }}>
+            <ScrollView style={{ height: "80%", padding: "4%" }}>
+                <View style={{ width: "100%", alignItems: "center" }}>
+                    <View style={{ padding: 20, borderRadius: 10, alignItems: "center", width: "100%", backgroundColor: COLORS.white }}>
                         <Image
                             source={image.pencil}
                             resizeMode="contain"
                             style={{
-                              
-                                marginLeft:80
+
+                                // marginLeft: 80
                             }}
                         />
                     </View>
-                    <Text style={{marginTop:10,...FONTS.lexendregular,color:COLORS.black}}>{value.item.detail}</Text>
+                    <Text style={{ marginTop: 10, ...FONTS.lexendregular, color: COLORS.black }}>{value.item.detail}</Text>
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -67,7 +58,7 @@ const DetailedProduct = ({ route }) => {
 const styles = StyleSheet.create({
     subdivOne: {
         width: horizontalScale(375),
-        height: verticalScale(65),
+        height: verticalScale(80),
         backgroundColor: "#0a0127",
         alignItems: "center",
         // justifyContent: 'center',

@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import {
     Text,
     View,
@@ -47,24 +47,24 @@ const customStyles = {
     currentStepLabelColor: '#E70736'
 }
 const OrderDetails = () => {
-    const [currentPosition,setCurrentPosition]= useState(3)
+    const [currentPosition, setCurrentPosition] = useState(3)
     const navigation = useNavigation();
-    const Data=[
+    const Data = [
         {
-            label:'Order Confirmed',
-            datetime:'Fri, 11th Fab 22'
+            label: 'Order Confirmed',
+            datetime: 'Fri, 11th Fab 22'
         },
         {
-            label:'Shipped',
-            datetime:'Set, 12th Fab 22'
+            label: 'Shipped',
+            datetime: 'Set, 12th Fab 22'
         },
         {
-            label:'Out For Delivery',
-            datetime:'Mon, 14th Fab 22'
+            label: 'Out For Delivery',
+            datetime: 'Mon, 14th Fab 22'
         },
         {
-            label:'Delivered',
-            datetime:'Mon, 14th Fab 22'
+            label: 'Delivered',
+            datetime: 'Mon, 14th Fab 22'
         }
     ];
     return (
@@ -74,24 +74,14 @@ const OrderDetails = () => {
                 backgroundColor="#0a0127"
             />
             <View style={styles.subdivOne}>
-                <TouchableOpacity
-                    style={{ margin: "5.5%" }}
-                    onPress={()=>navigation.goBack()}
-                >
-                    <Image
-                        source={icons.back}
-                        resizeMode="contain"
-                        style={{
-                            width: 20,
-                            height: 20,
-                        }}
-                    />
+                <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18), flexDirection: "column" }}>
+                    <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: RFValue(22), marginStart: "16%" }}>Order Deatils</Text>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), width: "78%", textAlign: "center" }}>Order Details</Text>
 
             </View>
-            <ScrollView style={{ height: "80%" }}>
-                <View style={{ width: "95%", borderRadius: 8, backgroundColor: "#FFFFFF", margin: "2%", flexDirection: "column" }}>
+            <ScrollView style={{ height: "80%", padding: "4%" }}>
+                <View style={{ width: "100%", borderRadius: 8, backgroundColor: "#FFFFFF", flexDirection: "column" }}>
                     <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "3%" }}>
                         <View style={{ flexDirection: "column", }}>
                             <View style={{ flexDirection: "row" }}>
@@ -100,7 +90,7 @@ const OrderDetails = () => {
                         </View>
                     </View>
                 </View>
-                <TouchableOpacity style={{ padding: 10 }} onPress={()=>navigation.navigate("PayPage")}>
+                <TouchableOpacity style={{ marginVertical: "4%" }} onPress={() => navigation.navigate("PayPage")}>
                     <View style={{ flexDirection: "row", backgroundColor: "#fff", borderRadius: 8 }} >
                         <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8, width: "30%" }}>
                             <View style={{ flexDirection: 'column', padding: 10, margin: 5 }}>
@@ -113,23 +103,23 @@ const OrderDetails = () => {
                             </View>
                         </View>
                         <View style={{ margin: 5, padding: 10 }}>
-                            <Text style={{ fontSize:  RFValue(16), ...FONTS.lexendsemibold, color: COLORS.black }}>Pencil</Text>
-                            <Text style={{ fontSize:  RFValue(14), ...FONTS.lexendregular, color: COLORS.black }}>Blanco Set</Text>
-                            <Text style={{ fontSize:  RFValue(20), ...FONTS.lexendregular, color: "red", marginTop: 20 }}>₹100.00</Text>
+                            <Text style={{ fontSize: RFValue(16), ...FONTS.lexendsemibold, color: COLORS.black }}>Pencil</Text>
+                            <Text style={{ fontSize: RFValue(14), ...FONTS.lexendregular, color: COLORS.black }}>Blanco Set</Text>
+                            <Text style={{ fontSize: RFValue(20), ...FONTS.lexendregular, color: "red", marginTop: 20 }}>₹100.00</Text>
                         </View>
                         <View style={{ flexDirection: "row", marginVertical: "2%" }}>
                             <View style={{ flexDirection: "column", marginLeft: 15, justifyContent: "flex-end", marginStart: 30 }}>
                                 <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(12), right: 10, color: "#000" }}>Avail Your Ticket</Text>
                                 <View style={{ backgroundColor: "#E70736", padding: 8, borderBottomEndRadius: 10, borderTopStartRadius: 10, top: 6 }}>
-                                    <Text style={{ textAlign: "center" }}>Play Now</Text>
+                                    <Text style={{ textAlign: "center", ...FONTS.lexendregular }}>Pay Now</Text>
                                 </View>
                             </View>
                         </View>
                     </View>
 
                 </TouchableOpacity>
-                 <View style={{ padding: 10 }}>
-                    <View style={{ backgroundColor: "#fff", borderRadius: 8 }}>
+                <View style={{}}>
+                    <View style={{ backgroundColor: "#fff", borderRadius: 8, paddingHorizontal: 8 }}>
                         <StepIndicator
                             customStyles={customStyles}
                             currentPosition={currentPosition}
@@ -147,7 +137,7 @@ const OrderDetails = () => {
                         />
                     </View>
                 </View>
-                <View style={{ marginHorizontal: 10, borderRadius: 8, padding: 10, backgroundColor: "white", flexDirection: "row" }}>
+                <View style={{ marginVertical: "4%", borderRadius: 8, padding: 10, backgroundColor: "white", flexDirection: "row" }}>
                     <Image
                         source={icons.download}
                         style={{
@@ -158,9 +148,9 @@ const OrderDetails = () => {
                             flexDirection: "column"
                         }}
                     />
-                    <Text style={{ flexDirection: "column", ...FONTS.lexendregular }}>  Invoice <Text style={{ color: "#E70736" }}>download</Text> </Text>
+                    <Text style={{ flexDirection: "column", ...FONTS.lexendregular, color: COLORS.black }}>  Invoice <Text style={{ color: "#E70736" }}>    download</Text> </Text>
                 </View>
-                <View style={{ margin: 10, borderRadius: 8, padding: 10, backgroundColor: "white", flexDirection: "row" }}>
+                <View style={{ borderRadius: 8, padding: 10, backgroundColor: "white", flexDirection: "row" }}>
                     <View style={{ padding: 10 }}>
                         <Text style={{ ...FONTS.lexendsemibold, color: "black" }}>
                             Shipping Details
@@ -170,7 +160,7 @@ const OrderDetails = () => {
                         <Text style={{ marginTop: 20, ...FONTS.lexendregular, color: "#616161" }}>Mobile:<Text style={{ marginTop: 10, ...FONTS.lexendregular, color: "black" }}> 9654896542 </Text></Text>
                     </View>
                 </View>
-                <View style={{ margin: 10, borderRadius: 8, padding: 5, backgroundColor: "white", flexDirection: "row", }}>
+                <View style={{ marginVertical: "4%", borderRadius: 8, padding: 5, backgroundColor: "white", flexDirection: "row", }}>
                     <View style={{ width: "100%" }}>
                         <Text style={{ ...FONTS.lexendsemibold, color: "black", padding: 10 }}>
                             Price Details
@@ -220,17 +210,14 @@ const OrderDetails = () => {
                         </View>
                     </View>
                 </View>
-                <View style={{ margin: 10, borderRadius: 8, padding: 10, backgroundColor: "white", flexDirection: "row",marginBottom:20 }}>
-                        <View style={{ flexDirection: "row", justifyContent: "space-around",marginLeft:10 }}>
-                            <View style={{ flexDirection: "column", ...FONTS.lexendregular }}>
-                                <Text style={{ fontSize: RFValue(10), top: 4, color: "black" }}>{'\u2B24'}</Text>
-                            </View>
-                            <View style={{ flexDirection: "column", ...FONTS.lexendregular,marginLeft:5 }}>
-                                <Text style={{ ...FONTS.lexendsemibold, color: "black", fontSize: RFValue(15) }}> Debit Card ₹70.00
-                                </Text>
-                            </View>
-                        </View>
+                <View style={{ marginBottom: "4%", borderRadius: 8, backgroundColor: "white" }}>
+                    <View style={{ padding: "4%" }}>
+                        <Text style={{ fontSize: RFValue(10), color: "black" }}>{'\u2B24'}
+                            <Text style={{ ...FONTS.lexendsemibold, color: "black", fontSize: RFValue(15) }}> Debit Card ₹70.00</Text>
+                        </Text>
+                    </View>
                 </View>
+                <View style={{ padding: "5%" }}></View>
             </ScrollView>
             {/* <View style={{ flexDirection: "row", height: "7%", backgroundColor: COLORS.white }}>
                 <TouchableOpacity style={{ flexDirection: "column", width: "45%", marginHorizontal: "3%", marginVertical: "1%", borderRadius: 5, borderWidth: 1, justifyContent: "center", alignItems: "center" }}>
@@ -246,7 +233,7 @@ const OrderDetails = () => {
 const styles = StyleSheet.create({
     subdivOne: {
         width: horizontalScale(375),
-        height: "10%",
+        height: verticalScale(80),
         backgroundColor: "#0a0127",
         alignItems: "center",
         // justifyContent: 'center',

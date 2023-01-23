@@ -21,13 +21,14 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { horizontalScale, moderateScale, verticalScale } from '../constants/metrices';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import CheckBox from "@react-native-community/checkbox";
+import EntypoIcons from "react-native-vector-icons/Entypo";
 
 const Faq = () => {
     const navigation = useNavigation();
     const Content = () => {
         return (
           <View style={{ flexDirection: "row", marginHorizontal:"4%" }}>
-           <Text style={{ color: COLORS.gray, fontSize: RFValue(16),}}>
+           <Text style={{ color: COLORS.gray, fontSize: RFValue(14),...FONTS.lexendregular,textAlign:"justify"}}>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
            </Text>
           
@@ -45,21 +46,11 @@ const Faq = () => {
     return (
         <>
             <View style={styles.subdivOne}>
-                <TouchableOpacity
-                    style={{ margin: "5.5%" }}
-                    onPress={()=>navigation.goBack()}
-                >
-                    <Image
-                        source={icons.back}
-                        resizeMode="contain"
-                        style={{
-                            width: 20,
-                            height: 20,
-
-                        }}
-                    />
+            <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(14) }}>
+                    <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: RFValue(22), marginStart: "15%" }}>FAQ's</Text>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), width: "79%", textAlign: "center" }}>
+            FAQ's</Text>
             </View>
             <Text style={{ fontFamily: "Lexend-SemiBold", color:COLORS.textHeader, fontSize: RFValue(16), margin: "3%" }}>About us</Text>
             <Content/>

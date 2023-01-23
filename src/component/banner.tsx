@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View,TouchableOpacity,Image } from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize';
 import Swiper from 'react-native-swiper'
+import { FONTS } from '../constants';
 import icons from '../constants/icons';
 import image from '../constants/image';
 
@@ -42,11 +43,11 @@ return(
        <View style={{ backgroundColor: "#070022", borderRadius: 8}}>
               <View style={{ padding: "10%", flexDirection: "row", justifyContent: "space-between" }}>
                 <View style={{ flexDirection: "column", width: "70%" }}>
-                <Text style={{ color: "white", fontSize:RFValue(6)}}>Lorem Ipsum is simply dummy text of the printing.</Text>
-                  <Text style={{ color: "white", fontSize: RFValue(13) }}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </Text>
-                  <Text style={{ color: "white",fontSize:RFValue(5), marginTop: "9%" }}>Lorem Ipsum is simply dummy text of the printing. Lorem Ipsum is simply dummy text of the printing. Lorem Ipsum is simply dummy text of the printing.</Text>
+                <Text style={{ color: "white", fontSize:RFValue(6),...FONTS.lexendregular}}>Lorem Ipsum is simply dummy text of the printing.</Text>
+                  <Text style={{ color: "white", fontSize: RFValue(13),...FONTS.lexendregular }}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </Text>
+                  <Text style={{ color: "white",fontSize:RFValue(5), marginTop: "9%",...FONTS.lexendregular }}>Lorem Ipsum is simply dummy text of the printing. Lorem Ipsum is simply dummy text of the printing. Lorem Ipsum is simply dummy text of the printing.</Text>
                   <TouchableOpacity style={{ borderWidth: 1, borderRadius: 8, borderColor: "white", marginTop: "6%", width: "50%", height: "20%" }}>
-                    <Text style={{ color: "white", fontSize: 12, textAlign: "center", padding: "3%" }}>See Details</Text>
+                    <Text style={{ color: "white", fontSize: RFValue(12),...FONTS.lexendregular, textAlign: "center", padding: "3%" }}>See Details</Text>
                   </TouchableOpacity>
                 </View>
                 <View style={{ width: "30%", flexDirection: "column" }}>
@@ -67,11 +68,11 @@ return(
     <View style={{ backgroundColor: "#070022", borderRadius: 8}}>
               <View style={{ padding: "10%", flexDirection: "row", justifyContent: "space-between" }}>
                 <View style={{ flexDirection: "column", width: "70%" }}>
-                 <Text style={{ color: "white", fontSize:RFValue(6)}}>Lorem Ipsum is simply dummy text of the printing.</Text>
-                  <Text style={{ color: "white", fontSize: RFValue(13) }}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </Text>
-                  <Text style={{ color: "white",fontSize:RFValue(5), marginTop: "9%" }}>Lorem Ipsum is simply dummy text of the printing. Lorem Ipsum is simply dummy text of the printing. Lorem Ipsum is simply dummy text of the printing.</Text>
+                 <Text style={{ color: "white", fontSize:RFValue(6),...FONTS.lexendregular}}>Lorem Ipsum is simply dummy text of the printing.</Text>
+                  <Text style={{ color: "white", fontSize: RFValue(13),...FONTS.lexendregular }}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </Text>
+                  <Text style={{ color: "white",fontSize:RFValue(5),...FONTS.lexendregular, marginTop: "9%" }}>Lorem Ipsum is simply dummy text of the printing. Lorem Ipsum is simply dummy text of the printing. Lorem Ipsum is simply dummy text of the printing.</Text>
                   <TouchableOpacity style={{ borderWidth: 1, borderRadius: 8, borderColor: "white", marginTop: "6%", width: "50%", height: "20%" }}>
-                    <Text style={{ color: "white", fontSize: 12, textAlign: "center", padding: "3%" }}>See Details</Text>
+                    <Text style={{ color: "white", fontSize:RFValue(12),...FONTS.lexendregular, textAlign: "center", padding: "3%" }}>See Details</Text>
                   </TouchableOpacity>
                 </View>
                 <View style={{ width: "30%", flexDirection: "column" }}>
@@ -92,11 +93,11 @@ return(
     <View style={{ backgroundColor: "#070022", borderRadius: 8}}>
               <View style={{ padding: "10%", flexDirection: "row", justifyContent: "space-between" }}>
                 <View style={{ flexDirection: "column", width: "70%" }}>
-                <Text style={{ color: "white", fontSize:RFValue(6)}}>Lorem Ipsum is simply dummy text of the printing.</Text>
-                  <Text style={{ color: "white", fontSize: RFValue(13) }}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </Text>
-                  <Text style={{ color: "white",fontSize:RFValue(5 ), marginTop: "9%" }}>Lorem Ipsum is simply dummy text of the printing. Lorem Ipsum is simply dummy text of the printing. Lorem Ipsum is simply dummy text of the printing.</Text>
+                <Text style={{ color: "white", fontSize:RFValue(6),...FONTS.lexendregular}}>Lorem Ipsum is simply dummy text of the printing.</Text>
+                  <Text style={{ color: "white", fontSize: RFValue(13),...FONTS.lexendregular }}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </Text>
+                  <Text style={{ color: "white",fontSize:RFValue(5 ),...FONTS.lexendregular, marginTop: "9%" }}>Lorem Ipsum is simply dummy text of the printing. Lorem Ipsum is simply dummy text of the printing. Lorem Ipsum is simply dummy text of the printing.</Text>
                   <TouchableOpacity style={{ borderWidth: 1, borderRadius: 8, borderColor: "white", marginTop: "6%", width: "50%", height: "20%"}}>
-                    <Text style={{ color: "white", fontSize: RFValue(12), textAlign: "center", padding: "3%" }}>See Details</Text>
+                    <Text style={{ color: "white", fontSize: RFValue(12),...FONTS.lexendregular, textAlign: "center", padding: "3%" }}>See Details</Text>
                   </TouchableOpacity>
                 </View>
                 <View style={{ width: "30%", flexDirection: "column" }}>

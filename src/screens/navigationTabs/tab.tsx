@@ -44,14 +44,14 @@ const Tabs = () => {
             initialRouteName={'DataPage'}
             tabBarOptions={tabOptions}
             screenOptions={({ route }) => ({
-                tabBarStyle:{height:56},
+                tabBarStyle:{height:70},
                 tabBarIcon: ({ focused }) => {
                     const tintColor = focused ? COLORS.element : COLORS.gray;
 
                     switch (route.name) {
                         case "Notification":
                             return (
-                                <View style={{ alignItems: "center",bottom:"6%" }}>
+                                <View style={{ alignItems: "center",bottom:"15%" }}>
                                     <View>{focused? <Image source={icons.tabTopSlide}
                                         resizeMode="contain"
                                         style={{width:30,height:20}}
@@ -79,7 +79,7 @@ const Tabs = () => {
                             );
                         case "Draws":
                             return (
-                                <View style={{ alignItems: "center",bottom:"6%" }}>
+                                <View style={{ alignItems: "center",bottom:"15%" }}>
                                     <View>{focused? <Image source={icons.tabTopSlide}
                                         resizeMode="contain"
                                         style={{width:30,height:20}}
@@ -107,7 +107,7 @@ const Tabs = () => {
                             );
                         case "DataPage":
                             return (
-                                <View style={{ alignItems: "center",bottom:"6%" }}>
+                                <View style={{ alignItems: "center",bottom:"15%" }}>
                                     <View>{focused? <Image source={icons.tabTopSlide}
                                         resizeMode="contain"
                                         style={{width:30,height:20}}
@@ -135,7 +135,7 @@ const Tabs = () => {
                             );
                         case "Tickets":
                             return (
-                                <View style={{ alignItems: "center",bottom:"6%" }}>
+                                <View style={{ alignItems: "center",bottom:"15%" }}>
                                     <View>{focused? <Image source={icons.tabTopSlide}
                                         resizeMode="contain"
                                         style={{width:30,height:20}}
@@ -163,7 +163,7 @@ const Tabs = () => {
                             );
                         case "Cart":
                             return (
-                                <View style={{ alignItems: "center",bottom:"6%" }}>
+                                <View style={{ alignItems: "center",bottom:"15%" }}>
                                     <View>{focused? <Image source={icons.tabTopSlide}
                                         resizeMode="contain"
                                         style={{width:30,height:20}}

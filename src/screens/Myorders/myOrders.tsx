@@ -30,28 +30,18 @@ const MyOrders = () => {
                 backgroundColor="#0a0127"
             />
             <View style={styles.subdivOne}>
-                <TouchableOpacity
-                    style={{ margin: "5.5%" }}
-                    onPress={()=>navigation.goBack()}
-                >
-                    <Image
-                        source={icons.back}
-                        resizeMode="contain"
-                        style={{
-                            width: 20,
-                            height: 20,
-                        }}
-                    />
+                <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18), flexDirection: "column" }}>
+                    <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: RFValue(22), marginStart: "20%" }}>My Orders</Text>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), width: "78%", textAlign: "center" }}>My Orders</Text>
 
             </View>
             <ScrollView style={{ height: "80%" }}>
                 <View style={{ flexDirection: "row" }}>
                     <View style={{ width: "78%", borderRadius: 20, backgroundColor: "#FFFFFF", margin: "2%", flexDirection: "column" }}>
                         <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "3%" }}>
-                            <View style={{ flexDirection: "column", }}>
-                                <View style={{ flexDirection: "row" }}>
+                            <View style={{ flexDirection: "column",alignItems:"center" }}>
+                                <View style={{ flexDirection: "row",alignItems:"center" }}>
                                     <Image
                                         source={icons.search}
 
@@ -63,20 +53,20 @@ const MyOrders = () => {
                         </View>
 
                     </View>
-                    <View style={{ borderRadius:10, backgroundColor: "#FFFFFF", marginVertical: "2%", flexDirection: "column" }}>
-                        <View style={{ flexDirection: "row", marginHorizontal: "2%",}}>
-                            <TouchableOpacity style={{backgroundColor: "white", flexDirection: "column"}} >
+                    <View style={{ borderRadius: 10, backgroundColor: "#FFFFFF", marginVertical: "2%", flexDirection: "column" }}>
+                        <View style={{ flexDirection: "row", marginHorizontal: "2%", borderRadius: 10 }}>
+                            <TouchableOpacity style={{ flexDirection: "column" }} >
                                 <Image
                                     source={icons.filter}
-                                    
-                                    style={{ height: 30, width:28,margin:8,left:5,borderRadius:10 }}
+
+                                    style={{ height: 30, width: 28, margin: 8, left: 5 }}
                                 />
                             </TouchableOpacity>
                         </View>
                     </View>
                 </View>
                 <View >
-                    <OrderList/>
+                    <OrderList />
                 </View>
             </ScrollView>
             {/* <View style={{ flexDirection: "row", height: "7%", backgroundColor: COLORS.white }}>
@@ -93,7 +83,7 @@ const MyOrders = () => {
 const styles = StyleSheet.create({
     subdivOne: {
         width: horizontalScale(375),
-        height: "10%",
+        height: verticalScale(80),
         backgroundColor: "#0a0127",
         alignItems: "center",
         // justifyContent: 'center',

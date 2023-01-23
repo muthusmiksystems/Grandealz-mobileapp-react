@@ -1,4 +1,3 @@
-
 import React, {type PropsWithChildren} from 'react';
 import {
   SafeAreaView,
@@ -77,18 +76,18 @@ const App = () => {
         <Stack.Screen name="PaymentOptions" component={PaymentOptions} />
         <Stack.Screen name="Coins" component={Coins} />
         <Stack.Screen name="ChangePassword" component={ChangePassword} />
-	  <Stack.Screen name="MyOrders" component={MyOrders}/>
-	   <Stack.Screen name="OrderDetails" component={OrderDetails}/>
-  <Stack.Screen name="OurProducts" component={OurProducts}/>
-        <Stack.Screen name="DetailedProduct" component={DetailedProduct}/>
-	   <Stack.Screen name="PersonalDetails" component={PersonalDetails} />
-	 <Stack.Screen name="HowItWorks" component={HowItWorks} />
+        <Stack.Screen name="MyOrders" component={MyOrders} />
+        <Stack.Screen name="OrderDetails" component={OrderDetails} />
+        <Stack.Screen name="OurProducts" component={OurProducts} />
+        <Stack.Screen name="DetailedProduct" component={DetailedProduct} />
+        <Stack.Screen name="PersonalDetails" component={PersonalDetails} />
+        <Stack.Screen name="HowItWorks" component={HowItWorks} />
         < Stack.Screen
-                    name="Tabs"
-                    component={Tabs}
-                    options={{ headerShown: false }}
-                />
-      
+          name="Tabs"
+          component={Tabs}
+          options={{ headerShown: false }}
+        />
+
       </Stack.Navigator>
 
     </NavigationContainer>

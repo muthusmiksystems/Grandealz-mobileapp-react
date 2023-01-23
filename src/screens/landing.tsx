@@ -33,7 +33,7 @@ const Landing = (props: Props) => {
     setTimeout(() => {
       setAuthLoaded(true);
       setAnimationLoaded(true);
-    }, 5000);
+    }, 2000);
   }, []);
   useEffect(() => {
     if (authLoaded && animationLoaded) {

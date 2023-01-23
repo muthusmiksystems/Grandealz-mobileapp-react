@@ -89,7 +89,7 @@ const PriceMap = () => {
                 </View>
                 <View style={{ borderBottomColor: COLORS.gray, borderBottomWidth: 2, margin: "1%" }} />
                 <View style={{ width: horizontalScale(310), alignSelf: "center" }}>
-                    <View style={{ flexDirection: "row", paddingBottom: "2%",alignItems:"center" }}>
+                    <View style={{ flexDirection: "row", paddingBottom: "2%", alignItems: "center" }}>
                         <Text style={{ color: COLORS.gray, fontSize: RFValue(14), ...FONTS.lexendregular, width: "75%" }}>Total Amount{"\n"}<Text>Inclusive of Tax (GST)</Text></Text>
                         <Text style={{ color: COLORS.gray, fontSize: RFValue(14), ...FONTS.lexendregular, width: "25%" }}>₹ 2160.00</Text>
                     </View>
