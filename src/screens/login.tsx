@@ -42,7 +42,7 @@ const Login = () => {
           value={isSelected}
           onValueChange={setSelection}
           style={styles.checkBox}
-          tintColors={{ true: COLORS.element }}
+          tintColors={{ true: COLORS.element}}
         />
       </View>
     )
@@ -59,8 +59,9 @@ const Login = () => {
           source={loginicon}
           resizeMode='contain'
           style={{
-            marginTop: verticalScale(50)
-          }}
+            height:verticalScale(150),
+            width:horizontalScale(130)
+           }}
         />
       </View>
       <View style={styles.subdivTwo}>
@@ -86,27 +87,26 @@ const Login = () => {
               <Ionicons name='eye-off-outline' size={30} />}
           </TouchableOpacity>
         </View>
-        <View style={{ flexDirection: "row", alignItems: "center",width:"90%",marginHorizontal:"5%" }}>
-          <View style={{ flexDirection: "column",width:"60%",marginStart:"1.5%"}}>
+        <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',marginHorizontal:"5%"}}>
+          <View style={{display: 'flex',flexDirection:"column",marginStart:"1.5%"}}>
             <View style={{ flexDirection: "row"}}>
               <CheckBox
                 value={isSelected}
                 onValueChange={setSelection}
                 style={styles.checkBox}
-                
                 tintColors={{ true: COLORS.element }}
               />
               <Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", flexDirection: "column", alignSelf: "center",fontSize:RFValue(12) }}>Remember Me</Text>
             </View>
           </View>
-          <TouchableOpacity style={{ flexDirection: "column",width:"40%",marginStart:"1.5%"}} onPressIn={() => navigation.navigate("ForgetPassword")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular",fontSize:RFValue(12) }}>Forgot Password?</Text></TouchableOpacity>
+          <TouchableOpacity style={{display: 'flex',flexDirection: "column",marginEnd:"2.5%"}} onPressIn={() => navigation.navigate("ForgetPassword")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular",fontSize:RFValue(12) }}>Forgot Password?</Text></TouchableOpacity>
         </View>
-        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(196), padding: "3%" }} onPressIn={() => {navigation.navigate("Tabs"),dispatch(loginHanlder())}}>
-          <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-SemiBold", color: "black" }}>Log In</Text>
+        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(193), padding: "3%" }} onPressIn={() => {navigation.navigate("Tabs"),dispatch(loginHanlder())}}>
+          <Text style={{ textAlign: "center", fontSize:RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Log In</Text>
         </TouchableOpacity>
         <View style={{ flexDirection: "row", marginTop: "10%", alignSelf: "center" }}>
-          <Text style={{ flexDirection: "column", alignSelf: "flex-start", fontFamily: "Lexend-Regular", color: "#000", fontSize: RFValue(12) }}>New User? </Text>
-          <TouchableOpacity style={{ alignSelf: "flex-end", flexDirection: "column" }} onPressIn={() => navigation.navigate("Signup")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", fontSize: RFValue(12) }}>Create New Account</Text></TouchableOpacity>
+          <Text style={{ flexDirection: "column", alignSelf: "flex-start", fontFamily: "Lexend-Regular", color: "#000", fontSize: RFValue(13) }}>New User? </Text>
+          <TouchableOpacity style={{ alignSelf: "flex-end", flexDirection: "column" }} onPressIn={() => navigation.navigate("Signup")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", fontSize: RFValue(13) }}>Create New Account</Text></TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
@@ -129,10 +129,8 @@ const styles = StyleSheet.create({
   },
   checkBox: {
     alignSelf: "center",
-    flexDirection: "column",
-    borderWidth:0.2
-    // width:"20%",
-    // height:"30%"
+    flexDirection:"column",
+    borderRadius:25
   }
 })
 export default Login;

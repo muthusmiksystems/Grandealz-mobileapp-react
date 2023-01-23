@@ -37,7 +37,7 @@ const Signup = () => {
           tintColors={{ true: COLORS.element }}
         />
         <View style={{ flexDirection: "column", alignSelf: "center" }}>
-          <Text style={{ fontFamily: "Lexend-Regular", color: "black", fontSize: RFValue(12) }}>I agree to <Text style={styles.underLineText}>Usage Terms</Text> and <Text style={styles.underLineText}>Privacy Policy</Text></Text>
+          <Text style={{ fontFamily: "Lexend-Regular", color: "black", fontSize: RFValue(12.8) }}>I agree to <Text style={styles.underLineText}>Usage Terms</Text> and <Text style={styles.underLineText}>Privacy Policy</Text></Text>
         </View>
       </View>
     )
@@ -57,11 +57,9 @@ const Signup = () => {
             source={loginicon}
             resizeMode='contain'
             style={{
-              // marginTop: verticalScale(50),
-              // flexDirection: "column",
-              // marginLeft: verticalScale(90)
-              // justifyContent:"center"
-            }}
+              height:verticalScale(150),
+              width:horizontalScale(130)
+             }}
           />
         </View>
 
@@ -125,11 +123,11 @@ const Signup = () => {
             <CheckBoxes />
           </View>
           <TouchableOpacity style={{ alignSelf: "center", marginTop: "5%", borderWidth: 1, borderRadius: 8, width: horizontalScale(200), padding: "4%" }} onPress={() => navigation.navigate("OtpPage")}>
-            <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-SemiBold", color: "black" }}>Register</Text>
+            <Text style={{ textAlign: "center", fontSize:RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Register</Text>
           </TouchableOpacity>
           <View style={{ flexDirection: "row", marginTop: "4%", alignSelf: "center" }}>
-            <Text style={{ flexDirection: "column", alignSelf: "flex-start", fontFamily: "Lexend-Regular", color: "black" }}>Existing User </Text>
-            <TouchableOpacity style={{ alignSelf: "flex-end", flexDirection: "column" }} onPressIn={() => navigation.navigate("login")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular" }}>Log in</Text></TouchableOpacity>
+            <Text style={{ flexDirection: "column", alignSelf: "flex-start", fontFamily: "Lexend-Regular", color: "black",fontSize:RFValue(13) }}>Existing User </Text>
+            <TouchableOpacity style={{ alignSelf: "flex-end", flexDirection: "column" }} onPressIn={() => navigation.navigate("login")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular",fontSize:RFValue(13)}}>Log in</Text></TouchableOpacity>
           </View>
         </ScrollView>
       </View>

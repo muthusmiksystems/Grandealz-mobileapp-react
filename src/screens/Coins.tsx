@@ -30,7 +30,7 @@ const Coins = () => {
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(14) }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), width: "75%", textAlign: "center" }}>Coins</Text>
+                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: 20, width: "79%", textAlign: "center" }}>Coins</Text>
             </View>
             <View>
                 <View style={{ height: "36%", backgroundColor: "#FFCACE", alignItems: "center" }}>

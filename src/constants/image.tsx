@@ -24,8 +24,10 @@ export const capshow= require("../assests/images/capshow.png");
 export const tshirtblack= require("../assests/images/tshirtblack.png");
 export const tshirtgreen= require("../assests/images/tshirtgreen.png");
 export const watches= require("../assests/images/watches.png");
+
 export const group= require("../assests/images/Groupshome.png");
 export const pencilorg= require("../assests/images/pencilorg.png");
+export const profilepic= require("../assests/images/Profile.png");
 
 export default {
     Android,
@@ -56,5 +58,6 @@ export default {
      bottel,
     tshirt,
     cap,
+    profilepic,
 
 }

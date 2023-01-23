@@ -42,7 +42,8 @@ const ChangePassword = () => {
             source={loginicon}
             resizeMode='contain'
             style={{
-              // marginTop: verticalScale(50)
+             height:verticalScale(150),
+             width:horizontalScale(130)
             }}
           />
         </View>

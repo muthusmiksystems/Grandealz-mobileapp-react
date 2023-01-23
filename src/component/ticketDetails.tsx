@@ -77,35 +77,34 @@ const TicketDetails = () => {
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => (
                         <View style={{ paddingTop: verticalScale(14) }}>
-                            <TouchableOpacity style={{ backgroundColor: "white", flexDirection: "row", width: horizontalScale(350), height: verticalScale(180), borderRadius: 6 }}>
+                            <TouchableOpacity style={{ backgroundColor: "white", flexDirection: "row", width: horizontalScale(350), height: verticalScale(160), borderRadius: 6 }}>
                                 <View style={{ flexDirection: "column", width: horizontalScale(30), right: horizontalScale(10), alignSelf: "center", backgroundColor: COLORS.lightGray, height: verticalScale(65), borderBottomEndRadius: 55, borderTopEndRadius: 55 }} />
                                 <View style={{ flexDirection: "column", width: horizontalScale(300), right: horizontalScale(10) }}>
-                                    <View style={{ flexDirection: "row", padding: 8, borderBottomWidth: 2 }}>
+                                    <View style={{ flexDirection: "row", padding: 8,borderBottomColor:"#616161",borderBottomWidth:1}}>
                                         <View style={{ flexDirection: "column", alignSelf: "center", width: horizontalScale(208) }}>
-                                            <View>
+                                            <View style={{marginBottom:"0%"}}>
                                                 <Image
                                                     source={item.imag}
                                                     resizeMode="contain"
-                                                    style={{ height:verticalScale(40),width:horizontalScale(120) }}
+                                                    style={{ height:verticalScale(40),width:horizontalScale(120)}}
                                                 />
                                             </View>
-                                            <Text style={{ ...FONTS.lexendsemibold, color: COLORS.black, fontSize: RFValue(10), paddingVertical: 8 }}>Video :- <Text style={{ ...FONTS.lexendregular }}>{item.video}</Text></Text>
+                                            <Text style={{ ...FONTS.lexendsemibold, color: COLORS.black, fontSize: RFValue(10), paddingVertical:2}}>Video :- <Text style={{ ...FONTS.lexendregular }}>{item.video}</Text></Text>
                                             <Text style={{ ...FONTS.lexendsemibold, color: COLORS.black, fontSize: RFValue(10) }}>Price :- <Text style={{ ...FONTS.lexendregular }}>₹{item.price}</Text></Text>
-                                            <Text style={{ ...FONTS.lexendsemibold, color: COLORS.black, fontSize: RFValue(10), paddingVertical: 8 }}>Watched On :- <Text style={{ ...FONTS.lexendregular, color: COLORS.gray }}>{item.watchedOn}</Text></Text>
+                                            <Text style={{ ...FONTS.lexendsemibold, color: COLORS.black, fontSize: RFValue(10), paddingVertical:4 }}>Watched On :- <Text style={{ ...FONTS.lexendregular, color: COLORS.gray }}>{item.watchedOn}</Text></Text>
                                         </View>
-                                        <View style={{ flexDirection: "column", backgroundColor: COLORS.element,borderRadius:10,width:horizontalScale(100),right:horizontalScale(16),height:verticalScale(105),top:verticalScale(10) }}>
+                                        <View style={{ flexDirection: "column", backgroundColor: COLORS.element,borderRadius:10,width:horizontalScale(100),right:horizontalScale(16),height:verticalScale(88),top:verticalScale(10) }}>
                                             <Text style={{ ...FONTS.lexendregular, color: "white", textAlign: "center" }}>Cash</Text>
                                             <Image
                                                 source={item.imag1}
                                                 resizeMode="contain"
                                                 style={{ height: verticalScale(50), width: horizontalScale(100) }}
                                             />
-                                            <View></View>
+                                            
                                         </View>
                                     </View>
-                                    <View style={{ width: horizontalScale(300), paddingHorizontal: 8 }}>
+                                    <View>
                                         <Text style={{ ...FONTS.lexendsemibold, color: COLORS.gray, fontSize: RFValue(10), paddingVertical: 8 }}>Ticket no. <Text style={{ ...FONTS.lexendregular, color: COLORS.element }}>{item.ticketno}</Text></Text>
-
                                     </View>
                                 </View>
                                 <View style={{ flexDirection: "column", width: horizontalScale(30), alignSelf: "center", backgroundColor: COLORS.lightGray, height: verticalScale(65), borderBottomStartRadius: 50, borderTopStartRadius: 50 }} />

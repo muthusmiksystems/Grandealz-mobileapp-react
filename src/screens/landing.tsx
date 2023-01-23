@@ -47,9 +47,9 @@ const Landing = (props: Props) => {
         source={loginicon}
         resizeMode="contain"
         style={{
-          width: '50%',
-          height: '18%',
-        }}
+            height:verticalScale(150),
+            width:horizontalScale(130)
+           }}
       />
     </View>
   )
