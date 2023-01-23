@@ -30,7 +30,7 @@ const PaymentOptions = () => {
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(14) }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: RFValue(24), width: "79%", textAlign: "center" }}>Payment Options</Text>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), width: "79%", textAlign: "center" }}>Payment Options</Text>
             </View>
             <View style={styles.subdivTwo}>
                 <Text style={{ fontFamily: "Lexend-Regular", color: COLORS.gray, fontSize:RFValue(13), width: "80%", textAlign: "center" }}>Once you make a purchase, your card(s) will appear here.</Text>

@@ -24,8 +24,7 @@ const DataPage = () => {
   const navigation = useNavigation();
   return (
     <ScrollView >
-      <View style={{height:"100%"}}>
-        <StatusBar
+      <StatusBar
           animated={true}
           backgroundColor={"#0a0127"}
         />
@@ -36,12 +35,13 @@ const DataPage = () => {
             height: verticalScale(80),
             justifyContent:"center"
           }}>
-          <View style={{ flexDirection: 'row', justifyContent: "space-between" }}>
-            <View style={{ flexDirection: "column" }}>
+          <View style={{ flexDirection: 'row', justifyContent: "space-between"}}>
+            <View style={{ flexDirection: "column"}}>
               <Image
                 source={icons.stsicon}
                 resizeMode="contain"
                 style={{
+                  // width: 100,
                   height: 50,
                   marginLeft: "12%"
                 }}
@@ -63,34 +63,33 @@ const DataPage = () => {
           </View>
         </View>
         <View >
-          <View style={{ padding: "3%",flex:0.4}}>
-           
-            <Banner/>
+          <View style={{ padding: "3%", flex: 0.4 }}>
+
+            <Banner />
           </View>
-          <View style={{ padding:"1%"}}>
-            <Text style={{fontSize:20,marginLeft:"4%", ...FONTS.lexendregular,color:COLORS.black}}>Closing Soon</Text>
+          <View style={{ padding: "1%" }}>
+            <Text style={{ fontSize: 20, marginLeft: "4%", ...FONTS.lexendregular, color: COLORS.black }}>Closing Soon</Text>
             <View>
-                <ClosingSoon/>
+              <ClosingSoon />
             </View>
             <View >
-              <Product/>
+              <Product />
             </View>
             <View>
-            <View style={{padding:5,backgroundColor:"#D10359",height:150,}}>
-              <Text style={{color:"white",marginLeft:25,...FONTS.lexendregular,color:COLORS.white, fontSize: RFValue(18)}}>
+              <View style={{ padding: 5, backgroundColor: "#D10359", height: 150, }}>
+                <Text style={{ color: "white", marginLeft: 25, ...FONTS.lexendregular, color: COLORS.white, fontSize: RFValue(18) }}>
                   SOLD OUT
-              </Text>
-              <View style={{marginLeft:"7%",width:"15%",height:"2%",borderColor:"white",backgroundColor:"black"}}/>
-              <Text style={{color:"white",marginLeft:25,...FONTS.lexendregular,color:COLORS.white}}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-              </Text>
-              
-            </View>
-              <Carsold/>
+                </Text>
+                <View style={{ marginLeft: "7%", width: "15%", height: "2%", borderColor: "white", backgroundColor: "black" }} />
+                <Text style={{ color: "white", marginLeft: 25, ...FONTS.lexendregular, color: COLORS.white }}>
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                </Text>
+
+              </View>
+              <Carsold />
             </View>
           </View>
         </View>
-      </View>
       </View>
     </ScrollView>
   )

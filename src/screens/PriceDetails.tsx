@@ -20,6 +20,7 @@ import { COLORS, FONTS } from '../constants';
 import { useNavigation } from '@react-navigation/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import EntypoIcons from "react-native-vector-icons/Entypo";
+import { horizontalScale, verticalScale } from '../constants/metrices';
 const PriceDetails = () => {
   const navigation = useNavigation();
   return (
@@ -29,20 +30,19 @@ const PriceDetails = () => {
         backgroundColor={"#0a0127"}
       />
       <View style={{ flex: 1.8 }}>
-
         <View
           style={{
             backgroundColor: "#0a0127",
-
+            height:verticalScale(80),
+            justifyContent:"center"
           }}>
           <View style={{ flexDirection: 'row', alignItems: "center" }}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18) }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), textAlign: "center", width: "75%" }}>Price Details</Text>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), textAlign: "center", width: "75%" }}>Prize Details</Text>
           </View>
         </View>
-
         <View style={{ padding: "2%" }}>
           <View style={{ borderRadius: 9, backgroundColor: "white" }}>
             <View style={{ flexDirection: "row", marginLeft: "5%" }}>

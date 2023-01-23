@@ -63,7 +63,7 @@ const PersonalDetails = () => {
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18), flexDirection: "column" }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: 20, width: "75%", textAlign: "center" }}>Personal Details</Text>
+                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: RFValue(24), width: "75%", textAlign: "center" }}>Personal Details</Text>
             </View>
             <ScrollView style={{ backgroundColor: COLORS.pagebackground, height: "90%" }}>
                 <View>

@@ -58,9 +58,11 @@ const ChangeMobileNumber = () => {
             style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: horizontalScale(300), borderColor: "#c4c4c2", marginTop: verticalScale(40), ...FONTS.lexendregular, fontSize: RFValue(14) }}
           />
         </View>
-        <TouchableOpacity style={{ alignSelf: "center", marginTop: "15%", borderWidth: 1, borderRadius: 8, width: horizontalScale(200), padding: "4%" }} onPress={() => navigation.navigate("OtpPage")}>
-          <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-SemiBold", color: "black" }}>Request OTP</Text>
+        <View style={{paddingBottom:verticalScale(52)}}>
+        <TouchableOpacity style={{ alignSelf: "center", marginTop: "15%", borderWidth: 1, borderRadius: 8, width: horizontalScale(180), padding: "4%"}} onPress={() => navigation.navigate("OtpPage")}>
+          <Text style={{ textAlign: "center", fontSize: 16,fontFamily: "Lexend-SemiBold",color: "black" }}>Request OTP</Text>
         </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   )
@@ -74,8 +76,8 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   subdivTwo: {
-    width: horizontalScale(342),
-    height: verticalScale(330),
+    width: horizontalScale(330),
+    // height: verticalScale(298),
     backgroundColor: "white",
     bottom: verticalScale(85),
     alignSelf: "center",

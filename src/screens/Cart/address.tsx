@@ -40,18 +40,20 @@ const Address = () => {
             </View>
             <ScrollView style={{ height: "80%" }}>
                 {/* <RadioButton.Group onValueChange={newValue => { setValue(newValue), parentCallback(newValue) }} value={value} > */}
-                <View style={{ width: "92%",alignSelf:"center", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", marginTop: "5%", padding: "2%" }}>
+                <View style={{ width: "92%", alignSelf: "center", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", marginTop: "5%", padding: "2%" }}>
                     <TouchableOpacity style={{ flexDirection: "row", width: "100%", borderRadius: 5, justifyContent: "center" }} onPress={() => navigation.navigate('AddAddress')}>
                         <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, margin: "3%" }}>Add new Address</Text>
                     </TouchableOpacity>
                 </View>
+
                 <View style={{ width: "92%",alignSelf:"center", borderRadius: 20, backgroundColor: COLORS.white, marginHorizontal: "2%", marginTop: "5%",marginBottom:"0%", borderColor: COLORS.element, borderWidth: 1 }}>
                     <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "1%" }}>
                         <View style={{ flexDirection: "column", width: "90%", }}>
                             <View style={{ flexDirection: "row",width:"100%" }}>
                                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "3%",marginVertical:"1%"}}>Davin connor</Text>
+
                                 <TouchableOpacity style={{ width: "15%", justifyContent: "center", alignItems: "center", marginStart: "2%", }}>
-                                    <Text style={{ width: "100%", color: COLORS.gray, fontSize: RFValue(11),textAlign:"center", ...FONTS.lexendregular, borderRadius: 5, borderWidth: 1, borderColor: COLORS.gray, paddingHorizontal: "5%" }}>Home</Text>
+                                    <Text style={{ width: "100%", color: COLORS.gray, fontSize: RFValue(11), textAlign: "center", ...FONTS.lexendregular, borderRadius: 5, borderWidth: 1, borderColor: COLORS.gray, paddingHorizontal: "5%" }}>Home</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -71,6 +73,7 @@ const Address = () => {
                         </Text>
                     </View>
                 </View>
+
                 <View style={{ width: "92%",alignSelf:"center", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", marginTop: "5%", }}>
                     <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "1%" }}>
                         <View style={{ flexDirection: "column", width: "90%", }}>
@@ -78,6 +81,8 @@ const Address = () => {
                                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "3%",marginVertical:"1%" }}>Davin connor</Text>
                                 <TouchableOpacity style={{ width: "25%", justifyContent: "center", alignItems: "center",marginStart: "2%", }}>
                                     <Text style={{ color: COLORS.gray, fontSize: RFValue(11), ...FONTS.lexendregular, borderRadius: 5,textAlign:"center", borderWidth: 1, borderColor: COLORS.gray, paddingHorizontal: "5%" }}>Work</Text>
+
+
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -100,15 +105,15 @@ const Address = () => {
 
                 {/* </RadioButton.Group> */}
             </ScrollView>
-            <View style={{ flexDirection: "row", height: "8%", backgroundColor: COLORS.white ,paddingHorizontal:horizontalScale(8)}}>
-                <View style={{ flexDirection: "column", width: "55%",marginHorizontal:"3%", marginVertical: "4%"}}>
+            <View style={{ flexDirection: "row", height: "8%", backgroundColor: COLORS.white, paddingHorizontal: horizontalScale(8) }}>
+                <View style={{ flexDirection: "column", width: "55%", marginHorizontal: "3%", marginVertical: "4%" }}>
                     <Text style={{ color: COLORS.element, fontSize: RFValue(14), ...FONTS.lexendregular }} >₹100.00</Text>
                     <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular }} >Total Amount</Text>
                 </View>
-                <TouchableOpacity  onPress={() => navigation.navigate("Delivery")} style={{ flexDirection: "column", width: "35%", marginVertical: "1%", borderRadius: 5, borderWidth: 1, alignSelf: "center" }} >
-                    <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular ,paddingVertical:verticalScale(10),textAlign:"center"}}>Continue</Text>
+                <TouchableOpacity onPress={() => navigation.navigate("Delivery")} style={{ flexDirection: "column", width: "35%", marginVertical: "1%", borderRadius: 5, borderWidth: 1, alignSelf: "center" }} >
+                    <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular, paddingVertical: verticalScale(10), textAlign: "center" }}>Continue</Text>
                 </TouchableOpacity>
-                
+
             </View>
 
         </SafeAreaView>
