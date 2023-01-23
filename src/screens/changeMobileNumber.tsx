@@ -59,7 +59,7 @@ const ChangeMobileNumber = () => {
         </View>
         <View style={{paddingBottom:verticalScale(52)}}>
         <TouchableOpacity style={{ alignSelf: "center", marginTop: "15%", borderWidth: 1, borderRadius: 8, width: horizontalScale(180), padding: "4%"}} onPress={() => navigation.navigate("OtpPage")}>
-          <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-SemiBold", color: "black" }}>Request OTP</Text>
+          <Text style={{ textAlign: "center", fontSize: 16,fontFamily: "Lexend-SemiBold",color: "black" }}>Request OTP</Text>
         </TouchableOpacity>
         </View>
       </View>
