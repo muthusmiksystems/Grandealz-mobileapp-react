@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -24,29 +24,29 @@ import { loginicon } from "../../constants/icons";
 
 
 const Home = (props: Props) => {
-    
 
 
-   
-return(
-<View style={styles.root}>
-  <Image
+
+
+  return (
+    <View style={styles.root}>
+      <Image
         source={loginicon}
         resizeMode="contain"
         style={{
           width: '50%',
           height: '10%',
         }}
-/>
-</View>
-)
+      />
+    </View>
+  )
 }
 const styles = StyleSheet.create({
-    root: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor:'#0a0127'
-    },
-  });
+  root: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#0a0127'
+  },
+});
 export default Home;

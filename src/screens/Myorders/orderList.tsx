@@ -68,10 +68,10 @@ const OrderList = () => {
             <View >
                 <FlatList
                     data={data}
-                    contentContainerStyle={{}}
+                    contentContainerStyle={{ }}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => (
-                        <View style={{ padding: '5%' }}>
+                        <View style={{ paddingHorizontal: '5%',paddingTop:"4%"}}>
                             <TouchableOpacity style={{ elevation: 1, borderRadius: 9, backgroundColor: "white" }} onPress={()=>navigation.navigate("OrderDetails")}>
                                 <View style={{flexDirection:"row",backgroundColor:"#fff"}} >
                                     <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8,width:"30%" }}>

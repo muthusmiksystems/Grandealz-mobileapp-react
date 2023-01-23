@@ -13,7 +13,7 @@ import { horizontalScale, verticalScale } from "../../constants/metrices";
 import { shoppingCart } from "../../constants/icons";
 import EntypoIcons from "react-native-vector-icons/Entypo";
 import { useNavigation } from "@react-navigation/native";
-import { FONTS,COLORS } from "../../constants";
+import { FONTS, COLORS } from "../../constants";
 import { RFValue } from "react-native-responsive-fontsize";
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import image from "../../constants/image";
@@ -23,10 +23,10 @@ import PriceDetails from "../PriceDetails";
 import PriceMap from "./pricemap";
 const Cart = () => {
 
-    const navigation=useNavigation();
+    const navigation = useNavigation();
 
     return (
-        <SafeAreaView style={{backgroundColor:"#F1F1F",height:"100%"}}>
+        <SafeAreaView style={{ backgroundColor: "#F1F1F", height: "100%" }}>
             <StatusBar
                 animated={true}
                 backgroundColor="#0a0127"
@@ -35,8 +35,8 @@ const Cart = () => {
                 <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), textAlign: "center" }}>Cart</Text>
             </View>
             <ScrollView style={{ height: "80%" }}>
-                <View style={{ width: "92%", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", marginTop: "5%",alignSelf:"center" }}>
-                    <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "2%",alignItems:"center",marginLeft:"3%" }}>
+                <View style={{ width: "92%", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", marginTop: "5%", alignSelf: "center" }}>
+                    <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "2%", alignItems: "center", marginLeft: "3%" }}>
                         <View style={{ flexDirection: "column", width: "85%", }}>
                             <View style={{ flexDirection: "row" }}>
                                 <Image
@@ -49,14 +49,14 @@ const Cart = () => {
                         </View>
                         <MCIcon name="chevron-right" size={25} style={{ flexDirection: "column", width: "75%" }} />
                     </View>
-                    <View style={{ flexDirection: "row", width: "100%", borderBottomStartRadius: 18, borderBottomEndRadius: 18, padding: "2%", backgroundColor: "#FFCACD",alignItems:"center" }}>
+                    <View style={{ flexDirection: "row", width: "100%", borderBottomStartRadius: 18, borderBottomEndRadius: 18, padding: "2%", backgroundColor: "#FFCACD", alignItems: "center" }}>
                         <Text style={{ flexDirection: "column", width: "85%", color: COLORS.textHeader, fontSize: RFValue(12), ...FONTS.lexendregular, padding: "3%" }}>FREE delivery Applied!</Text>
                         <Text style={{ flexDirection: "column", width: "15%", color: COLORS.textHeader, fontSize: RFValue(10), ...FONTS.lexendregular, }}>-₹10.00{"\n"}
                             <Text style={{ color: COLORS.element, fontSize: RFValue(10), ...FONTS.lexendregular, }}>Remove</Text></Text>
                     </View>
                 </View>
 
-                <View style={{ width: "92%", borderRadius: 20, backgroundColor: "#0B0029", margin: "2%",alignSelf:"center" }}>
+                <View style={{ width: "92%", borderRadius: 20, backgroundColor: "#0B0029", margin: "2%", alignSelf: "center" }}>
                     <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "3%" }}>
                         <View style={{ flexDirection: "column", width: "55%", }}>
                             <View style={{ flexDirection: "row" }}>
@@ -96,11 +96,11 @@ const Cart = () => {
                 <Text style={{ fontFamily: "Lexend-Regular", color: "black", fontSize: 16, marginTop: 20 }}>Your cart in empty</Text>
             </View> */}
             </ScrollView>
-            <View style={{ flexDirection: "row", height: "8%", backgroundColor: COLORS.white ,padding:"2%"}}>
-                <TouchableOpacity style={{ flexDirection: "column", width: "45%", borderRadius: 5, borderWidth: 1, justifyContent: "center", alignItems: "center",marginLeft:"3%" }}>
+            <View style={{ flexDirection: "row", height: "8%", backgroundColor: COLORS.white, padding: "2%" }}>
+                <TouchableOpacity style={{ flexDirection: "column", width: "45%", borderRadius: 5, borderWidth: 1, justifyContent: "center", alignItems: "center", marginLeft: "3%" }}>
                     <Text style={{ color: COLORS.textHeader, fontSize: RFValue(12), ...FONTS.lexendregular }}>Continue to Shopping</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ flexDirection: "column", width: "45%", backgroundColor: COLORS.element, borderRadius: 5, justifyContent: "center", alignItems: "center",marginLeft:"4%" }} onPress={()=>navigation.navigate("Delivery")}>
+                <TouchableOpacity style={{ flexDirection: "column", width: "45%", backgroundColor: COLORS.element, borderRadius: 5, justifyContent: "center", alignItems: "center", marginLeft: "4%" }} onPress={() => navigation.navigate("Delivery")}>
                     <Text style={{ color: COLORS.white, fontSize: RFValue(12), ...FONTS.lexendregular }} >Process to Checkout </Text>
                 </TouchableOpacity>
             </View>
@@ -110,13 +110,13 @@ const Cart = () => {
 const styles = StyleSheet.create({
     subdivOne: {
         width: horizontalScale(375),
-        height:verticalScale(80),
+        height: verticalScale(80),
         backgroundColor: "#0a0127",
         // alignItems: "center",
         justifyContent: 'center',
         // flexDirection: "row",
 
-        
+
     },
     subdivTwo: {
         height: verticalScale(748),

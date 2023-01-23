@@ -28,62 +28,62 @@ const UserAgreement = () => {
     const CheckBoxes = () => {
         const [isSelected, setSelection] = useState(false);
         return (
-          <View style={{ flexDirection: "row", left: horizontalScale(17) }}>
-            <CheckBox
-              value={isSelected}
-              onValueChange={setSelection}
-              style={styles.checkBox}
-            // tintColors={{true: COLORS.primary}}
-            />
-          
-          </View>
+            <View style={{ flexDirection: "row", left: horizontalScale(17) }}>
+                <CheckBox
+                    value={isSelected}
+                    onValueChange={setSelection}
+                    style={styles.checkBox}
+                // tintColors={{true: COLORS.primary}}
+                />
+
+            </View>
         )
-      }
-    
+    }
+
     return (
         <>
-        <View style={styles.subdivOne}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(14) }}>
+            <View style={styles.subdivOne}>
+                <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(14) }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: RFValue(24), width: "79%", textAlign: "center" }}>
-            User Agreement</Text>
-        </View>
-        <Text style={{ fontFamily: "Lexend-SemiBold", color:COLORS.textHeader, fontSize: RFValue(16), margin: "3%" }}>User Agreement</Text>
-        <View style={{ flexDirection: "row", marginHorizontal:"4%" }}>
-           <Text style={{ color: COLORS.gray, fontSize: RFValue(14),...FONTS.lexendregular,textAlign:"justify"}}>
-           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-           </Text>
-          </View>
-        
-          <View style={{ flexDirection: "row", marginHorizontal:"4%" }}>
-           <Text style={{ color: COLORS.gray, fontSize: RFValue(14),...FONTS.lexendregular,textAlign:"justify"}}>
-           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-           </Text>
-          </View>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), width: "79%", textAlign: "center" }}>
+                    User Agreement</Text>
+            </View>
+            <Text style={{ fontFamily: "Lexend-SemiBold", color: COLORS.textHeader, fontSize: RFValue(16), margin: "3%" }}>User Agreement</Text>
+            <View style={{ flexDirection: "row", marginHorizontal: "4%" }}>
+                <Text style={{ color: COLORS.gray, fontSize: RFValue(14), ...FONTS.lexendregular, textAlign: "justify" }}>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                </Text>
+            </View>
 
-          
-          <View style={{ flexDirection: "row", marginHorizontal:"4%" }}>
-           <Text style={{ color: COLORS.gray, fontSize: RFValue(14),...FONTS.lexendregular,textAlign:"justify"}}>
-           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-           </Text>
-          </View>
-          <View style={{ flexDirection: "row", marginHorizontal:"4%" }}>
-           <Text style={{ color: COLORS.gray, fontSize: RFValue(14),...FONTS.lexendregular,textAlign:"justify"}}>
-           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-           </Text>
-          </View>
+            <View style={{ flexDirection: "row", marginHorizontal: "4%" }}>
+                <Text style={{ color: COLORS.gray, fontSize: RFValue(14), ...FONTS.lexendregular, textAlign: "justify" }}>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                </Text>
+            </View>
 
-          <View style={{ flexDirection: "row", marginHorizontal:"4%" }}>
-           <Text style={{ color: COLORS.gray, fontSize: RFValue(14),...FONTS.lexendregular,textAlign:"justify"}}>
-           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-           </Text>
-          </View>
 
-         
-       
-    </>
-)
+            <View style={{ flexDirection: "row", marginHorizontal: "4%" }}>
+                <Text style={{ color: COLORS.gray, fontSize: RFValue(14), ...FONTS.lexendregular, textAlign: "justify" }}>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                </Text>
+            </View>
+            <View style={{ flexDirection: "row", marginHorizontal: "4%" }}>
+                <Text style={{ color: COLORS.gray, fontSize: RFValue(14), ...FONTS.lexendregular, textAlign: "justify" }}>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                </Text>
+            </View>
+
+            <View style={{ flexDirection: "row", marginHorizontal: "4%" }}>
+                <Text style={{ color: COLORS.gray, fontSize: RFValue(14), ...FONTS.lexendregular, textAlign: "justify" }}>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                </Text>
+            </View>
+
+
+
+        </>
+    )
 }
 const styles = StyleSheet.create({
 
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     checkBox: {
         alignSelf: "center",
         flexDirection: "column",
-      }
-    })
+    }
+})
 
 export default UserAgreement;

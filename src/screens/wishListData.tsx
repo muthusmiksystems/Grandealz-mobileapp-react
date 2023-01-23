@@ -49,7 +49,7 @@ const data = [
         delvery: "Closing in 15 : 54 : 48"
 
     },
-    
+
 
 ];
 const WishlistData = () => {
@@ -65,7 +65,7 @@ const WishlistData = () => {
                     renderItem={({ item }) => (
                         <View style={{ padding: '5%' }}>
                             <TouchableOpacity style={{ elevation: 1, borderRadius: 9, backgroundColor: "white", width: "100%" }}>
-                                <View style={{ flexDirection: "row", backgroundColor: "#fff",borderRadius:10 }} >
+                                <View style={{ flexDirection: "row", backgroundColor: "#fff", borderRadius: 10 }} >
                                     <View style={{ alignItems: 'center', padding: 10, marginVertical: 5, width: "30%" }}>
                                         <View style={{ flexDirection: 'column', margin: 5 }}>
                                             <Image
@@ -84,12 +84,12 @@ const WishlistData = () => {
                                         <Text style={{ fontSize: 12, ...FONTS.lexendregular, color: COLORS.black }}>{`\n`}{item.delvery}  </Text>
                                     </View>
                                     <View style={{ flexDirection: "row", marginVertical: 5, }}>
-                                        <View style={{ flexDirection: "column",justifyContent:"space-between"}}>
-                                            <View style={{ flexDirection: "row",width:"35%",left:22,bottom:5, marginLeft: 45,backgroundColor:"#E70736",justifyContent:"flex-end",borderTopEndRadius:12,borderBottomLeftRadius:12 }}>
-                                                <Text style={{marginRight:13,fontSize:RFValue(20),color:"white",bottom:7}}>_</Text>
+                                        <View style={{ flexDirection: "column", justifyContent: "space-between" }}>
+                                            <View style={{ flexDirection: "row", width: "35%", left: 22, bottom: 5, marginLeft: 45, backgroundColor: "#E70736", justifyContent: "flex-end", borderTopEndRadius: 12, borderBottomLeftRadius: 12 }}>
+                                                <Text style={{ marginRight: 13, fontSize: RFValue(20), color: "white", bottom: 7 }}>_</Text>
                                             </View>
-                                            <View style={{ flexDirection: "row",borderTopLeftRadius:12,borderBottomEndRadius:12,top:5,backgroundColor:"#E70736",padding:4 }}>
-                                                <Text style={{...FONTS.lexendregular,color:COLORS.white,fontSize:RFValue(12),left:5}}>ADD TO CART</Text>
+                                            <View style={{ flexDirection: "row", borderTopLeftRadius: 12, borderBottomEndRadius: 12, top: 5, backgroundColor: "#E70736", padding: 4 }}>
+                                                <Text style={{ ...FONTS.lexendregular, color: COLORS.white, fontSize: RFValue(12), left: 5 }}>ADD TO CART</Text>
                                             </View>
                                         </View>
                                     </View>

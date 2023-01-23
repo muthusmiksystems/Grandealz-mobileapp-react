@@ -53,17 +53,17 @@ const AddAddress = () => {
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(14) }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: RFValue(24), width: horizontalScale(290), textAlign: "center" }}>Add New Address</Text>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), width: horizontalScale(290), textAlign: "center" }}>Add New Address</Text>
             </View>
             <ScrollView style={{ height: "80%" }}>
-                <Text style={{ color: COLORS.textHeader, fontSize: RFValue(15), ...FONTS.lexendregular,marginLeft:"5%",marginTop:"5%" }}>CONTACT DETAILS</Text>
+                <Text style={{ color: COLORS.textHeader, fontSize: RFValue(15), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "5%" }}>CONTACT DETAILS</Text>
                 <View style={{ marginHorizontal: "3%", marginVertical: "2%" }}>
                     <TextInput
                         keyboardType={"default"}
                         placeholder="Name*"
                         maxLength={10}
                         placeholderTextColor={COLORS.gray}
-                        style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white,alignSelf:"center",...FONTS.lexendregular,fontSize:RFValue(14) }}
+                        style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(14) }}
                     />
                 </View>
                 <View style={{ marginHorizontal: "3%" }}>
@@ -72,19 +72,19 @@ const AddAddress = () => {
                         placeholder="MobileNo*"
                         maxLength={10}
                         placeholderTextColor={COLORS.gray}
-                        style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white,alignSelf:"center",...FONTS.lexendregular,fontSize:RFValue(14) }}
+                        style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(14) }}
                     />
                 </View>
 
 
-                <Text style={{ color: COLORS.textHeader, fontSize: RFValue(15), ...FONTS.lexendregular,marginLeft:"5%",marginTop:"3%" }}>ADDRESS</Text>
+                <Text style={{ color: COLORS.textHeader, fontSize: RFValue(15), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "3%" }}>ADDRESS</Text>
                 <View style={{ marginHorizontal: "3%", marginVertical: "2%" }}>
                     <TextInput
                         keyboardType={"default"}
                         placeholder="Pin Code*"
                         maxLength={10}
                         placeholderTextColor={COLORS.gray}
-                        style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white,alignSelf:"center",...FONTS.lexendregular,fontSize:RFValue(14) }}
+                        style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(14) }}
                     />
                 </View>
                 <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
@@ -93,7 +93,7 @@ const AddAddress = () => {
                         placeholder="Address (House No, Building, street, Area)*"
                         maxLength={10}
                         placeholderTextColor={COLORS.gray}
-                        style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white ,alignSelf:"center",...FONTS.lexendregular,fontSize:RFValue(14)}}
+                        style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(14) }}
                     />
                 </View>
                 <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
@@ -102,7 +102,7 @@ const AddAddress = () => {
                         placeholder="Locality / Town*"
                         maxLength={10}
                         placeholderTextColor={COLORS.gray}
-                        style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white,alignSelf:"center",...FONTS.lexendregular,fontSize:RFValue(14) }}
+                        style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(14) }}
                     />
                 </View>
                 <View style={{ flexDirection: "row", marginHorizontal: "2%" }}>
@@ -113,7 +113,7 @@ const AddAddress = () => {
                                 placeholder="City / District*"
                                 maxLength={10}
                                 placeholderTextColor={COLORS.gray}
-                                style={{ paddingStart: 15, borderRadius: 8, width: "91%", backgroundColor: COLORS.white,alignSelf:"center",...FONTS.lexendregular,fontSize:RFValue(14) }}
+                                style={{ paddingStart: 15, borderRadius: 8, width: "91%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(14) }}
                             />
                         </View>
                     </View>
@@ -124,25 +124,25 @@ const AddAddress = () => {
                                 placeholder="State*"
                                 maxLength={10}
                                 placeholderTextColor={COLORS.gray}
-                                style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white,alignSelf:"center",...FONTS.lexendregular,fontSize:RFValue(14) }}
+                                style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(14) }}
                             />
                         </View>
                     </View>
                 </View>
 
 
-                <Text style={{ color: COLORS.textHeader, fontSize: RFValue(15), ...FONTS.lexendregular,marginLeft:"5%",marginTop:"3%" }}>SAVE ADDRESS AS</Text>
-                <View style={{ marginVertical: "2%", flexDirection: "row", width: "89%",alignSelf:"center", borderRadius: 10, backgroundColor: COLORS.white }}>
-                    <TouchableOpacity style={{paddingVertical:"5%",marginHorizontal:"5%"}}><Text style={{ color: COLORS.gray,textAlign:"center", fontSize: RFValue(11), ...FONTS.lexendregular, borderRadius: 4, borderWidth: 1, borderColor: COLORS.gray, paddingVertical: "1%",paddingHorizontal:"4%" }}>Home</Text></TouchableOpacity>
-                    <TouchableOpacity style={{paddingVertical:"5%"}}><Text style={{ color: COLORS.gray,textAlign:"center", fontSize: RFValue(11), ...FONTS.lexendregular, borderRadius: 4, borderWidth: 1, borderColor: COLORS.gray, paddingHorizontal: "4%",paddingVertical:"1%" }}>Work</Text></TouchableOpacity>
+                <Text style={{ color: COLORS.textHeader, fontSize: RFValue(15), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "3%" }}>SAVE ADDRESS AS</Text>
+                <View style={{ marginVertical: "2%", flexDirection: "row", width: "89%", alignSelf: "center", borderRadius: 10, backgroundColor: COLORS.white }}>
+                    <TouchableOpacity style={{ paddingVertical: "5%", marginHorizontal: "5%" }}><Text style={{ color: COLORS.gray, textAlign: "center", fontSize: RFValue(11), ...FONTS.lexendregular, borderRadius: 4, borderWidth: 1, borderColor: COLORS.gray, paddingVertical: "1%", paddingHorizontal: "4%" }}>Home</Text></TouchableOpacity>
+                    <TouchableOpacity style={{ paddingVertical: "5%" }}><Text style={{ color: COLORS.gray, textAlign: "center", fontSize: RFValue(11), ...FONTS.lexendregular, borderRadius: 4, borderWidth: 1, borderColor: COLORS.gray, paddingHorizontal: "4%", paddingVertical: "1%" }}>Work</Text></TouchableOpacity>
                 </View>
 
                 <View style={{ marginHorizontal: "3%", marginBottom: "2%", padding: "2%", flexDirection: "row", width: "90%", borderRadius: 10, backgroundColor: COLORS.white, alignSelf: "center" }}>
                     <CheckBoxes />
-                    <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, paddingHorizontal: "5%",alignSelf:"center" }}>Make this my default address</Text>
+                    <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, paddingHorizontal: "5%", alignSelf: "center" }}>Make this my default address</Text>
                 </View>
             </ScrollView>
-            <View style={{ flexDirection: "row", height: "8%", backgroundColor: COLORS.white,paddingVertical:"1%",paddingHorizontal:"2%" }}>
+            <View style={{ flexDirection: "row", height: "8%", backgroundColor: COLORS.white, paddingVertical: "1%", paddingHorizontal: "2%" }}>
 
                 <TouchableOpacity style={{ flexDirection: "column", width: "90%", marginHorizontal: "5%", marginVertical: "1%", borderRadius: 5, borderWidth: 1, justifyContent: "center", alignItems: "center" }}>
                     <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular }}>Add Address</Text>
@@ -157,7 +157,7 @@ const AddAddress = () => {
 const styles = StyleSheet.create({
     subdivOne: {
         width: horizontalScale(375),
-        height: "10%",
+        height: verticalScale(80),
         backgroundColor: "#0a0127",
         alignItems: "center",
         // justifyContent: 'center',

@@ -39,7 +39,7 @@ const ProductDetails = () => {
             <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18), flexDirection: "column" }}>
               <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
             </TouchableOpacity>
-            <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: RFValue(24), width: "78%", textAlign: "center" }}>Product Details</Text>
+            <Text style={{ ...FONTS.lexendsemibold, color: "white", fontSize: RFValue(24), width: "78%", textAlign: "center" }}>Product Details</Text>
           </View>
         </View>
 

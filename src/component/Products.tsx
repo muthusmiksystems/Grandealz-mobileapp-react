@@ -56,7 +56,7 @@ const Product = () => {
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => (
                         <View style={{ padding: '5%' }}>
-                            <TouchableOpacity style={{ borderWidth: 1, borderRadius: 9, borderTopWidth: 4, borderTopColor: "red", backgroundColor: "white" }}>
+                            <TouchableOpacity style={{ borderRadius: 9, borderTopWidth: 4, borderTopColor: "red", backgroundColor: "white" }}>
                                 <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8 }}>
                                     <View style={{ flexDirection: 'column', padding: 10 }}>
                                         <Image
@@ -78,7 +78,7 @@ const Product = () => {
 
                                   
 
-                                        <Text style={{ textAlign: "center", color: "black", fontSize: 18 }}>Add to Cart</Text>
+                                        <Text style={{ textAlign: "center", color: "black", fontSize: RFValue(18),...FONTS.lexendregular }}>Add to Cart</Text>
                                     </TouchableOpacity>
                                 </View>
                                 <View style={{ flexDirection: "row", marginVertical: "2%" }}>

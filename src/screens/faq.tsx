@@ -38,7 +38,7 @@ const Faq = () => {
       const Title = () => {
         return (
          <View>
-            <Text style={{ fontFamily: "Lexend-SemiBold", color:COLORS.textHeader, fontSize: RFValue(16), margin: "3%",...FONTS.lexendregular }}>Lorem Ipsum is simply</Text>
+            <Text style={{ fontFamily: "Lexend-SemiBold", color:COLORS.textHeader, fontSize: RFValue(16), margin: "3%" }}>Lorem Ipsum is simply</Text>
           </View>
         )
       }
@@ -49,7 +49,7 @@ const Faq = () => {
             <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(14) }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: RFValue(24), width: "79%", textAlign: "center" }}>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), width: "79%", textAlign: "center" }}>
             FAQ's</Text>
             </View>
             <Text style={{ fontFamily: "Lexend-SemiBold", color:COLORS.textHeader, fontSize: RFValue(16), margin: "3%" }}>About us</Text>

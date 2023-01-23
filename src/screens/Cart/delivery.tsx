@@ -41,7 +41,7 @@ const Delivery = () => {
             </View>
             <ScrollView style={{ height: "80%" }}>
                 {/* <RadioButton.Group onValueChange={newValue => { setValue(newValue), parentCallback(newValue) }} value={value} > */}
-                <View style={{ width: "92%", borderRadius: 20, backgroundColor: COLORS.white, alignSelf: "center", marginTop: "4%",paddingVertical:"3%" }}>
+                <View style={{ width: "92%", borderRadius: 20, backgroundColor: COLORS.white, alignSelf: "center", marginTop: "4%", paddingVertical: "3%" }}>
                     <View style={{ flexDirection: "row", width: "100%", borderRadius: 10 }}>
                         <View style={{ flexDirection: "column" }}>
                             <View style={{ flexDirection: "row" }}>
@@ -54,7 +54,7 @@ const Delivery = () => {
                                 />
                             </View>
                         </View>
-                        <View style={{ flexDirection: "column", width: "65%"}}>
+                        <View style={{ flexDirection: "column", width: "65%" }}>
 
                             <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendsemibold, margin: "3%" }}>Deliver at your door step</Text>
 
@@ -72,7 +72,7 @@ const Delivery = () => {
                         </View>
                     </View>
                 </View>
-                <View style={{ width: "92%",alignSelf:"center", borderRadius: 20, backgroundColor: COLORS.white, marginTop: "4%",paddingVertical:"3%" }}>
+                <View style={{ width: "92%", alignSelf: "center", borderRadius: 20, backgroundColor: COLORS.white, marginTop: "4%", paddingVertical: "3%" }}>
                     <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "2%" }}>
                         <View style={{ flexDirection: "column" }}>
                             <View style={{ flexDirection: "row" }}>
