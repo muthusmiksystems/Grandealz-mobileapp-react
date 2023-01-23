@@ -10,7 +10,7 @@ import {
     TouchableOpacity,
     FlatList
 } from 'react-native';
-import { horizontalScale, verticalScale } from "../constants/metrices";
+import { horizontalScale, moderateScale, verticalScale } from "../constants/metrices";
 import { love } from "../constants/icons"
 import EntypoIcons from "react-native-vector-icons/Entypo";
 import { useNavigation } from "@react-navigation/native";
@@ -23,13 +23,13 @@ import WishlistData from "./wishListData";
 const Data = [
     {
         id: '1',
-        imag: image.pencil,
+        imag: image.pencilorg,
         name: "Pencil",
         detail: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry  standard dummy text ever since the 1500s Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'
     },
     {
         id: '2',
-        imag: image.pencil,
+        imag: image.pencilorg,
         name: "Pencil",
         detail: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry  standard dummy text ever since the 1500s Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'
 
@@ -56,7 +56,7 @@ const Data = [
     },
     {
         id: '6',
-        imag: image.pencil,
+        imag: image.pencilorg,
         name: "Pencil",
         detail: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry  standard dummy text ever since the 1500s Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'
     },
@@ -97,9 +97,9 @@ const OurProducts = () => {
                         numColumns={2}
                         contentContainerStyle={{ paddingBottom: verticalScale(50),alignSelf:"center" }}
                         renderItem={({ item, index }) => (
-                            <TouchableOpacity style={{ backgroundColor: "white",borderRadius:10,marginTop:horizontalScale(14),marginLeft:verticalScale(14),width:horizontalScale(160),height:verticalScale(220) }} onPress={() => { navigation.navigate("DetailedProduct", { item }) }}>
-                                <View style={{ padding: 15 }}>
-                                    <View style={{ paddingVertical: verticalScale(10), backgroundColor: "#F1F1F1",borderRadius:10,alignItems:"center" }}>
+                            <TouchableOpacity style={{ backgroundColor: "white",borderRadius:8,marginTop:horizontalScale(14),marginLeft:verticalScale(14),width:horizontalScale(160),height:verticalScale(220) }} onPress={() => { navigation.navigate("DetailedProduct", { item }) }}>
+                                <View style={{ padding: moderateScale(9) }}>
+                                    <View style={{ paddingVertical: verticalScale(15), backgroundColor: "#F1F1F1",alignItems:"center" }}>
                                         <Image
                                             source={item.imag}
                                             resizeMode="stretch"

@@ -55,14 +55,17 @@ const Login = () => {
         backgroundColor="#0a0127"
       />
       <View style={styles.subdivOne}>
+      <View style={{flexDirection:"column",marginTop:verticalScale(45)}}>
         <Image
           source={loginicon}
           resizeMode='contain'
           style={{
             height:verticalScale(150),
-            width:horizontalScale(130)
+            width:horizontalScale(130),
+      
            }}
         />
+        </View>
       </View>
       <View style={styles.subdivTwo}>
         <Text style={{ fontSize: RFValue(26), color: "black", textAlign: "center", fontFamily: "Lexend-SemiBold", marginTop: verticalScale(16) }}>Log In</Text>

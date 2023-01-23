@@ -24,7 +24,7 @@ const DrawsMain = () => {
     const navigation = useNavigation();
     return (
         <SafeAreaView>
-            <View style={{ flexDirection: "row", width: "92%",alignSelf:"center",height:verticalScale(55) }}>
+            <View style={{ flexDirection: "row", width: "94%",alignSelf:"center",height:verticalScale(51) }}>
 
                 <View style={{ flexDirection: "row", width: "80%", marginHorizontal: "1%", backgroundColor: "white", borderRadius: 10, }}>
                     <TouchableOpacity style={{ backgroundColor: showWinners ? COLORS.element : "white", flexDirection: "column", width: "50%", paddingVertical: "5%", borderRadius: 10, justifyContent: "center", alignItems: "center" }} onPress={() => setShowWinners(!showWinners)}>
@@ -46,7 +46,7 @@ const DrawsMain = () => {
 
 
             </View>
-            <View style={{ marginVertical: "1%", position: "relative" }}>
+            <View style={{ marginVertical: "1%", position: "relative",paddingBottom:"10%" }}>
                 {showWinners ?
                     <View>
                         <Winners />
