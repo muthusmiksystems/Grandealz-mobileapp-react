@@ -39,13 +39,13 @@ const MyOrders = () => {
             <ScrollView style={{ height: "80%" }}>
                 <View style={{ flexDirection: "row" }}>
                     <View style={{ width: "78%", borderRadius: 20, backgroundColor: "#FFFFFF", margin: "2%", flexDirection: "column" }}>
-                        <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "3%" }}>
+                        <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "4%" }}>
                             <View style={{ flexDirection: "column",alignItems:"center" }}>
-                                <View style={{ flexDirection: "row",alignItems:"center" }}>
+                                <View style={{ flexDirection: "row",alignItems:"center",justifyContent:"center" }}>
                                     <Image
                                         source={icons.search}
-
-                                        style={{ height: 30, width: 30 }}
+                                        resizeMode="contain"
+                                        style={{ height:verticalScale(20), width:horizontalScale(20) }}
                                     />
                                     <Text style={{ color: COLORS.gray, fontSize: RFValue(16), ...FONTS.lexendregular, marginStart: "5%" }}>Search in orders</Text>
                                 </View>
@@ -59,7 +59,7 @@ const MyOrders = () => {
                                 <Image
                                     source={icons.filter}
 
-                                    style={{ height: 30, width: 28, margin: 8, left: 5 }}
+                                    style={{ height: verticalScale(30), width: horizontalScale(24), margin: 8, left: 5 }}
                                 />
                             </TouchableOpacity>
                         </View>
