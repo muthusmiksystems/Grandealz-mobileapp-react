@@ -22,42 +22,40 @@ const data = [
         id: '1',
         imag: image.whitecar,
         from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-        to: "1689 soul out 1985"
+        to: "1689 sold out 1985"
 
     },
     {
         id: '2',
         imag: image.whitecar,
         from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-        to: "1689 soul out 1985"
+        to: "1689 sold out 1985"
     },
     {
         id: '3',
         imag: image.whitecar,
         from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-        to: "1689 soul out 1985"
+        to: "1689 sold out 1985"
     },
     {
         id: '4',
         imag: image.whitecar,
         from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-        to: "1689 soul out 1985"
+        to: "1689 sold out 1985"
     },
-
 ];
 const Carsold = () => {
     return (
         <SafeAreaView >
-            <View style={{bottom:80,paddingBottom:"5%"}} >
+            <View style={{bottom:80}} >
                 <FlatList
                     data={data}
                     contentContainerStyle={{}}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => (
-                        <View style={{ padding: '5%' }}>
+                        <View style={{ paddingTop:"5%",paddingHorizontal:"6%" }}>
                             <TouchableOpacity style={{  borderRadius: 9,backgroundColor: "white" }}>
-                                <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8 }}>
-                                    <View style={{ flexDirection: 'column', padding: 10 }}>
+                                <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8 ,flexDirection: 'column', padding: 10}}>
                                         <Image
                                             source={item.imag}
                                             style={{
@@ -66,18 +64,13 @@ const Carsold = () => {
                                                 borderWidth: 1,
                                             }}
                                         />
-                                    </View>
                                 </View>
                                 <View style={{ marginLeft: 5, padding: 10 }}>
-                                    
                                     <Text style={{  ...FONTS.lexendsemibold,fontSize: RFValue(14), color: "black" }}>Campaign:- range Rover V8 GCC </Text>
                                     <Text style={{ ...FONTS.lexendregular,fontSize:RFValue(16), color: "black" }}>EL-00990</Text>
-                                    <Text style={{ ...FONTS.lexendregular,fontSize: RFValue(16), color: "red" }}>Draw date to be announced</Text>
+                                    <Text style={{ ...FONTS.lexendregular,fontSize: RFValue(16), color: "#E70736" }}>Draw date to be announced</Text>
                                 </View>
-                                
-
-
-                            </TouchableOpacity>
+                             </TouchableOpacity>
                         </View>
                     )}
                 />

@@ -41,11 +41,11 @@ const DetailedProduct = ({ route }) => {
                 <View style={{ width: "100%", alignItems: "center" }}>
                     <View style={{ padding: 20, borderRadius: 10, alignItems: "center", width: "100%", backgroundColor: COLORS.white }}>
                         <Image
-                            source={image.pencil}
+                            source={image.pencilorg}
                             resizeMode="contain"
                             style={{
-
-                                // marginLeft: 80
+                                width:horizontalScale(250),
+                                height:verticalScale(250)
                             }}
                         />
                     </View>
@@ -73,3 +73,5 @@ const styles = StyleSheet.create({
 
 })
 export default DetailedProduct;
+
+

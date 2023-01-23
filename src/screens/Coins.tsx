@@ -33,8 +33,8 @@ const Coins = () => {
                 <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: 20, width: "79%", textAlign: "center" }}>Coins</Text>
             </View>
             <View>
-                <View style={{ height: "35%", backgroundColor: "#FFCACE", alignItems: "center" }}>
-                    <View style={{ height: "90%", width: "80%", top: "15%", }}>
+                <View style={{ height: "36%", backgroundColor: "#FFCACE", alignItems: "center" }}>
+                    <View style={{ height: "90%", width: "83%", top: "15%", }}>
                         <View style={{ flexDirection: "column", width: horizontalScale(20), right: horizontalScale(60), alignSelf: "center", backgroundColor: "#FFCACE", height: verticalScale(25), borderBottomEndRadius: 55, borderBottomStartRadius: 55, zIndex: 100, top: "10%" }} />
 
                         <View style={{ backgroundColor: '#0a0127', padding: "5%", flexDirection: "row", borderRadius: 10, borderWidth: 1 }}>
@@ -42,20 +42,21 @@ const Coins = () => {
                             <View style={{ width: "20%", justifyContent: "center", alignItems: "center" }}>
                                 <Image
                                     source={icons.rupee}
-                                    style={{ height: RFValue(35), width: RFValue(35) }}
+                                    style={{ height: RFValue(50), width: RFValue(50) }}
                                 />
                             </View>
                             <View style={{ width: "70%", justifyContent: "center", alignItems: "center", }}>
                                 <Text style={styles.fontSizeStyle}>50 Coins</Text>
                             </View>
-                            <View style={{ width: "10%", height: "100%", left: "32%", bottom: "1%", }}>
-                                <View style={{ flexDirection: "column", width: horizontalScale(10), alignSelf: "center", backgroundColor: "#FFCACE", height: verticalScale(15), borderTopStartRadius: 55, borderBottomStartRadius: 55, }} />
-                                <View style={{ flexDirection: "column", width: horizontalScale(10), alignSelf: "center", backgroundColor: "#FFCACE", height: verticalScale(15), borderTopStartRadius: 55, borderBottomStartRadius: 55, }} />
-                                <View style={{ flexDirection: "column", width: horizontalScale(10), alignSelf: "center", backgroundColor: "#FFCACE", height: verticalScale(15), borderTopStartRadius: 55, borderBottomStartRadius: 55, }} />
+                            <View style={{ width: "10%", height: "99%", left: "35%", bottom: "1%",}}>
+                                <View style={{ flexDirection: "column", width: horizontalScale(10), alignSelf: "center", backgroundColor: "#FFCACE", height: verticalScale(14), borderTopStartRadius: 55, borderBottomStartRadius: 55, }} />
+                                <View style={{ flexDirection: "column", width: horizontalScale(10), alignSelf: "center", backgroundColor: "#FFCACE", height: verticalScale(14), borderTopStartRadius: 55, borderBottomStartRadius: 55, }} />
+                                <View style={{ flexDirection: "column", width: horizontalScale(10), alignSelf: "center", backgroundColor: "#FFCACE", height: verticalScale(14), borderTopStartRadius: 55, borderBottomStartRadius: 55, }} />
 
-                                <View style={{ flexDirection: "column", width: horizontalScale(10), alignSelf: "center", backgroundColor: '#F1F1F1', height: verticalScale(15), borderTopStartRadius: 55, borderBottomStartRadius: 55, }} />
-                                <View style={{ flexDirection: "column", width: horizontalScale(10), alignSelf: "center", backgroundColor: '#F1F1F1', height: verticalScale(15), borderTopStartRadius: 55, borderBottomStartRadius: 55, }} />
-                                <View style={{ flexDirection: "column", width: horizontalScale(10), alignSelf: "center", backgroundColor: '#F1F1F1', height: verticalScale(15), borderTopStartRadius: 55, borderBottomStartRadius: 55, }} />
+                                <View style={{ flexDirection: "column", width: horizontalScale(10), alignSelf: "center", backgroundColor: '#F1F1F1', height: verticalScale(14), borderTopStartRadius: 55, borderBottomStartRadius: 55, }} />
+                                <View style={{ flexDirection: "column", width: horizontalScale(10), alignSelf: "center", backgroundColor: '#F1F1F1', height: verticalScale(14), borderTopStartRadius: 55, borderBottomStartRadius: 55, }} />
+                                <View style={{ flexDirection: "column", width: horizontalScale(10), alignSelf: "center", backgroundColor: '#F1F1F1', height: verticalScale(14), borderTopStartRadius: 55, borderBottomStartRadius: 55, }} />
+                                <View style={{ flexDirection: "column", width: horizontalScale(10), alignSelf: "center", backgroundColor: '#F1F1F1', height: verticalScale(11), borderTopStartRadius: 55, borderBottomStartRadius: 55, }} />
 
                             </View>
                         </View>
@@ -171,9 +172,9 @@ const styles = StyleSheet.create({
     fontSizeStyle: {
         ...FONTS.lexendsemibold,
         color: COLORS.white,
-        fontSize: RFValue(25),
+        fontSize: RFValue(35),
         width: "82%",
-        left: "30%"
+        left: "5%"
     },
 
 })
