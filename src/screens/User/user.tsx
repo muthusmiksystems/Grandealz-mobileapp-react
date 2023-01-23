@@ -6,17 +6,18 @@ import {
     StyleSheet,
     TouchableOpacity,
     Image,
+    ImageBackground,
     ScrollView
 } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import { icons, COLORS, FONTS } from '../../constants';
-import { horizontalScale, verticalScale } from '../../constants/metrices';
+import { horizontalScale, moderateScale, verticalScale } from '../../constants/metrices';
 import EntypoIcons from "react-native-vector-icons/Entypo";
 import { useNavigation } from '@react-navigation/native';
 import image from '../../constants/image';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-
+import FontA5 from "react-native-vector-icons/FontAwesome5"
 
 const User = () => {
 
@@ -43,19 +44,23 @@ const User = () => {
                 </View>
             </View>
             <ScrollView style={{ backgroundColor: COLORS.pagebackground, borderWidth: 0, borderColor: "red", height: "90%" }}>
-                <View style={{ alignItems: "center", borderWidth: 0, padding: 24 }}>
+                <View style={{ alignItems: "center",padding: 24 }}>
                     <View style={{ borderWidth: 1, borderRadius: 8, height: 110, width: 120, alignItems: "center" }}>
-                        <Image
-                            source={image.cars}
+                        <ImageBackground
+                            source={image.profilepic}
                             resizeMode="stretch"
                             style={{
                                 width: "100%",
                                 height: "100%"
-                            }}
-                        />
+                            }}>
+                            <TouchableOpacity style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', height: "27%", bottom: 0, borderBottomEndRadius: moderateScale(4), borderBottomStartRadius: moderateScale(4), width: "100%", position: 'absolute', alignItems: "center", justifyContent: "center" }} >
+                                <FontA5 name="edit" color="white" size={moderateScale(13)} style={{ margin: "2%" }} />
+                            </TouchableOpacity>
+                            </ImageBackground>
+                     
                     </View>
                     <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(20), color: COLORS.black }}>Connor Davis</Text>
-                    <Text style={{ ...FONTS.lexendregular, fontSize: RFValue(14) }}>info@gmail.com</Text>
+                    <Text style={{ ...FONTS.lexendregular, fontSize: RFValue(13) , color: COLORS.black}}>info@gmail.com</Text>
                 </View>
                 <View style={styles.viewBox}>
                     <TouchableOpacity style={styles.touchButton} onPress={()=>navigation.navigate("PersonalDetails")}>
@@ -63,8 +68,8 @@ const User = () => {
                             source={icons.userIcon}
                             resizeMode="contain"
                             style={{
-                                width: 30,
-                                height: 30,
+                                width: verticalScale(28),
+                                height:horizontalScale(25),
                                 flexDirection: "column"
                             }}
                         />
@@ -78,8 +83,8 @@ const User = () => {
                             source={icons.userHeart}
                             resizeMode="contain"
                             style={{
-                                width: 30,
-                                height: 30,
+                                width: verticalScale(28),
+                                height:horizontalScale(25),
                                 flexDirection: "column"
                             }}
                         />
@@ -93,8 +98,8 @@ const User = () => {
                             source={icons.userBox}
                             resizeMode="contain"
                             style={{
-                                width: 30,
-                                height: 30,
+                                width: verticalScale(28),
+                                height:horizontalScale(25),
                                 flexDirection: "column"
                             }}
                         />
@@ -111,8 +116,8 @@ const User = () => {
                             source={icons.userCreditCard}
                             resizeMode="contain"
                             style={{
-                                width: 30,
-                                height: 30,
+                                width: verticalScale(28),
+                                height:horizontalScale(25),
                                 flexDirection: "column"
                             }}
                         />
@@ -126,8 +131,8 @@ const User = () => {
                             source={icons.userLocation}
                             resizeMode="contain"
                             style={{
-                                width: 30,
-                                height: 30,
+                                width: verticalScale(28),
+                                height:horizontalScale(25),
                                 flexDirection: "column"
                             }}
                         />
@@ -141,8 +146,8 @@ const User = () => {
                             source={icons.userChangePassword}
                             resizeMode="contain"
                             style={{
-                                width: 30,
-                                height: 30,
+                                width: verticalScale(28),
+                                height:horizontalScale(25),
                                 flexDirection: "column"
                             }}
                         />
@@ -156,8 +161,8 @@ const User = () => {
                             source={icons.coinDollar}
                             resizeMode="contain"
                             style={{
-                                width: 30,
-                                height: 30,
+                                width: verticalScale(28),
+                                height:horizontalScale(25),
                                 flexDirection: "column"
                             }}
                         />
@@ -174,8 +179,8 @@ const User = () => {
                             source={icons.userInfo}
                             resizeMode="contain"
                             style={{
-                                width: 30,
-                                height: 30,
+                                width: verticalScale(28),
+                                height:horizontalScale(25),
                                 flexDirection: "column"
                             }}
                         />
@@ -189,8 +194,8 @@ const User = () => {
                             source={icons.userShirt}
                             resizeMode="contain"
                             style={{
-                                width: 30,
-                                height: 30,
+                                width: verticalScale(28),
+                                height:horizontalScale(25),
                                 flexDirection: "column"
                             }}
                         />
@@ -204,8 +209,8 @@ const User = () => {
                             source={icons.userHeart}
                             resizeMode="contain"
                             style={{
-                                width: 30,
-                                height: 30,
+                                width: verticalScale(28),
+                                height:horizontalScale(25),
                                 flexDirection: "column"
                             }}
                         />
@@ -214,18 +219,18 @@ const User = () => {
 
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={{ borderWidth: 1, alignSelf: "center", borderColor: COLORS.gray, marginTop: "10%", width: "55%", borderRadius: 10 }}>
-                    <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(18), textAlign: "center", color: COLORS.black, paddingVertical: "6%" }}>Logout</Text>
+                <TouchableOpacity style={{ borderWidth: 1, alignSelf: "center", borderColor: COLORS.gray, marginTop: "10%", width: "65%", borderRadius: 10 }}>
+                    <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(16), textAlign: "center", color: COLORS.black, paddingVertical: "6%" }}>Logout</Text>
                 </TouchableOpacity>
-                <View style={{ padding: 20 }}>
-                    <Text style={{ ...FONTS.lexendregular, fontSize: RFValue(14), color: COLORS.element, textAlign: "center" }}>Delete my account</Text>
+                <View style={{ padding:moderateScale(20),margin:"3%" }}>
+                    <Text style={{ ...FONTS.lexendregular, fontSize: RFValue(13), color: COLORS.element, textAlign: "center" }}>Delete my account</Text>
                 </View>
                 <View style={{ flexDirection: "row", marginTop: "1%" }}>
-                    <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignSelf: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginHorizontal: "6%", width: "40%", borderRadius: 10 }}>
-                        <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(18), textAlign: "center", color: COLORS.black, paddingVertical: "8%" }}>Call us</Text>
+                    <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignSelf: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginStart: "5%",marginEnd:"2%", width: "45%", borderRadius: 10 }}>
+                        <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(16), textAlign: "center", color: COLORS.black, paddingVertical: "8%" }}>Call us</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignSelf: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginHorizontal: "2%", width: "40%", borderRadius: 10 }}>
-                        <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(18), textAlign: "center", color: COLORS.black, paddingVertical: "8%" }}>Email us</Text>
+                    <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignSelf: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginEnd: "5%", width: "45%", borderRadius: 10 }}>
+                        <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(16), textAlign: "center", color: COLORS.black, paddingVertical: "8%" }}>Email us</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{ flexDirection: "row", marginVertical: "8%" }}>
@@ -256,8 +261,8 @@ const User = () => {
                             source={icons.userWhatsapp}
                             resizeMode="contain"
                             style={{
-                                width: 30,
-                                height: 30,
+                                width: verticalScale(30),
+                                height:horizontalScale(30),
                                 flexDirection: "column"
                             }}
                         />
@@ -285,7 +290,7 @@ const styles = StyleSheet.create({
     touchButton: {
         flexDirection: "row",
         paddingHorizontal: 10,
-        paddingVertical: 8,
+        paddingVertical: 6,
         alignItems: "center"
     },
     fontSizeStyle: {
@@ -300,12 +305,11 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.white,
         alignSelf: "center",
         borderRadius: 10,
-        padding: 5
-    },
+            },
     fontHeadStyle: {
         ...FONTS.lexendsemibold,
         color: COLORS.black,
-        fontSize: RFValue(18),
+        fontSize: RFValue(16),
         width: "82%",
         left: "6%",
         marginTop: "3%"

@@ -20,6 +20,7 @@ import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import image from "../../constants/image";
 import OrderList from "./orderList";
 import StepIndicator from 'react-native-step-indicator';
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 const { width, height } = Dimensions.get("window");
 const labels = ["Cart", "Delivery Address", "Order Summary", "Payment Method"];
@@ -111,7 +112,7 @@ const OrderDetails = () => {
                             <View style={{ flexDirection: "column", marginLeft: 15, justifyContent: "flex-end", marginStart: 30 }}>
                                 <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(12), right: 10, color: "#000" }}>Avail Your Ticket</Text>
                                 <View style={{ backgroundColor: "#E70736", padding: 8, borderBottomEndRadius: 10, borderTopStartRadius: 10, top: 6 }}>
-                                    <Text style={{ textAlign: "center", ...FONTS.lexendregular }}>Pay Now</Text>
+                                    <Text style={{ textAlign: "center", ...FONTS.lexendregular,color:COLORS.white }}>Pay Now</Text>
                                 </View>
                             </View>
                         </View>

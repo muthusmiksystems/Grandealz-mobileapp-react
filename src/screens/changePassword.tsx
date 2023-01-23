@@ -42,7 +42,8 @@ const ChangePassword = () => {
             source={loginicon}
             resizeMode='contain'
             style={{
-              // marginTop: verticalScale(50)
+             height:verticalScale(150),
+             width:horizontalScale(130)
             }}
           />
         </View>
@@ -76,7 +77,7 @@ const ChangePassword = () => {
             {/* <Fontisto name='email' size={30} style={{ alignSelf: "center" }} /> */}
           </View>
         </View>
-        <TouchableOpacity style={{ alignSelf: "center", marginTop: "12%", borderWidth: 1, borderRadius: 8, width: verticalScale(200), padding: "3%" }}
+        <TouchableOpacity style={{ marginBottom:"15%",alignSelf: "center", marginTop: "12%", borderWidth: 1, borderRadius: 8, width: verticalScale(200), padding: "3%" }}
           onPress={() => navigation.navigate("OtpPage")}
         >
           <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-SemiBold", color: "black" }}>Update</Text>
@@ -94,7 +95,6 @@ const styles = StyleSheet.create({
   },
   subdivTwo: {
     width: horizontalScale(342),
-    height: verticalScale(430),
     backgroundColor: "white",
     bottom: verticalScale(85),
     alignSelf: "center",

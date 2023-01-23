@@ -6,7 +6,11 @@ export const loginHanlder = createAsyncThunk('posts/loginPostcall', async (thunk
     // console.log("Inside the api call", data);
 
     const payload = { "email": "cheranc7c7@gmail.com", "password": "Cheran@123"};
-    const headers = { 'Content-Type': 'application/json', }
+    const headers = { 'Content-Type': 'application/json',
+    "Access-Control-Allow-Origin": "*",
+    "Content-Length":"<calculated when request is sent>",
+    "Access-Control-Allow-Credentials": "true" }
+    console.log(Login_Url,"login")
     return await axios.post(Login_Url, payload, { headers: headers }).then(response => {
         console.log("Response", response);
         return response
