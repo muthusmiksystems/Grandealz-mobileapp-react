@@ -47,6 +47,7 @@ import Coins from './src/screens/Coins';
 import PersonalDetails from './src/component/personalDetails';
 import OurProducts from './src/screens/ourProduct';
 import DetailedProduct from './src/screens/detailedProduct';
+import HowItWorks from './src/screens/howitworks';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const App = () => {
   return (
@@ -81,6 +82,7 @@ const App = () => {
   <Stack.Screen name="OurProducts" component={OurProducts}/>
         <Stack.Screen name="DetailedProduct" component={DetailedProduct}/>
 	   <Stack.Screen name="PersonalDetails" component={PersonalDetails} />
+	 <Stack.Screen name="HowItWorks" component={HowItWorks} />
         < Stack.Screen
                     name="Tabs"
                     component={Tabs}

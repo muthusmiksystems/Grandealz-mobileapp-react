@@ -16,6 +16,7 @@ import icons from '../../constants/icons';
 import { COLORS,FONTS } from '../../constants';
 import {useNavigation } from '@react-navigation/native';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { horizontalScale } from '../../constants/metrices';
 
 const data = [
   {
@@ -71,7 +72,7 @@ const DrawsHeader = () => {
           horizontal={true}
           data={data}
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ marginVertical: "4%",marginLeft:"4%",paddingRight:"50%"  }}
+          contentContainerStyle={{ marginVertical: "4%",marginLeft:"4%",paddingRight:"75%"  }}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
             <View>
