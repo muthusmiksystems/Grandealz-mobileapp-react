@@ -20,11 +20,12 @@ const PaymentOptions = () => {
     const navigation = useNavigation();
 
     return (
-        <SafeAreaView>
+        <SafeAreaView >
             <StatusBar
                 animated={true}
                 backgroundColor="#0a0127"
             />
+
             <View style={styles.subdivOne}>
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(14) }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
@@ -32,9 +33,9 @@ const PaymentOptions = () => {
                 <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: RFValue(24), width: "79%", textAlign: "center" }}>Payment Options</Text>
             </View>
             <View style={styles.subdivTwo}>
-                <Text style={{ fontFamily: "Lexend-Regular", color: COLORS.gray, fontSize: 16, width: "80%", textAlign: "center" }}>Once you make a purchase, your card(s) will appear here.</Text>
+                <Text style={{ fontFamily: "Lexend-Regular", color: COLORS.gray, fontSize:RFValue(13), width: "80%", textAlign: "center" }}>Once you make a purchase, your card(s) will appear here.</Text>
                 <TouchableOpacity style={{ borderWidth: 2, borderRadius: 10, width: "60%", marginTop: "7%" }} onPress={()=>navigation.navigate("AddNewPayee")}>
-                    <Text style={{ ...FONTS.lexendsemibold, color: COLORS.black, paddingVertical: 15, textAlign: "center", fontSize: RFValue(14) }}>Start Shopping</Text>
+                    <Text style={{ ...FONTS.lexendsemibold, color: COLORS.black, paddingVertical:verticalScale (15), textAlign: "center", fontSize: RFValue(15) }}>Start Shopping</Text>
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
@@ -53,7 +54,8 @@ const styles = StyleSheet.create({
         height: verticalScale(748),
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: COLORS.pagebackground
+        backgroundColor: COLORS.pagebackground,
+        padding:"4%"
     }
 
 })

@@ -70,42 +70,45 @@ const CartRelated = () => {
 
         <View>
             <View style={{ margin: "4%", marginVertical: "5%" }}>
-                <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular, }}>People Have also bought this together</Text>
+                <Text style={{ color:"#616161", fontSize: RFValue(14), ...FONTS.lexendsemibold }}>People Have also bought this together</Text>
             </View>
             {/* <View style={{borderWidth:2}}> */}
             <FlatList
                 horizontal={true}
                 data={data}
                 showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{ marginLeft: "4%", paddingRight: "100%" }}
+                contentContainerStyle={{ marginLeft: "2%", paddingRight: "10%" }}
                 keyExtractor={item => item.id}
+                ItemSeparatorComponent={() => <View style={{marginHorizontal:horizontalScale(10) }} />}
                 renderItem={({ item }) => (
                     <View style={{ backgroundColor: COLORS.white, borderRadius: 14, paddingBottom: verticalScale(13) }}>
                         <TouchableOpacity style={{ margin: 3 }} onPress={() => navigation.navigate("PriceDetails")}>
                             {/* <View style={{}}>
 
                             </View> */}
-                            <View style={{ backgroundColor: "#F9F9F9", padding: "2%", margin: 10 }}>
+                            <View style={{ backgroundColor: "#F9F9F9",  margin: moderateScale(10),padding:moderateScale(2) }}>
                                 <Image
-                                    source={image.money}
+                                    source={image.inputcash}
                                     resizeMode={'contain'}
                                     style={{
                                         height: RFValue(110),
                                         width: RFValue(110),
                                         margin: 5
+                                        ,backgroundColor:"#F9F9F9",
                                     }}
                                 />
                             </View>
                         </TouchableOpacity>
-                        <View style={{ marginHorizontal: "5%" }}>
-                            <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendsemibold, paddingBottom: "2%" }}>INR 1000.00 Cash</Text>
-                            <Text style={{ color: COLORS.textHeader, fontSize: RFValue(12), ...FONTS.lexendregular, paddingBottom: "2%" }}>Pencil</Text>
-                            <Text style={{ color: COLORS.element, fontSize: RFValue(12), ...FONTS.lexendregular, }}>INR 100.00</Text>
+                        <View>
+                            <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendsemibold,marginHorizontal:horizontalScale(12) }}>₹ 1000.00 Cash</Text>
+                            <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular,marginHorizontal:horizontalScale(12) }}>Pencil</Text>
+                            <Text style={{ color: COLORS.element, fontSize: RFValue(13), ...FONTS.lexendregular,marginHorizontal:horizontalScale(12)  }}>₹ 100.00</Text>
                         </View>
-                        <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", borderWidth: 1, borderRadius: 5, marginTop: RFValue(5), width: "70%", alignSelf: "center" }}>
-                            <Text style={{ color: COLORS.textHeader, fontSize: RFValue(16), ...FONTS.lexendregular, }}>Add</Text>
+                        <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", borderWidth: 1.5, borderRadius: 5, marginTop: RFValue(5), width: "70%", alignSelf: "center" ,padding:"4%"}}>
+                            <Text style={{ color: COLORS.textHeader, fontSize: RFValue(12), ...FONTS.lexendsemibold, }}>Add</Text>
                         </TouchableOpacity>
                     </View>
+                    
                 )}
             />
             {/* </View> */}

@@ -57,11 +57,9 @@ const Signup = () => {
             source={loginicon}
             resizeMode='contain'
             style={{
-              // marginTop: verticalScale(50),
-              // flexDirection: "column",
-              // marginLeft: verticalScale(90)
-              // justifyContent:"center"
-            }}
+              height:verticalScale(150),
+              width:horizontalScale(130)
+             }}
           />
         </View>
 

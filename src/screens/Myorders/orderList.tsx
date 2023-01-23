@@ -16,6 +16,7 @@ import icons from '../../constants/icons';
 import { COLORS, FONTS } from '../../constants';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useNavigation } from '@react-navigation/native';
+import { horizontalScale, verticalScale } from '../../constants/metrices';
 
 const data = [
     {
@@ -68,7 +69,7 @@ const OrderList = () => {
             <View >
                 <FlatList
                     data={data}
-                    contentContainerStyle={{ }}
+                    contentContainerStyle={{paddingBottom:"5%" }}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => (
                         <View style={{ paddingHorizontal: '5%',paddingTop:"4%"}}>
@@ -91,14 +92,14 @@ const OrderList = () => {
                                         <Text style={{ fontSize: 14,...FONTS.lexendregular, color: COLORS.black }}>{item.count}  </Text>
                                         <Text style={{ fontSize: 12,...FONTS.lexendregular, color: COLORS.black }}>{item.delvery}  </Text>                                        
                                     </View>
-                                    <View style={{ flexDirection: "row", marginVertical: "2%" }}>
-                                        <View style={{ flexDirection: "column", marginLeft: 15,justifyContent:"center",marginStart:30 }}>
+                                    <View style={{ flexDirection: "row", marginVertical: "2%",marginStart:"3%" }}>
+                                        <View style={{ flexDirection: "column", marginLeft: 15,justifyContent:"center",marginStart:horizontalScale(30) }}>
                                             <Image
                                                 source={icons.next}
                                                 style={{
                                                     borderWidth: 1,
-                                                    width:20,
-                                                    height:20
+                                                    width:verticalScale(30),
+                                                    height:verticalScale(25)
                                                 }}
                                             />
                                         </View>
