@@ -27,7 +27,7 @@ const OtpPage = () => {
     fontFamily: "Lexend-Regular",
     borderBottomWidth: 3,
     width: horizontalScale(40),
-    marginTop:verticalScale(15)
+    marginTop:verticalScale(9)
   }
 
   return (
@@ -56,8 +56,8 @@ const OtpPage = () => {
         <Text style={{ fontSize:  RFValue(26), color: "black", textAlign: "center", fontFamily: "Lexend-SemiBold", marginTop: verticalScale(14) }}>Confirm OTP</Text>
         <View style={{ alignItems: "center" }}>
           <Text style={{ width: horizontalScale(300), textAlign: "justify", fontSize: RFValue(12), color: "black", marginTop: verticalScale(27), fontFamily: "Lexend-Regular" }}>
-            Please enter the verification code that we have sent to the mobile number +919549878945
-          </Text>
+            Please  enter  the  verification  code  that  we  have  sent  to  the  mobile  number  +919549878945
+          </Text> 
           <OTPTextView
             // handleTextChange={(value) => {setOtp(value) }}
             textInputStyle={containerStyle}
@@ -66,15 +66,16 @@ const OtpPage = () => {
             tintColor={"#0a0127"}
           />
           <View style={{flexDirection:"row",marginTop:"2%"}}>
-          <Text style={{ color: "black", fontFamily: "Lexend-Regular" }}>Time Remaining 2:00</Text>
-          <TouchableOpacity><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular" }}>     Resend</Text></TouchableOpacity>
+          <Text style={{ color: "black", fontFamily: "Lexend-Regular",fontSize:RFValue(13) }}>Time Remaining 2:00</Text>
+          <TouchableOpacity><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular",fontSize:RFValue(13) }}>     Resend</Text></TouchableOpacity>
           </View>
         </View>
-        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(200), padding: "4%" }}>
-          <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-SemiBold", color: "black" }}>Verify</Text>
+        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(223), padding: "4%" }}>
+          <Text style={{ textAlign: "center", fontSize:RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Verify</Text>
         </TouchableOpacity>
-        <View style={{ flexDirection: "row", marginTop: "6%", alignSelf: "center" }}>
-          <TouchableOpacity onPress={() => navigation.navigate("ChangeMobileNumber")} style={{ flexDirection: "column" }}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular" }}>Change Mobile Number</Text></TouchableOpacity>
+        <View style={{ flexDirection: "row", marginTop: "7%", alignSelf: "center",paddingBottom:verticalScale(52)}}>
+          <TouchableOpacity onPress={() => navigation.navigate("ChangeMobileNumber")} style={{ flexDirection: "column" }}>
+            <Text style={{ color: "#E70736", fontFamily: "Lexend-Regular",fontSize:RFValue(13)}}>Change Mobile Number</Text></TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
@@ -88,8 +89,8 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   subdivTwo: {
-    width: horizontalScale(342),
-    height: verticalScale(395),
+    width: horizontalScale(330),
+    // height: verticalScale(382),
     backgroundColor: "white",
     bottom: verticalScale(85),
     alignSelf: "center",
