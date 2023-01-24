@@ -45,7 +45,7 @@ const CartProducts = () => {
                                     <View style={{ width: "70%", marginHorizontal: "3%" }}>
                                         <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendsemibold, }}>Pencil</Text>
                                         <Text style={{ color: COLORS.gray, fontSize: RFValue(13), ...FONTS.lexendregular, }}>Blanco Set</Text>
-                                        <Text style={{ color: COLORS.element, fontSize: RFValue(13), ...FONTS.lexendregular, }}>? 100.00</Text>
+                                        <Text style={{ color: COLORS.element, fontSize: RFValue(13), ...FONTS.lexendregular, }}>₹ 100.00</Text>
                                         <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginTop: "5%" }}>1 Coupon
                                             <Text style={{ color: COLORS.gray }}> per unit</Text> </Text>
                                     </View>

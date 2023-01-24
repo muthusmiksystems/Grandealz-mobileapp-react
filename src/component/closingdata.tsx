@@ -50,15 +50,15 @@ const ClosingSoon = () => {
   const navigation=useNavigation();
   return (
     <SafeAreaView >
-      <View style={{ paddingVertical: "5%" }}>
+      <View style={{ paddingVertical: "2%" }}>
         <FlatList
           horizontal={true}
           data={data}
-          contentContainerStyle={{ margin: 10, width: 800 }}
+          contentContainerStyle={{ margin: 10, width:horizontalScale(700) }}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
             <View style={{ padding: '1%' }}>
-              <TouchableOpacity style={{borderRadius: 9, borderTopWidth: 4, borderTopColor: "#E70736", backgroundColor: "white", height: 182, width: 180 ,}} onPress={()=>navigation.navigate("PriceDetails")}>
+              <TouchableOpacity style={{borderRadius: 9, borderTopWidth: 4, borderTopColor: "#E70736", backgroundColor: "white", height:verticalScale(160),width:horizontalScale(130)}} onPress={()=>navigation.navigate("PriceDetails")}>
                 <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8 }}>
                   <View style={{ flexDirection: 'column', paddingVertical: 15 }}>
                     <Image
@@ -71,13 +71,13 @@ const ClosingSoon = () => {
                     />
                   </View>
                 </View>
-                <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 5, padding: 10 }}>
+                <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 5, padding:5 }}>
                   <Text style={{ fontSize:RFValue(11) ,color:COLORS.black,...FONTS.lexendregular,lineHeight:11.25,}}>{item.from}</Text>
                 </View>
                 <View>
                   <Text style={{ fontSize: RFValue(10), textAlign: "center",color:COLORS.black,...FONTS.lexendregular }}>{item.to}</Text>
                 </View>
-                <View style={{marginLeft:"20%",width:"60%",height:"4%",borderColor:"#F1F1F1",borderWidth:1,margin:10,borderRadius:12,backgroundColor:"#F1F1F1"}}>
+                <View style={{marginLeft:"15%",width:"70%",height:"4%",borderColor:"#F1F1F1",borderWidth:1,margin:2,borderRadius:12,backgroundColor:"#F1F1F1"}}>
                   <Text style={{backgroundColor:"#EC092D",width:"80%",borderRadius:12}}></Text>
                 </View>
                 
