@@ -96,7 +96,11 @@ const ProductDetails = () => {
                 />
               </View>
 
+<<<<<<< HEAD
               <View style={{ flexDirection: 'column', padding: moderateScale(10)  }}>
+=======
+              <View style={{ flexDirection: 'column', padding: 20 }}>
+>>>>>>> 8965dfed7e070b5267f8228abb4d90a863beb9ff
                 <Image
                   source={image.inputcash}
                   style={{
@@ -110,12 +114,21 @@ const ProductDetails = () => {
           </View>
           <View style={{ marginVertical:"5%", backgroundColor: "#D8D8D8 " }}>
            
+<<<<<<< HEAD
           <View style={{ flexDirection: "row", marginVertical: "2%" }}>
               <TouchableOpacity style={{ flexDirection: "column",width:"48%",marginEnd:"2%" }} onPressIn={() => { navigation.navigate("PriceDetails") }}>
                 <Text style={{ textAlign:"center", fontSize: RFValue(15),padding:"7%",backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }}> Prize Details</Text>
               </TouchableOpacity>
               <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1 ,width:"49%",borderRadius: 5 }} >
                 <Text style={{ textAlign:"center",fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}>
+=======
+          <View style={{ flexDirection: "row", margin: "2%", justifyContent: "space-between" }}>
+              <TouchableOpacity style={{ flexDirection: "column",height:horizontalScale(46),width:verticalScale(186)}}  onPressIn={() => { navigation.navigate("PriceDetails") }}>
+                <Text style={{ fontSize: RFValue(15),borderRadius:8 , paddingHorizontal: 35, padding: 13, backgroundColor:"white" , color:"black",borderWidth:1, ...FONTS.lexendregular,  }}> Prize Details</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={{ flexDirection: "column" , borderRadius:10, marginLeft: "2%",backgroundColor: "#fff" }}>
+                <Text style={{ fontSize: RFValue(15), padding: 12,paddingHorizontal: 25,  borderRadius:8,backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, }}>
+>>>>>>> 8965dfed7e070b5267f8228abb4d90a863beb9ff
                   Product Details
                 </Text>
               </TouchableOpacity>

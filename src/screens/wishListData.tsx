@@ -88,8 +88,13 @@ const WishlistData = () => {
                                             <View style={{marginRight:"2%",backgroundColor: "#E70736",width:"30%",justifyContent:"flex-end",alignSelf:"flex-end",borderTopEndRadius: 12, borderBottomLeftRadius: 12 }}>
                                                 <Text style={{  fontSize: RFValue(20), color: "white", bottom: 7,marginStart:"35%" }}>_</Text>
                                             </View>
+<<<<<<< HEAD
                                             <View style={{ justifyContent:"center",alignItems:"center", borderTopLeftRadius: 12, width:horizontalScale(100),height:verticalScale(20),borderBottomEndRadius: 10, backgroundColor: "#E70736" }}>
                                                 <Text style={{ ...FONTS.lexendregular, color: COLORS.white, fontSize: RFValue(10),paddingHorizontal:"5%",paddingVertical:"2%" }}>ADD TO CART</Text>
+=======
+                                            <View style={{ justifyContent:"center",alignItems:"center", borderTopLeftRadius: 12, width:horizontalScale(100),height:verticalScale(20),marginStart:"8%",borderBottomEndRadius: 10, backgroundColor: "#E70736" }}>
+                                                <Text style={{ ...FONTS.lexendregular, color: COLORS.white, fontSize: RFValue(10),paddingHorizontal:"5%", }}>ADD TO CART</Text>
+>>>>>>> 8965dfed7e070b5267f8228abb4d90a863beb9ff
                                             </View>
                                         
                                     </View>
