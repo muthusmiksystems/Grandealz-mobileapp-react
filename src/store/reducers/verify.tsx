@@ -1,15 +1,14 @@
 import { createSlice, createAsyncThunk, } from '@reduxjs/toolkit';
 import axios from 'axios'
-import { Register_Url } from '../../services/constant';
+import { Verify_Url } from '../../services/constant';
 
-export const registerHandler = createAsyncThunk('posts/loginPostcall', async (data,thunkAPI) => {
+export const VerifyHandler = createAsyncThunk('posts/loginPostcall', async (data,thunkAPI) => {
 
     console.log("Inside the api call", data);
-    console.log(Register_Url,"Response");
     const payload = data;
     const headers = { 'Content-Type': 'application/json', }
-    return await axios.post(Register_Url, payload,{ headers: headers }).then(response => {
-        console.log(Register_Url,"Response", response);
+    return await axios.post(Verify_Url, payload,{ headers: headers }).then(response => {
+        console.log(Verify_Url,"Response", response);
         return response
     }).catch((err) => {
         console.log(err)
@@ -17,7 +16,7 @@ export const registerHandler = createAsyncThunk('posts/loginPostcall', async (da
 
 })
 
-export const registerHandleSlice = createSlice({
+export const verifyHandleSlice = createSlice({
     name: 'registerHandle',
     initialState: {
         data: "No data",
@@ -28,12 +27,11 @@ export const registerHandleSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
        
-         console.log(registerHandler, "search response")
-        builder.addCase(registerHandler.fulfilled, (state, action) => {
+        builder.addCase(VerifyHandler.fulfilled, (state, action) => {
             state.data = action.payload;
         })
     },
 })
-export default registerHandleSlice.reducer;
+export default verifyHandleSlice.reducer;
 
 

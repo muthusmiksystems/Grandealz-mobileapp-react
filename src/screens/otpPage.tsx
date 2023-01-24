@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -19,9 +19,12 @@ import OTPTextView from 'react-native-otp-textinput';
 import { useNavigation } from "@react-navigation/native";
 import { RFValue } from "react-native-responsive-fontsize";
 import EntypoIcons from "react-native-vector-icons/Entypo";
+import { useDispatch } from "react-redux";
+import { VerifyHandler } from "../store/reducers/verify";
 
 const OtpPage = () => {
-
+  const [otp,setOtp]=useState("");
+  const dispatch=useDispatch();
   const navigation = useNavigation();
   const containerStyle = {
     fontFamily: "Lexend-Regular",
@@ -29,7 +32,10 @@ const OtpPage = () => {
     width: horizontalScale(40),
     marginTop:verticalScale(9)
   }
-
+  const handleSubmit=()=>{
+    dispatch(VerifyHandler(otp))
+    navigation.navigate("login")
+  }
   return (
     <SafeAreaView style={{ width: "100%", height: "100%", backgroundColor: "#f1f1f1" }}>
       <StatusBar
@@ -60,18 +66,19 @@ const OtpPage = () => {
             Please  enter  the  verification  code  that  we  have  sent  to  the  mobile  number  +919549878945
           </Text> 
           <OTPTextView
-            // handleTextChange={(value) => {setOtp(value) }}
+           
             textInputStyle={containerStyle}
             inputCount={4}
             inputCellLength={1}
             tintColor={"#0a0127"}
+            handleTextChange={(text) => {setOtp(text) }}
           />
           <View style={{flexDirection:"row",marginTop:"2%"}}>
           <Text style={{ color: "black", fontFamily: "Lexend-Regular",fontSize:RFValue(13) }}>Time Remaining 2:00</Text>
           <TouchableOpacity><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular",fontSize:RFValue(13) }}>     Resend</Text></TouchableOpacity>
           </View>
         </View>
-        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(223), padding: "4%" }}>
+        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(223), padding: "4%" }}  onPress={() => { handleSubmit() }}>
           <Text style={{ textAlign: "center", fontSize:RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Verify</Text>
         </TouchableOpacity>
         <View style={{ flexDirection: "row", marginTop: "7%", alignSelf: "center",paddingBottom:verticalScale(52)}}>
