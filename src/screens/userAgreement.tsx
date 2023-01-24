@@ -46,7 +46,7 @@ const UserAgreement = () => {
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(14) }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), width: "79%", textAlign: "center" }}>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(21), width: "79%", textAlign: "center" }}>
                     User Agreement</Text>
             </View>
             <Text style={{ fontFamily: "Lexend-SemiBold", color: COLORS.textHeader, fontSize: RFValue(16), margin: "3%" }}>User Agreement</Text>
