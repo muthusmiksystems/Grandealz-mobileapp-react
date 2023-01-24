@@ -37,7 +37,6 @@ const ForgetPassword = () => {
           <EntypoIcons name="chevron-left" size={30} color={"white"} />
         </TouchableOpacity>
         <View style={{ flexDirection: "column", marginLeft: horizontalScale(78), marginTop: verticalScale(45) }}>
-
           <Image
             source={loginicon}
             resizeMode='contain'
@@ -52,7 +51,7 @@ const ForgetPassword = () => {
       <View style={styles.subdivTwo}>
         <Text style={{ fontSize:RFValue(26), color: "black", textAlign: "center", marginTop: verticalScale(20), fontFamily: "Lexend-SemiBold" }}>Forgot Password</Text>
         <View style={{ alignItems: "center" }}>
-          <Text style={{ width: horizontalScale(300), textAlign: "justify", fontSize: RFValue(13), color: "black", marginTop: verticalScale(26), fontFamily: "Lexend-Regular" }}>
+          <Text style={{ width: horizontalScale(300),fontSize: RFValue(13), color: "black", marginTop: verticalScale(26), fontFamily: "Lexend-Regular" }}>
             Enter your registered email address and we will send you a link to reset your password :
           </Text>
           <View style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), marginTop: verticalScale(32), color: "#000" }}>

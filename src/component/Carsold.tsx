@@ -15,6 +15,7 @@ import image from '../constants/image';
 import icons from '../constants/icons';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { FONTS } from '../constants';
+import { horizontalScale } from '../constants/metrices';
 
 
 const data = [
@@ -65,10 +66,10 @@ const Carsold = () => {
                                             }}
                                         />
                                 </View>
-                                <View style={{ marginLeft: 5, padding: 10 }}>
-                                    <Text style={{  ...FONTS.lexendsemibold,fontSize: RFValue(14), color: "black" }}>Campaign:- range Rover V8 GCC </Text>
-                                    <Text style={{ ...FONTS.lexendregular,fontSize:RFValue(16), color: "black" }}>EL-00990</Text>
-                                    <Text style={{ ...FONTS.lexendregular,fontSize: RFValue(16), color: "#E70736" }}>Draw date to be announced</Text>
+                                <View style={{ marginLeft:horizontalScale(15), padding: 10 }}>
+                                    <Text style={{  ...FONTS.lexendsemibold,fontSize: RFValue(13),fontWeight:"600", color: "black" }}>Campaign:- range Rover V8 GCC </Text>
+                                    <Text style={{ ...FONTS.lexendregular,fontSize:RFValue(13),fontWeight:"300", color: "black" }}>EL-00990</Text>
+                                    <Text style={{ ...FONTS.lexendregular,fontSize: RFValue(13), color: "#E70736" }}>Draw date to be announced</Text>
                                 </View>
                              </TouchableOpacity>
                         </View>

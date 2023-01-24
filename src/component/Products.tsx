@@ -113,10 +113,10 @@ const Product = () => {
                                     </View>
 
                                     <View style={{ flexDirection: "column" }}>
-                                        <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(11), marginLeft: 6, ...FONTS.lexendsemibold, color: COLORS.black }}>
+                                        <Text style={{ ...FONTS.lexendsemibold, fontWeight:"400",fontSize: RFValue(13), marginLeft: 6, ...FONTS.lexendsemibold, color: COLORS.black }}>
                                             Max Draw Date :September 05,2023
                                         </Text>
-                                        <Text style={{ fontSize: RFValue(10), marginLeft: 6, ...FONTS.lexendregular, color: COLORS.black }}>
+                                        <Text style={{ fontSize: RFValue(10), marginLeft: 6, ...FONTS.lexendregular, color:"#616161" }}>
                                             Or Earlier if the Campaign is Sold Out
                                         </Text>
                                     </View>

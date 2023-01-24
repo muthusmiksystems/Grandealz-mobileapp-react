@@ -69,7 +69,7 @@ const CartRelated = () => {
     return (
 
         <View>
-            <View style={{ margin: "4%", marginVertical: "5%" }}>
+            <View style={{ margin: "4%", marginVertical: "5%",borderWidth:1 }}>
                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular, }}>People Have also bought this together</Text>
             </View>
             {/* <View style={{borderWidth:2}}> */}
@@ -77,30 +77,30 @@ const CartRelated = () => {
                 horizontal={true}
                 data={data}
                 showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{ marginLeft: "4%", paddingRight: "100%" }}
+                contentContainerStyle={{ marginLeft: "4%" }}
                 keyExtractor={item => item.id}
                 renderItem={({ item }) => (
-                    <View style={{ backgroundColor: COLORS.white, borderRadius: 14, paddingBottom: verticalScale(13) }}>
+                    <View style={{ backgroundColor: COLORS.white, borderRadius: 14, padding: verticalScale(6) }}>
                         <TouchableOpacity style={{ margin: 3 }} onPress={() => navigation.navigate("PriceDetails")}>
                             {/* <View style={{}}>
 
                             </View> */}
-                            <View style={{ backgroundColor: "#F9F9F9", padding: "2%", margin: 10 }}>
+                            <View style={{ backgroundColor: "#F9F9F9", padding: "2%" }}>
                                 <Image
                                     source={image.money}
                                     resizeMode={'contain'}
                                     style={{
                                         height: RFValue(110),
                                         width: RFValue(110),
-                                        margin: 5
+                                        margin:5
                                     }}
                                 />
                             </View>
                         </TouchableOpacity>
-                        <View style={{ marginHorizontal: "5%" }}>
+                        <View style={{}}>
                             <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendsemibold, paddingBottom: "2%" }}>INR 1000.00 Cash</Text>
                             <Text style={{ color: COLORS.textHeader, fontSize: RFValue(12), ...FONTS.lexendregular, paddingBottom: "2%" }}>Pencil</Text>
-                            <Text style={{ color: COLORS.element, fontSize: RFValue(12), ...FONTS.lexendregular, }}>INR 100.00</Text>
+                            <Text style={{ color: COLORS.element, fontSize: RFValue(12), ...FONTS.lexendregular, }}>₹ 100.00</Text>
                         </View>
                         <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", borderWidth: 1, borderRadius: 5, marginTop: RFValue(5), width: "70%", alignSelf: "center" }}>
                             <Text style={{ color: COLORS.textHeader, fontSize: RFValue(16), ...FONTS.lexendregular, }}>Add</Text>

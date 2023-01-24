@@ -77,8 +77,8 @@ const DataPage = () => {
               <Product />
             
             
-              <View style={{ padding: 5, backgroundColor: "#D10359", height: 150, }}>
-                <Text style={{ color: "white", marginLeft: 25, ...FONTS.lexendregular, color: COLORS.white, fontSize: RFValue(18) }}>
+              <View style={{ paddingVertical:verticalScale (10), backgroundColor: "#D10359", height: 150, }}>
+                <Text style={{ color: "white", marginLeft: 25, ...FONTS.lexendregular, fontWeight:"600",color: COLORS.white, fontSize: RFValue(15) }}>
                   SOLD OUT
                 </Text>
                 <View style={{ marginLeft: "7%", width: "10%", height: "2%", borderColor: "white", backgroundColor: "black" }} />

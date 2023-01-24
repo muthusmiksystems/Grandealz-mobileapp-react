@@ -36,7 +36,7 @@ const Cart = () => {
             <View style={styles.subdivOne}>
                 <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), textAlign: "center" }}>Cart</Text>
             </View>
-            <ScrollView style={{ height: "80%",padding:"4%"}}>
+            <ScrollView style={{ height: "80%",paddingHorizontal:"4%"}}>
                 <View style={{ width: "100%", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", marginTop: "5%", alignSelf: "center" }}>
                     <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "3%", alignItems: "center", marginLeft: "3%" }}>
                         <View style={{ flexDirection: "column", width: "85%", }}>
