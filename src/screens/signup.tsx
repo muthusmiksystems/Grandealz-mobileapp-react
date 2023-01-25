@@ -11,6 +11,7 @@ import {
   TextInput,
   View,
   Image,
+  Keyboard,
   TouchableOpacity,
   // Button
 } from "react-native";
@@ -26,19 +27,60 @@ import EntypoIcons from "react-native-vector-icons/Entypo";
 import { COLORS, FONTS } from "../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { registerHandler } from "../store/reducers/register";
+import useForm from "./Auth/useForm";
+import validate from "./Auth/validate";
 
 
 const Signup = () => {
+
   const dispatch = useDispatch();
+  const navigation = useNavigation();
+
+  const { handleChange, handleSubmit, formErrors, data, formValues } = useForm(validate);
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [errorfirst, setErrorFirst] = useState(null);
+  const [errorEmail, setErrorEmail] = useState(null);
+  const [errorPassword, setErrorPassword] = useState(null);
+  const [errorPhone, setErrorPhone] = useState(null);
+  const [errorLast, setErrorLast] = useState(null);
 
-  const navigation = useNavigation();
 
-  const handleSubmit = () => {
+  useEffect(() => {
+    console.log(Object.keys(formValues).length, "kk",formValues)
+    if (formErrors && Object.keys(formErrors).length > 0) {
+      if (formErrors && formErrors.firstName) {
+        console.log("firstname failed")
+        setFirstName(formErrors.firstName)
+        setErrorFirst(true);
+      } 
+      else if (formErrors && formErrors.lastName) {
+        console.log("lastname failed")
+        setLastName(formErrors.lastName);
+        setErrorLast(formErrors.lastName);
+      }
+      else if (formErrors && formErrors.email) {
+        console.log("email failed")
+        setEmail(formErrors.email);
+        setErrorEmail(formErrors.email);
+      } 
+      else if (formErrors && formErrors.password) {
+        console.log("password  failed")
+        setPassword(formErrors.password);
+        setErrorPassword(formErrors.password);
+      } else if (formErrors && formErrors.phonenumber) {
+        console.log("password Validation failed")
+        setPhone(formErrors.phonenumber);
+        setErrorPhone(formErrors.phonenumber);
+      }
+    }
+  }, [formErrors])
+
+  const handleSubmited = () => {
     const data = {
       "first_name": firstName,
       "last_name": lastName,
@@ -49,18 +91,18 @@ const Signup = () => {
       "term_and_condition": true,
       "referralcode": ""
     }
-    console.log(data);
-    dispatch(registerHandler(data))
-      .then(unwrapResult)
-      .then((originalPromiseResult) => {
-        console.log("success samuvel you did itdone", originalPromiseResult);
-        var data = originalPromiseResult.result
-        navigation.navigate("OtpPage")
-      })
-      .catch((rejectedValueOrSerializedError) => {
-        console.log(" Inside catch", rejectedValueOrSerializedError);
+    console.log("data inside the handle submit", data);
+    // dispatch(registerHandler(data))
+    //   .then(unwrapResult)
+    //   .then((originalPromiseResult) => {
+    //     console.log("success samuvel you did itdone", originalPromiseResult);
+    //     var data = originalPromiseResult.result
+    //     navigation.navigate("OtpPage")
+    //   })
+    //   .catch((rejectedValueOrSerializedError) => {
+    //     console.log(" Inside catch", rejectedValueOrSerializedError);
 
-      })
+    //   })
 
   }
   const CheckBoxes = () => {
@@ -123,19 +165,22 @@ const Signup = () => {
               <TextInput
                 placeholder="First Name"
                 placeholderTextColor={"black"}
-                onChangeText={(text) => setFirstName(text)}
+                // onChangeText={(e) => { setFirstName(text), text ? setError("") : setError(...errordata, errordata.firstname = "enter first name") }}
+                onChangeText={e => { handleChange(e, "firstName"), setErrorFirst(""), setFirstName(e) }}
                 style={{ borderWidth: 1, paddingStart: 15, borderColor: "#c4c4c2", borderRadius: 8, width: horizontalScale(300), marginTop: verticalScale(30), ...FONTS.lexendregular, fontSize: RFValue(14) }}
               />
               <TextInput
                 placeholder="Last Name"
                 placeholderTextColor={"black"}
-                onChangeText={(text) => { setLastName(text) }}
+                onChangeText={e => { handleChange(e, "lastName"), setErrorLast(""), setLastName(e) }}
+                // onChangeText={(text) => { setLastName(text), text ? setError("") : setError(...errordata, errordata.lastname = "enter last name") }}
                 style={{ borderWidth: 1, paddingStart: 15, borderColor: "#c4c4c2", borderRadius: 8, width: horizontalScale(300), marginTop: verticalScale(18), ...FONTS.lexendregular, fontSize: RFValue(14) }}
               />
               <TextInput
                 placeholder="Email"
                 placeholderTextColor={"black"}
-                onChangeText={(text) => { setEmail(text) }}
+                onChangeText={e => { handleChange(e, "email"), setErrorEmail(""), setEmail(e) }}
+                // onChangeText={(text) => { setEmail(text), text ? setError("") : setError([...errordata, errordata.email = "enter valid email"]) }}
                 style={{ borderWidth: 1, paddingStart: 15, borderColor: "#c4c4c2", borderRadius: 8, width: horizontalScale(300), marginTop: verticalScale(18), ...FONTS.lexendregular, fontSize: RFValue(14) }}
               />
               <View style={{ flexDirection: "row" }}>
@@ -150,7 +195,8 @@ const Signup = () => {
                   keyboardType={"phone-pad"}
                   placeholder="Phone"
                   maxLength={10}
-                  onChangeText={(text) => { setPhone(text) }}
+                  onChangeText={e => { handleChange(e, "phonenumber"), setErrorPhone(""), setPhone(e) }}
+                  //onChangeText={(text) => { setPhone(text), text ? setError("") : setError(...errordata, errordata.phone = "enter phone number") }}
                   placeholderTextColor={"black"}
                   style={{ borderWidth: 1, paddingStart: 15, borderColor: "#c4c4c2", flexDirection: "column", borderRadius: 8, width: horizontalScale(248), marginLeft: "2%", marginTop: verticalScale(18), ...FONTS.lexendregular, fontSize: RFValue(14) }}
                 />
@@ -158,7 +204,8 @@ const Signup = () => {
 
               <TextInput
                 placeholder="Password"
-                onChangeText={(text) => { setPassword(text) }}
+                onChangeText={e => { handleChange(e, "password"), setErrorPassword(""), setPassword(e) }}
+                //onChangeText={(text) => { setPassword(text), text ? setError("") : setError(...errordata, errordata.password = "enter the password") }}
                 placeholderTextColor={"black"}
                 style={{ borderWidth: 1, paddingStart: 15, borderColor: "#c4c4c2", borderRadius: 8, width: horizontalScale(300), marginTop: verticalScale(18), ...FONTS.lexendregular, fontSize: RFValue(14) }}
               />
@@ -166,7 +213,7 @@ const Signup = () => {
             <View style={{ alignSelf: "center", width: horizontalScale(300) }}>
               <CheckBoxes />
             </View>
-            <TouchableOpacity style={{ alignSelf: "center", marginTop: "5%", borderWidth: 1, borderRadius: 8, width: horizontalScale(200), padding: "4%" }} onPress={() => { handleSubmit() }} /* onPress={() => navigation.navigate("OtpPage")} */>
+            <TouchableOpacity style={{ alignSelf: "center", marginTop: "5%", borderWidth: 1, borderRadius: 8, width: horizontalScale(200), padding: "4%" }} onPress={e => { handleSubmit(e), Keyboard.dismiss }} disabled={false} /* onPress={() => { handleSubmited() }} */ /* onPress={() => navigation.navigate("OtpPage")} */>
               <Text style={{ textAlign: "center", fontSize: RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Register</Text>
             </TouchableOpacity>
             <View style={{ flexDirection: "row", marginTop: "4%", alignSelf: "center" }}>
