@@ -78,7 +78,7 @@ const OrderDetails = () => {
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18), flexDirection: "column" }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), width: "78%", textAlign: "center" }}>Order Details</Text>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), width: "78%", textAlign: "center" }}>Order Details</Text>
 
             </View>
             <ScrollView style={{ height: "80%", padding: "4%" }}>
@@ -92,9 +92,9 @@ const OrderDetails = () => {
                     </View>
                 </View>
                 <TouchableOpacity style={{ marginVertical: "4%" }} onPress={() => navigation.navigate("PayPage")}>
-                    <View style={{ flexDirection: "row", backgroundColor: "#fff", borderRadius: 8 }} >
-                        <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8, width: "30%" }}>
-                            <View style={{ flexDirection: 'column', padding: 10, margin: 5 }}>
+                    <View style={{ flexDirection: "row" ,backgroundColor:"white",borderRadius:10}}>
+                        <View style={{ flexDirection: "row", width: "65%", paddingVertical: "5%", paddingLeft: "3%"}}>
+                            <View style={{ flexDirection: "column", backgroundColor: COLORS.pagebackground, padding: "4%", width: "45%", alignItems: "center",borderRadius:5 }}>
                                 <Image
                                     source={image.pencil}
                                     style={{
@@ -102,21 +102,52 @@ const OrderDetails = () => {
                                     }}
                                 />
                             </View>
+                            <View style={{ flexDirection: "column", width: "50%", paddingLeft: "4%" ,marginTop:RFValue(5)}}>
+                            <Text style={{ fontSize: RFValue(16), ...FONTS.lexendsemibold, color: COLORS.black }}>Pencil</Text>
+                            <Text style={{ fontSize: RFValue(14), ...FONTS.lexendregular, color:"#616161" }}>Blanco Set</Text>
+                            <Text style={{ fontSize: RFValue(20), ...FONTS.lexendregular, color: "red", marginTop: 20 }}>₹100.00</Text>
+                        </View> 
                         </View>
-                        <View style={{ margin: 5, padding: 10 }}>
+                        <View style={{ flexDirection: "column", width: "33%",marginLeft:"2%",justifyContent: "flex-end"}}>
+                        <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(12), color: "#000",textAlign:"right",marginRight:"5%" }}>Avail Your Ticket</Text>
+                            <View style={{ width: "95%", backgroundColor: COLORS.element, alignSelf: "flex-end", flexDirection: "row", borderBottomEndRadius: 10, borderTopStartRadius: 10 }}>
+                                <Text style={{ width: "100%", textAlign: "center", paddingVertical: "8%", ...FONTS.lexendregular, color: COLORS.white }}>Play Now</Text>
+                            </View>
+                        </View>
+                    </View>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    {/* <View style={{ flexDirection: "row", backgroundColor: "#fff", borderRadius: 8 }} >
+                        <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8 }}>
+                            <View style={{ flexDirection: 'column', padding: "2%", margin: 5 }}>
+
+                            </View>
+                        </View>
+                        <View style={{ margin: 5, }}>
                             <Text style={{ fontSize: RFValue(16), ...FONTS.lexendsemibold, color: COLORS.black }}>Pencil</Text>
                             <Text style={{ fontSize: RFValue(14), ...FONTS.lexendregular, color: COLORS.black }}>Blanco Set</Text>
                             <Text style={{ fontSize: RFValue(20), ...FONTS.lexendregular, color: "red", marginTop: 20 }}>₹100.00</Text>
                         </View>
                         <View style={{ flexDirection: "row", marginVertical: "2%" }}>
                             <View style={{ flexDirection: "column", marginLeft: 15, justifyContent: "flex-end", marginStart: 30 }}>
-                                <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(12), right: 10, color: "#000" }}>Avail Your Ticket</Text>
+                                
                                 <View style={{ backgroundColor: "#E70736", padding: 8, borderBottomEndRadius: 10, borderTopStartRadius: 10, top: 6 }}>
-                                    <Text style={{ textAlign: "center", ...FONTS.lexendregular,color:COLORS.white }}>Pay Now</Text>
+                                    <Text style={{ textAlign: "center", ...FONTS.lexendregular, color: COLORS.white }}>Play Now</Text>
                                 </View>
                             </View>
                         </View>
-                    </View>
+                    </View> */}
 
                 </TouchableOpacity>
                 <View style={{}}>
@@ -166,7 +197,7 @@ const OrderDetails = () => {
                         <Text style={{ ...FONTS.lexendsemibold, color: "black", padding: 10 }}>
                             Price Details
                         </Text>
-                        <View style={{ borderWidth: 0.5, borderColor: "#616161", width: "100%" }} />
+                        <View style={{ borderWidth: 0.5, borderColor: "#616161", width: "95%", marginLeft: RFValue(9) }} />
                         <View style={{ flexDirection: "row", justifyContent: "space-between", padding: 10 }}>
                             <View style={{ flexDirection: "column", ...FONTS.lexendregular }}>
                                 <Text>Total MRP</Text>
@@ -199,7 +230,7 @@ const OrderDetails = () => {
                                 <Text>₹20.00</Text>
                             </View>
                         </View>
-                        <View style={{ borderWidth: 0.5, borderColor: "#616161", width: "100%" }} />
+                        <View style={{ borderWidth: 0.5, borderColor: "#616161", width: "95%", marginLeft: RFValue(9) }} />
                         <View style={{ flexDirection: "row", justifyContent: "space-between", padding: 10 }}>
                             <View style={{ flexDirection: "column", ...FONTS.lexendregular }}>
                                 <Text>Total Amount</Text>
@@ -211,11 +242,10 @@ const OrderDetails = () => {
                         </View>
                     </View>
                 </View>
-                <View style={{ marginBottom: "4%", borderRadius: 8, backgroundColor: "white" }}>
-                    <View style={{ padding: "4%" }}>
-                        <Text style={{ fontSize: RFValue(10), color: "black" }}>{'\u2B24'}
-                            <Text style={{ ...FONTS.lexendsemibold, color: "black", fontSize: RFValue(15) }}> Debit Card ₹70.00</Text>
-                        </Text>
+                <View style={{ marginBottom: "4%", borderRadius: 8, backgroundColor: "white", height: RFValue(40) }}>
+                    <View style={{ margin: RFValue(10), flexDirection: "row" }}>
+                        <Text style={{ flexDirection: "column", color: "black", marginTop: RFValue(2) }}>{'\u2B24'}</Text>
+                        <Text style={{ ...FONTS.lexendsemibold, color: "black", fontSize: RFValue(15), flexDirection: "column" }}> Debit Card ₹70.00</Text>
                     </View>
                 </View>
                 <View style={{ padding: "5%" }}></View>

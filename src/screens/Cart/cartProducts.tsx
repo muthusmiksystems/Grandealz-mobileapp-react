@@ -65,8 +65,8 @@ const CartProducts = () => {
                 )
             })}
 
-            <View style={{ flexDirection: "row", width: "100%", borderBottomStartRadius: 10, borderBottomEndRadius: 10, backgroundColor: COLORS.element }}>
-                <View style={{ marginTop: "5%", marginLeft: "5%" }}>
+            <View style={{ flexDirection: "row", width: "100%", borderBottomStartRadius: 10, borderBottomEndRadius: 10, backgroundColor: COLORS.element,paddingBottom:RFValue(12) }}>
+                <View style={{ marginTop:RFValue(12), marginLeft: "2.5%" }}>
                     <ToggleSwitch
                         isOn={toggle}
                         onColor="#0a0127"
@@ -75,7 +75,7 @@ const CartProducts = () => {
                         onToggle={isOn => setToggle(!toggle)}
                     />
                 </View>
-                <Text style={{ color: COLORS.white, fontSize: RFValue(13), ...FONTS.lexendregular, padding: "5%" }}>Donate Product(s) & Double Your Tickets</Text>
+                <Text style={{ color: COLORS.white, fontSize:moderateScale (13), ...FONTS.lexendregular,marginTop:RFValue(12),marginLeft:RFValue(5)}}>Donate Product(s) & Double Your Tickets</Text>
             </View>
         </View>
 

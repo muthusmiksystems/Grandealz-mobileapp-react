@@ -24,14 +24,14 @@ const DrawsMain = () => {
     const navigation = useNavigation();
     return (
         <SafeAreaView>
-            <View style={{ flexDirection: "row", width: "94%",alignSelf:"center",height:verticalScale(51) }}>
+            <View style={{ flexDirection: "row", width: "94%",alignSelf:"center",height:verticalScale(52) }}>
 
                 <View style={{ flexDirection: "row", width: "80%", marginHorizontal: "1%", backgroundColor: "white", borderRadius: 10, }}>
-                    <TouchableOpacity style={{ backgroundColor: showWinners ? COLORS.element : "white", flexDirection: "column", width: "50%", paddingVertical: "5%", borderRadius: 10, justifyContent: "center", alignItems: "center" }} onPress={() => setShowWinners(!showWinners)}>
-                        <Text style={{ color: showWinners ? "white" : COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular, }}>Winners</Text>
+                    <TouchableOpacity style={{ backgroundColor: showWinners ? COLORS.element : "white", flexDirection: "column", width: "50%",borderRadius: 10, justifyContent: "center", alignItems: "center" }} onPress={() => setShowWinners(!showWinners)}>
+                        <Text style={{ color: showWinners ? "white" : COLORS.textHeader, fontSize: RFValue(15), ...FONTS.lexendregular, }}>Winners</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{ backgroundColor: !showWinners ? COLORS.element : "white", flexDirection: "column", width: "50%", paddingVertical: "5%", borderRadius: 10, justifyContent: "center", alignItems: "center" }} onPress={() => setShowWinners(!showWinners)}>
-                        <Text style={{ color: !showWinners ? "white" : COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular, }}>Upcoming Draws</Text>
+                    <TouchableOpacity style={{ backgroundColor: !showWinners ? COLORS.element : "white", flexDirection: "column", width: "50%", borderRadius: 10, justifyContent: "center", alignItems: "center" }} onPress={() => setShowWinners(!showWinners)}>
+                        <Text style={{ color: !showWinners ? "white" : COLORS.textHeader, fontSize: RFValue(15), ...FONTS.lexendregular, }}>Upcoming Draws</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{ flexDirection: "row", width: "16%", marginHorizontal: "1%", backgroundColor: "white", borderRadius: 10,alignItems:"center",padding:"2.8%" }}>

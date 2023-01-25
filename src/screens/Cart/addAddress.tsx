@@ -9,7 +9,7 @@ import {
     Image, TextInput,
     TouchableOpacity
 } from 'react-native';
-import { horizontalScale, verticalScale } from "../../constants/metrices";
+import { horizontalScale, moderateScale, verticalScale } from "../../constants/metrices";
 import { shoppingCart } from "../../constants/icons";
 import EntypoIcons from "react-native-vector-icons/Entypo";
 import { useNavigation } from "@react-navigation/native";
@@ -29,7 +29,7 @@ const AddAddress = () => {
     const CheckBoxes = () => {
         const [isSelected, setSelection] = useState(false);
         return (
-            <View style={{ flexDirection: "row", left: horizontalScale(17) }}>
+            <View style={{ flexDirection:"column"}}>
                 <CheckBox
                     value={isSelected}
                     onValueChange={setSelection}
@@ -53,7 +53,7 @@ const AddAddress = () => {
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(14) }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), width: horizontalScale(290), textAlign: "center" }}>Add New Address</Text>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), width: horizontalScale(290), textAlign: "center" }}>Add New Address</Text>
             </View>
             <ScrollView style={{ height: "80%" }}>
                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "5%" }}>CONTACT DETAILS</Text>
@@ -132,14 +132,14 @@ const AddAddress = () => {
 
 
                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "3%" }}>SAVE ADDRESS AS</Text>
-                <View style={{ marginVertical: "2%", flexDirection: "row", width: "89%", alignSelf: "center", borderRadius: 10, backgroundColor: COLORS.white }}>
-                    <TouchableOpacity style={{ paddingVertical: "5%", marginHorizontal: "5%" }}><Text style={{ color: COLORS.gray, textAlign: "center", fontSize: RFValue(11), ...FONTS.lexendregular, borderRadius: 4, borderWidth: 1, borderColor: COLORS.gray, paddingVertical: "1%", paddingHorizontal: "4%" }}>Home</Text></TouchableOpacity>
-                    <TouchableOpacity style={{ paddingVertical: "5%" }}><Text style={{ color: COLORS.gray, textAlign: "center", fontSize: RFValue(11), ...FONTS.lexendregular, borderRadius: 4, borderWidth: 1, borderColor: COLORS.gray, paddingHorizontal: "4%", paddingVertical: "1%" }}>Work</Text></TouchableOpacity>
+                <View style={{ marginVertical: "2%", flexDirection: "row", width: "90%", alignSelf: "center", borderRadius: 10, backgroundColor: COLORS.white }}>
+                    <TouchableOpacity style={{ paddingVertical: "3%", marginHorizontal: "3.5%" }}><Text style={{ color: COLORS.gray, textAlign: "center", fontSize: RFValue(11), ...FONTS.lexendregular, borderRadius: 4, borderWidth: 1, borderColor: COLORS.gray, paddingVertical: "1%", paddingHorizontal: "4%" }}>Home</Text></TouchableOpacity>
+                    <TouchableOpacity style={{ paddingVertical: "3%" }}><Text style={{ color: COLORS.gray, textAlign: "center", fontSize: RFValue(11), ...FONTS.lexendregular, borderRadius: 4, borderWidth: 1, borderColor: COLORS.gray, paddingHorizontal: "4%", paddingVertical: "1%" }}>Work</Text></TouchableOpacity>
                 </View>
 
                 <View style={{ marginHorizontal: "3%", marginBottom: "2%", padding: "2%", flexDirection: "row", width: "90%", borderRadius: 10, backgroundColor: COLORS.white, alignSelf: "center" }}>
                     <CheckBoxes />    
-                    <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, paddingHorizontal: "5%", alignSelf: "center" }}>Make this my default address</Text>
+                    <Text style={{ color: COLORS.gray, fontSize:moderateScale(12), ...FONTS.lexendregular, alignSelf: "center",flexDirection:"column" }}>Make this my default address</Text>
                 </View>
             </ScrollView>
             <View style={{ flexDirection: "row", height: "8%", backgroundColor: COLORS.white, paddingVertical: "1%", paddingHorizontal: "2%" }}>

@@ -54,9 +54,9 @@ const OtpPage = () => {
         {/* <Text style={{ fontSize: 35, color: "white", fontFamily: "Lexend-Regular" }}>Grandealz</Text> */}
       </View>
       <View style={styles.subdivTwo}>
-        <Text style={{ fontSize:  RFValue(26), color: "black", textAlign: "center", fontFamily: "Lexend-SemiBold", marginTop: verticalScale(14) }}>Confirm OTP</Text>
+        <Text style={{ fontSize:  RFValue(25), color: "black", textAlign: "center", fontFamily: "Lexend-SemiBold", marginTop: verticalScale(14) }}>Confirm OTP</Text>
         <View style={{ alignItems: "center" }}>
-          <Text style={{ width: horizontalScale(300), textAlign: "justify", fontSize: RFValue(12), color: "black", marginTop: verticalScale(27), fontFamily: "Lexend-Regular" }}>
+          <Text style={{ width: horizontalScale(300), fontSize: RFValue(12), color: "black", marginTop: verticalScale(27), fontFamily: "Lexend-Regular" }}>
             Please  enter  the  verification  code  that  we  have  sent  to  the  mobile  number  +919549878945
           </Text> 
           <OTPTextView

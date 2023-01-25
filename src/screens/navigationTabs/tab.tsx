@@ -44,7 +44,7 @@ const Tabs = () => {
             initialRouteName={'DataPage'}
             tabBarOptions={tabOptions}
             screenOptions={({ route }) => ({
-                tabBarStyle:{height:70},
+                tabBarStyle:{height:RFValue(70)},
                 tabBarIcon: ({ focused }) => {
                     const tintColor = focused ? COLORS.element : COLORS.gray;
 
@@ -61,20 +61,20 @@ const Tabs = () => {
                                             source={icons.tabBellColor}
                                             resizeMode="contain"
                                             style={{
-                                                width: 60,
-                                                height: 30
+                                                width:RFValue(26),
+                                                height:RFValue(26)
                                             }}
                                         /> :
                                             <Image
                                                 source={icons.tabBellNoColor}
                                                 resizeMode="contain"
                                                 style={{
-                                                    width: 60,
-                                                    height: 30
+                                                    width:RFValue(26),
+                                                    height:RFValue(26)
                                                 }}
                                             />}
                                     </View>
-                                    <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(10) }}>Notifications</Text>
+                                    <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(10)}}>Notifications</Text>
                                 </View>
                             );
                         case "Draws":
@@ -89,16 +89,16 @@ const Tabs = () => {
                                             source={icons.tabDrawColor}
                                             resizeMode="contain"
                                             style={{
-                                                width: 60,
-                                                height: 30
+                                                width:RFValue(26),
+                                                height:RFValue(26)
                                             }}
                                         /> :
                                             <Image
                                                 source={icons.tabDrawNoColor}
                                                 resizeMode="contain"
                                                 style={{
-                                                    width: 60,
-                                                    height: 30
+                                                    width:RFValue(26),
+                                                    height:RFValue(26)
                                                 }}
                                             />}
                                     </View>
@@ -117,16 +117,16 @@ const Tabs = () => {
                                             source={icons.tabHomeColor}
                                             resizeMode="contain"
                                             style={{
-                                                width: 60,
-                                                height: 30
+                                                width:RFValue(26),
+                                                height:RFValue(26)
                                             }}
                                         /> :
                                             <Image
                                                 source={icons.tabHomeNoColor}
                                                 resizeMode="contain"
                                                 style={{
-                                                    width: 60,
-                                                    height: 30
+                                                    width:RFValue(26),
+                                                    height:RFValue(26)
                                                 }}
                                             />}
                                     </View>
@@ -145,16 +145,16 @@ const Tabs = () => {
                                             source={icons.tabTicketColor}
                                             resizeMode="contain"
                                             style={{
-                                                width: 60,
-                                                height: 30,
+                                                width:RFValue(30),
+                                                height:RFValue(25),
                                             }}
                                         /> :
                                             <Image
                                                 source={icons.tabTicketNoColor}
                                                 resizeMode="contain"
                                                 style={{
-                                                    width: 60,
-                                                    height: 30
+                                                    width:RFValue(30),
+                                                height:RFValue(25),
                                                 }}
                                             />}
                                     </View>
@@ -173,24 +173,22 @@ const Tabs = () => {
                                             source={icons.tabTrolleyColor}
                                             resizeMode="contain"
                                             style={{
-                                                width: 60,
-                                                height: 30
+                                                width:RFValue(26),
+                                                height:RFValue(26),
                                             }}
                                         /> :
                                             <Image
                                                 source={icons.tabTrolleyNoColor}
                                                 resizeMode="contain"
                                                 style={{
-                                                    width: 60,
-                                                    height: 30
+                                                    width:RFValue(26),
+                                                    height:RFValue(26),
                                                 }}
                                             />}
                                     </View>
                                     <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(10) }}>Cart</Text>
                                 </View>
-
                             );
-
                     }
                 }
             })}
