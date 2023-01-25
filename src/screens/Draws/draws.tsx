@@ -43,7 +43,7 @@ const Draws = (props: Props) => {
                 style={{ width: 20,height: 20,}} />
             </TouchableOpacity> */}
         {/* <View style={{ marginTop: "4%", flexDirection: 'row', justifyContent: "center" }}> */}
-        <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), textAlign: "center" }}>Draws</Text>
+        <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(21), textAlign: "center" }}>Draws</Text>
         {/* </View> */}
       </View>
       <ScrollView style={{ height: "90%" }}>
