@@ -54,28 +54,31 @@ const ClosingSoon = () => {
         <FlatList
           horizontal={true}
           data={data}
-          contentContainerStyle={{ margin: 10, width:horizontalScale(700) }}
+          // ItemSeparatorComponent={() => (
+          //   <View style={{ width: 5 }} />
+          // )}
+          contentContainerStyle={{ margin: 10}}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
             <View style={{ padding: '1%' }}>
-              <TouchableOpacity style={{borderRadius: 9, borderTopWidth: 4, borderTopColor: "#E70736", backgroundColor: "white", height:verticalScale(160),width:horizontalScale(130)}} onPress={()=>navigation.navigate("PriceDetails")}>
+              <TouchableOpacity style={{borderRadius: 9, borderTopWidth: 4, borderTopColor: "#E70736", backgroundColor: "white", height:RFValue(145),width:RFValue(128)}} onPress={()=>navigation.navigate("PriceDetails")}>
                 <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8 }}>
-                  <View style={{ flexDirection: 'column', paddingVertical: 15 }}>
+                  <View style={{ flexDirection: 'column',marginTop:RFValue(15)}}>
                     <Image
                       source={item.imag}
                       style={{
-                        height:verticalScale(55),
-                        width:horizontalScale(90),
+                        height:verticalScale(50),
+                        width:horizontalScale(86),
                         borderWidth: 1,
                       }}
                     />
                   </View>
                 </View>
-                <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 5, padding:5 }}>
-                  <Text style={{ fontSize:RFValue(11) ,color:COLORS.black,...FONTS.lexendregular,lineHeight:11.25,}}>{item.from}</Text>
+                <View style={{ flexDirection: "row", justifyContent: "center", marginTop:RFValue(20), padding:5 }}>
+                  <Text style={{ fontSize:RFValue(10) ,color:COLORS.black,...FONTS.lexendregular,lineHeight:11.25,}}>{item.from}</Text>
                 </View>
                 <View>
-                  <Text style={{ fontSize: RFValue(10), textAlign: "center",color:COLORS.black,...FONTS.lexendregular }}>{item.to}</Text>
+                  <Text style={{ fontSize: RFValue(9), textAlign: "center",color:COLORS.black,...FONTS.lexendregular }}>{item.to}</Text>
                 </View>
                 <View style={{marginLeft:"15%",width:"70%",height:"4%",borderColor:"#F1F1F1",borderWidth:1,margin:2,borderRadius:12,backgroundColor:"#F1F1F1"}}>
                   <Text style={{backgroundColor:"#EC092D",width:"80%",borderRadius:12}}></Text>

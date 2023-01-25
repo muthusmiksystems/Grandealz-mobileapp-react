@@ -69,7 +69,7 @@ const Carsold = () => {
                                 <View style={{ marginLeft:horizontalScale(15), padding: 10 }}>
                                     <Text style={{  ...FONTS.lexendsemibold,fontSize: RFValue(13),fontWeight:"600", color: "black" }}>Campaign:- range Rover V8 GCC </Text>
                                     <Text style={{ ...FONTS.lexendregular,fontSize:RFValue(13),fontWeight:"300", color: "black" }}>EL-00990</Text>
-                                    <Text style={{ ...FONTS.lexendregular,fontSize: RFValue(13), color: "#E70736" }}>Draw date to be announced</Text>
+                                    <Text style={{ ...FONTS.lexendregular,fontSize: RFValue(13),fontWeight:"400", color: "#E70736" }}>Draw date to be announced</Text>
                                 </View>
                              </TouchableOpacity>
                         </View>

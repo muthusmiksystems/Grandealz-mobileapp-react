@@ -69,19 +69,22 @@ const CartRelated = () => {
     return (
 
         <View>
-            <View style={{ margin: "4%", marginVertical: "5%",borderWidth:1 }}>
-                <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular, }}>People Have also bought this together</Text>
+            <View style={{marginVertical: "5%"}}>
+                <Text style={{ color:"#616161",fontSize: RFValue(14), ...FONTS.lexendregular, }}>People Have also bought this together</Text>
             </View>
             {/* <View style={{borderWidth:2}}> */}
             <FlatList
                 horizontal={true}
                 data={data}
                 showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{ marginLeft: "4%" }}
+                // contentContainerStyle={{ marginLeft: "4%" }}
+                ItemSeparatorComponent={() => (
+                    <View style={{ width: 15 }} />
+                  )}
                 keyExtractor={item => item.id}
                 renderItem={({ item }) => (
-                    <View style={{ backgroundColor: COLORS.white, borderRadius: 14, padding: verticalScale(6) }}>
-                        <TouchableOpacity style={{ margin: 3 }} onPress={() => navigation.navigate("PriceDetails")}>
+                    <View style={{ backgroundColor: COLORS.white, borderRadius: 14,width:RFValue(154),height:RFValue(246),padding:RFValue(15)}}>
+                        <TouchableOpacity  onPress={() => navigation.navigate("PriceDetails")}>
                             {/* <View style={{}}>
 
                             </View> */}
@@ -90,20 +93,20 @@ const CartRelated = () => {
                                     source={image.money}
                                     resizeMode={'contain'}
                                     style={{
-                                        height: RFValue(110),
-                                        width: RFValue(110),
-                                        margin:5
+                                        height: RFValue(95),
+                                        width: RFValue(95),
+                                        margin:10
                                     }}
                                 />
                             </View>
                         </TouchableOpacity>
                         <View style={{}}>
-                            <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendsemibold, paddingBottom: "2%" }}>INR 1000.00 Cash</Text>
-                            <Text style={{ color: COLORS.textHeader, fontSize: RFValue(12), ...FONTS.lexendregular, paddingBottom: "2%" }}>Pencil</Text>
-                            <Text style={{ color: COLORS.element, fontSize: RFValue(12), ...FONTS.lexendregular, }}>₹ 100.00</Text>
+                            <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendsemibold, paddingBottom: "2%" ,marginTop:RFValue(5)}}>INR 1000.00 Cash</Text>
+                            <Text style={{ color:"#616161", fontSize: RFValue(13), ...FONTS.lexendregular, paddingBottom: "2%" }}>Pencil</Text>
+                            <Text style={{ color: COLORS.element, fontSize: RFValue(13), ...FONTS.lexendregular, }}>₹ 100.00</Text>
                         </View>
-                        <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", borderWidth: 1, borderRadius: 5, marginTop: RFValue(5), width: "70%", alignSelf: "center" }}>
-                            <Text style={{ color: COLORS.textHeader, fontSize: RFValue(16), ...FONTS.lexendregular, }}>Add</Text>
+                        <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", borderWidth: 1, borderRadius: 5, marginTop: RFValue(5), width:RFValue(113), alignSelf: "center",height:RFValue(26) }}>
+                            <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, }}>Add</Text>
                         </TouchableOpacity>
                     </View>
                 )}

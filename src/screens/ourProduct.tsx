@@ -86,7 +86,7 @@ const OurProducts = () => {
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18), flexDirection: "column" }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: RFValue(24), width: "75%", textAlign: "center" }}>Our Products</Text>
+                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: RFValue(20), width: "75%", textAlign: "center" }}>Our Products</Text>
 
             </View>
             <ScrollView style={{}}>
@@ -95,19 +95,18 @@ const OurProducts = () => {
                         data={Data}
                         scrollEnabled={true}
                         numColumns={2}
-                        contentContainerStyle={{ paddingBottom: verticalScale(50),alignSelf:"center" }}
+                        contentContainerStyle={{ padding:"4%",marginTop:RFValue(5)}}
                         renderItem={({ item, index }) => (
-                            <TouchableOpacity style={{ backgroundColor: "white",borderRadius:8,marginTop:horizontalScale(14),marginLeft:verticalScale(14),width:horizontalScale(160),height:verticalScale(220) }} onPress={() => { navigation.navigate("DetailedProduct", { item }) }}>
-                                <View style={{ padding: moderateScale(9) }}>
-                                    <View style={{ paddingVertical: verticalScale(15), backgroundColor: "#F1F1F1",alignItems:"center" }}>
+                            <TouchableOpacity style={{ backgroundColor: "white",borderRadius:8,marginBottom:horizontalScale(14),marginLeft:verticalScale(14),width:horizontalScale(155),height:verticalScale(190) }} onPress={() => { navigation.navigate("DetailedProduct", { item }) }}>
+                                <View style={{padding:RFValue(10)}}>
+                                    <View style={{backgroundColor: "#F1F1F1",alignItems:"center",width: horizontalScale(135),padding:RFValue(18),height: verticalScale(135) }}>
                                         <Image
                                             source={item.imag}
                                             resizeMode="stretch"
-                                            style={{ width: horizontalScale(120), height: verticalScale(130) }}
+                                            style={{width: horizontalScale(99), height: verticalScale(99) }}
                                         />
                                     </View>
-
-                                    <Text style={{ textAlign: "center", ...FONTS.lexendsemibold, color: COLORS.black }}>{`\n`}{item.name}</Text>
+                                <Text style={{ textAlign: "center",fontSize:RFValue(13), ...FONTS.lexendsemibold, color: COLORS.black,marginTop:RFValue(-8)}}>{`\n`}{item.name}</Text>
                                 </View>
                             </TouchableOpacity>
                         )}

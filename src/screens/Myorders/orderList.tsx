@@ -72,10 +72,10 @@ const OrderList = () => {
                     contentContainerStyle={{paddingBottom:"5%" }}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => (
-                        <View style={{ paddingHorizontal: '5%',paddingTop:"4%"}}>
-                            <TouchableOpacity style={{ elevation: 1, borderRadius: 9, backgroundColor: "white" }} onPress={()=>navigation.navigate("OrderDetails")}>
-                                <View style={{flexDirection:"row",backgroundColor:"#fff"}} >
-                                    <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8,width:"30%" }}>
+                        <View style={{marginBottom:"4%"}}>
+                            <TouchableOpacity  onPress={()=>navigation.navigate("OrderDetails")}>
+                                <View style={{flexDirection:"row",backgroundColor:"#fff",borderRadius:10}} >
+                                    <View style={{ alignItems: 'center',width:"30%" }}>
                                         <View style={{ flexDirection: 'column', padding: 10,margin:5 }}>
                                             <Image
                                                 source={item.imag}
@@ -86,11 +86,11 @@ const OrderList = () => {
                                         </View>
                                     </View>
                                     <View style={{ margin: 5, padding: 10 }}>
-                                        <Text style={{ fontSize: 16, ...FONTS.lexendsemibold, color: COLORS.black }}>{item.name} </Text>
-                                        <Text style={{ fontSize: 14,...FONTS.lexendregular, color: COLORS.black }}>{item.desc}  </Text>
-                                        <Text style={{  fontSize: 14,...FONTS.lexendregular,color: "red" }}>{item.price}</Text>
-                                        <Text style={{ fontSize: 14,...FONTS.lexendregular, color: COLORS.black }}>{item.count}  </Text>
-                                        <Text style={{ fontSize: 12,...FONTS.lexendregular, color: COLORS.black }}>{item.delvery}  </Text>                                        
+                                        <Text style={{ fontSize:RFValue(16), ...FONTS.lexendsemibold, color: COLORS.black }}>{item.name} </Text>
+                                        <Text style={{ fontSize:RFValue(14),...FONTS.lexendregular, color:"#616161" }}>{item.desc}  </Text>
+                                        <Text style={{  fontSize:RFValue(14),...FONTS.lexendregular,color: "red" }}>{item.price}</Text>
+                                        <Text style={{ fontSize:RFValue(14),...FONTS.lexendregular,color:"#616161",marginTop:RFValue(7) }}>{item.count}  </Text>
+                                        <Text style={{ fontSize:RFValue(12),...FONTS.lexendregular, color:"#0B002A" }}>{item.delvery}  </Text>                                        
                                     </View>
                                     <View style={{ flexDirection: "row", marginVertical: "2%",marginStart:"3%" }}>
                                         <View style={{ flexDirection: "column", marginLeft: 15,justifyContent:"center",marginStart:horizontalScale(30) }}>
