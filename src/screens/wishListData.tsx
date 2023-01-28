@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren } from 'react';
+import React, { useState, type PropsWithChildren } from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -75,6 +75,7 @@ const data = [
 ];
 const WishlistData = () => {
     const navigation = useNavigation();
+    // const storage= storageCtrl<any>()
     console.log("again......")
     return (
         <SafeAreaView >

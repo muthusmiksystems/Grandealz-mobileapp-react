@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import {
     Text,
     View,
@@ -26,15 +26,17 @@ import CheckBox from "@react-native-community/checkbox";
 import PaymentGate from "./payPage";
 
 const AddAddress = () => {
+    const [name,setName]=useState('')
+    const [nameValid,setNameValid]=useState(false)
     const CheckBoxes = () => {
         const [isSelected, setSelection] = useState(false);
         return (
-            <View style={{ flexDirection:"column"}}>
+            <View style={{ flexDirection: "column" }}>
                 <CheckBox
                     value={isSelected}
                     onValueChange={setSelection}
                     style={styles.checkBox}
-                    tintColors={{true: "green"}}
+                    tintColors={{ true: "green" }}
                 />
 
             </View>
@@ -61,14 +63,16 @@ const AddAddress = () => {
                     <TextInput
                         keyboardType={"default"}
                         placeholder="Name*"
-                        maxLength={10}
+                        // maxLength={10}
+                        // onChangeText={(text:String)=>setName({name:text},()=>{name ? setNameValid(true):setNameValid(false)})}
                         placeholderTextColor={COLORS.gray}
                         style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(13) }}
                     />
+
                 </View>
                 <View style={{ marginHorizontal: "3%" }}>
                     <TextInput
-                        keyboardType={"default"}
+                        keyboardType={"numeric"}
                         placeholder="MobileNo*"
                         maxLength={10}
                         placeholderTextColor={COLORS.gray}
@@ -80,7 +84,7 @@ const AddAddress = () => {
                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "3%" }}>ADDRESS</Text>
                 <View style={{ marginHorizontal: "3%", marginVertical: "2%" }}>
                     <TextInput
-                        keyboardType={"default"}
+                        keyboardType={"numeric"}
                         placeholder="Pin Code*"
                         maxLength={10}
                         placeholderTextColor={COLORS.gray}
@@ -138,19 +142,24 @@ const AddAddress = () => {
                 </View>
 
                 <View style={{ marginHorizontal: "3%", marginBottom: "2%", padding: "2%", flexDirection: "row", width: "90%", borderRadius: 10, backgroundColor: COLORS.white, alignSelf: "center" }}>
-                    <CheckBoxes />    
-                    <Text style={{ color: COLORS.gray, fontSize:moderateScale(12), ...FONTS.lexendregular, alignSelf: "center",flexDirection:"column" }}>Make this my default address</Text>
+                    <CheckBoxes />
+                    <Text style={{ color: COLORS.gray, fontSize: moderateScale(12), ...FONTS.lexendregular, alignSelf: "center", flexDirection: "column" }}>Make this my default address</Text>
                 </View>
+                {/* <View style={{ flexDirection: "row", height: "8%", backgroundColor: COLORS.white, paddingVertical: "1%", paddingHorizontal: "2%" }}>
+
+                    <TouchableOpacity style={{ flexDirection: "column", width: "90%", marginHorizontal: "5%", marginVertical: "1%", borderRadius: 5, borderWidth: 1, justifyContent: "center", alignItems: "center" }}>
+                        <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular }}>Add Address</Text>
+                    </TouchableOpacity>
+
+                </View> */}
             </ScrollView>
             <View style={{ flexDirection: "row", height: "8%", backgroundColor: COLORS.white, paddingVertical: "1%", paddingHorizontal: "2%" }}>
 
-                <TouchableOpacity style={{ flexDirection: "column", width: "90%", marginHorizontal: "5%", marginVertical: "1%", borderRadius: 5, borderWidth: 1, justifyContent: "center", alignItems: "center" }}>
+                <TouchableOpacity style={ styles.addressButton }>
                     <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular }}>Add Address</Text>
                 </TouchableOpacity>
 
             </View>
-
-
         </SafeAreaView>
     );
 }
@@ -174,8 +183,18 @@ const styles = StyleSheet.create({
     checkBox: {
         alignSelf: "center",
         flexDirection: "column",
-        borderWidth:1,
-        borderColor:"black",
+        borderWidth: 1,
+        borderColor: "black",
+    },
+    addressButton:{
+        flexDirection: "column", 
+        width: "90%", 
+        marginHorizontal: "5%", 
+        marginVertical: "1%", 
+        borderRadius: 5, 
+        borderWidth: 1, 
+        justifyContent: "center", 
+        alignItems: "center"
     }
 
 })
