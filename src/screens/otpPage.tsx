@@ -21,8 +21,10 @@ import { RFValue } from "react-native-responsive-fontsize";
 import EntypoIcons from "react-native-vector-icons/Entypo";
 import { useDispatch } from "react-redux";
 import { VerifyHandler } from "../store/reducers/verify";
+import { unwrapResult } from '@reduxjs/toolkit';
 
-const OtpPage = () => {
+const OtpPage = ({}) => {
+  
   const [otp,setOtp]=useState("");
   const dispatch=useDispatch();
   const navigation = useNavigation();
@@ -32,9 +34,22 @@ const OtpPage = () => {
     width: horizontalScale(40),
     marginTop:verticalScale(9)
   }
-  const handleSubmit=()=>{
+  const handleSubmit=()=>{    
+    if(otp.length>3){
     dispatch(VerifyHandler(otp))
-    navigation.navigate("login")
+    .then(unwrapResult)
+    .then((originalPromiseResult) => {
+       console.log("successfully returned to login with response ", originalPromiseResult);
+         if (originalPromiseResult.status==="200") {
+             const param = originalPromiseResult.data;
+             navigation.navigate("login")
+        } else {
+           console.log("error",originalPromiseResult.message);
+           ;
+        }
+    })
+    }
+    
   }
   return (
     <SafeAreaView style={{ width: "100%", height: "100%", backgroundColor: "#f1f1f1" }}>

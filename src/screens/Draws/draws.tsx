@@ -26,10 +26,27 @@ import { RFValue } from "react-native-responsive-fontsize";
 import DrawsHeader from "./drawsListHorizontal";
 
 import DrawsMain from "./drawsMain";
+import { useDispatch } from "react-redux";
+import { drawwinnersHandler } from "../../store/reducers/Drawwinner";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 
 const Draws = (props: Props) => {
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(drawwinnersHandler())
+      .then(unwrapResult)
+      .then(async(result) => {
+        console.log("successfully returned to login with response ", result);
+        if (result.data.status == 200) {
+          console.log("draw winner data", result)
+        } else {
+          console.log(result, "error")
+        }
+      }).catch((rejectedValueOrSerializedError: any) => {
+        console.log(" Inside catch", rejectedValueOrSerializedError);
+      })
+  }, [])
 
 
   return (

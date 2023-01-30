@@ -28,11 +28,11 @@ const validate = (details) => {
       }
     }
     //Sign Up phone number
-    if (details.phonenumber !== undefined) {
-      if (details.phonenumber.length == 0) {
-        formErrors.phonenumber = "Mobile Number is required!";
-      } else if (!/^(\+\d{1,3}[- ]?)?\d{10}$/.test(details.phonenumber)) {
-        formErrors.phonenumber = "This is not a valid mobile number!";
+    if (details.phone !== undefined) {
+      if (details.phone.length == 0) {
+        formErrors.phone = "Mobile Number is required!";
+      } else if (!/^(\+\d{1,3}[- ]?)?\d{10}$/.test(details.phone)) {
+        formErrors.phone = "This is not a valid mobile number!";
       }
     }
     //login password loginpassword
@@ -47,7 +47,7 @@ const validate = (details) => {
       if (details.password.length == 0) {
         formErrors.password = "Password is required!";
       } else if (!/^[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(details.password)) {
-        formErrors.password = "A minimum 8 characters should contain a combination of uppercase,lowercase and number";
+        formErrors.password = "8 characters should contain a combination of uppercase,lowercase and number";
       }
     }
     //Sign Up confirm password

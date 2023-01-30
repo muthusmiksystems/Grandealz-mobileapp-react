@@ -2,71 +2,97 @@ import { useState, useEffect } from "react";
 
 
 const useForm = (validate) => {
-    const [ details] = useState({});
-    var [data,setData]=useState()
-    const [formValues, setFormValues] = useState(details);
-    const [formErrors, setFormErrors] = useState({});
-    const [isSubmit, setIsSubmit] = useState(false);
-  
+  const [details] = useState({});
+  var [data, setData] = useState()
+  const [formValues, setFormValues] = useState(details);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
 
-    const handleChange = (e,name) => {
+
+  const handleChange = (e, name) => {
     // const { name, value } = e.target;
-    console.log(formValues,"useformdata.....");
-    setFormValues({ ...formValues, [name]:e});
-
+    console.log(formValues, "useformdata.....");
+    setFormValues({ ...formValues, [name]: e });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, type) => {
+    
     e.preventDefault();
-        if (formValues.firstName && formValues.lastName && formValues.email && formValues.password && formValues.phonenumber) {
-          setFormErrors(validate(formValues));
+    switch (type) {
+      case '1': console.log("Login Page",type);
+        if (formValues.email && formValues.password) {
+          setFormErrors(validate(formValues))
         }
         else {
-          if (!formValues.firstName && formValues.lastName && formValues.email && formValues.password &&  formValues.phonenumber) {
-            let Error = { "signundef": "First Name is required!" }
+          if (!formValues.email && !formValues.password) {
+            let Error = { "loginundef": "Please fill this the fields!" }
+            setFormErrors(Error)
+          } else if (formValues.email && !formValues.password) {
+            let Error = { "password": "Please fill the valid password to proceed" }
+            setFormErrors(Error)
+          } else if (!formValues.email && formValues.password) {
+            let Error = { "email": "Please fill the valid email or username to proceed" }
+            setFormErrors(Error)
+          }
+        }
+        break;
+      case '2':
+        //signup  
+        if (formValues.firstName && formValues.lastName && formValues.email && formValues.password && formValues.phone) {
+          setFormErrors(validate(formValues));
+          console.log("sujithhhhhhhhh", formValues)
+        }
+        else {
+          if (!formValues.firstName && formValues.lastName && formValues.email && formValues.password && formValues.phone) {
+            let Error = { "firstName": "First Name is required!" }
             setFormErrors(Error);
           }
-          else if (!formValues.lastName && formValues.firstName && formValues.email && formValues.password &&   formValues.phonenumber) {
-            let Error = { "signundef": "Last Name is required!" }
+          else if (!formValues.lastName && formValues.firstName && formValues.email && formValues.password && formValues.phone) {
+            let Error = { "lastName": "Last Name is required!" }
             setFormErrors(Error);
           }
-          else if (!formValues.email && formValues.lastName && formValues.firstName && formValues.password &&  formValues.phonenumber) {
-            let Error = { "signundef": "Email is required!" }
+          if (!formValues.email && formValues.lastName && formValues.firstName && formValues.password && formValues.phone) {
+            let Error = { "email": "Email is required!" }
             setFormErrors(Error);
           }
-          else if (!formValues.password && formValues.lastName && formValues.email && formValues.firstName &&  formValues.phonenumber) {
-            let Error = { "signundef": "Password is required!" }
+          else if (!formValues.password && formValues.lastName && formValues.email && formValues.firstName && formValues.phone) {
+            let Error = { "password": "Password is not Valid!" }
             setFormErrors(Error);
           }
-          else if (!formValues.lastName && formValues.email && formValues.password && formValues.firstName && formValues.phonenumber) {
-            let Error = { "signundef": "Confirm password is required!" }
-            setFormErrors(Error);
-          }
-          else if (!formValues.phonenumber && formValues.lastName && formValues.email && formValues.password &&   formValues.firstName) {
-            let Error = { "signundef": "Mobile Number is required!" }
+          else if (!formValues.phone && formValues.lastName && formValues.email && formValues.password && formValues.firstName) {
+            let Error = { "phone": "ph.required" }
             setFormErrors(Error);
           }
           else {
-            let Error = { "signundef": "Please fill all the fields!" }
+            let Error = { "allerror": "Please fill all fields!" }
             setFormErrors(Error);
           }
-        }     
+        }
+        break;
+      case '3': console.log("Forgot Password");
+        if (formValues.forgotemail !== undefined) {
+          setFormErrors(validate(formValues));
+        }
+        else {
+          let Error = { "forgotemail": "Email is required!" }
+          setFormErrors(Error);
+        }
+        break;
+    }
     console.log('formValues handlesubmit', formValues);
     //setFormErrors(validate(formValues));
     setIsSubmit(true);
   };
 
-    useEffect(() => {
-    console.log(formErrors),"errors";
+  useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-        console.log(formValues,'formValues'); 
+      console.log(formValues, 'formValues.......', formErrors, "samuel");
       setData(formValues);
-      console.log(data);
+      console.log(data, "samuel");
     }
-  },[formErrors]);
-  
+  }, [formErrors]);
 
-   return { handleChange, details, handleSubmit,formErrors,data,formValues}
+  return { handleChange, details, handleSubmit, formErrors, data, formValues }
 
 }
 export default useForm;

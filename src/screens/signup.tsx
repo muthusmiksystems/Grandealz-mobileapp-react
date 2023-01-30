@@ -13,12 +13,14 @@ import {
   Image,
   Keyboard,
   TouchableOpacity,
+  ToastAndroid,
+  Pressable,
   // Button
 } from "react-native";
 import { horizontalScale, verticalScale } from "../constants/metrices";
 import { unwrapResult } from '@reduxjs/toolkit';
 import { loginicon } from "../constants/icons";
-// import InputBox from 'react-native-floating-label-inputbox';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 // import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { useNavigation } from "@react-navigation/native";
 import CheckBox from "@react-native-community/checkbox";
@@ -38,12 +40,13 @@ const Signup = () => {
 
   const { handleChange, handleSubmit, formErrors, data, formValues } = useForm(validate);
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorfirst, setErrorFirst] = useState(null);
+  const [firstName, setFirstName] = useState<any>("");
+  const [lastName, setLastName] = useState<any>("");
+  const [email, setEmail] = useState<any>("");
+  const [phone, setPhone] = useState<any>("");
+  const [password, setPassword] = useState<any>("");
+  const [error,setError]=useState<any>("");
+  const [errorFirst, setErrorFirst] = useState(null);
   const [errorEmail, setErrorEmail] = useState(null);
   const [errorPassword, setErrorPassword] = useState(null);
   const [errorPhone, setErrorPhone] = useState(null);
@@ -51,59 +54,112 @@ const Signup = () => {
 
 
   useEffect(() => {
-    console.log(Object.keys(formValues).length, "kk",formValues)
+    console.log(Object.keys(formValues).length, "kk", formErrors)
     if (formErrors && Object.keys(formErrors).length > 0) {
-      if (formErrors && formErrors.firstName) {
-        console.log("firstname failed")
-        setFirstName(formErrors.firstName)
-        setErrorFirst(true);
-      } 
+      if (formErrors && formErrors.allerror) {
+        setError(formErrors.allerror)
+      }
+      else if (formErrors && formErrors.firstName) {
+        //setFirstName(formErrors.firstName)
+        setErrorFirst(formErrors.firstName);
+        console.log(firstName, "firstname failed", formErrors)
+
+      }
       else if (formErrors && formErrors.lastName) {
         console.log("lastname failed")
-        setLastName(formErrors.lastName);
+        //setLastName(formErrors.lastName);
         setErrorLast(formErrors.lastName);
       }
       else if (formErrors && formErrors.email) {
-        console.log("email failed")
-        setEmail(formErrors.email);
+        //setEmail(formErrors.email);
         setErrorEmail(formErrors.email);
-      } 
+        console.log("email failed", formErrors.email)
+      }
       else if (formErrors && formErrors.password) {
-        console.log("password  failed")
-        setPassword(formErrors.password);
-        setErrorPassword(formErrors.password);
-      } else if (formErrors && formErrors.phonenumber) {
         console.log("password Validation failed")
-        setPhone(formErrors.phonenumber);
-        setErrorPhone(formErrors.phonenumber);
+        //setPassword(formErrors.password);
+        setErrorPassword(formErrors.password);
+      } 
+      else if (formErrors && formErrors.phone) {
+        console.log("phone failed")
+        //setPhone(formErrors.phone);
+        setErrorPhone(formErrors.phone);
       }
     }
+    // console.log("im the formerror data........",formValues)
+    
   }, [formErrors])
 
-  const handleSubmited = () => {
-    const data = {
-      "first_name": firstName,
-      "last_name": lastName,
-      "email": email,
-      "phone": phone,
-      "password": password,
-      "country_phone_code": "+91",
-      "term_and_condition": true,
-      "referralcode": ""
+  useEffect(()=>{
+    if (data && Object.keys(data)) {
+      const reg = {
+        "first_name": data.firstName,
+        "last_name": data.lastName,
+        "email": data.email,
+        "phone": data.phone,
+        "password": data.password,
+        "country_phone_code": "+91",
+        "term_and_condition": true,
+        "referralcode": ""
+      }
+      console.log("data inside the handle submit",reg);
+      dispatch(registerHandler(reg))
+      .then(unwrapResult)
+      .then(async(originalPromiseResult) => {
+        console.log("success samuvel you did itdone", originalPromiseResult.data.access_token);
+        await AsyncStorage.setItem('loginToken', originalPromiseResult.data.access_token);
+        if( originalPromiseResult.status === "200"){
+        var data = originalPromiseResult.data.access_token
+        navigation.navigate("OtpPage")
+        }
+        else if(originalPromiseResult==="You have already registered"){
+          console.log("im the error data",originalPromiseResult)
+          ToastAndroid.showWithGravity(originalPromiseResult),
+          ToastAndroid.CENTER,ToastAndroid.SHORT
+        }
+        else{
+          console.log(originalPromiseResult,"error")
+        }
+      })
+      
     }
-    console.log("data inside the handle submit", data);
-    // dispatch(registerHandler(data))
-    //   .then(unwrapResult)
-    //   .then((originalPromiseResult) => {
-    //     console.log("success samuvel you did itdone", originalPromiseResult);
-    //     var data = originalPromiseResult.result
-    //     navigation.navigate("OtpPage")
-    //   })
-    //   .catch((rejectedValueOrSerializedError) => {
-    //     console.log(" Inside catch", rejectedValueOrSerializedError);
+    
+  },[data])
 
-    //   })
-
+  // const handleSubmited = () => {
+  //   const data = {
+  //     "first_name": firstName,
+  //     "last_name": lastName,
+  //     "email": email,
+  //     "phone": phone,
+  //     "password": password,
+  //     "country_phone_code": "+91",
+  //     "term_and_condition": true,
+  //     "referralcode": ""
+  //   }
+  //   console.log("data inside the handle submit", data);
+  // }
+  const handleBox = () => {
+    if (errorEmail) {
+      setEmail(""),
+      setEmail(""), setErrorEmail("");
+    }
+    else if (errorFirst) {
+      setFirstName(""),
+      setFirstName(""), setErrorFirst("");
+    }
+    else if (errorLast) {
+      setLastName("")
+      setLastName(""), setErrorLast("");
+    }
+    else if (errorPhone) {
+      setPhone("")
+      setPhone(""), setErrorPhone("");
+    }
+    else if (errorPassword) {
+      setPassword("")
+      setPassword(""), setErrorPassword("");
+    }
   }
   const CheckBoxes = () => {
     const [isSelected, setSelection] = useState(false);
@@ -149,71 +205,97 @@ const Signup = () => {
         <View style={styles.subdivTwo}>
 
           <View style={{ paddingBottom: "1%" }}>
-            <Text style={{ fontSize: RFValue(26), color: "black", textAlign: "center", marginTop: verticalScale(10), fontFamily: "Lexend-SemiBold" }}>Register</Text>
-            <View style={{ alignItems: "center" }}>
-              {/* <InputBox
-            // inputOutLine
-            label={"Password"}
-            // value={password}
-            // secureTextEntry={errorPassword ? false : true}
-            rightIcon={<FontAwesome5 name={'eye'} size={38} />}
-            passHideIcon={<FontAwesome5 name={'eye-slash'} size={38} />}
-            // labelStyle={{ ...FONTS.robotoregular }}
-            // customLabelStyle={{ ...styles.textPassword, ...{ color: (errorLogin || errorEmail) ? "red" : COLORS.black, } }}
-            // onChangeText={e => { handleChange(e, "loginpassword"), setErrorLogin(""), setPassword(e), setErrorPassword(null) }}
-          /> */}
-              <TextInput
-                placeholder="First Name"
-                placeholderTextColor={"black"}
-                // onChangeText={(e) => { setFirstName(text), text ? setError("") : setError(...errordata, errordata.firstname = "enter first name") }}
-                onChangeText={e => { handleChange(e, "firstName"), setErrorFirst(""), setFirstName(e) }}
-                style={{ borderWidth: 1, paddingStart: 15, borderColor: "#c4c4c2", borderRadius: 8, width: horizontalScale(300), marginTop: verticalScale(30), ...FONTS.lexendregular, fontSize: RFValue(14) }}
-              />
-              <TextInput
-                placeholder="Last Name"
-                placeholderTextColor={"black"}
-                onChangeText={e => { handleChange(e, "lastName"), setErrorLast(""), setLastName(e) }}
-                // onChangeText={(text) => { setLastName(text), text ? setError("") : setError(...errordata, errordata.lastname = "enter last name") }}
-                style={{ borderWidth: 1, paddingStart: 15, borderColor: "#c4c4c2", borderRadius: 8, width: horizontalScale(300), marginTop: verticalScale(18), ...FONTS.lexendregular, fontSize: RFValue(14) }}
-              />
-              <TextInput
-                placeholder="Email"
-                placeholderTextColor={"black"}
-                onChangeText={e => { handleChange(e, "email"), setErrorEmail(""), setEmail(e) }}
-                // onChangeText={(text) => { setEmail(text), text ? setError("") : setError([...errordata, errordata.email = "enter valid email"]) }}
-                style={{ borderWidth: 1, paddingStart: 15, borderColor: "#c4c4c2", borderRadius: 8, width: horizontalScale(300), marginTop: verticalScale(18), ...FONTS.lexendregular, fontSize: RFValue(14) }}
-              />
+            <Text style={{ fontSize: RFValue(26), color: "black", textAlign: "center", marginTop: verticalScale(5), fontFamily: "Lexend-SemiBold" }}>Register</Text>
+            <View style={{ alignItems: "center",}}>
+
+              <Pressable onPressIn={() => handleBox()}>
+                <TextInput
+                  placeholder="First Name"
+                  value={firstName}
+                  clearButtonMode="always"
+                  placeholderTextColor={"black"}
+                  // onChangeText={(e) => { setFirstName(text), text ? setError("") : setError(...errordata, errordata.firstname = "enter first name") }}
+                  onChangeText={e => { handleChange(e, "firstName"), setErrorFirst(""), setFirstName(e) }}
+                  style={{ ...styles.textInput, ...{ marginTop: verticalScale(14) }, ...{ color: (errorFirst) ? "red" : "black" } }}
+                />
+              </Pressable>
+              <View style={{ height: "4%" }}>
+                {formErrors.firstName || formErrors.allerror ?
+                  <Text style={styles.ErrorText}>{errorFirst}</Text> : null}
+              </View>
+              <Pressable onPressIn={() => handleBox()}>
+                <TextInput
+                  placeholder="Last Name"
+                  value={lastName}
+                  placeholderTextColor={"black"}
+                  onChangeText={e => { handleChange(e, "lastName"), setErrorLast(""), setLastName(e) }}
+                  // onChangeText={(text) => { setLastName(text), text ? setError("") : setError(...errordata, errordata.lastname = "enter last name") }}
+                  style={{ ...styles.textInput, ...{ color: (errorLast) ? "red" : "black" } }} />
+              </Pressable>
+              <View style={{ height: "4%" }}>
+                {formErrors.lastName || formErrors.allerror ?
+                  <Text style={styles.ErrorText}>{errorEmail}</Text> : null}
+              </View>
+              <Pressable onPressIn={() => handleBox()}>
+                <TextInput
+                  placeholder="Email"
+                  keyboardType="email-address"
+                  value={email}
+                  placeholderTextColor={"black"}
+                  onChangeText={e => { handleChange(e, "email"), setErrorEmail(""), setEmail(e) }}
+                  // onChangeText={(text) => { setEmail(text), text ? setError("") : setError([...errordata, errordata.email = "enter valid email"]) }}
+                  style={{ ...styles.textInput, ...{ color: (errorEmail) ? "red" : "black" } }} />
+
+              </Pressable>
+              <View style={{ height: "4%" }}>
+                {formErrors.email || formErrors.allerror ?
+                  <Text style={styles.ErrorText}>{errorEmail}</Text> : null}
+              </View>
               <View style={{ flexDirection: "row" }}>
                 <TextInput
                   placeholder="+91"
                   maxLength={3}
                   keyboardType="phone-pad"
                   placeholderTextColor={"black"}
-                  style={{ borderWidth: 1, flexDirection: "column", borderColor: "#c4c4c2", paddingStart: 10, borderRadius: 8, width: horizontalScale(45), marginTop: verticalScale(18), ...FONTS.lexendregular, fontSize: RFValue(14) }}
+                  style={{ ...styles.phone }}
                 />
-                <TextInput
-                  keyboardType={"phone-pad"}
-                  placeholder="Phone"
-                  maxLength={10}
-                  onChangeText={e => { handleChange(e, "phonenumber"), setErrorPhone(""), setPhone(e) }}
-                  //onChangeText={(text) => { setPhone(text), text ? setError("") : setError(...errordata, errordata.phone = "enter phone number") }}
-                  placeholderTextColor={"black"}
-                  style={{ borderWidth: 1, paddingStart: 15, borderColor: "#c4c4c2", flexDirection: "column", borderRadius: 8, width: horizontalScale(248), marginLeft: "2%", marginTop: verticalScale(18), ...FONTS.lexendregular, fontSize: RFValue(14) }}
-                />
-              </View>
+                <Pressable onPressIn={() => handleBox()}>
+                  <TextInput
+                    keyboardType={"phone-pad"}
+                    placeholder="Phone"
+                    value={phone}
+                    maxLength={10}
+                    onChangeText={e => { handleChange(e, "phone"), setErrorPhone(""), setPhone(e) }}
+                    //onChangeText={(text) => { setPhone(text), text ? setError("") : setError(...errordata, errordata.phone = "enter phone number") }}
+                    placeholderTextColor={"black"}
+                    style={{ ...styles.pin, ...{ color: (errorPhone) ? "red" : "black" } }}
+                  />
+                </Pressable>
 
-              <TextInput
-                placeholder="Password"
-                onChangeText={e => { handleChange(e, "password"), setErrorPassword(""), setPassword(e) }}
-                //onChangeText={(text) => { setPassword(text), text ? setError("") : setError(...errordata, errordata.password = "enter the password") }}
-                placeholderTextColor={"black"}
-                style={{ borderWidth: 1, paddingStart: 15, borderColor: "#c4c4c2", borderRadius: 8, width: horizontalScale(300), marginTop: verticalScale(18), ...FONTS.lexendregular, fontSize: RFValue(14) }}
-              />
+              </View>
+              <View style={{ height: "4%" }}>
+                {formErrors.phone || formErrors.allerror ?
+                  <Text style={styles.ErrorText}>{errorPhone}</Text> : null}
+              </View>
+              <Pressable onPressIn={() => handleBox()}>
+                <TextInput
+                  placeholder="Password"
+                  value={password}
+                  onChangeText={e => { handleChange(e, "password"), setErrorPassword(""), setPassword(e) }}
+                  //onChangeText={(text) => { setPassword(text), text ? setError("") : setError(...errordata, errordata.password = "enter the password") }}
+                  placeholderTextColor={"black"}
+                  style={{ ...styles.textInput, ...{ color: (errorPassword) ? "red" : "black" } }} />
+              </Pressable>
             </View>
-            <View style={{ alignSelf: "center", width: horizontalScale(300) }}>
+            <View style={{ alignSelf: "center", width: horizontalScale(300), }}>
               <CheckBoxes />
             </View>
-            <TouchableOpacity style={{ alignSelf: "center", marginTop: "5%", borderWidth: 1, borderRadius: 8, width: horizontalScale(200), padding: "4%" }} onPress={e => { handleSubmit(e), Keyboard.dismiss }} disabled={false} /* onPress={() => { handleSubmited() }} */ /* onPress={() => navigation.navigate("OtpPage")} */>
+            <View style={{ }}>
+                {formErrors.allerror || formErrors.password ?
+                  <Text style={styles.Errorpass}>{error}{errorPassword}</Text> : null}
+              </View>
+            <TouchableOpacity style={{ alignSelf: "center", borderWidth: 1, borderRadius: 8, width: horizontalScale(200), padding: "4%" }} onPress={e => { handleSubmit(e, "2"), Keyboard.dismiss }} disabled={false} /* onPress={() => { handleSubmited() }} */ /* onPress={() => navigation.navigate("OtpPage")} */>
+
               <Text style={{ textAlign: "center", fontSize: RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Register</Text>
             </TouchableOpacity>
             <View style={{ flexDirection: "row", marginTop: "4%", alignSelf: "center" }}>
@@ -221,11 +303,8 @@ const Signup = () => {
               <TouchableOpacity style={{ alignSelf: "flex-end", flexDirection: "column" }} onPressIn={() => navigation.navigate("login")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", fontSize: RFValue(13) }}>Log in</Text></TouchableOpacity>
             </View>
           </View>
-
-
         </View>
       </ScrollView>
-
     </SafeAreaView>
   )
 }
@@ -252,6 +331,49 @@ const styles = StyleSheet.create({
     color: "#E70736",
     textDecorationLine: "underline",
     fontFamily: "Lexend-Regular"
-  }
+  },
+  phone: {
+    borderWidth: 1,
+    flexDirection: "column",
+    borderColor: "#c4c4c2",
+    paddingStart: 10,
+    borderRadius: 8,
+    width: horizontalScale(45),
+    ...FONTS.lexendregular,
+    fontSize: RFValue(14)
+  },
+  pin: {
+    borderWidth: 1,
+    paddingStart: 15,
+    borderColor: "#c4c4c2",
+    flexDirection: "column",
+    borderRadius: 8,
+    width: horizontalScale(248),
+    marginLeft: "2%",
+    ...FONTS.lexendregular, fontSize: RFValue(14)
+  },
+  ErrorText: {
+    color: "red",
+    ...FONTS.lexendregular,
+    fontSize: RFValue(10),
+    textAlign: "center",
+    width: horizontalScale(100)
+  },
+  Errorpass: {
+    color: "red",
+    ...FONTS.lexendregular,
+    fontSize: RFValue(10),
+    textAlign:"center",
+    width: horizontalScale(350)
+  },
+  textInput: {
+    borderWidth: 1,
+    paddingStart: 15,
+    borderColor: "#c4c4c2",
+    borderRadius: 8,
+    width: horizontalScale(300),
+    ...FONTS.lexendregular,
+    fontSize: RFValue(14)
+  },
 })
 export default Signup;
