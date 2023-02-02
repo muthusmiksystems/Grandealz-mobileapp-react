@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Text,
     View,
@@ -19,17 +19,24 @@ import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import ToggleSwitch from 'toggle-switch-react-native';
 import image from "../../constants/image";
+import { ourCartPage } from "../../services/ourCart";
 
 const CartProducts = () => {
-
     const navigation = useNavigation();
     const [toggle, setToggle] = useState(false);
     const data = ["all", "hello", "everybody", "world"]
+    const [cartsku, setCartsku] = useState()
+    useEffect(() => {
+        const cartStock = async () => {
+            let ourCartStock = await ourCartPage()
+            console.log("ourcart console", ourCartStock)
+            setCartsku(ourCartStock)
+        }
+        cartStock()
+    }, [])
     return (
-
         <View style={{ width: "100%", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", alignSelf: "center" }}>
-
-            {data.map((item, index) => {
+            {cartsku && cartsku .map((item, index) => {
                 return (
                     <>
                         <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "2%" }}>
@@ -37,19 +44,18 @@ const CartProducts = () => {
                                 <View style={{ flexDirection: "row", }}>
                                     <View style={{ width: "35%", backgroundColor: "#F9F9F9" }}>
                                         <Image
-                                            source={image.pencil}
+                                            source={{ uri: item.product_image }}
                                             resizeMode={"cover"}
                                             style={{ height: 80, width: 90, justifyContent: "center", margin: "10%" }}
                                         />
                                     </View>
                                     <View style={{ width: "70%", marginHorizontal: "3%" }}>
-                                        <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendsemibold, }}>Pencil</Text>
-                                        <Text style={{ color: COLORS.gray, fontSize: RFValue(13), ...FONTS.lexendregular, }}>Blanco Set</Text>
-                                        <Text style={{ color: COLORS.element, fontSize: RFValue(13), ...FONTS.lexendregular, }}>₹ 100.00</Text>
-                                        <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginTop: "5%" }}>1 Coupon
+                                        <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendsemibold, }}>{item.product_title}</Text>
+                                        <Text style={{ color: COLORS.gray, fontSize: RFValue(13), ...FONTS.lexendregular, }}>{item.draw_sub_title}</Text>
+                                        <Text style={{ color: COLORS.element, fontSize: RFValue(13), ...FONTS.lexendregular, }}>{item.product_price}</Text>
+                                        <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginTop: "5%" }}> {item.coins_redeem} Coupon
                                             <Text style={{ color: COLORS.gray }}> per unit</Text> </Text>
                                     </View>
-
                                 </View>
                             </View>
                             <View style={{ flexDirection: "column", width: "15%", alignSelf: "center" }}>
@@ -57,16 +63,13 @@ const CartProducts = () => {
                                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginStart: "15%" }}>2</Text>
                                 <TouchableOpacity><AntIcon name="minussquare" size={moderateScale(20)} color={COLORS.element} style={{ marginTop: "10%" }} /></TouchableOpacity>
                             </View>
-
                         </View>
-
                         <View style={{ borderBottomColor: "#F1F1F1", borderBottomWidth: 3 }} />
                     </>
                 )
             })}
-
-            <View style={{ flexDirection: "row", width: "100%", borderBottomStartRadius: 10, borderBottomEndRadius: 10, backgroundColor: COLORS.element,paddingBottom:RFValue(12) }}>
-                <View style={{ marginTop:RFValue(12), marginLeft: "2.5%" }}>
+            <View style={{ flexDirection: "row", width: "100%", borderBottomStartRadius: 10, borderBottomEndRadius: 10, backgroundColor: COLORS.element, paddingBottom: RFValue(12) }}>
+                <View style={{ marginTop: RFValue(12), marginLeft: "2.5%" }}>
                     <ToggleSwitch
                         isOn={toggle}
                         onColor="#0a0127"
@@ -75,11 +78,9 @@ const CartProducts = () => {
                         onToggle={isOn => setToggle(!toggle)}
                     />
                 </View>
-                <Text style={{ color: COLORS.white, fontSize:moderateScale (13), ...FONTS.lexendregular,marginTop:RFValue(12),marginLeft:RFValue(5)}}>Donate Product(s) & Double Your Tickets</Text>
+                <Text style={{ color: COLORS.white, fontSize: moderateScale(13), ...FONTS.lexendregular, marginTop: RFValue(12), marginLeft: RFValue(5) }}>Donate Product(s) & Double Your Tickets</Text>
             </View>
         </View>
-
-
     );
 }
 const styles = StyleSheet.create({
@@ -97,6 +98,5 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         // borderWidth:2
     }
-
 })
 export default CartProducts;

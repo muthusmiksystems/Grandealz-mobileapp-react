@@ -16,11 +16,12 @@ import { useNavigation } from "@react-navigation/native";
 import TicketDetails from "../../component/ticketDetails";
 import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS } from "../../constants";
+import CouponDetails from "../../component/couponDetails";
  
-const Tickets = () => {
+const Coupons = () => {
 
     const navigation=useNavigation();
-
+    
     return (
         <SafeAreaView>
             <StatusBar
@@ -28,13 +29,14 @@ const Tickets = () => {
                 backgroundColor="#0a0127"
             />
             <View style={styles.subdivOne}>
-                {/* <TouchableOpacity onPress={()=>navigation.goBack()} style={{marginLeft:horizontalScale(14)}}>
+                <TouchableOpacity onPress={()=>navigation.goBack()} style={{marginLeft:horizontalScale(14)}}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
-                </TouchableOpacity> */}
-                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20),textAlign:"center" }}>Active Tickets</Text>
+                </TouchableOpacity>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20),textAlign:"center" }}>Coupon Code</Text>
             </View>
             <View style={styles.subdivTwo}>
-                <TicketDetails/>
+                
+                <CouponDetails/>
             </View>
         </SafeAreaView>
     );
@@ -54,4 +56,4 @@ const styles = StyleSheet.create({
     }
 
 })
-export default Tickets;
+export default Coupons;

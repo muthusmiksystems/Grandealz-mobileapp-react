@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren } from 'react';
+import React, { type PropsWithChildren, useEffect, useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -18,10 +18,29 @@ import { COLORS, FONTS } from '../../constants';
 import icons from '../../constants/icons';
 import image from '../../constants/image';
 import { useNavigation } from '@react-navigation/native';
+import { unwrapResult } from '@reduxjs/toolkit';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { horizontalScale, verticalScale } from '../../constants/metrices';
+import { useDispatch } from 'react-redux';
+import { bannerHandler } from '../../store/reducers/Banners';
+import { drawgetHandler } from '../../store/reducers/Drawgetcall';
+import { Item } from 'react-native-paper/lib/typescript/components/Drawer/Drawer';
 const DataPage = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const [apiData, setApiData] = useState();
+  const [result, setResult] = useState();
+  const [sold, setSold] = useState<any>();
+  const [camp, setCamp] = useState<any>();
+  const [close, setClose] = useState<any>();
+  useEffect(() => {
+    dispatch(bannerHandler())
+      .then(unwrapResult).then((originalPromiseResult: React.SetStateAction<undefined>) => {
+        //console.log("successfully returned to banners with response ", originalPromiseResult);
+        setApiData(originalPromiseResult);
+      })
+  }, [])
+
   return (
     <ScrollView >
       <StatusBar
@@ -63,33 +82,25 @@ const DataPage = () => {
             </View>
           </View>
         </View>
-        
-          <View style={{ padding: "3%", flex: 0.4 }}>
-            <Banner />
-          </View>
-          
-            <Text style={{ ...FONTS.lexendsemibold,fontSize:RFValue(18), marginLeft: "4%", ...FONTS.lexendsemibold, color:"black" }}>Closing Soon</Text>
-            <View style={{ marginLeft: "4%",width:horizontalScale(40),borderWidth:1,backgroundColor:"#E70736",borderColor:"#E70736"}}/>
-            <View>
-              <ClosingSoon />
-            </View>
-            
-              <Product />
-            
-            
-              <View style={{ paddingVertical:verticalScale (10), backgroundColor: "#D10359", height: 150, }}>
-                <Text style={{ color: "white", marginLeft: 25, ...FONTS.lexendregular, fontWeight:"600",color: COLORS.white, fontSize: RFValue(15) }}>
-                  SOLD OUT
-                </Text>
-                <View style={{ marginLeft: "7%", width: "10%", height: "2%", borderColor: "white", backgroundColor: "black" }} />
-                <Text style={{ color: "white", marginLeft: 25, ...FONTS.lexendregular, color: COLORS.white,marginTop:"1%" }}>
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                </Text>
-              </View>
-              <Carsold />
-            
-         
-        
+        <View style={{ padding: "3%", flex: 0.4 }}>
+          <Banner data={apiData} />
+        </View>
+        <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(18), marginLeft: "4%", ...FONTS.lexendsemibold, color: "black" }}>Closing Soon</Text>
+        <View style={{ marginLeft: "4%", width: horizontalScale(40), borderWidth: 1, backgroundColor: "#E70736", borderColor: "#E70736" }} />
+        <TouchableOpacity >
+          <ClosingSoon />
+        </TouchableOpacity>
+        <Product />
+        <View style={{ paddingVertical: verticalScale(10), backgroundColor: "#D10359", height: 150, }}>
+          <Text style={{ color: "white", marginLeft: 25, ...FONTS.lexendregular, fontWeight: "600", color: COLORS.white, fontSize: RFValue(15) }}>
+            SOLD OUT
+          </Text>
+          <View style={{ marginLeft: "7%", width: "10%", height: "2%", borderColor: "white", backgroundColor: "black" }} />
+          <Text style={{ color: "white", marginLeft: 25, ...FONTS.lexendregular, color: COLORS.white, marginTop: "1%" }}>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          </Text>
+        </View>
+        <Carsold/>
       </View>
     </ScrollView>
   )

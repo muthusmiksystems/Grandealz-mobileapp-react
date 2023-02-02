@@ -26,12 +26,14 @@ import { RFValue } from "react-native-responsive-fontsize";
 import DrawsHeader from "./drawsListHorizontal";
 
 import DrawsMain from "./drawsMain";
+import { useDispatch } from "react-redux";
+import { drawwinnersHandler } from "../../store/reducers/Drawwinner";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 
 const Draws = (props: Props) => {
-
-
-
+  const dispatch = useDispatch();
+  
   return (
     <SafeAreaView>
       <StatusBar animated={true} backgroundColor={"#0a0127"} />
