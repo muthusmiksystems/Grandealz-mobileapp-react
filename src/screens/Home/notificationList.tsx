@@ -110,7 +110,7 @@ const NotificationList = () => {
           }}>
 
           <View style={{ height: verticalScale(80), justifyContent: 'center' }}>
-            <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), textAlign: "center" }}>Notifications</Text>
+            <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), textAlign: "center" }}>Notifications</Text>
           </View>
         </View>
 

@@ -1,13 +1,14 @@
 import { createSlice, createAsyncThunk, } from '@reduxjs/toolkit';
 import axios from 'axios'
-import { Register_Url } from '../../services/constant';
 
-export const bannerHandler = createAsyncThunk('posts/bannerPostcall', async (thunkAPI) => {
+
+export const productDrawHandler = createAsyncThunk('get/drawProductGetcall', async (data,thunkAPI) => {
 
     try {
-        let result = await axios.get(`${'https://api.grandealz.vytech.co'}/banners`,);
-        //console.log("result inside the login page",result.data.status)
-        return result.data
+        console.log("inside..... ")
+        const payload = data;
+        let result = await axios.get(`${'https://api.grandealz.vytech.co'}/draws`);
+        console.log("result inside the login page.....",result.data.data)
         // if (parseInt(result.data.status) === 200) {
         //     console.log({ responseData: result.data.data });
         //     return result.data
@@ -17,14 +18,15 @@ export const bannerHandler = createAsyncThunk('posts/bannerPostcall', async (thu
         //     console.log('Login Error', result);
         //     return result.data.message
         // }
+        return result.data.data
     } catch (error) {
         console.log('Login Catch Error', error);
     }
 
 })
 
-export const bannerHandleSlice = createSlice({
-    name: 'bannerHandle',
+export const productDrawHandleSlice = createSlice({
+    name: 'productDrawHandle',
     initialState: {
         data: "No data",
         isSuccess: false,
@@ -34,12 +36,12 @@ export const bannerHandleSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
        
-         console.log(bannerHandler, "search response")
-        builder.addCase(bannerHandler.fulfilled, (state, action) => {
+         console.log(productDrawHandler, "search response")
+        builder.addCase(productDrawHandler.fulfilled, (state, action) => {
             state.data = action.payload;
         })
     },
 })
-export default bannerHandleSlice.reducer;
+export default productDrawHandleSlice.reducer;
 
 

@@ -9,7 +9,7 @@ import {
     Image,
     TouchableOpacity
 } from 'react-native';
-import { horizontalScale, verticalScale } from "../../constants/metrices";
+import { horizontalScale, moderateScale, verticalScale } from "../../constants/metrices";
 import { shoppingCart } from "../../constants/icons";
 import EntypoIcons from "react-native-vector-icons/Entypo";
 import { useNavigation } from "@react-navigation/native";
@@ -37,7 +37,7 @@ const Delivery = () => {
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18) }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), textAlign: "center", width: "75%" }}>Delivery</Text>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), textAlign: "center", width: "75%" }}>Delivery</Text>
             </View>
             <ScrollView style={{ height: "80%" }}>
                 {/* <RadioButton.Group onValueChange={newValue => { setValue(newValue), parentCallback(newValue) }} value={value} > */}
@@ -86,7 +86,7 @@ const Delivery = () => {
                             </View>
                         </View>
                         <View style={{ flexDirection: "column", width: "65%", }}>
-                            <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendsemibold, margin: "3%" }}>Self Pickup From Our Outlet</Text>
+                            <Text style={{ color: COLORS.textHeader, fontSize:moderateScale(13), ...FONTS.lexendsemibold, margin: "3%" }}>Self Pickup From Our Outlet</Text>
                         </View>
                     </View>
                 </View>

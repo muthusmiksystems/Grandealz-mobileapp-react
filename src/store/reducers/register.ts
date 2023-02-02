@@ -17,7 +17,7 @@ export const registerHandler = createAsyncThunk('posts/loginPostcall', async (da
     try {
         const payload = data;
         let result = await axios.post(`${'https://api.grandealz.vytech.co'}/auth/register`, payload);
-        console.log("result inside the login page",result.data.status)
+        //console.log("result inside the login page",result.data.status)
         if (parseInt(result.data.status) === 200) {
             console.log({ responseData: result.data.data });
             return result.data

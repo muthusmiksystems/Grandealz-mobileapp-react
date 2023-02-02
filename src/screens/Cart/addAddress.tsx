@@ -187,7 +187,7 @@ const AddAddress = () => {
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(14) }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), width: horizontalScale(290), textAlign: "center" }}>Add New Address</Text>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), width: horizontalScale(290), textAlign: "center" }}>Add New Address</Text>
             </View>
             <ScrollView style={{ height: "80%" }}>
                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "5%" }}>CONTACT DETAILS</Text>
@@ -307,8 +307,8 @@ const AddAddress = () => {
                     <TouchableOpacity style={{ paddingVertical: "5%" }}><Text style={{ color: COLORS.gray, textAlign: "center", fontSize: RFValue(11), ...FONTS.lexendregular, borderRadius: 4, borderWidth: 1, borderColor: COLORS.gray, paddingHorizontal: "4%", paddingVertical: "1%" }}>Work</Text></TouchableOpacity>
                 </View>
 
-                <View style={{ marginHorizontal: "3%", marginBottom: "2%", padding: "2%", flexDirection: "row", width: "90%", borderRadius: 10, backgroundColor: COLORS.white, alignSelf: "center" }}>
-                    <CheckBoxes />
+                <View style={{ marginHorizontal: "2%", marginBottom: "2%", padding: "2%", flexDirection: "row", width: "90%", borderRadius: 10, backgroundColor: COLORS.white, alignSelf: "center" }}>
+                    <View style={{marginLeft:"-4%"}}><CheckBoxes /></View>
                     <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, paddingHorizontal: "5%", alignSelf: "center" }}>Make this my default address</Text>
                 </View>
             </ScrollView>

@@ -27,6 +27,7 @@ import CheckBox from "@react-native-community/checkbox";
 import { RFValue } from "react-native-responsive-fontsize";
 import EntypoIcons from "react-native-vector-icons/Entypo";
 import { COLORS, FONTS } from "../constants";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch, useSelector } from "react-redux";
 import { registerHandler } from "../store/reducers/register";
 import useForm from "./Auth/useForm";
@@ -104,23 +105,24 @@ const Signup = () => {
       }
       console.log("data inside the handle submit",reg);
       dispatch(registerHandler(reg))
-      .then(unwrapResult)
-      .then((originalPromiseResult) => {
-        console.log("success samuvel you did itdone", originalPromiseResult);
-        if( originalPromiseResult.status === "200"){
-        var data = originalPromiseResult.data.access_token
-        navigation.navigate("OtpPage",data)
-        }
-        else if(originalPromiseResult==="You have already registered"){
-          console.log("im the error data",originalPromiseResult)
-          ToastAndroid.showWithGravity(originalPromiseResult),
-          ToastAndroid.CENTER,ToastAndroid.SHORT
-        }
-        else{
-          console.log(originalPromiseResult,"error")
-        }
-      })
-      
+        .then(unwrapResult)
+        .then(async (originalPromiseResult) => {
+          console.log("success samuvel you did itdone", originalPromiseResult.data.access_token);
+          await AsyncStorage.setItem('loginToken', originalPromiseResult.data.access_token);
+          if (originalPromiseResult.status === "200") {
+            var data = originalPromiseResult.data.access_token
+            navigation.navigate("OtpPage")
+          }
+          else if (originalPromiseResult === "You have already registered") {
+            console.log("im the error data", originalPromiseResult)
+            ToastAndroid.showWithGravity(originalPromiseResult),
+              ToastAndroid.CENTER, ToastAndroid.SHORT
+          }
+          else {
+            console.log(originalPromiseResult, "error")
+          }
+        })
+
     }
     
   },[data])
@@ -171,7 +173,7 @@ const Signup = () => {
           tintColors={{ true: COLORS.element }}
         />
         <View style={{ flexDirection: "column", alignSelf: "center" }}>
-          <Text style={{ fontFamily: "Lexend-Regular", color: "black", fontSize: RFValue(11) }}>I agree to <Text style={styles.underLineText}>Usage Terms</Text> and <Text style={styles.underLineText}>Privacy Policy</Text></Text>
+          <Text style={{ fontFamily: "Lexend-Regular", color: "black", fontSize: RFValue(12) }}>I agree to <Text style={styles.underLineText}>Usage Terms</Text> and <Text style={styles.underLineText}>Privacy Policy</Text></Text>
         </View>
       </View>
     )
@@ -204,16 +206,17 @@ const Signup = () => {
         <View style={styles.subdivTwo}>
 
           <View style={{ paddingBottom: "1%" }}>
-            <Text style={{ fontSize: RFValue(26), color: "black", textAlign: "center", marginTop: verticalScale(5), fontFamily: "Lexend-SemiBold" }}>Register</Text>
-            <View style={{ alignItems: "center",}}>
+            <Text style={{ fontSize: RFValue(26), color: "black", textAlign: "center", marginTop: verticalScale(10), fontFamily: "Lexend-SemiBold" }}>Register</Text>
+            <View style={{ alignItems: "center" }}>
 
               <Pressable onPressIn={() => handleBox()}>
                 <TextInput
                   placeholder="First Name"
+                  // placeholderStyle={{ fontFamily: "Lexend-Regular" }}
                   value={firstName}
                   clearButtonMode="always"
                   placeholderTextColor={"black"}
-                  // onChangeText={(e) => { setFirstName(text), text ? setError("") : setError(...errordata, errordata.firstname = "enter first name") }}
+                  //style={{ borderWidth: 1, paddingStart: 15, borderColor: "#c4c4c2", borderRadius: 8, width: horizontalScale(300), marginTop: verticalScale(30), ...FONTS.lexendregular, fontSize: RFValue(14) }}
                   onChangeText={e => { handleChange(e, "firstName"), setErrorFirst(""), setFirstName(e) }}
                   style={{ ...styles.textInput, ...{ marginTop: verticalScale(14) }, ...{ color: (errorFirst) ? "red" : "black" } }}
                 />

@@ -24,13 +24,17 @@ import { horizontalScale, verticalScale } from '../../constants/metrices';
 import { useDispatch } from 'react-redux';
 import { bannerHandler } from '../../store/reducers/Banners';
 import { addressListHandler } from "../../store/reducers/addresslist";
-
+import { drawgetHandler } from '../../store/reducers/Drawgetcall';
+import { Item } from 'react-native-paper/lib/typescript/components/Drawer/Drawer';
 const DataPage = () => {
   const navigation = useNavigation();
-  const dispatch= useDispatch();
-  const [apiData,setApiData]=useState();
-
-  useEffect (()=>{
+  const dispatch = useDispatch();
+  const [apiData, setApiData] = useState();
+  const [result, setResult] = useState();
+  const [sold, setSold] = useState<any>();
+  const [camp, setCamp] = useState<any>();
+  const [close, setClose] = useState<any>();
+  useEffect(() => {
     dispatch(bannerHandler())
     .then(unwrapResult).then((originalPromiseResult)=>{
       // console.log("successfully returned to login with response ", originalPromiseResult);

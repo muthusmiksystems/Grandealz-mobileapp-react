@@ -49,8 +49,8 @@ const User = () => {
                 </View>
             </View>
             <ScrollView style={{ backgroundColor: COLORS.pagebackground, borderWidth: 0, borderColor: "red", height: "90%" }}>
-                <View style={{ alignItems: "center", padding: 24 }}>
-                    <View style={{ borderWidth: 1, borderRadius: 8, height: 110, width: 120, alignItems: "center" }}>
+                <View style={{ alignItems: "center",padding: 24 }}>
+                    <View style={{ borderWidth: 1, borderRadius: 8, height:RFValue(100), width:RFValue(100), alignItems: "center" }}>
                         <ImageBackground
                             source={image.profilepic}
                             resizeMode="stretch"

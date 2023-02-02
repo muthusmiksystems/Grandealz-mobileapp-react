@@ -59,7 +59,7 @@ const WishList = () => {
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18), flexDirection: "column" }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), width: "75%", textAlign: "center" }}>Wishlist</Text>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(21), width: "75%", textAlign: "center" }}>Wishlist</Text>
 
             </View>
             <ScrollView style={styles.subdivTwo}>
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         flexDirection: "row"
     },
     subdivTwo: {
-        height: verticalScale(748),
+        height: "92%",
         // alignItems: "center",
         // justifyContent: "center",
         // borderWidth:2

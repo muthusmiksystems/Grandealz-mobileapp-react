@@ -19,7 +19,7 @@ import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import ToggleSwitch from 'toggle-switch-react-native';
 import image from "../../constants/image";
-import { ourCartPage } from "../../services/register";
+import { ourCartPage } from "../../services/ourCart";
 
 const CartProducts = () => {
 
@@ -59,7 +59,7 @@ const CartProducts = () => {
                                         <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendsemibold, }}>{item.product_title}</Text>
                                         <Text style={{ color: COLORS.gray, fontSize: RFValue(13), ...FONTS.lexendregular, }}>{item.draw_sub_title}</Text>
                                         <Text style={{ color: COLORS.element, fontSize: RFValue(13), ...FONTS.lexendregular, }}>{item.product_price}</Text>
-                                        <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginTop: "5%" }}>{item.coins_redeem} Cuopen
+                                        <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginTop: "5%" }}> {item.coins_redeem} Coupon
                                             <Text style={{ color: COLORS.gray }}> per unit</Text> </Text>
                                     </View>
 
@@ -77,9 +77,8 @@ const CartProducts = () => {
                     </>
                 )
             })}
-
-            <View style={{ flexDirection: "row", width: "100%", borderBottomStartRadius: 10, borderBottomEndRadius: 10, backgroundColor: COLORS.element }}>
-                <View style={{ marginTop: "5%", marginLeft: "5%" }}>
+            <View style={{ flexDirection: "row", width: "100%", borderBottomStartRadius: 10, borderBottomEndRadius: 10, backgroundColor: COLORS.element, paddingBottom: RFValue(12) }}>
+                <View style={{ marginTop: RFValue(12), marginLeft: "2.5%" }}>
                     <ToggleSwitch
                         isOn={toggle}
                         onColor="#0a0127"
@@ -88,7 +87,7 @@ const CartProducts = () => {
                         onToggle={isOn => setToggle(!toggle)}
                     />
                 </View>
-                <Text style={{ color: COLORS.white, fontSize: RFValue(13), ...FONTS.lexendregular, padding: "5%" }}>Donate Product(s) & Double Your Tickets</Text>
+                <Text style={{ color: COLORS.white, fontSize: moderateScale(13), ...FONTS.lexendregular, marginTop: RFValue(12), marginLeft: RFValue(5) }}>Donate Product(s) & Double Your Tickets</Text>
             </View>
         </View>
 

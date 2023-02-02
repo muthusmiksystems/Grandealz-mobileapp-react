@@ -1,23 +1,24 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createSlice, createAsyncThunk, } from '@reduxjs/toolkit';
 import axios from 'axios'
-import { Verify_Url } from '../../services/constant';
 
-export const VerifyHandler = createAsyncThunk('posts/loginPostcall', async (data,thunkAPI) => {
+export const VerifyHandler = createAsyncThunk('posts/verifyPostcall', async (data,thunkAPI) => {
     try {
-        const payload = data.otp;
-        const headers={'Authorization':`Bearer ${data.token}` }
-
+        const payload ={"otp":data} ;
+        const token = await AsyncStorage.getItem('loginToken');
+        console.log(token,"token token token",data)
+        const headers={'Authorization':`Bearer ${token}` }
         let result = await axios.post(`${'https://api.grandealz.vytech.co'}/auth/verify-otp`, payload,{headers:headers});
-        console.log("result inside the verification page",result.data.status)
-        // if (parseInt(result.data.status) === 200) {
-        //     console.log({ responseData: result.data.data });
-        //     return result.data
-        // } else if(parseInt(result.data.status)== 401 ){
-        //     console.log({responseData: result.data})
-        // }else {
-        //     console.log('Login Error', result);
-        //     return result.data.message
-        // }
+        console.log("result inside the verification page",result.data)
+        if (parseInt(result.data.status) === 200) {
+            console.log({ responseData: result.data });
+            return result.data
+        } else if(parseInt(result.data.status)== 401 ){
+            console.log({responseData: result.data})
+        }else {
+            console.log('Login Error', result);
+            return result.data.message
+        }
     } catch (error) {
         console.log('Login Catch Error', error);
     }
