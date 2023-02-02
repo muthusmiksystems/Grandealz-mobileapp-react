@@ -50,7 +50,7 @@ const ChangePassword = () => {
         {/* <Text style={{ fontSize: 35, color: "white",fontFamily:"Lexend-Regular" }}>Grandealz</Text> */}
       </View>
       <View style={styles.subdivTwo}>
-        <Text style={{ fontSize:RFValue(25), color: "black", textAlign: "center", marginTop: verticalScale(20), fontFamily: "Lexend-SemiBold" }}>Change Password</Text>
+        <Text style={{ fontSize:RFValue(26), color: "black", textAlign: "center", marginTop: verticalScale(20), fontFamily: "Lexend-SemiBold" }}>Change Password</Text>
         <View style={{ alignItems: "center" }}>
           <View style={{ alignSelf: "center" }}>
             <TextInput

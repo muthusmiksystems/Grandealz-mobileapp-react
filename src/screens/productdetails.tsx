@@ -38,11 +38,11 @@ const ProductDetails = () => {
             <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18), flexDirection: "column" }}>
               <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
             </TouchableOpacity>
-            <Text style={{ ...FONTS.lexendsemibold, color: "white", fontSize: RFValue(20), width: "78%", textAlign: "center" }}>Product Details</Text>
+            <Text style={{ ...FONTS.lexendsemibold, color: "white", fontSize: RFValue(24), width: "78%", textAlign: "center" }}>Product Details</Text>
           </View>
         </View>
 
-        < ScrollView style={{ padding: "4%" }}>
+        <View style={{ padding: "4%" }}>
           <View style={{ borderRadius: 9, backgroundColor: "white" }}>
             <View style={{ flexDirection: "row", marginLeft: "5%" }}>
               <View>
@@ -108,14 +108,14 @@ const ProductDetails = () => {
               </View>
             </View>
           </View>
-          <View style={{ marginVertical:"5%"}}>
+          <View style={{ marginVertical:"5%", backgroundColor: "#D8D8D8 " }}>
            
           <View style={{ flexDirection: "row", marginVertical: "2%" }}>
-              <TouchableOpacity style={{ flexDirection: "column",borderWidth: 1,width:"49%",marginEnd:"2%",borderRadius: 5  }} onPressIn={() => { navigation.navigate("PriceDetails") }}>
-                <Text style={{ textAlign:"center", fontSize: RFValue(15),padding:"7%", ...FONTS.lexendregular,backgroundColor: "#fff", color: "#000", borderRadius: 5}}> Prize Details</Text>
+              <TouchableOpacity style={{ flexDirection: "column",width:"48%",marginEnd:"2%" }} onPressIn={() => { navigation.navigate("PriceDetails") }}>
+                <Text style={{ textAlign:"center", fontSize: RFValue(15),padding:"7%",backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }}> Prize Details</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={{ flexDirection: "column",width:"49%"}} >
-                <Text style={{ textAlign:"center",fontSize: RFValue(15),backgroundColor: "#E70736", color: "white", padding: "7%",...FONTS.lexendregular, borderRadius: 5 }}>
+              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1 ,width:"49%",borderRadius: 5 }} >
+                <Text style={{ textAlign:"center",fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}>
                   Product Details
                 </Text>
               </TouchableOpacity>
@@ -142,7 +142,7 @@ const ProductDetails = () => {
               </TouchableOpacity>
             </View>
           </View>
-        </ScrollView>
+        </View>
 
 
       </View>

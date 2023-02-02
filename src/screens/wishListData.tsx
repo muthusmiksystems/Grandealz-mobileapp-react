@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren } from 'react';
+import React, { useState,type PropsWithChildren } from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -73,16 +73,19 @@ const data = [
 
 
 ];
-const WishlistData = () => {
+const WishlistData = (Wishlist) => {
+
+    const [product_description, setProduct_description] = useState(false)
+
     const navigation = useNavigation();
-    console.log("again......")
+    console.log("again......", Wishlist.Wishlist)
     return (
         <SafeAreaView >
             <View style={{ padding: "4%" }}>
                 <FlatList
-                    data={data}
+                    data={Wishlist.Wishlist}
                     contentContainerStyle={{}}
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => item.draw._id}
                     renderItem={({ item }) => (
                         <View style={{ width: "100%", marginBottom: "4%", borderRadius: 10, backgroundColor: "white" }}>
                             <TouchableOpacity>
@@ -90,16 +93,16 @@ const WishlistData = () => {
                                     <View style={{ flexDirection: "row", width: "70%", paddingVertical: "5%", paddingLeft: "3%" }}>
                                         <View style={{ flexDirection: "column", backgroundColor: COLORS.pagebackground, padding: "4%", width: "45%", alignItems: "center" }}>
                                             <Image
-                                                source={item.imag}
+                                                source={{uri:item.draw.product_image}}
                                                 resizeMode="contain"
-                                                style={{}}
+                                                style={{height: verticalScale(100), width: horizontalScale(80)}}
                                             />
                                         </View>
                                         <View style={{ flexDirection: "column", justifyContent: "center", width: "60%", paddingLeft: "4%" }}>
-                                            <Text style={{ color: COLORS.black, ...FONTS.lexendsemibold, fontSize: RFValue(13) }}>{item.name}</Text>
-                                            <Text style={{ color: COLORS.gray, ...FONTS.lexendregular, fontSize: RFValue(13) }}>{item.desc}</Text>
-                                            <Text style={{ color: COLORS.element, ...FONTS.lexendregular, fontSize: RFValue(13) }}>{item.price}</Text>
-                                            <Text style={{ color: COLORS.black, ...FONTS.lexendregular, fontSize: RFValue(10), marginTop: "4%" }}>{item.delvery}</Text>
+                                            <Text style={{ color: COLORS.black, ...FONTS.lexendsemibold, fontSize: RFValue(13) }}>{item.draw.product_title}</Text>
+                                            <Text style={{ color: COLORS.gray, ...FONTS.lexendregular, fontSize: RFValue(13) }}>{(item.draw.product_description).substring(0, 45)}</Text>
+                                            <Text style={{ color: COLORS.element, ...FONTS.lexendregular, fontSize: RFValue(13) }}>₹{item.draw.product_price}</Text>
+                                            {/* <Text style={{ color: COLORS.black, ...FONTS.lexendregular, fontSize: RFValue(10), marginTop: "4%" }}>{item.delvery}</Text> */}
                                         </View>
                                     </View>
                                     <View style={{ flexDirection: "column", width: "30%", borderColor: "green",justifyContent:"space-between" }}>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     Text,
     View,
@@ -19,9 +19,19 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS, FONTS } from "../constants";
 import OrderList from "./Myorders/orderList";
 import WishlistData from "./wishListData";
-
+import { wishlistHandle } from "../services/wishlist";
 const WishList = () => {
     const navigation = useNavigation();
+
+    const [Wishlistdata, setWishlistdata] = useState<any>();
+
+    useEffect(() => {
+        const soon = async () => {
+            let WishList = await wishlistHandle()
+            setWishlistdata(WishList)
+        }
+        soon();
+    }, [])
     return (
         <SafeAreaView>
             <StatusBar
@@ -49,13 +59,13 @@ const WishList = () => {
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18), flexDirection: "column" }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(21), width: "75%", textAlign: "center" }}>Wishlist</Text>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), width: "75%", textAlign: "center" }}>Wishlist</Text>
 
             </View>
             <ScrollView style={styles.subdivTwo}>
-                {/* <View style={{ flexDirection: "row" }}> */}
-                    <WishlistData />
-                {/* </View> */}
+                <View style={{ flexDirection: "row" }}>
+                    <WishlistData  Wishlist={Wishlistdata}/>
+                </View>
             </ScrollView>
         </SafeAreaView>
     );
@@ -70,9 +80,9 @@ const styles = StyleSheet.create({
         flexDirection: "row"
     },
     subdivTwo: {
-        height: "92%",
+        height: verticalScale(748),
         // alignItems: "center",
-        // borderColor:"red",
+        // justifyContent: "center",
         // borderWidth:2
     }
 

@@ -38,11 +38,11 @@ const ProductDetails = () => {
             <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18), flexDirection: "column" }}>
               <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
             </TouchableOpacity>
-            <Text style={{ ...FONTS.lexendsemibold, color: "white", fontSize: RFValue(20), width: "78%", textAlign: "center" }}>Prize Details</Text>
+            <Text style={{ ...FONTS.lexendsemibold, color: "white", fontSize: RFValue(24), width: "78%", textAlign: "center" }}>PrizeDetails</Text>
           </View>
         </View>
 
-        <ScrollView style={{ padding: "4%" }}>
+        <View style={{ padding: "4%" }}>
           <View style={{ borderRadius: 9, backgroundColor: "white" }}>
             <View style={{ flexDirection: "row", marginLeft: "5%" }}>
               <View>
@@ -81,8 +81,8 @@ const ProductDetails = () => {
                   style={{
                     bottom: "70%",
                     marginRight: "2%",
-                    width: 25,
-                    height: 25
+                    width:25,
+                    height:25
                   }}
                 />
                 <Image
@@ -90,13 +90,13 @@ const ProductDetails = () => {
                   style={{
                     bottom: "40%",
                     marginRight: "2%",
-                    width: 25,
-                    height: 25
+                    width:25,
+                    height:25
                   }}
                 />
               </View>
 
-              <View style={{ flexDirection: 'column', padding: moderateScale(10) }}>
+              <View style={{ flexDirection: 'column', padding: moderateScale(10)  }}>
                 <Image
                   source={image.inputcash}
                   style={{
@@ -108,21 +108,21 @@ const ProductDetails = () => {
               </View>
             </View>
           </View>
-          <View style={{ marginVertical: "5%",paddingBottom:"10%"}}>
-
-            <View style={{ flexDirection: "row", marginVertical: "2%" }}>
-              <TouchableOpacity style={{ flexDirection: "column", width: "48%", marginEnd: "2%" }}>
-                <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "7%", backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }}> Prize Details</Text>
+          <View style={{ marginVertical:"5%", backgroundColor: "#D8D8D8 " }}>
+           
+          <View style={{ flexDirection: "row", marginVertical: "2%" }}>
+              <TouchableOpacity style={{ flexDirection: "column",width:"48%",marginEnd:"2%" }}>
+                <Text style={{ textAlign:"center", fontSize: RFValue(15),padding:"7%",backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }}> Prize Details</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, width: "49%", borderRadius: 5 }} onPressIn={() => { navigation.navigate("ProductDetails") }}>
-                <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}>
+              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1 ,width:"49%",borderRadius: 5 }} onPressIn={() => { navigation.navigate("ProductDetails") }}>
+                <Text style={{ textAlign:"center",fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}>
                   Product Details
                 </Text>
               </TouchableOpacity>
             </View>
             <Text style={{ fontSize: RFValue(15), ...FONTS.lexendregular, color: COLORS.black, }}>Get a chance to win </Text>
-            <Text style={{ color: "#E70736", fontSize: RFValue(15), ...FONTS.lexendsemibold }}>₹1,50,000 Cash</Text>
-            <Text style={{ marginVertical: "2%", fontSize: RFValue(10), ...FONTS.lexendregular, color: COLORS.black, }}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</Text>
+            <Text style={{ color: "#E70736",fontSize: RFValue(15), ...FONTS.lexendsemibold }}>₹1,50,000 Cash</Text>
+            <Text style={{ marginVertical: "2%", fontSize: RFValue(10) , ...FONTS.lexendregular, color: COLORS.black, }}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</Text>
             {/* <View style={{ flexDirection: "row", marginVertical: "2%", justifyContent: "space-evenly" }}>
                 <TouchableOpacity style={{ flexDirection: "column", marginLeft: 5, borderWidth: 1,borderRadius:10 }}>
                   <Text style={{ fontSize: 20, padding: 10, backgroundColor: "#fff", color: "#000",...FONTS.lexendregular,borderRadius:10 }}> Go To Home </Text>
@@ -131,32 +131,32 @@ const ProductDetails = () => {
                   <Text style={{ fontSize: 20, padding: 10, backgroundColor: "#fff", color: "#000",...FONTS.lexendregular,borderRadius:10 }}>View Card</Text>
                 </TouchableOpacity>
               </View> */}
-            <View style={{ flexDirection: "row", marginVertical: "2%",}}>
-              <TouchableOpacity style={{ flexDirection: "column", width: "48%", marginEnd: "2%" }}>
-                <Text style={{ textAlign: "center", fontSize: RFValue(15), borderWidth: 1, padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}> Go to Home</Text>
+               <View style={{ flexDirection: "row",marginVertical:"2%",paddingBottom:"2%"}}>
+              <TouchableOpacity style={{ flexDirection: "column", width:"48%",marginEnd:"2%" }}>
+              <Text style={{textAlign:"center", fontSize: RFValue(15),  borderWidth: 1,padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular,borderRadius: 5  }}> Go to Home</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 5, width: "49%" }} onPressIn={() => { navigation.navigate("ProductDetails") }}>
-                <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}>
+              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 5, width:"49%" }} onPressIn={() => { navigation.navigate("ProductDetails") }}>
+                <Text style={{textAlign:"center",  fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}>
                   View Card
                 </Text>
               </TouchableOpacity>
             </View>
           </View>
-        </ScrollView>
+        </View>
 
 
       </View>
       <View style={{ flex: 0.15, backgroundColor: "white" }}>
-        <View style={{ flexDirection: "row", marginVertical: "2%", marginHorizontal: "4%" }}>
-          <TouchableOpacity style={{ flexDirection: "column", borderRadius: 6, width: "48%", marginEnd: "2%" }}>
-            <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "7%", backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }}>ADD TO CART</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 6, width: "49%" }} >
-            <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 8 }}>
-              BUY NOW
-            </Text>
-          </TouchableOpacity>
-        </View>
+      <View style={{ flexDirection: "row", marginVertical: "2%",marginHorizontal:"4%" }}>
+              <TouchableOpacity style={{ flexDirection: "column", borderRadius: 6,width:"48%",marginEnd:"2%" }}>
+                <Text style={{textAlign:"center", fontSize: RFValue(15),padding:"7%",backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }}>ADD TO CART</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={{flexDirection: "column", borderWidth: 1, borderRadius: 6, width:"49%" }} >
+                <Text style={{textAlign:"center",  fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 8 }}>
+                BUY NOW
+                </Text>
+              </TouchableOpacity>
+            </View>
         {/* <View style={{ flexDirection: "row", marginVertical: "2%", justifyContent: "space-evenly" }}>
           <TouchableOpacity style={{ flexDirection: "column", borderRadius: 6 }}>
             <Text style={{ fontSize: RFValue(15), paddingHorizontal: 35, padding: 10, backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 8 }}> ADD TO CART</Text>

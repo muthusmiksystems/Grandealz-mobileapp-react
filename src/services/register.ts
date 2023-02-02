@@ -1,6 +1,12 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { Register_Url } from "./constant";
 import { Login_Url } from "./constant";
+async function fetchJSONAsync() {
+    let response = await AsyncStorage.getItem("loginToken");
+    console.log("response data",response)
+    return response;
+  }
 
 export const registerPost=async()=>{
     const payload = { "email": "cheranc7c7@gmail.com", "password": "Cheran@123"};
@@ -25,3 +31,36 @@ return await axios.post(Login_Url, payload, { headers: headers }).then(response 
     console.log("Catch error Api Failed",err)
 })
 }
+
+
+export const ourprod=async()=>{
+    
+return await axios.get(`https://api.grandealz.vytech.co/draws`).then(response => {
+    console.log("Response", response.data.data);
+    return response.data.data
+}).catch((err) => {
+    console.log("Catch error Api Failed",err)
+})
+}
+
+export const ourCartPage=async()=>{
+    const key=fetchJSONAsync()
+    const headers={'Content-Type':'Application/json','Authorization':"Bearer"+key}
+    return await axios.get(`${'https://api.grandealz.vytech.co'}/draws`,{headers:headers}).then(response => {
+        console.log("Response", response.data.data);
+        return response.data.data
+    }).catch((err) => {
+        console.log("Catch error Api Failed",err)
+    })
+    }
+
+    export const ourCountry=async()=>{
+        const key=fetchJSONAsync()
+        const headers={'Content-Type':'Application/json','Authorization':"Bearer"+key}
+        return await axios.get(`${'https://api.grandealz.vytech.co'}/draws`,{headers:headers}).then(response => {
+            console.log("Response countryCode", response.data.data);
+            return response.data.data
+        }).catch((err) => {
+            console.log("Catch error Api Failed",err)
+        })
+        }

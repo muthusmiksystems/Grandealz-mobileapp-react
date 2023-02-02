@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren } from 'react';
+import React, { type PropsWithChildren,useEffect,useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -18,10 +18,32 @@ import { COLORS, FONTS } from '../../constants';
 import icons from '../../constants/icons';
 import image from '../../constants/image';
 import { useNavigation } from '@react-navigation/native';
+import { unwrapResult } from '@reduxjs/toolkit';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { horizontalScale, verticalScale } from '../../constants/metrices';
+import { useDispatch } from 'react-redux';
+import { bannerHandler } from '../../store/reducers/Banners';
+import { addressListHandler } from "../../store/reducers/addresslist";
+
 const DataPage = () => {
   const navigation = useNavigation();
+  const dispatch= useDispatch();
+  const [apiData,setApiData]=useState();
+
+  useEffect (()=>{
+    dispatch(bannerHandler())
+    .then(unwrapResult).then((originalPromiseResult)=>{
+      // console.log("successfully returned to login with response ", originalPromiseResult);
+      setApiData(originalPromiseResult);
+    })
+  },[])
+
+
+   const Addresslist = () =>{
+    dispatch(addressListHandler())
+   }
+       
+
   return (
     <ScrollView >
       <StatusBar
@@ -48,7 +70,7 @@ const DataPage = () => {
               />
             </View>
             <View style={{ flexDirection: "column" }}>
-              <TouchableOpacity onPress={() => navigation.navigate('User')}>
+              <TouchableOpacity onPress={() => {navigation.navigate('User'),Addresslist()}}>
                 <Image
                   source={icons.user}
                   resizeMode="contain"
@@ -65,7 +87,7 @@ const DataPage = () => {
         </View>
         
           <View style={{ padding: "3%", flex: 0.4 }}>
-            <Banner />
+            <Banner data={apiData}/>
           </View>
           
             <Text style={{ ...FONTS.lexendsemibold,fontSize:RFValue(18), marginLeft: "4%", ...FONTS.lexendsemibold, color:"black" }}>Closing Soon</Text>

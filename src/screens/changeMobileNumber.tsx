@@ -48,7 +48,7 @@ const ChangeMobileNumber = () => {
         {/* <Text style={{ fontSize: 35, color: "white",fontFamily:"Lexend-Regular" }}>Grandealz</Text> */}
       </View>
       <View style={styles.subdivTwo}>
-        <Text style={{ fontSize: RFValue(25), color: "black", textAlign: "center", fontFamily: "Lexend-SemiBold", marginTop: verticalScale(20) }}>Change Mobile No.</Text>
+        <Text style={{ fontSize: RFValue(26), color: "black", textAlign: "center", fontFamily: "Lexend-SemiBold", marginTop: verticalScale(20) }}>Change Mobile No.</Text>
         <View style={{ alignItems: "center" }}>
           <TextInput
             keyboardType={"phone-pad"}
