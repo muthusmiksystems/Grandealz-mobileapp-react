@@ -9,6 +9,7 @@ import {
   useColorScheme,
   TextInput,
   View,
+  Keyboard,
   Image,
   TouchableOpacity,
   // Button
@@ -26,6 +27,10 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS, FONTS } from "../constants";
 import { useDispatch,useSelector } from "react-redux";
 import { loginHanlder } from "../store/reducers/login";
+import useForm from "./Auth/useForm";
+import validate from "./Auth/validate";
+import { unwrapResult } from '@reduxjs/toolkit';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = () => {
   const navigation = useNavigation();
@@ -34,20 +39,94 @@ const Login = () => {
   console.log("PAss show", passShow);
   const [isSelected, setSelection] = useState(false);
 
-  const CheckBoxes = (props) => {
-    const [isSelected, setSelection] = useState(false);
-    return (
-      <View style={{ flexDirection: "row", left: horizontalScale(17) }}>
-        <CheckBox
-          value={isSelected}
-          onValueChange={setSelection}
-          style={styles.checkBox}
-          tintColors={{ true: COLORS.element}}
-        />
-      </View>
-    )
-  }
+  const { handleChange, details, handleSubmit, formErrors, data, formValues } = useForm(validate);
+  
+  const [token, setToken] = useState("");
+  const [errorLogin, setErrorLogin] = useState(null);
+  const [errorEmail, setErrorEmail] = useState(null);
+  const [errorPassword, setErrorPassword] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
+  useEffect(() => {
+    console.log(Object.keys(formValues).length, "kk", formErrors)
+    if (formErrors && Object.keys(formErrors).length > 0) {
+      if (formErrors && formErrors.email) {
+        //setEmail(formErrors.email);
+        setErrorEmail(formErrors.email);
+        console.log("email failed", formErrors.email)
+      }
+      else if (formErrors && formErrors.password) {
+        console.log("password Validation failed")
+        //setPassword(formErrors.password);
+        setErrorPassword(formErrors.password);
+      }
+      else {
+        setErrorEmail(formErrors.loginundef);
+        setErrorPassword(formErrors.loginundef);
+        console.log("im inisde the loginundi", formErrors.loginundef)
+      }
+    }
+    console.log(data,"im the formerror data........", formValues)
+  }, [formErrors])
+
+  useEffect(() => {
+    if (data && Object.keys(data)) {
+      const reg = {
+        "email": data.email,
+        "password": data.password,
+      }
+      
+      console.log("data inside the handle submit", data);
+      dispatch(loginHanlder(reg))
+        .then(unwrapResult)
+        .then(async (originalPromiseResult) => {
+          console.log("successfully returned to login with response ", originalPromiseResult);
+          if (originalPromiseResult.data.access_token) {
+            await AsyncStorage.setItem('loginToken', originalPromiseResult.data.access_token);
+            console.log("token from api................", originalPromiseResult.data.access_token)
+            setToken(originalPromiseResult.access_token)
+            //   setErrorLogin("");
+            //   console.log(await AsyncStorage.getItem('loginToken'), "helloooo")
+            //   console.log(originalPromiseResult.data)
+            navigation.navigate("Tabs")
+          } 
+          else {
+            console.log(originalPromiseResult, "error")
+            if (originalPromiseResult.errorCode == 2238) {
+              setErrorLogin("Username and Password not Found. Please Create an Account")
+              console.log(errorLogin, "error in login")
+            } else if (originalPromiseResult.errorCode == 2219) {
+              setErrorLogin("Please verify the mail sent and try again")
+              console.log(errorLogin, "error in login")
+            }
+          }
+        }).catch((rejectedValueOrSerializedError) => {
+          console.log(" Inside catch", rejectedValueOrSerializedError);
+        })
+    }
+  }, [data])
+
+  useEffect(()=>{
+    const token = AsyncStorage.getItem('loginToken');
+    if(token){
+      console.log("im inisde ato login")
+      navigation.navigate("Tabs")
+    }
+  },[])
+  useEffect(() => {
+    // console.log(errorPassword, password, "password error")
+  }, [errorPassword])
+
+  const handlePasswordBox = () => {
+    // console.log("box pass")
+    if (errorEmail) {
+      setEmail(""), setErrorEmail("");
+    }
+    else if (errorPassword) {
+      setPassword(""), setErrorPassword("");
+    }
+  }
   return (
     <SafeAreaView style={{ width: "100%", height: "100%", backgroundColor: "#f1f1f1" }}>
       <StatusBar
@@ -68,27 +147,52 @@ const Login = () => {
         </View>
       </View>
       <View style={styles.subdivTwo}>
-        <Text style={{ fontSize: RFValue(25), color: "black", textAlign: "center", fontFamily: "Lexend-SemiBold", marginTop: verticalScale(16) }}>Log In</Text>
-        <View style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), marginTop: verticalScale(40), color: "#000" }}>
+        <Text style={{ fontSize: RFValue(26), color: "black", textAlign: "center", fontFamily: "Lexend-SemiBold", marginTop: verticalScale(16) }}>Log In</Text>
+        <TouchableOpacity style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), marginTop: verticalScale(40), color: "#000" }}
+          onPressIn={() => handlePasswordBox()}>
           <TextInput
             placeholder="Email"
+            value={email}
             placeholderTextColor={"black"}
-            style={{ flexDirection: "column", width: horizontalScale(250), ...FONTS.lexendregular, fontSize: RFValue(14) }}
+            keyboardType="email-address"
+            onChangeText={e => { handleChange(e, "email"), setErrorEmail(""), setEmail(e) }}
+            style={{
+              flexDirection: "column",
+              width: horizontalScale(250),
+              ...FONTS.lexendregular,
+              fontSize: RFValue(14), color: (errorEmail) ? "red" : "black"
+            }}
           />
           <Fontisto name='email' size={30} style={{ alignSelf: "center" }} />
+        </TouchableOpacity>
+        <View style={{height:"5%"}}>
+          {formErrors.email || formErrors.loginundef ?
+            <Text style={styles.ErrorText}>{errorEmail}</Text> : null}
         </View>
-
-        <View style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), marginTop: verticalScale(18), color: "#000" }}>
+        <TouchableOpacity style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), color: "#000" }} onPressIn={() => handlePasswordBox()} >
           <TextInput
             placeholder="Password"
+            value={password}
             secureTextEntry={passShow ? true : false}
             placeholderTextColor={"black"}
-            style={{ flexDirection: "column", width: horizontalScale(250), ...FONTS.lexendregular, fontSize: RFValue(14) }}
+            onChangeText={e => { handleChange(e, "password"), setErrorPassword(""), setPassword(e) }}
+            style={{
+              flexDirection: "column",
+              width: horizontalScale(250),
+              ...FONTS.lexendregular,
+              fontSize: RFValue(14), color: (errorPassword) ? "red" : "black"
+            }}
           />
           <TouchableOpacity style={{ alignSelf: "center", flexDirection: "column" }} onPress={() => setPassShow(!passShow)}>
             {passShow ? <Ionicons name="eye-outline" size={30} /> :
-              <Ionicons name='eye-off-outline' size={30} />}
+              <Ionicons name='eye-off-outline' size={30} />
+            }
           </TouchableOpacity>
+
+        </TouchableOpacity>
+        <View style={{height:"3%"}}>
+          {formErrors.password || formErrors.loginundef ?
+            <Text style={styles.ErrorText}>{errorPassword}</Text> : null}
         </View>
         <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',marginHorizontal:"5%"}}>
           <View style={{display: 'flex',flexDirection:"column",marginStart:"1.5%"}}>
@@ -104,7 +208,7 @@ const Login = () => {
           </View>
           <TouchableOpacity style={{display: 'flex',flexDirection: "column",marginEnd:"2.5%"}} onPressIn={() => navigation.navigate("ForgetPassword")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular",fontSize:RFValue(12) }}>Forgot Password?</Text></TouchableOpacity>
         </View>
-        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(193), padding: "3%" }} onPressIn={() => {navigation.navigate("Tabs"),dispatch(loginHanlder())}}>
+        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(193), padding: "3%" }} onPress={e => { handleSubmit(e, "1"), Keyboard.dismiss }} disabled={false}>
           <Text style={{ textAlign: "center", fontSize:RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Log In</Text>
         </TouchableOpacity>
         <View style={{ flexDirection: "row", marginTop: "10%", alignSelf: "center" }}>
@@ -132,8 +236,14 @@ const styles = StyleSheet.create({
   },
   checkBox: {
     alignSelf: "center",
-    flexDirection:"column",
-    borderRadius:25
+    flexDirection: "column",
+    borderRadius: 25
+  },
+  ErrorText: {
+    color: "red",
+    ...FONTS.lexendregular,
+    fontSize: RFValue(10),
+    textAlign: "center"
   }
 })
 export default Login;

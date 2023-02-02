@@ -1,30 +1,30 @@
 import { createSlice, createAsyncThunk, } from '@reduxjs/toolkit';
 import axios from 'axios'
-import { Login_Url } from '../../services/constant';
-export const loginHanlder = createAsyncThunk('posts/loginPostcall', async (data, thunkAPI) => {
-   
+import { Verify_Url } from '../../services/constant';
+
+export const drawwinnersHandler = createAsyncThunk('posts/Drawwinnerscall', async (thunkAPI) => {
     try {
-        const payload = data;
-        let result = await axios.post(`${'https://api.grandealz.vytech.co'}/auth/login`, payload);
-        //console.log("result inside the login page",result.data.status)
+        console.log(("inside the draw api"));
+        
+        let result = await axios.get(`${'https://api.grandealz.vytech.co'}/draws/winners`);
+        console.log("result inside the DrawWinner data page",result.data.status)
         if (parseInt(result.data.status) === 200) {
             console.log({ responseData: result.data.data });
-            return result.data
+            return result.data.data;
         } else if(parseInt(result.data.status)== 401 ){
             console.log({responseData: result.data})
-            return result.data
         }else {
-            console.log('Login Error', result);
+            console.log('Draw winner Error', result);
             return result.data.message
         }
     } catch (error) {
         console.log('Login Catch Error', error);
     }
-}
-)
 
-export const loginHandleSlice = createSlice({
-    name: 'loginHandle',
+})
+
+export const drawwinnersHandleSlice = createSlice({
+    name: 'drawWinnersHandle',
     initialState: {
         data: "No data",
         isSuccess: false,
@@ -34,12 +34,11 @@ export const loginHandleSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
        
-         console.log(loginHanlder, "search response")
-        builder.addCase(loginHanlder.fulfilled, (state, action) => {
+        builder.addCase(drawwinnersHandler.fulfilled, (state, action) => {
             state.data = action.payload;
         })
     },
 })
-export default loginHandleSlice.reducer;
+export default drawwinnersHandleSlice.reducer;
 
 

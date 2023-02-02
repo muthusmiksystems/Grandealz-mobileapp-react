@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren } from 'react';
+import React, { type PropsWithChildren,useState,useEffect } from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -16,6 +16,7 @@ import icons from '../../constants/icons';
 import { COLORS, FONTS } from '../../constants';
 import { horizontalScale, verticalScale } from '../../constants/metrices';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { drawCommingGet } from '../../services/register';
 const data = [
     {
         id: '1',
@@ -57,10 +58,25 @@ const data = [
 
 ];
 const UpcomingDraws = () => {
+
+    const [close, setClose] = useState<any>();
+    //drawGetCall
+    useEffect(() => {
+      //console.log("data..............");
+      const data="status=UpComming"
+      const soon = async () => {
+        let closingData = await drawCommingGet(data)
+        let result = closingData.data;
+        console.log("im inside the upcomming page ",result);
+        setClose(result)
+      }
+      soon();
+  
+    }, [])
     return (
 
         <FlatList
-            data={data}
+            data={close}
             contentContainerStyle={{ width: "91%", alignSelf: "center", marginTop: "2%" }}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
@@ -69,15 +85,14 @@ const UpcomingDraws = () => {
 
                         <View>
                             <Image
-                                source={image.drawsCar}
+                                source={{uri: item.draw_image}}
                                 resizeMode={"contain"}
                                 style={{ height:verticalScale(150), width: horizontalScale(310) }}
                             />
                         </View>
                         <View style={{ marginLeft: "2%" }}>
-                            <Text style={{ fontSize: RFValue(16), color: COLORS.textHeader, ...FONTS.lexendsemibold, padding: "1%" }}>Campaign:- range Rover V8 GCC</Text>
-
-                            <Text style={{ fontSize: RFValue(16), color: COLORS.textHeader, ...FONTS.lexendregular, marginHorizontal: "1%", paddingBottom: "1%" }}>EL-00990</Text>
+                            <Text style={{ fontSize: RFValue(16), color: COLORS.textHeader, ...FONTS.lexendsemibold, padding: "1%" }}>Campaign:- {item.draw_title}</Text>
+                            <Text style={{ fontSize: RFValue(16), color: COLORS.textHeader, ...FONTS.lexendregular, marginHorizontal: "1%", paddingBottom: "1%" }}>{item.draw_sub_title}</Text>
                             <Text style={{ fontSize: RFValue(14), color: COLORS.element2, marginHorizontal: "1%", ...FONTS.lexendregular }}>Draw date to be announced</Text>
 
                         </View>

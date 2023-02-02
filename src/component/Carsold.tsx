@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren } from 'react';
+import React, { type PropsWithChildren,useState,useEffect } from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -15,42 +15,39 @@ import image from '../constants/image';
 import icons from '../constants/icons';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { FONTS } from '../constants';
-import { horizontalScale } from '../constants/metrices';
+import { horizontalScale,verticalScale } from '../constants/metrices';
+import { drawGetCall } from '../services/register';
+import { useNavigation } from '@react-navigation/native';
 
-
-const data = [
-    {
-        id: '1',
-        imag: image.whitecar,
-        from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-        to: "1689 sold out 1985"
-
-    },
-    {
-        id: '2',
-        imag: image.whitecar,
-        from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-        to: "1689 sold out 1985"
-    },
-    {
-        id: '3',
-        imag: image.whitecar,
-        from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-        to: "1689 sold out 1985"
-    },
-    {
-        id: '4',
-        imag: image.whitecar,
-        from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-        to: "1689 sold out 1985"
-    },
-];
 const Carsold = () => {
+    const navigation = useNavigation();
+    const [close, setClose] = useState<any>();
+    //drawGetCall
+    useEffect(() => {
+      const soon = async () => {
+        let campaigns = await drawGetCall()
+        let result = campaigns.data;
+        
+        var a: any[] = [];
+        result.map((e: { total_no_of_sold_out_tickets: number; total_no_of_tickets: number; }) => {
+          var data = (e.total_no_of_sold_out_tickets * 100 / e.total_no_of_tickets);
+          //console.log("sold out page.......",e);
+          if (data ===100) {
+            a.push(e)
+          }
+          //console.log(a, "data to maping")
+          setClose(a)
+        })
+      }
+      soon();
+  
+    },[])
     return (
         <SafeAreaView >
+            {close ?
             <View style={{bottom:80}} >
                 <FlatList
-                    data={data}
+                    data={close}
                     contentContainerStyle={{}}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => (
@@ -58,17 +55,17 @@ const Carsold = () => {
                             <TouchableOpacity style={{  borderRadius: 9,backgroundColor: "white" }}>
                                 <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8 ,flexDirection: 'column', padding: 10}}>
                                         <Image
-                                            source={item.imag}
+                                            source={{uri : item.draw_image}}
                                             style={{
-
-                                                height: 150,
+                                                height: verticalScale(150),
+                                                width: horizontalScale(230),
                                                 borderWidth: 1,
                                             }}
                                         />
                                 </View>
                                 <View style={{ marginLeft:horizontalScale(15), padding: 10 }}>
-                                    <Text style={{  ...FONTS.lexendsemibold,fontSize: RFValue(13),fontWeight:"600", color: "black" }}>Campaign:- range Rover V8 GCC </Text>
-                                    <Text style={{ ...FONTS.lexendregular,fontSize:RFValue(13),fontWeight:"300", color: "black" }}>EL-00990</Text>
+                                    <Text style={{  ...FONTS.lexendsemibold,fontSize: RFValue(13),fontWeight:"600", color: "black" }}>Campaign:- {item.draw_title}</Text>
+                                    <Text style={{ ...FONTS.lexendregular,fontSize:RFValue(13),fontWeight:"300", color: "black" }}>{item.draw_sub_title}</Text>
                                     <Text style={{ ...FONTS.lexendregular,fontSize: RFValue(13),fontWeight:"400", color: "#E70736" }}>Draw date to be announced</Text>
                                 </View>
                              </TouchableOpacity>
@@ -76,6 +73,7 @@ const Carsold = () => {
                     )}
                 />
             </View>
+            :null }
         </SafeAreaView>
     )
 }
