@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren } from 'react';
+import React, { type PropsWithChildren,useState,useEffect } from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -16,6 +16,7 @@ import icons from '../../constants/icons';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { COLORS, FONTS } from '../../constants';
 import { horizontalScale, verticalScale } from '../../constants/metrices';
+import { drawWinnerGet } from '../../services/register';
 
 
 const data = [
@@ -59,10 +60,24 @@ const data = [
 
 ];
 const Winners = () => {
+    const [close, setClose] = useState<any>();
+    //drawGetCall
+    useEffect(() => {
+      //console.log("data..............");
+      const data="winners"
+      const soon = async () => {
+        let closingData = await drawWinnerGet(data)
+        let result = closingData.data;
+        //console.log("im inside the winner page ",result);
+        setClose(result)
+      }
+      soon();
+  
+    }, [])
     return (
 
         <FlatList
-            data={data}
+            data={close}
             contentContainerStyle={{ width: "91%", alignSelf: "center", marginTop: "5%" }}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
@@ -70,7 +85,7 @@ const Winners = () => {
                     <TouchableOpacity >
                         <View>
                             <Image
-                                source={image.drawsCar}
+                                source={{uri: item.draw_image}}
                                 resizeMode="contain"
                                 style={{ height: verticalScale(160), width: horizontalScale(320) }}
 
@@ -80,10 +95,10 @@ const Winners = () => {
 
                             <Text style={{ fontSize: RFValue(15), color: COLORS.topBackground, ...FONTS.lexendsemibold, paddingTop: "3%", paddingHorizontal: "3.5%" }}>CONGRATULATIONS </Text>
                             <Text style={{ fontSize: RFValue(13), color: COLORS.textHeader, marginHorizontal: "1%", ...FONTS.lexendregular, paddingHorizontal: "3%" }}>
-                                <Text style={{ fontSize: RFValue(16), color: COLORS.textHeader,...FONTS.lexendsemibold, paddingHorizontal: "3%" }}>Arjun Bista </Text>
+                                <Text style={{ fontSize: RFValue(16), color: COLORS.textHeader,...FONTS.lexendsemibold, paddingHorizontal: "3%" }}>{item.winner.user.first_name} </Text>
                                 on Winning</Text>
-                            <Text style={{ fontSize: RFValue(13), color: COLORS.textHeader, ...FONTS.lexendsemibold, marginHorizontal: "1%", paddingBottom: "1%", paddingHorizontal: "3%" }}>1 entry our range Rover campaign</Text>
-                            <Text style={{ fontSize: RFValue(13), color: COLORS.black, marginHorizontal: "1%", ...FONTS.lexendregular, paddingHorizontal: "3%" }}>Coupon no. LS-00090-A1205-D</Text>
+                            <Text style={{ fontSize: RFValue(13), color: COLORS.textHeader, ...FONTS.lexendsemibold, marginHorizontal: "1%", paddingBottom: "1%", paddingHorizontal: "3%" }}>1 entry our {item.draw_title}</Text>
+                            <Text style={{ fontSize: RFValue(13), color: COLORS.black, marginHorizontal: "1%", ...FONTS.lexendregular, paddingHorizontal: "3%" }}>Coupon no. {item.winner.draw_ticket}</Text>
                             <Text style={{ fontSize: RFValue(10), color: COLORS.gray, paddingTop: "5%", ...FONTS.lexendregular, marginHorizontal: "1%",paddingHorizontal: "3.5%" }}>Announced on</Text>
                             <Text style={{ fontSize: RFValue(10), color: COLORS.gray, ...FONTS.lexendregular, marginHorizontal: "1%",paddingHorizontal: "3.5%" }}>August 07.2022 8:05 PM</Text>
                         </View>

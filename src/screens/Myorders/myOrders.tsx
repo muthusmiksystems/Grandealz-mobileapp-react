@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect,useState}from "react";
 import {
     Text,
     View,
@@ -7,7 +7,7 @@ import {
     ScrollView,
     StyleSheet,
     Image,
-    TouchableOpacity
+    TouchableOpacity,Modal,
 } from 'react-native';
 import { horizontalScale, verticalScale } from "../../constants/metrices";
 import icons, { shoppingCart } from "../../constants/icons";
@@ -18,10 +18,22 @@ import { RFValue } from "react-native-responsive-fontsize";
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import image from "../../constants/image";
 import OrderList from "./orderList";
+import { orderlistHandle } from "../../services/orderlist";
 
 const MyOrders = () => {
 
     const navigation = useNavigation();
+
+    const [Orderlistdata, setOrderlistdata] = useState<any>();
+    const [modalVisible, setModalVisible] = useState(false);
+    
+    useEffect(() => {
+      const  orderitems= async () => {
+        let OrderList= await orderlistHandle()
+        setOrderlistdata(OrderList)
+      }
+      orderitems();
+    }, [])
 
     return (
         <SafeAreaView style={{ backgroundColor: "#F1F1F", height: "100%" }}>
@@ -33,29 +45,43 @@ const MyOrders = () => {
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18), flexDirection: "column" }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), width: "78%", textAlign: "center" }}>My Orders</Text>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), width: "78%", textAlign: "center" }}>My Orders</Text>
 
             </View>
-            <ScrollView style={{ height: "80%" }}>
-                <View style={{ flexDirection: "row" }}>
-                    <View style={{ width: "78%", borderRadius: 20, backgroundColor: "#FFFFFF", margin: "2%", flexDirection: "column" }}>
-                        <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "4%" }}>
-                            <View style={{ flexDirection: "column",alignItems:"center" }}>
-                                <View style={{ flexDirection: "row",alignItems:"center",justifyContent:"center" }}>
+            <ScrollView style={{ height: "80%" ,padding:"4%"}}>
+            {/* <View style={styles.centeredView}>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        Alert.alert('Modal has been closed.');
+                        setModalVisible(!modalVisible);
+                    }}>
+                        <View>
+                            <Text> Hi hello people</Text>
+                        </View>
+                        </Modal>
+            </View> */}
+                <View style={{ flexDirection: "row",marginBottom:RFValue(10) }}>
+                    <View style={{ flexDirection: "row",alignSelf:"center",width: "83%",height:"82%", borderRadius: 20, backgroundColor: "#FFFFFF", marginRight: "2%", }}>
+                        {/* <View style={{  }}> */}
+                            <View style={{ flexDirection: "column" }}>
+                                <View style={{ flexDirection: "row",margin:RFValue(10)}}>
                                     <Image
                                         source={icons.search}
                                         resizeMode="contain"
-                                        style={{ height:verticalScale(20), width:horizontalScale(20) }}
+                                        style={{ height:verticalScale(20), width:horizontalScale(20),marginLeft:RFValue(15),top:RFValue(4) }}
                                     />
-                                    <Text style={{ color: COLORS.gray, fontSize: RFValue(16), ...FONTS.lexendregular, marginStart: "5%" }}>Search in orders</Text>
+                                    <Text style={{ color: COLORS.gray, fontSize: RFValue(16), ...FONTS.lexendregular, marginStart:RFValue(5) }}>Search in orders</Text>
                                 </View>
                             </View>
-                        </View>
+                        {/* </View> */}
 
                     </View>
                     <View style={{ borderRadius: 10, backgroundColor: "#FFFFFF", marginVertical: "2%", flexDirection: "column" }}>
                         <View style={{ flexDirection: "row", marginHorizontal: "2%", borderRadius: 10 }}>
-                            <TouchableOpacity style={{ flexDirection: "column" }} >
+                            <TouchableOpacity style={{ flexDirection: "column" }} onPress={()=>setModalVisible(false)}>
                                 <Image
                                     source={icons.filter}
 
@@ -66,7 +92,7 @@ const MyOrders = () => {
                     </View>
                 </View>
                 <View >
-                    <OrderList />
+                    <OrderList  orderlist={Orderlistdata}/>
                 </View>
             </ScrollView>
             {/* <View style={{ flexDirection: "row", height: "7%", backgroundColor: COLORS.white }}>
@@ -77,6 +103,7 @@ const MyOrders = () => {
                     <Text style={{ color: COLORS.white, fontSize: RFValue(14), ...FONTS.lexendregular }} >Process to Checkout </Text>
                 </TouchableOpacity>
             </View> */}
+           
         </SafeAreaView>
     );
 }
@@ -96,7 +123,13 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         // borderWidth:2
-    }
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
+      },
 
 })
 export default MyOrders;

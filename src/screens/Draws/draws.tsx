@@ -26,12 +26,14 @@ import { RFValue } from "react-native-responsive-fontsize";
 import DrawsHeader from "./drawsListHorizontal";
 
 import DrawsMain from "./drawsMain";
+import { useDispatch } from "react-redux";
+import { drawwinnersHandler } from "../../store/reducers/Drawwinner";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 
 const Draws = (props: Props) => {
-
-
-
+  const dispatch = useDispatch();
+  
   return (
     <SafeAreaView>
       <StatusBar animated={true} backgroundColor={"#0a0127"} />
@@ -43,7 +45,7 @@ const Draws = (props: Props) => {
                 style={{ width: 20,height: 20,}} />
             </TouchableOpacity> */}
         {/* <View style={{ marginTop: "4%", flexDirection: 'row', justifyContent: "center" }}> */}
-        <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), textAlign: "center" }}>Draws</Text>
+        <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(21), textAlign: "center" }}>Draws</Text>
         {/* </View> */}
       </View>
       <ScrollView style={{ height: "90%" }}>

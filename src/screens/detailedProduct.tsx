@@ -34,14 +34,14 @@ const DetailedProduct = ({ route }) => {
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18), flexDirection: "column" }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), textAlign: "center", width: "75%" }}>{value.item.name}</Text>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), textAlign: "center", width: "75%" }}>{value.item.product_title}</Text>
 
             </View>
             <ScrollView style={{ height: "80%", padding: "4%" }}>
                 <View style={{ width: "100%", alignItems: "center" }}>
                     <View style={{ padding: 20, borderRadius: 10, alignItems: "center", width: "100%", backgroundColor: COLORS.white }}>
                         <Image
-                            source={image.pencilorg}
+                            source={{uri:value.item.product_image}}
                             resizeMode="contain"
                             style={{
                                 width:horizontalScale(250),
@@ -49,7 +49,7 @@ const DetailedProduct = ({ route }) => {
                             }}
                         />
                     </View>
-                    <Text style={{ marginTop: 10, ...FONTS.lexendregular, color: COLORS.black }}>{value.item.detail}</Text>
+                    <Text style={{ marginTop: 10, ...FONTS.lexendregular, color: COLORS.black }}>{value.item.product_description}</Text>
                 </View>
             </ScrollView>
         </SafeAreaView>

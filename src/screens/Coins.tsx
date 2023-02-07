@@ -42,7 +42,7 @@ const Coins = () => {
                             <View style={{ width: "20%", justifyContent: "center", alignItems: "center" }}>
                                 <Image
                                     source={icons.rupee}
-                                    style={{ height: RFValue(50), width: RFValue(50) }}
+                                    style={{ height: RFValue(48), width: RFValue(48) }}
                                 />
                             </View>
                             <View style={{ width: "70%", justifyContent: "center", alignItems: "center", }}>
@@ -172,9 +172,9 @@ const styles = StyleSheet.create({
     fontSizeStyle: {
         ...FONTS.lexendsemibold,
         color: COLORS.white,
-        fontSize: RFValue(35),
-        width: "82%",
-        left: "5%"
+        fontSize: RFValue(30),
+        width: "90%",
+        left: "12%"
     },
 
 })

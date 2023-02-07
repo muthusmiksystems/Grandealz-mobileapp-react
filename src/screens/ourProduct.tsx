@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     Text,
     View,
@@ -20,6 +20,8 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS, FONTS } from "../constants";
 import OrderList from "./Myorders/orderList";
 import WishlistData from "./wishListData";
+import { productGetCall } from "../../src test sasi/services/register";
+import { ourCountry, ourprod } from "../services/register";
 const Data = [
     {
         id: '1',
@@ -76,6 +78,16 @@ const Data = [
 ];
 const OurProducts = () => {
     const navigation = useNavigation();
+    const [stock,setStock]=useState()
+    useEffect(()=>{
+        const prod=async ()=>{
+            let ourProduct=await ourprod()
+            console.log("consolelog",ourProduct)
+            setStock(ourProduct)
+        }
+        prod()
+    },[])
+   
     return (
         <SafeAreaView style={{ backgroundColor: "#F1F1F", height: "100%" }}>
             <StatusBar
@@ -86,13 +98,13 @@ const OurProducts = () => {
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18), flexDirection: "column" }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: RFValue(24), width: "75%", textAlign: "center" }}>Our Products</Text>
+                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: RFValue(20), width: "75%", textAlign: "center" }}>Our Products</Text>
 
             </View>
             <ScrollView style={{}}>
-                <View >
+                <View>
                     <FlatList
-                        data={Data}
+                        data={stock}
                         scrollEnabled={true}
                         numColumns={2}
                         contentContainerStyle={{ paddingBottom: verticalScale(50),alignSelf:"center" }}
@@ -101,13 +113,13 @@ const OurProducts = () => {
                                 <View style={{ padding: moderateScale(9) }}>
                                     <View style={{ paddingVertical: verticalScale(15), backgroundColor: "#F1F1F1",alignItems:"center" }}>
                                         <Image
-                                            source={item.imag}
+                                            source={{uri:item.product_image}}
                                             resizeMode="stretch"
                                             style={{ width: horizontalScale(120), height: verticalScale(130) }}
                                         />
                                     </View>
 
-                                    <Text style={{ textAlign: "center", ...FONTS.lexendsemibold, color: COLORS.black }}>{`\n`}{item.name}</Text>
+                                    <Text style={{ textAlign: "center", ...FONTS.lexendsemibold, color: COLORS.black }}>{`\n`}{item.product_title}</Text>
                                 </View>
                             </TouchableOpacity>
                         )}

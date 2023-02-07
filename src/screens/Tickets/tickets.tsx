@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import {
     Text,
     View,
@@ -16,10 +16,22 @@ import { useNavigation } from "@react-navigation/native";
 import TicketDetails from "../../component/ticketDetails";
 import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS } from "../../constants";
+import { activeTicketGet } from "../../services/ticket";
 
 const Tickets = () => {
 
     const navigation=useNavigation();
+
+    
+        const [Ticketlistdata, setTicketlistdata] = useState<any>();
+    
+        useEffect(() => {
+          const soon = async () => {
+            let TicketList= await activeTicketGet()
+            setTicketlistdata(TicketList)
+          }
+          soon();
+        }, [])
 
     return (
         <SafeAreaView>
@@ -28,13 +40,10 @@ const Tickets = () => {
                 backgroundColor="#0a0127"
             />
             <View style={styles.subdivOne}>
-                {/* <TouchableOpacity onPress={()=>navigation.goBack()} style={{marginLeft:horizontalScale(14)}}>
-                    <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
-                </TouchableOpacity> */}
-                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24),textAlign:"center" }}>Active Tickets</Text>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20),textAlign:"center" }}>Active Tickets</Text>
             </View>
             <View style={styles.subdivTwo}>
-                <TicketDetails/>
+                <TicketDetails Ticketdata={Ticketlistdata}/>
             </View>
         </SafeAreaView>
     );
@@ -44,12 +53,9 @@ const styles = StyleSheet.create({
         width: horizontalScale(375),
         height: verticalScale(80),
         backgroundColor: "#0a0127",
-        // alignItems: "center",
         justifyContent: 'center',
-        // flexDirection: "row"
     },
     subdivTwo: {
-        // height: verticalScale(748),
         backgroundColor:COLORS.lightGray    
     }
 

@@ -18,88 +18,44 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import { useNavigation } from '@react-navigation/native';
 import { horizontalScale, verticalScale } from '../../constants/metrices';
 
-const data = [
-    {
-        id: '1',
-        imag: image.pencil,
-        name: "Pencil",
-        desc: "Blanco Set",
-        price: "₹100.00",
-        count: "1 Ticket",
-        delvery: "Delivered on fab 20"
 
-    },
-    {
-        id: '2',
-        imag: image.pencil,
-        name: "Pencil",
-        desc: "Blanco Set",
-        price: "₹100.00",
-        count: "1 Ticket",
-        delvery: "Delivered on fab 20"
-
-    },
-    {
-        id: '3',
-        imag: image.pencil,
-        name: "Pencil",
-        desc: "Blanco Set",
-        price: "₹100.00",
-        count: "1 Ticket",
-        delvery: "Delivered on fab 20"
-
-    },
-    {
-        id: '4',
-        imag: image.pencil,
-        name: "Pencil",
-        desc: "Blanco Set",
-        price: "₹100.00",
-        count: "1 Ticket",
-        delvery: "Delivered on fab 20"
-
-    },
-
-];
-const OrderList = () => {
+const OrderList = (orderlist) => {
     const navigation = useNavigation();
-    console.log("again......")
     return (
         <SafeAreaView >
             <View >
                 <FlatList
-                    data={data}
-                    contentContainerStyle={{paddingBottom:"5%" }}
-                    keyExtractor={item => item.id}
+                    data={orderlist.orderlist}
+                    contentContainerStyle={{ paddingBottom: "5%" }}
+                    keyExtractor={item => item._id}
                     renderItem={({ item }) => (
-                        <View style={{ paddingHorizontal: '5%',paddingTop:"4%"}}>
-                            <TouchableOpacity style={{ elevation: 1, borderRadius: 9, backgroundColor: "white" }} onPress={()=>navigation.navigate("OrderDetails")}>
-                                <View style={{flexDirection:"row",backgroundColor:"#fff"}} >
-                                    <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8,width:"30%" }}>
-                                        <View style={{ flexDirection: 'column', padding: 10,margin:5 }}>
+                        <View style={{ marginBottom: "4%" }}>
+                            <TouchableOpacity onPress={() => navigation.navigate("OrderDetails",item)}>
+                                <View style={{ flexDirection: "row", backgroundColor: "#fff", borderRadius: 10 }} >
+                                    <View style={{ alignItems: 'center', width: "30%" }}>
+                                        <View style={{ flexDirection: 'column', padding: 10, margin: 5 }}>
                                             <Image
-                                                source={item.imag}
-                                                style={{
-                                                    borderWidth: 1,
-                                                }}
+                                                source={{ uri: item.draws.draw.product_image}}
+                                                resizeMode="contain"
+                                                style={{ height: verticalScale(70), width: horizontalScale(100) }}
                                             />
                                         </View>
                                     </View>
-                                    <View style={{ margin: 5, padding: 10 }}>
-                                        <Text style={{ fontSize: 16, ...FONTS.lexendsemibold, color: COLORS.black }}>{item.name} </Text>
-                                        <Text style={{ fontSize: 14,...FONTS.lexendregular, color: COLORS.black }}>{item.desc}  </Text>
-                                        <Text style={{  fontSize: 14,...FONTS.lexendregular,color: "red" }}>{item.price}</Text>
-                                        <Text style={{ fontSize: 14,...FONTS.lexendregular, color: COLORS.black }}>{item.count}  </Text>
-                                        <Text style={{ fontSize: 12,...FONTS.lexendregular, color: COLORS.black }}>{item.delvery}  </Text>                                        
+                                    <View style={{ margin: 5, padding:10,width:"45%"}}>
+                                        <Text style={{ fontSize: RFValue(16), ...FONTS.lexendsemibold, color: COLORS.black }}>{item.draws.draw.product_title} </Text>
+                                        <Text style={{ fontSize: RFValue(14), ...FONTS.lexendregular, color: "#616161" }}>{item.draws.draw.draw_title}  </Text>
+                                        <Text style={{ fontSize: RFValue(14), ...FONTS.lexendregular, color: "red" }}>₹{item.draws.draw.product_price}</Text>
+                                        <Text style={{ fontSize: RFValue(14), ...FONTS.lexendregular, color: "#616161", marginTop: RFValue(7) }}>{item.draws.draw_tickets.length} Tickets</Text>
+                                        {/* <Text style={{ fontSize: RFValue(12), ...FONTS.lexendregular, color: "#0B002A" }}>{item.delvery}  </Text> */}
                                     </View>
-                                    <View style={{ flexDirection: "row", marginVertical: "2%",marginStart:"3%" }}>
-                                        <View style={{ flexDirection: "column", marginLeft: 15,justifyContent:"center",marginStart:horizontalScale(30) }}>
+                                    <View style={{ flexDirection: "row", marginVertical: "2%", marginStart: "3%"}}>
+                                        <View style={{ flexDirection: "column", justifyContent: "center", marginStart: horizontalScale(30) }}>
                                             <Image
                                                 source={icons.next}
                                                 style={{
                                                     borderWidth: 1,
-                                                    width:verticalScale(30),
-                                                    height:verticalScale(25)
+                                                    width: verticalScale(30),
+                                                    height: verticalScale(25)
                                                 }}
                                             />
                                         </View>
