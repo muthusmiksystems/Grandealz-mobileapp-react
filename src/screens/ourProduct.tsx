@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     Text,
     View,
@@ -20,6 +20,8 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS, FONTS } from "../constants";
 import OrderList from "./Myorders/orderList";
 import WishlistData from "./wishListData";
+import { productGetCall } from "../../src test sasi/services/register";
+import { ourCountry, ourprod } from "../services/register";
 const Data = [
     {
         id: '1',
@@ -76,6 +78,16 @@ const Data = [
 ];
 const OurProducts = () => {
     const navigation = useNavigation();
+    const [stock,setStock]=useState()
+    useEffect(()=>{
+        const prod=async ()=>{
+            let ourProduct=await ourprod()
+            console.log("consolelog",ourProduct)
+            setStock(ourProduct)
+        }
+        prod()
+    },[])
+   
     return (
         <SafeAreaView style={{ backgroundColor: "#F1F1F", height: "100%" }}>
             <StatusBar
@@ -90,23 +102,24 @@ const OurProducts = () => {
 
             </View>
             <ScrollView style={{}}>
-                <View >
+                <View>
                     <FlatList
-                        data={Data}
+                        data={stock}
                         scrollEnabled={true}
                         numColumns={2}
-                        contentContainerStyle={{ padding:"4%",marginTop:RFValue(5)}}
+                        contentContainerStyle={{ paddingBottom: verticalScale(50),alignSelf:"center" }}
                         renderItem={({ item, index }) => (
-                            <TouchableOpacity style={{ backgroundColor: "white",borderRadius:8,marginBottom:horizontalScale(14),marginLeft:verticalScale(14),width:horizontalScale(155),height:verticalScale(190) }} onPress={() => { navigation.navigate("DetailedProduct", { item }) }}>
-                                <View style={{padding:RFValue(10)}}>
-                                    <View style={{backgroundColor: "#F1F1F1",alignItems:"center",width: horizontalScale(135),padding:RFValue(18),height: verticalScale(135) }}>
+                            <TouchableOpacity style={{ backgroundColor: "white",borderRadius:8,marginTop:horizontalScale(14),marginLeft:verticalScale(14),width:horizontalScale(160),height:verticalScale(220) }} onPress={() => { navigation.navigate("DetailedProduct", { item }) }}>
+                                <View style={{ padding: moderateScale(9) }}>
+                                    <View style={{ paddingVertical: verticalScale(15), backgroundColor: "#F1F1F1",alignItems:"center" }}>
                                         <Image
-                                            source={item.imag}
+                                            source={{uri:item.product_image}}
                                             resizeMode="stretch"
-                                            style={{width: horizontalScale(99), height: verticalScale(99) }}
+                                            style={{ width: horizontalScale(120), height: verticalScale(130) }}
                                         />
                                     </View>
-                                <Text style={{ textAlign: "center",fontSize:RFValue(13), ...FONTS.lexendsemibold, color: COLORS.black,marginTop:RFValue(-8)}}>{`\n`}{item.name}</Text>
+
+                                    <Text style={{ textAlign: "center", ...FONTS.lexendsemibold, color: COLORS.black }}>{`\n`}{item.product_title}</Text>
                                 </View>
                             </TouchableOpacity>
                         )}

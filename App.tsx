@@ -1,4 +1,4 @@
-import React, {type PropsWithChildren} from 'react';
+import React, { type PropsWithChildren } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -16,8 +16,8 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Landing from './src/screens/landing';
 import ForgetPassword from './src/screens/forgetPassword';
 import DataPage from './src/screens/Home/dataPage';
@@ -47,12 +47,15 @@ import PersonalDetails from './src/component/personalDetails';
 import OurProducts from './src/screens/ourProduct';
 import DetailedProduct from './src/screens/detailedProduct';
 import HowItWorks from './src/screens/howitworks';
+import Coupons from './src/screens/Tickets/coupon';
+
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        screenOptions={{headerShown: false}}
+        screenOptions={{ headerShown: false }}
         initialRouteName="landing">
         <Stack.Screen name="landing" component={Landing} />
         <Stack.Screen name="login" component={Login} />
@@ -64,7 +67,7 @@ const App = () => {
         <Stack.Screen name="WishList" component={WishList} />
         <Stack.Screen name="PriceDetails" component={PriceDetails} />
         <Stack.Screen name="ProductDetails" component={ProductDetails} />
-	      <Stack.Screen name="User" component={User} />
+        <Stack.Screen name="User" component={User} />
         <Stack.Screen name="Delivery" component={Delivery} />
         <Stack.Screen name="Address" component={Address} />
         <Stack.Screen name="AddAddress" component={AddAddress} />
@@ -82,6 +85,7 @@ const App = () => {
         <Stack.Screen name="DetailedProduct" component={DetailedProduct} />
         <Stack.Screen name="PersonalDetails" component={PersonalDetails} />
         <Stack.Screen name="HowItWorks" component={HowItWorks} />
+        <Stack.Screen name="Coupons" component={Coupons} />
         < Stack.Screen
           name="Tabs"
           component={Tabs}

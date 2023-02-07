@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -19,9 +19,15 @@ import OTPTextView from 'react-native-otp-textinput';
 import { useNavigation } from "@react-navigation/native";
 import { RFValue } from "react-native-responsive-fontsize";
 import EntypoIcons from "react-native-vector-icons/Entypo";
+import { useDispatch } from "react-redux";
+import { VerifyHandler } from "../store/reducers/verify";
+import { unwrapResult } from '@reduxjs/toolkit';
 
-const OtpPage = () => {
-
+const OtpPage = ({route}) => {
+  const token=route.params;
+  console.log("tokennnnnnnn",token)
+  const [otp,setOtp]=useState("");
+  const dispatch=useDispatch();
   const navigation = useNavigation();
   const containerStyle = {
     fontFamily: "Lexend-Regular",
@@ -29,7 +35,28 @@ const OtpPage = () => {
     width: horizontalScale(40),
     marginTop:verticalScale(9)
   }
-
+  const handleSubmit=()=>{
+    const Data={
+      "otp":otp,
+      "token":token
+    }
+    console.log("data for opt verify...........",otp.length);
+    
+    if(otp.length>3){
+    dispatch(VerifyHandler(Data)).then(unwrapResult)
+    .then((originalPromiseResult) => {
+       console.log("successfully returned to login with response ", originalPromiseResult);
+         if (originalPromiseResult.status==="200") {
+             const param = originalPromiseResult.data;
+             navigation.navigate("login")
+        } else {
+           console.log("error",originalPromiseResult);
+           ;
+        }
+    })
+    }
+    
+  }
   return (
     <SafeAreaView style={{ width: "100%", height: "100%", backgroundColor: "#f1f1f1" }}>
       <StatusBar
@@ -54,24 +81,25 @@ const OtpPage = () => {
         {/* <Text style={{ fontSize: 35, color: "white", fontFamily: "Lexend-Regular" }}>Grandealz</Text> */}
       </View>
       <View style={styles.subdivTwo}>
-        <Text style={{ fontSize:  RFValue(25), color: "black", textAlign: "center", fontFamily: "Lexend-SemiBold", marginTop: verticalScale(14) }}>Confirm OTP</Text>
+        <Text style={{ fontSize:  RFValue(26), color: "black", textAlign: "center", fontFamily: "Lexend-SemiBold", marginTop: verticalScale(14) }}>Confirm OTP</Text>
         <View style={{ alignItems: "center" }}>
-          <Text style={{ width: horizontalScale(300), fontSize: RFValue(12), color: "black", marginTop: verticalScale(27), fontFamily: "Lexend-Regular" }}>
+          <Text style={{ width: horizontalScale(300), textAlign: "justify", fontSize: RFValue(12), color: "black", marginTop: verticalScale(27), fontFamily: "Lexend-Regular" }}>
             Please  enter  the  verification  code  that  we  have  sent  to  the  mobile  number  +919549878945
           </Text> 
           <OTPTextView
-            // handleTextChange={(value) => {setOtp(value) }}
+           
             textInputStyle={containerStyle}
             inputCount={4}
             inputCellLength={1}
             tintColor={"#0a0127"}
+            handleTextChange={(text) => {setOtp(text) }}
           />
           <View style={{flexDirection:"row",marginTop:"2%"}}>
           <Text style={{ color: "black", fontFamily: "Lexend-Regular",fontSize:RFValue(13) }}>Time Remaining 2:00</Text>
           <TouchableOpacity><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular",fontSize:RFValue(13) }}>     Resend</Text></TouchableOpacity>
           </View>
         </View>
-        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(223), padding: "4%" }}>
+        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(223), padding: "4%" }}  onPress={() => { handleSubmit() }}>
           <Text style={{ textAlign: "center", fontSize:RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Verify</Text>
         </TouchableOpacity>
         <View style={{ flexDirection: "row", marginTop: "7%", alignSelf: "center",paddingBottom:verticalScale(52)}}>

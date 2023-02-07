@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk, } from '@reduxjs/toolkit';
 import axios from 'axios'
+import { ToastAndroid } from 'react-native';
 import { Forget_Password_Url } from '../../services/constant';
 
-export const forgotPasswordHandler = createAsyncThunk('posts/forgotpostcall', async (data,thunkAPI) => {
+export const forgotPasswordHandler = createAsyncThunk('posts/forgotpostcall', async (data, thunkAPI) => {
 
     // console.log("Inside the api call", data);
 
@@ -17,23 +18,28 @@ export const forgotPasswordHandler = createAsyncThunk('posts/forgotpostcall', as
     try {
         const payload = data;
         let result = await axios.post(`${'https://api.grandealz.vytech.co'}/auth/forgote-password`, payload);
-        console.log("result inside the Forgot page",result.data.status)
+        console.log("result inside the Forgot page", result.data.status)
         if (parseInt(result.data.status) === 200) {
             console.log({ responseData: result.data.data });
             return result.data.message
-        } else if(parseInt(result.data.status)== 404 ){
+        } else if (parseInt(result.data.status) == 404) {
             // console.log({responseData: result.data})
             return result.data.message
-        }else {
+        } else {
             console.log('Forgot Error', result);
             return result.data.message
         }
     } catch (error) {
         console.log('Forgot Catch Error', error);
+        ToastAndroid.showWithGravity(
+            'Please try again later',
+            ToastAndroid.SHORT,
+            ToastAndroid.CENTER,
+        );
     }
 })
 
-export const registerHandleSlice = createSlice({
+export const forgetPasswordHandleSlice = createSlice({
     name: 'ForgorHandle',
     initialState: {
         data: "No data",
@@ -43,13 +49,13 @@ export const registerHandleSlice = createSlice({
     },
     reducers: {},
     extraReducers: (builder) => {
-       
+
         console.log(forgotPasswordHandler, "search response")
         builder.addCase(forgotPasswordHandler.fulfilled, (state, action) => {
             state.data = action.payload;
         })
     },
 })
-export default registerHandleSlice.reducer;
+export default forgetPasswordHandleSlice.reducer;
 
 

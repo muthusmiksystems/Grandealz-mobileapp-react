@@ -61,6 +61,13 @@ const ForgetPassword = () => {
             );
             navigation.navigate('OtpPage')
           }
+          // else if(originalPromiseResult==="undefined"){
+          //   ToastAndroid.showWithGravity(
+          //     'Please try again later.',
+          //     ToastAndroid.SHORT,
+          //     ToastAndroid.CENTER,
+          //   );
+          // }
           else{
             setError(originalPromiseResult)
             // console.log("error....",error);
@@ -106,7 +113,7 @@ const ForgetPassword = () => {
               placeholderTextColor={"black"}
               onChangeText={(text: String) => setForgetEmail(text)}
               value={forgetEmail}
-              style={{ flexDirection: "column", width: horizontalScale(250), ...FONTS.lexendregular, fontSize: RFValue(14) }}
+              style={{ flexDirection: "column", width: horizontalScale(250), ...FONTS.lexendregular, fontSize: RFValue(14),color:COLORS.black }}
             />
             <Fontisto name='email' size={30} style={{ alignSelf: "center" }} />
           </View>

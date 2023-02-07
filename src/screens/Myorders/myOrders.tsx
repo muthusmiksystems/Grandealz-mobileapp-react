@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect,useState}from "react";
 import {
     Text,
     View,
@@ -18,10 +18,21 @@ import { RFValue } from "react-native-responsive-fontsize";
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import image from "../../constants/image";
 import OrderList from "./orderList";
+import { orderlistHandle } from "../../services/orderlist";
 
 const MyOrders = () => {
 
     const navigation = useNavigation();
+
+    const [Orderlistdata, setOrderlistdata] = useState<any>();
+    
+    useEffect(() => {
+      const  orderitems= async () => {
+        let OrderList= await orderlistHandle()
+        setOrderlistdata(OrderList)
+      }
+      orderitems();
+    }, [])
 
     return (
         <SafeAreaView style={{ backgroundColor: "#F1F1F", height: "100%" }}>
@@ -66,7 +77,7 @@ const MyOrders = () => {
                     </View>
                 </View>
                 <View >
-                    <OrderList />
+                    <OrderList  orderlist={Orderlistdata}/>
                 </View>
             </ScrollView>
             {/* <View style={{ flexDirection: "row", height: "7%", backgroundColor: COLORS.white }}>
