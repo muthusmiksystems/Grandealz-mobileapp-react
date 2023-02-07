@@ -43,9 +43,14 @@ export const tabTopSlide = require("../assests/icons/recUp.png")
 export const rupee=require("../assests/icons/rupee.png")
 export const download=require("../assests/icons/download.png")
 export const share=require("../assests/icons/share.png")
+export const loginwhite=require("../assests/icons/grandealz3White.png")
+export const conlogo=require("../assests/icons/conlogo.png")
+
 
 export default {
     loginicon,
+    loginwhite,
+    conlogo,
     crcard,
     Upi,
     netBanking,

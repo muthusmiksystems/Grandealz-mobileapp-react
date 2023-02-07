@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren } from 'react';
+import React, { type PropsWithChildren,useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -18,8 +18,36 @@ import { verticalScale, horizontalScale, moderateScale } from '../constants/metr
 import EntypoIcons from "react-native-vector-icons/Entypo";
 import { useNavigation } from '@react-navigation/native';
 import { RFValue } from 'react-native-responsive-fontsize';
-const ProductDetails = () => {
+import { useDispatch, useSelector, useStore } from 'react-redux';
+import moment from "moment";
+import { addToWishlistHandle } from '../services/wishlist';
+import { addToCartHandler } from '../store/reducers/addToCart';
+import { unwrapResult } from '@reduxjs/toolkit';
+const PriceDetails = ({route}) => {
+  const pricing = route.params
+  const[isWished,setIsWished]=useState(false)
+  const dispatch=useDispatch();
+  const store=useStore();
+  console.log(pricing,"samuel sham")
   const navigation = useNavigation();
+
+  const handleAdd=()=>{
+    let value=pricing._id;
+    dispatch(addToCartHandler(value))
+    .then(unwrapResult)
+    .then((orginalResult: any)=>{
+      console.log("result of api is ",orginalResult)
+    })
+  }
+
+  const handleAddWishlist=async()=>{
+        const result=  await addToWishlistHandle(pricing._id);
+        setIsWished(true);
+        console.log("done",pricing._id);
+        
+        console.log("result",result)
+  }
+
   return (
     <View style={{ flex: 1 }} >
       <StatusBar
@@ -27,7 +55,6 @@ const ProductDetails = () => {
         backgroundColor={"#0a0127"}
       />
       <View style={{ flex: 1.8 }}>
-
         <View
           style={{
             backgroundColor: "#0a0127",
@@ -41,12 +68,11 @@ const ProductDetails = () => {
             <Text style={{ ...FONTS.lexendsemibold, color: "white", fontSize: RFValue(20), width: "78%", textAlign: "center" }}>Prize Details</Text>
           </View>
         </View>
-
         <ScrollView style={{ padding: "4%" }}>
           <View style={{ borderRadius: 9, backgroundColor: "white" }}>
             <View style={{ flexDirection: "row", marginLeft: "5%" }}>
               <View>
-                <Image
+                <Image  
                   source={image.calander}
                   style={{
                     borderWidth: 1,
@@ -56,24 +82,22 @@ const ProductDetails = () => {
                 />
               </View>
               <View style={{ flexDirection: "column", marginLeft: "2%" }}>
-                <Text style={{ color: COLORS.black, ...FONTS.lexendregular, fontSize: RFValue(13) }}>Max Draw Date: September 05,2022</Text>
+                <Text style={{ color: COLORS.black, ...FONTS.lexendregular, fontSize: RFValue(13) }}>Max Draw Date: {moment (pricing.max_draw_date).format('Do MMMM, YYYY')}</Text>
                 <Text style={{ color: COLORS.black, ...FONTS.lexendregular, fontSize: RFValue(10) }}>Or earlier if the campaign is sold out</Text>
               </View>
             </View>
             <View style={{ borderWidth: 0.5, width: "100%", borderColor: "lightgrey", marginTop: "2%" }} />
-
             <View style={{ alignItems: 'center', borderTopEndRadius: 8, }}>
               <View style={{ alignSelf: "flex-start", marginLeft: "2%", borderTopEndRadius: 40, borderTopStartRadius: 40, borderBottomEndRadius: 40, borderBottomStartRadius: 40, borderWidth: 3, marginTop: "2%", height: verticalScale(55), width: horizontalScale(120), borderColor: "#D8000D", flexDirection: "row" }}>
                 <View style={{ flexDirection: "column", padding: 4, marginLeft: "7%" }}>
-                  <Text style={{ color: "#E70736", ...FONTS.lexendregular, fontSize: RFValue(13) }}> 1100</Text>
+                  <Text style={{ color: "#E70736", ...FONTS.lexendregular, fontSize: RFValue(13),textAlign:"center" }}>{pricing.total_no_of_sold_out_tickets}</Text>
                   <Text style={{ ...FONTS.lexendsemibold, alignSelf: "center", color: "black", fontSize: RFValue(10), }}> Sold</Text>
                 </View>
                 <View style={{ backgroundColor: "#7F7E76B2", height: verticalScale(23), marginTop: verticalScale(15), borderWidth: 1, borderColor: "#7F7E76B2" }} />
                 <View style={{ flexDirection: "column", padding: 4 }}>
                   <Text style={{ ...FONTS.lexendregular, color: " rgba(127, 126, 118, 0.7)", fontSize: RFValue(9) }}> OUT OF</Text>
-                  <Text style={{ color: "#E70736", ...FONTS.lexendregular, fontSize: RFValue(13) }}> 1100</Text>
+                  <Text style={{ color: "#E70736", ...FONTS.lexendregular, fontSize: RFValue(13),textAlign:"center" }}>{pricing.total_no_of_tickets}</Text>
                 </View>
-
               </View>
               <View style={{ alignSelf: "flex-end" }}>
                 <Image
@@ -85,6 +109,7 @@ const ProductDetails = () => {
                     height: 25
                   }}
                 />
+                <TouchableOpacity onPress={()=>handleAddWishlist()}>
                 <Image
                   source={icons.userHeart}
                   style={{
@@ -94,11 +119,11 @@ const ProductDetails = () => {
                     height: 25
                   }}
                 />
+                </TouchableOpacity>
               </View>
-
               <View style={{ flexDirection: 'column', padding: moderateScale(10) }}>
                 <Image
-                  source={image.inputcash}
+                  source={{uri:pricing.draw_image}}
                   style={{
                     borderWidth: 1,
                     width: 257,
@@ -109,20 +134,19 @@ const ProductDetails = () => {
             </View>
           </View>
           <View style={{ marginVertical: "5%",paddingBottom:"10%"}}>
-
             <View style={{ flexDirection: "row", marginVertical: "2%" }}>
               <TouchableOpacity style={{ flexDirection: "column", width: "48%", marginEnd: "2%" }}>
                 <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "7%", backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }}> Prize Details</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, width: "49%", borderRadius: 5 }} onPressIn={() => { navigation.navigate("ProductDetails") }}>
+              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, width: "49%", borderRadius: 5 }} onPressIn={() => { navigation.navigate("ProductDetails",pricing) }}>
                 <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}>
                   Product Details
                 </Text>
               </TouchableOpacity>
             </View>
             <Text style={{ fontSize: RFValue(15), ...FONTS.lexendregular, color: COLORS.black, }}>Get a chance to win </Text>
-            <Text style={{ color: "#E70736", fontSize: RFValue(15), ...FONTS.lexendsemibold }}>₹1,50,000 Cash</Text>
-            <Text style={{ marginVertical: "2%", fontSize: RFValue(10), ...FONTS.lexendregular, color: COLORS.black, }}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</Text>
+            <Text style={{ color: "#E70736", fontSize: RFValue(15), ...FONTS.lexendsemibold }}>₹ {pricing.product_price} Cash</Text>
+            <Text style={{ marginVertical: "2%", fontSize: RFValue(10), ...FONTS.lexendregular, color: COLORS.black, }}>{pricing.product_description}</Text>
             {/* <View style={{ flexDirection: "row", marginVertical: "2%", justifyContent: "space-evenly" }}>
                 <TouchableOpacity style={{ flexDirection: "column", marginLeft: 5, borderWidth: 1,borderRadius:10 }}>
                   <Text style={{ fontSize: 20, padding: 10, backgroundColor: "#fff", color: "#000",...FONTS.lexendregular,borderRadius:10 }}> Go To Home </Text>
@@ -132,10 +156,10 @@ const ProductDetails = () => {
                 </TouchableOpacity>
               </View> */}
             <View style={{ flexDirection: "row", marginVertical: "2%",}}>
-              <TouchableOpacity style={{ flexDirection: "column", width: "48%", marginEnd: "2%" }}>
+              <TouchableOpacity style={{ flexDirection: "column", width: "48%", marginEnd: "2%" }} onPressIn={() => {  navigation.navigate("Tabs") }} >
                 <Text style={{ textAlign: "center", fontSize: RFValue(15), borderWidth: 1, padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}> Go to Home</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 5, width: "49%" }} onPressIn={() => { navigation.navigate("ProductDetails") }}>
+              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 5, width: "49%" }}>
                 <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}>
                   View Card
                 </Text>
@@ -143,13 +167,11 @@ const ProductDetails = () => {
             </View>
           </View>
         </ScrollView>
-
-
       </View>
       <View style={{ flex: 0.15, backgroundColor: "white" }}>
         <View style={{ flexDirection: "row", marginVertical: "2%", marginHorizontal: "4%" }}>
           <TouchableOpacity style={{ flexDirection: "column", borderRadius: 6, width: "48%", marginEnd: "2%" }}>
-            <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "7%", backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }}>ADD TO CART</Text>
+            <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "7%", backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }} onPress={()=>{handleAdd()}}>ADD TO CART</Text>
           </TouchableOpacity>
           <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 6, width: "49%" }} >
             <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 8 }}>
@@ -185,4 +207,4 @@ const styles = StyleSheet.create({
   },
 
 })
-export default ProductDetails;
+export default PriceDetails;
