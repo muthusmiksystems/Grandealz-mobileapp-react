@@ -50,6 +50,8 @@ const validate = (details) => {
         formErrors.password = "8 characters should contain a combination of uppercase,lowercase and number";
       }
     }
+
+    
     //Sign Up confirm password
     if (details.password !== undefined) {
       if (details.password2 !== undefined) {

@@ -1,4 +1,4 @@
-import React, { useState,type PropsWithChildren } from 'react';
+import React, { useState, type PropsWithChildren, useEffect } from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -18,6 +18,11 @@ import { COLORS, FONTS } from '../constants';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useNavigation } from '@react-navigation/native';
 import { horizontalScale, verticalScale } from '../constants/metrices';
+import { RemovewishlistHandle } from '../services/deletewishlist';
+import { ToastAndroid } from 'react-native';
+import { wishlistHandle } from "../services/wishlist";
+import { useFocusEffect } from "@react-navigation/native";
+
 
 const data = [
     {
@@ -73,12 +78,36 @@ const data = [
 
 
 ];
-const WishlistData = (Wishlist) => {
+const WishlistData = (Wishlist,changed,statusChange,setStatusChange) => {
 
-    const [product_description, setProduct_description] = useState(false)
+    // const {Wishlist,setStatus,status}=props;
+    const [productid, setProductid] = useState()
+    // console.log("props:",Wishlist,status)
+    const [removeres, setRemoveres] = useState()
+
+    const RemoveItem = (data:any) => {
+        setProductid(data)
+        ToastAndroid.showWithGravity(
+            'Removed successfully',
+            ToastAndroid.SHORT,
+            ToastAndroid.CENTER,
+        );
+     
+    }
+
+    useEffect(() => {
+        const RemoveWishlist = async () => {
+            let Removeitems = await RemovewishlistHandle(productid)
+            setRemoveres(Removeitems)
+
+        }
+        RemoveWishlist()
+    }, [productid])
+
+    
 
     const navigation = useNavigation();
-    console.log("again......", Wishlist.Wishlist)
+    // console.log("again......", Wishlist.Wishlist)
     return (
         <SafeAreaView >
             <View style={{ padding: "4%" }}>
@@ -93,28 +122,29 @@ const WishlistData = (Wishlist) => {
                                     <View style={{ flexDirection: "row", width: "70%", paddingVertical: "5%", paddingLeft: "3%" }}>
                                         <View style={{ flexDirection: "column", backgroundColor: COLORS.pagebackground, padding: "4%", width: "45%", alignItems: "center" }}>
                                             <Image
-                                                source={{uri:item.draw.product_image}}
+                                                source={{ uri: item.draw.product_image }}
                                                 resizeMode="contain"
-                                                style={{height: verticalScale(100), width: horizontalScale(80)}}
+                                                style={{ height: verticalScale(100), width: horizontalScale(80) }}
                                             />
                                         </View>
                                         <View style={{ flexDirection: "column", justifyContent: "center", width: "60%", paddingLeft: "4%" }}>
                                             <Text style={{ color: COLORS.black, ...FONTS.lexendsemibold, fontSize: RFValue(13) }}>{item.draw.product_title}</Text>
                                             <Text style={{ color: COLORS.gray, ...FONTS.lexendregular, fontSize: RFValue(13) }}>{(item.draw.product_description).substring(0, 45)}</Text>
                                             <Text style={{ color: COLORS.element, ...FONTS.lexendregular, fontSize: RFValue(13) }}>₹{item.draw.product_price}</Text>
-                                            {/* <Text style={{ color: COLORS.black, ...FONTS.lexendregular, fontSize: RFValue(10), marginTop: "4%" }}>{item.delvery}</Text> */}
                                         </View>
                                     </View>
-                                    <View style={{ flexDirection: "column", width: "30%", borderColor: "green",justifyContent:"space-between" }}>
-                                        <View style={{ width: "30%", backgroundColor: COLORS.element, alignSelf: "flex-end", flexDirection: "row", borderTopEndRadius:10,borderBottomStartRadius:10 }}>
-                                            <Text style={{ width:"100%" ,paddingVertical:"8%" , textAlign: "center", ...FONTS.lexendregular, fontSize: RFValue(16), color: COLORS.white }}>-</Text>
-                                        </View>
+                                    <View style={{ flexDirection: "column", width: "30%", borderColor: "green", justifyContent: "space-between" }}>
+                                        <TouchableOpacity onPress={() => RemoveItem(item._id)}>
+                                            <View style={{ width: "30%", backgroundColor: COLORS.element, alignSelf: "flex-end", flexDirection: "row", borderTopEndRadius: 10, borderBottomStartRadius: 10 }}>
+                                                <Text style={{ width: "100%", paddingVertical: "8%", textAlign: "center", ...FONTS.lexendregular, fontSize: RFValue(16), color: COLORS.white }}>-</Text>
+                                            </View>
+                                        </TouchableOpacity>
                                         {/* <View style={{ width: "30%", backgroundColor: COLORS.element, alignSelf: "flex-end" }}>
                                             <Text style={{ padding: "4%", textAlign: "center" }}>l,l,l</Text>
                                         </View> */}
-                                        <View style={{ width: "102%", backgroundColor: COLORS.element, alignSelf: "flex-end", flexDirection: "row", borderBottomEndRadius:10,borderTopStartRadius:10 }}>
-                                            <Text style={{ width:"100%", textAlign: "center",paddingVertical:"8%", ...FONTS.lexendregular, color: COLORS.white }}>ADD TO CART</Text>
-                                        </View>
+                                        <TouchableOpacity style={{ width: "102%", backgroundColor: COLORS.element, alignSelf: "flex-end", flexDirection: "row", borderBottomEndRadius: 10, borderTopStartRadius: 10 }} >
+                                            <Text style={{ width: "100%", textAlign: "center", paddingVertical: "8%", ...FONTS.lexendregular, color: COLORS.white }}>ADD TO CART</Text>
+                                        </TouchableOpacity>
                                     </View>
                                 </View>
                             </TouchableOpacity>

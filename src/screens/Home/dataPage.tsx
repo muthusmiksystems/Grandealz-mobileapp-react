@@ -47,6 +47,7 @@ const DataPage = () => {
     dispatch(addressListHandler())
    }
        
+   console.log("mmm",apiData)
 
   return (
     <ScrollView >
@@ -101,7 +102,6 @@ const DataPage = () => {
             </View>
             
               <Product />
-            
             
               <View style={{ paddingVertical:verticalScale (10), backgroundColor: "#D10359", height: 150, }}>
                 <Text style={{ color: "white", marginLeft: 25, ...FONTS.lexendregular, fontWeight:"600",color: COLORS.white, fontSize: RFValue(15) }}>

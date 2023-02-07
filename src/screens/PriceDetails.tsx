@@ -145,10 +145,10 @@ const PriceDetails = ({route}) => {
                 </TouchableOpacity>
               </View> */}
             <View style={{ flexDirection: "row", marginVertical: "2%",}}>
-              <TouchableOpacity style={{ flexDirection: "column", width: "48%", marginEnd: "2%" }}>
+              <TouchableOpacity style={{ flexDirection: "column", width: "48%", marginEnd: "2%" }} onPressIn={() => {  navigation.navigate("Tabs") }} >
                 <Text style={{ textAlign: "center", fontSize: RFValue(15), borderWidth: 1, padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}> Go to Home</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 5, width: "49%" }} onPressIn={() => { navigation.navigate("ProductDetails") }}>
+              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 5, width: "49%" }}>
                 <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}>
                   View Card
                 </Text>

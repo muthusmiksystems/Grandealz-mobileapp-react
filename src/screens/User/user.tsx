@@ -27,6 +27,15 @@ const User = () => {
 
 
     const navigation = useNavigation();
+    const handleLogout = () => {
+            const Removetoken = AsyncStorage.removeItem("loginToken")
+            if (Removetoken) {
+                // console.log("ramma")
+                navigation.navigate("login")
+            }
+    }
+
+
 
     return (
         <SafeAreaView>
@@ -49,8 +58,8 @@ const User = () => {
                 </View>
             </View>
             <ScrollView style={{ backgroundColor: COLORS.pagebackground, borderWidth: 0, borderColor: "red", height: "90%" }}>
-                <View style={{ alignItems: "center",padding: 24 }}>
-                    <View style={{ borderWidth: 1, borderRadius: 8, height:RFValue(100), width:RFValue(100), alignItems: "center" }}>
+                <View style={{ alignItems: "center", padding: 24 }}>
+                    <View style={{ borderWidth: 1, borderRadius: 8, height: RFValue(100), width: RFValue(100), alignItems: "center" }}>
                         <ImageBackground
                             source={image.profilepic}
                             resizeMode="stretch"
@@ -131,7 +140,7 @@ const User = () => {
 
                     </TouchableOpacity>
                     <View style={styles.divider} />
-                    <TouchableOpacity style={styles.touchButton} onPress={() =>navigation.navigate('Address')}>
+                    <TouchableOpacity style={styles.touchButton} onPress={() => navigation.navigate('Address')}>
                         <Image
                             source={icons.userLocation}
                             resizeMode="contain"
@@ -224,7 +233,7 @@ const User = () => {
 
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={{ borderWidth: 1, alignSelf: "center", borderColor: COLORS.gray, marginTop: "10%", width: "65%", borderRadius: 10 }}>
+                <TouchableOpacity style={{ borderWidth: 1, alignSelf: "center", borderColor: COLORS.gray, marginTop: "10%", width: "65%", borderRadius: 10 }} onPress={() => handleLogout()} >
                     <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(16), textAlign: "center", color: COLORS.black, paddingVertical: "6%" }}>Logout</Text>
                 </TouchableOpacity>
                 <View style={{ padding: moderateScale(20), margin: "3%" }}>

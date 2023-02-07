@@ -82,23 +82,18 @@ const UpcomingDraws = () => {
             renderItem={({ item }) => (
                 <View style={{ borderRadius: 9, backgroundColor: "white", alignItems: "center", paddingVertical: verticalScale(20), marginBottom: "5%" }}>
                     <TouchableOpacity>
-
                         <View>
                             <Image
                                 source={{uri: item.draw_image}}
                                 resizeMode={"contain"}
-                                style={{ height:verticalScale(150), width: horizontalScale(310) }}
+                                style={{ height:verticalScale(150), width: horizontalScale(310)}}
                             />
                         </View>
                         <View style={{ marginLeft: "2%" }}>
-                            <Text style={{ fontSize: RFValue(16), color: COLORS.textHeader, ...FONTS.lexendsemibold, padding: "1%" }}>Campaign:- {item.draw_title}</Text>
-                            <Text style={{ fontSize: RFValue(16), color: COLORS.textHeader, ...FONTS.lexendregular, marginHorizontal: "1%", paddingBottom: "1%" }}>{item.draw_sub_title}</Text>
-                            <Text style={{ fontSize: RFValue(14), color: COLORS.element2, marginHorizontal: "1%", ...FONTS.lexendregular }}>Draw date to be announced</Text>
-
+                            <Text style={{ fontSize: RFValue(16), color: COLORS.textHeader, ...FONTS.lexendsemibold, padding: "1%" }}>{item.product_title}</Text>
+                            <Text style={{ fontSize: RFValue(16), color: COLORS.textHeader, ...FONTS.lexendregular, marginHorizontal: "1%", paddingBottom: "1%" }}>{item.product_description}</Text>
+                            <Text style={{ fontSize: RFValue(14), color: COLORS.element2, marginHorizontal: "1%", ...FONTS.lexendregular }}>₹{item.product_price}</Text>
                         </View>
-
-
-
                     </TouchableOpacity>
                 </View>
             )}

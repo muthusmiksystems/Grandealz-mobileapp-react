@@ -131,7 +131,7 @@ const Product = () => {
                                         />
                                     </View>
                                 </View>
-                                <TouchableOpacity onPress={() => navigation.navigate("MyOrders")} style={{ padding: "5%", borderWidth: 1, marginHorizontal: 20, borderRadius: 8 }}>
+                                <TouchableOpacity  style={{ padding: "5%", borderWidth: 1, marginHorizontal: 20, borderRadius: 8 }} onPress={()=>navigation.navigate("Tabs",{screen:"Cart"},(item))}>
                                     <Text style={{ textAlign: "center", color: "black", fontSize: RFValue(15), ...FONTS.lexendsemibold }}>Add to Cart</Text>
                                 </TouchableOpacity>
                                 <View style={{ flexDirection: "row", paddingVertical: "5%" }}>

@@ -12,7 +12,7 @@ export const couponPage=async()=>{
     const headers={'Content-Type':'Application/json','Authorization':"Bearer "+key}
     
     return await axios.get(`https://api.grandealz.vytech.co/coupon`,{headers:headers}).then(response => {
-        console.log("Response", response.data.data);
+        console.log("Response coupon", response.data.data);
         return response.data.data
     }).catch((err) => {
         console.log("Catch error Api Failed",err)

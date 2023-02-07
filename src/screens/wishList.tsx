@@ -20,24 +20,48 @@ import { COLORS, FONTS } from "../constants";
 import OrderList from "./Myorders/orderList";
 import WishlistData from "./wishListData";
 import { wishlistHandle } from "../services/wishlist";
+
 const WishList = () => {
     const navigation = useNavigation();
 
     const [Wishlistdata, setWishlistdata] = useState<any>();
-
+    const [statusChange, setStatusChange] = useState<boolean>(false);
+    
     useEffect(() => {
         const soon = async () => {
             let WishList = await wishlistHandle()
+            console.log("Wishlistdata",WishList)
             setWishlistdata(WishList)
         }
-        soon();
-    }, [])
+        soon()
+    },[])
+
+useEffect(() => {
+        // const soon = async () => {
+        //     let WishList = await wishlistHandle()
+        //     console.log("Wishlistdata",WishList)
+        //     setWishlistdata(WishList)
+        // }
+        // soon()
+        console.log("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj")
+    },[statusChange])
+
+const changed=()=>{
+    console.log("llllkfg")
+}
     return (
         <SafeAreaView>
             <StatusBar
                 animated={true}
                 backgroundColor="#0a0127"
             />
+            <View style={styles.subdivOne}>
+                <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18), flexDirection: "column" }}>
+                    <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
+                </TouchableOpacity>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(21), width: "75%", textAlign: "center" }}>Wishlist</Text>
+
+            </View>
             {/* <View style={styles.subdivOne}>
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(30) }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
@@ -55,16 +79,12 @@ const WishList = () => {
                 />
                 <Text style={{ fontFamily: "Lexend-Regular", color: "black", fontSize: 16, marginTop: 20 }}>Your wishlist in empty</Text>
             </View> */}
-            <View style={styles.subdivOne}>
-                <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18), flexDirection: "column" }}>
-                    <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
-                </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(21), width: "75%", textAlign: "center" }}>Wishlist</Text>
-
-            </View>
             <ScrollView style={styles.subdivTwo}>
                 <View style={{ flexDirection: "row" }}>
-                    <WishlistData  Wishlist={Wishlistdata}/>
+                    {/* {Wishlistdata? */}
+                    <WishlistData Wishlist={Wishlistdata} changed={changed()} setStatusChange={setStatusChange} statusChange={statusChange}  />
+                    {/* :null
+                     } */}
                 </View>
             </ScrollView>
         </SafeAreaView>

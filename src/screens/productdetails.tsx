@@ -127,7 +127,7 @@ const ProductDetails = ({route}) => {
             <Text style={{ color: "#E70736",fontSize: RFValue(15), ...FONTS.lexendsemibold }}>₹ {pricing.product_price} Cash</Text>
             <Text style={{  marginVertical: "2%", fontSize: RFValue(10) , ...FONTS.lexendregular, color: COLORS.black, }}>{pricing.draw_description}</Text>
                <View style={{ flexDirection: "row",marginVertical:"2%",paddingBottom:"2%"}}>
-              <TouchableOpacity style={{ flexDirection: "column", width:"48%",marginEnd:"2%" }}>
+              <TouchableOpacity style={{ flexDirection: "column", width:"48%",marginEnd:"2%" }} onPressIn={() => {  navigation.navigate("Tabs") }}>
               <Text style={{textAlign:"center", fontSize: RFValue(15),  borderWidth: 1,padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular,borderRadius: 5  }}> Go to Home</Text>
               </TouchableOpacity>
               <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 5, width:"49%" }} >

@@ -5,6 +5,8 @@ import  drawgetHandleReducer  from './reducers/Drawgetcall';
 import drawwinnersHandleReducer from './reducers/Drawwinner';
 import  productDrawHandleReducer from './reducers/productdraw';
 import  addressListHandlerReducer  from './reducers/addresslist';
+import changepasswordHandleReducer from './reducers/changepassword'
+
 const store=configureStore({
     reducer:{
         loginHandle:loginHandleReducer,     
@@ -13,6 +15,7 @@ const store=configureStore({
         drawwinnersHandle:drawwinnersHandleReducer,
         productDrawHandle:productDrawHandleReducer,
 	AddressHandle:addressListHandlerReducer,
+    ChangepasswordHandle:changepasswordHandleReducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         immutableCheck: false,

@@ -22,7 +22,12 @@ import CartRelated from "../Draws/cartRelated";
 import PriceDetails from "../PriceDetails";
 import PriceMap from "./pricemap";
 import { Colors } from "react-native/Libraries/NewAppScreen";
-const Cart = () => {
+
+
+const Cart = ({route}) => {
+
+    const Addproduct = route.params;
+    console.log("adding cart", route);
 
     const navigation = useNavigation();
     const[apply,setApply]=useState(true);
@@ -81,7 +86,6 @@ const Cart = () => {
                                 </TouchableOpacity>
                             }
                         </View>
-
                     </View>
                 </View>
                 <CartProducts />

@@ -49,15 +49,16 @@ const customStyles = {
     currentStepLabelColor: '#E70736'
 }
 const OrderDetails = ({ route }) => {
+
+
+    const [orderdetailsdata, setOrderdetailsdata] = useState()
     const [currentPosition, setCurrentPosition] = useState(3)
     const navigation = useNavigation();
 
-    // const {state} = props.navigation;
-    // console.log("PROPS " + state.params);
     const orderid = route.params;
     console.log("details", orderid._id);
 
-    const [orderdetailsdata, setOrderdetailsdata] = useState()
+   
 
     useEffect(() => {
         const orderDetail = async () => {

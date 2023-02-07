@@ -25,10 +25,10 @@ const TicketDetails = (Ticketdata) => {
    
     return (
         <SafeAreaView >
-            <View style={{ width: horizontalScale(375), height: verticalScale(670) }} >
+            <View style={{ width: horizontalScale(375), height: verticalScale(670),}} >
                 <FlatList
                     data={Ticketdata.Ticketdata}
-                    contentContainerStyle={{ marginLeft: horizontalScale(12),paddingBottom:"5%" }}
+                    contentContainerStyle={{ marginLeft: horizontalScale(12),paddingBottom:"15%"}}
                     keyExtractor={item => item.draw._id}
                     renderItem={({ item }) => (
                         <View style={{ paddingTop: verticalScale(14) }}>

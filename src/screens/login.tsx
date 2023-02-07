@@ -12,9 +12,12 @@ import {
   Pressable,
   View,
   Image,
+ Alert,
+ BackHandler,
   TouchableOpacity,
   // Button
 } from "react-native";
+// import {useBackHandler} from '@react-native-community/hooks';
 import { Icon } from "react-native-vector-icons/Icon";
 import { horizontalScale, verticalScale } from "../constants/metrices";
 import { loginicon } from "../constants/icons";
@@ -35,7 +38,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import StorageController from "../services/storagectrl";
 
 
-const Login = () => {
+const Login = (props: Prop) => {
+
   const navigation = useNavigation();
   const storage = StorageController
   const dispatch = useDispatch();
@@ -73,6 +77,22 @@ const Login = () => {
     console.log(data,"im the formerror data........", formValues)
   }, [formErrors])
 
+
+//   const Redirecthandle =() =>{
+//   Alert.alert("","are sure u want app"),[{
+//     text:"no",
+//     onPress:()=>null,
+//     style:"cancel"
+//   },{
+//     text:"yes",
+//     onPress:()=>BackHandler.exitAPP(),
+//   }]
+//   }
+
+// useBackHandler(Redirecthandle)
+
+
+
   useEffect(() => {
     if (data && Object.keys(data)) {
       const reg = {
@@ -87,7 +107,7 @@ const Login = () => {
           if (originalPromiseResult.data.access_token) {
               console.log("token  sam   ...dddd",originalPromiseResult.data.access_token);
               await AsyncStorage.setItem('loginToken', originalPromiseResult.data.access_token)
-            navigation.navigate("Tabs")
+              props.navigation.replace("Tabs")
           } else {
             setErrorLogin(originalPromiseResult)
             console.log(originalPromiseResult, "error")
@@ -105,15 +125,7 @@ const Login = () => {
     }
   }, [data])
 
-  useEffect(() => {
-    // console.log(errorPassword, password, "password error")
-       const token = AsyncStorage.getItem("logintoken");
-       if(token)
-       {
-        console.log("I am inside the login");
-        navigation.navigate("Tabs");
-       }
-  }, [])
+ 
 
   const handlePasswordBox = () => {
     // console.log("box pass")
