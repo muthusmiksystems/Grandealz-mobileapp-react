@@ -11,9 +11,7 @@ import {
     ScrollView,
     ToastAndroid
 } from 'react-native';
-
 import { useDispatch, useSelector } from 'react-redux'
-
 import SafeAreaView from 'react-native-safe-area-view';
 import { icons, COLORS, FONTS } from '../constants';
 import { horizontalScale, moderateScale, verticalScale } from '../constants/metrices';
@@ -24,9 +22,7 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { RadioButton } from 'react-native-paper';
 import { Dropdown } from 'react-native-element-dropdown';
-
 import { current, unwrapResult } from '@reduxjs/toolkit';
-
 import { countryList } from '../services/countryList';
 import { stateList } from '../services/stateList';
 import { DatePickerProps } from 'react-native-date-picker';
@@ -37,7 +33,7 @@ import { userDetailsHandler } from '../store/reducers/userDetails';
 
 const PersonalDetails = (props) => {
     console.log("Page props in Personal details..............", props.route.params)
-    const userData:any=useSelector<any>(state=>state.userDetailsHandle.data.data);
+    const userData: any = useSelector<any>(state => state.userDetailsHandle.data.data);
     const userDate = moment(userData.date_of_birth).toISOString();
     const dispatch = useDispatch();
     const navigation = useNavigation();
@@ -66,8 +62,8 @@ const PersonalDetails = (props) => {
     const [date, setDate] = useState(moment(userData.date_of_birth).toISOString())
     const [dateShow, setDateShow] = useState(false);
     const [dateError, setDateError] = useState("");
-   
-    console.log("userData ..;;;;;;;;;;;;;;;;;;;;;",userData)
+
+    console.log("userData ..;;;;;;;;;;;;;;;;;;;;;", userData)
     const getCountryList = async () => {
         let listCountries = await countryList().then((originalPromiseResult) => {
             console.log("Personal Details Country....", originalPromiseResult);
@@ -169,10 +165,10 @@ const PersonalDetails = (props) => {
         //     setCountryError('')
         // }
         //State
-        if (stateValue.length == 0) {
-            setStateError('State is required')
-            errorCount++;
-        }
+        // if (stateValue.length == 0) {
+        //     setStateError('State is required')
+        //     errorCount++;
+        // }
         // else {
         //     setStateError('')
         // }
@@ -208,7 +204,7 @@ const PersonalDetails = (props) => {
             const payload = {
                 "first_name": firstName,
                 "last_name": lastName,
-                "date_of_birth": date,
+                "date_of_birth": moment(date).format('YYYY-MM-DD'),
                 "gender": checked,
                 "country_phone_code": "string",
                 "profile_pic": "1675750141561-38402481.jpeg",
@@ -226,7 +222,7 @@ const PersonalDetails = (props) => {
                         ToastAndroid.CENTER,
                     );
                 }
-                else{
+                else {
                     ToastAndroid.showWithGravity(
                         'Updated SuccessFully!',
                         ToastAndroid.SHORT,
@@ -243,8 +239,8 @@ const PersonalDetails = (props) => {
     }
 
     const selectedDateFunction = (event, selectedDate) => {
-        const currentDate = selectedDate ? moment(selectedDate).format("YYYY-MM-DD") : moment(userDate).format("YYYY-MM-DD");
-        console.log("rgerfefefge", currentDate)
+        const currentDate = selectedDate ? selectedDate : date;
+        // console.log("rgerfefefge", currentDate)
         setDate(currentDate);
         setDateShow(false);
     }
@@ -252,151 +248,6 @@ const PersonalDetails = (props) => {
         color: COLORS.black,
         fontFamily: "Lexend-Regular",
     }
-
-
-const PersonalDetails = () => {
-    const dispatch = useDispatch();
-    const navigation = useNavigation();
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [mblNumber, setMblNumber] = useState('');
-    const [mblCode, setMblCode] = useState('');
-    const [checked, setChecked] = React.useState('Male');
-    const [firstNameError, setFirstNameError] = useState('');
-    const [lastNameError, setLastNameError] = useState('');
-    const [emailError, setEmailError] = useState('');
-    const [mblCodeError, setMblCodeError] = useState('');
-    const [mblNumberError, setMblNumberError] = useState('');
-    const [countryListValue, setCountryListValue] = useState([])
-    const [countryValue, setCountryValue] = useState<any>('')
-    const [stateListValue, setStateListValue] = useState([])
-    const [stateValue, setStateValue] = useState<any>('')
-    const [cityListValue, setCityListValue] = useState([])
-    const [cityValue, setCityValue] = useState<any>('')
-    const [Gender, setGenderError] = useState("")
-    const [countryError, setCountryError] = useState("")
-    const [stateError, setStateError] = useState("")
-
-    const [dateShow, setDateShow] = useState(false);
-    // const [radioButtons, setRadioButtons] = useState([
-    //     {
-    //         id: '1', // acts as primary key, should be unique and non-empty string
-    //         label: 'Option 1',
-    //         value: 'option1'
-    //     },
-    //     {
-    //         id: '2',
-    //         label: 'Option 2',
-    //         value: 'option2'
-    //     }
-    // ]);
-
-    // function onPressRadioButton(radioButtonsArray) {
-    //     setRadioButtons(radioButtonsArray);
-    // }
-    const getCountryList = async () => {
-        let listCountries = await countryList().then((originalPromiseResult) => {
-            console.log("Personal Details Country....", originalPromiseResult);
-            // const value = originalPromiseResult
-            setCountryListValue(originalPromiseResult);
-            console.log("listCoun", originalPromiseResult[56].name)
-        })
-    }
-    const getStateList = async (data: any) => {
-        let listCountries = await stateList(data).then((originalPromiseResult) => {
-            console.log("Personal Details State....", originalPromiseResult);
-            // const value = originalPromiseResult
-            setStateListValue(originalPromiseResult);
-            console.log("listCoun", originalPromiseResult)
-        })
-    }
-
-    useEffect(() => {
-        getCountryList();
-    }, [])
-    useEffect(() => {
-        if (countryValue) {
-            getStateList(countryValue);
-        }
-        else { Alert.alert("Select any nationality") }
-
-    }, [countryValue])
-    useEffect(() => {
-        if (countryValue) {
-            if (stateValue) {
-                getStateList(countryValue);
-            } else { Alert.alert("Select any state") }
-        }
-        else { Alert.alert("Select any country") }
-
-    }, [cityValue])
-
-    const validateFunction = () => {
-        console.log("values", firstName, lastName, email, mblNumber, mblCode, checked, countryValue, stateValue);
-        //firstName
-        if (firstName.length <= 3 || firstName === undefined) {
-            setFirstNameError('FirstName is mandatory')
-        }
-        else {
-            setFirstNameError('')
-        }
-        //lastName
-        if (lastName.length <= 3 || lastName === undefined) {
-            setLastNameError('LastName is mandatory')
-        }
-        else {
-            setLastNameError('')
-        }
-        //email
-        if (email.length === 0 || email === undefined) {
-            setEmailError('Email id is mandatory')
-        }
-        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
-            setEmailError('Invalid email format')
-        }
-        else {
-            setEmailError('')
-        }
-        //mblCode
-        if (mblCode.length == 0) {
-            setMblCodeError("Code is required")
-        }
-        else {
-            setMblCodeError('')
-        }
-        //Mbl number
-        if (mblNumber.length == 0) {
-            // console.log("mbl................", mblNumber.length);
-            setMblNumberError('Mobile number is required')
-        }
-        else {
-            setMblNumberError('')
-        }
-        //Gender
-        if (checked.length == 0) {
-            setGenderError('Please select your gender')
-        }
-        else {
-            setGenderError('')
-        }
-        //Nationality
-        if (countryValue.length == 0) {
-            setCountryError('Nationality is required')
-        }
-        else {
-            setCountryError('')
-        }
-        //State
-        if (stateValue.length == 0) {
-            setStateError('State is required')
-        }
-        else {
-            setStateError('')
-        }
-    }
-
-
     return (
         <SafeAreaView>
             <StatusBar
@@ -436,9 +287,7 @@ const PersonalDetails = () => {
                 <View style={{ paddingLeft: 19, height: "1.8%" }}>
                     {lastNameError ? <Text style={styles.errorText}>{lastNameError}</Text> : null}
                 </View>
-
                 {/* <View>
-
                     <Text style={{ paddingLeft: "5%", ...FONTS.lexendregular, color: COLORS.gray, fontSize: RFValue(12) }}>Email</Text>
                     <TextInput
                         placeholder="Email id"
@@ -455,9 +304,7 @@ const PersonalDetails = () => {
                     <View style={{ flexDirection: "column", width: "34%", paddingLeft: "5%" }}>
                         <Text style={{ ...FONTS.lexendregular, color: COLORS.gray, fontSize: RFValue(12) }}>Country Code</Text>
                         <TextInput
-
                             placeholder="CC"
-
                             keyboardType={"phone-pad"}
                             placeholderTextColor={"black"}
                             onChangeText={(text: String) => { setMblCode(text) }}
@@ -465,8 +312,6 @@ const PersonalDetails = () => {
                             style={{ backgroundColor: COLORS.white, right: "2.5%", borderRadius: 8, ...FONTS.lexendregular, color: COLORS.black, fontSize: RFValue(16), paddingLeft: 14, marginTop: "1%" }}
                         />
                     </View>
-
-
                     <View style={{ flexDirection: "column", width: "65%" }}>
                         <Text style={{ ...FONTS.lexendregular, color: COLORS.gray, fontSize: RFValue(12), paddingLeft: "7%" }}>Mobile</Text>
                         <TextInput
@@ -479,19 +324,7 @@ const PersonalDetails = () => {
                             style={{ width: "89%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, ...FONTS.lexendregular, color: COLORS.black, fontSize: RFValue(16), paddingLeft: 14, marginTop: "1%" }}
                         />
                     </View>
-                    {/* <View style={{ paddingLeft: 19, height: "2%" }}>
-                        {firstNameError ? <Text style={styles.errorText}>{firstNameError}</Text> : null}
-                    </View> */}
                 </View>
-                <View style={{ flexDirection: "row", height: "2%" }}>
-                    <View style={{ flexDirection: "column", width: "34%", marginStart: "5%" }}>
-                        {mblCodeError ? <Text style={styles.errorText}>{mblCodeError}</Text> : null}
-                    </View>
-                    <View style={{ flexDirection: "column", width: "65%" }}>
-                        {mblNumberError ? <Text style={styles.errorText}>{mblNumberError}</Text> : null}
-                    </View>
-                </View>
-
                 <View style={{ flexDirection: "row", height: "2%" }}>
                     <View style={{ flexDirection: "column", width: "34%", marginStart: "5%" }}>
                         {mblCodeError ? <Text style={styles.errorText}>{mblCodeError}</Text> : null}
@@ -500,7 +333,6 @@ const PersonalDetails = () => {
                         {mblNumberError ? <Text style={styles.errorText}>{mblNumberError}</Text> : null}
                     </View>
                 </View> */}
-
                 <View style={{ flexDirection: "row", alignItems: "center", width: "91%", padding: "2%", marginTop: "1%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, ...FONTS.lexendregular }}>
                     <RadioButton
                         value="M"
@@ -520,9 +352,7 @@ const PersonalDetails = () => {
                     <Text style={{ ...FONTS.lexendregular, color: COLORS.black, fontSize: moderateScale(16) }}>Female</Text>
                 </View>
                 <View style={{ paddingLeft: 19, height: "1.8%" }}>
-
                     {Gender ? <Text style={styles.errorText}>{Gender}</Text> : null}
-
                 </View>
                 <View>
                     <Text style={{ paddingLeft: "5%", ...FONTS.lexendregular, color: COLORS.gray, fontSize: RFValue(12) }}>Nationality</Text>
@@ -531,20 +361,18 @@ const PersonalDetails = () => {
                         placeholderStyle={styles.dropText}
                         selectedTextStyle={styles.dropText}
                         data={countryListValue}
-
                         maxHeight={350}
                         itemTextStyle={themeForList}
                         labelField="name"
                         valueField="isoCode"
                         onChange={item => { setCountryValue(item.isoCode), console.log("dbdgbdfbdg..........", item.isoCode) }}
                         placeholder={(userData.nationality) ? userData.nationality : "Select Nationality"}
-
                     />
                 </View>
                 <View style={{ paddingLeft: 19, height: "1.8%" }}>
                     {countryError ? <Text style={styles.errorText}>{countryError}</Text> : null}
                 </View>
-                <View>
+                {/* <View>
                     <Text style={{ paddingLeft: "5%", ...FONTS.lexendregular, color: COLORS.gray, fontSize: RFValue(12) }}>State</Text>
                     <Dropdown
                         style={{ width: "91%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, padding: "2%", marginTop: "1%", paddingHorizontal: 14 }}
@@ -554,14 +382,12 @@ const PersonalDetails = () => {
                         // iconStyle={styles.iconStyle}
                         data={stateListValue}
                         // search
-
                         maxHeight={350}
                         itemTextStyle={themeForList}
                         labelField="name"
                         valueField="name"
                         onChange={item => { setStateValue(item.name), console.log("dbdgbdfbdg..........", item.isoCode) }}
                         placeholder={(stateValue) ? stateValue : "Select State"}
-
                     // searchPlaceholder="Search..."
                     // value={value}
                     // onFocus={() => setIsFocus(true)}
@@ -582,7 +408,7 @@ const PersonalDetails = () => {
                 </View>
                 <View style={{ paddingLeft: 19, height: "1.8%" }}>
                     {stateError ? <Text style={styles.errorText}>{stateError}</Text> : null}
-                </View>
+                </View> */}
                 <View>
                     <Text style={{ paddingLeft: "5%", ...FONTS.lexendregular, color: COLORS.gray, fontSize: RFValue(12) }}>Country of residence</Text>
                     <Dropdown
@@ -590,7 +416,6 @@ const PersonalDetails = () => {
                         placeholderStyle={styles.dropText}
                         selectedTextStyle={styles.dropText}
                         data={countryListValue}
-
                         maxHeight={350}
                         itemTextStyle={themeForList}
                         labelField="name"
@@ -607,7 +432,7 @@ const PersonalDetails = () => {
                     <TouchableOpacity style={{ width: "91%", backgroundColor: COLORS.white, alignSelf: "center", justifyContent: "center", borderRadius: 8, ...FONTS.lexendregular, color: COLORS.black, fontSize: RFValue(16), paddingLeft: 14, marginTop: "1%", height: 50 }}
                         onPress={() => setDateShow(true)}
                     >
-                        <Text style={styles.dropText}>{(date) ? date : "Date of birth"}</Text>
+                        <Text style={styles.dropText}>{(date) ? moment(date).format('YYYY-MM-DD') : "Date of birth"}</Text>
                         {/* {console.log("Date/...........",new Date(),"ddfdfd..........",userDate)} */}
                     </TouchableOpacity>
                     {dateShow ?
@@ -618,14 +443,11 @@ const PersonalDetails = () => {
                             onChange={selectedDateFunction}
                             // minimumDate={new Date()}
                             maximumDate={new Date()}
-
                         />
                         : null}
                 </View>
                 <View style={{ paddingLeft: 19, height: "1.8%" }}>
-
                     {dateError ? <Text style={styles.errorText}>{dateError}</Text> : null}
-
                 </View>
                 {/* <View>
                     <Text style={{ paddingLeft: "5%", ...FONTS.lexendregular, color: COLORS.gray, fontSize: RFValue(12), paddingTop: "3%" }}>Date of birth</Text>
@@ -660,9 +482,7 @@ const PersonalDetails = () => {
                     />
                 </View> */}
                 <TouchableOpacity style={{ borderWidth: 1, alignSelf: "center", borderColor: COLORS.gray, marginVertical: verticalScale(30), width: "60%", borderRadius: 10 }}
-
                     onPress={() => uploadpersonalDetails()}
-
                 >
                     <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(18), textAlign: "center", color: COLORS.black, paddingVertical: "6%" }}>Save</Text>
                 </TouchableOpacity>
