@@ -20,19 +20,16 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import FontA5 from "react-native-vector-icons/FontAwesome5"
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useDispatch } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
 // import AnimatedButton from '../../component/Ani';
-
-
-
 
 
 
 const User = (props) => {
 
-
-
+    console.log("PAge props.............", props.route.params)
+    const userData: any = useSelector<any>(state => state.userDetailsHandle.data.data);
+    console.log("UseSelector.................", userData)
     const navigation = useNavigation();
     const handleLogout = () => {
 
@@ -78,10 +75,9 @@ const User = (props) => {
             <ScrollView style={{ backgroundColor: COLORS.pagebackground, borderWidth: 0, borderColor: "red", height: "90%" }}>
                 <View style={{ alignItems: "center", padding: 24 }}>
                     <View style={{ borderWidth: 1, borderRadius: 8, height: RFValue(100), width: RFValue(100), alignItems: "center" }}>
-
-                        {(props.route.params.profile_pic) ?
+                        {(userData.profile_pic) ?
                             <ImageBackground
-                                source={{ uri: (props.route.params.profile_pic) }}
+                                source={{ uri: (userData.profile_pic) }}
                                 resizeMode="stretch"
                                 style={{
                                     width: "100%",
@@ -105,12 +101,11 @@ const User = (props) => {
                             </ImageBackground>
                         }
                     </View>
-                    <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(20), color: COLORS.black }}>{(props.route.params) ? props.route.params.first_name+" "+props.route.params.last_name:"-" }</Text>
-                    <Text style={{ ...FONTS.lexendregular, fontSize: RFValue(13), color: COLORS.black }}>{(props.route.params) ? props.route.params.email:"-"}</Text>
+                    <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(20), color: COLORS.black }}>{(userData) ? userData.first_name + " " + userData.last_name : "-"}</Text>
+                    <Text style={{ ...FONTS.lexendregular, fontSize: RFValue(13), color: COLORS.black }}>{(userData) ? userData.email : "-"}</Text>
                 </View>
                 <View style={styles.viewBox}>
                     <TouchableOpacity style={styles.touchButton} onPress={() => navigation.navigate("PersonalDetails", props.route.params)}>
-
                         <Image
                             source={icons.userIcon}
                             resizeMode="contain"
