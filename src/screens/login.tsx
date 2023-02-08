@@ -12,8 +12,10 @@ import {
   Pressable,
   View,
   Image,
+
   Alert,
   BackHandler,
+
   TouchableOpacity,
   // Button
 } from "react-native";
@@ -36,6 +38,7 @@ import validate from "./Auth/validate";
 import { unwrapResult } from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import StorageController from "../services/storagectrl";
+
 
 function handleBackButton() {
   // if (screen === 'Login') {
@@ -81,6 +84,7 @@ const Login = (props: Prop) => {
         console.log("im inisde the loginundi", formErrors.loginundef)
       }
     }
+
     console.log(data, "im the formerror data........", formValues)
   }, [formErrors])
   
@@ -133,6 +137,7 @@ const Login = (props: Prop) => {
 
 
 
+
   const handlePasswordBox = () => {
     // console.log("box pass")
     if (errorEmail) {
@@ -181,7 +186,9 @@ const Login = (props: Prop) => {
           />
           <Fontisto name='email' size={30} style={{ alignSelf: "center" }} />
         </TouchableOpacity>
+
         <View style={{ height: "5%" }}>
+
           {formErrors.email || formErrors.loginundef ?
             <Text style={styles.ErrorText}>{errorEmail}</Text> : null}
         </View>
@@ -231,7 +238,9 @@ const Login = (props: Prop) => {
           <TouchableOpacity style={{ display: 'flex', flexDirection: "column", marginEnd: "2.5%" }} onPressIn={() => navigation.navigate("ForgetPassword")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", fontSize: RFValue(12) }}>Forgot Password?</Text></TouchableOpacity>
         </View>
         <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(193), padding: "3%" }} onPress={e => { handleSubmit(e, "1"), Keyboard.dismiss }} disabled={false}>
+
           <Text style={{ textAlign: "center", fontSize: RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Log In</Text>
+
         </TouchableOpacity>
         <View style={{ flexDirection: "row", marginTop: "10%", alignSelf: "center" }}>
           <Text style={{ flexDirection: "column", alignSelf: "flex-start", fontFamily: "Lexend-Regular", color: "#000", fontSize: RFValue(13) }}>New User? </Text>

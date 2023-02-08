@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import loginHandleReducer from "./reducers/login";
+
 import bannerHandleReducer from './reducers/Banners';
 import drawgetHandleReducer from './reducers/Drawgetcall';
 import drawwinnersHandleReducer from './reducers/Drawwinner';
@@ -16,8 +17,10 @@ const store = configureStore({
         drawwinnersHandle: drawwinnersHandleReducer,
         productDrawHandle: productDrawHandleReducer,
         AddressHandle: addressListHandlerReducer,
+
         ChangepasswordHandle: changepasswordHandleReducer,
         userDetailsHandle: userDetailsHandleReducer,
+
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         immutableCheck: false,

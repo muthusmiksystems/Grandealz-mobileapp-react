@@ -21,7 +21,9 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import FontA5 from "react-native-vector-icons/FontAwesome5"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from "react-redux";
+
 // import AnimatedButton from '../../component/Ani';
+
 
 
 
@@ -30,8 +32,10 @@ import { useDispatch } from "react-redux";
 const User = (props) => {
 
 
+
     const navigation = useNavigation();
     const handleLogout = () => {
+
         Alert.alert("","Are you sure you want to logout? ", [
             {
               text: 'Cancel',
