@@ -17,6 +17,7 @@ import TicketDetails from "../../component/ticketDetails";
 import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS } from "../../constants";
 import { activeTicketGet } from "../../services/ticket";
+import { Button } from "react-native-paper";
 
 const Tickets = () => {
 
@@ -24,6 +25,8 @@ const Tickets = () => {
 
     
         const [Ticketlistdata, setTicketlistdata] = useState<any>();
+
+        const [show,setShow] = useState(false)
     
         useEffect(() => {
           const soon = async () => {
@@ -32,6 +35,12 @@ const Tickets = () => {
           }
           soon();
         }, [])
+
+
+        if(Ticketlistdata.length==0){
+            setShow(true)
+        }
+
 
     return (
         <SafeAreaView>
@@ -44,6 +53,10 @@ const Tickets = () => {
             </View>
             <View style={styles.subdivTwo}>
                 <TicketDetails Ticketdata={Ticketlistdata}/>
+            </View>
+            <View>
+                <Text>You can view active coupons here after you make your purchase</Text>
+                <Button>Start Shopping</Button>
             </View>
         </SafeAreaView>
     );

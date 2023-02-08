@@ -46,9 +46,9 @@ const User = (props) => {
                 AsyncStorage.removeItem("loginToken");
                 navigation.navigate("login");
             }
-            
-
     }
+
+    
 
 
 
@@ -88,7 +88,8 @@ const User = (props) => {
                                     <FontA5 name="edit" color="white" size={moderateScale(13)} style={{ margin: "2%" }} />
                                 </TouchableOpacity>
                             </ImageBackground> :
-                            <ImageBackground
+                            <ImageBackground  
+                            onPress={() =>Editprofilepic()}
                                 source={image.profilepic}
                                 resizeMode="stretch"
                                 style={{
