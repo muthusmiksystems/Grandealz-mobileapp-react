@@ -118,6 +118,7 @@ const Login = (props: Prop) => {
       console.log("data inside the handle submit", data);
       dispatch(loginHanlder(reg))
         .then(unwrapResult)
+
         .then(async (originalPromiseResult:any) => {
           console.log("successfully returned to login with response ", originalPromiseResult);
           if (originalPromiseResult?.data?.access_token) {

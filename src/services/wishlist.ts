@@ -17,6 +17,7 @@ export const wishlistHandle = async () => {
 }
 
 
+
 export const addToWishlistHandle = async (data:string) => {
     const token=await AsyncStorage.getItem('loginToken');
         const headers={'Authorization':`Bearer ${token}` }

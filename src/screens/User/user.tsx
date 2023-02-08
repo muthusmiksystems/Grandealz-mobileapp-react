@@ -27,7 +27,10 @@ import { useDispatch } from "react-redux";
 
 
 
-const User = () => {
+
+
+const User = (props) => {
+
 
 
     const navigation = useNavigation();
@@ -75,24 +78,39 @@ const User = () => {
             <ScrollView style={{ backgroundColor: COLORS.pagebackground, borderWidth: 0, borderColor: "red", height: "90%" }}>
                 <View style={{ alignItems: "center", padding: 24 }}>
                     <View style={{ borderWidth: 1, borderRadius: 8, height: RFValue(100), width: RFValue(100), alignItems: "center" }}>
-                        <ImageBackground
-                            source={image.profilepic}
-                            resizeMode="stretch"
-                            style={{
-                                width: "100%",
-                                height: "100%"
-                            }}>
-                            <TouchableOpacity style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', height: "27%", bottom: 0, borderBottomEndRadius: moderateScale(4), borderBottomStartRadius: moderateScale(4), width: "100%", position: 'absolute', alignItems: "center", justifyContent: "center" }} >
-                                <FontA5 name="edit" color="white" size={moderateScale(13)} style={{ margin: "2%" }} />
-                            </TouchableOpacity>
-                        </ImageBackground>
 
+                        {(props.route.params.profile_pic) ?
+                            <ImageBackground
+                                source={{ uri: (props.route.params.profile_pic) }}
+                                resizeMode="stretch"
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    borderRadius: 10
+                                }}>
+                                <TouchableOpacity style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', height: "27%", bottom: 0, borderBottomEndRadius: moderateScale(4), borderBottomStartRadius: moderateScale(4), width: "100%", position: 'absolute', alignItems: "center", justifyContent: "center" }} >
+                                    <FontA5 name="edit" color="white" size={moderateScale(13)} style={{ margin: "2%" }} />
+                                </TouchableOpacity>
+                            </ImageBackground> :
+                            <ImageBackground
+                                source={image.profilepic}
+                                resizeMode="stretch"
+                                style={{
+                                    width: "100%",
+                                    height: "100%"
+                                }}>
+                                <TouchableOpacity style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', height: "27%", bottom: 0, borderBottomEndRadius: moderateScale(4), borderBottomStartRadius: moderateScale(4), width: "100%", position: 'absolute', alignItems: "center", justifyContent: "center" }} >
+                                    <FontA5 name="edit" color="white" size={moderateScale(13)} style={{ margin: "2%" }} />
+                                </TouchableOpacity>
+                            </ImageBackground>
+                        }
                     </View>
-                    <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(20), color: COLORS.black }}>Connor Davis</Text>
-                    <Text style={{ ...FONTS.lexendregular, fontSize: RFValue(13), color: COLORS.black }}>info@gmail.com</Text>
+                    <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(20), color: COLORS.black }}>{(props.route.params) ? props.route.params.first_name+" "+props.route.params.last_name:"-" }</Text>
+                    <Text style={{ ...FONTS.lexendregular, fontSize: RFValue(13), color: COLORS.black }}>{(props.route.params) ? props.route.params.email:"-"}</Text>
                 </View>
                 <View style={styles.viewBox}>
-                    <TouchableOpacity style={styles.touchButton} onPress={() => navigation.navigate("PersonalDetails")}>
+                    <TouchableOpacity style={styles.touchButton} onPress={() => navigation.navigate("PersonalDetails", props.route.params)}>
+
                         <Image
                             source={icons.userIcon}
                             resizeMode="contain"
