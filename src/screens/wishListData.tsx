@@ -1,6 +1,4 @@
-
 import React, { useState, type PropsWithChildren, useEffect } from 'react';
-
 import {
     SafeAreaView,
     ScrollView,
@@ -13,7 +11,6 @@ import {
     View,
     TouchableOpacity,
 } from 'react-native';
-
 import image from '../constants/image';
 import icons from '../constants/icons';
 import { COLORS, FONTS } from '../constants';
@@ -22,10 +19,7 @@ import { useNavigation } from '@react-navigation/native';
 import { horizontalScale, verticalScale } from '../constants/metrices';
 import { RemovewishlistHandle } from '../services/deletewishlist';
 import { ToastAndroid } from 'react-native';
-import { wishlistHandle } from "../services/wishlist";
-import { useFocusEffect } from "@react-navigation/native";
-
-
+import {AddtoCartHandle} from "../services/addtocart";
 const data = [
     {
         id: '1',
@@ -35,7 +29,6 @@ const data = [
         price: "₹100.00",
         count: "1 Ticket",
         delvery: "Closing in 15 : 54 : 48"
-
     },
     {
         id: '2',
@@ -45,7 +38,6 @@ const data = [
         price: "₹100.00",
         count: "1 Ticket",
         delvery: "Closing in 15 : 54 : 48"
-
     },
     {
         id: '3',
@@ -55,7 +47,6 @@ const data = [
         price: "₹100.00",
         count: "1 Ticket",
         delvery: "Closing in 15 : 54 : 48"
-
     },
     {
         id: '5',
@@ -65,7 +56,6 @@ const data = [
         price: "₹100.00",
         count: "1 Ticket",
         delvery: "Closing in 15 : 54 : 48"
-
     },
     {
         id: '5',
@@ -75,19 +65,12 @@ const data = [
         price: "₹100.00",
         count: "1 Ticket",
         delvery: "Closing in 15 : 54 : 48"
-
     },
-
-
 ];
-
-const WishlistData = (Wishlist,changed,statusChange,setStatusChange) => {
-
-    // const {Wishlist,setStatus,status}=props;
+const WishlistData = (Wishlist) => {
     const [productid, setProductid] = useState()
-    // console.log("props:",Wishlist,status)
     const [removeres, setRemoveres] = useState()
-
+    const [drawid,setDrawid] = useState()
     const RemoveItem = (data:any) => {
         setProductid(data)
         ToastAndroid.showWithGravity(
@@ -95,23 +78,29 @@ const WishlistData = (Wishlist,changed,statusChange,setStatusChange) => {
             ToastAndroid.SHORT,
             ToastAndroid.CENTER,
         );
-     
     }
-
     useEffect(() => {
         const RemoveWishlist = async () => {
             let Removeitems = await RemovewishlistHandle(productid)
             setRemoveres(Removeitems)
-
         }
         RemoveWishlist()
     }, [productid])
-
-    
-
+    const AddtoCartitems = async () => {
+        let AddItemtoCart = await AddtoCartHandle(drawid)
+        if(AddItemtoCart.status ==="200"){
+            navigation.navigate("Tabs",{screen:"Cart"})
+        }
+        else{
+            ToastAndroid.showWithGravity(
+                AddItemtoCart.message,
+                ToastAndroid.SHORT,
+                ToastAndroid.CENTER,
+            );
+        }
+    }
     const navigation = useNavigation();
     // console.log("again......", Wishlist.Wishlist)
-
     return (
         <SafeAreaView >
             <View style={{ padding: "4%" }}>
@@ -122,22 +111,19 @@ const WishlistData = (Wishlist,changed,statusChange,setStatusChange) => {
                     renderItem={({ item }) => (
                         <View style={{ width: "100%", marginBottom: "4%", borderRadius: 10, backgroundColor: "white" }}>
                             <TouchableOpacity>
-                                <View style={{ flexDirection: "row" }}>
+                                <View style={{ flexDirection: "row"}}>
                                     <View style={{ flexDirection: "row", width: "70%", paddingVertical: "5%", paddingLeft: "3%" }}>
                                         <View style={{ flexDirection: "column", backgroundColor: COLORS.pagebackground, padding: "4%", width: "45%", alignItems: "center" }}>
                                             <Image
-
                                                 source={{ uri: item.draw.product_image }}
                                                 resizeMode="contain"
                                                 style={{ height: verticalScale(100), width: horizontalScale(80) }}
-
                                             />
                                         </View>
                                         <View style={{ flexDirection: "column", justifyContent: "center", width: "60%", paddingLeft: "4%" }}>
                                             <Text style={{ color: COLORS.black, ...FONTS.lexendsemibold, fontSize: RFValue(13) }}>{item.draw.product_title}</Text>
                                             <Text style={{ color: COLORS.gray, ...FONTS.lexendregular, fontSize: RFValue(13) }}>{(item.draw.product_description).substring(0, 45)}</Text>
                                             <Text style={{ color: COLORS.element, ...FONTS.lexendregular, fontSize: RFValue(13) }}>₹{item.draw.product_price}</Text>
-
                                         </View>
                                     </View>
                                     <View style={{ flexDirection: "column", width: "30%", borderColor: "green", justifyContent: "space-between" }}>
@@ -149,7 +135,7 @@ const WishlistData = (Wishlist,changed,statusChange,setStatusChange) => {
                                         {/* <View style={{ width: "30%", backgroundColor: COLORS.element, alignSelf: "flex-end" }}>
                                             <Text style={{ padding: "4%", textAlign: "center" }}>l,l,l</Text>
                                         </View> */}
-                                        <TouchableOpacity style={{ width: "102%", backgroundColor: COLORS.element, alignSelf: "flex-end", flexDirection: "row", borderBottomEndRadius: 10, borderTopStartRadius: 10 }} >
+                                        <TouchableOpacity style={{ width: "102%", backgroundColor: COLORS.element, alignSelf: "flex-end", flexDirection: "row", borderBottomEndRadius: 10, borderTopStartRadius: 10 }} onPress={() =>{setDrawid(item.draw._id),AddtoCartitems()}} >
                                             <Text style={{ width: "100%", textAlign: "center", paddingVertical: "8%", ...FONTS.lexendregular, color: COLORS.white }}>ADD TO CART</Text>
                                         </TouchableOpacity>
                                     </View>
@@ -173,7 +159,6 @@ const WishlistData = (Wishlist,changed,statusChange,setStatusChange) => {
                         //                 <Text style={{ fontSize: 16, ...FONTS.lexendsemibold, color: COLORS.black }}>{item.name} </Text>
                         //                 <Text style={{ fontSize: 14, ...FONTS.lexendregular, color: COLORS.black }}>{item.desc}  </Text>
                         //                 <Text style={{ fontSize: 14, ...FONTS.lexendregular, color: "red" }}>{item.price}</Text>
-
                         //                 <Text style={{ fontSize: 11, ...FONTS.lexendregular, color: COLORS.black }}>{`\n`}{item.delvery}  </Text>
                         //             </View>
                         //             <View style={{ flexDirection: "column", width: "33%", justifyContent: "space-between" }}>
@@ -183,7 +168,6 @@ const WishlistData = (Wishlist,changed,statusChange,setStatusChange) => {
                         //                 <View style={{ justifyContent: "center", alignItems: "center", borderTopLeftRadius: 12, width: horizontalScale(100), height: verticalScale(20), borderBottomEndRadius: 10, backgroundColor: "#E70736" }}>
                         //                     <Text style={{ ...FONTS.lexendregular, color: COLORS.white, fontSize: RFValue(10), paddingHorizontal: "5%", paddingVertical: "2%" }}>ADD TO CART</Text>
                         //                 </View>
-
                         //             </View>
                         //         </View>
                         //     </TouchableOpacity>
@@ -195,7 +179,6 @@ const WishlistData = (Wishlist,changed,statusChange,setStatusChange) => {
     )
 }
 const styles = StyleSheet.create({
-
     container: {
         alignContent: "center"
     },
@@ -205,6 +188,5 @@ const styles = StyleSheet.create({
     text1: {
         alignContent: "center"
     },
-
 })
 export default WishlistData;

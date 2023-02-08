@@ -35,28 +35,22 @@ import { drawgetHandler } from '../../store/reducers/Drawgetcall';
 import { Item } from 'react-native-paper/lib/typescript/components/Drawer/Drawer';
 const DataPage = () => {
   const navigation = useNavigation();
+  const userData: any = useSelector<any>(state => state.userDetailsHandle.data.data);
+
   const dispatch = useDispatch();
   const [apiData, setApiData] = useState();
-
-  const [userData,setUserData]=useState();
-
+  // const [userData,setUserData]=useState();
   const [result, setResult] = useState();
   const [sold, setSold] = useState<any>();
   const [camp, setCamp] = useState<any>();
   const [close, setClose] = useState<any>();
   useEffect(() => {
     dispatch(bannerHandler())
-
       .then(unwrapResult).then((originalPromiseResult) => {
         // console.log("successfully returned to login with response ", originalPromiseResult);
         setApiData(originalPromiseResult);
       })
-    dispatch(userDetailsHandler()).then(unwrapResult).then((originalPromiseResult) => {
-
-      console.log("user Details by sujith.............", originalPromiseResult);
-      setUserData(originalPromiseResult);
-
-    })
+    dispatch(userDetailsHandler())
   }, [])
 
 
@@ -65,7 +59,6 @@ const DataPage = () => {
   }
 
   console.log("mmm", apiData)
-
 
   return (
     <ScrollView >
@@ -93,11 +86,10 @@ const DataPage = () => {
               />
             </View>
             <View style={{ flexDirection: "column" }}>
-
-              <TouchableOpacity onPress={() => { navigation.navigate('User',userData?.data), Addresslist() }}>
-                {(userData?.data?.profile_pic)?
+              <TouchableOpacity onPress={() => { navigation.navigate('User'), Addresslist() }}>
+                {(userData?.profile_pic)?
                   <Image
-                  source={{uri:(userData?.data?.profile_pic)}}
+                  source={{uri:(userData?.profile_pic)}}
                   resizeMode="contain"
                   style={{
                     width: horizontalScale(50),
@@ -106,7 +98,6 @@ const DataPage = () => {
                     bottom: horizontalScale(7),
                   }}
                   />:
-
                 <Image
                   source={icons.user}
                   resizeMode="contain"
@@ -121,7 +112,6 @@ const DataPage = () => {
             </View>
           </View>
         </View>
-
 
         <View style={{ padding: "3%", flex: 0.4 }}>
           <Banner data={apiData} />
@@ -148,7 +138,7 @@ const DataPage = () => {
         <Carsold />
 
 
-n
+
       </View>
     </ScrollView>
   )
