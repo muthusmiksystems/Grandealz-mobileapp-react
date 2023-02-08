@@ -25,6 +25,7 @@ const WishList = () => {
     const navigation = useNavigation();
 
     const [Wishlistdata, setWishlistdata] = useState<any>();
+
     const [statusChange, setStatusChange] = useState<boolean>(false);
     
     useEffect(() => {
@@ -49,6 +50,7 @@ useEffect(() => {
 const changed=()=>{
     console.log("llllkfg")
 }
+
     return (
         <SafeAreaView>
             <StatusBar
@@ -81,10 +83,12 @@ const changed=()=>{
             </View> */}
             <ScrollView style={styles.subdivTwo}>
                 <View style={{ flexDirection: "row" }}>
+
                     {/* {Wishlistdata? */}
                     <WishlistData Wishlist={Wishlistdata} changed={changed()} setStatusChange={setStatusChange} statusChange={statusChange}  />
                     {/* :null
                      } */}
+
                 </View>
             </ScrollView>
         </SafeAreaView>

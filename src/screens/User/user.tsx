@@ -6,6 +6,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     Image,
+    Alert,
     ImageBackground,
     ScrollView
 } from 'react-native';
@@ -21,6 +22,9 @@ import FontA5 from "react-native-vector-icons/FontAwesome5"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from "react-redux";
 
+// import AnimatedButton from '../../component/Ani';
+
+
 
 
 const User = () => {
@@ -28,11 +32,22 @@ const User = () => {
 
     const navigation = useNavigation();
     const handleLogout = () => {
-            const Removetoken = AsyncStorage.removeItem("loginToken")
-            if (Removetoken) {
-                // console.log("ramma")
-                navigation.navigate("login")
+
+        Alert.alert("","Are you sure you want to logout? ", [
+            {
+              text: 'Cancel',
+              onPress: () => console.log('Cancel Pressed'),
+              style: 'cancel',
+            },
+            {text: 'OK', onPress: () => Removetoken()},
+          ]);
+
+            const Removetoken = async()=>{
+                AsyncStorage.removeItem("loginToken");
+                navigation.navigate("login");
             }
+            
+
     }
 
 

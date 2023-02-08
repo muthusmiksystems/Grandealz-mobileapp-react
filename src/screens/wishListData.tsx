@@ -1,4 +1,6 @@
+
 import React, { useState, type PropsWithChildren, useEffect } from 'react';
+
 import {
     SafeAreaView,
     ScrollView,
@@ -78,6 +80,7 @@ const data = [
 
 
 ];
+
 const WishlistData = (Wishlist,changed,statusChange,setStatusChange) => {
 
     // const {Wishlist,setStatus,status}=props;
@@ -108,6 +111,7 @@ const WishlistData = (Wishlist,changed,statusChange,setStatusChange) => {
 
     const navigation = useNavigation();
     // console.log("again......", Wishlist.Wishlist)
+
     return (
         <SafeAreaView >
             <View style={{ padding: "4%" }}>
@@ -122,15 +126,18 @@ const WishlistData = (Wishlist,changed,statusChange,setStatusChange) => {
                                     <View style={{ flexDirection: "row", width: "70%", paddingVertical: "5%", paddingLeft: "3%" }}>
                                         <View style={{ flexDirection: "column", backgroundColor: COLORS.pagebackground, padding: "4%", width: "45%", alignItems: "center" }}>
                                             <Image
+
                                                 source={{ uri: item.draw.product_image }}
                                                 resizeMode="contain"
                                                 style={{ height: verticalScale(100), width: horizontalScale(80) }}
+
                                             />
                                         </View>
                                         <View style={{ flexDirection: "column", justifyContent: "center", width: "60%", paddingLeft: "4%" }}>
                                             <Text style={{ color: COLORS.black, ...FONTS.lexendsemibold, fontSize: RFValue(13) }}>{item.draw.product_title}</Text>
                                             <Text style={{ color: COLORS.gray, ...FONTS.lexendregular, fontSize: RFValue(13) }}>{(item.draw.product_description).substring(0, 45)}</Text>
                                             <Text style={{ color: COLORS.element, ...FONTS.lexendregular, fontSize: RFValue(13) }}>₹{item.draw.product_price}</Text>
+
                                         </View>
                                     </View>
                                     <View style={{ flexDirection: "column", width: "30%", borderColor: "green", justifyContent: "space-between" }}>

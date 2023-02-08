@@ -12,8 +12,10 @@ import {
   Pressable,
   View,
   Image,
- Alert,
- BackHandler,
+
+  Alert,
+  BackHandler,
+
   TouchableOpacity,
   // Button
 } from "react-native";
@@ -38,9 +40,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import StorageController from "../services/storagectrl";
 
 
+function handleBackButton() {
+  // if (screen === 'Login') {
+  console.log("BackHandler Function");
+  BackHandler.exitApp();
+  return true;
+  // }
+}
 const Login = (props: Prop) => {
 
   const navigation = useNavigation();
+  let screen = "Login";
   const storage = StorageController
   const dispatch = useDispatch();
   const [passShow, setPassShow] = useState("true");
@@ -74,22 +84,28 @@ const Login = (props: Prop) => {
         console.log("im inisde the loginundi", formErrors.loginundef)
       }
     }
-    console.log(data,"im the formerror data........", formValues)
+
+    console.log(data, "im the formerror data........", formValues)
   }, [formErrors])
+  
+  useEffect(() => {
+    navigation.addListener("blur", () => { BackHandler.removeEventListener("hardwareBackPress", handleBackButton); })
+    navigation.addListener("focus", () => { BackHandler.addEventListener("hardwareBackPress", handleBackButton); })
+  }, [handleBackButton])
 
 
-//   const Redirecthandle =() =>{
-//   Alert.alert("","are sure u want app"),[{
-//     text:"no",
-//     onPress:()=>null,
-//     style:"cancel"
-//   },{
-//     text:"yes",
-//     onPress:()=>BackHandler.exitAPP(),
-//   }]
-//   }
+  //   const Redirecthandle =() =>{
+  //   Alert.alert("","are sure u want app"),[{
+  //     text:"no",
+  //     onPress:()=>null,
+  //     style:"cancel"
+  //   },{
+  //     text:"yes",
+  //     onPress:()=>BackHandler.exitAPP(),
+  //   }]
+  //   }
 
-// useBackHandler(Redirecthandle)
+  // useBackHandler(Redirecthandle)
 
 
 
@@ -102,22 +118,15 @@ const Login = (props: Prop) => {
       console.log("data inside the handle submit", data);
       dispatch(loginHanlder(reg))
         .then(unwrapResult)
-        .then(async(originalPromiseResult) => {
+        .then(async (originalPromiseResult:any) => {
           console.log("successfully returned to login with response ", originalPromiseResult);
-          if (originalPromiseResult.data.access_token) {
-              console.log("token  sam   ...dddd",originalPromiseResult.data.access_token);
-              await AsyncStorage.setItem('loginToken', originalPromiseResult.data.access_token)
-              props.navigation.replace("Tabs")
+          if (originalPromiseResult?.data?.access_token) {
+            console.log("token  sam   ...dddd", originalPromiseResult.data.access_token);
+            await AsyncStorage.setItem('loginToken', originalPromiseResult.data.access_token)
+            props.navigation.replace("Tabs")
           } else {
-            setErrorLogin(originalPromiseResult)
-            console.log(originalPromiseResult, "error")
-            if (originalPromiseResult.errorCode == 2238) {
-              setErrorLogin("Username and Password not Found. Please Create an Account")
-              console.log(errorLogin, "error in login")
-            } else if (originalPromiseResult.errorCode == 2219) {
-              setErrorLogin("Please verify the mail sent and try again")
-              console.log(errorLogin, "error in login")
-            }
+            console.log("setError response ", originalPromiseResult);
+           setErrorLogin(originalPromiseResult);
           }
         }).catch((rejectedValueOrSerializedError) => {
           console.log(" Inside catch", rejectedValueOrSerializedError);
@@ -125,7 +134,8 @@ const Login = (props: Prop) => {
     }
   }, [data])
 
- 
+
+
 
   const handlePasswordBox = () => {
     // console.log("box pass")
@@ -163,7 +173,9 @@ const Login = (props: Prop) => {
             value={email}
             placeholderTextColor={"black"}
             keyboardType="email-address"
-            onChangeText={e => { handleChange(e, "email"), setErrorEmail(""), setEmail(e) }}
+
+            onChangeText={e => { handleChange(e, "email"), setErrorEmail(""),setErrorLogin(""), setEmail(e) }}
+
             style={{
               flexDirection: "column",
               width: horizontalScale(250),
@@ -173,7 +185,9 @@ const Login = (props: Prop) => {
           />
           <Fontisto name='email' size={30} style={{ alignSelf: "center" }} />
         </TouchableOpacity>
-        <View style={{height:"5%"}}>
+
+        <View style={{ height: "5%" }}>
+
           {formErrors.email || formErrors.loginundef ?
             <Text style={styles.ErrorText}>{errorEmail}</Text> : null}
         </View>
@@ -183,7 +197,9 @@ const Login = (props: Prop) => {
             value={password}
             secureTextEntry={passShow ? true : false}
             placeholderTextColor={"black"}
-            onChangeText={e => { handleChange(e, "password"), setErrorPassword(""), setPassword(e) }}
+
+            onChangeText={e => { handleChange(e, "password"), setErrorPassword(""),setErrorLogin(""), setPassword(e) }}
+
             style={{
               flexDirection: "column",
               width: horizontalScale(250),
@@ -198,13 +214,17 @@ const Login = (props: Prop) => {
           </TouchableOpacity>
 
         </TouchableOpacity>
-        <View style={{height:"3%"}}>
+
+        <View style={{ height: "6%" }}>
           {formErrors.password || formErrors.loginundef ?
             <Text style={styles.ErrorText}>{errorPassword}</Text> : null}
+            {console.log("uuuuuuuuuuuuuuus",errorLogin?true:false)}
+            {errorLogin?<Text style={styles.ErrorText}>{errorLogin}</Text> : null}
+
         </View>
-        <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',marginHorizontal:"5%"}}>
-          <View style={{display: 'flex',flexDirection:"column",marginStart:"1.5%"}}>
-            <View style={{ flexDirection: "row"}}>
+        <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginHorizontal: "5%" }}>
+          <View style={{ display: 'flex', flexDirection: "column", marginStart: "1.5%" }}>
+            <View style={{ flexDirection: "row" }}>
               <CheckBox
                 value={isSelected}
                 onValueChange={setSelection}
@@ -217,7 +237,9 @@ const Login = (props: Prop) => {
           <TouchableOpacity style={{ display: 'flex', flexDirection: "column", marginEnd: "2.5%" }} onPressIn={() => navigation.navigate("ForgetPassword")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", fontSize: RFValue(12) }}>Forgot Password?</Text></TouchableOpacity>
         </View>
         <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(193), padding: "3%" }} onPress={e => { handleSubmit(e, "1"), Keyboard.dismiss }} disabled={false}>
-          <Text style={{ textAlign: "center", fontSize:RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Log In</Text>
+
+          <Text style={{ textAlign: "center", fontSize: RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Log In</Text>
+
         </TouchableOpacity>
         <View style={{ flexDirection: "row", marginTop: "10%", alignSelf: "center" }}>
           <Text style={{ flexDirection: "column", alignSelf: "flex-start", fontFamily: "Lexend-Regular", color: "#000", fontSize: RFValue(13) }}>New User? </Text>

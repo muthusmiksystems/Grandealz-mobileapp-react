@@ -1,26 +1,28 @@
-import {configureStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import loginHandleReducer from "./reducers/login";
-import  bannerHandleReducer from './reducers/Banners';
-import  drawgetHandleReducer  from './reducers/Drawgetcall';
+
+import bannerHandleReducer from './reducers/Banners';
+import drawgetHandleReducer from './reducers/Drawgetcall';
 import drawwinnersHandleReducer from './reducers/Drawwinner';
-import  productDrawHandleReducer from './reducers/productdraw';
-import  addressListHandlerReducer  from './reducers/addresslist';
+import productDrawHandleReducer from './reducers/productdraw';
+import addressListHandlerReducer from './reducers/addresslist';
 import changepasswordHandleReducer from './reducers/changepassword'
 
-const store=configureStore({
-    reducer:{
-        loginHandle:loginHandleReducer,     
-        bannerHandle:bannerHandleReducer,
-	drawgetHandle:drawgetHandleReducer,
-        drawwinnersHandle:drawwinnersHandleReducer,
-        productDrawHandle:productDrawHandleReducer,
-	AddressHandle:addressListHandlerReducer,
-    ChangepasswordHandle:changepasswordHandleReducer
+const store = configureStore({
+    reducer: {
+        loginHandle: loginHandleReducer,
+        bannerHandle: bannerHandleReducer,
+        drawgetHandle: drawgetHandleReducer,
+        drawwinnersHandle: drawwinnersHandleReducer,
+        productDrawHandle: productDrawHandleReducer,
+        AddressHandle: addressListHandlerReducer,
+        ChangepasswordHandle: changepasswordHandleReducer
+
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         immutableCheck: false,
         serializableCheck: false,
-      })
+    })
 })
 
 export default store;

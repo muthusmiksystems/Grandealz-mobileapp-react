@@ -11,6 +11,7 @@ export const changepasswordHandle  = createAsyncThunk('post/changepasswordpostca
     const token=await AsyncStorage.getItem('loginToken');
         const headers={'Authorization':`Bearer ${token}`}
     console.log("headers.data",headers,"kkkk",data)
+
     let result = await axios.post(`${'https://api.grandealz.vytech.co'}/auth/change-password`,payload,{headers:headers})
     console.log("ram",result)
     if (parseInt(result.data.status) === 200) {
@@ -21,6 +22,7 @@ export const changepasswordHandle  = createAsyncThunk('post/changepasswordpostca
          return result.data.message
     } else {
          return result.data.message
+
     }
 } catch (err)  {
         console.log("catch error Api error", err);

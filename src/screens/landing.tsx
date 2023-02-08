@@ -39,7 +39,8 @@ const Landing = (props: Props) => {
 const authentication=async()=>{
     let Token= await AsyncStorage.getItem('loginToken');
     if(Token){
-      props.navigation.replace('Tab');
+
+      props.navigation.replace('Tabs');
     }else{
       props.navigation.replace('login');
     }
@@ -49,7 +50,7 @@ const authentication=async()=>{
   useEffect(() => {
     if (authLoaded && animationLoaded) {
       
-      props.navigation.replace('login');
+      authentication();
     }
   }, [authLoaded, animationLoaded, props.navigation]);
   return (

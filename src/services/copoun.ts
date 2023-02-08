@@ -3,6 +3,7 @@ import axios from "axios";
 
 async function fetchJSONAsync() {
     let response = await AsyncStorage.getItem("loginToken");
+
     console.log("response data",response)
     return response;
   }
@@ -18,3 +19,4 @@ export const couponPage=async()=>{
         console.log("Catch error Api Failed",err)
     })
     }
+
