@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren } from 'react';
+import React, { type PropsWithChildren,useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -20,13 +20,18 @@ import { useNavigation } from '@react-navigation/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useDispatch, useSelector, useStore } from 'react-redux';
 import moment from "moment";
+
+import { addToWishlistHandle } from '../services/wishlist';
+
 import { addToCartHandler } from '../store/reducers/addToCart';
 import { unwrapResult } from '@reduxjs/toolkit';
 const PriceDetails = ({route}) => {
   const pricing = route.params
+
+  const[isWished,setIsWished]=useState(false)
   const dispatch=useDispatch();
   const store=useStore();
-  console.log("store data",store.getState())
+
   console.log(pricing,"samuel sham")
   const navigation = useNavigation();
 
@@ -38,6 +43,16 @@ const PriceDetails = ({route}) => {
       console.log("result of api is ",orginalResult)
     })
   }
+
+
+  const handleAddWishlist=async()=>{
+        const result=  await addToWishlistHandle(pricing._id);
+        setIsWished(true);
+        console.log("done",pricing._id);
+        
+        console.log("result",result)
+  }
+
 
   return (
     <View style={{ flex: 1 }} >
@@ -100,6 +115,7 @@ const PriceDetails = ({route}) => {
                     height: 25
                   }}
                 />
+                <TouchableOpacity onPress={()=>handleAddWishlist()}>
                 <Image
                   source={icons.userHeart}
                   style={{
@@ -109,6 +125,7 @@ const PriceDetails = ({route}) => {
                     height: 25
                   }}
                 />
+                </TouchableOpacity>
               </View>
               <View style={{ flexDirection: 'column', padding: moderateScale(10) }}>
                 <Image

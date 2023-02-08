@@ -7,7 +7,7 @@ import {
     ScrollView,
     StyleSheet,
     Image,
-    TouchableOpacity
+    TouchableOpacity,Modal,
 } from 'react-native';
 import { horizontalScale, verticalScale } from "../../constants/metrices";
 import icons, { shoppingCart } from "../../constants/icons";
@@ -25,6 +25,9 @@ const MyOrders = () => {
     const navigation = useNavigation();
 
     const [Orderlistdata, setOrderlistdata] = useState<any>();
+
+    const [modalVisible, setModalVisible] = useState(false);
+
     
     useEffect(() => {
       const  orderitems= async () => {
@@ -48,6 +51,20 @@ const MyOrders = () => {
 
             </View>
             <ScrollView style={{ height: "80%" ,padding:"4%"}}>
+            {/* <View style={styles.centeredView}>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        Alert.alert('Modal has been closed.');
+                        setModalVisible(!modalVisible);
+                    }}>
+                        <View>
+                            <Text> Hi hello people</Text>
+                        </View>
+                        </Modal>
+            </View> */}
                 <View style={{ flexDirection: "row",marginBottom:RFValue(10) }}>
                     <View style={{ flexDirection: "row",alignSelf:"center",width: "83%",height:"82%", borderRadius: 20, backgroundColor: "#FFFFFF", marginRight: "2%", }}>
                         {/* <View style={{  }}> */}
@@ -66,7 +83,7 @@ const MyOrders = () => {
                     </View>
                     <View style={{ borderRadius: 10, backgroundColor: "#FFFFFF", marginVertical: "2%", flexDirection: "column" }}>
                         <View style={{ flexDirection: "row", marginHorizontal: "2%", borderRadius: 10 }}>
-                            <TouchableOpacity style={{ flexDirection: "column" }} >
+                            <TouchableOpacity style={{ flexDirection: "column" }} onPress={()=>setModalVisible(false)}>
                                 <Image
                                     source={icons.filter}
 
@@ -88,6 +105,7 @@ const MyOrders = () => {
                     <Text style={{ color: COLORS.white, fontSize: RFValue(14), ...FONTS.lexendregular }} >Process to Checkout </Text>
                 </TouchableOpacity>
             </View> */}
+           
         </SafeAreaView>
     );
 }
@@ -107,7 +125,13 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         // borderWidth:2
-    }
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
+      },
 
 })
 export default MyOrders;

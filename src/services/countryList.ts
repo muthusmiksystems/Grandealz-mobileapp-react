@@ -12,7 +12,9 @@ export const countryList = async () => {
     const headers = { 'Content-Type': 'Application/json', 'Authorization': "Bearer " + key }
 
     return await axios.get(`${'https://api.grandealz.vytech.co'}/location/get-all-countries`, { headers: headers }).then(response => {
+
         // console.log("Country List with codes", response.data.data);
+
         return response.data.data
     }).catch((err) => {
         console.log("Catch error Api Failed", err)

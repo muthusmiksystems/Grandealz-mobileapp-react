@@ -114,22 +114,16 @@ const Login = (props: Prop) => {
       console.log("data inside the handle submit", data);
       dispatch(loginHanlder(reg))
         .then(unwrapResult)
-        .then(async (originalPromiseResult) => {
+
+        .then(async (originalPromiseResult:any) => {
           console.log("successfully returned to login with response ", originalPromiseResult);
-          if (originalPromiseResult.data.access_token) {
+          if (originalPromiseResult?.data?.access_token) {
             console.log("token  sam   ...dddd", originalPromiseResult.data.access_token);
             await AsyncStorage.setItem('loginToken', originalPromiseResult.data.access_token)
             props.navigation.replace("Tabs")
           } else {
-            setErrorLogin(originalPromiseResult)
-            console.log(originalPromiseResult, "error")
-            if (originalPromiseResult.errorCode == 2238) {
-              setErrorLogin("Username and Password not Found. Please Create an Account")
-              console.log(errorLogin, "error in login")
-            } else if (originalPromiseResult.errorCode == 2219) {
-              setErrorLogin("Please verify the mail sent and try again")
-              console.log(errorLogin, "error in login")
-            }
+            console.log("setError response ", originalPromiseResult);
+           setErrorLogin(originalPromiseResult);
           }
         }).catch((rejectedValueOrSerializedError) => {
           console.log(" Inside catch", rejectedValueOrSerializedError);
@@ -175,7 +169,9 @@ const Login = (props: Prop) => {
             value={email}
             placeholderTextColor={"black"}
             keyboardType="email-address"
-            onChangeText={e => { handleChange(e, "email"), setErrorEmail(""), setEmail(e) }}
+
+            onChangeText={e => { handleChange(e, "email"), setErrorEmail(""),setErrorLogin(""), setEmail(e) }}
+
             style={{
               flexDirection: "column",
               width: horizontalScale(250),
@@ -195,7 +191,9 @@ const Login = (props: Prop) => {
             value={password}
             secureTextEntry={passShow ? true : false}
             placeholderTextColor={"black"}
-            onChangeText={e => { handleChange(e, "password"), setErrorPassword(""), setPassword(e) }}
+
+            onChangeText={e => { handleChange(e, "password"), setErrorPassword(""),setErrorLogin(""), setPassword(e) }}
+
             style={{
               flexDirection: "column",
               width: horizontalScale(250),
@@ -210,9 +208,13 @@ const Login = (props: Prop) => {
           </TouchableOpacity>
 
         </TouchableOpacity>
-        <View style={{ height: "3%" }}>
+
+        <View style={{ height: "6%" }}>
           {formErrors.password || formErrors.loginundef ?
             <Text style={styles.ErrorText}>{errorPassword}</Text> : null}
+            {console.log("uuuuuuuuuuuuuuus",errorLogin?true:false)}
+            {errorLogin?<Text style={styles.ErrorText}>{errorLogin}</Text> : null}
+
         </View>
         <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginHorizontal: "5%" }}>
           <View style={{ display: 'flex', flexDirection: "column", marginStart: "1.5%" }}>

@@ -25,17 +25,28 @@ import { useDispatch } from "react-redux";
 
 
 
+
+
 const User = (props) => {
 
-    console.log("PAge props.............", props.route.params)
+
     const navigation = useNavigation();
     const handleLogout = () => {
-        const Removetoken = AsyncStorage.removeItem("loginToken")
-        if (Removetoken) {
-            // console.log("ramma")
-            // Alert.alert("Successfully logged out")
-            navigation.navigate("login")
-        }
+        Alert.alert("","Are you sure you want to logout? ", [
+            {
+              text: 'Cancel',
+              onPress: () => console.log('Cancel Pressed'),
+              style: 'cancel',
+            },
+            {text: 'OK', onPress: () => Removetoken()},
+          ]);
+
+            const Removetoken = async()=>{
+                AsyncStorage.removeItem("loginToken");
+                navigation.navigate("login");
+            }
+            
+
     }
 
 
@@ -63,6 +74,7 @@ const User = (props) => {
             <ScrollView style={{ backgroundColor: COLORS.pagebackground, borderWidth: 0, borderColor: "red", height: "90%" }}>
                 <View style={{ alignItems: "center", padding: 24 }}>
                     <View style={{ borderWidth: 1, borderRadius: 8, height: RFValue(100), width: RFValue(100), alignItems: "center" }}>
+
                         {(props.route.params.profile_pic) ?
                             <ImageBackground
                                 source={{ uri: (props.route.params.profile_pic) }}
@@ -94,6 +106,7 @@ const User = (props) => {
                 </View>
                 <View style={styles.viewBox}>
                     <TouchableOpacity style={styles.touchButton} onPress={() => navigation.navigate("PersonalDetails", props.route.params)}>
+
                         <Image
                             source={icons.userIcon}
                             resizeMode="contain"

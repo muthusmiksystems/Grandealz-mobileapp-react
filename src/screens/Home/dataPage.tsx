@@ -1,4 +1,7 @@
+
 import React, { type PropsWithChildren, useEffect, useState } from 'react';
+
+
 import {
   SafeAreaView,
   ScrollView,
@@ -18,12 +21,15 @@ import { COLORS, FONTS } from '../../constants';
 import icons from '../../constants/icons';
 import image from '../../constants/image';
 import { useNavigation } from '@react-navigation/native';
+
 import { original, unwrapResult } from '@reduxjs/toolkit';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { horizontalScale, verticalScale } from '../../constants/metrices';
 import { useDispatch ,useSelector } from 'react-redux';
 import { bannerHandler } from '../../store/reducers/Banners';
 import { userDetailsHandler } from '../../store/reducers/userDetails';
+
+
 import { addressListHandler } from "../../store/reducers/addresslist";
 import { drawgetHandler } from '../../store/reducers/Drawgetcall';
 import { Item } from 'react-native-paper/lib/typescript/components/Drawer/Drawer';
@@ -31,13 +37,16 @@ const DataPage = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [apiData, setApiData] = useState();
+
   const [userData,setUserData]=useState();
+
   const [result, setResult] = useState();
   const [sold, setSold] = useState<any>();
   const [camp, setCamp] = useState<any>();
   const [close, setClose] = useState<any>();
   useEffect(() => {
     dispatch(bannerHandler())
+
       .then(unwrapResult).then((originalPromiseResult) => {
         // console.log("successfully returned to login with response ", originalPromiseResult);
         setApiData(originalPromiseResult);
@@ -56,6 +65,7 @@ const DataPage = () => {
   }
 
   console.log("mmm", apiData)
+
 
   return (
     <ScrollView >
@@ -83,6 +93,7 @@ const DataPage = () => {
               />
             </View>
             <View style={{ flexDirection: "column" }}>
+
               <TouchableOpacity onPress={() => { navigation.navigate('User',userData?.data), Addresslist() }}>
                 {(userData?.data?.profile_pic)?
                   <Image
@@ -95,6 +106,7 @@ const DataPage = () => {
                     bottom: horizontalScale(7),
                   }}
                   />:
+
                 <Image
                   source={icons.user}
                   resizeMode="contain"
@@ -109,6 +121,7 @@ const DataPage = () => {
             </View>
           </View>
         </View>
+
 
         <View style={{ padding: "3%", flex: 0.4 }}>
           <Banner data={apiData} />
@@ -135,7 +148,7 @@ const DataPage = () => {
         <Carsold />
 
 
-
+n
       </View>
     </ScrollView>
   )
