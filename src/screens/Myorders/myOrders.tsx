@@ -25,7 +25,9 @@ const MyOrders = () => {
     const navigation = useNavigation();
 
     const [Orderlistdata, setOrderlistdata] = useState<any>();
+
     const [modalVisible, setModalVisible] = useState(false);
+
     
     useEffect(() => {
       const  orderitems= async () => {

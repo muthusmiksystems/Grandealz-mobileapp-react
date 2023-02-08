@@ -43,7 +43,6 @@ const authentication=async()=>{
     }else{
       props.navigation.replace('login');
     }
-
 }
 
   useEffect(() => {

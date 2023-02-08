@@ -20,14 +20,18 @@ import { useNavigation } from '@react-navigation/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useDispatch, useSelector, useStore } from 'react-redux';
 import moment from "moment";
+
 import { addToWishlistHandle } from '../services/wishlist';
+
 import { addToCartHandler } from '../store/reducers/addToCart';
 import { unwrapResult } from '@reduxjs/toolkit';
 const PriceDetails = ({route}) => {
   const pricing = route.params
+
   const[isWished,setIsWished]=useState(false)
   const dispatch=useDispatch();
   const store=useStore();
+
   console.log(pricing,"samuel sham")
   const navigation = useNavigation();
 
@@ -40,6 +44,7 @@ const PriceDetails = ({route}) => {
     })
   }
 
+
   const handleAddWishlist=async()=>{
         const result=  await addToWishlistHandle(pricing._id);
         setIsWished(true);
@@ -47,6 +52,7 @@ const PriceDetails = ({route}) => {
         
         console.log("result",result)
   }
+
 
   return (
     <View style={{ flex: 1 }} >

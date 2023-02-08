@@ -48,6 +48,7 @@ import OurProducts from './src/screens/ourProduct';
 import DetailedProduct from './src/screens/detailedProduct';
 import HowItWorks from './src/screens/howitworks';
 import Coupons from './src/screens/Tickets/coupon';
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const App = () => {
   return (

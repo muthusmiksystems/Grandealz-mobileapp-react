@@ -13,7 +13,7 @@ export const wishlistHandle = async () => {
     }).catch((err) => {
         console.log("catch error Api error", err);
     })
-}
+
 
 
 export const addToWishlistHandle = async (data:string) => {

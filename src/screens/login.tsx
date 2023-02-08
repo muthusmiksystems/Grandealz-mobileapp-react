@@ -114,6 +114,7 @@ const Login = (props: Prop) => {
       console.log("data inside the handle submit", data);
       dispatch(loginHanlder(reg))
         .then(unwrapResult)
+
         .then(async (originalPromiseResult:any) => {
           console.log("successfully returned to login with response ", originalPromiseResult);
           if (originalPromiseResult?.data?.access_token) {
@@ -168,7 +169,9 @@ const Login = (props: Prop) => {
             value={email}
             placeholderTextColor={"black"}
             keyboardType="email-address"
+
             onChangeText={e => { handleChange(e, "email"), setErrorEmail(""),setErrorLogin(""), setEmail(e) }}
+
             style={{
               flexDirection: "column",
               width: horizontalScale(250),
@@ -188,7 +191,9 @@ const Login = (props: Prop) => {
             value={password}
             secureTextEntry={passShow ? true : false}
             placeholderTextColor={"black"}
+
             onChangeText={e => { handleChange(e, "password"), setErrorPassword(""),setErrorLogin(""), setPassword(e) }}
+
             style={{
               flexDirection: "column",
               width: horizontalScale(250),
@@ -203,11 +208,13 @@ const Login = (props: Prop) => {
           </TouchableOpacity>
 
         </TouchableOpacity>
+
         <View style={{ height: "6%" }}>
           {formErrors.password || formErrors.loginundef ?
             <Text style={styles.ErrorText}>{errorPassword}</Text> : null}
             {console.log("uuuuuuuuuuuuuuus",errorLogin?true:false)}
             {errorLogin?<Text style={styles.ErrorText}>{errorLogin}</Text> : null}
+
         </View>
         <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginHorizontal: "5%" }}>
           <View style={{ display: 'flex', flexDirection: "column", marginStart: "1.5%" }}>
