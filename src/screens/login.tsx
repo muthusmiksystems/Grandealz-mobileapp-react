@@ -54,7 +54,7 @@ const Login = (props: Prop) => {
   const storage = StorageController
   const dispatch = useDispatch();
   const [passShow, setPassShow] = useState("true");
-  console.log("PAss show", passShow);
+
   const [isSelected, setSelection] = useState(false);
 
   const { handleChange, details, handleSubmit, formErrors, data, formValues } = useForm(validate);
@@ -66,26 +66,25 @@ const Login = (props: Prop) => {
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-    console.log(Object.keys(formValues).length, "kk", formErrors)
+    console.log(Object.keys(formValues).length, "kk", formErrors.password)
     if (formErrors && Object.keys(formErrors).length > 0) {
-      if (formErrors && formErrors.email) {
+      if (formErrors && formErrors.email && formErrors.password) {
         //setEmail(formErrors.email);
         setErrorEmail(formErrors.email);
-        console.log("email failed", formErrors.email)
+        setErrorPassword(formErrors.password); 
+        console.log("email password failed", formErrors.email)
       }
       else if (formErrors && formErrors.password) {
         console.log("password Validation failed")
         //setPassword(formErrors.password);
         setErrorPassword(formErrors.password);
       }
-      else {
-        setErrorEmail(formErrors.loginundef);
-        setErrorPassword(formErrors.loginundef);
-        console.log("im inisde the loginundi", formErrors.loginundef)
+      else if (formErrors && formErrors.email ){
+        setErrorEmail(formErrors.email);
+        console.log("email failed", formErrors.email)
       }
     }
-
-    console.log(data, "im the formerror data........", formValues)
+    console.log(data, "data........", formValues)
   }, [formErrors])
   
   useEffect(() => {
@@ -114,29 +113,30 @@ const Login = (props: Prop) => {
       const reg = {
         "email": data.email,
         "password": data.password,
+        "fcm_id": ""
       }
-      console.log("data inside the handle submit", data);
+      console.log("data inside the handle submit", reg);
       dispatch(loginHanlder(reg))
         .then(unwrapResult)
-
         .then(async (originalPromiseResult:any) => {
           console.log("successfully returned to login with response ", originalPromiseResult);
           if (originalPromiseResult?.data?.access_token) {
             console.log("token  sam   ...dddd", originalPromiseResult.data.access_token);
             await AsyncStorage.setItem('loginToken', originalPromiseResult.data.access_token)
             props.navigation.replace("Tabs")
-          } else {
+          } else if (originalPromiseResult.data.message){
+            console.log("setError response ", originalPromiseResult.data.message);
+           setErrorLogin(originalPromiseResult.data.message);
+          }
+          else{
             console.log("setError response ", originalPromiseResult);
-           setErrorLogin(originalPromiseResult);
+           //setErrorLogin(originalPromiseResult.data.message);
           }
         }).catch((rejectedValueOrSerializedError) => {
           console.log(" Inside catch", rejectedValueOrSerializedError);
         })
     }
   }, [data])
-
-
-
 
   const handlePasswordBox = () => {
     // console.log("box pass")
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
     color: "red",
     ...FONTS.lexendregular,
     fontSize: RFValue(10),
-    textAlign: "center"
+    marginStart:"7%"
   }
 })
 export default Login;

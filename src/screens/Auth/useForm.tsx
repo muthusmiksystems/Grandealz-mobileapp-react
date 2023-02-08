@@ -25,13 +25,13 @@ const useForm = (validate) => {
         }
         else {
           if (!formValues.email && !formValues.password) {
-            let Error = { "loginundef": "Please fill this the fields!" }
+            let Error = { "email": "Please enter EmailId!","password":"Please enter valid password" }
             setFormErrors(Error)
           } else if (formValues.email && !formValues.password) {
-            let Error = { "password": "Please fill the valid password to proceed" }
+            let Error = { "password": "Please enter valid password" }
             setFormErrors(Error)
           } else if (!formValues.email && formValues.password) {
-            let Error = { "email": "Please fill the valid email or username to proceed" }
+            let Error = { "email": "Please enter valid Email" }
             setFormErrors(Error)
           }
         }
@@ -88,7 +88,6 @@ const useForm = (validate) => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       console.log(formValues, 'formValues.......', formErrors, "samuel");
       setData(formValues);
-      console.log(data, "samuel");
     }
   }, [formErrors]);
 

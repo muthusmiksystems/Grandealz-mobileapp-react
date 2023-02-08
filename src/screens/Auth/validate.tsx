@@ -7,7 +7,7 @@ const validate = (details) => {
         formErrors.emailorusername = "Email/Username is required!";
       } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(details.emailorusername)) {
         if (details.emailorusername.length < 4) {
-          formErrors.emailorusername = "This is not a valid email/username format!";
+          formErrors.emailorusername = "Please enter a valid emailId!";
         }
       }
     }
@@ -16,7 +16,7 @@ const validate = (details) => {
       if (details.email.length == 0) {
         formErrors.email = "Email is required!";
       } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(details.email)) {
-        formErrors.email = "This is not a valid email format!";
+        formErrors.email = "Please enter a valid emailId !";
       }
     }
     //ForgotPage email
@@ -24,7 +24,7 @@ const validate = (details) => {
       if (details.forgotemail.length == 0) {
         formErrors.forgotemail = "Email is required!";
       } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(details.forgotemail)) {
-        formErrors.forgotemail = "This is not a valid email format!";
+        formErrors.forgotemail = "please enter a valid emailId!";
       }
     }
     //Sign Up phone number
@@ -48,7 +48,7 @@ const validate = (details) => {
         formErrors.password = "Password is required!";
       } else if (!/^[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(details.password)) {
 
-        formErrors.password = "password must have min 8 characters with the  combination of uppercase,lowercase and number";
+        formErrors.password = "password must have min 8 characters with number";
 
       }
     }

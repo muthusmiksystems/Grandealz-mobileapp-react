@@ -60,9 +60,7 @@ const useForm = (validate) => {
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues, 'formValues.......', formErrors, "samuel");
       setData(formValues);
-      console.log(data, "samuel");
     }
   }, [formErrors]);
 
