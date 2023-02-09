@@ -49,7 +49,6 @@ const data = [
         watchedOn: "12.08.22 09:55pm",
         ticketno: "20-232301-32133265",
     },
-    
 
 ];
 const CouponDetails = () => {
@@ -65,7 +64,7 @@ const CouponDetails = () => {
 
      const[applycoupon,setApplycoupon]=useState("")
      const[error,setError]=useState("")
-    //  console.log(applycoupon)
+     //console.log(applycoupon)
 
     const validatePromocode=()=>{
         let code=13
@@ -81,9 +80,7 @@ const CouponDetails = () => {
         {
             setError('Invalid Coupon code!')
         }
-        
     }
-
     return (
         <SafeAreaView >
             <View style={{ width: horizontalScale(375), height: verticalScale(670) }} >
@@ -100,8 +97,7 @@ const CouponDetails = () => {
                                 underlineColor="white"
                                 activeUnderlineColor={'transparent'}
                                 style={{width:200,height:40,backgroundColor:"white",fontSize:RFValue(12),borderWidth:10,borderColor:"white"}}
-                                />                                 
-                                
+                                />                                                                 
                             </View>
                         </View>                       
                         <TouchableOpacity style={{ flexDirection: "column", }}  onPress={() => validatePromocode()}>
@@ -111,7 +107,6 @@ const CouponDetails = () => {
                         </TouchableOpacity>                      
                         {/* <MCIcon name="chevron-right" size={moderateScale(35)} color={COLORS.black} style={{ flexDirection: "column", width: "75%" }} /> */}
                     </View>
-                   
                 </View>
                 <View style={{ height: "3%",marginTop:"-9%" }}>
                       {error ? <Text style={{ ...FONTS.lexendregular, color: COLORS.element, fontSize: RFValue(12), paddingStart: "7%" }}>{error}</Text> : null}
@@ -162,7 +157,6 @@ const CouponDetails = () => {
     )
 }
 const styles = StyleSheet.create({
-
     container: {
         alignContent: "center"
     },
@@ -172,6 +166,5 @@ const styles = StyleSheet.create({
     text1: {
         alignContent: "center"
     },
-
 })
 export default CouponDetails;

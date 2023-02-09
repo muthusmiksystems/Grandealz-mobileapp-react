@@ -12,10 +12,8 @@ import {
   Pressable,
   View,
   Image,
-
   Alert,
   BackHandler,
-
   TouchableOpacity,
   // Button
 } from "react-native";

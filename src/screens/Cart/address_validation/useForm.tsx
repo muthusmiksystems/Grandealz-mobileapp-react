@@ -18,10 +18,8 @@ const useForm = (validate) => {
   const handleSubmit = (e, type) => {
     
     e.preventDefault();
-    switch (type) {
-      case '1':
-        //signup  
-        if (formValues.Name && formValues.phone && formValues.pincode && formValues.address && formValues.locality) {
+
+        if (formValues.Name && formValues.address && formValues.locality && formValues.mobile && formValues.pincode) {
           setFormErrors(validate(formValues));
           console.log("sujithhhhhhhhh", formValues)
         }
@@ -51,9 +49,7 @@ const useForm = (validate) => {
             setFormErrors(Error);
           }
         }
-        break;
-    }
-    console.log('formValues handlesubmit', formValues);
+    console.log('formValues handlesubmit.....', formValues);
     //setFormErrors(validate(formValues));
     setIsSubmit(true);
   };
