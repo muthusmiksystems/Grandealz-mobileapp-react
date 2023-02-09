@@ -55,7 +55,8 @@ const ForgetPassword = () => {
           console.log("successfully returned to ForgetPassword with response ", originalPromiseResult);
           if (originalPromiseResult==="Please check your registered email to reset your password.") {
             ToastAndroid.showWithGravity(
-              'Please check your registered email to reset your password.',
+              originalPromiseResult,
+              // 'Please check your registered email to reset your password.',
               ToastAndroid.SHORT,
               ToastAndroid.CENTER,
             );
@@ -70,7 +71,12 @@ const ForgetPassword = () => {
           //   );
           // }
           else{
-            setError(originalPromiseResult)
+            ToastAndroid.showWithGravity(
+              originalPromiseResult,
+              ToastAndroid.SHORT,
+              ToastAndroid.CENTER,
+            );
+            // setError(originalPromiseResult)
             // console.log("error....",error);
           }
           // console.log(ori);

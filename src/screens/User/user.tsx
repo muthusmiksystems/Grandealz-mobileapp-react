@@ -36,7 +36,6 @@ import { imageUploadService } from '../../services/imageUploadService';
 
 
 const User = (props) => {
-
     console.log("PAge props.............", props.route.params)
     const userData: any = useSelector<any>(state => state.userDetailsHandle.data.data);
     const [modalState, setModalState] = useState(false)
@@ -58,13 +57,9 @@ const User = (props) => {
             AsyncStorage.removeItem("loginToken");
             navigation.navigate("login");
         }
-
-
     }
 
     useEffect(() => {
-
-
         const uploadImage = async () => {
             await imageUploadService(profilePic).then((originalPromiseResult) => {
                 if (originalPromiseResult == undefined) {
@@ -97,65 +92,14 @@ const User = (props) => {
                     "type": result.assets[0].type
                 }
                 setProfilePic(file)
-                // // if ((result.assets[0].fileSize) > 3000000) {
-                // ImageResizer.createResizedImage(
-                //     result.assets[0].uri!,
-                //     result.assets[0].width!,
-                //     result.assets[0].height!,
-                //     "JPEG",
-                //     0,
-                // )
-                //     .then(resizedImageUri => {
-                //         console.log("resized.........", resizedImageUri.uri);
-                //         console.log("resized.........", resizedImageUri);
-                //         this.setState({
-                //             filepath: { uri: resizedImageUri.uri },
-                //             // filepath: { uri: result.assets[0].uri! },
-                //             modalVisible: false
-                //         }, () => !this.state.filepath == undefined || null || "" ? this.setState({ isIdImageSelected: false }) : this.setState({ isIdImageSelected: true }))
-                //         // resizeImageUri is the URI of the new image that can now be displayed, uploaded...
-                //     })
-                //     .catch(err => {
-                //         console.log("resized.........", err);
-                //         Alert.alert("Please try again later!")
-                //         this.props.navigation.pop();
-                //         // Oops, something went wrong. Check that the filename is correct and
-                //         // inspect err to get more details.
-                //     });
             }
-            // else {
-            //     setProfilePic({
-            //         // filepath:{uri:resizedImageUri.uri!},
-            //         filepath: { uri: result.filename! },
-            //         modalVisible: false
-            //     }, () => !this.state.filepath == undefined || null || "" ? this.setState({ isIdImageSelected: false }) : this.setState({ isIdImageSelected: true }))
-            //     // }
-            // }
+
             else {
                 Alert.alert("Please try again later!")
                 // this.props.navigation.pop();
             }
         }
-
-    const navigation = useNavigation();
-    const handleLogout = () => {
-        Alert.alert("","Are you sure you want to logout? ", [
-            {
-              text: 'Cancel',
-              onPress: () => console.log('Cancel Pressed'),
-              style: 'cancel',
-            },
-            {text: 'OK', onPress: () => Removetoken()},
-          ]);
-
-            const Removetoken = async()=>{
-                AsyncStorage.removeItem("loginToken");
-                navigation.navigate("login");
-            }
-            
-
     }
-
     const openGallery = async () => {
         setModalState(false)
         if (Platform.OS == 'android' && await checkForPermissions()) {
@@ -171,44 +115,13 @@ const User = (props) => {
                 const file = {
                     "filename": result.assets[0].fileName,
                     "type": result.assets[0].type
-                }  
+                }
                 setProfilePic(file)
             }
-            // if (result.assets) {
-            // ImageResizer.createResizedImage(
-            //     result.assets[0].uri!,
-            //     result.assets[0].width!,
-            //     result.assets[0].height!,
-            //     "JPEG",
-            //     0.5,
-            // )
-            //     .then(resizedImageUri => {
-            //         console.log("resized.........", resizedImageUri.uri);
-            //         console.log("resized.........", resizedImageUri);
-            //         this.setState({
-            //             filepath: { uri: resizedImageUri.uri },
-            //             // filepath: { uri: result.assets[0].uri! },
-            //             modalVisible: false
-            //         }, () => !this.state.filepath == undefined || null || "" ? this.setState({ isIdImageSelected: false }) : this.setState({ isIdImageSelected: true }))
-            //         // resizeImageUri is the URI of the new image that can now be displayed, uploaded...
-            //     })
-            //     .catch(err => {
-            //         console.log("resized.........", err);
-            //         Alert.alert("Please try again later!")
-            //         this.props.navigation.pop();
-            //         // Oops, something went wrong. Check that the filename is correct and
-            //         // inspect err to get more details.
-            //     });
-            //     this.setState({
-            //         filepath: { uri: result.assets[0].uri! },
-            //         modalVisible: false
-            //     },
-            //         () => this.state.filepath === undefined || null || "" ? this.setState({ isIdImageSelected: false }) : this.setState({ isIdImageSelected: true }))
-            // }
-            // else {
-            //     Alert.alert("Please try again later!")
-            //     this.props.navigation.pop();
-            // }
+            else {
+                Alert.alert("Please try again later!")
+                // this.props.navigation.pop();
+            }
         }
     }
     const checkForPermissions = async () => {
@@ -509,10 +422,11 @@ const User = (props) => {
                 style={{ width: '100%', margin: 0, padding: 0 }}
                 onBackButtonPress={() => setModalState(false)}
                 onBackdropPress={() => setModalState(false)}
+                // onDismiss={()=>setModalState(false)}
             >
                 <View style={{ height: '40%', margin: 0, padding: 0, width: '100%', bottom: 0, backgroundColor: '#fff', borderRadius: 10 }}>
                     <View style={[styles.MainAlertView, { paddingBottom: 10, padding: 20 }]}>
-                        <View style={{ flexDirection: 'row', width: '100%', padding: 10, paddingBottom: 0, alignItems: 'center', justifyContent: 'space-around' }}>
+                        <View style={{ flexDirection: 'row', width: '100%', paddingBottom: 0, alignItems: 'center', justifyContent: 'space-around' }}>
 
                             <TouchableOpacity onPress={() => openCamera()} style={{ alignItems: 'center' }}>
                                 {/* <LinearGradient style={{ borderRadius: 5, alignSelf: 'center', alignItems: 'center', padding: 20 }} start={{ x: 0, y: 0.75 }} end={{ x: 1, y: 0.25 }} colors={['#0073C7', '#037BB5', '#0684A3', '#0684A3', '#098C91', '#098C91', '#0C957F', '#0C9581', '#0C967B', '#0D9A74']}> */}
