@@ -11,7 +11,8 @@ import {
     ScrollView,
     Platform,
     PermissionsAndroid,
-    ToastAndroid
+    ToastAndroid,
+    Modal
 } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import { icons, COLORS, FONTS } from '../../constants';
@@ -26,7 +27,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import FontA5 from "react-native-vector-icons/FontAwesome5";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch, useSelector } from "react-redux";
-import { Modal } from 'react-native-paper';
+// import { Modal } from 'react-native-paper';
 // import AnimatedButton from '../../component/Ani';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { CameraOptions, ImageLibraryOptions } from 'react-native-image-picker/lib/typescript/types';
@@ -62,12 +63,21 @@ const User = (props) => {
     useEffect(() => {
         const uploadImage = async () => {
             await imageUploadService(profilePic).then((originalPromiseResult) => {
-                if (originalPromiseResult == undefined) {
+                console.log("Original............",originalPromiseResult.status)
+                if (originalPromiseResult.status == "422") {
+                    ToastAndroid.showWithGravity(
+                        '422',
+                        ToastAndroid.SHORT,
+                        ToastAndroid.CENTER
+                    )
+                }
+                else if (originalPromiseResult == undefined) {
                     ToastAndroid.showWithGravity(
                         'Something went wrong!, Please try again later',
                         ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                     )
+                    
                 }
             });
         }
@@ -180,6 +190,7 @@ const User = (props) => {
                             <ImageBackground
                                 source={{ uri: (userData.profile_pic) }}
                                 resizeMode="stretch"
+                                imageStyle={{borderRadius:7}}
                                 style={{
                                     width: "100%",
                                     height: "100%",
@@ -191,10 +202,10 @@ const User = (props) => {
                                     <FontA5 name="edit" color="white" size={moderateScale(13)} style={{ margin: "2%" }} />
                                 </TouchableOpacity>
                             </ImageBackground> :
-                            <ImageBackground  
-                            onPress={() =>Editprofilepic()}
+                            <ImageBackground
                                 source={image.profilepic}
                                 resizeMode="stretch"
+                                imageStyle={{borderRadius:7}}
                                 style={{
                                     width: "100%",
                                     height: "100%"
@@ -423,12 +434,16 @@ const User = (props) => {
             </ScrollView>
             <Modal
                 visible={modalState}
-                style={{ width: '100%', margin: 0, padding: 0 }}
-                onBackButtonPress={() => setModalState(false)}
-                onBackdropPress={() => setModalState(false)}
-                // onDismiss={()=>setModalState(false)}
+                transparent={true}
+                onRequestClose={() => {
+                    setModalState(false);
+                }}
+                animationType="slide"
+            // onBackButtonPress={() => setModalState(false)}
+            // onBackdropPress={() => setModalState(false)}
+            // onDismiss={()=>setModalState(false)}
             >
-                <View style={{ height: '40%', margin: 0, padding: 0, width: '100%', bottom: 0, backgroundColor: '#fff', borderRadius: 10 }}>
+                <View style={styles.centeredView}>
                     <View style={[styles.MainAlertView, { paddingBottom: 10, padding: 20 }]}>
                         <View style={{ flexDirection: 'row', width: '100%', paddingBottom: 0, alignItems: 'center', justifyContent: 'space-around' }}>
 
@@ -504,6 +519,11 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         width: '100%',
         borderColor: '#fff',
+    }, centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
     }
 })
 

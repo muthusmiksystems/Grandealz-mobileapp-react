@@ -84,7 +84,7 @@ const Address = () => {
                         <TouchableOpacity style={{flexDirection: "column", width: "10%", borderRadius: 5,  alignItems: "center", backgroundColor: COLORS.element, padding: "2%",marginVertical:"1%" }} onPress={()=>{handledata(data._id)}}>
                             <Entypo name="edit" size={moderateScale(15)} color={COLORS.black} style={{ paddingVertical:"2%" }} />
                         </TouchableOpacity>
-                        <TouchableOpacity style={{flexDirection: "column", width: "10%", borderRadius: 5,  alignItems: "center", backgroundColor: COLORS.element, padding: "2%",margin:"1%" }}/*  onPress={()=>{handleDelete(data._id)}} */>
+                        <TouchableOpacity style={{flexDirection: "column", width: "10%", borderRadius: 5,  alignItems: "center", backgroundColor: COLORS.element, padding: "2%",margin:"1%" }} onPress={()=>{handleDelete(data._id)}}>
                             <AntIcon name="delete" size={moderateScale(15)} color={COLORS.black} style={{ paddingVertical:"2%" }} />
                         </TouchableOpacity>
                     </View>
