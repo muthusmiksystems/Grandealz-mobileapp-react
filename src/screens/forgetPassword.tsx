@@ -41,7 +41,7 @@ const ForgetPassword = () => {
     else if (forgetEmail !== undefined) {
       // console.log("..............",forgetEmail);
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(forgetEmail)) {
-        setError("Invalid email Id");
+        setError("Invalid EmailID");
       }
       else {
         setError("");
@@ -55,10 +55,12 @@ const ForgetPassword = () => {
           console.log("successfully returned to ForgetPassword with response ", originalPromiseResult);
           if (originalPromiseResult==="Please check your registered email to reset your password.") {
             ToastAndroid.showWithGravity(
-              'Please check your registered email to reset your password.',
+              originalPromiseResult,
+              // 'Please check your registered email to reset your password.',
               ToastAndroid.SHORT,
               ToastAndroid.CENTER,
             );
+            setForgetEmail('')
             navigation.navigate('OtpPage')
           }
           // else if(originalPromiseResult==="undefined"){
@@ -69,7 +71,12 @@ const ForgetPassword = () => {
           //   );
           // }
           else{
-            setError(originalPromiseResult)
+            ToastAndroid.showWithGravity(
+              originalPromiseResult,
+              ToastAndroid.SHORT,
+              ToastAndroid.CENTER,
+            );
+            // setError(originalPromiseResult)
             // console.log("error....",error);
           }
           // console.log(ori);
@@ -115,7 +122,7 @@ const ForgetPassword = () => {
               value={forgetEmail}
               style={{ flexDirection: "column", width: horizontalScale(250), ...FONTS.lexendregular, fontSize: RFValue(14),color:COLORS.black }}
             />
-            <Fontisto name='email' size={30} style={{ alignSelf: "center" }} />
+            <Fontisto name='email' size={30} style={{ alignSelf: "center",color:COLORS.gray }} />
           </View>
         </View>
         <View style={{ height: "5%" }}>

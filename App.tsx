@@ -48,9 +48,13 @@ import OurProducts from './src/screens/ourProduct';
 import DetailedProduct from './src/screens/detailedProduct';
 import HowItWorks from './src/screens/howitworks';
 import Coupons from './src/screens/Tickets/coupon';
+
 import PlayNow from './src/screens/Myorders/playNow';
 import Playnowquiz from './src/screens/Myorders/playnowquiz';
 import Playnowquizsubmit from './src/screens/Myorders/playnowquizsubmit';
+
+import EditAddress from './src/screens/Cart/editAddress';
+
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const App = () => {
@@ -91,7 +95,8 @@ const App = () => {
         <Stack.Screen name="PlayNow" component={PlayNow}/>
         <Stack.Screen name="playnowquiz" component={Playnowquiz}/>
         <Stack.Screen name="Playnowquizsubmit" component={Playnowquizsubmit}/>
-      
+        <Stack.Screen name="EditAddress" component={EditAddress}/>
+
         < Stack.Screen
           name="Tabs"
           component={Tabs}

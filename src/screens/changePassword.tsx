@@ -46,8 +46,10 @@ const ChangePassword = () => {
     }else{
       setError('');
    
-    if (newpassword!==confirmpassword) {
-      setError("Password and Confirm password is not same");
+
+    if ((newpassword!==confirmpassword) || (expassword === newpassword)) {
+      setError("Please Check your password");
+
     }else{
         if (!/^[a-zA-Z0-9!@#$%^&*~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹]{8,16}$/.test(newpassword) && !/^[a-zA-Z0-9!@#$%^&*~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹]{8,16}$/.test(confirmpassword)) {
           setError("minimum 8 characters should be with uppercase,lowercase and number");
@@ -59,14 +61,22 @@ const ChangePassword = () => {
             "new_password": confirmpassword
           };
           dispatch(changepasswordHandle(value)).then(unwrapResult).then((originalPromiseResult) => {
-            console.log("successfully returned to ForgetPassword with response ", originalPromiseResult);
-            if (originalPromiseResult === " Reset password success.") {
+
+            console.log("successfully returned to change Password with response ", originalPromiseResult);
+            if (originalPromiseResult ==="Password has been changed.") {
               ToastAndroid.showWithGravity(
-                'Please check your registered email to reset your password.',
+                'Password has been changed successfully',
                 ToastAndroid.SHORT,
                 ToastAndroid.CENTER,
               );
-              navigation.navigate('OtpPage')
+              setExpassword(""),
+              setNewpassword(""),
+              setConfirmpassword("")
+              navigation.navigate('User')
+            }
+            else{
+              setError(originalPromiseResult)
+
             }
           })
         
@@ -132,7 +142,9 @@ const ChangePassword = () => {
               {/* <Fontisto name='email' size={30} style={{ alignSelf: "center" }} /> */}
             </View>
           </View>
-          <View style={{ height: "8%", alignItems: "center", marginRight: RFValue(18) }}>
+
+          <View style={{ height: "10%", alignItems: "center", marginRight: RFValue(18) }}>
+
             {error ? <Text style={{ ...FONTS.lexendregular, color: COLORS.element, fontSize: RFValue(12), paddingStart: "7%" }}>{error}</Text> : null}
           </View>
           <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: verticalScale(200), padding: "3%" }}

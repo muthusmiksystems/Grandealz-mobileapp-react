@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Text,
     View,
@@ -105,7 +105,7 @@ const AddAddress = () => {
             const AddAddress = {
                 "name": data.Name,
                 "phone": data.phone,
-                "pincode":data.pincode,
+                "pincode": data.pincode,
                 "address": data.address,
                 "locality_town": data.locality,
                 "city": {
@@ -128,30 +128,27 @@ const AddAddress = () => {
                 "address_type": "Home",
                 "is_default_address": false
             }
-            console.log("data inside the handle submit",AddAddress);
-            dispatch(AddAddressHandle(AddAddress))
-                // .then(unwrapResult)
-                // .then((originalPromiseResult) => {
-                //     console.log("success samuvel you did itdone", originalPromiseResult);
-                //     if (originalPromiseResult.status === "200") {
-                //         var data = originalPromiseResult.data.access_token
-                //         navigation.navigate("OtpPage", data)
-                //     }
-                //     else if (originalPromiseResult === "You have already registered") {
-                //         console.log("im the error data", originalPromiseResult)
-                //         ToastAndroid.showWithGravity(originalPromiseResult),
-                //             ToastAndroid.CENTER, ToastAndroid.SHORT
-                //     }
-                //     else {
-                //         console.log(originalPromiseResult, "error")
-                //     }
-                // })
-
+            console.log("data inside the handle submit", AddAddress);
+            //dispatch(AddAddressHandle(AddAddress))
+            // .then(unwrapResult)
+            // .then((originalPromiseResult) => {
+            //     console.log("success samuvel you did itdone", originalPromiseResult);
+            //     if (originalPromiseResult.status === "200") {
+            //         var data = originalPromiseResult.data.access_token
+            //         navigation.navigate("OtpPage", data)
+            //     }
+            //     else if (originalPromiseResult === "You have already registered") {
+            //         console.log("im the error data", originalPromiseResult)
+            //         ToastAndroid.showWithGravity(originalPromiseResult),
+            //             ToastAndroid.CENTER, ToastAndroid.SHORT
+            //     }
+            //     else {
+            //         console.log(originalPromiseResult, "error")
+            //     }
+            // })
         }
 
     }, [data])
-
-
 
     const handleBox = () => {
 
@@ -264,7 +261,7 @@ const AddAddress = () => {
                             keyboardType={"default"}
                             placeholder="Locality / Town*"
                             value={locality}
-                            maxLength={10}
+                            maxLength={40}
                             onChangeText={e => { handleChange(e, "locality"), setErrorLocality(""), setLocality(e) }}
                             placeholderTextColor={COLORS.gray}
                             style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(14) }}
@@ -303,12 +300,12 @@ const AddAddress = () => {
 
                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "3%" }}>SAVE ADDRESS AS</Text>
                 <View style={{ marginVertical: "2%", flexDirection: "row", width: "89%", alignSelf: "center", borderRadius: 10, backgroundColor: COLORS.white }}>
-                    <TouchableOpacity style={{ paddingVertical: "5%", marginHorizontal: "5%" }}><Text style={{ color: COLORS.gray, textAlign: "center", fontSize: RFValue(11), ...FONTS.lexendregular, borderRadius: 4, borderWidth: 1, borderColor: COLORS.gray, paddingVertical: "1%", paddingHorizontal: "4%" }}>Home</Text></TouchableOpacity>
-                    <TouchableOpacity style={{ paddingVertical: "5%" }}><Text style={{ color: COLORS.gray, textAlign: "center", fontSize: RFValue(11), ...FONTS.lexendregular, borderRadius: 4, borderWidth: 1, borderColor: COLORS.gray, paddingHorizontal: "4%", paddingVertical: "1%" }}>Work</Text></TouchableOpacity>
+                    <TouchableOpacity style={{ paddingVertical: "5%", marginHorizontal: "5%" }}><Text style={styles.switch}>Home</Text></TouchableOpacity>
+                    <TouchableOpacity style={{ paddingVertical: "5%" }}><Text style={styles.switch}>Work</Text></TouchableOpacity>
                 </View>
 
                 <View style={{ marginHorizontal: "2%", marginBottom: "2%", padding: "2%", flexDirection: "row", width: "90%", borderRadius: 10, backgroundColor: COLORS.white, alignSelf: "center" }}>
-                    <View style={{marginLeft:"-4%"}}><CheckBoxes /></View>
+                    <View style={{ marginLeft: "-4%" }}><CheckBoxes /></View>
                     <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, paddingHorizontal: "5%", alignSelf: "center" }}>Make this my default address</Text>
                 </View>
             </ScrollView>
@@ -334,6 +331,17 @@ const styles = StyleSheet.create({
         flexDirection: "row",
 
 
+    },
+    switch: {
+        color: COLORS.gray,
+        textAlign: "center",
+        fontSize: RFValue(11),
+        ...FONTS.lexendregular,
+        borderRadius: 4,
+        borderWidth: 1,
+        borderColor: COLORS.gray,
+        paddingVertical: "1%",
+        paddingHorizontal: "4%"
     },
     subdivTwo: {
         height: verticalScale(748),
