@@ -25,7 +25,9 @@ const useForm = (validate) => {
         }
         else {
           if (!formValues.email && !formValues.password) {
-            let Error = { "email": "Please enter EmailId!", "password": "Please enter valid password" }
+
+            let Error = { "email": "Please enter EmailId!","password":"Please enter valid password" }
+
             setFormErrors(Error)
           } else if (formValues.email && !formValues.password) {
             let Error = { "password": "Please enter valid password" }

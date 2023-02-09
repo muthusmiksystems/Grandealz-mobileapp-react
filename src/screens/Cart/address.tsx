@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
 import {
     Text,
     View,
@@ -22,18 +22,35 @@ import Entypo from 'react-native-vector-icons/Entypo';
 // import { RadioButton } from "react-native-paper";
 import icons from "../../constants/icons";
 import { Colors } from "react-native/Libraries/NewAppScreen";
-import { useSelector, useStore } from "react-redux";
+import { useDispatch, useSelector, useStore } from "react-redux";
+import { RemoveAddressHandle } from "../../services/deleteaddress";
+import { addressListHandler } from "../../store/reducers/addresslist";
+import { unwrapResult } from "@reduxjs/toolkit";
 const Address = () => {
 
     const navigation = useNavigation();
-
+    const dispatch=useDispatch();
     const addresslist = useSelector((state) => state.AddressHandle.data);
-
+    const [addres,setAddress]=useState("");
     const store = useStore()
     console.log(store.getState(), "hello")
 
     console.log("addresslist value", addresslist)
 
+
+    const handledata=(data: any)=>{
+        console.log("editing page",data)
+       navigation.navigate("EditAddress",data)
+    }
+    const handleDelete=async (data: any)=>{
+        console.log("deleting page",data)
+        let Removeitems = await RemoveAddressHandle(data)
+        console.log("removed stats",Removeitems.message)
+        dispatch(addressListHandler())
+        .then(unwrapResult).then((originalPromiseResult)=>{
+            console.log("result data",originalPromiseResult)
+        })
+    }
     return (
         <SafeAreaView style={{ backgroundColor: "#F1F1F", height: "100%" }}>
             <StatusBar
@@ -53,9 +70,9 @@ const Address = () => {
                         <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, margin: "3%" }}>Add new Address</Text>
                     </TouchableOpacity>
                 </View>
-                {(addresslist).map((data, index) => (
+                {(addresslist).map((data,index) => (
                 <View key={index} style={{ width: "92%",alignSelf:"center", borderRadius: 20, backgroundColor: COLORS.white, marginHorizontal: "2%", marginTop: "5%",marginBottom:"0%", borderColor: COLORS.element, borderWidth: 1 }}>
-                    <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "1%" }}>
+                    <View style={{ flexDirection: "row", width: "90%", borderRadius: 10, padding: "1%" }}>
                         <View style={{ flexDirection: "column", width: "90%", }}>
                             <View style={{ flexDirection: "row",width:"100%" }}>
                                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "3%",marginVertical:"1%"}}>{data.name}</Text>
@@ -64,10 +81,12 @@ const Address = () => {
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        <View style={{ flexDirection: "column", width: "10%", borderRadius: 5,  alignItems: "center", backgroundColor: COLORS.element, padding: "2%",marginVertical:"0.5%" }}>
-                            <Entypo name="edit" size={moderateScale(15)} color={COLORS.white} style={{ paddingVertical:"2%" }} />
-                        </View>
-
+                        <TouchableOpacity style={{flexDirection: "column", width: "10%", borderRadius: 5,  alignItems: "center", backgroundColor: COLORS.element, padding: "2%",marginVertical:"1%" }} onPress={()=>{handledata(data._id)}}>
+                            <Entypo name="edit" size={moderateScale(15)} color={COLORS.black} style={{ paddingVertical:"2%" }} />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{flexDirection: "column", width: "10%", borderRadius: 5,  alignItems: "center", backgroundColor: COLORS.element, padding: "2%",margin:"1%" }}/*  onPress={()=>{handleDelete(data._id)}} */>
+                            <AntIcon name="delete" size={moderateScale(15)} color={COLORS.black} style={{ paddingVertical:"2%" }} />
+                        </TouchableOpacity>
                     </View>
                     <View>
                         <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, marginHorizontal: "3%",marginTop:"0%" }}>
@@ -114,7 +133,7 @@ const Address = () => {
 
                 {/* </RadioButton.Group> */ }
             </ScrollView>
-            <View style={{ flexDirection: "row", height: "8%", backgroundColor: COLORS.white, paddingHorizontal: horizontalScale(8) }}>
+            {/* <View style={{ flexDirection: "row", height: "8%", backgroundColor: COLORS.white, paddingHorizontal: horizontalScale(8) }}>
                 <View style={{ flexDirection: "column", width: "55%", marginHorizontal: "3%", marginVertical: "4%" }}>
                     <Text style={{ color: COLORS.element, fontSize: RFValue(14), ...FONTS.lexendregular }} >₹100.00</Text>
                     <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular }} >Total Amount</Text>
@@ -122,7 +141,7 @@ const Address = () => {
                 <TouchableOpacity onPress={() => navigation.navigate("Delivery")} style={{ flexDirection: "column", width: "35%", marginVertical: "1%", borderRadius: 5, borderWidth: 1, alignSelf: "center" }} >
                     <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular, paddingVertical: verticalScale(10), textAlign: "center" }}>Continue</Text>
                 </TouchableOpacity>
-            </View>
+            </View> */}
         </SafeAreaView>
     );
 }

@@ -70,7 +70,9 @@ const Login = (props: Prop) => {
       if (formErrors && formErrors.email && formErrors.password) {
         //setEmail(formErrors.email);
         setErrorEmail(formErrors.email);
-        setErrorPassword(formErrors.password);
+
+        setErrorPassword(formErrors.password); 
+
         console.log("email password failed", formErrors.email)
       }
       else if (formErrors && formErrors.password) {
@@ -78,7 +80,9 @@ const Login = (props: Prop) => {
         //setPassword(formErrors.password);
         setErrorPassword(formErrors.password);
       }
-      else if (formErrors && formErrors.email) {
+
+      else if (formErrors && formErrors.email ){
+
         setErrorEmail(formErrors.email);
         console.log("email failed", formErrors.email)
       }
@@ -117,7 +121,9 @@ const Login = (props: Prop) => {
       console.log("data inside the handle submit", reg);
       dispatch(loginHanlder(reg))
         .then(unwrapResult)
-        .then(async (originalPromiseResult: any) => {
+
+        .then(async (originalPromiseResult:any) => {
+
           console.log("successfully returned to login with response ", originalPromiseResult);
           if (originalPromiseResult?.data?.access_token) {
             console.log("token  sam   ...dddd", originalPromiseResult.data.access_token);
@@ -128,6 +134,7 @@ const Login = (props: Prop) => {
               ToastAndroid.CENTER
             )
             props.navigation.replace("Tabs")
+
           }
           else if (originalPromiseResult.message) {
             ToastAndroid.showWithGravity(
@@ -144,6 +151,7 @@ const Login = (props: Prop) => {
               ToastAndroid.CENTER
             )
             //  setErrorLogin(originalPromiseResult.message);
+
           }
         }).catch((rejectedValueOrSerializedError) => {
           console.log(" Inside catch", rejectedValueOrSerializedError);
@@ -292,7 +300,9 @@ const styles = StyleSheet.create({
     color: "red",
     ...FONTS.lexendregular,
     fontSize: RFValue(10),
-    marginStart: "7%"
+
+    marginStart:"7%"
+
   }
 })
 export default Login;

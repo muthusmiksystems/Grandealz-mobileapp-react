@@ -79,11 +79,11 @@ const ClosingSoon = () => {
             // ItemSeparatorComponent={() => (
             //   <View style={{ width: 5 }} />
             // )}
-            contentContainerStyle={{ margin: 10 }}
+            contentContainerStyle={{ marginHorizontal:"4%" }}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
-              <View style={{ padding: '1%' }}>
-                <TouchableOpacity style={{ borderRadius: 9, borderTopWidth: 4, borderTopColor: "#E70736", backgroundColor: "white", height: RFValue(145), width: RFValue(128) }} onPress={() => /* navigation.navigate("PriceDetails") */ handleSearch(item)}>
+              <View style={{ paddingHorizontal:horizontalScale(8) }}>
+                <TouchableOpacity style={{ borderRadius: 9, borderTopWidth: 4, borderTopColor: "#E70736", backgroundColor: "white", height: RFValue(145), width: RFValue(110) }} onPress={() => /* navigation.navigate("PriceDetails") */ handleSearch(item)}>
                   <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8 }}>
                     <View style={{ flexDirection: 'column', marginTop: RFValue(15) }}>
                       <Image

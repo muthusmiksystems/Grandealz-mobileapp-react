@@ -1,4 +1,5 @@
 const validate = (details) => {
+
   const formErrors = {};
   console.log("passowrd present", details)
   //Login page or sign in
@@ -48,7 +49,9 @@ const validate = (details) => {
       formErrors.password = "Please enter your password";
     } else if (!/^[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(details.password)) {
 
-      formErrors.password = "Minimum 8 characters is required with combination of alphabets, numbers and special characters";
+
+        formErrors.password = "password must have min 8 characters with number";
+
 
     }
   }

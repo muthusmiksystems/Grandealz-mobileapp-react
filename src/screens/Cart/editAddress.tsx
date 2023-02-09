@@ -28,9 +28,12 @@ import CheckBox from "@react-native-community/checkbox";
 import PaymentGate from "./payPage";
 import useForm from "./address_validation/useForm";
 import validate from "./address_validation/validate";
+import { useDispatch } from "react-redux";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { addressEditHandler } from "../../store/reducers/addressedit";
 
-
-const AddAddress = () => {
+const EditAddress = ({route}) => {
+    const edit= route.params;
     const CheckBoxes = () => {
         const [isSelected, setSelection] = useState(false);
         return (
@@ -44,9 +47,10 @@ const AddAddress = () => {
             </View>
         )
     }
-
+    const dispatch =useDispatch();
     const { handleChange, handleSubmit, formErrors, data, formValues } = useForm(validate);
     const [Name, setName] = useState<any>("");
+    const [editadd,setEditAdd]=useState("");
     const [errorName, setErrorName] = useState(null);
     const [phone, setPhone] = useState<any>("");
     const [errorPhone, setErrorPhone] = useState(null);
@@ -56,9 +60,35 @@ const AddAddress = () => {
     const [errorAddress, setErrorAddress] = useState(null);
     const [locality, setLocality] = useState<any>("");
     const [errorLocality, setErrorLocality] = useState(null);
+    const [city, setCity] = useState<any>("");
+    const [errorCity, setErrorCity] = useState(null);
+    const [stateses, setStateses] = useState<any>("");
+    const [errorStateses, setErrorStateses] = useState(null);
+    const [country, setCountry] = useState<any>("");
+    const [errorCountry, setErrorCountry] = useState(null);
 
     const navigation = useNavigation();
+    useEffect(()=>{
+        dispatch(addressEditHandler(edit))
+       .then(unwrapResult)
+       .then((address: any)=>{
+        setName(address.name)
+        setPhone(address.phone)
+        setPincode(address.pincode)
+        setAddress(address.address)
+        setLocality(address.locality_town)
+        setCity(address.city.name)
+        setStateses(address.state.name)
+        setCountry(address.country.name)
+        console.log(address,"address to edit in this page ")
+       })
+     
+      
+    },[])
 
+    useEffect(()=>{
+        console.log(".....",Name);
+    },[Name])
 
     useEffect(() => {
 
@@ -190,6 +220,7 @@ const AddAddress = () => {
                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "5%" }}>CONTACT DETAILS</Text>
                 <View style={{ marginHorizontal: "3%", marginVertical: "2%" }}>
                     <Pressable onPressIn={() => handleBox()}>
+                        {console.log("name.......",Name)}
                         <TextInput
                             placeholder="Name*"
                             value={Name}
@@ -278,7 +309,8 @@ const AddAddress = () => {
                             <TextInput
                                 keyboardType={"default"}
                                 placeholder="City / District*"
-                                maxLength={10}
+                                maxLength={30}
+                                value={city}
                                 placeholderTextColor={COLORS.gray}
                                 style={{ paddingStart: 15, borderRadius: 8, width: "91%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(13) }}
                             />
@@ -289,7 +321,8 @@ const AddAddress = () => {
                             <TextInput
                                 keyboardType={"default"}
                                 placeholder="State*"
-                                maxLength={10}
+                                value={stateses}
+                                maxLength={40}
                                 placeholderTextColor={COLORS.gray}
                                 style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(13) }}
                             />
@@ -362,6 +395,5 @@ const styles = StyleSheet.create({
         textAlign: "center",
         width: horizontalScale(100)
     },
-
 })
-export default AddAddress;
+export default EditAddress;
