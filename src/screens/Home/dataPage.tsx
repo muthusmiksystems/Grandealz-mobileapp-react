@@ -24,7 +24,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { original, unwrapResult } from '@reduxjs/toolkit';
 import { RFValue } from 'react-native-responsive-fontsize';
-import { horizontalScale, verticalScale } from '../../constants/metrices';
+import { horizontalScale, moderateScale, verticalScale } from '../../constants/metrices';
 import { useDispatch ,useSelector } from 'react-redux';
 import { bannerHandler } from '../../store/reducers/Banners';
 import { userDetailsHandler } from '../../store/reducers/userDetails';
@@ -76,7 +76,7 @@ const DataPage = () => {
           <View style={{ flexDirection: 'row', justifyContent: "space-between", marginTop: "4%" }}>
             <View style={{ flexDirection: "column" }}>
               <Image
-                source={icons.stsicon}
+                source={icons.userGrand}
                 resizeMode="contain"
                 style={{
                   width: horizontalScale(140),
@@ -86,28 +86,33 @@ const DataPage = () => {
               />
             </View>
             <View style={{ flexDirection: "column" }}>
-              <TouchableOpacity onPress={() => { navigation.navigate('User'), Addresslist() }}>
-                {(userData?.profile_pic)?
+            <TouchableOpacity onPress={() => { navigation.navigate('User'), Addresslist() }}
+                style={{borderRadius:moderateScale(40)}}
+              >
+                {(userData?.profile_pic) ?
                   <Image
-                  source={{uri:(userData?.profile_pic)}}
-                  resizeMode="contain"
-                  style={{
-                    width: horizontalScale(50),
-                    height: verticalScale(40),
-                    margin: "3%",
-                    bottom: horizontalScale(7),
-                  }}
-                  />:
-                <Image
-                  source={icons.user}
-                  resizeMode="contain"
-                  style={{
-                    width: horizontalScale(35),
-                    height: verticalScale(40),
-                    margin: "3%",
-                    bottom: horizontalScale(7)
-                  }}
-                />}
+                    source={{ uri: (userData?.profile_pic) }}
+                    resizeMode="stretch"
+                    
+                    style={{
+                      width: horizontalScale(40),
+                      height: verticalScale(40),
+                      margin: "3%",
+                      bottom: horizontalScale(7),
+                      borderRadius:moderateScale(40)
+                    }}
+                  /> :
+                  <Image
+                    source={icons.user}
+                    resizeMode="stretch"
+                    style={{
+                      width: horizontalScale(40),
+                      height: verticalScale(40),
+                      margin: "3%",
+                      bottom: horizontalScale(7),
+                      borderRadius:moderateScale(40)
+                    }}
+                  />}
               </TouchableOpacity>
             </View>
           </View>
@@ -118,7 +123,7 @@ const DataPage = () => {
         </View>
 
         <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(18), marginLeft: "4%", ...FONTS.lexendsemibold, color: "black" }}>Closing Soon</Text>
-        <View style={{ marginLeft: "4%", width: horizontalScale(40), borderWidth: 1, backgroundColor: "#E70736", borderColor: "#E70736" }} />
+        <View style={{ marginLeft: "4.5%", width: horizontalScale(40), borderWidth: 1, backgroundColor: "#E70736", borderColor: "#E70736" }} />
         <View>
           {/* {console.log("user Details by sujith set in userData.............",userData.data )} */}
           <ClosingSoon />

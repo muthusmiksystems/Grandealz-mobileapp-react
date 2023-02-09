@@ -79,7 +79,7 @@ const ClosingSoon = () => {
             // ItemSeparatorComponent={() => (
             //   <View style={{ width: 5 }} />
             // )}
-            contentContainerStyle={{ marginHorizontal:"4%" }}
+            contentContainerStyle={{ marginStart:"2%" }}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
               <View style={{ paddingHorizontal:horizontalScale(8) }}>
