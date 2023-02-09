@@ -32,7 +32,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerHandler } from "../store/reducers/register";
 import useForm from "./Auth/useForm";
 import validate from "./Auth/validate";
-
+import { countryList } from "../services/countryList";
 
 const Signup = () => {
 
@@ -46,14 +46,26 @@ const Signup = () => {
   const [email, setEmail] = useState<any>("");
   const [phone, setPhone] = useState<any>("");
   const [password, setPassword] = useState<any>("");
-  const [error,setError]=useState<any>("");
+  const [error, setError] = useState<any>("");
   const [errorFirst, setErrorFirst] = useState(null);
   const [errorEmail, setErrorEmail] = useState(null);
   const [errorPassword, setErrorPassword] = useState(null);
   const [errorPhone, setErrorPhone] = useState(null);
   const [errorLast, setErrorLast] = useState(null);
 
-
+  const [countryListValue, setCountryListValue] = useState([])
+  const [mblCode, setMblCode] = useState("");
+  const getCountryList = async () => {
+    let listCountries = await countryList().then((originalPromiseResult) => {
+      console.log("Personal Details Country....", originalPromiseResult);
+      // const value = originalPromiseResult
+      setCountryListValue(originalPromiseResult);
+      console.log("listCoun", originalPromiseResult[56].name)
+    })
+  }
+  useEffect(() => {
+    getCountryList();
+  }, [])
   useEffect(() => {
     console.log(Object.keys(formValues).length, "kk", formErrors)
     if (formErrors && Object.keys(formErrors).length > 0) {
@@ -80,7 +92,7 @@ const Signup = () => {
         console.log("password Validation failed")
         //setPassword(formErrors.password);
         setErrorPassword(formErrors.password);
-      } 
+      }
       else if (formErrors && formErrors.phone) {
         console.log("phone failed")
         //setPhone(formErrors.phone);
@@ -88,10 +100,10 @@ const Signup = () => {
       }
     }
     // console.log("im the formerror data........",formValues)
-    
+
   }, [formErrors])
 
-  useEffect(()=>{
+  useEffect(() => {
     if (data && Object.keys(data)) {
       const reg = {
         "first_name": data.firstName,
@@ -103,7 +115,7 @@ const Signup = () => {
         "term_and_condition": true,
         "referralcode": ""
       }
-      console.log("data inside the handle submit",reg);
+      console.log("data inside the handle submit", reg);
       dispatch(registerHandler(reg))
         .then(unwrapResult)
         .then(async (originalPromiseResult) => {
@@ -115,8 +127,11 @@ const Signup = () => {
           }
           else if (originalPromiseResult === "You have already registered") {
             console.log("im the error data", originalPromiseResult)
-            ToastAndroid.showWithGravity(originalPromiseResult),
-              ToastAndroid.CENTER, ToastAndroid.SHORT
+            ToastAndroid.showWithGravity(
+              originalPromiseResult,
+              ToastAndroid.CENTER,
+              ToastAndroid.SHORT
+            )
           }
           else {
             console.log(originalPromiseResult, "error")
@@ -124,8 +139,8 @@ const Signup = () => {
         })
 
     }
-    
-  },[data])
+
+  }, [data])
 
   // const handleSubmited = () => {
   //   const data = {
@@ -143,11 +158,11 @@ const Signup = () => {
   const handleBox = () => {
     if (errorEmail) {
       setEmail(""),
-      setEmail(""), setErrorEmail("");
+        setEmail(""), setErrorEmail("");
     }
     else if (errorFirst) {
       setFirstName(""),
-      setFirstName(""), setErrorFirst("");
+        setFirstName(""), setErrorFirst("");
     }
     else if (errorLast) {
       setLastName("")
@@ -292,10 +307,10 @@ const Signup = () => {
             <View style={{ alignSelf: "center", width: horizontalScale(300), }}>
               <CheckBoxes />
             </View>
-            <View style={{ }}>
-                {formErrors.allerror || formErrors.password ?
-                  <Text style={styles.Errorpass}>{error}{errorPassword}</Text> : null}
-              </View>
+            <View style={{}}>
+              {formErrors.allerror || formErrors.password ?
+                <Text style={styles.Errorpass}>{error}{errorPassword}</Text> : null}
+            </View>
             <TouchableOpacity style={{ alignSelf: "center", borderWidth: 1, borderRadius: 8, width: horizontalScale(200), padding: "4%" }} onPress={e => { handleSubmit(e, "2"), Keyboard.dismiss }} disabled={false} /* onPress={() => { handleSubmited() }} */ /* onPress={() => navigation.navigate("OtpPage")} */>
 
               <Text style={{ textAlign: "center", fontSize: RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Register</Text>
@@ -358,14 +373,14 @@ const styles = StyleSheet.create({
     color: "red",
     ...FONTS.lexendregular,
     fontSize: RFValue(10),
-    textAlign: "center",
-    width: horizontalScale(100)
+    marginStart:"7%",
+    // width: horizontalScale(100)
   },
   Errorpass: {
     color: "red",
     ...FONTS.lexendregular,
     fontSize: RFValue(10),
-    textAlign:"center",
+    textAlign: "center",
     width: horizontalScale(350)
   },
   textInput: {
