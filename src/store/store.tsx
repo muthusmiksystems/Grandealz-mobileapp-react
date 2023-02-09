@@ -7,6 +7,8 @@ import productDrawHandleReducer from './reducers/productdraw';
 import addressListHandlerReducer from './reducers/addresslist';
 import changepasswordHandleReducer from './reducers/changepassword'
 import userDetailsHandleReducer from './reducers/userDetails';
+import AddCouponHandleReducer from './reducers/addcouponcode';
+
 const store = configureStore({
     reducer: {
         loginHandle: loginHandleReducer,
@@ -17,6 +19,7 @@ const store = configureStore({
         AddressHandle: addressListHandlerReducer,
         ChangepasswordHandle: changepasswordHandleReducer,
         userDetailsHandle: userDetailsHandleReducer,
+        AddCouponHandle:AddCouponHandleReducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         immutableCheck: false,

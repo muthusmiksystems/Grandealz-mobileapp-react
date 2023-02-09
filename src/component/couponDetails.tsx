@@ -11,6 +11,7 @@ import {
     View,
     TouchableOpacity,
 } from 'react-native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import image from '../constants/image';
 import icons from '../constants/icons';
 import { horizontalScale, verticalScale } from '../constants/metrices';
@@ -18,7 +19,11 @@ import { COLORS, FONTS } from '../constants';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { couponPage } from '../services/copoun';
 import { TextInput } from 'react-native-paper';
-
+import {AddCouponHandle} from "../store/reducers/addcouponcode"
+import { ToastAndroid } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { unwrapResult } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
 
 const data = [
     {
@@ -51,8 +56,13 @@ const data = [
     },
 
 ];
+
+
+
 const CouponDetails = () => {
     const [dataoff , setDataOff]=useState();
+
+    const dispatch = useDispatch();
     useEffect(()=>{
         const coupn = async ()=>{
              let offer= await couponPage()
@@ -64,23 +74,55 @@ const CouponDetails = () => {
 
      const[applycoupon,setApplycoupon]=useState("")
      const[error,setError]=useState("")
-     //console.log(applycoupon)
+
+    const navigation = useNavigation();
+
+ 
 
     const validatePromocode=()=>{
-        let code=13
         if(applycoupon.length==0)
         {
             setError('Please input Coupon code!')
         }
-        else if(applycoupon.length<12)
-        {
-            setError('Invalid Coupon code!')
-        }
-        else if(applycoupon.length>=code)
-        {
-            setError('Invalid Coupon code!')
+        else{
+          dispatch(AddCouponHandle(applycoupon)).then(unwrapResult).then(async(originalPromiseResult) => {
+
+            
+
+            console.log("response", originalPromiseResult);
+            if (originalPromiseResult.status ==="200") {
+              ToastAndroid.showWithGravity(
+                originalPromiseResult.message,
+                ToastAndroid.SHORT,
+                ToastAndroid.CENTER,
+              );
+              navigation.navigate("Tabs",{screen:"Cart"})
+            }
+            else{
+                setError(originalPromiseResult.message)
+                ToastAndroid.showWithGravity(
+                    originalPromiseResult.message,
+                    ToastAndroid.SHORT,
+                    ToastAndroid.CENTER,
+                );
+
+            }
+          })
+            
         }
     }
+
+
+    const CouponValue = (data) =>{
+        setApplycoupon(data)
+        setError("")
+    }
+
+
+    
+    
+
+
     return (
         <SafeAreaView >
             <View style={{ width: horizontalScale(375), height: verticalScale(670) }} >
@@ -92,12 +134,16 @@ const CouponDetails = () => {
                                 {/* <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginStart: "5%" }}>Apply Promo Code</Text> */}
                                 <TextInput
                                 placeholder='PromoCode'
+                                // placeholderTextColor={"black"}
                                 onChangeText={(text:string)=>{setApplycoupon(text),error? setError(""):null}}
                                 value={applycoupon}
                                 underlineColor="white"
                                 activeUnderlineColor={'transparent'}
-                                style={{width:200,height:40,backgroundColor:"white",fontSize:RFValue(12),borderWidth:10,borderColor:"white"}}
-                                />                                                                 
+
+                                style={{width:200,height:40,backgroundColor:"white",fontSize:RFValue(12),color:COLORS.black,...FONTS.lexendregular,borderWidth:10,borderColor:"white"}}
+                                />                                 
+                                
+
                             </View>
                         </View>                       
                         <TouchableOpacity style={{ flexDirection: "column", }}  onPress={() => validatePromocode()}>
@@ -108,7 +154,7 @@ const CouponDetails = () => {
                         {/* <MCIcon name="chevron-right" size={moderateScale(35)} color={COLORS.black} style={{ flexDirection: "column", width: "75%" }} /> */}
                     </View>
                 </View>
-                <View style={{ height: "3%",marginTop:"-9%" }}>
+                <View style={{ height: "3%",marginTop:"-7%" }}>
                       {error ? <Text style={{ ...FONTS.lexendregular, color: COLORS.element, fontSize: RFValue(12), paddingStart: "7%" }}>{error}</Text> : null}
                       </View>
                 <View>
@@ -141,9 +187,9 @@ const CouponDetails = () => {
                                             <Text style={{ ...FONTS.lexendsemibold, color: COLORS.black, fontSize: RFValue(12), paddingVertical: 7}}>Save {item.discount}% with this code</Text>
                                         </View>
                                         <View style={{ flexDirection: "column", }}>
-                                            <View style={{ flexDirection: "column", alignItems: "center",paddingTop:6 }}>
+                                            <TouchableOpacity style={{ flexDirection: "column", alignItems: "center",paddingTop:6 }} onPress={() =>CouponValue(item.coupon)}>
                                                 <Text style={{width:60,height:26, borderWidth: 1, paddingLeft:12,paddingTop:3, borderRadius: 5, color: COLORS.textHeader, fontSize: RFValue(12), ...FONTS.lexendregular, marginStart: "5%" }}>Apply</Text>
-                                            </View>
+                                            </TouchableOpacity>
                                         </View>
                                     </View>
                                 </View>

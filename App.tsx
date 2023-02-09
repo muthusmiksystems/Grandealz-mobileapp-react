@@ -50,7 +50,6 @@ import HowItWorks from './src/screens/howitworks';
 import Coupons from './src/screens/Tickets/coupon';
 import EditAddress from './src/screens/Cart/editAddress';
 
-
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const App = () => {
   return (

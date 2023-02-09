@@ -15,6 +15,7 @@ import {
   Alert,
   BackHandler,
   TouchableOpacity,
+  ToastAndroid,
   // Button
 } from "react-native";
 // import {useBackHandler} from '@react-native-community/hooks';
@@ -62,14 +63,16 @@ const Login = (props: Prop) => {
   const [errorPassword, setErrorPassword] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  
   useEffect(() => {
     console.log(Object.keys(formValues).length, "kk", formErrors.password)
     if (formErrors && Object.keys(formErrors).length > 0) {
       if (formErrors && formErrors.email && formErrors.password) {
         //setEmail(formErrors.email);
         setErrorEmail(formErrors.email);
+
         setErrorPassword(formErrors.password); 
+
         console.log("email password failed", formErrors.email)
       }
       else if (formErrors && formErrors.password) {
@@ -77,14 +80,16 @@ const Login = (props: Prop) => {
         //setPassword(formErrors.password);
         setErrorPassword(formErrors.password);
       }
+
       else if (formErrors && formErrors.email ){
+
         setErrorEmail(formErrors.email);
         console.log("email failed", formErrors.email)
       }
     }
     console.log(data, "data........", formValues)
   }, [formErrors])
-  
+
   useEffect(() => {
     navigation.addListener("blur", () => { BackHandler.removeEventListener("hardwareBackPress", handleBackButton); })
     navigation.addListener("focus", () => { BackHandler.addEventListener("hardwareBackPress", handleBackButton); })
@@ -116,22 +121,45 @@ const Login = (props: Prop) => {
       console.log("data inside the handle submit", reg);
       dispatch(loginHanlder(reg))
         .then(unwrapResult)
+
         .then(async (originalPromiseResult:any) => {
+
           console.log("successfully returned to login with response ", originalPromiseResult);
           if (originalPromiseResult?.data?.access_token) {
             console.log("token  sam   ...dddd", originalPromiseResult.data.access_token);
             await AsyncStorage.setItem('loginToken', originalPromiseResult.data.access_token)
+            ToastAndroid.showWithGravity(
+              "Successfully logged in",
+              ToastAndroid.SHORT,
+              ToastAndroid.CENTER
+            )
             props.navigation.replace("Tabs")
-          } else if (originalPromiseResult.data.message){
-            console.log("setError response ", originalPromiseResult.data.message);
-           setErrorLogin(originalPromiseResult.data.message);
+
           }
-          else{
-            console.log("setError response ", originalPromiseResult);
-           //setErrorLogin(originalPromiseResult.data.message);
+          else if (originalPromiseResult.message) {
+            ToastAndroid.showWithGravity(
+              originalPromiseResult.message,
+              ToastAndroid.SHORT,
+              ToastAndroid.CENTER
+            )
+          }
+          else {
+            // console.log("setError response ", originalPromiseResult);
+            ToastAndroid.showWithGravity(
+              originalPromiseResult,
+              ToastAndroid.SHORT,
+              ToastAndroid.CENTER
+            )
+            //  setErrorLogin(originalPromiseResult.message);
+
           }
         }).catch((rejectedValueOrSerializedError) => {
           console.log(" Inside catch", rejectedValueOrSerializedError);
+          ToastAndroid.showWithGravity(
+            "Something went wrong!, please try again later",
+            ToastAndroid.SHORT,
+            ToastAndroid.CENTER
+          )
         })
     }
   }, [data])
@@ -173,7 +201,7 @@ const Login = (props: Prop) => {
             placeholderTextColor={"black"}
             keyboardType="email-address"
 
-            onChangeText={e => { handleChange(e, "email"), setErrorEmail(""),setErrorLogin(""), setEmail(e) }}
+            onChangeText={e => { handleChange(e, "email"), setErrorEmail(""), setErrorLogin(""), setEmail(e) }}
 
             style={{
               flexDirection: "column",
@@ -182,7 +210,7 @@ const Login = (props: Prop) => {
               fontSize: RFValue(14), color: (errorEmail) ? "red" : "black"
             }}
           />
-          <Fontisto name='email' size={30} style={{ alignSelf: "center" }} />
+          <Fontisto name='email' size={30} style={{ alignSelf: "center", color: COLORS.gray }} />
         </TouchableOpacity>
 
         <View style={{ height: "5%" }}>
@@ -197,7 +225,7 @@ const Login = (props: Prop) => {
             secureTextEntry={passShow ? true : false}
             placeholderTextColor={"black"}
 
-            onChangeText={e => { handleChange(e, "password"), setErrorPassword(""),setErrorLogin(""), setPassword(e) }}
+            onChangeText={e => { handleChange(e, "password"), setErrorPassword(""), setErrorLogin(""), setPassword(e) }}
 
             style={{
               flexDirection: "column",
@@ -207,8 +235,8 @@ const Login = (props: Prop) => {
             }}
           />
           <TouchableOpacity style={{ alignSelf: "center", flexDirection: "column" }} onPress={() => setPassShow(!passShow)}>
-            {passShow ? <Ionicons name="eye-outline" size={30} /> :
-              <Ionicons name='eye-off-outline' size={30} />
+            {passShow ? <Ionicons name="eye-outline" size={30} style={{ color: COLORS.gray }} /> :
+              <Ionicons name='eye-off-outline' size={30} style={{ color: COLORS.gray }} />
             }
           </TouchableOpacity>
 
@@ -217,8 +245,8 @@ const Login = (props: Prop) => {
         <View style={{ height: "6%" }}>
           {formErrors.password || formErrors.loginundef ?
             <Text style={styles.ErrorText}>{errorPassword}</Text> : null}
-            {console.log("uuuuuuuuuuuuuuus",errorLogin?true:false)}
-            {errorLogin?<Text style={styles.ErrorText}>{errorLogin}</Text> : null}
+          {console.log("uuuuuuuuuuuuuuus", errorLogin ? true : false)}
+          {errorLogin ? <Text style={styles.ErrorText}>{errorLogin}</Text> : null}
 
         </View>
         <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginHorizontal: "5%" }}>
@@ -272,7 +300,9 @@ const styles = StyleSheet.create({
     color: "red",
     ...FONTS.lexendregular,
     fontSize: RFValue(10),
+
     marginStart:"7%"
+
   }
 })
 export default Login;

@@ -16,16 +16,18 @@ const useForm = (validate) => {
   };
 
   const handleSubmit = (e, type) => {
-    
+
     e.preventDefault();
     switch (type) {
-      case '1': console.log("Login Page",type);
+      case '1': console.log("Login Page", type);
         if (formValues.email && formValues.password) {
           setFormErrors(validate(formValues))
         }
         else {
           if (!formValues.email && !formValues.password) {
+
             let Error = { "email": "Please enter EmailId!","password":"Please enter valid password" }
+
             setFormErrors(Error)
           } else if (formValues.email && !formValues.password) {
             let Error = { "password": "Please enter valid password" }
