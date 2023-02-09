@@ -116,7 +116,7 @@ const OrderDetails = ({ route }) => {
                     </View>
                 </View>
                 {(orderdetailsdata) ? (orderdetailsdata.draws.map((data, index) => (
-                    <TouchableOpacity style={{ marginVertical: "4%" }} onPress={() => navigation.navigate("PayPage")}>
+                    <TouchableOpacity style={{ marginVertical: "4%" }} onPress={() => navigation.navigate("PlayNow")}>
                         <View key={index} style={{ flexDirection: "row", backgroundColor: "white", borderRadius: 10 }}>
                             <View style={{ flexDirection: "row", width: "65%", paddingVertical: "5%", paddingLeft: "3%" }}>
                                 <View style={{ flexDirection: "column", backgroundColor: COLORS.pagebackground, padding: "4%", width: "45%", alignItems: "center", borderRadius: 5 }}>
