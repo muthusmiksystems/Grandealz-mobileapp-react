@@ -34,6 +34,7 @@ const PriceDetails = ({route}) => {
 
   console.log(pricing,"samuel sham")
   const navigation = useNavigation();
+  
 
   const handleAdd=()=>{
     let value=pricing._id;
@@ -51,6 +52,7 @@ const PriceDetails = ({route}) => {
         console.log("done",pricing._id);
         
         console.log("result",result)
+        
   }
 
 
@@ -122,7 +124,8 @@ const PriceDetails = ({route}) => {
                     bottom: "40%",
                     marginRight: "2%",
                     width: 25,
-                    height: 25
+                    height: 25,
+                    
                   }}
                 />
                 </TouchableOpacity>
