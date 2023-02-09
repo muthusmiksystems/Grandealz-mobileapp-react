@@ -13,7 +13,7 @@ export const loginHanlder = createAsyncThunk('posts/loginPostcall', async (data,
             return result.data
         } else if(parseInt(result.data.status)== 401 ){
             console.log("condition 2",{responseData: result.data})
-            return result
+            return result.data
         }else {
             console.log('Login Error', result);
             return result.data.message

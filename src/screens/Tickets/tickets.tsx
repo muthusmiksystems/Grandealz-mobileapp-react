@@ -37,9 +37,7 @@ const Tickets = () => {
         }, [])
 
 
-        if(Ticketlistdata.length==0){
-            setShow(true)
-        }
+       
 
 
     return (
