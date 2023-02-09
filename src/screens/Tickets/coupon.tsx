@@ -21,7 +21,8 @@ import CouponDetails from "../../component/couponDetails";
 const Coupons = () => {
 
     const navigation=useNavigation();
-    
+
+   
     return (
         <SafeAreaView>
             <StatusBar

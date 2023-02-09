@@ -94,11 +94,13 @@ const User = (props) => {
                 setProfilePic(file)
             }
 
+
             else {
                 Alert.alert("Please try again later!")
                 // this.props.navigation.pop();
             }
         }
+
     }
     const openGallery = async () => {
         setModalState(false)
@@ -108,6 +110,7 @@ const User = (props) => {
                 mediaType: 'photo'
             }
             const result = await launchImageLibrary(options);
+
 
             console.log("imgdetails.....................", result)
             if (result.assets) {
@@ -149,6 +152,7 @@ const User = (props) => {
         }
     }
 
+
     return (
         <SafeAreaView>
             <StatusBar
@@ -187,7 +191,8 @@ const User = (props) => {
                                     <FontA5 name="edit" color="white" size={moderateScale(13)} style={{ margin: "2%" }} />
                                 </TouchableOpacity>
                             </ImageBackground> :
-                            <ImageBackground
+                            <ImageBackground  
+                            onPress={() =>Editprofilepic()}
                                 source={image.profilepic}
                                 resizeMode="stretch"
                                 style={{
@@ -359,7 +364,6 @@ const User = (props) => {
                         />
                         <Text style={styles.fontSizeStyle}>Our Charity Work</Text>
                         <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
-
                     </TouchableOpacity>
                 </View>
                 <TouchableOpacity style={{ borderWidth: 1, alignSelf: "center", borderColor: COLORS.gray, marginTop: "10%", width: "65%", borderRadius: 10 }} onPress={() => handleLogout()} >
