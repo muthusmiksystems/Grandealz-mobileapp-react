@@ -8,6 +8,7 @@ import addressListHandlerReducer from './reducers/addresslist';
 import changepasswordHandleReducer from './reducers/changepassword'
 import userDetailsHandleReducer from './reducers/userDetails';
 import AddCouponHandleReducer from './reducers/addcouponcode';
+
 const store = configureStore({
     reducer: {
         loginHandle: loginHandleReducer,

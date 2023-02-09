@@ -248,6 +248,7 @@ const PersonalDetails = (props) => {
         color: COLORS.black,
         fontFamily: "Lexend-Regular",
     }
+
     return (
         <SafeAreaView>
             <StatusBar
@@ -271,7 +272,7 @@ const PersonalDetails = (props) => {
                         style={{ width: "91%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, ...FONTS.lexendregular, color: COLORS.black, fontSize: RFValue(16), paddingLeft: 14, marginTop: "1%" }}
                     />
                 </View>
-                <View style={{ paddingLeft: 19, height: "1.8%" }}>
+                <View style={{ paddingLeft: 19, height:"2%" }}>
                     {firstNameError ? <Text style={styles.errorText}>{firstNameError}</Text> : null}
                 </View>
                 <View>
@@ -284,9 +285,10 @@ const PersonalDetails = (props) => {
                         style={{ width: "91%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, ...FONTS.lexendregular, color: COLORS.black, fontSize: RFValue(16), paddingLeft: 14, marginTop: "1%" }}
                     />
                 </View>
-                <View style={{ paddingLeft: 19, height: "1.8%" }}>
+                <View style={{ paddingLeft: 19, height:"2%" }}>
                     {lastNameError ? <Text style={styles.errorText}>{lastNameError}</Text> : null}
                 </View>
+
                 {/* <View>
                     <Text style={{ paddingLeft: "5%", ...FONTS.lexendregular, color: COLORS.gray, fontSize: RFValue(12) }}>Email</Text>
                     <TextInput
@@ -297,7 +299,7 @@ const PersonalDetails = (props) => {
                         style={{ width: "91%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, ...FONTS.lexendregular, color: COLORS.black, fontSize: RFValue(16), paddingLeft: 14, marginTop: "1%" }}
                     />
                 </View>
-                <View style={{ paddingLeft: 19, height: "1.8%" }}>
+                <View style={{ paddingLeft: 19, height:"2%" }}>
                     {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
                 </View>
                 <View style={{ flexDirection: "row" }}>
@@ -351,7 +353,7 @@ const PersonalDetails = (props) => {
                     />
                     <Text style={{ ...FONTS.lexendregular, color: COLORS.black, fontSize: moderateScale(16) }}>Female</Text>
                 </View>
-                <View style={{ paddingLeft: 19, height: "1.8%" }}>
+                <View style={{ paddingLeft: 19, height:"2%" }}>
                     {Gender ? <Text style={styles.errorText}>{Gender}</Text> : null}
                 </View>
                 <View>
@@ -369,7 +371,7 @@ const PersonalDetails = (props) => {
                         placeholder={(userData.nationality) ? userData.nationality : "Select Nationality"}
                     />
                 </View>
-                <View style={{ paddingLeft: 19, height: "1.8%" }}>
+                <View style={{ paddingLeft: 19, height:"2%" }}>
                     {countryError ? <Text style={styles.errorText}>{countryError}</Text> : null}
                 </View>
                 {/* <View>
@@ -406,7 +408,7 @@ const PersonalDetails = (props) => {
                     // )}
                     />
                 </View>
-                <View style={{ paddingLeft: 19, height: "1.8%" }}>
+                <View style={{ paddingLeft: 19, height:"2%" }}>
                     {stateError ? <Text style={styles.errorText}>{stateError}</Text> : null}
                 </View> */}
                 <View>
@@ -424,7 +426,7 @@ const PersonalDetails = (props) => {
                         placeholder={(props.route) ? countryResidenceValue : "Select country of residence"}
                     />
                 </View>
-                <View style={{ paddingLeft: 19, height: "1.8%" }}>
+                <View style={{ paddingLeft: 19, height:"2%" }}>
                     {countryResidenceError ? <Text style={styles.errorText}>{countryResidenceError}</Text> : null}
                 </View>
                 <View>
@@ -446,7 +448,7 @@ const PersonalDetails = (props) => {
                         />
                         : null}
                 </View>
-                <View style={{ paddingLeft: 19, height: "1.8%" }}>
+                <View style={{ paddingLeft: 19, height:"2%" }}>
                     {dateError ? <Text style={styles.errorText}>{dateError}</Text> : null}
                 </View>
                 {/* <View>
@@ -543,7 +545,7 @@ const styles = StyleSheet.create({
     errorText: {
         ...FONTS.lexendregular,
         color: COLORS.element,
-        fontSize: moderateScale(12)
+        fontSize: moderateScale(10)
     }
 })
 
