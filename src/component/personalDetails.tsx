@@ -248,6 +248,150 @@ const PersonalDetails = (props) => {
         color: COLORS.black,
         fontFamily: "Lexend-Regular",
     }
+    
+const PersonalDetails = () => {
+    const dispatch = useDispatch();
+    const navigation = useNavigation();
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [mblNumber, setMblNumber] = useState('');
+    const [mblCode, setMblCode] = useState('');
+    const [checked, setChecked] = React.useState('Male');
+    const [firstNameError, setFirstNameError] = useState('');
+    const [lastNameError, setLastNameError] = useState('');
+    const [emailError, setEmailError] = useState('');
+    const [mblCodeError, setMblCodeError] = useState('');
+    const [mblNumberError, setMblNumberError] = useState('');
+    const [countryListValue, setCountryListValue] = useState([])
+    const [countryValue, setCountryValue] = useState<any>('')
+    const [stateListValue, setStateListValue] = useState([])
+    const [stateValue, setStateValue] = useState<any>('')
+    const [cityListValue, setCityListValue] = useState([])
+    const [cityValue, setCityValue] = useState<any>('')
+    const [Gender, setGenderError] = useState("")
+    const [countryError, setCountryError] = useState("")
+    const [stateError, setStateError] = useState("")
+
+    const [dateShow, setDateShow] = useState(false);
+    // const [radioButtons, setRadioButtons] = useState([
+    //     {
+    //         id: '1', // acts as primary key, should be unique and non-empty string
+    //         label: 'Option 1',
+    //         value: 'option1'
+    //     },
+    //     {
+    //         id: '2',
+    //         label: 'Option 2',
+    //         value: 'option2'
+    //     }
+    // ]);
+
+    // function onPressRadioButton(radioButtonsArray) {
+    //     setRadioButtons(radioButtonsArray);
+    // }
+    const getCountryList = async () => {
+        let listCountries = await countryList().then((originalPromiseResult) => {
+            console.log("Personal Details Country....", originalPromiseResult);
+            // const value = originalPromiseResult
+            setCountryListValue(originalPromiseResult);
+            console.log("listCoun", originalPromiseResult[56].name)
+        })
+    }
+    const getStateList = async (data: any) => {
+        let listCountries = await stateList(data).then((originalPromiseResult) => {
+            console.log("Personal Details State....", originalPromiseResult);
+            // const value = originalPromiseResult
+            setStateListValue(originalPromiseResult);
+            console.log("listCoun", originalPromiseResult)
+        })
+    }
+
+    useEffect(() => {
+        getCountryList();
+    }, [])
+    useEffect(() => {
+        if (countryValue) {
+            getStateList(countryValue);
+        }
+        else { Alert.alert("Select any nationality") }
+
+    }, [countryValue])
+    useEffect(() => {
+        if (countryValue) {
+            if (stateValue) {
+                getStateList(countryValue);
+            } else { Alert.alert("Select any state") }
+        }
+        else { Alert.alert("Select any country") }
+
+    }, [cityValue])
+
+    const validateFunction = () => {
+        console.log("values", firstName, lastName, email, mblNumber, mblCode, checked, countryValue, stateValue);
+        //firstName
+        if (firstName.length <= 3 || firstName === undefined) {
+            setFirstNameError('FirstName is mandatory')
+        }
+        else {
+            setFirstNameError('')
+        }
+        //lastName
+        if (lastName.length <= 3 || lastName === undefined) {
+            setLastNameError('LastName is mandatory')
+        }
+        else {
+            setLastNameError('')
+        }
+        //email
+        if (email.length === 0 || email === undefined) {
+            setEmailError('Email id is mandatory')
+        }
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+            setEmailError('Invalid email format')
+        }
+        else {
+            setEmailError('')
+        }
+        //mblCode
+        if (mblCode.length == 0) {
+            setMblCodeError("Code is required")
+        }
+        else {
+            setMblCodeError('')
+        }
+        //Mbl number
+        if (mblNumber.length == 0) {
+            // console.log("mbl................", mblNumber.length);
+            setMblNumberError('Mobile number is required')
+        }
+        else {
+            setMblNumberError('')
+        }
+        //Gender
+        if (checked.length == 0) {
+            setGenderError('Please select your gender')
+        }
+        else {
+            setGenderError('')
+        }
+        //Nationality
+        if (countryValue.length == 0) {
+            setCountryError('Nationality is required')
+        }
+        else {
+            setCountryError('')
+        }
+        //State
+        if (stateValue.length == 0) {
+            setStateError('State is required')
+        }
+        else {
+            setStateError('')
+        }
+    }
+
+
     return (
         <SafeAreaView>
             <StatusBar
@@ -287,6 +431,7 @@ const PersonalDetails = (props) => {
                 <View style={{ paddingLeft: 19, height: "1.8%" }}>
                     {lastNameError ? <Text style={styles.errorText}>{lastNameError}</Text> : null}
                 </View>
+
                 {/* <View>
                     <Text style={{ paddingLeft: "5%", ...FONTS.lexendregular, color: COLORS.gray, fontSize: RFValue(12) }}>Email</Text>
                     <TextInput

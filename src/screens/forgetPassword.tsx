@@ -41,7 +41,7 @@ const ForgetPassword = () => {
     else if (forgetEmail !== undefined) {
       // console.log("..............",forgetEmail);
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(forgetEmail)) {
-        setError("Invalid email Id");
+        setError("Invalid EmailID");
       }
       else {
         setError("");
@@ -59,6 +59,7 @@ const ForgetPassword = () => {
               ToastAndroid.SHORT,
               ToastAndroid.CENTER,
             );
+            setForgetEmail('')
             navigation.navigate('OtpPage')
           }
           // else if(originalPromiseResult==="undefined"){
@@ -115,7 +116,7 @@ const ForgetPassword = () => {
               value={forgetEmail}
               style={{ flexDirection: "column", width: horizontalScale(250), ...FONTS.lexendregular, fontSize: RFValue(14),color:COLORS.black }}
             />
-            <Fontisto name='email' size={30} style={{ alignSelf: "center" }} />
+            <Fontisto name='email' size={30} style={{ alignSelf: "center",color:COLORS.gray }} />
           </View>
         </View>
         <View style={{ height: "5%" }}>

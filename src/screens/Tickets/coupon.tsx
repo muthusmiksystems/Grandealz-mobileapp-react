@@ -32,11 +32,11 @@ const Coupons = () => {
                 <TouchableOpacity onPress={()=>navigation.goBack()} style={{marginLeft:horizontalScale(14)}}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20),textAlign:"center" }}>Coupon Code</Text>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20),textAlign:"center",width:horizontalScale(280) }}>Coupon Code</Text>
             </View>
             <View style={styles.subdivTwo}>
-                
-                <CouponDetails/>
+
+                <CouponDetails />
             </View>
         </SafeAreaView>
     );
@@ -46,13 +46,13 @@ const styles = StyleSheet.create({
         width: horizontalScale(375),
         height: verticalScale(80),
         backgroundColor: "#0a0127",
-        // alignItems: "center",
-        justifyContent: 'center',
-        // flexDirection: "row"
+        alignItems: "center",
+        // justifyContent: 'center',
+        flexDirection: "row"
     },
     subdivTwo: {
         // height: verticalScale(748),
-        backgroundColor:COLORS.lightGray    
+        backgroundColor: COLORS.lightGray
     }
 
 })

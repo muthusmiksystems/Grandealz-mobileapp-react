@@ -8,20 +8,30 @@ import {
     Image,
     Alert,
     ImageBackground,
-    ScrollView
+    ScrollView,
+    Platform,
+    PermissionsAndroid,
+    ToastAndroid
 } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import { icons, COLORS, FONTS } from '../../constants';
 import { horizontalScale, moderateScale, verticalScale } from '../../constants/metrices';
 import EntypoIcons from "react-native-vector-icons/Entypo";
 import { useNavigation } from '@react-navigation/native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import image from '../../constants/image';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import FontA5 from "react-native-vector-icons/FontAwesome5"
+import FontA5 from "react-native-vector-icons/FontAwesome5";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch, useSelector } from "react-redux";
+import { Modal } from 'react-native-paper';
 // import AnimatedButton from '../../component/Ani';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { CameraOptions, ImageLibraryOptions } from 'react-native-image-picker/lib/typescript/types';
+import imageUpload from '../../store/reducers/imageUpload';
+import { imageUploadService } from '../../services/imageUploadService';
 
 
 
@@ -29,10 +39,106 @@ const User = (props) => {
 
     console.log("PAge props.............", props.route.params)
     const userData: any = useSelector<any>(state => state.userDetailsHandle.data.data);
+    const [modalState, setModalState] = useState(false)
+    const [profilePic, setProfilePic] = useState<any>()
     console.log("UseSelector.................", userData)
     const navigation = useNavigation();
     const handleLogout = () => {
 
+        Alert.alert("", "Are you sure you want to logout? ", [
+            {
+                text: 'Cancel',
+                onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+            },
+            { text: 'OK', onPress: () => Removetoken() },
+        ]);
+
+        const Removetoken = async () => {
+            AsyncStorage.removeItem("loginToken");
+            navigation.navigate("login");
+        }
+
+
+    }
+
+    useEffect(() => {
+
+
+        const uploadImage = async () => {
+            await imageUploadService(profilePic).then((originalPromiseResult) => {
+                if (originalPromiseResult == undefined) {
+                    ToastAndroid.showWithGravity(
+                        'Something went wrong!, Please try again later',
+                        ToastAndroid.SHORT,
+                        ToastAndroid.CENTER
+                    )
+                }
+            });
+        }
+        console.log(profilePic)
+        uploadImage();
+
+    }, [profilePic])
+
+    const openCamera = async () => {
+        setModalState(false)
+        if (Platform.OS == 'android' && await checkForPermissions()) {
+            console.log("Camera permission given");
+            const options: CameraOptions = {
+                mediaType: 'photo'
+            }
+            const result = await launchCamera(options);
+            console.log("imgdetails.....................", result);
+            if (result.assets) {
+                console.log("imgdetails.....................", result.assets[0].fileName);
+                const file = {
+                    "filename": result.assets[0].fileName,
+                    "type": result.assets[0].type
+                }
+                setProfilePic(file)
+                // // if ((result.assets[0].fileSize) > 3000000) {
+                // ImageResizer.createResizedImage(
+                //     result.assets[0].uri!,
+                //     result.assets[0].width!,
+                //     result.assets[0].height!,
+                //     "JPEG",
+                //     0,
+                // )
+                //     .then(resizedImageUri => {
+                //         console.log("resized.........", resizedImageUri.uri);
+                //         console.log("resized.........", resizedImageUri);
+                //         this.setState({
+                //             filepath: { uri: resizedImageUri.uri },
+                //             // filepath: { uri: result.assets[0].uri! },
+                //             modalVisible: false
+                //         }, () => !this.state.filepath == undefined || null || "" ? this.setState({ isIdImageSelected: false }) : this.setState({ isIdImageSelected: true }))
+                //         // resizeImageUri is the URI of the new image that can now be displayed, uploaded...
+                //     })
+                //     .catch(err => {
+                //         console.log("resized.........", err);
+                //         Alert.alert("Please try again later!")
+                //         this.props.navigation.pop();
+                //         // Oops, something went wrong. Check that the filename is correct and
+                //         // inspect err to get more details.
+                //     });
+            }
+            // else {
+            //     setProfilePic({
+            //         // filepath:{uri:resizedImageUri.uri!},
+            //         filepath: { uri: result.filename! },
+            //         modalVisible: false
+            //     }, () => !this.state.filepath == undefined || null || "" ? this.setState({ isIdImageSelected: false }) : this.setState({ isIdImageSelected: true }))
+            //     // }
+            // }
+            else {
+                Alert.alert("Please try again later!")
+                // this.props.navigation.pop();
+            }
+        }
+
+    const navigation = useNavigation();
+    const handleLogout = () => {
         Alert.alert("","Are you sure you want to logout? ", [
             {
               text: 'Cancel',
@@ -50,7 +156,85 @@ const User = (props) => {
 
     }
 
+    const openGallery = async () => {
+        setModalState(false)
+        if (Platform.OS == 'android' && await checkForPermissions()) {
+            console.log("Camera permission given");
+            const options: ImageLibraryOptions = {
+                mediaType: 'photo'
+            }
+            const result = await launchImageLibrary(options);
 
+            console.log("imgdetails.....................", result)
+            if (result.assets) {
+                console.log("imgdetails.....................", result.assets[0].fileName);
+                const file = {
+                    "filename": result.assets[0].fileName,
+                    "type": result.assets[0].type
+                }  
+                setProfilePic(file)
+            }
+            // if (result.assets) {
+            // ImageResizer.createResizedImage(
+            //     result.assets[0].uri!,
+            //     result.assets[0].width!,
+            //     result.assets[0].height!,
+            //     "JPEG",
+            //     0.5,
+            // )
+            //     .then(resizedImageUri => {
+            //         console.log("resized.........", resizedImageUri.uri);
+            //         console.log("resized.........", resizedImageUri);
+            //         this.setState({
+            //             filepath: { uri: resizedImageUri.uri },
+            //             // filepath: { uri: result.assets[0].uri! },
+            //             modalVisible: false
+            //         }, () => !this.state.filepath == undefined || null || "" ? this.setState({ isIdImageSelected: false }) : this.setState({ isIdImageSelected: true }))
+            //         // resizeImageUri is the URI of the new image that can now be displayed, uploaded...
+            //     })
+            //     .catch(err => {
+            //         console.log("resized.........", err);
+            //         Alert.alert("Please try again later!")
+            //         this.props.navigation.pop();
+            //         // Oops, something went wrong. Check that the filename is correct and
+            //         // inspect err to get more details.
+            //     });
+            //     this.setState({
+            //         filepath: { uri: result.assets[0].uri! },
+            //         modalVisible: false
+            //     },
+            //         () => this.state.filepath === undefined || null || "" ? this.setState({ isIdImageSelected: false }) : this.setState({ isIdImageSelected: true }))
+            // }
+            // else {
+            //     Alert.alert("Please try again later!")
+            //     this.props.navigation.pop();
+            // }
+        }
+    }
+    const checkForPermissions = async () => {
+        try {
+            const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.CAMERA,
+                {
+                    title: "App Camera Permission",
+                    message: "App needs access to your camera ",
+                    buttonNeutral: "Ask Me Later",
+                    buttonNegative: "Cancel",
+                    buttonPositive: "OK"
+                }
+            );
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                console.log("Camera permission given");
+                return true;
+            } else {
+                console.log("Camera permission denied");
+                return false;
+            }
+        } catch (err) {
+            return false;
+            // console.warn(err);
+        }
+    }
 
     return (
         <SafeAreaView>
@@ -84,7 +268,9 @@ const User = (props) => {
                                     height: "100%",
                                     borderRadius: 10
                                 }}>
-                                <TouchableOpacity style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', height: "27%", bottom: 0, borderBottomEndRadius: moderateScale(4), borderBottomStartRadius: moderateScale(4), width: "100%", position: 'absolute', alignItems: "center", justifyContent: "center" }} >
+                                <TouchableOpacity style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', height: "27%", bottom: 0, borderBottomEndRadius: moderateScale(4), borderBottomStartRadius: moderateScale(4), width: "100%", position: 'absolute', alignItems: "center", justifyContent: "center" }}
+                                    onPress={() => setModalState(true)}
+                                >
                                     <FontA5 name="edit" color="white" size={moderateScale(13)} style={{ margin: "2%" }} />
                                 </TouchableOpacity>
                             </ImageBackground> :
@@ -95,7 +281,9 @@ const User = (props) => {
                                     width: "100%",
                                     height: "100%"
                                 }}>
-                                <TouchableOpacity style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', height: "27%", bottom: 0, borderBottomEndRadius: moderateScale(4), borderBottomStartRadius: moderateScale(4), width: "100%", position: 'absolute', alignItems: "center", justifyContent: "center" }} >
+                                <TouchableOpacity style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', height: "27%", bottom: 0, borderBottomEndRadius: moderateScale(4), borderBottomStartRadius: moderateScale(4), width: "100%", position: 'absolute', alignItems: "center", justifyContent: "center" }}
+                                    onPress={() => setModalState(true)}
+                                >
                                     <FontA5 name="edit" color="white" size={moderateScale(13)} style={{ margin: "2%" }} />
                                 </TouchableOpacity>
                             </ImageBackground>
@@ -316,6 +504,35 @@ const User = (props) => {
                     <TouchableOpacity onPress={() => navigation.navigate("PrivacyPolicy")}><Text style={{ ...FONTS.lexendregular, fontSize: RFValue(14), color: "#616161" }}>Privacy Policy</Text></TouchableOpacity>
                 </View>
             </ScrollView>
+            <Modal
+                visible={modalState}
+                style={{ width: '100%', margin: 0, padding: 0 }}
+                onBackButtonPress={() => setModalState(false)}
+                onBackdropPress={() => setModalState(false)}
+            >
+                <View style={{ height: '40%', margin: 0, padding: 0, width: '100%', bottom: 0, backgroundColor: '#fff', borderRadius: 10 }}>
+                    <View style={[styles.MainAlertView, { paddingBottom: 10, padding: 20 }]}>
+                        <View style={{ flexDirection: 'row', width: '100%', padding: 10, paddingBottom: 0, alignItems: 'center', justifyContent: 'space-around' }}>
+
+                            <TouchableOpacity onPress={() => openCamera()} style={{ alignItems: 'center' }}>
+                                {/* <LinearGradient style={{ borderRadius: 5, alignSelf: 'center', alignItems: 'center', padding: 20 }} start={{ x: 0, y: 0.75 }} end={{ x: 1, y: 0.25 }} colors={['#0073C7', '#037BB5', '#0684A3', '#0684A3', '#098C91', '#098C91', '#0C957F', '#0C9581', '#0C967B', '#0D9A74']}> */}
+                                <Ionicons style={{ color: COLORS.black, fontSize: 25 }} name="camera" />
+                                {/* </LinearGradient> */}
+                                <Text style={{ paddingTop: 10, fontSize: 16, color: '#000', ...FONTS.lexendregular }}>Camera</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => openGallery()} style={{ alignItems: 'center' }}>
+                                {/* <LinearGradient style={{ borderRadius: 5, alignSelf: 'center', alignItems: 'center', padding: 20 }} start={{ x: 0, y: 0.75 }} end={{ x: 1, y: 0.25 }} colors={['#0073C7', '#037BB5', '#0684A3', '#0684A3', '#098C91', '#098C91', '#0C957F', '#0C9581', '#0C967B', '#0D9A74']}> */}
+                                <Ionicons style={{ color: COLORS.black, fontSize: 25 }} name="images" />
+                                {/* </LinearGradient> */}
+
+                                <Text style={{ paddingTop: 10, fontSize: 16, color: '#000', ...FONTS.lexendregular }}>Gallery</Text>
+                            </TouchableOpacity>
+
+                        </View>
+
+                    </View>
+                </View>
+            </Modal>
         </SafeAreaView>
     )
 }
@@ -361,6 +578,14 @@ const styles = StyleSheet.create({
         width: "118%",
         right: "10%",
         borderTopWidth: 2
+    },
+    MainAlertView: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: "#FFF",
+        borderRadius: 10,
+        width: '100%',
+        borderColor: '#fff',
     }
 })
 

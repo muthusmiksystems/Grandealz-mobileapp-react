@@ -95,11 +95,12 @@ const CouponDetails = () => {
                                 {/* <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginStart: "5%" }}>Apply Promo Code</Text> */}
                                 <TextInput
                                 placeholder='PromoCode'
+                                // placeholderTextColor={"black"}
                                 onChangeText={(text:string)=>{setApplycoupon(text),error? setError(""):null}}
                                 value={applycoupon}
                                 underlineColor="white"
                                 activeUnderlineColor={'transparent'}
-                                style={{width:200,height:40,backgroundColor:"white",fontSize:RFValue(12),borderWidth:10,borderColor:"white"}}
+                                style={{width:200,height:40,backgroundColor:"white",fontSize:RFValue(12),color:COLORS.black,...FONTS.lexendregular,borderWidth:10,borderColor:"white"}}
                                 />                                 
                                 
                             </View>

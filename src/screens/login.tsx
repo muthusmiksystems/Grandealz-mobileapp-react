@@ -184,7 +184,7 @@ const Login = (props: Prop) => {
               fontSize: RFValue(14), color: (errorEmail) ? "red" : "black"
             }}
           />
-          <Fontisto name='email' size={30} style={{ alignSelf: "center" }} />
+          <Fontisto name='email' size={30} style={{ alignSelf: "center",color:COLORS.gray }} />
         </TouchableOpacity>
 
         <View style={{ height: "5%" }}>
@@ -209,8 +209,8 @@ const Login = (props: Prop) => {
             }}
           />
           <TouchableOpacity style={{ alignSelf: "center", flexDirection: "column" }} onPress={() => setPassShow(!passShow)}>
-            {passShow ? <Ionicons name="eye-outline" size={30} /> :
-              <Ionicons name='eye-off-outline' size={30} />
+            {passShow ? <Ionicons name="eye-outline" size={30} style={{color:COLORS.gray}}/> :
+              <Ionicons name='eye-off-outline' size={30}  style={{color:COLORS.gray}}/>
             }
           </TouchableOpacity>
 
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
     color: "red",
     ...FONTS.lexendregular,
     fontSize: RFValue(10),
-    textAlign: "center"
+    marginStart: "7%"
   }
 })
 export default Login;
