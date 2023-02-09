@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren,useState } from 'react';
+import React, { type PropsWithChildren,useState, useEffect } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -16,12 +16,12 @@ import image from '../constants/image';
 import { COLORS, FONTS } from '../constants';
 import { verticalScale, horizontalScale, moderateScale } from '../constants/metrices';
 import EntypoIcons from "react-native-vector-icons/Entypo";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from '@react-navigation/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useDispatch, useSelector, useStore } from 'react-redux';
 import moment from "moment";
-
-import { addToWishlistHandle } from '../services/wishlist';
+import { addToWishlistHandle, wishlistHandle } from '../services/wishlist';
 
 import { addToCartHandler } from '../store/reducers/addToCart';
 import { unwrapResult } from '@reduxjs/toolkit';
@@ -44,17 +44,26 @@ const PriceDetails = ({route}) => {
       console.log("result of api is ",orginalResult)
     })
   }
-
-
+  const [heart,setHeart]=useState(false)
+  
   const handleAddWishlist=async()=>{
-        const result=  await addToWishlistHandle(pricing._id);
+        const result= await addToWishlistHandle(pricing._id);
         setIsWished(true);
-        console.log("done",pricing._id);
-        
-        console.log("result",result)
+        console.log("done..........",pricing._id);
+        setHeart(!heart)
+        console.log("result...........",result)
         
   }
-
+ const [pricelist,setPricelist]=useState();
+ 
+ useEffect(()=>{
+    const listprice=async ()=>{
+      let priceitem=await wishlistHandle();
+      setPricelist(priceitem)
+      console.log("......hihihih........",priceitem)
+    }
+    listprice()
+ },[])
 
   return (
     <View style={{ flex: 1 }} >
@@ -118,16 +127,28 @@ const PriceDetails = ({route}) => {
                   }}
                 />
                 <TouchableOpacity onPress={()=>handleAddWishlist()}>
-                <Image
-                  source={icons.userHeart}
-                  style={{
+                  {heart?
+                 <FontAwesome name="heart-o" style={{
+                  bottom: "40%",
+                  marginRight: "2%",
+                  width: 30,
+                  height: 30,                  
+                  
+                }}size={30}  color={"black"} />
+                :
+                
+                  <FontAwesome name="heart" style={{
                     bottom: "40%",
                     marginRight: "2%",
-                    width: 25,
-                    height: 25,
+                    width: 30,
+                    height: 30,                  
                     
-                  }}
-                />
+                  }}size={30}  color={"red"} />
+                  
+                  }
+                  
+                
+               
                 </TouchableOpacity>
               </View>
               <View style={{ flexDirection: 'column', padding: moderateScale(10) }}>
