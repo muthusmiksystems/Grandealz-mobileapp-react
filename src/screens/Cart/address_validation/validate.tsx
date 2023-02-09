@@ -6,8 +6,6 @@ const validate = (details) => {
     if (details.Name !== undefined) {
       if (details.Name.length == 0) {
         formErrors.Name = "Name is required!";
-      }else if (!/^(\+\d{1,3}[- ]?)?\$/.test(details.Name)) {
-        formErrors.Name = "This is not a valid Format!";
       }
     }
     
@@ -23,9 +21,7 @@ const validate = (details) => {
     if (details.pincode !== undefined) {
       if (details.pincode.length == 0) {
         formErrors.pincode = "Pincode is required!";
-      } else if (!/^(\+\d{1,3}[- ]?)?\d{6}$/.test(details.pincode)) {
-        formErrors.pincode = "This is not a valid Format!";
-      }
+      } 
     }
 
     //Address
@@ -40,8 +36,6 @@ const validate = (details) => {
    if (details.locality !== undefined) {
     if (details.locality.length == 0) {
       formErrors.locality = "Locality is required!";
-    }else if (!/^(\+\d{1,3}[- ]?)?\}$/.test(details.locality)) {
-      formErrors.locality = "This is not a valid Format!";
     }
   }
   

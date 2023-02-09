@@ -9,12 +9,14 @@ import {
     Keyboard,
     Image, TextInput,
     TouchableOpacity,
-    Pressable
+    Pressable,
+    ToastAndroid
 } from 'react-native';
-import { horizontalScale, verticalScale } from "../../constants/metrices";
+import { horizontalScale, moderateScale, verticalScale } from "../../constants/metrices";
 import { shoppingCart } from "../../constants/icons";
 import EntypoIcons from "react-native-vector-icons/Entypo";
 import { useNavigation } from "@react-navigation/native";
+import { Dropdown } from 'react-native-element-dropdown';
 import { FONTS, COLORS } from "../../constants";
 import { RFValue } from "react-native-responsive-fontsize";
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -28,12 +30,15 @@ import CheckBox from "@react-native-community/checkbox";
 import PaymentGate from "./payPage";
 import useForm from "./address_validation/useForm";
 import validate from "./address_validation/validate";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { addressEditHandler } from "../../store/reducers/addressedit";
+import { countryList } from "../../services/countryList";
+import { stateList } from "../../services/stateList";
+import { cityList } from "../../services/cityList";
 
-const EditAddress = ({route}) => {
-    const edit= route.params;
+const EditAddress = ({ route }) => {
+    const edit = route.params;
     const CheckBoxes = () => {
         const [isSelected, setSelection] = useState(false);
         return (
@@ -47,10 +52,12 @@ const EditAddress = ({route}) => {
             </View>
         )
     }
-    const dispatch =useDispatch();
+    const userData: any = useSelector<any>(state => state.userDetailsHandle.data.data);
+    const dispatch = useDispatch();
     const { handleChange, handleSubmit, formErrors, data, formValues } = useForm(validate);
     const [Name, setName] = useState<any>("");
-    const [editadd,setEditAdd]=useState("");
+    const [editadd, setEditAdd] = useState("");
+    const [error, setError] = useState("");
     const [errorName, setErrorName] = useState(null);
     const [phone, setPhone] = useState<any>("");
     const [errorPhone, setErrorPhone] = useState(null);
@@ -64,31 +71,92 @@ const EditAddress = ({route}) => {
     const [errorCity, setErrorCity] = useState(null);
     const [stateses, setStateses] = useState<any>("");
     const [errorStateses, setErrorStateses] = useState(null);
+    
+    const [stateIso,setStateIso]=useState(null);
     const [country, setCountry] = useState<any>("");
     const [errorCountry, setErrorCountry] = useState(null);
+    const [countryListValue, setCountryListValue] = useState([])
+    const [countryValue, setCountryValue] = useState<any>(null)
+    const [stateListValue, setStateListValue] = useState([])
+    const [stateValue, setStateValue] = useState<any>('')
+    const [cityListValue, setCityListValue] = useState([])
+    const [cityValue, setCityValue] = useState<any>('')
+    const [countryError, setCountryError] = useState("")
+    const [stateError, setStateError] = useState("")
+    const[cityData,setCityData]=useState();
+    const [stateData,setStateData]=useState();
+    const[countryData,setCountryData]=useState();
 
     const navigation = useNavigation();
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(addressEditHandler(edit))
-       .then(unwrapResult)
-       .then((address: any)=>{
-        setName(address.name)
-        setPhone(address.phone)
-        setPincode(address.pincode)
-        setAddress(address.address)
-        setLocality(address.locality_town)
-        setCity(address.city.name)
-        setStateses(address.state.name)
-        setCountry(address.country.name)
-        console.log(address,"address to edit in this page ")
-       })
-     
-      
-    },[])
+            .then(unwrapResult)
+            .then((address: any) => {
+                setName(address.name)
+                setPhone(address.phone)
+                setPincode(address.pincode)
+                setAddress(address.address)
+                setLocality(address.locality_town)
+                setCity(address.city.name)
+                setStateses(address.state.name)
+                setCountry(address.country.name)
+                console.log(address, "address to edit in this page ")
+            })
 
-    useEffect(()=>{
-        console.log(".....",Name);
-    },[Name])
+
+    }, [])
+    const getCountryList = async () => {
+        let listCountries = await countryList().then((originalPromiseResult) => {
+            //console.log("Personal Details Country....", originalPromiseResult);
+            // const value = originalPromiseResult
+            setCountryListValue(originalPromiseResult);
+            console.log("listCoun", originalPromiseResult[56].name)
+        })
+    }
+    const getStateList = async (data: any) => {
+        let listCountries = await stateList(data).then((originalPromiseResult) => {
+            //console.log("Personal Details State....", originalPromiseResult);
+            // const value = originalPromiseResult
+            setStateListValue(originalPromiseResult);
+            console.log("listCoun", originalPromiseResult)
+        })
+    }
+    const getCityList = async(data: any) =>{
+        let listCity = await cityList(data).then((originalPromiseResult)=>{
+            console.log("Personal Details City....", originalPromiseResult);
+            // const value = originalPromiseResult
+            setCityListValue(originalPromiseResult);
+            console.log("listCity", originalPromiseResult)
+        })
+    }
+
+    useEffect(() => {
+        getCountryList();
+    }, [])
+
+    useEffect(() => {
+        if (countryValue) {
+            getStateList(countryValue);
+        }
+        // else { Alert.alert("Select any nationality") }
+
+    }, [countryValue])
+    const themeForList = {
+        color: COLORS.black,
+        fontFamily: "Lexend-Regular",
+    }
+    useEffect(() => {
+        if (countryValue) {
+            if (stateValue) {
+                console.log("samuuuuuuuuuuuuu",countryValue,"county data",stateIso)
+                const data={countryValue,stateIso}
+                getCityList(data);
+            }
+            //  else { Alert.alert("Select any state") }
+        }
+        // else { Alert.alert("Select any country") }
+
+    }, [stateValue])
 
     useEffect(() => {
 
@@ -132,52 +200,56 @@ const EditAddress = ({route}) => {
     useEffect(() => {
 
         if (data && Object.keys(data)) {
+            console.log(data, "naming data...")
             const AddAddress = {
                 "name": data.Name,
-                "phone": data.phone,
+                "phone": data.mobile,
                 "pincode": data.pincode,
                 "address": data.address,
                 "locality_town": data.locality,
                 "city": {
-                    "name": "string",
-                    "countryCode": "string",
-                    "stateCode": "string"
+                    "name": cityData.name,
+                    "stateCode": cityData.stateCode,
+                    "countryCode": cityData.countryCode
                 },
                 "state": {
-                    "name": "string",
-                    "isoCode": "string",
-                    "countryCode": "string"
+
+                    "name": stateData.name,
+                    "isoCode": stateData.isoCode,
+                    "countryCode": stateData.countryCode
+
                 },
                 "country": {
-                    "name": "string",
-                    "isoCode": "string",
-                    "flag": "string",
-                    "phonecode": "string",
-                    "currency": "string"
+                    "name": countryData.name,
+                    "isoCode": countryData.isoCode,
+                    "flag": countryData.flag,
+                    "phonecode": countryData.phonecode,
+                    "currency": countryData.currency
                 },
                 "address_type": "Home",
                 "is_default_address": false
             }
             console.log("data inside the handle submit", AddAddress);
-            //dispatch(AddAddressHandle(AddAddress))
-            // .then(unwrapResult)
-            // .then((originalPromiseResult) => {
-            //     console.log("success samuvel you did itdone", originalPromiseResult);
-            //     if (originalPromiseResult.status === "200") {
-            //         var data = originalPromiseResult.data.access_token
-            //         navigation.navigate("OtpPage", data)
-            //     }
-            //     else if (originalPromiseResult === "You have already registered") {
-            //         console.log("im the error data", originalPromiseResult)
-            //         ToastAndroid.showWithGravity(originalPromiseResult),
-            //             ToastAndroid.CENTER, ToastAndroid.SHORT
-            //     }
-            //     else {
-            //         console.log(originalPromiseResult, "error")
-            //     }
-            // })
+            const apidata={AddAddress,edit}
+            dispatch(addressEditHandler(apidata))
+            .then(unwrapResult)
+            .then((originalPromiseResult) => {
+                console.log("success samuvel you did itdone", originalPromiseResult);
+                if (originalPromiseResult.status === "200") {
+                    ToastAndroid.showWithGravity(originalPromiseResult.message,
+                    ToastAndroid.CENTER, ToastAndroid.SHORT)
+                    navigation.navigate("Address")
+                }
+                else if (originalPromiseResult === "You have already registered") {
+                    console.log("im the error data", originalPromiseResult)
+                    ToastAndroid.showWithGravity(originalPromiseResult,
+                        ToastAndroid.CENTER, ToastAndroid.SHORT)
+                }
+                else {
+                    console.log(originalPromiseResult, "error")
+                }
+            })
         }
-
     }, [data])
 
     const handleBox = () => {
@@ -220,11 +292,10 @@ const EditAddress = ({route}) => {
                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "5%" }}>CONTACT DETAILS</Text>
                 <View style={{ marginHorizontal: "3%", marginVertical: "2%" }}>
                     <Pressable onPressIn={() => handleBox()}>
-                        {console.log("name.......",Name)}
                         <TextInput
                             placeholder="Name*"
                             value={Name}
-                            maxLength={10}
+                            maxLength={15}
                             placeholderTextColor={COLORS.gray}
                             onChangeText={e => { handleChange(e, "Name"), setErrorName(""), setName(e) }}
                             style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(13) }}
@@ -306,30 +377,57 @@ const EditAddress = ({route}) => {
                 <View style={{ flexDirection: "row", marginHorizontal: "2%" }}>
                     <View style={{ flexDirection: "column", width: "48.5%" }}>
                         <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
-                            <TextInput
-                                keyboardType={"default"}
-                                placeholder="City / District*"
-                                maxLength={30}
-                                value={city}
-                                placeholderTextColor={COLORS.gray}
-                                style={{ paddingStart: 15, borderRadius: 8, width: "91%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(13) }}
+                            <Dropdown
+                                style={{ width: "92%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, padding: "2%", marginTop: "1%", paddingHorizontal: 14 }}
+                                placeholderStyle={styles.dropText}
+                                selectedTextStyle={styles.dropText}
+                                data={countryListValue}
+                                maxHeight={350}
+                                itemTextStyle={themeForList}
+                                labelField="name"
+                                valueField="isoCode"
+                                onChange={item => { setCountryValue(item.isoCode), console.log("dbdgbdfbdg..........", item),setCountryData(item) }}
+                                placeholder={(countryValue) ? countryValue : "Country"}
                             />
                         </View>
                     </View>
                     <View style={{ flexDirection: "column", width: "50%" }}>
                         <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
-                            <TextInput
-                                keyboardType={"default"}
-                                placeholder="State*"
-                                value={stateses}
-                                maxLength={40}
-                                placeholderTextColor={COLORS.gray}
-                                style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(13) }}
+                        <Dropdown
+                                style={{ width: "91%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, padding: "2%", marginTop: "1%", paddingHorizontal: 14 }}
+                                placeholderStyle={styles.dropText}
+                                selectedTextStyle={styles.dropText}
+                                data={stateListValue}
+                                maxHeight={350}
+                                itemTextStyle={themeForList}
+                                labelField="name"
+                                valueField="name"
+                                onChange={item => { setStateValue(item.name),setStateIso(item.isoCode) ,console.log("dbdgbdfbdg..........", item),setStateData(item) }}
+                                placeholder={(stateValue) ? stateValue : "Select State"}
                             />
                         </View>
                     </View>
                 </View>
-
+                <View style={{ marginHorizontal: "1%", marginBottom: "2%",marginTop:"2%" }}>
+                        <Dropdown
+                                style={{ width: "91%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, padding: "2%", marginTop: "1%", paddingHorizontal: 14 }}
+                                placeholderStyle={styles.dropText}
+                                selectedTextStyle={styles.dropText}
+                                data={cityListValue}
+                                maxHeight={350}
+                                itemTextStyle={themeForList}
+                                
+                                labelField="name"
+                                valueField="name"
+                                onChange={item => { setCityValue(item.name),console.log("dbdgbdfbdg..........", item),setCityData(item) }}
+                                placeholder={(cityValue) ? cityValue : "Select City"}
+                            />
+                        </View>
+                
+                <View>
+                    {formErrors.locality || formErrors.allerror ?
+                        <Text style={styles.ErrorText}>{errorLocality}</Text> : null}
+                </View>
 
                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "3%" }}>SAVE ADDRESS AS</Text>
                 <View style={{ marginVertical: "2%", flexDirection: "row", width: "89%", alignSelf: "center", borderRadius: 10, backgroundColor: COLORS.white }}>
@@ -394,6 +492,11 @@ const styles = StyleSheet.create({
         fontSize: RFValue(10),
         textAlign: "center",
         width: horizontalScale(100)
+    },
+    dropText: {
+        ...FONTS.lexendregular,
+        color: COLORS.black,
+        fontSize: moderateScale(16)
     },
 })
 export default EditAddress;
