@@ -8,9 +8,10 @@ async function fetchJSONAsync() {
   }
 
 export const ourCartPage=async()=>{
-    const key=fetchJSONAsync()
-    const headers={'Content-Type':'Application/json','Authorization':"Bearer"+key}
-    return await axios.get(`${'https://api.grandealz.vytech.co'}/draws`,{headers:headers}).then(response => {
+    const key= await fetchJSONAsync()
+    const headers={'Content-Type':'Application/json','Authorization':"Bearer "+key}
+    console.log("content type data",key)
+    return await axios.get(`${'https://api.grandealz.vytech.co'}/cart`,{headers:headers}).then(response => {
         console.log("Response", response.data.data);
         return response.data.data
     }).catch((err) => {

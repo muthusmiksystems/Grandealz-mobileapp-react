@@ -32,8 +32,8 @@ const CartProducts = () => {
     useEffect(()=>{
         const cartStock=async()=>{
             let ourCartStock=await ourCartPage()
-            console.log("ourcart console",ourCartStock)
-            setCartsku(ourCartStock)
+            console.log("ourcart console",ourCartStock.draws[0])
+            setCartsku(ourCartStock.draws)
         }
         cartStock()
     },[])
@@ -41,7 +41,7 @@ const CartProducts = () => {
     return (
 
         <View style={{ width: "100%", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", alignSelf: "center" }}>
-
+    
             {cartsku && cartsku.map((item, index) => {
                 return (
                     <>
@@ -50,16 +50,16 @@ const CartProducts = () => {
                                 <View style={{ flexDirection: "row", }}>
                                     <View style={{ width: "35%", backgroundColor: "#F9F9F9" }}>
                                         <Image
-                                            source={{uri:item.product_image}}
+                                            source={{uri:item.draw.product_image}}
                                             resizeMode={"cover"}
                                             style={{ height: 80, width: 90, justifyContent: "center", margin: "10%" }}
                                         />
                                     </View>
                                     <View style={{ width: "70%", marginHorizontal: "3%" }}>
-                                        <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendsemibold, }}>{item.product_title}</Text>
-                                        <Text style={{ color: COLORS.gray, fontSize: RFValue(13), ...FONTS.lexendregular, }}>{item.draw_sub_title}</Text>
-                                        <Text style={{ color: COLORS.element, fontSize: RFValue(13), ...FONTS.lexendregular, }}>{item.product_price}</Text>
-                                        <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginTop: "5%" }}> {item.coins_redeem} Coupon
+                                        <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendsemibold, }}>{item.draw.product_title}</Text>
+                                        <Text style={{ color: COLORS.gray, fontSize: RFValue(13), ...FONTS.lexendregular, }}>{item.draw.draw_sub_title}</Text>
+                                        <Text style={{ color: COLORS.element, fontSize: RFValue(13), ...FONTS.lexendregular, }}>{item.draw.product_price}</Text>
+                                        <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginTop: "5%" }}> {item.draw.coins_redeem} Coupon
                                             <Text style={{ color: COLORS.gray }}> per unit</Text> </Text>
                                     </View>
 

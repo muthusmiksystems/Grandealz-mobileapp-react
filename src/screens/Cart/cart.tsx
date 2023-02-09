@@ -26,34 +26,11 @@ import { AddCouponHandle } from "../../store/reducers/addcouponcode";
 import { useDispatch, useSelector } from 'react-redux';
 
 const Cart = () => {
-
-
     const CouponPrice: any = useSelector<any>(state => state.AddCouponHandle.data.data);
     console.log("UseSelector.................",CouponPrice)
-
-
-    // useEffect(() => {
-    //     console.log("UseSelector.................",CouponPrice)
-    // }, [CouponPrice])
-
-
-
-
     const navigation = useNavigation();
     const [apply, setApply] = useState(true);
     const [copounprice, setCouponprice] = useState();
-
-    //     useEffect(()=>{
-    //     const CouponData = async () => {
-    //         let OurCouponprice = await AddCouponHandle()
-    //         setCouponprice(OurCouponprice)
-    //         console.log("Tatazoo",copounprice)
-    //     }
-    //     CouponData()
-    // },[])
-
-
-
     return (
         <SafeAreaView style={{ backgroundColor: "#F1F1F", height: "100%" }}>
             <StatusBar
