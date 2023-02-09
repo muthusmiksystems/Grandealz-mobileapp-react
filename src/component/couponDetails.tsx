@@ -11,6 +11,7 @@ import {
     View,
     TouchableOpacity,
 } from 'react-native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import image from '../constants/image';
 import icons from '../constants/icons';
 import { horizontalScale, verticalScale } from '../constants/metrices';
@@ -18,9 +19,11 @@ import { COLORS, FONTS } from '../constants';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { couponPage } from '../services/copoun';
 import { TextInput } from 'react-native-paper';
-import {AddCouponHandle} from "../services/addcouponcode"
+import {AddCouponHandle} from "../store/reducers/addcouponcode"
 import { ToastAndroid } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { unwrapResult } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
 
 const data = [
     {
@@ -51,11 +54,14 @@ const data = [
         watchedOn: "12.08.22 09:55pm",
         ticketno: "20-232301-32133265",
     },
-    
-
 ];
+
+
+
 const CouponDetails = () => {
     const [dataoff , setDataOff]=useState();
+
+    const dispatch = useDispatch();
     useEffect(()=>{
         const coupn = async ()=>{
              let offer= await couponPage()
@@ -67,38 +73,40 @@ const CouponDetails = () => {
 
      const[applycoupon,setApplycoupon]=useState("")
      const[error,setError]=useState("")
-
-     const[couponrep,setCouponrep] = useState("")
     const navigation = useNavigation();
 
-    //  console.log(applycoupon)
-    const AddCoupon = async () => {
-        let AddCouponCode = await AddCouponHandle(applycoupon)
-        setCouponrep(AddCouponCode)
-        if(AddCouponCode.status ==="200"){
-            ToastAndroid.showWithGravity(
-                AddCouponCode.message,
-                ToastAndroid.SHORT,
-                ToastAndroid.CENTER,
-            );
-            navigation.navigate("Tabs",{screen:"Cart"},couponrep)
-        }
-        else{
-            setError(AddCouponCode.message)
-            ToastAndroid.showWithGravity(
-                AddCouponCode.message,
-                ToastAndroid.SHORT,
-                ToastAndroid.CENTER,
-            );
-        }
-    }
+    
+
     const validatePromocode=()=>{
         if(applycoupon.length==0)
         {
             setError('Please input Coupon code!')
         }
         else{
-            AddCoupon()
+          dispatch(AddCouponHandle(applycoupon)).then(unwrapResult).then(async(originalPromiseResult) => {
+
+            
+
+            console.log("response", originalPromiseResult);
+            if (originalPromiseResult.status ==="200") {
+              ToastAndroid.showWithGravity(
+                originalPromiseResult.message,
+                ToastAndroid.SHORT,
+                ToastAndroid.CENTER,
+              );
+              navigation.navigate("Tabs",{screen:"Cart"})
+            }
+            else{
+                setError(originalPromiseResult.message)
+                ToastAndroid.showWithGravity(
+                    originalPromiseResult.message,
+                    ToastAndroid.SHORT,
+                    ToastAndroid.CENTER,
+                );
+
+            }
+          })
+            
         }
     }
 
@@ -107,6 +115,8 @@ const CouponDetails = () => {
         setError("")
     }
 
+
+    
     
 
 

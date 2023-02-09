@@ -259,7 +259,6 @@ const User = (props) => {
                         />
                         <Text style={styles.fontSizeStyle}>Our Charity Work</Text>
                         <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
-
                     </TouchableOpacity>
                 </View>
                 <TouchableOpacity style={{ borderWidth: 1, alignSelf: "center", borderColor: COLORS.gray, marginTop: "10%", width: "65%", borderRadius: 10 }} onPress={() => handleLogout()} >
