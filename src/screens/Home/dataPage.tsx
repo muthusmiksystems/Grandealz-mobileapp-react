@@ -92,7 +92,7 @@ const DataPage = () => {
                 {(userData?.profile_pic) ?
                   <Image
                     source={{ uri: (userData?.profile_pic) }}
-                    resizeMode="stretch"
+                    resizeMode="cover"
                     
                     style={{
                       width: horizontalScale(40),
@@ -104,7 +104,7 @@ const DataPage = () => {
                   /> :
                   <Image
                     source={icons.user}
-                    resizeMode="stretch"
+                    resizeMode="cover"
                     style={{
                       width: horizontalScale(40),
                       height: verticalScale(40),
@@ -118,7 +118,7 @@ const DataPage = () => {
           </View>
         </View>
 
-        <View style={{ padding: "3%", flex: 0.4 }}>
+        <View style={{ padding: "3%",height:verticalScale(220)}}>
           <Banner data={apiData} />
         </View>
 

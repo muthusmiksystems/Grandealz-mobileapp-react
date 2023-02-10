@@ -19,14 +19,27 @@ import { horizontalScale, verticalScale } from "../constants/metrices";
 // import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { loginicon } from "../constants/icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-
-
+import { useFocusEffect } from "@react-navigation/native";
+import NetInfo from '@react-native-community/netinfo';
 
 const Landing = (props: Props) => {
+  const navigation = useNavigation();
   const [authLoaded, setAuthLoaded] = useState(false);
   const [animationLoaded, setAnimationLoaded] = useState(false);
 
+  // useFocusEffect(() => {
+  //   NetInfo.addEventListener(state => {
+  //     if (!state.isConnected) {
+  //       navigation.navigate("NetworkError")
+  //     }
+  //     else {
+  //       setTimeout(() => {
+  //         setAuthLoaded(true);
+  //         setAnimationLoaded(true);
+  //       }, 2000);
+  //     }
+  //   })
+  // },[])
 
   useEffect(() => {
 
@@ -36,19 +49,19 @@ const Landing = (props: Props) => {
     }, 2000);
   }, []);
 
-const authentication=async()=>{
-    let Token= await AsyncStorage.getItem('loginToken');
-    if(Token){
+  const authentication = async () => {
+    let Token = await AsyncStorage.getItem('loginToken');
+    if (Token) {
 
       props.navigation.replace('Tabs');
-    }else{
+    } else {
       props.navigation.replace('login');
     }
-}
+  }
 
   useEffect(() => {
     if (authLoaded && animationLoaded) {
-      
+
       authentication();
     }
   }, [authLoaded, animationLoaded, props.navigation]);
@@ -58,9 +71,9 @@ const authentication=async()=>{
         source={loginicon}
         resizeMode="contain"
         style={{
-            height:verticalScale(150),
-            width:horizontalScale(130)
-           }}
+          height: verticalScale(150),
+          width: horizontalScale(130)
+        }}
       />
     </View>
   )
