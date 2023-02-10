@@ -19,7 +19,7 @@ import image from "../../constants/image";
 import { RFValue } from "react-native-responsive-fontsize";
 
 
-const WishListEmpty = () => {
+const CartEmpty = () => {
     const navigation = useNavigation();
 
     return (
@@ -27,7 +27,7 @@ const WishListEmpty = () => {
             <View  style={styles.container}>
             <View style={styles.view1} >
             <Image
-                source={image.heartEmpty}
+                source={image.cartEmpty}
                 resizeMode="contain"
                 style={{ height: verticalScale(100), width: horizontalScale(80),top:verticalScale(5) }}
             />
@@ -77,4 +77,4 @@ const styles = StyleSheet.create({
 
 
 })
-export default WishListEmpty;
+export default CartEmpty;

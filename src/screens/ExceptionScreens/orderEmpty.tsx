@@ -10,28 +10,30 @@ import {
     FlatList,
     TouchableOpacity
 } from 'react-native';
-import { horizontalScale, verticalScale } from "../../constants/metrices";
+import { horizontalScale, moderateScale, verticalScale } from "../../constants/metrices";
 
 import EntypoIcons from "react-native-vector-icons/Entypo";
 import { useNavigation } from "@react-navigation/native";
 
 import image from "../../constants/image";
 import { RFValue } from "react-native-responsive-fontsize";
+import { FONTS } from "../../constants";
 
 
-const WishListEmpty = () => {
+const OrderEmpty = () => {
     const navigation = useNavigation();
 
     return (
         <SafeAreaView style={{height:"90%",width:"100%",}}>
             <View  style={styles.container}>
-            <View style={styles.view1} >
+            {/* <View style={styles.view1} > */}
             <Image
-                source={image.heartEmpty}
+                source={image.OrderEmpty}
                 resizeMode="contain"
-                style={{ height: verticalScale(100), width: horizontalScale(80),top:verticalScale(5) }}
+                style={{ height: verticalScale(400), width: horizontalScale(180),top:verticalScale(5) }}
             />
-            </View>
+            <Text style={styles.text1}>You haven't placed any order yet!</Text>
+            {/* </View> */}
             </View>
         </SafeAreaView>
     );
@@ -56,6 +58,7 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         height:"100%",
         width:"100%",
+        // borderWidth:2
     },
     view1: {
         alignContent: "center",
@@ -72,9 +75,14 @@ const styles = StyleSheet.create({
         borderBottomEndRadius: 95,
     },
     text1: {
-        alignContent: "center"
+        alignContent: "center",
+        color:" #616161",
+        ...FONTS.lexendregular,
+        fontSize: moderateScale(13),
+        marginStart:horizontalScale(20)
+        
     },
 
 
 })
-export default WishListEmpty;
+export default OrderEmpty;

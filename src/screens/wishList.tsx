@@ -23,6 +23,9 @@ import { wishlistHandle } from "../services/wishlist";
 import { RemovewishlistHandle } from '../services/deletewishlist';
 import { ToastAndroid } from 'react-native';
 import { AddtoCartHandle } from "../services/addtocart";
+import WishListEmpty from "./ExceptionScreens/wishListEmpty";
+import CartEmpty from "./ExceptionScreens/cartEmpty";
+import OrderEmpty from "./ExceptionScreens/orderEmpty";
 const WishList = () => {
     const navigation = useNavigation();
 
@@ -111,10 +114,12 @@ const WishList = () => {
                 />
                 <Text style={{ fontFamily: "Lexend-Regular", color: "black", fontSize: 16, marginTop: 20 }}>Your wishlist in empty</Text>
             </View> */}
+              {Wishlistdata.length > 0 ?
             <ScrollView style={styles.subdivTwo}>
+          
                 <View style={{ flexDirection: "row" }}>
                     <View style={{ padding: "4%" }}>
-                        {Wishlistdata.length > 0 ?
+                      
                             <FlatList
                                 data={Wishlistdata}
                                 contentContainerStyle={{}}
@@ -152,10 +157,12 @@ const WishList = () => {
                                     </View>
                                 )}
                             />
-                            : null}
+                           
                     </View>
                 </View>
+         
             </ScrollView>
+                   :<WishListEmpty/>}
         </SafeAreaView>
     );
 }
@@ -169,7 +176,7 @@ const styles = StyleSheet.create({
         flexDirection: "row"
     },
     subdivTwo: {
-        height: "92%",
+        height: "100%",
         // alignItems: "center",
         // justifyContent: "center",
         // borderWidth:2
