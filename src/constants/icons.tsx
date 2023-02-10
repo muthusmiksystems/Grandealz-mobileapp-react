@@ -47,11 +47,12 @@ export const loginwhite=require("../assests/icons/grandealz3White.png")
 export const conlogo=require("../assests/icons/conlogo.png")
 export const close=require("../assests/icons/close.png")
 export const back1=require("../assests/icons/back1.png")
-
+export const networkGif=require("../assests/icons/noNetworkGif.gif")
 
 export default {
     loginicon,
     loginwhite,
+    networkGif,
     close,
     back1,
     conlogo,

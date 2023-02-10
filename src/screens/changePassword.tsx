@@ -117,7 +117,7 @@ const ChangePassword = () => {
                 placeholderTextColor={"black"}
                 onChangeText={(text: String) => {setExpassword(text), error ? setError("") : null }}
                 value={expassword}
-                style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: horizontalScale(300), borderColor: "#c4c4c2", marginTop: verticalScale(40), ...FONTS.lexendregular, fontSize: RFValue(14) }}
+                style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: horizontalScale(300), borderColor: "#c4c4c2", marginTop: verticalScale(40), ...FONTS.lexendregular, fontSize: RFValue(14),color:COLORS.black }}
               />
               {/* <Fontisto name='email' size={30} style={{ alignSelf: "center" }} /> */}
             </View>
@@ -127,7 +127,7 @@ const ChangePassword = () => {
                 placeholderTextColor={"black"}
                 onChangeText={(text: String) => { setNewpassword(text), error ? setError("") : null }}
                 value={newpassword}
-                style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: horizontalScale(300), borderColor: "#c4c4c2", marginTop: verticalScale(20), ...FONTS.lexendregular, fontSize: RFValue(14) }}
+                style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: horizontalScale(300), borderColor: "#c4c4c2", marginTop: verticalScale(20), ...FONTS.lexendregular, fontSize: RFValue(14),color:COLORS.black }}
               />
               {/* <Fontisto name='email' size={30} style={{ alignSelf: "center" }} /> */}
             </View>
@@ -137,7 +137,7 @@ const ChangePassword = () => {
                 placeholderTextColor={"black"}
                 onChangeText={(text: String) => { setConfirmpassword(text), error ? setError("") : null }}
                 value={confirmpassword}
-                style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: horizontalScale(300), borderColor: "#c4c4c2", marginTop: verticalScale(20), ...FONTS.lexendregular, fontSize: RFValue(14) }}
+                style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: horizontalScale(300), borderColor: "#c4c4c2", marginTop: verticalScale(20), ...FONTS.lexendregular, fontSize: RFValue(14),color:COLORS.black }}
               />
               {/* <Fontisto name='email' size={30} style={{ alignSelf: "center" }} /> */}
             </View>
