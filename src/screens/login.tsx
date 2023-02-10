@@ -38,6 +38,7 @@ import { unwrapResult } from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import StorageController from "../services/storagectrl";
 
+
 function handleBackButton() {
   // if (screen === 'Login') {
   console.log("BackHandler Function");
@@ -62,7 +63,7 @@ const Login = (props: Prop) => {
   const [errorPassword, setErrorPassword] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  
   useEffect(() => {
     console.log(Object.keys(formValues).length, "kk", formErrors.password)
     if (formErrors && Object.keys(formErrors).length > 0) {
@@ -70,7 +71,7 @@ const Login = (props: Prop) => {
         //setEmail(formErrors.email);
         setErrorEmail(formErrors.email);
 
-        setErrorPassword(formErrors.password);
+        setErrorPassword(formErrors.password); 
 
         console.log("email password failed", formErrors.email)
       }
@@ -80,7 +81,7 @@ const Login = (props: Prop) => {
         setErrorPassword(formErrors.password);
       }
 
-      else if (formErrors && formErrors.email) {
+      else if (formErrors && formErrors.email ){
 
         setErrorEmail(formErrors.email);
         console.log("email failed", formErrors.email)
@@ -121,7 +122,7 @@ const Login = (props: Prop) => {
       dispatch(loginHanlder(reg))
         .then(unwrapResult)
 
-        .then(async (originalPromiseResult: any) => {
+        .then(async (originalPromiseResult:any) => {
 
           console.log("successfully returned to login with response ", originalPromiseResult);
           if (originalPromiseResult?.data?.access_token) {
@@ -302,7 +303,7 @@ const styles = StyleSheet.create({
     ...FONTS.lexendregular,
     fontSize: RFValue(10),
 
-    marginStart: "7%"
+    marginStart:"7%"
 
   }
 })

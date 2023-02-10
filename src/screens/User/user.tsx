@@ -33,16 +33,14 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { CameraOptions, ImageLibraryOptions } from 'react-native-image-picker/lib/typescript/types';
 import imageUpload from '../../store/reducers/imageUpload';
 import { imageUploadService } from '../../services/imageUploadService';
-import { personalDetailsUpdate } from '../../services/personalDetailsUpdate';
-import { userDetailsHandler } from '../../store/reducers/userDetails';
-import { deleteAccount } from '../../services/deleteAccount';
+
+
 
 const User = (props) => {
     console.log("PAge props.............", props.route.params)
     const userData: any = useSelector<any>(state => state.userDetailsHandle.data.data);
     const [modalState, setModalState] = useState(false)
     const [profilePic, setProfilePic] = useState<any>()
-    const [profileName, setProfileName] = useState<any>()
     console.log("UseSelector.................", userData)
     const navigation = useNavigation();
     const handleLogout = () => {
@@ -53,7 +51,7 @@ const User = (props) => {
                 onPress: () => console.log('Cancel Pressed'),
                 style: 'cancel',
             },
-            { text: 'logout', onPress: () => Removetoken() },
+            { text: 'OK', onPress: () => Removetoken() },
         ]);
 
         const Removetoken = async () => {
@@ -61,13 +59,11 @@ const User = (props) => {
             navigation.navigate("login");
         }
     }
-    const dispatch = useDispatch();
-    // const userData = useSelector<any>(state => state.userData.data);
 
     useEffect(() => {
         const uploadImage = async () => {
             await imageUploadService(profilePic).then((originalPromiseResult) => {
-                console.log("Original............", originalPromiseResult.status)
+                console.log("Original............",originalPromiseResult.status)
                 if (originalPromiseResult.status == "422") {
                     ToastAndroid.showWithGravity(
                         '422',
@@ -75,58 +71,21 @@ const User = (props) => {
                         ToastAndroid.CENTER
                     )
                 }
-                else if (originalPromiseResult.status == "201") {
-                    setProfileName(originalPromiseResult.data.file.filename)
-                }
                 else if (originalPromiseResult == undefined) {
                     ToastAndroid.showWithGravity(
                         'Something went wrong!, Please try again later',
                         ToastAndroid.SHORT,
                         ToastAndroid.CENTER
                     )
-
+                    
                 }
             });
         }
         console.log(profilePic)
         uploadImage();
+
     }, [profilePic])
 
-    useEffect(() => {
-        updateImage()
-    }, [profileName])
-
-    const updateImage = async () => {
-        const imageData = {
-            "first_name": userData.first_name,
-            "last_name": userData.last_name,
-            "date_of_birth": userData.date_of_birth,
-            "gender": userData.gender,
-            "country_phone_code": "string",
-            "profile_pic": profileName,
-            "country_of_residence": userData.country_of_residence,
-            "nationality": "Indian",
-        }
-        // console.log("Payload...............", imageData)
-        let callingAutobot = await personalDetailsUpdate(imageData).then((originalPromiseResult) => {
-            console.log("Personal Details Country....", originalPromiseResult);
-            if (originalPromiseResult === undefined) {
-                ToastAndroid.showWithGravity(
-                    'Something went wrong!, Please try again later',
-                    ToastAndroid.SHORT,
-                    ToastAndroid.CENTER,
-                );
-            }
-            else {
-                ToastAndroid.showWithGravity(
-                    'Image Updated SuccessFully!',
-                    ToastAndroid.SHORT,
-                    ToastAndroid.CENTER,
-                );
-                dispatch(userDetailsHandler());
-            }
-        })
-    }
     const openCamera = async () => {
         setModalState(false)
         if (Platform.OS == 'android' && await checkForPermissions()) {
@@ -139,17 +98,19 @@ const User = (props) => {
             if (result.assets) {
                 console.log("imgdetails.....................", result.assets[0].fileName);
                 const file = {
-                    "name": result.assets[0].fileName,
-                    "type": result.assets[0].type,
-                    "uri": result.assets[0].uri
+                    "filename": result.assets[0].fileName,
+                    "type": result.assets[0].type
                 }
                 setProfilePic(file)
             }
+
+
             else {
                 Alert.alert("Please try again later!")
                 // this.props.navigation.pop();
             }
         }
+
     }
     const openGallery = async () => {
         setModalState(false)
@@ -159,13 +120,14 @@ const User = (props) => {
                 mediaType: 'photo'
             }
             const result = await launchImageLibrary(options);
+
+
             console.log("imgdetails.....................", result)
             if (result.assets) {
                 console.log("imgdetails.....................", result.assets[0].fileName);
                 const file = {
-                    "name": result.assets[0].fileName,
-                    "type": result.assets[0].type,
-                    "uri": result.assets[0].uri
+                    "filename": result.assets[0].fileName,
+                    "type": result.assets[0].type
                 }
                 setProfilePic(file)
             }
@@ -175,57 +137,6 @@ const User = (props) => {
             }
         }
     }
-    // const openCamera = async () => {
-    //     setModalState(false)
-    //     if (Platform.OS == 'android' && await checkForPermissions()) {
-    //         console.log("Camera permission given");
-    //         const options: CameraOptions = {
-    //             mediaType: 'photo'
-    //         }
-    //         const result = await launchCamera(options);
-    //         console.log("imgdetails.....................", result);
-    //         if (result.assets) {
-    //             console.log("imgdetails.....................", result.assets[0].fileName);
-    //             const file = {
-    //                 "filename": result.assets[0].fileName,
-    //                 "type": result.assets[0].type
-    //             }
-    //             setProfilePic(file)
-    //         }
-
-
-    //         else {
-    //             Alert.alert("Please try again later!")
-    //             // this.props.navigation.pop();
-    //         }
-    //     }
-
-    // }
-    // const openGallery = async () => {
-    //     setModalState(false)
-    //     if (Platform.OS == 'android' && await checkForPermissions()) {
-    //         console.log("Camera permission given");
-    //         const options: ImageLibraryOptions = {
-    //             mediaType: 'photo'
-    //         }
-    //         const result = await launchImageLibrary(options);
-
-
-    //         console.log("imgdetails.....................", result)
-    //         if (result.assets) {
-    //             console.log("imgdetails.....................", result.assets[0].fileName);
-    //             const file = {
-    //                 "filename": result.assets[0].fileName,
-    //                 "type": result.assets[0].type
-    //             }
-    //             setProfilePic(file)
-    //         }
-    //         else {
-    //             Alert.alert("Please try again later!")
-    //             // this.props.navigation.pop();
-    //         }
-    //     }
-    // }
     const checkForPermissions = async () => {
         try {
             const granted = await PermissionsAndroid.request(
@@ -251,25 +162,6 @@ const User = (props) => {
         }
     }
 
-    const deleteAcc = async () => {
-        await deleteAccount().then((originalPromiseResult) => {
-            if (originalPromiseResult === undefined) {
-                ToastAndroid.showWithGravity(
-                    'Something went wrong!, Please try again later',
-                    ToastAndroid.SHORT,
-                    ToastAndroid.CENTER,
-                );
-            }
-            else {
-                ToastAndroid.showWithGravity(
-                    'Your account deleted successfully',
-                    ToastAndroid.SHORT,
-                    ToastAndroid.CENTER,
-                );
-                navigation.replace("login")
-            }
-        })
-    }
 
     return (
         <SafeAreaView>
@@ -297,8 +189,8 @@ const User = (props) => {
                         {(userData.profile_pic) ?
                             <ImageBackground
                                 source={{ uri: (userData.profile_pic) }}
-                                resizeMode="cover"
-                                imageStyle={{ borderRadius: 7 }}
+                                resizeMode="stretch"
+                                imageStyle={{borderRadius:7}}
                                 style={{
                                     width: "100%",
                                     height: "100%",
@@ -312,8 +204,8 @@ const User = (props) => {
                             </ImageBackground> :
                             <ImageBackground
                                 source={image.profilepic}
-                                resizeMode="cover"
-                                imageStyle={{ borderRadius: 7 }}
+                                resizeMode="stretch"
+                                imageStyle={{borderRadius:7}}
                                 style={{
                                     width: "100%",
                                     height: "100%"
@@ -488,9 +380,9 @@ const User = (props) => {
                 <TouchableOpacity style={{ borderWidth: 1, alignSelf: "center", borderColor: COLORS.gray, marginTop: "10%", width: "65%", borderRadius: 10 }} onPress={() => handleLogout()} >
                     <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(16), textAlign: "center", color: COLORS.black, paddingVertical: "6%" }}>Logout</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ padding: moderateScale(20), margin: "3%" }} onPress={() => deleteAcc()}>
+                <View style={{ padding: moderateScale(20), margin: "3%" }}>
                     <Text style={{ ...FONTS.lexendregular, fontSize: RFValue(13), color: COLORS.element, textAlign: "center" }}>Delete my account</Text>
-                </TouchableOpacity>
+                </View>
                 <View style={{ flexDirection: "row", marginTop: "1%" }}>
                     <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignSelf: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginStart: "5%", marginEnd: "2%", width: "45%", borderRadius: 10 }}>
                         <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(16), textAlign: "center", color: COLORS.black, paddingVertical: "8%" }}>Call us</Text>
