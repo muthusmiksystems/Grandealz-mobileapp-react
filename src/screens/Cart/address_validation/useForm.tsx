@@ -24,23 +24,23 @@ const useForm = (validate) => {
           console.log("sujithhhhhhhhh", formValues)
         }
         else {
-          if (!formValues.Name && formValues.phone && formValues.pincode && formValues.address && formValues.locality) {
+          if (formValues.Name===undefined && formValues.phone && formValues.pincode && formValues.address && formValues.locality) {
             let Error = { "Name": "Name is required!" }
             setFormErrors(Error);
           }
-          else if (!formValues.phone && formValues.Name && formValues.pincode && formValues.address && formValues.locality) {
+          else if (formValues.phone===undefined && formValues.Name && formValues.pincode && formValues.address && formValues.locality) {
             let Error = { "mobile": "Mobile no is required!" }
             setFormErrors(Error);
           }
-          if (!formValues.pincode && formValues.Name && formValues.phone && formValues.address && formValues.locality) {
+          if (!formValues.pincode===undefined && formValues.Name && formValues.phone && formValues.address && formValues.locality) {
             let Error = { "pincode": "pincode is required!" }
             setFormErrors(Error);
           }
-          else if (!formValues.address && formValues.Name && formValues.phone && formValues.pincode && formValues.locality) {
+          else if (!formValues.address===undefined && formValues.Name && formValues.phone && formValues.pincode && formValues.locality) {
             let Error = { "address": "Address is required!" }
             setFormErrors(Error);
           }
-          else if (!formValues.locality && formValues.Name && formValues.phone && formValues.pincode && formValues.address) {
+          else if (!formValues.locality===undefined && formValues.Name && formValues.phone && formValues.pincode && formValues.address) {
             let Error = { "locality": "locality is required!" }
             setFormErrors(Error);
           }

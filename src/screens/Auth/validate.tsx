@@ -50,7 +50,7 @@ const validate = (details) => {
     } else if (!/^[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(details.password)) {
 
 
-        formErrors.password = "password must have min 8 characters with number";
+        formErrors.password = "password must have min 8 characters";
 
 
     }

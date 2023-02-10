@@ -8,16 +8,16 @@ export const addressEditHandler = createAsyncThunk('posts/AddressEDitcall', asyn
     try {
         const token=await AsyncStorage.getItem('loginToken');
         const headers={'Authorization':`Bearer ${token}`};
-        const id=data.edit;
-        const payload=data.AddAddress;
+        const ids=data.id;
+        const payload=data.payload;
         //const design=`${'https://api.grandealz.vytech.co'}/addresses/${id}`;
-        //console.log("api data inside the log",design)
+        console.log("api data inside the log",data)
 
-        let result = await axios.put(`${'https://api.grandealz.vytech.co'}/addresses/${id}`,payload,{ headers:headers });
-        console.log("result inside the adrres edit",result.data.status)
+        let result = await axios.put(`${'https://api.grandealz.vytech.co'}/addresses/${ids}`,payload,{ headers:headers });
+        console.log("result inside the adrres edit",result.data.message)
         if (parseInt(result.data.status) === 200) {
             console.log({ responseData: result.data.data });
-            return result.data
+            return result.data.message;
         } else if(parseInt(result.data.status)== 401 ){
             console.log({responseData: result.data})
         }else {
