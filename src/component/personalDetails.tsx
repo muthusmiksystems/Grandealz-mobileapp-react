@@ -63,13 +63,10 @@ const PersonalDetails = (props) => {
     const [dateShow, setDateShow] = useState(false);
     const [dateError, setDateError] = useState("");
 
-    var url = userData.profile_pic.split('/');
-
-    // console.log("kaliraaaaaaaaaaaaaaaaaaaaaa", url[3]);
-    // console.log("userData ..;;;;;;;;;;;;;;;;;;;;;", userData)
+    console.log("userData ..;;;;;;;;;;;;;;;;;;;;;", userData)
     const getCountryList = async () => {
         let listCountries = await countryList().then((originalPromiseResult) => {
-            // console.log("Personal Details Country....", originalPromiseResult);
+            console.log("Personal Details Country....", originalPromiseResult);
             // const value = originalPromiseResult
             setCountryListValue(originalPromiseResult);
             console.log("listCoun", originalPromiseResult[56].name)
@@ -77,10 +74,10 @@ const PersonalDetails = (props) => {
     }
     const getStateList = async (data: any) => {
         let listCountries = await stateList(data).then((originalPromiseResult) => {
-            // console.log("Personal Details State....", originalPromiseResult);
+            console.log("Personal Details State....", originalPromiseResult);
             // const value = originalPromiseResult
             setStateListValue(originalPromiseResult);
-            // console.log("listCoun", originalPromiseResult)
+            console.log("listCoun", originalPromiseResult)
         })
     }
 
@@ -108,32 +105,24 @@ const PersonalDetails = (props) => {
     }, [cityValue])
 
     const validateFunction = () => {
-        // console.log("values", firstName, lastName, email, mblNumber, mblCode, checked, countryResidenceValue, countryValue, stateValue, date);
+        console.log("values", firstName, lastName, email, mblNumber, mblCode, checked, countryResidenceValue, countryValue, stateValue, date);
         //firstName
         let errorCount = 0;
-        if (firstName.length === 0 || firstName === undefined) {
+        if (firstName.length <= 3 || firstName === undefined) {
             setFirstNameError('FirstName is mandatory')
             errorCount++;
         }
-        else if (firstName.length <= 2) {
-            setFirstNameError('FirstName should have minimum 3 characters')
-            errorCount++;
-        }
-        else {
-            setFirstNameError('')
-        }
+        // else {
+        //     setFirstNameError('')
+        // }
         //lastName
-        if (lastName.length === 0 || lastName === undefined) {
+        if (lastName.length <= 3 || lastName === undefined) {
             setLastNameError('LastName is mandatory')
             errorCount++;
         }
-        else if (lastName.length <= 2) {
-            setLastNameError('LastName should have minimum 3 characters')
-            errorCount++;
-        }
-        else {
-            setLastNameError('')
-        }
+        // else {
+        //     setLastNameError('')
+        // }
         //email
         // if (email.length === 0 || email === undefined) {
         //     setEmailError('Email id is mandatory')
@@ -164,17 +153,17 @@ const PersonalDetails = (props) => {
             setGenderError('Please select your gender')
             errorCount++;
         }
-        else {
-            setGenderError('')
-        }
+        // else {
+        //     setGenderError('')
+        // }
         //Nationality
         if (countryValue.length == 0) {
             setCountryError('Nationality is required')
             errorCount++;
         }
-        else {
-            setCountryError('')
-        }
+        // else {
+        //     setCountryError('')
+        // }
         //State
         // if (stateValue.length == 0) {
         //     setStateError('State is required')
@@ -188,17 +177,17 @@ const PersonalDetails = (props) => {
             setCountryResidenceError('Country of residence is required')
             errorCount++;
         }
-        else {
-            setCountryResidenceError('')
-        }
+        // else {
+        //     setCountryResidenceError('')
+        // }
         //Date of birth
         if (date.length == 0) {
             setDateError('Date of birth is required')
             errorCount++;
         }
-        else {
-            setDateError('')
-        }
+        // else {
+        //     setDateError('')
+        // }
         if (errorCount === 0) {
             setDateError(""), setCountryResidenceError(""), setStateError(""), setCountryError(""), setGenderError(""), setLastNameError(""), setFirstNameError("");
             return true;
@@ -210,7 +199,7 @@ const PersonalDetails = (props) => {
 
     const uploadpersonalDetails = async () => {
         const validateLetter = validateFunction();
-        // console.log("Retrun.............", validateLetter);
+        console.log("Retrun.............", validateLetter);
         if (validateLetter) {
             const payload = {
                 "first_name": firstName,
@@ -218,14 +207,14 @@ const PersonalDetails = (props) => {
                 "date_of_birth": moment(date).format('YYYY-MM-DD'),
                 "gender": checked,
                 "country_phone_code": "string",
-                "profile_pic": url[3],
+                "profile_pic": "1675750141561-38402481.jpeg",
                 "country_of_residence": countryResidenceValue,
                 "nationality": "Indian",
                 //   "state":"TamilNadu"
             }
-            // console.log("payload for update.............", payload)
+            console.log("payload for update.............", payload)
             let callingAutobot = await personalDetailsUpdate(payload).then((originalPromiseResult) => {
-                // console.log("Personal Details Country....", originalPromiseResult);
+                console.log("Personal Details Country....", originalPromiseResult);
                 if (originalPromiseResult === undefined) {
                     ToastAndroid.showWithGravity(
                         'Something went wrong!, Please try again later',
@@ -283,7 +272,7 @@ const PersonalDetails = (props) => {
                         style={{ width: "91%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, ...FONTS.lexendregular, color: COLORS.black, fontSize: RFValue(16), paddingLeft: 14, marginTop: "1%" }}
                     />
                 </View>
-                <View style={{ paddingLeft: 19, height: "2%" }}>
+                <View style={{ paddingLeft: 19, height:"2%" }}>
                     {firstNameError ? <Text style={styles.errorText}>{firstNameError}</Text> : null}
                 </View>
                 <View>
@@ -296,7 +285,7 @@ const PersonalDetails = (props) => {
                         style={{ width: "91%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, ...FONTS.lexendregular, color: COLORS.black, fontSize: RFValue(16), paddingLeft: 14, marginTop: "1%" }}
                     />
                 </View>
-                <View style={{ paddingLeft: 19, height: "2%" }}>
+                <View style={{ paddingLeft: 19, height:"2%" }}>
                     {lastNameError ? <Text style={styles.errorText}>{lastNameError}</Text> : null}
                 </View>
 
@@ -364,7 +353,7 @@ const PersonalDetails = (props) => {
                     />
                     <Text style={{ ...FONTS.lexendregular, color: COLORS.black, fontSize: moderateScale(16) }}>Female</Text>
                 </View>
-                <View style={{ paddingLeft: 19, height: "2%" }}>
+                <View style={{ paddingLeft: 19, height:"2%" }}>
                     {Gender ? <Text style={styles.errorText}>{Gender}</Text> : null}
                 </View>
                 <View>
@@ -378,11 +367,11 @@ const PersonalDetails = (props) => {
                         itemTextStyle={themeForList}
                         labelField="name"
                         valueField="isoCode"
-                        onChange={item => { setCountryValue(item.isoCode) }}
+                        onChange={item => { setCountryValue(item.isoCode), console.log("dbdgbdfbdg..........", item.isoCode) }}
                         placeholder={(userData.nationality) ? userData.nationality : "Select Nationality"}
                     />
                 </View>
-                <View style={{ paddingLeft: 19, height: "2%" }}>
+                <View style={{ paddingLeft: 19, height:"2%" }}>
                     {countryError ? <Text style={styles.errorText}>{countryError}</Text> : null}
                 </View>
                 {/* <View>
@@ -433,11 +422,11 @@ const PersonalDetails = (props) => {
                         itemTextStyle={themeForList}
                         labelField="name"
                         valueField="name"
-                        onChange={item => { setCountryResidenceValue(item.name) }}
+                        onChange={item => { setCountryResidenceValue(item.name), console.log("dbdgbdfbdg..........", item.isoCode) }}
                         placeholder={(props.route) ? countryResidenceValue : "Select country of residence"}
                     />
                 </View>
-                <View style={{ paddingLeft: 19, height: "2%" }}>
+                <View style={{ paddingLeft: 19, height:"2%" }}>
                     {countryResidenceError ? <Text style={styles.errorText}>{countryResidenceError}</Text> : null}
                 </View>
                 <View>
@@ -459,7 +448,7 @@ const PersonalDetails = (props) => {
                         />
                         : null}
                 </View>
-                <View style={{ paddingLeft: 19, height: "2%" }}>
+                <View style={{ paddingLeft: 19, height:"2%" }}>
                     {dateError ? <Text style={styles.errorText}>{dateError}</Text> : null}
                 </View>
                 {/* <View>

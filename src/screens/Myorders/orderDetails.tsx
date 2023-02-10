@@ -58,7 +58,7 @@ const OrderDetails = ({ route }) => {
     const orderid = route.params;
     console.log("details", orderid._id);
 
-
+   
 
     useEffect(() => {
         const orderDetail = async () => {
@@ -116,7 +116,7 @@ const OrderDetails = ({ route }) => {
                     </View>
                 </View>
                 {(orderdetailsdata) ? (orderdetailsdata.draws.map((data, index) => (
-                    <View style={{ marginVertical: "4%" }} >
+                    <TouchableOpacity style={{ marginVertical: "4%" }} onPress={() => navigation.navigate("PlayNow")}>
                         <View key={index} style={{ flexDirection: "row", backgroundColor: "white", borderRadius: 10 }}>
                             <View style={{ flexDirection: "row", width: "65%", paddingVertical: "5%", paddingLeft: "3%" }}>
                                 <View style={{ flexDirection: "column", backgroundColor: COLORS.pagebackground, padding: "4%", width: "45%", alignItems: "center", borderRadius: 5 }}>
@@ -134,12 +134,12 @@ const OrderDetails = ({ route }) => {
                             </View>
                             <View style={{ flexDirection: "column", width: "33%", marginLeft: "2%", justifyContent: "flex-end" }}>
                                 <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(12), color: "#000", textAlign: "right", marginRight: "5%" }}>Avail Your Ticket</Text>
-                                <TouchableOpacity style={{ width: "95%", backgroundColor: COLORS.element, alignSelf: "flex-end", flexDirection: "row", borderBottomEndRadius: 10, borderTopStartRadius: 10 }} onPress={() => navigation.replace("PlayNow")}>
+                                <View style={{ width: "95%", backgroundColor: COLORS.element, alignSelf: "flex-end", flexDirection: "row", borderBottomEndRadius: 10, borderTopStartRadius: 10 }}>
                                     <Text style={{ width: "100%", textAlign: "center", paddingVertical: "8%", ...FONTS.lexendregular, color: COLORS.white }}>Play Now</Text>
-                                </TouchableOpacity>
+                                </View>
                             </View>
                         </View>
-                    </View>
+                    </TouchableOpacity>
                 ))) : null}
                 <View style={{ marginTop: 10 }}>
                     <View style={{ backgroundColor: "#fff", borderRadius: 8, paddingHorizontal: 8 }}>
