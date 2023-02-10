@@ -20,9 +20,10 @@ export const wishlistHandle = async () => {
 
 export const addToWishlistHandle = async (data:string) => {
     const token=await AsyncStorage.getItem('loginToken');
+    console.log("headers.token",token)
         const headers={'Authorization':`Bearer ${token}` }
         const payload={"draw":data};
-    console.log("headers.data",headers)
+    
     return await axios.post(`https://api.grandealz.vytech.co/wish-list`,payload,{headers:headers}).then(response => {
         console.log("Responce in active ticket call",response);
          return response

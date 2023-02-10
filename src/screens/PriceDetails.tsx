@@ -22,21 +22,19 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import { useDispatch, useSelector, useStore } from 'react-redux';
 import moment from "moment";
 import { addToWishlistHandle, wishlistHandle } from '../services/wishlist';
-
 import { addToCartHandler } from '../store/reducers/addToCart';
 import { unwrapResult } from '@reduxjs/toolkit';
+import { RemovewishlistHandle } from '../services/deletewishlist';
 const PriceDetails = ({route}) => {
-  const pricing = route.params
-
-  const[isWished,setIsWished]=useState(false)
-  const dispatch=useDispatch();
-  const store=useStore();
-
-  console.log(pricing,"samuel sham")
+  const pricing = route.params;
   const navigation = useNavigation();
+  const dispatch=useDispatch();
+  const [pricelist,setPricelist]=useState();
+  const[wishedId,setWishedId]=useState<string>("");
+  const [heart,setHeart]=useState(false)
   
-
-  const handleAdd=()=>{
+  // console.log("routedData.....................",pricing)
+  const handleAddtoCart=()=>{
     let value=pricing._id;
     dispatch(addToCartHandler(value))
     .then(unwrapResult)
@@ -44,25 +42,48 @@ const PriceDetails = ({route}) => {
       console.log("result of api is ",orginalResult)
     })
   }
-  const [heart,setHeart]=useState(false)
-  
-  const handleAddWishlist=async()=>{
-        const result= await addToWishlistHandle(pricing._id);
-        setIsWished(true);
-        console.log("done..........",pricing._id);
-        setHeart(!heart)
-        console.log("result...........",result)
-        
+
+  const RemoveWishlist = async () => {
+    console.log("Removewish........", wishedId);
+    let Removeitems = await RemovewishlistHandle(wishedId)
+    showHeartIfExists();
+
+    console.log("result...........", Removeitems)
   }
- const [pricelist,setPricelist]=useState();
+  const handleAddWishlist = async () => {
+    console.log("Addwish........", pricing._id);
+    const result = await addToWishlistHandle(pricing._id);
+
+    showHeartIfExists();
+    console.log("result...........", result)
+
+  }
+
  
- useEffect(()=>{
-    const listprice=async ()=>{
-      let priceitem=await wishlistHandle();
-      setPricelist(priceitem)
-      console.log("......hihihih........",priceitem)
+  const showHeartIfExists = async () => {
+    let priceitem = await wishlistHandle();
+    setPricelist(priceitem)
+    // console.log("priceitem..........",priceitem)
+    var WishIdArray: any[] = [];
+    (priceitem).forEach((element: any) => {
+      var Data = (element.draw._id);
+      if(Data===pricing._id){
+        console.log("trueeeeeeeeeeeee.........",element._id);
+        setWishedId(element._id);
+      }
+      WishIdArray.push(Data);
+    })
+    if (WishIdArray.includes(pricing._id)) {
+     // console.log(`true${pricing._id}`)
+     setHeart(true);
+    } else {
+      //console.log(`false${pricing._id}`)
+      setHeart(false);
     }
-    listprice()
+  }
+
+ useEffect(()=>{
+  showHeartIfExists()
  },[])
 
   return (
@@ -126,17 +147,19 @@ const PriceDetails = ({route}) => {
                     height: 25
                   }}
                 />
-                <TouchableOpacity onPress={()=>handleAddWishlist()}>
-                  {heart?
-                 <FontAwesome name="heart-o" style={{
-                  bottom: "40%",
-                  marginRight: "2%",
-                  width: 30,
-                  height: 30,                  
-                  
-                }}size={30}  color={"black"} />
-                :
                 
+                  {!heart?
+                  <TouchableOpacity onPress={() =>handleAddWishlist()}>
+                    <FontAwesome name="heart-o" style={{
+                      bottom: "40%",
+                      marginRight: "2%",
+                      width: 30,
+                      height: 30,
+
+                    }} size={30} color={"black"} />
+                  </TouchableOpacity>
+                :
+                <TouchableOpacity onPress={()=>RemoveWishlist()}>
                   <FontAwesome name="heart" style={{
                     bottom: "40%",
                     marginRight: "2%",
@@ -144,12 +167,8 @@ const PriceDetails = ({route}) => {
                     height: 30,                  
                     
                   }}size={30}  color={"red"} />
-                  
-                  }
-                  
-                
-               
                 </TouchableOpacity>
+                       }
               </View>
               <View style={{ flexDirection: 'column', padding: moderateScale(10) }}>
                 <Image
@@ -168,7 +187,7 @@ const PriceDetails = ({route}) => {
               <TouchableOpacity style={{ flexDirection: "column", width: "48%", marginEnd: "2%" }}>
                 <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "7%", backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }}> Prize Details</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, width: "49%", borderRadius: 5 }} onPressIn={() => { navigation.navigate("ProductDetails",pricing) }}>
+              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, width: "49%", borderRadius: 5 }} onPressIn={() => { navigation.replace("ProductDetails",pricing) }}>
                 <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}>
                   Product Details
                 </Text>
@@ -182,16 +201,16 @@ const PriceDetails = ({route}) => {
                   <Text style={{ fontSize: 20, padding: 10, backgroundColor: "#fff", color: "#000",...FONTS.lexendregular,borderRadius:10 }}> Go To Home </Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1,borderRadius:10 }}>
-                  <Text style={{ fontSize: 20, padding: 10, backgroundColor: "#fff", color: "#000",...FONTS.lexendregular,borderRadius:10 }}>View Card</Text>
+                  <Text style={{ fontSize: 20, padding: 10, backgroundColor: "#fff", color: "#000",...FONTS.lexendregular,borderRadius:10 }}>View Cart</Text>
                 </TouchableOpacity>
               </View> */}
             <View style={{ flexDirection: "row", marginVertical: "2%",}}>
               <TouchableOpacity style={{ flexDirection: "column", width: "48%", marginEnd: "2%" }} onPressIn={() => {  navigation.navigate("Tabs") }} >
                 <Text style={{ textAlign: "center", fontSize: RFValue(15), borderWidth: 1, padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}> Go to Home</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 5, width: "49%" }}>
+              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 5, width: "49%" }} onPressIn={() => {  navigation.navigate("Tabs",{screen:"Cart"}) }}>
                 <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}>
-                  View Card
+                  View Cart
                 </Text>
               </TouchableOpacity>
             </View>
@@ -201,7 +220,7 @@ const PriceDetails = ({route}) => {
       <View style={{ flex: 0.15, backgroundColor: "white" }}>
         <View style={{ flexDirection: "row", marginVertical: "2%", marginHorizontal: "4%" }}>
           <TouchableOpacity style={{ flexDirection: "column", borderRadius: 6, width: "48%", marginEnd: "2%" }}>
-            <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "7%", backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }} onPress={()=>{handleAdd()}}>ADD TO CART</Text>
+            <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "7%", backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }} onPress={()=>{handleAddtoCart()}}>ADD TO CART</Text>
           </TouchableOpacity>
           <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 6, width: "49%" }} >
             <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 8 }}>

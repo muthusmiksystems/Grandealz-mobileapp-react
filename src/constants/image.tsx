@@ -29,7 +29,7 @@ export const group= require("../assests/images/Groupshome.png");
 export const pencilorg= require("../assests/images/pencilorg.png");
 export const profilepic= require("../assests/images/Profile.png");
 export const audicar=require("../assests/images/audicar.png")
-
+export const heartEmpty=require("../assests/images/heartEmpty.png")
 export default {
     Android,
     audicar,
@@ -61,5 +61,6 @@ export default {
     tshirt,
     cap,
     profilepic,
+    heartEmpty,
 
 }
