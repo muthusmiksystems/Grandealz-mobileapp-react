@@ -23,9 +23,8 @@ import { useDispatch } from "react-redux";
 import { VerifyHandler } from "../store/reducers/verify";
 import { unwrapResult } from '@reduxjs/toolkit';
 
-const OtpPage = ({route}) => {
-  const token=route.params;
-  console.log("tokennnnnnnn",token)
+const OtpPage = () => {
+  
   const [otp,setOtp]=useState("");
   const dispatch=useDispatch();
   const navigation = useNavigation();
@@ -38,7 +37,6 @@ const OtpPage = ({route}) => {
   const handleSubmit=()=>{
     const Data={
       "otp":otp,
-      "token":token
     }
     console.log("data for opt verify...........",otp.length);
     

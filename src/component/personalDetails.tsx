@@ -457,30 +457,30 @@ const PersonalDetails = (props) => {
                         style={{ width: "91%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, padding: "2%", marginTop: "1%", paddingHorizontal: 14 }}
                         placeholderStyle={styles.dropText}
                         selectedTextStyle={styles.dropText}
-                        // inputSearchStyle={styles.inputSearchStyle}
-                        // iconStyle={styles.iconStyle}
-                        // data={Nation}
-                        // search
+                        inputSearchStyle={styles.inputSearchStyle}
+                        iconStyle={styles.iconStyle}
+                        data={Nation}
+                        search
                         maxHeight={200}
                         labelField="label"
                         valueField="value"
                         placeholder={"MM/DD/YYYY"}
-                    // searchPlaceholder="Search..."
-                    // value={value}
-                    // onFocus={() => setIsFocus(true)}
-                    // onBlur={() => setIsFocus(false)}
-                    // onChange={item => {
-                    //     setValue(item.value);
-                    //     setIsFocus(false);
-                    // }}
-                    // renderLeftIcon={() => (
-                    //     <AntDesign
-                    //         style={styles.icon}
-                    //         color={isFocus ? 'blue' : 'black'}
-                    //         name="Safety"
-                    //         size={20}
-                    //     />
-                    // )}
+                    searchPlaceholder="Search..."
+                    value={value}
+                    onFocus={() => setIsFocus(true)}
+                    onBlur={() => setIsFocus(false)}
+                    onChange={item => {
+                        setValue(item.value);
+                        setIsFocus(false);
+                    }}
+                    renderLeftIcon={() => (
+                        <AntDesign
+                            style={styles.icon}
+                            color={isFocus ? 'blue' : 'black'}
+                            name="Safety"
+                            size={20}
+                        />
+                    )}
                     />
                 </View> */}
                 <TouchableOpacity style={{ borderWidth: 1, alignSelf: "center", borderColor: COLORS.gray, marginVertical: verticalScale(30), width: "60%", borderRadius: 10 }}

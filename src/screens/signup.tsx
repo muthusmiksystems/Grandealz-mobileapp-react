@@ -39,7 +39,7 @@ const Signup = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  const { handleChange, handleSubmit, formErrors, data, formValues } = useForm(validate);
+  //const { handleChange, handleSubmit, formErrors, data, formValues } = useForm(validate);
 
   const [firstName, setFirstName] = useState<any>("");
   const [lastName, setLastName] = useState<any>("");
@@ -52,95 +52,173 @@ const Signup = () => {
   const [errorPassword, setErrorPassword] = useState(null);
   const [errorPhone, setErrorPhone] = useState(null);
   const [errorLast, setErrorLast] = useState(null);
-
   const [countryListValue, setCountryListValue] = useState([])
   const [mblCode, setMblCode] = useState("");
-  const getCountryList = async () => {
-    let listCountries = await countryList().then((originalPromiseResult) => {
-      console.log("Personal Details Country....", originalPromiseResult);
-      // const value = originalPromiseResult
-      setCountryListValue(originalPromiseResult);
-      console.log("listCoun", originalPromiseResult[56].name)
-    })
-  }
-  useEffect(() => {
-    getCountryList();
-  }, [])
-  useEffect(() => {
-    console.log(Object.keys(formValues).length, "kk", formErrors)
-    if (formErrors && Object.keys(formErrors).length > 0) {
-      if (formErrors && formErrors.allerror) {
-        setError(formErrors.allerror)
-      }
-      else if (formErrors && formErrors.firstName) {
-        //setFirstName(formErrors.firstName)
-        setErrorFirst(formErrors.firstName);
-        console.log(firstName, "firstname failed", formErrors)
 
+  // useEffect(() => {
+  //   console.log(Object.keys(formValues).length, "kk", formErrors)
+  //   if (formErrors && Object.keys(formErrors).length > 0) {
+  //     if (formErrors && formErrors.allerror) {
+  //       setError(formErrors.allerror)
+  //     }
+  //     if (formErrors && formErrors.firstName) {
+  //       //setFirstName(formErrors.firstName)
+  //       setErrorFirst(formErrors.firstName);
+  //       console.log("firstname failed")
+
+  //     }
+  //     if (formErrors && formErrors.lastName) {
+  //       console.log("lastname failed")
+  //       //setLastName(formErrors.lastName);
+  //       setErrorLast(formErrors.lastName);
+  //     }
+  //     if (formErrors && formErrors.email) {
+  //       //setEmail(formErrors.email);
+  //       setErrorEmail(formErrors.email);
+  //       console.log("email failed", formErrors.email)
+  //     }
+  //     if (formErrors && formErrors.password) {
+  //       console.log("password Validation failed")
+  //       //setPassword(formErrors.password);
+  //       setErrorPassword(formErrors.password);
+  //     }
+  //     if (formErrors && formErrors.phone) {
+  //       console.log("phone failed")
+  //       //setPhone(formErrors.phone);
+  //       setErrorPhone(formErrors.phone);
+  //     }
+  //   }
+  //   console.log("im the formerror data........",formValues)
+
+  // }, [formErrors])
+
+  const validateFunction = () => {
+    console.log("values", firstName, lastName, phone, email, password);
+
+    let errorCount = 0;
+    if (firstName.length <= 3 || firstName === undefined) {
+      setErrorFirst('FirstName is Required')
+      errorCount++;
+    }
+
+    if (lastName.length <= 3 || lastName === undefined) {
+      setErrorLast('LastName is required')
+      errorCount++;
+    }
+    if (email.length < 5 || email === undefined) {
+      setErrorEmail('please enter valid emailId')
+      errorCount++;
+    }
+    if (email.length == 0) {
+      setErrorEmail('Please enter your EmailID');
+      errorCount++;
+    }
+    if (email !== undefined) {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+        setErrorEmail("Invalid EmailID");
+        errorCount++;
       }
-      else if (formErrors && formErrors.lastName) {
-        console.log("lastname failed")
-        //setLastName(formErrors.lastName);
-        setErrorLast(formErrors.lastName);
-      }
-      else if (formErrors && formErrors.email) {
-        //setEmail(formErrors.email);
-        setErrorEmail(formErrors.email);
-        console.log("email failed", formErrors.email)
-      }
-      else if (formErrors && formErrors.password) {
-        console.log("password Validation failed")
-        //setPassword(formErrors.password);
-        setErrorPassword(formErrors.password);
-      }
-      else if (formErrors && formErrors.phone) {
-        console.log("phone failed")
-        //setPhone(formErrors.phone);
-        setErrorPhone(formErrors.phone);
+      else {
+        setError("");
       }
     }
-    // console.log("im the formerror data........",formValues)
+    if (phone.length <= 9) {
+      setErrorPhone('Please enter Mobile No')
+      errorCount++;
+    }
+    if (password !== undefined) {
+      if (password.length == 0) {
+        setErrorPassword("Please enter your password");
+        errorCount++;
+      } else if (!/^[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(password)) {  
+          setErrorPassword("password must have 8 charater");
+          errorCount++;
+      }
+      else if(password.length >= 7){
+        setErrorPassword("");
+      }
+    }
+    if (errorCount === 0) {
+      setErrorFirst(""), setErrorLast(""), setErrorEmail(""), setErrorPassword(""), setErrorPhone("");
+      return true;
+    }
+    if (errorCount > 0) {
+      if (firstName.length >= 3) {
+        setErrorFirst("");
+      }
+      if (lastName.length >= 3) {
+        setErrorLast("");
+      }
+      if (phone.length >= 9) {
+        setErrorPhone("");
+      }
+    }
+    else {
+      return false;
+    }
+  }
 
-  }, [formErrors])
+  const handleSubmit = async () => {
+    const validateLetter = validateFunction();
+    console.log("Retrun.............", validateLetter);
+    if (validateLetter) {
 
-  useEffect(() => {
-    if (data && Object.keys(data)) {
       const reg = {
-        "first_name": data.firstName,
-        "last_name": data.lastName,
-        "email": data.email,
-        "phone": data.phone,
-        "password": data.password,
+        "first_name": firstName,
+        "last_name": lastName,
+        "email": email,
+        "phone": phone,
+        "password": password,
         "country_phone_code": "+91",
         "term_and_condition": true,
-        "referralcode": ""
+        "referralcode": "",
+        "fcm_id": ""
       }
       console.log("data inside the handle submit", reg);
       dispatch(registerHandler(reg))
-        .then(unwrapResult)
-        .then(async (originalPromiseResult) => {
-          console.log("success samuvel you did itdone", originalPromiseResult.data.access_token);
+      .then(unwrapResult)
+      .then(async (originalPromiseResult) => {
+        console.log("im the register",originalPromiseResult)
+        if (originalPromiseResult.status === "200") {
           await AsyncStorage.setItem('loginToken', originalPromiseResult.data.access_token);
-          if (originalPromiseResult.status === "200") {
-            var data = originalPromiseResult.data.access_token
-            navigation.navigate("OtpPage")
-          }
-          else if (originalPromiseResult === "You have already registered") {
-            console.log("im the error data", originalPromiseResult)
-            ToastAndroid.showWithGravity(
-              originalPromiseResult,
-              ToastAndroid.CENTER,
-              ToastAndroid.SHORT
-            )
-          }
-          else {
-            console.log(originalPromiseResult, "error")
-          }
-        })
-
+          ToastAndroid.showWithGravity(
+            originalPromiseResult.message,
+            ToastAndroid.CENTER,
+            ToastAndroid.SHORT
+          )
+          navigation.navigate("OtpPage")
+        }
+        else if (originalPromiseResult.status === "400") {
+          console.log("im the error data", originalPromiseResult)
+          ToastAndroid.showWithGravity(
+            originalPromiseResult.message,
+            ToastAndroid.CENTER,
+            ToastAndroid.SHORT
+          )
+        }
+        else {
+          console.log(originalPromiseResult, "error")
+        }
+      })
     }
+  }
 
-  }, [data])
+  // useEffect(() => {
+  //   if (data && Object.keys(data)) {
+  //     const reg = {
+  //       "first_name": data.firstName,
+  //       "last_name": data.lastName,
+  //       "email": data.email,
+  //       "phone": data.phone,
+  //       "password": data.password,
+  //       "country_phone_code": "+91",
+  //       "term_and_condition": true,
+  //       "referralcode": ""
+  //     }
+  //     console.log("data inside the handle submit", reg);
+  //   }
+
+  // }, [data])
 
   // const handleSubmited = () => {
   //   const data = {
@@ -231,13 +309,12 @@ const Signup = () => {
                   value={firstName}
                   clearButtonMode="always"
                   placeholderTextColor={"black"}
-                  //style={{ borderWidth: 1, paddingStart: 15, borderColor: "#c4c4c2", borderRadius: 8, width: horizontalScale(300), marginTop: verticalScale(30), ...FONTS.lexendregular, fontSize: RFValue(14) }}
-                  onChangeText={e => { handleChange(e, "firstName"), setErrorFirst(""), setFirstName(e) }}
-                  style={{ ...styles.textInput, ...{ marginTop: verticalScale(14) }, ...{ color: (errorFirst) ? "red" : "black" } }}
+                  onChangeText={(text) => setFirstName(text)}
+                  style={{ ...styles.textInput, ...{ marginTop: verticalScale(14) } }}
                 />
               </Pressable>
               <View style={{ height: "4%" }}>
-                {formErrors.firstName || formErrors.allerror ?
+                {errorFirst ?
                   <Text style={styles.ErrorText}>{errorFirst}</Text> : null}
               </View>
               <Pressable onPressIn={() => handleBox()}>
@@ -245,13 +322,14 @@ const Signup = () => {
                   placeholder="Last Name"
                   value={lastName}
                   placeholderTextColor={"black"}
-                  onChangeText={e => { handleChange(e, "lastName"), setErrorLast(""), setLastName(e) }}
+                  onChangeText={(text) => setLastName(text)}
+                  //onChangeText={e => { handleChange(e, "lastName"), setErrorLast(""), setLastName(e) }}
                   // onChangeText={(text) => { setLastName(text), text ? setError("") : setError(...errordata, errordata.lastname = "enter last name") }}
-                  style={{ ...styles.textInput, ...{ color: (errorLast) ? "red" : "black" } }} />
+                  style={{ ...styles.textInput, }} />
               </Pressable>
               <View style={{ height: "4%" }}>
-                {formErrors.lastName || formErrors.allerror ?
-                  <Text style={styles.ErrorText}>{errorEmail}</Text> : null}
+                {errorLast ?
+                  <Text style={styles.ErrorText}>{errorLast}</Text> : null}
               </View>
               <Pressable onPressIn={() => handleBox()}>
                 <TextInput
@@ -259,13 +337,14 @@ const Signup = () => {
                   keyboardType="email-address"
                   value={email}
                   placeholderTextColor={"black"}
-                  onChangeText={e => { handleChange(e, "email"), setErrorEmail(""), setEmail(e) }}
+                  onChangeText={(text) => setEmail(text)}
+                  //onChangeText={e => { handleChange(e, "email"), setErrorEmail(""), setEmail(e) }}
                   // onChangeText={(text) => { setEmail(text), text ? setError("") : setError([...errordata, errordata.email = "enter valid email"]) }}
-                  style={{ ...styles.textInput, ...{ color: (errorEmail) ? "red" : "black" } }} />
+                  style={{ ...styles.textInput, }} />
 
               </Pressable>
               <View style={{ height: "4%" }}>
-                {formErrors.email || formErrors.allerror ?
+                {errorEmail ?
                   <Text style={styles.ErrorText}>{errorEmail}</Text> : null}
               </View>
               <View style={{ flexDirection: "row" }}>
@@ -282,37 +361,38 @@ const Signup = () => {
                     placeholder="Phone"
                     value={phone}
                     maxLength={10}
-                    onChangeText={e => { handleChange(e, "phone"), setErrorPhone(""), setPhone(e) }}
+                    onChangeText={(text) => setPhone(text)}
+                    //onChangeText={e => { handleChange(e, "phone"), setErrorPhone(""), setPhone(e) }}
                     //onChangeText={(text) => { setPhone(text), text ? setError("") : setError(...errordata, errordata.phone = "enter phone number") }}
                     placeholderTextColor={"black"}
-                    style={{ ...styles.pin, ...{ color: (errorPhone) ? "red" : "black" } }}
+                    style={{ ...styles.pin, }}
                   />
                 </Pressable>
 
               </View>
               <View style={{ height: "4%" }}>
-                {formErrors.phone || formErrors.allerror ?
+                {errorPhone ?
                   <Text style={styles.ErrorText}>{errorPhone}</Text> : null}
               </View>
               <Pressable onPressIn={() => handleBox()}>
                 <TextInput
                   placeholder="Password"
                   value={password}
-                  onChangeText={e => { handleChange(e, "password"), setErrorPassword(""), setPassword(e) }}
+                  onChangeText={(text) => setPassword(text)}
+                  //onChangeText={e => { handleChange(e, "password"), setErrorPassword(""), setPassword(e) }}
                   //onChangeText={(text) => { setPassword(text), text ? setError("") : setError(...errordata, errordata.password = "enter the password") }}
                   placeholderTextColor={"black"}
-                  style={{ ...styles.textInput, ...{ color: (errorPassword) ? "red" : "black" } }} />
+                  style={{ ...styles.textInput }} />
               </Pressable>
+              <View style={{ height: "4%" }}>
+                {errorPassword ?
+                  <Text style={styles.ErrorText}>{errorPassword}</Text> : null}
+              </View>
             </View>
             <View style={{ alignSelf: "center", width: horizontalScale(300), }}>
               <CheckBoxes />
             </View>
-            <View style={{}}>
-              {formErrors.allerror || formErrors.password ?
-                <Text style={styles.Errorpass}>{error}{errorPassword}</Text> : null}
-            </View>
-            <TouchableOpacity style={{ alignSelf: "center", borderWidth: 1, borderRadius: 8, width: horizontalScale(200), padding: "4%" }} onPress={e => { handleSubmit(e, "2"), Keyboard.dismiss }} disabled={false} /* onPress={() => { handleSubmited() }} */ /* onPress={() => navigation.navigate("OtpPage")} */>
-
+            <TouchableOpacity style={{ alignSelf: "center", borderWidth: 1, borderRadius: 8, width: horizontalScale(200), padding: "4%" }} onPress={e => { handleSubmit(), Keyboard.dismiss }} disabled={false} /* onPress={() => { handleSubmited() }} */ /* onPress={() => navigation.navigate("OtpPage")} */>
               <Text style={{ textAlign: "center", fontSize: RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Register</Text>
             </TouchableOpacity>
             <View style={{ flexDirection: "row", marginTop: "4%", alignSelf: "center" }}>
@@ -373,8 +453,9 @@ const styles = StyleSheet.create({
     color: "red",
     ...FONTS.lexendregular,
     fontSize: RFValue(10),
-    marginStart:"7%",
-    // width: horizontalScale(100)
+    marginStart: "7%",
+    textAlign:"left",
+    //width: horizontalScale(100)
   },
   Errorpass: {
     color: "red",
@@ -384,6 +465,7 @@ const styles = StyleSheet.create({
     width: horizontalScale(350)
   },
   textInput: {
+    color: "black",
     borderWidth: 1,
     paddingStart: 15,
     borderColor: "#c4c4c2",

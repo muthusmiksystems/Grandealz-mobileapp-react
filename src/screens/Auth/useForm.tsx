@@ -49,7 +49,7 @@ const useForm = (validate) => {
             let Error = { "firstName": "First Name is required!" }
             setFormErrors(Error);
           }
-          else if (!formValues.lastName && formValues.firstName && formValues.email && formValues.password && formValues.phone) {
+          if (!formValues.lastName && formValues.firstName && formValues.email && formValues.password && formValues.phone) {
             let Error = { "lastName": "Last Name is required!" }
             setFormErrors(Error);
           }
@@ -57,16 +57,16 @@ const useForm = (validate) => {
             let Error = { "email": "Email is required!" }
             setFormErrors(Error);
           }
-          else if (!formValues.password && formValues.lastName && formValues.email && formValues.firstName && formValues.phone) {
+          if (!formValues.password && formValues.lastName && formValues.email && formValues.firstName && formValues.phone) {
             let Error = { "password": "Password is not Valid!" }
             setFormErrors(Error);
           }
-          else if (!formValues.phone && formValues.lastName && formValues.email && formValues.password && formValues.firstName) {
-            let Error = { "phone": "ph.required" }
+          if (!formValues.phone && formValues.lastName && formValues.email && formValues.password && formValues.firstName) {
+            let Error = { "phone": "phone number is required" }
             setFormErrors(Error);
           }
           else {
-            let Error = { "allerror": "Please fill all fields!" }
+            let Error = { "firstName": "First Name is required!", "lastName": "Last Name is required!","email": "Email is required!","password": "Password is not Valid!","phone": "phone number is required"  }
             setFormErrors(Error);
           }
         }

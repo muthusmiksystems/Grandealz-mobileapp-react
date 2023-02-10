@@ -4,9 +4,9 @@ import axios from 'axios'
 
 export const VerifyHandler = createAsyncThunk('posts/verifyPostcall', async (data,thunkAPI) => {
     try {
-        const payload ={"otp":data} ;
+        const payload =data ;
         const token = await AsyncStorage.getItem('loginToken');
-        console.log(token,"token token token",data)
+        console.log(token,"token token token",payload)
         const headers={'Authorization':`Bearer ${token}` }
         let result = await axios.post(`${'https://api.grandealz.vytech.co'}/auth/verify-otp`, payload,{headers:headers});
         console.log("result inside the verification page",result.data)
