@@ -41,7 +41,11 @@ const ForgetPassword = () => {
     else if (forgetEmail !== undefined) {
       // console.log("..............",forgetEmail);
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(forgetEmail)) {
+<<<<<<< Updated upstream
         setError("Invalid EmailID");
+=======
+        setError("Invalid email Id");
+>>>>>>> Stashed changes
       }
       else {
         setError("");
@@ -55,12 +59,19 @@ const ForgetPassword = () => {
           console.log("successfully returned to ForgetPassword with response ", originalPromiseResult);
           if (originalPromiseResult==="Please check your registered email to reset your password.") {
             ToastAndroid.showWithGravity(
+<<<<<<< Updated upstream
               originalPromiseResult,
               // 'Please check your registered email to reset your password.',
               ToastAndroid.SHORT,
               ToastAndroid.CENTER,
             );
             setForgetEmail('')
+=======
+              'Please check your registered email to reset your password.',
+              ToastAndroid.SHORT,
+              ToastAndroid.CENTER,
+            );
+>>>>>>> Stashed changes
             navigation.navigate('OtpPage')
           }
           // else if(originalPromiseResult==="undefined"){
@@ -71,12 +82,16 @@ const ForgetPassword = () => {
           //   );
           // }
           else{
+<<<<<<< Updated upstream
             ToastAndroid.showWithGravity(
               originalPromiseResult,
               ToastAndroid.SHORT,
               ToastAndroid.CENTER,
             );
             // setError(originalPromiseResult)
+=======
+            setError(originalPromiseResult)
+>>>>>>> Stashed changes
             // console.log("error....",error);
           }
           // console.log(ori);

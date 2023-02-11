@@ -38,7 +38,10 @@ import { unwrapResult } from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import StorageController from "../services/storagectrl";
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 function handleBackButton() {
   // if (screen === 'Login') {
   console.log("BackHandler Function");
@@ -63,6 +66,7 @@ const Login = (props: Prop) => {
   const [errorPassword, setErrorPassword] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+<<<<<<< Updated upstream
   
   useEffect(() => {
     console.log(Object.keys(formValues).length, "kk", formErrors.password)
@@ -74,12 +78,23 @@ const Login = (props: Prop) => {
         setErrorPassword(formErrors.password); 
 
         console.log("email password failed", formErrors.email)
+=======
+
+  useEffect(() => {
+    console.log(Object.keys(formValues).length, "kk", formErrors)
+    if (formErrors && Object.keys(formErrors).length > 0) {
+      if (formErrors && formErrors.email) {
+        //setEmail(formErrors.email);
+        setErrorEmail(formErrors.email);
+        console.log("email failed", formErrors.email)
+>>>>>>> Stashed changes
       }
       else if (formErrors && formErrors.password) {
         console.log("password Validation failed")
         //setPassword(formErrors.password);
         setErrorPassword(formErrors.password);
       }
+<<<<<<< Updated upstream
 
       else if (formErrors && formErrors.email ){
 
@@ -90,6 +105,17 @@ const Login = (props: Prop) => {
     console.log(data, "data........", formValues)
   }, [formErrors])
 
+=======
+      else {
+        setErrorEmail(formErrors.loginundef);
+        setErrorPassword(formErrors.loginundef);
+        console.log("im inisde the loginundi", formErrors.loginundef)
+      }
+    }
+    console.log(data, "im the formerror data........", formValues)
+  }, [formErrors])
+  
+>>>>>>> Stashed changes
   useEffect(() => {
     navigation.addListener("blur", () => { BackHandler.removeEventListener("hardwareBackPress", handleBackButton); })
     navigation.addListener("focus", () => { BackHandler.addEventListener("hardwareBackPress", handleBackButton); })
@@ -116,6 +142,7 @@ const Login = (props: Prop) => {
       const reg = {
         "email": data.email,
         "password": data.password,
+<<<<<<< Updated upstream
         "fcm_id": ""
       }
       console.log("data inside the handle submit", reg);
@@ -124,10 +151,18 @@ const Login = (props: Prop) => {
 
         .then(async (originalPromiseResult:any) => {
 
+=======
+      }
+      console.log("data inside the handle submit", data);
+      dispatch(loginHanlder(reg))
+        .then(unwrapResult)
+        .then(async (originalPromiseResult:any) => {
+>>>>>>> Stashed changes
           console.log("successfully returned to login with response ", originalPromiseResult);
           if (originalPromiseResult?.data?.access_token) {
             console.log("token  sam   ...dddd", originalPromiseResult.data.access_token);
             await AsyncStorage.setItem('loginToken', originalPromiseResult.data.access_token)
+<<<<<<< Updated upstream
             ToastAndroid.showWithGravity(
               "Successfully logged in",
               ToastAndroid.SHORT,
@@ -160,10 +195,24 @@ const Login = (props: Prop) => {
             ToastAndroid.SHORT,
             ToastAndroid.CENTER
           )
+=======
+            props.navigation.replace("Tabs")
+          } else {
+            console.log("setError response ", originalPromiseResult);
+           setErrorLogin(originalPromiseResult);
+          }
+        }).catch((rejectedValueOrSerializedError) => {
+          console.log(" Inside catch", rejectedValueOrSerializedError);
+>>>>>>> Stashed changes
         })
     }
   }, [data])
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
   const handlePasswordBox = () => {
     // console.log("box pass")
     if (errorEmail) {
@@ -200,9 +249,13 @@ const Login = (props: Prop) => {
             value={email}
             placeholderTextColor={"black"}
             keyboardType="email-address"
+<<<<<<< Updated upstream
 
             onChangeText={e => { handleChange(e, "email"), setErrorEmail(""), setErrorLogin(""), setEmail(e) }}
 
+=======
+            onChangeText={e => { handleChange(e, "email"), setErrorEmail(""),setErrorLogin(""), setEmail(e) }}
+>>>>>>> Stashed changes
             style={{
               flexDirection: "column",
               width: horizontalScale(250),
@@ -210,11 +263,17 @@ const Login = (props: Prop) => {
               fontSize: RFValue(14), color: (errorEmail) ? "red" : "black"
             }}
           />
+<<<<<<< Updated upstream
           <Fontisto name='email' size={30} style={{ alignSelf: "center", color: COLORS.gray }} />
         </TouchableOpacity>
 
         <View style={{ height: "5%" }}>
 
+=======
+          <Fontisto name='email' size={30} style={{ alignSelf: "center" }} />
+        </TouchableOpacity>
+        <View style={{ height: "5%" }}>
+>>>>>>> Stashed changes
           {formErrors.email || formErrors.loginundef ?
             <Text style={styles.ErrorText}>{errorEmail}</Text> : null}
         </View>
@@ -224,9 +283,13 @@ const Login = (props: Prop) => {
             value={password}
             secureTextEntry={passShow ? true : false}
             placeholderTextColor={"black"}
+<<<<<<< Updated upstream
 
             onChangeText={e => { handleChange(e, "password"), setErrorPassword(""), setErrorLogin(""), setPassword(e) }}
 
+=======
+            onChangeText={e => { handleChange(e, "password"), setErrorPassword(""),setErrorLogin(""), setPassword(e) }}
+>>>>>>> Stashed changes
             style={{
               flexDirection: "column",
               width: horizontalScale(250),
@@ -235,12 +298,18 @@ const Login = (props: Prop) => {
             }}
           />
           <TouchableOpacity style={{ alignSelf: "center", flexDirection: "column" }} onPress={() => setPassShow(!passShow)}>
+<<<<<<< Updated upstream
             {passShow ? <Ionicons name="eye-outline" size={30} style={{ color: COLORS.gray }} /> :
               <Ionicons name='eye-off-outline' size={30} style={{ color: COLORS.gray }} />
+=======
+            {passShow ? <Ionicons name="eye-outline" size={30} /> :
+              <Ionicons name='eye-off-outline' size={30} />
+>>>>>>> Stashed changes
             }
           </TouchableOpacity>
 
         </TouchableOpacity>
+<<<<<<< Updated upstream
 
         <View style={{ height: "6%" }}>
           {formErrors.password || formErrors.loginundef ?
@@ -248,6 +317,13 @@ const Login = (props: Prop) => {
           {console.log("uuuuuuuuuuuuuuus", errorLogin ? true : false)}
           {errorLogin ? <Text style={styles.ErrorText}>{errorLogin}</Text> : null}
 
+=======
+        <View style={{ height: "6%" }}>
+          {formErrors.password || formErrors.loginundef ?
+            <Text style={styles.ErrorText}>{errorPassword}</Text> : null}
+            {console.log("uuuuuuuuuuuuuuus",errorLogin?true:false)}
+            {errorLogin?<Text style={styles.ErrorText}>{errorLogin}</Text> : null}
+>>>>>>> Stashed changes
         </View>
         <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginHorizontal: "5%" }}>
           <View style={{ display: 'flex', flexDirection: "column", marginStart: "1.5%" }}>
@@ -264,9 +340,13 @@ const Login = (props: Prop) => {
           <TouchableOpacity style={{ display: 'flex', flexDirection: "column", marginEnd: "2.5%" }} onPressIn={() => navigation.navigate("ForgetPassword")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", fontSize: RFValue(12) }}>Forgot Password?</Text></TouchableOpacity>
         </View>
         <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(193), padding: "3%" }} onPress={e => { handleSubmit(e, "1"), Keyboard.dismiss }} disabled={false}>
+<<<<<<< Updated upstream
 
           <Text style={{ textAlign: "center", fontSize: RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Log In</Text>
 
+=======
+          <Text style={{ textAlign: "center", fontSize: RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Log In</Text>
+>>>>>>> Stashed changes
         </TouchableOpacity>
         <View style={{ flexDirection: "row", marginTop: "10%", alignSelf: "center" }}>
           <Text style={{ flexDirection: "column", alignSelf: "flex-start", fontFamily: "Lexend-Regular", color: "#000", fontSize: RFValue(13) }}>New User? </Text>
@@ -300,9 +380,13 @@ const styles = StyleSheet.create({
     color: "red",
     ...FONTS.lexendregular,
     fontSize: RFValue(10),
+<<<<<<< Updated upstream
 
     marginStart:"7%"
 
+=======
+    textAlign: "center"
+>>>>>>> Stashed changes
   }
 })
 export default Login;

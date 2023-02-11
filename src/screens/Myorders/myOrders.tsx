@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 import React, { useEffect, useState } from "react";
+=======
+import React,{useEffect,useState}from "react";
+>>>>>>> Stashed changes
 import {
     Text,
     View,
@@ -7,9 +11,13 @@ import {
     ScrollView,
     StyleSheet,
     Image,
+<<<<<<< Updated upstream
     TouchableOpacity, Modal,
     Alert,
     Pressable,
+=======
+    TouchableOpacity,Modal,
+>>>>>>> Stashed changes
 } from 'react-native';
 import { horizontalScale, verticalScale } from "../../constants/metrices";
 import icons, { close, shoppingCart } from "../../constants/icons";
@@ -21,16 +29,20 @@ import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import image from "../../constants/image";
 import OrderList from "./orderList";
 import { orderlistHandle } from "../../services/orderlist";
+<<<<<<< Updated upstream
 import { Provider } from "react-redux";
 import CheckBox from "@react-native-community/checkbox";
 import { RadioButton } from "react-native-paper";
 import OrderEmpty from "../ExceptionScreens/orderEmpty";
 
+=======
+>>>>>>> Stashed changes
 
 const MyOrders = () => {
 
     const navigation = useNavigation();
 
+<<<<<<< Updated upstream
     const [value, setValue] =useState();
     const [timevalue,setTimevalue]=useState();
 
@@ -45,6 +57,17 @@ const MyOrders = () => {
             setOrderlistdata(OrderList)
         }
         orderitems();
+=======
+    const [Orderlistdata, setOrderlistdata] = useState<any>();
+    const [modalVisible, setModalVisible] = useState(false);
+    
+    useEffect(() => {
+      const  orderitems= async () => {
+        let OrderList= await orderlistHandle()
+        setOrderlistdata(OrderList)
+      }
+      orderitems();
+>>>>>>> Stashed changes
     }, [])
 
     return (
@@ -60,6 +83,7 @@ const MyOrders = () => {
                 <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), width: "78%", textAlign: "center" }}>My Orders</Text>
 
             </View>
+<<<<<<< Updated upstream
             {Orderlistdata.length > 0 ?
             <ScrollView style={{ height: "80%", padding: "4%" ,}}>
                 <View style={styles.centeredView}>
@@ -92,6 +116,34 @@ const MyOrders = () => {
                                             </View>
                                         </Pressable>
                                     </View>
+=======
+            <ScrollView style={{ height: "80%" ,padding:"4%"}}>
+            {/* <View style={styles.centeredView}>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        Alert.alert('Modal has been closed.');
+                        setModalVisible(!modalVisible);
+                    }}>
+                        <View>
+                            <Text> Hi hello people</Text>
+                        </View>
+                        </Modal>
+            </View> */}
+                <View style={{ flexDirection: "row",marginBottom:RFValue(10) }}>
+                    <View style={{ flexDirection: "row",alignSelf:"center",width: "83%",height:"82%", borderRadius: 20, backgroundColor: "#FFFFFF", marginRight: "2%", }}>
+                        {/* <View style={{  }}> */}
+                            <View style={{ flexDirection: "column" }}>
+                                <View style={{ flexDirection: "row",margin:RFValue(10)}}>
+                                    <Image
+                                        source={icons.search}
+                                        resizeMode="contain"
+                                        style={{ height:verticalScale(20), width:horizontalScale(20),marginLeft:RFValue(15),top:RFValue(4) }}
+                                    />
+                                    <Text style={{ color: COLORS.gray, fontSize: RFValue(16), ...FONTS.lexendregular, marginStart:RFValue(5) }}>Search in orders</Text>
+>>>>>>> Stashed changes
                                 </View>
                                 <View style={{ width: "100%", height: 500 }}>
                                     <SafeAreaView>
@@ -178,14 +230,21 @@ const MyOrders = () => {
                                 />
                                 <Text style={{ color: COLORS.gray, fontSize: RFValue(16), ...FONTS.lexendregular, marginStart: RFValue(5) }}>Search in orders</Text>
                             </View>
+<<<<<<< Updated upstream
                         </View>
+=======
+>>>>>>> Stashed changes
                         {/* </View> */}
 
                     </View>
                     <View style={{ borderRadius: 10, backgroundColor: "#FFFFFF", marginVertical: "2%", flexDirection: "column" }}>
                         <View style={{ flexDirection: "row", marginHorizontal: "2%", borderRadius: 10 }}>
+<<<<<<< Updated upstream
 
                             <TouchableOpacity style={{ flexDirection: "column" }} onPress={() => setModalVisible(!modalVisible)}>
+=======
+                            <TouchableOpacity style={{ flexDirection: "column" }} onPress={()=>setModalVisible(false)}>
+>>>>>>> Stashed changes
                                 <Image
                                     source={icons.filter}
 
@@ -196,7 +255,11 @@ const MyOrders = () => {
                     </View>
                 </View>
                 <View >
+<<<<<<< Updated upstream
                     <OrderList orderlist={Orderlistdata} />
+=======
+                    <OrderList  orderlist={Orderlistdata}/>
+>>>>>>> Stashed changes
                 </View>
             </ScrollView>
             :<OrderEmpty/>}
@@ -208,7 +271,11 @@ const MyOrders = () => {
                     <Text style={{ color: COLORS.white, fontSize: RFValue(14), ...FONTS.lexendregular }} >Process to Checkout </Text>
                 </TouchableOpacity>
             </View> */}
+<<<<<<< Updated upstream
 
+=======
+           
+>>>>>>> Stashed changes
         </SafeAreaView>
     );
 }
@@ -233,6 +300,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+<<<<<<< Updated upstream
     },
     modalView: {
         width: 300,
@@ -251,6 +319,10 @@ const styles = StyleSheet.create({
     },
   
 
+=======
+        marginTop: 22,
+      },
+>>>>>>> Stashed changes
 
 })
 export default MyOrders;

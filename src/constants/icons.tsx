@@ -43,11 +43,14 @@ export const tabTopSlide = require("../assests/icons/recUp.png")
 export const rupee=require("../assests/icons/rupee.png")
 export const download=require("../assests/icons/download.png")
 export const share=require("../assests/icons/share.png")
+<<<<<<< Updated upstream
 export const loginwhite=require("../assests/icons/grandealz3White.png")
 export const conlogo=require("../assests/icons/conlogo.png")
 export const close=require("../assests/icons/close.png")
 export const back1=require("../assests/icons/back1.png")
 
+=======
+>>>>>>> Stashed changes
 
 export default {
     loginicon,

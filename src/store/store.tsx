@@ -6,8 +6,11 @@ import drawwinnersHandleReducer from './reducers/Drawwinner';
 import productDrawHandleReducer from './reducers/productdraw';
 import addressListHandlerReducer from './reducers/addresslist';
 import changepasswordHandleReducer from './reducers/changepassword'
+<<<<<<< Updated upstream
 import userDetailsHandleReducer from './reducers/userDetails';
 import AddCouponHandleReducer from './reducers/addcouponcode';
+=======
+>>>>>>> Stashed changes
 
 const store = configureStore({
     reducer: {
@@ -17,9 +20,13 @@ const store = configureStore({
         drawwinnersHandle: drawwinnersHandleReducer,
         productDrawHandle: productDrawHandleReducer,
         AddressHandle: addressListHandlerReducer,
+<<<<<<< Updated upstream
         ChangepasswordHandle: changepasswordHandleReducer,
         userDetailsHandle: userDetailsHandleReducer,
         AddCouponHandle:AddCouponHandleReducer,
+=======
+        ChangepasswordHandle: changepasswordHandleReducer
+>>>>>>> Stashed changes
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         immutableCheck: false,

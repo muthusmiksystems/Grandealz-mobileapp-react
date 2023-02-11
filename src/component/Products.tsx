@@ -92,8 +92,13 @@ const Product = () => {
                         <View style={{ padding: '5%' }}>
                             <TouchableOpacity style={{ borderRadius: 9, borderTopWidth: 4, borderTopColor: "red", backgroundColor: "white" }} onPress={() => /* navigation.navigate("PriceDetails") */ handleSearch(item)}>
                                 <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8 }}>
+<<<<<<< Updated upstream
                                     <View style={{alignSelf:"flex-end",marginRight:"5%",borderRightColor:"#7F7E76",borderTopEndRadius:30,borderTopStartRadius:30,borderBottomEndRadius:30,borderBottomStartRadius:30,borderWidth:3,marginTop:"2%",height:verticalScale(55),width:horizontalScale(115),borderColor:"#D8000D",flexDirection:"row"}}>
                                         <View style={{flexDirection:"column",padding:4,marginLeft:"10%"}}>
+=======
+                                    <View style={{alignSelf:"flex-end",marginRight:"4%",borderRightColor:"#7F7E76",borderTopEndRadius:40,borderTopStartRadius:40,borderBottomEndRadius:40,borderBottomStartRadius:40,borderWidth:3,marginTop:"2%",height:verticalScale(55),width:horizontalScale(120),borderColor:"#D8000D",flexDirection:"row"}}>
+                                        <View style={{flexDirection:"column",padding:4,marginLeft:"7%"}}>
+>>>>>>> Stashed changes
                                             <Text style={{color:"#E70736",...FONTS.lexendregular,fontSize:RFValue(13),textAlign:"center"}}> {item.total_no_of_sold_out_tickets}</Text>
                                             <Text  style={{...FONTS.lexendsemibold,alignSelf:"center",color:"black",fontSize:RFValue(10),}}> Sold</Text>
                                         </View>

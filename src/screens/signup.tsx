@@ -32,7 +32,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerHandler } from "../store/reducers/register";
 import useForm from "./Auth/useForm";
 import validate from "./Auth/validate";
+<<<<<<< Updated upstream
 import { countryList } from "../services/countryList";
+=======
+
+>>>>>>> Stashed changes
 
 const Signup = () => {
 
@@ -46,13 +50,18 @@ const Signup = () => {
   const [email, setEmail] = useState<any>("");
   const [phone, setPhone] = useState<any>("");
   const [password, setPassword] = useState<any>("");
+<<<<<<< Updated upstream
   const [error, setError] = useState<any>("");
+=======
+  const [error,setError]=useState<any>("");
+>>>>>>> Stashed changes
   const [errorFirst, setErrorFirst] = useState(null);
   const [errorEmail, setErrorEmail] = useState(null);
   const [errorPassword, setErrorPassword] = useState(null);
   const [errorPhone, setErrorPhone] = useState(null);
   const [errorLast, setErrorLast] = useState(null);
 
+<<<<<<< Updated upstream
   const [countryListValue, setCountryListValue] = useState([])
   const [mblCode, setMblCode] = useState("");
   const getCountryList = async () => {
@@ -66,6 +75,9 @@ const Signup = () => {
   useEffect(() => {
     getCountryList();
   }, [])
+=======
+
+>>>>>>> Stashed changes
   useEffect(() => {
     console.log(Object.keys(formValues).length, "kk", formErrors)
     if (formErrors && Object.keys(formErrors).length > 0) {
@@ -92,7 +104,11 @@ const Signup = () => {
         console.log("password Validation failed")
         //setPassword(formErrors.password);
         setErrorPassword(formErrors.password);
+<<<<<<< Updated upstream
       }
+=======
+      } 
+>>>>>>> Stashed changes
       else if (formErrors && formErrors.phone) {
         console.log("phone failed")
         //setPhone(formErrors.phone);
@@ -100,10 +116,17 @@ const Signup = () => {
       }
     }
     // console.log("im the formerror data........",formValues)
+<<<<<<< Updated upstream
 
   }, [formErrors])
 
   useEffect(() => {
+=======
+    
+  }, [formErrors])
+
+  useEffect(()=>{
+>>>>>>> Stashed changes
     if (data && Object.keys(data)) {
       const reg = {
         "first_name": data.firstName,
@@ -115,7 +138,11 @@ const Signup = () => {
         "term_and_condition": true,
         "referralcode": ""
       }
+<<<<<<< Updated upstream
       console.log("data inside the handle submit", reg);
+=======
+      console.log("data inside the handle submit",reg);
+>>>>>>> Stashed changes
       dispatch(registerHandler(reg))
         .then(unwrapResult)
         .then(async (originalPromiseResult) => {
@@ -127,11 +154,16 @@ const Signup = () => {
           }
           else if (originalPromiseResult === "You have already registered") {
             console.log("im the error data", originalPromiseResult)
+<<<<<<< Updated upstream
             ToastAndroid.showWithGravity(
               originalPromiseResult,
               ToastAndroid.CENTER,
               ToastAndroid.SHORT
             )
+=======
+            ToastAndroid.showWithGravity(originalPromiseResult),
+              ToastAndroid.CENTER, ToastAndroid.SHORT
+>>>>>>> Stashed changes
           }
           else {
             console.log(originalPromiseResult, "error")
@@ -139,8 +171,13 @@ const Signup = () => {
         })
 
     }
+<<<<<<< Updated upstream
 
   }, [data])
+=======
+    
+  },[data])
+>>>>>>> Stashed changes
 
   // const handleSubmited = () => {
   //   const data = {
@@ -158,11 +195,19 @@ const Signup = () => {
   const handleBox = () => {
     if (errorEmail) {
       setEmail(""),
+<<<<<<< Updated upstream
         setEmail(""), setErrorEmail("");
     }
     else if (errorFirst) {
       setFirstName(""),
         setFirstName(""), setErrorFirst("");
+=======
+      setEmail(""), setErrorEmail("");
+    }
+    else if (errorFirst) {
+      setFirstName(""),
+      setFirstName(""), setErrorFirst("");
+>>>>>>> Stashed changes
     }
     else if (errorLast) {
       setLastName("")
@@ -307,10 +352,17 @@ const Signup = () => {
             <View style={{ alignSelf: "center", width: horizontalScale(300), }}>
               <CheckBoxes />
             </View>
+<<<<<<< Updated upstream
             <View style={{}}>
               {formErrors.allerror || formErrors.password ?
                 <Text style={styles.Errorpass}>{error}{errorPassword}</Text> : null}
             </View>
+=======
+            <View style={{ }}>
+                {formErrors.allerror || formErrors.password ?
+                  <Text style={styles.Errorpass}>{error}{errorPassword}</Text> : null}
+              </View>
+>>>>>>> Stashed changes
             <TouchableOpacity style={{ alignSelf: "center", borderWidth: 1, borderRadius: 8, width: horizontalScale(200), padding: "4%" }} onPress={e => { handleSubmit(e, "2"), Keyboard.dismiss }} disabled={false} /* onPress={() => { handleSubmited() }} */ /* onPress={() => navigation.navigate("OtpPage")} */>
 
               <Text style={{ textAlign: "center", fontSize: RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Register</Text>
@@ -373,14 +425,23 @@ const styles = StyleSheet.create({
     color: "red",
     ...FONTS.lexendregular,
     fontSize: RFValue(10),
+<<<<<<< Updated upstream
     marginStart:"7%",
     // width: horizontalScale(100)
+=======
+    textAlign: "center",
+    width: horizontalScale(100)
+>>>>>>> Stashed changes
   },
   Errorpass: {
     color: "red",
     ...FONTS.lexendregular,
     fontSize: RFValue(10),
+<<<<<<< Updated upstream
     textAlign: "center",
+=======
+    textAlign:"center",
+>>>>>>> Stashed changes
     width: horizontalScale(350)
   },
   textInput: {

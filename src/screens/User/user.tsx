@@ -23,6 +23,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import image from '../../constants/image';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+<<<<<<< Updated upstream
 import FontA5 from "react-native-vector-icons/FontAwesome5";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch, useSelector } from "react-redux";
@@ -32,9 +33,18 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { CameraOptions, ImageLibraryOptions } from 'react-native-image-picker/lib/typescript/types';
 import imageUpload from '../../store/reducers/imageUpload';
 import { imageUploadService } from '../../services/imageUploadService';
+=======
+import FontA5 from "react-native-vector-icons/FontAwesome5"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch } from "react-redux";
+// import AnimatedButton from '../../component/Ani';
+
+
+>>>>>>> Stashed changes
 
 
 
+<<<<<<< Updated upstream
 const User = (props) => {
     console.log("PAge props.............", props.route.params)
     const userData: any = useSelector<any>(state => state.userDetailsHandle.data.data);
@@ -151,6 +161,26 @@ const User = (props) => {
             // console.warn(err);
         }
     }
+=======
+    const navigation = useNavigation();
+    const handleLogout = () => {
+        Alert.alert("","Are you sure you want to logout? ", [
+            {
+              text: 'Cancel',
+              onPress: () => console.log('Cancel Pressed'),
+              style: 'cancel',
+            },
+            {text: 'OK', onPress: () => Removetoken()},
+          ]);
+
+            const Removetoken = async()=>{
+                AsyncStorage.removeItem("loginToken");
+                navigation.navigate("login");
+            }
+            
+    }
+
+>>>>>>> Stashed changes
 
 
     return (
@@ -176,6 +206,7 @@ const User = (props) => {
             <ScrollView style={{ backgroundColor: COLORS.pagebackground, borderWidth: 0, borderColor: "red", height: "90%" }}>
                 <View style={{ alignItems: "center", padding: 24 }}>
                     <View style={{ borderWidth: 1, borderRadius: 8, height: RFValue(100), width: RFValue(100), alignItems: "center" }}>
+<<<<<<< Updated upstream
                         {(userData.profile_pic) ?
                             <ImageBackground
                                 source={{ uri: (userData.profile_pic) }}
@@ -212,6 +243,26 @@ const User = (props) => {
                 </View>
                 <View style={styles.viewBox}>
                     <TouchableOpacity style={styles.touchButton} onPress={() => navigation.navigate("PersonalDetails", props.route.params)}>
+=======
+                        <ImageBackground
+                            source={image.profilepic}
+                            resizeMode="stretch"
+                            style={{
+                                width: "100%",
+                                height: "100%"
+                            }}>
+                            <TouchableOpacity style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', height: "27%", bottom: 0, borderBottomEndRadius: moderateScale(4), borderBottomStartRadius: moderateScale(4), width: "100%", position: 'absolute', alignItems: "center", justifyContent: "center" }} >
+                                <FontA5 name="edit" color="white" size={moderateScale(13)} style={{ margin: "2%" }} />
+                            </TouchableOpacity>
+                        </ImageBackground>
+
+                    </View>
+                    <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(20), color: COLORS.black }}>Connor Davis</Text>
+                    <Text style={{ ...FONTS.lexendregular, fontSize: RFValue(13), color: COLORS.black }}>info@gmail.com</Text>
+                </View>
+                <View style={styles.viewBox}>
+                    <TouchableOpacity style={styles.touchButton} onPress={() => navigation.navigate("PersonalDetails")}>
+>>>>>>> Stashed changes
                         <Image
                             source={icons.userIcon}
                             resizeMode="contain"

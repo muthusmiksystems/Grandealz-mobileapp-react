@@ -6,7 +6,11 @@ import { useDispatch } from 'react-redux';
 import { FONTS } from '../constants';
 import icons from '../constants/icons';
 import image from '../constants/image';
+<<<<<<< Updated upstream
 import { horizontalScale, moderateScale, verticalScale } from '../constants/metrices';
+=======
+import { horizontalScale, moderateScale } from '../constants/metrices';
+>>>>>>> Stashed changes
 import { bannerHandler } from '../store/reducers/Banners';
 import { unwrapResult } from '@reduxjs/toolkit';
 

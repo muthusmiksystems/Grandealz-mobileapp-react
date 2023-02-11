@@ -19,6 +19,7 @@ import image from "../constants/image";
 import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS, FONTS } from "../constants";
 import OrderList from "./Myorders/orderList";
+<<<<<<< Updated upstream
 import { wishlistHandle } from "../services/wishlist";
 import { RemovewishlistHandle } from '../services/deletewishlist';
 import { ToastAndroid } from 'react-native';
@@ -90,6 +91,22 @@ const WishList = () => {
         console.log("llllkfg")
     }
 
+=======
+import WishlistData from "./wishListData";
+import { wishlistHandle } from "../services/wishlist";
+const WishList = () => {
+    const navigation = useNavigation();
+
+    const [Wishlistdata, setWishlistdata] = useState<any>();
+
+    useEffect(() => {
+        const soon = async () => {
+            let WishList = await wishlistHandle()
+            setWishlistdata(WishList)
+        }
+        soon();
+    }, [])
+>>>>>>> Stashed changes
     return (
         <SafeAreaView>
             <StatusBar
@@ -114,6 +131,7 @@ const WishList = () => {
                 />
                 <Text style={{ fontFamily: "Lexend-Regular", color: "black", fontSize: 16, marginTop: 20 }}>Your wishlist in empty</Text>
             </View> */}
+<<<<<<< Updated upstream
               {Wishlistdata.length > 0 ?
             <ScrollView style={styles.subdivTwo}>
           
@@ -163,6 +181,20 @@ const WishList = () => {
          
             </ScrollView>
                    :<WishListEmpty/>}
+=======
+            <View style={styles.subdivOne}>
+                <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18), flexDirection: "column" }}>
+                    <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
+                </TouchableOpacity>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(21), width: "75%", textAlign: "center" }}>Wishlist</Text>
+
+            </View>
+            <ScrollView style={styles.subdivTwo}>
+                <View style={{ flexDirection: "row" }}>
+                    <WishlistData  Wishlist={Wishlistdata}/>
+                </View>
+            </ScrollView>
+>>>>>>> Stashed changes
         </SafeAreaView>
     );
 }
@@ -176,7 +208,11 @@ const styles = StyleSheet.create({
         flexDirection: "row"
     },
     subdivTwo: {
+<<<<<<< Updated upstream
         height: "100%",
+=======
+        height: "92%",
+>>>>>>> Stashed changes
         // alignItems: "center",
         // justifyContent: "center",
         // borderWidth:2

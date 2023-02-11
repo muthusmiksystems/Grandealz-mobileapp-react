@@ -22,10 +22,19 @@ import CartRelated from "../Draws/cartRelated";
 import PriceDetails from "../PriceDetails";
 import PriceMap from "./pricemap";
 import { Colors } from "react-native/Libraries/NewAppScreen";
+<<<<<<< Updated upstream
 import { AddCouponHandle } from "../../store/reducers/addcouponcode";
 import { useDispatch, useSelector } from 'react-redux';
 
 const Cart = () => {
+=======
+
+
+const Cart = ({route}) => {
+
+    const Addproduct = route.params;
+    console.log("adding cart", route);
+>>>>>>> Stashed changes
 
 
     const CouponPrice: any = useSelector<any>(state => state.AddCouponHandle.data.data);
@@ -63,8 +72,13 @@ const Cart = () => {
             <View style={styles.subdivOne}>
                 <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), textAlign: "center" }}>Cart</Text>
             </View>
+<<<<<<< Updated upstream
             <ScrollView style={{ height: "80%", paddingHorizontal: "4%" }}>
                 <TouchableOpacity style={{ width: "100%", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", marginTop: "5%", alignSelf: "center" }} onPress={() => { navigation.navigate("Coupons") }}>
+=======
+            <ScrollView style={{ height: "80%",paddingHorizontal:"4%"}}>
+                <TouchableOpacity style={{ width: "100%", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", marginTop: "5%", alignSelf: "center" }} onPress={()=>{navigation.navigate("Coupons")}}>
+>>>>>>> Stashed changes
                     <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "3%", alignItems: "center", marginLeft: "3%" }}>
                         <View style={{ flexDirection: "column", width: "85%", }}>
                             <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -84,7 +98,10 @@ const Cart = () => {
                         <Text style={{ flexDirection: "column", width: "15%", color: COLORS.textHeader, fontSize: RFValue(11), ...FONTS.lexendregular, }}>-₹{CouponPrice.coupon_discount}{"\n"}
                         <Text style={{ color: COLORS.element, fontSize: RFValue(10), ...FONTS.lexendregular, }}>Remove</Text></Text>
                     </View>
+<<<<<<< Updated upstream
                     ):null}
+=======
+>>>>>>> Stashed changes
                 </TouchableOpacity>
 
                 <View style={{ width: "100%", borderRadius: 10, backgroundColor: "#0B0029", margin: "2%", alignSelf: "center" }}>
@@ -133,7 +150,11 @@ const Cart = () => {
                 <TouchableOpacity style={{ flexDirection: "column", width: "45%", borderRadius: 5, borderWidth: 1, justifyContent: "center", alignItems: "center", marginLeft: "3%" }}>
                     <Text style={{ color: COLORS.textHeader, fontSize: RFValue(11), ...FONTS.lexendsemibold }}>Continue to Shopping</Text>
                 </TouchableOpacity>
+<<<<<<< Updated upstream
                 <TouchableOpacity style={{ flexDirection: "column", width: "45%", backgroundColor: COLORS.element, borderRadius: 5, justifyContent: "center", alignItems: "center", marginLeft: "4%", }} onPress={() => { navigation.navigate("Delivery") }}>
+=======
+                <TouchableOpacity style={{ flexDirection: "column", width: "45%", backgroundColor: COLORS.element, borderRadius: 5, justifyContent: "center", alignItems: "center", marginLeft: "4%", }} onPress={()=>{navigation.navigate("Delivery")}}>
+>>>>>>> Stashed changes
                     <Text style={{ color: COLORS.white, fontSize: RFValue(11), ...FONTS.lexendregular }} >Process to Checkout </Text>
                 </TouchableOpacity>
             </View>

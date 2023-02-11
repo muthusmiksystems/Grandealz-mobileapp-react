@@ -17,7 +17,10 @@ import TicketDetails from "../../component/ticketDetails";
 import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS } from "../../constants";
 import { activeTicketGet } from "../../services/ticket";
+<<<<<<< Updated upstream
 import { Button } from "react-native-paper";
+=======
+>>>>>>> Stashed changes
 
 const Tickets = () => {
 
@@ -25,8 +28,11 @@ const Tickets = () => {
 
     
         const [Ticketlistdata, setTicketlistdata] = useState<any>();
+<<<<<<< Updated upstream
 
         const [show,setShow] = useState(false)
+=======
+>>>>>>> Stashed changes
     
         useEffect(() => {
           const soon = async () => {
@@ -36,10 +42,13 @@ const Tickets = () => {
           soon();
         }, [])
 
+<<<<<<< Updated upstream
 
        
 
 
+=======
+>>>>>>> Stashed changes
     return (
         <SafeAreaView>
             <StatusBar
@@ -51,10 +60,13 @@ const Tickets = () => {
             </View>
             <View style={styles.subdivTwo}>
                 <TicketDetails Ticketdata={Ticketlistdata}/>
+<<<<<<< Updated upstream
             </View>
             <View>
                 <Text>You can view active coupons here after you make your purchase</Text>
                 <Button>Start Shopping</Button>
+=======
+>>>>>>> Stashed changes
             </View>
         </SafeAreaView>
     );

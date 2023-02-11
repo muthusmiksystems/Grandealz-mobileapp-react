@@ -34,10 +34,17 @@ const DrawsMain = () => {
     const [modalVisible, setModalVisible] = useState(false);
     return (
         <SafeAreaView>
+<<<<<<< Updated upstream
             <View style={{ flexDirection: "row", width: "94%", alignSelf: "center", height: verticalScale(52) }}>
 
                 <View style={{ flexDirection: "row", width: "80%", marginHorizontal: "1%", backgroundColor: "white", borderRadius: 10, }}>
                     <TouchableOpacity style={{ backgroundColor: showWinners ? COLORS.element : "white", flexDirection: "column", width: "50%", borderRadius: 10, justifyContent: "center", alignItems: "center" }} onPress={() => setShowWinners(!showWinners)}>
+=======
+            <View style={{ flexDirection: "row", width: "94%",alignSelf:"center",height:verticalScale(52) }}>
+
+                <View style={{ flexDirection: "row", width: "80%", marginHorizontal: "1%", backgroundColor: "white", borderRadius: 10, }}>
+                    <TouchableOpacity style={{ backgroundColor: showWinners ? COLORS.element : "white", flexDirection: "column", width: "50%",borderRadius: 10, justifyContent: "center", alignItems: "center" }} onPress={() => setShowWinners(!showWinners)}>
+>>>>>>> Stashed changes
                         <Text style={{ color: showWinners ? "white" : COLORS.textHeader, fontSize: RFValue(15), ...FONTS.lexendregular, }}>Winners</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{ backgroundColor: !showWinners ? COLORS.element : "white", flexDirection: "column", width: "50%", borderRadius: 10, justifyContent: "center", alignItems: "center" }} onPress={() => setShowWinners(!showWinners)}>
@@ -148,7 +155,11 @@ const DrawsMain = () => {
 
 
             </View>
+<<<<<<< Updated upstream
             <View style={{ marginVertical: "1%", position: "relative", paddingBottom: "10%" }}>
+=======
+            <View style={{ marginVertical: "1%", position: "relative",paddingBottom:"10%" }}>
+>>>>>>> Stashed changes
                 {showWinners ?
                     <View>
                         <Winners />

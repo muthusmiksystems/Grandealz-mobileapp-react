@@ -39,11 +39,18 @@ const Landing = (props: Props) => {
 const authentication=async()=>{
     let Token= await AsyncStorage.getItem('loginToken');
     if(Token){
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
       props.navigation.replace('Tabs');
     }else{
       props.navigation.replace('login');
     }
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 }
 
   useEffect(() => {

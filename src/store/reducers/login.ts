@@ -6,9 +6,14 @@ export const loginHanlder = createAsyncThunk('posts/loginPostcall', async (data,
     try {
         const payload = data;
         let result = await axios.post(`${'https://api.grandealz.vytech.co'}/auth/login`, payload);
+<<<<<<< Updated upstream
         console.log("result inside the login page",result.data.status)
         if (parseInt(result.data.status) === 200) {
 
+=======
+        // console.log("result inside the login page",result.data.status)
+        if (parseInt(result.data.status) === 200) {
+>>>>>>> Stashed changes
              console.log("condition 1",{ responseData: result.data.data });
             return result.data
         } else if(parseInt(result.data.status)== 401 ){
@@ -18,11 +23,17 @@ export const loginHanlder = createAsyncThunk('posts/loginPostcall', async (data,
             console.log('Login Error', result);
             return result.data.message
         }
+<<<<<<< Updated upstream
 
     } catch (error:any) {
         console.log('Login Catch Error', error.response);
         return( error.response.data.message)
 
+=======
+    } catch (error:any) {
+        console.log('Login Catch Error', error.response.data.message);
+        return( error.response.data.message)
+>>>>>>> Stashed changes
     }
 }
 )

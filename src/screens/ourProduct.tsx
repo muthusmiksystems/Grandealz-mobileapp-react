@@ -78,6 +78,7 @@ const Data = [
 ];
 const OurProducts = () => {
     const navigation = useNavigation();
+<<<<<<< Updated upstream
     const [stock, setStock] = useState()
     useEffect(() => {
         const prod = async () => {
@@ -88,6 +89,18 @@ const OurProducts = () => {
         prod()
     }, [])
 
+=======
+    const [stock,setStock]=useState()
+    useEffect(()=>{
+        const prod=async ()=>{
+            let ourProduct=await ourprod()
+            console.log("consolelog",ourProduct)
+            setStock(ourProduct)
+        }
+        prod()
+    },[])
+   
+>>>>>>> Stashed changes
     return (
         <SafeAreaView style={{ backgroundColor: "#F1F1F", height: "100%" }}>
             <StatusBar
@@ -98,10 +111,17 @@ const OurProducts = () => {
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18), flexDirection: "column" }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
+<<<<<<< Updated upstream
                 <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), width: "75%", textAlign: "center" }}>Our Products</Text>
 
             </View>
             <ScrollView>
+=======
+                <Text style={{ fontFamily: "Lexend-Regular", color: "white", fontSize: RFValue(20), width: "75%", textAlign: "center" }}>Our Products</Text>
+
+            </View>
+            <ScrollView style={{}}>
+>>>>>>> Stashed changes
                 <View>
                     <FlatList
                         data={stock}
@@ -109,18 +129,31 @@ const OurProducts = () => {
                         numColumns={2}
                         contentContainerStyle={{ paddingBottom: verticalScale(50), padding: "2%" }}
                         renderItem={({ item, index }) => (
+<<<<<<< Updated upstream
                             <TouchableOpacity style={{ backgroundColor: "white", borderRadius: 8, marginTop: horizontalScale(14), marginLeft: verticalScale(14), width: horizontalScale(160), height: verticalScale(220) }} onPress={() => { navigation.navigate("DetailedProduct", { item }) }}>
                                 <View style={{ padding: moderateScale(9) }}>
                                     <View style={{ paddingVertical: verticalScale(15), backgroundColor: "#F1F1F1", alignItems: "center" }}>
                                         <Image
                                             source={{ uri: item.product_image }}
+=======
+                            <TouchableOpacity style={{ backgroundColor: "white",borderRadius:8,marginTop:horizontalScale(14),marginLeft:verticalScale(14),width:horizontalScale(160),height:verticalScale(220) }} onPress={() => { navigation.navigate("DetailedProduct", { item }) }}>
+                                <View style={{ padding: moderateScale(9) }}>
+                                    <View style={{ paddingVertical: verticalScale(15), backgroundColor: "#F1F1F1",alignItems:"center" }}>
+                                        <Image
+                                            source={{uri:item.product_image}}
+>>>>>>> Stashed changes
                                             resizeMode="stretch"
                                             style={{ width: horizontalScale(120), height: verticalScale(130) }}
                                         />
                                     </View>
+<<<<<<< Updated upstream
                                     <View style={{ alignItems: "center", justifyContent: "center", marginTop: "9%" }}>
                                         <Text style={{ textAlign: "center", ...FONTS.lexendsemibold, color: COLORS.black, fontSize: RFValue(13) }}>{item.product_title}</Text>
                                     </View>
+=======
+
+                                    <Text style={{ textAlign: "center", ...FONTS.lexendsemibold, color: COLORS.black }}>{`\n`}{item.product_title}</Text>
+>>>>>>> Stashed changes
                                 </View>
                             </TouchableOpacity>
                         )}

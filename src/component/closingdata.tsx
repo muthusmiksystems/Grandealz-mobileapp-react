@@ -68,11 +68,14 @@ const ClosingSoon = () => {
   const handleSearch = (value: any) => {
     navigation.navigate("PriceDetails", value)
   }
+<<<<<<< Updated upstream
   const handleProgressActive=(event:any)=>{
     const val=(event.total_no_of_sold_out_tickets)/(event.total_no_of_tickets)*100
     // console.log(`${val}%`);
     return `${val}%`
   }
+=======
+>>>>>>> Stashed changes
 
   return (
     <SafeAreaView >
@@ -84,11 +87,19 @@ const ClosingSoon = () => {
             // ItemSeparatorComponent={() => (
             //   <View style={{ width: 5 }} />
             // )}
+<<<<<<< Updated upstream
             contentContainerStyle={{ marginHorizontal:"4%" }}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
               <View style={{ paddingHorizontal:horizontalScale(8) }}>
                 <TouchableOpacity style={{ borderRadius: 9, borderTopWidth: 4, borderTopColor: "#E70736", backgroundColor: "white", height: RFValue(145), width: RFValue(110) }} onPress={() => /* navigation.navigate("PriceDetails") */ handleSearch(item)}>
+=======
+            contentContainerStyle={{ margin: 10 }}
+            keyExtractor={item => item.id}
+            renderItem={({ item }) => (
+              <View style={{ padding: '1%' }}>
+                <TouchableOpacity style={{ borderRadius: 9, borderTopWidth: 4, borderTopColor: "#E70736", backgroundColor: "white", height: RFValue(145), width: RFValue(128) }} onPress={() => /* navigation.navigate("PriceDetails") */ handleSearch(item)}>
+>>>>>>> Stashed changes
                   <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8 }}>
                     <View style={{ flexDirection: 'column', marginTop: RFValue(15) }}>
                       <Image
@@ -108,7 +119,11 @@ const ClosingSoon = () => {
                     <Text style={{ fontSize: RFValue(9), textAlign: "center", color: COLORS.black, ...FONTS.lexendregular }}>{item.total_no_of_sold_out_tickets} sold out of {item.total_no_of_tickets}</Text>
                   </View>
                   <View style={{ marginLeft: "15%", width: "70%", height: "4%", borderColor: "#F1F1F1", borderWidth: 1, margin: 2, borderRadius: 12, backgroundColor: "#F1F1F1" }}>
+<<<<<<< Updated upstream
                     <Text style={{ backgroundColor: "#EC092D", width: handleProgressActive(item), borderRadius: 12 }}></Text>
+=======
+                    <Text style={{ backgroundColor: "#EC092D", width: "80%", borderRadius: 12 }}></Text>
+>>>>>>> Stashed changes
                   </View>
 
                 </TouchableOpacity>

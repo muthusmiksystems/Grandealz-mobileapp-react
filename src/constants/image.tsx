@@ -28,10 +28,14 @@ export const watches= require("../assests/images/watches.png");
 export const group= require("../assests/images/Groupshome.png");
 export const pencilorg= require("../assests/images/pencilorg.png");
 export const profilepic= require("../assests/images/Profile.png");
+<<<<<<< Updated upstream
 export const audicar=require("../assests/images/audicar.png")
 export const heartEmpty=require("../assests/images/heartEmpty.png")
 export const cartEmpty=require("../assests/images/shoppingCart.png")
 export const OrderEmpty=require("../assests/images/OrderEmpty.png")
+=======
+
+>>>>>>> Stashed changes
 export default {
     Android,
     audicar,

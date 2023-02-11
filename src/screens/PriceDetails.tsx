@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 import React, { type PropsWithChildren,useState, useEffect } from 'react';
+=======
+import React, { type PropsWithChildren,useState } from 'react';
+>>>>>>> Stashed changes
 import {
   SafeAreaView,
   ScrollView,
@@ -16,11 +20,15 @@ import image from '../constants/image';
 import { COLORS, FONTS } from '../constants';
 import { verticalScale, horizontalScale, moderateScale } from '../constants/metrices';
 import EntypoIcons from "react-native-vector-icons/Entypo";
+<<<<<<< Updated upstream
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+=======
+>>>>>>> Stashed changes
 import { useNavigation } from '@react-navigation/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useDispatch, useSelector, useStore } from 'react-redux';
 import moment from "moment";
+<<<<<<< Updated upstream
 import { addToWishlistHandle, wishlistHandle } from '../services/wishlist';
 import { addToCartHandler } from '../store/reducers/addToCart';
 import { unwrapResult } from '@reduxjs/toolkit';
@@ -35,6 +43,20 @@ const PriceDetails = ({route}) => {
   
   // console.log("routedData.....................",pricing)
   const handleAddtoCart=()=>{
+=======
+import { addToWishlistHandle } from '../services/wishlist';
+import { addToCartHandler } from '../store/reducers/addToCart';
+import { unwrapResult } from '@reduxjs/toolkit';
+const PriceDetails = ({route}) => {
+  const pricing = route.params
+  const[isWished,setIsWished]=useState(false)
+  const dispatch=useDispatch();
+  const store=useStore();
+  console.log(pricing,"samuel sham")
+  const navigation = useNavigation();
+
+  const handleAdd=()=>{
+>>>>>>> Stashed changes
     let value=pricing._id;
     dispatch(addToCartHandler(value))
     .then(unwrapResult)
@@ -43,6 +65,7 @@ const PriceDetails = ({route}) => {
     })
   }
 
+<<<<<<< Updated upstream
   const RemoveWishlist = async () => {
     console.log("Removewish........", wishedId);
     let Removeitems = await RemovewishlistHandle(wishedId)
@@ -86,6 +109,16 @@ const PriceDetails = ({route}) => {
   showHeartIfExists()
  },[])
 
+=======
+  const handleAddWishlist=async()=>{
+        const result=  await addToWishlistHandle(pricing._id);
+        setIsWished(true);
+        console.log("done",pricing._id);
+        
+        console.log("result",result)
+  }
+
+>>>>>>> Stashed changes
   return (
     <View style={{ flex: 1 }} >
       <StatusBar
@@ -147,6 +180,7 @@ const PriceDetails = ({route}) => {
                     height: 25
                   }}
                 />
+<<<<<<< Updated upstream
                 
                   {!heart?
                   <TouchableOpacity onPress={() =>handleAddWishlist()}>
@@ -169,6 +203,19 @@ const PriceDetails = ({route}) => {
                   }}size={30}  color={"red"} />
                 </TouchableOpacity>
                        }
+=======
+                <TouchableOpacity onPress={()=>handleAddWishlist()}>
+                <Image
+                  source={icons.userHeart}
+                  style={{
+                    bottom: "40%",
+                    marginRight: "2%",
+                    width: 25,
+                    height: 25
+                  }}
+                />
+                </TouchableOpacity>
+>>>>>>> Stashed changes
               </View>
               <View style={{ flexDirection: 'column', padding: moderateScale(10) }}>
                 <Image
@@ -187,7 +234,11 @@ const PriceDetails = ({route}) => {
               <TouchableOpacity style={{ flexDirection: "column", width: "48%", marginEnd: "2%" }}>
                 <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "7%", backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }}> Prize Details</Text>
               </TouchableOpacity>
+<<<<<<< Updated upstream
               <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, width: "49%", borderRadius: 5 }} onPressIn={() => { navigation.replace("ProductDetails",pricing) }}>
+=======
+              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, width: "49%", borderRadius: 5 }} onPressIn={() => { navigation.navigate("ProductDetails",pricing) }}>
+>>>>>>> Stashed changes
                 <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}>
                   Product Details
                 </Text>
@@ -208,9 +259,15 @@ const PriceDetails = ({route}) => {
               <TouchableOpacity style={{ flexDirection: "column", width: "48%", marginEnd: "2%" }} onPressIn={() => {  navigation.navigate("Tabs") }} >
                 <Text style={{ textAlign: "center", fontSize: RFValue(15), borderWidth: 1, padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}> Go to Home</Text>
               </TouchableOpacity>
+<<<<<<< Updated upstream
               <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 5, width: "49%" }} onPressIn={() => {  navigation.navigate("Tabs",{screen:"Cart"}) }}>
                 <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}>
                   View Cart
+=======
+              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 5, width: "49%" }}>
+                <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}>
+                  View Card
+>>>>>>> Stashed changes
                 </Text>
               </TouchableOpacity>
             </View>
@@ -220,7 +277,11 @@ const PriceDetails = ({route}) => {
       <View style={{ flex: 0.15, backgroundColor: "white" }}>
         <View style={{ flexDirection: "row", marginVertical: "2%", marginHorizontal: "4%" }}>
           <TouchableOpacity style={{ flexDirection: "column", borderRadius: 6, width: "48%", marginEnd: "2%" }}>
+<<<<<<< Updated upstream
             <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "7%", backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }} onPress={()=>{handleAddtoCart()}}>ADD TO CART</Text>
+=======
+            <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "7%", backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }} onPress={()=>{handleAdd()}}>ADD TO CART</Text>
+>>>>>>> Stashed changes
           </TouchableOpacity>
           <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 6, width: "49%" }} >
             <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 8 }}>
