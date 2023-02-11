@@ -5,10 +5,9 @@ import axios from 'axios'
 export const productDrawHandler = createAsyncThunk('get/drawProductGetcall', async (data,thunkAPI) => {
 
     try {
-        console.log("inside..... ")
         const payload = data;
         let result = await axios.get(`${'https://api.grandealz.vytech.co'}/draws`);
-        console.log("result inside the login page.....",result.data.data)
+        // console.log("result inside the login page.....",result.data.data)
         // if (parseInt(result.data.status) === 200) {
         //     console.log({ responseData: result.data.data });
         //     return result.data

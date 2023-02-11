@@ -22,27 +22,43 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import { useDispatch, useSelector, useStore } from 'react-redux';
 import moment from "moment";
 import { addToWishlistHandle, wishlistHandle } from '../services/wishlist';
-import { addToCartHandler } from '../store/reducers/addToCart';
-import { unwrapResult } from '@reduxjs/toolkit';
+import { ourCartPage } from '../services/ourCart';
 import { RemovewishlistHandle } from '../services/deletewishlist';
+import { AddtoCartHandle } from '../services/addtocart';
+import { ToastAndroid } from 'react-native';
 const PriceDetails = ({route}) => {
   const pricing = route.params;
   const navigation = useNavigation();
   const dispatch=useDispatch();
-  const [pricelist,setPricelist]=useState();
+  const [cartList,setCartList]=useState([]);
   const[wishedId,setWishedId]=useState<string>("");
+  
   const [heart,setHeart]=useState(false)
   
   // console.log("routedData.....................",pricing)
-  const handleAddtoCart=()=>{
-    let value=pricing._id;
-    dispatch(addToCartHandler(value))
-    .then(unwrapResult)
-    .then((orginalResult: any)=>{
-      console.log("result of api is ",orginalResult)
-    })
-  }
 
+
+  const handleAddtoCart = async () => {
+    const payload = { "draw": pricing._id, "qty": 2 }
+    console.log("payload", payload)
+    let AddItemtoCart = await AddtoCartHandle(payload)
+    if (AddItemtoCart.status === "200") {
+      ToastAndroid.showWithGravity(
+        AddItemtoCart.message,
+        ToastAndroid.SHORT,
+        ToastAndroid.CENTER,
+      );
+      cartStock();
+    }
+    else {
+      ToastAndroid.showWithGravity(
+        AddItemtoCart.message,
+        ToastAndroid.SHORT,
+        ToastAndroid.CENTER,
+      );
+      // setChanger(!changer);
+    }
+  }
   const RemoveWishlist = async () => {
     console.log("Removewish........", wishedId);
     let Removeitems = await RemovewishlistHandle(wishedId)
@@ -58,32 +74,45 @@ const PriceDetails = ({route}) => {
     console.log("result...........", result)
 
   }
-
- 
   const showHeartIfExists = async () => {
     let priceitem = await wishlistHandle();
-    setPricelist(priceitem)
     // console.log("priceitem..........",priceitem)
     var WishIdArray: any[] = [];
     (priceitem).forEach((element: any) => {
       var Data = (element.draw._id);
-      if(Data===pricing._id){
-        console.log("trueeeeeeeeeeeee.........",element._id);
+      if (Data === pricing._id) {
+        console.log("trueeeeeeeeeeeee.........", element._id);
         setWishedId(element._id);
       }
       WishIdArray.push(Data);
     })
     if (WishIdArray.includes(pricing._id)) {
-     // console.log(`true${pricing._id}`)
-     setHeart(true);
+      // console.log(`true${pricing._id}`)
+      setHeart(true);
     } else {
       //console.log(`false${pricing._id}`)
       setHeart(false);
     }
   }
 
+  const cartStock = async () => {
+    let ourCartStock = await ourCartPage()
+    console.log("CartData List on cart",ourCartStock)
+    var AlreadyInCart:any=[];
+        let data = ourCartStock?.draws;
+        
+        if (data) {
+            (data).forEach((element: any) => {
+                var Data = (element.draw._id);
+                AlreadyInCart.push(Data);
+            })
+        }
+        setCartList(AlreadyInCart);
+         console.log("dtaaaa.....................", AlreadyInCart)
+}
  useEffect(()=>{
-  showHeartIfExists()
+  showHeartIfExists();
+  cartStock();
  },[])
 
   return (
@@ -219,10 +248,17 @@ const PriceDetails = ({route}) => {
       </View>
       <View style={{ flex: 0.15, backgroundColor: "white" }}>
         <View style={{ flexDirection: "row", marginVertical: "2%", marginHorizontal: "4%" }}>
+        { !(cartList.includes(`${pricing._id}`)) ?
           <TouchableOpacity style={{ flexDirection: "column", borderRadius: 6, width: "48%", marginEnd: "2%" }}>
             <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "7%", backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }} onPress={()=>{handleAddtoCart()}}>ADD TO CART</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 6, width: "49%" }} >
+          :
+          <TouchableOpacity style={{ flexDirection: "column", borderRadius: 6, width: "48%", marginEnd: "2%" }}>
+          <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "7%", backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }} onPress={()=>{navigation.navigate("Tabs",{screen:"Cart"})}}>VIEW CART</Text>
+        </TouchableOpacity>
+        }
+
+          <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 6, width: "49%" }} onPress={()=>console.log("router value",route.params)}>
             <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 8 }}>
               BUY NOW
             </Text>

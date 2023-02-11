@@ -58,20 +58,15 @@ const ClosingSoon = () => {
   console.log(DataInfo,"data......")
   //drawGetCall
   useEffect(() => {
-    dispatch(productDrawHandler())
-      .then(unwrapResult)
-      .then((originalPromiseResult) => {
-        console.log("success samuvel you did itdone", originalPromiseResult);
-      })
+    dispatch(productDrawHandler());
+      // .then(unwrapResult)
+      // .then((originalPromiseResult) => {
+      //   console.log("success samuvel you did itdone", originalPromiseResult);
+      // })
   }, [])
 
   const handleSearch = (value: any) => {
     navigation.navigate("PriceDetails", value)
-  }
-  const handleProgressActive=(event:any)=>{
-    const val=(event.total_no_of_sold_out_tickets)/(event.total_no_of_tickets)*100
-    // console.log(`${val}%`);
-    return `${val}%`
   }
 
   return (
@@ -84,7 +79,7 @@ const ClosingSoon = () => {
             // ItemSeparatorComponent={() => (
             //   <View style={{ width: 5 }} />
             // )}
-            contentContainerStyle={{ marginStart:"2%" }}
+            contentContainerStyle={{ marginHorizontal:"4%" }}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
               <View style={{ paddingHorizontal:horizontalScale(8) }}>
@@ -108,7 +103,7 @@ const ClosingSoon = () => {
                     <Text style={{ fontSize: RFValue(9), textAlign: "center", color: COLORS.black, ...FONTS.lexendregular }}>{item.total_no_of_sold_out_tickets} sold out of {item.total_no_of_tickets}</Text>
                   </View>
                   <View style={{ marginLeft: "15%", width: "70%", height: "4%", borderColor: "#F1F1F1", borderWidth: 1, margin: 2, borderRadius: 12, backgroundColor: "#F1F1F1" }}>
-                    <Text style={{ backgroundColor: "#EC092D", width: handleProgressActive(item), borderRadius: 12 }}></Text>
+                    <Text style={{ backgroundColor: "#EC092D", width: "80%", borderRadius: 12 }}></Text>
                   </View>
 
                 </TouchableOpacity>

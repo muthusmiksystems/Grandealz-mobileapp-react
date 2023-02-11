@@ -33,9 +33,14 @@ import { userDetailsHandler } from '../../store/reducers/userDetails';
 import { addressListHandler } from "../../store/reducers/addresslist";
 import { drawgetHandler } from '../../store/reducers/Drawgetcall';
 import { Item } from 'react-native-paper/lib/typescript/components/Drawer/Drawer';
+import NetInfo from "@react-native-community/netinfo";
+import { useFocusEffect } from '@react-navigation/native';
+// import Image from 'react-native-image-progress';
+// import Progress from 'react-native-progress'
+
 const DataPage = () => {
   const navigation = useNavigation();
-  const userData: any = useSelector<any>(state => state.userDetailsHandle.data.data);
+  const userData: any = useSelector<any>(state => state.userDetailsHandle?.data?.data);
 
   const dispatch = useDispatch();
   const [apiData, setApiData] = useState();
@@ -45,6 +50,11 @@ const DataPage = () => {
   const [camp, setCamp] = useState<any>();
   const [close, setClose] = useState<any>();
   useEffect(() => {
+    NetInfo.addEventListener(state => {
+      if (!state.isConnected) {
+        navigation.navigate("NetworkError")
+      }
+    })
     dispatch(bannerHandler())
       .then(unwrapResult).then((originalPromiseResult) => {
         // console.log("successfully returned to login with response ", originalPromiseResult);
@@ -92,7 +102,7 @@ const DataPage = () => {
                 {(userData?.profile_pic) ?
                   <Image
                     source={{ uri: (userData?.profile_pic) }}
-                    resizeMode="stretch"
+                    resizeMode="cover"
                     
                     style={{
                       width: horizontalScale(40),
@@ -104,7 +114,7 @@ const DataPage = () => {
                   /> :
                   <Image
                     source={icons.user}
-                    resizeMode="stretch"
+                    resizeMode="cover"
                     style={{
                       width: horizontalScale(40),
                       height: verticalScale(40),
@@ -118,7 +128,7 @@ const DataPage = () => {
           </View>
         </View>
 
-        <View style={{ padding: "3%", flex: 0.4 }}>
+        <View style={{ padding: "3%",height:verticalScale(220)}}>
           <Banner data={apiData} />
         </View>
 

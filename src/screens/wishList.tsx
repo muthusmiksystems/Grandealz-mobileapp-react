@@ -10,6 +10,7 @@ import {
     FlatList,
     TouchableOpacity
 } from 'react-native';
+import LoaderKit from 'react-native-loader-kit';
 import { horizontalScale, verticalScale } from "../constants/metrices";
 import { love } from "../constants/icons"
 import EntypoIcons from "react-native-vector-icons/Entypo";
@@ -23,57 +24,26 @@ import { wishlistHandle } from "../services/wishlist";
 import { RemovewishlistHandle } from '../services/deletewishlist';
 import { ToastAndroid } from 'react-native';
 import { AddtoCartHandle } from "../services/addtocart";
-import WishListEmpty from "./ExceptionScreens/wishListEmpty";
-import CartEmpty from "./ExceptionScreens/cartEmpty";
-import OrderEmpty from "./ExceptionScreens/orderEmpty";
 const WishList = () => {
     const navigation = useNavigation();
-
     const [Wishlistdata, setWishlistdata] = useState<any>([]);
-
-    const [statusChange, setStatusChange] = useState<boolean>(false);
     const [productid, setProductid] = useState()
     const [removeres, setRemoveres] = useState()
-    const [drawid, setDrawid] = useState();
-
-
-
-
-    useEffect(() => {
-        soon()
-    }, [])
-
-
+    const [drawid, setDrawid] = useState(null);
     useEffect(() => {
         RemoveWishlist();
+        soon()
     }, [productid])
-
-    const RemoveItem = (data: any) => {
-        setProductid(data)
-        ToastAndroid.showWithGravity(
-            'Removed successfully',
-            ToastAndroid.SHORT,
-            ToastAndroid.CENTER,
-        );
-    }
-
-    const RemoveWishlist = async () => {
-        let Removeitems = await RemovewishlistHandle(productid)
-        setRemoveres(Removeitems);
-        soon();
-    }
-
     const soon = async () => {
         let WishList = await wishlistHandle()
         console.log("Wishlistdata", WishList)
         setWishlistdata(WishList)
     }
-
-
-
-
+useEffect(() =>{
+    if(drawid){
     const AddtoCartitems = async () => {
-        let AddItemtoCart = await AddtoCartHandle(drawid)
+        const payload={"draw": drawid,"qty":1}
+        let AddItemtoCart = await AddtoCartHandle(payload)
         if (AddItemtoCart.status === "200") {
             navigation.navigate("Tabs", { screen: "Cart" })
         }
@@ -85,23 +55,33 @@ const WishList = () => {
             );
         }
     }
-
-    const changed = () => {
-        console.log("llllkfg")
+    AddtoCartitems()
+}
+}, [drawid])
+    const RemoveWishlist = async () => {
+        let Removeitems = await RemovewishlistHandle(productid)
+        setRemoveres(Removeitems);
+        soon();
     }
-
+    const RemoveItem = (data: any) => {
+        setProductid(data)
+        ToastAndroid.showWithGravity(
+            'Removed successfully',
+            ToastAndroid.SHORT,
+            ToastAndroid.CENTER,
+        );
+    }
     return (
         <SafeAreaView>
             <StatusBar
                 animated={true}
-                backgroundColor="#0a0127"
+                backgroundColor="#0A0127"
             />
             <View style={styles.subdivOne}>
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18), flexDirection: "column" }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
                 <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(21), width: "75%", textAlign: "center" }}>Wishlist</Text>
-
             </View>
             {/* <View style={styles.subdivTwo}>
                 <Image
@@ -114,12 +94,10 @@ const WishList = () => {
                 />
                 <Text style={{ fontFamily: "Lexend-Regular", color: "black", fontSize: 16, marginTop: 20 }}>Your wishlist in empty</Text>
             </View> */}
-              {Wishlistdata.length > 0 ?
             <ScrollView style={styles.subdivTwo}>
-          
                 <View style={{ flexDirection: "row" }}>
                     <View style={{ padding: "4%" }}>
-                      
+                        {Wishlistdata.length > 0 ?
                             <FlatList
                                 data={Wishlistdata}
                                 contentContainerStyle={{}}
@@ -148,7 +126,7 @@ const WishList = () => {
                                                             <Text style={{ width: "100%", paddingVertical: "8%", textAlign: "center", ...FONTS.lexendregular, fontSize: RFValue(16), color: COLORS.white }}>-</Text>
                                                         </View>
                                                     </TouchableOpacity>
-                                                    <TouchableOpacity style={{ width: "102%", backgroundColor: COLORS.element, alignSelf: "flex-end", flexDirection: "row", borderBottomEndRadius: 10, borderTopStartRadius: 10 }} onPress={() => { setDrawid(item.draw._id), AddtoCartitems() }} >
+                                                    <TouchableOpacity style={{ width: "102%", backgroundColor: COLORS.element, alignSelf: "flex-end", flexDirection: "row", borderBottomEndRadius: 10, borderTopStartRadius: 10 }} onPress={() =>setDrawid(item.draw._id)} >
                                                         <Text style={{ width: "100%", textAlign: "center", paddingVertical: "8%", ...FONTS.lexendregular, color: COLORS.white }}>ADD TO CART</Text>
                                                     </TouchableOpacity>
                                                 </View>
@@ -157,12 +135,10 @@ const WishList = () => {
                                     </View>
                                 )}
                             />
-                           
+                            : null}
                     </View>
                 </View>
-         
             </ScrollView>
-                   :<WishListEmpty/>}
         </SafeAreaView>
     );
 }
@@ -170,13 +146,13 @@ const styles = StyleSheet.create({
     subdivOne: {
         width: horizontalScale(375),
         height: verticalScale(80),
-        backgroundColor: "#0a0127",
+        backgroundColor: "#0A0127",
         alignItems: "center",
         // justifyContent: 'center',
         flexDirection: "row"
     },
     subdivTwo: {
-        height: "100%",
+        height: "92%",
         // alignItems: "center",
         // justifyContent: "center",
         // borderWidth:2
@@ -190,7 +166,5 @@ const styles = StyleSheet.create({
     text1: {
         alignContent: "center"
     },
-
-
 })
 export default WishList;

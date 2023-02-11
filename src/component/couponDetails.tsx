@@ -87,9 +87,8 @@ const CouponDetails = () => {
         else{
           dispatch(AddCouponHandle(applycoupon)).then(unwrapResult).then(async(originalPromiseResult) => {
 
-            
 
-            console.log("response", originalPromiseResult);
+            
             if (originalPromiseResult.status ==="200") {
               ToastAndroid.showWithGravity(
                 originalPromiseResult.message,

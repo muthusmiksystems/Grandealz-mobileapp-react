@@ -74,10 +74,10 @@ const Address = () => {
                 {/* <RadioButton.Group onValueChange={newValue => { setValue(newValue), parentCallback(newValue) }} value={value} > */}
                 <View style={{ width: "92%", alignSelf: "center", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", marginTop: "5%", padding: "2%" }}>
                     <TouchableOpacity style={{ flexDirection: "row", width: "100%", borderRadius: 5, justifyContent: "center" }} onPress={() => navigation.navigate('AddAddress')}>
-                        <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, margin: "3%" }}>Add New Address</Text>
+                        <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, margin: "3%" }}>Add new Address</Text>
                     </TouchableOpacity>
                 </View>
-                
+                {/* {addresslist ? */}
                 {(addresslist).map((data,index) => (
                 <View key={index} style={{ width: "92%",alignSelf:"center", borderRadius: 20, backgroundColor: COLORS.white, marginHorizontal: "2%", marginTop: "5%",marginBottom:"0%", borderColor: COLORS.element, borderWidth: 1 }}>
                     <View style={{ flexDirection: "row", width: "90%", borderRadius: 10, padding: "1%" }}>
@@ -111,7 +111,6 @@ const Address = () => {
                         </Text>
                     </View>
                 </View>
-                
                  ))}
                 {/* <View style={{ width: "92%",alignSelf:"center", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", marginTop: "5%", }}>
                     <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "1%" }}>
@@ -126,6 +125,7 @@ const Address = () => {
                         <View style={{ flexDirection: "column", width: "10%", borderRadius: 5,  alignItems: "center", alignSelf: "flex-end", borderColor: COLORS.black, borderWidth:1, padding: "2%",marginVertical:"0.5%" }}>
                         <Entypo name="edit" size={moderateScale(15)} color={COLORS.black} style={{ paddingVertical:"2%" }} />
                         </View>
+
                     </View>
                     <View>
                     <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, marginHorizontal: "3%",marginTop:"0%" }}>
@@ -141,7 +141,6 @@ const Address = () => {
 
                 {/* </RadioButton.Group> */ }
             </ScrollView>
-            
             {/* <View style={{ flexDirection: "row", height: "8%", backgroundColor: COLORS.white, paddingHorizontal: horizontalScale(8) }}>
                 <View style={{ flexDirection: "column", width: "55%", marginHorizontal: "3%", marginVertical: "4%" }}>
                     <Text style={{ color: COLORS.element, fontSize: RFValue(14), ...FONTS.lexendregular }} >₹100.00</Text>

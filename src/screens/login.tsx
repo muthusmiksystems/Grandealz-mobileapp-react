@@ -126,10 +126,10 @@ const Login = (props: Prop) => {
 
           console.log("successfully returned to login with response ", originalPromiseResult);
           if (originalPromiseResult?.data?.access_token) {
-            if(isSelected===true){
+            // if(isSelected===true){
               console.log("token  sam   ...dddd", originalPromiseResult.data.access_token);
             await AsyncStorage.setItem('loginToken', originalPromiseResult.data.access_token)
-            }
+            // }
             ToastAndroid.showWithGravity(
               "Successfully logged in",
               ToastAndroid.SHORT,

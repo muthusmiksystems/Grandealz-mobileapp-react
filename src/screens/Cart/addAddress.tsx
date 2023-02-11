@@ -295,7 +295,7 @@ const AddAddress = () => {
 
     useEffect(() => {
         getCountryList();
-        const india=[{"currency": "INR", "flag": "🇮🇳", "isoCode": "IN", "name": "India", "phonecode": "91"}];
+        const india=[{"currency": "INR", "flag": "????", "isoCode": "IN", "name": "India", "phonecode": "91"}];
         setCountryListValue(india)
     }, [])
 

@@ -24,7 +24,6 @@ import { orderlistHandle } from "../../services/orderlist";
 import { Provider } from "react-redux";
 import CheckBox from "@react-native-community/checkbox";
 import { RadioButton } from "react-native-paper";
-import OrderEmpty from "../ExceptionScreens/orderEmpty";
 
 
 const MyOrders = () => {
@@ -34,7 +33,7 @@ const MyOrders = () => {
     const [value, setValue] =useState();
     const [timevalue,setTimevalue]=useState();
 
-    const [Orderlistdata, setOrderlistdata] = useState<any>([]);
+    const [Orderlistdata, setOrderlistdata] = useState<any>();
 
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -60,8 +59,7 @@ const MyOrders = () => {
                 <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), width: "78%", textAlign: "center" }}>My Orders</Text>
 
             </View>
-            {Orderlistdata.length > 0 ?
-            <ScrollView style={{ height: "80%", padding: "4%" ,}}>
+            <ScrollView style={{ height: "80%", padding: "4%" }}>
                 <View style={styles.centeredView}>
                     <Modal
                         animationType="slide"
@@ -199,7 +197,6 @@ const MyOrders = () => {
                     <OrderList orderlist={Orderlistdata} />
                 </View>
             </ScrollView>
-            :<OrderEmpty/>}
             {/* <View style={{ flexDirection: "row", height: "7%", backgroundColor: COLORS.white }}>
                 <TouchableOpacity style={{ flexDirection: "column", width: "45%", marginHorizontal: "3%", marginVertical: "1%", borderRadius: 5, borderWidth: 1, justifyContent: "center", alignItems: "center" }}>
                     <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular }}>Continue to Shopping</Text>
