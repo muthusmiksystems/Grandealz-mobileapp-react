@@ -117,7 +117,7 @@ const ChangePassword = () => {
                 placeholderTextColor={"black"}
                 onChangeText={(text: String) => {setExpassword(text), error ? setError("") : null }}
                 value={expassword}
-                style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: horizontalScale(300), borderColor: "#c4c4c2", marginTop: verticalScale(40), ...FONTS.lexendregular, fontSize: RFValue(14) }}
+                style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: horizontalScale(300), borderColor: "#c4c4c2", marginTop: verticalScale(40), ...FONTS.lexendregular, fontSize: RFValue(14),color:COLORS.black }}
               />
               {/* <Fontisto name='email' size={30} style={{ alignSelf: "center" }} /> */}
             </View>
@@ -127,7 +127,7 @@ const ChangePassword = () => {
                 placeholderTextColor={"black"}
                 onChangeText={(text: String) => { setNewpassword(text), error ? setError("") : null }}
                 value={newpassword}
-                style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: horizontalScale(300), borderColor: "#c4c4c2", marginTop: verticalScale(20), ...FONTS.lexendregular, fontSize: RFValue(14) }}
+                style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: horizontalScale(300), borderColor: "#c4c4c2", marginTop: verticalScale(20), ...FONTS.lexendregular, fontSize: RFValue(14),color:COLORS.black }}
               />
               {/* <Fontisto name='email' size={30} style={{ alignSelf: "center" }} /> */}
             </View>
@@ -137,7 +137,7 @@ const ChangePassword = () => {
                 placeholderTextColor={"black"}
                 onChangeText={(text: String) => { setConfirmpassword(text), error ? setError("") : null }}
                 value={confirmpassword}
-                style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: horizontalScale(300), borderColor: "#c4c4c2", marginTop: verticalScale(20), ...FONTS.lexendregular, fontSize: RFValue(14) }}
+                style={{ borderWidth: 1, paddingStart: 15, borderRadius: 8, width: horizontalScale(300), borderColor: "#c4c4c2", marginTop: verticalScale(20), ...FONTS.lexendregular, fontSize: RFValue(14),color:COLORS.black }}
               />
               {/* <Fontisto name='email' size={30} style={{ alignSelf: "center" }} /> */}
             </View>
@@ -147,7 +147,7 @@ const ChangePassword = () => {
 
             {error ? <Text style={{ ...FONTS.lexendregular, color: COLORS.element, fontSize: RFValue(12), paddingStart: "7%" }}>{error}</Text> : null}
           </View>
-          <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: verticalScale(200), padding: "3%" }}
+          <TouchableOpacity style={{ alignSelf: "center", marginTop: "1%", borderWidth: 1, borderRadius: 8, width: verticalScale(200), padding: "3%" }}
             onPress={() => validatePassword()}
           >
             <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-SemiBold", color: "black" }}>Update</Text>

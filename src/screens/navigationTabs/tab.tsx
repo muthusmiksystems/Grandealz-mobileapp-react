@@ -1,8 +1,8 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Image, View, Text, Button, TouchableOpacity } from 'react-native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
-
+import { productDrawHandler } from '../../store/reducers/productdraw';
 import DataPage from "../Home/dataPage";
 import Draws from "../Draws/draws";
 import NotificationList from "../Home/notificationList";
@@ -12,6 +12,7 @@ import { icons, COLORS, FONTS } from "../../constants";
 import Icon from 'react-native-vector-icons/FontAwesome'
 import BrandIcons from "react-native-vector-icons/Ionicons"
 import EntypoIcons from "react-native-vector-icons/Entypo";
+import { useDispatch, useSelector } from 'react-redux';
 
 import { RFValue } from "react-native-responsive-fontsize";
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -38,7 +39,12 @@ const tabOptions = {
 };
 
 const Tabs = () => {
+    const dispatch = useDispatch();
     const navigation = useNavigation();
+    useEffect(() => {
+    dispatch(productDrawHandler())
+}, [])
+
     return (
         <Tab.Navigator
             backBehavior="initialRoute"

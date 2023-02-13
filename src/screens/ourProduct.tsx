@@ -14,80 +14,31 @@ import { horizontalScale, moderateScale, verticalScale } from "../constants/metr
 import { love } from "../constants/icons"
 import EntypoIcons from "react-native-vector-icons/Entypo";
 import { useNavigation } from "@react-navigation/native";
+import LoaderKit from 'react-native-loader-kit';
 import icons from "../constants/icons"
 import image from "../constants/image";
 import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS, FONTS } from "../constants";
+import LoderKit from ""
 import OrderList from "./Myorders/orderList";
 import WishlistData from "./wishListData";
 import { productGetCall } from "../../src test sasi/services/register";
 import { ourCountry, ourprod } from "../services/register";
-const Data = [
-    {
-        id: '1',
-        imag: image.pencilorg,
-        name: "Pencil",
-        detail: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry  standard dummy text ever since the 1500s Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'
-    },
-    {
-        id: '2',
-        imag: image.pencilorg,
-        name: "Pencil",
-        detail: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry  standard dummy text ever since the 1500s Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'
 
-    },
-    {
-        id: '3',
-        imag: image.bottel,
-        name: "Bottel",
-        detail: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry  standard dummy text ever since the 1500s Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'
-    },
-    {
-        id: '4',
-        imag: image.tshirt,
-        name: "T-Shirt",
-        detail: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry  standard dummy text ever since the 1500s Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'
-
-    },
-    {
-        id: '5',
-        imag: image.cap,
-        name: "Cap",
-        detail: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry  standard dummy text ever since the 1500s Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'
-
-    },
-    {
-        id: '6',
-        imag: image.pencilorg,
-        name: "Pencil",
-        detail: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry  standard dummy text ever since the 1500s Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'
-    },
-    {
-        id: '7',
-        imag: image.bottel,
-        name: "Bottel",
-        detail: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry  standard dummy text ever since the 1500s Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'
-
-    },
-    {
-        id: '8',
-        imag: image.tshirt,
-        name: "T-Shirt",
-        detail: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry  standard dummy text ever since the 1500s Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'
-    },
-];
 const OurProducts = () => {
     const navigation = useNavigation();
-    const [stock, setStock] = useState()
+    const [stock, setStock] = useState([]);
+    const [loader, setLoader] = useState(false)
     useEffect(() => {
-        const prod = async () => {
-            let ourProduct = await ourprod()
-            console.log("consolelog", ourProduct)
-            setStock(ourProduct)
-        }
+        setLoader(true);
         prod()
     }, [])
-
+    const prod = async () => {
+        let ourProduct = await ourprod()
+        console.log("consolelog", ourProduct)
+        setStock(ourProduct);
+        setLoader(false);
+    }
     return (
         <SafeAreaView style={{ backgroundColor: "#F1F1F", height: "100%" }}>
             <StatusBar
@@ -101,6 +52,8 @@ const OurProducts = () => {
                 <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), width: "75%", textAlign: "center" }}>Our Products</Text>
 
             </View>
+      {!loader ?
+        (stock)?
             <ScrollView>
                 <View>
                     <FlatList
@@ -127,6 +80,20 @@ const OurProducts = () => {
                     />
                 </View>
             </ScrollView>
+            :
+            <View style={{ width: "100%", alignItems: "center", paddingBottom: "5%", height: "92%", justifyContent: "center" }}>
+                    <Text style={{color:"black"}}> No Products Available</Text>
+            </View>
+            :
+                <View style={{ width: "100%", alignItems: "center", paddingBottom: "5%", height: "92%", justifyContent: "center" }}>
+                    <LoaderKit
+                        style={{ width: 100, height: 105 }}
+                        name={'BallClipRotatePulse'} // Optional: see list of animations below
+                        size={30} // Required on iOS
+                        color={COLORS.element} // Optional: color can be: 'red', 'green',... or '#ddd', '#ffffff',
+                    />
+                </View>
+        }
         </SafeAreaView>
     );
 }

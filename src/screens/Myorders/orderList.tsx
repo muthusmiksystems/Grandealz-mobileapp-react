@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren } from 'react';
+import React, {useState, type PropsWithChildren } from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -17,15 +17,27 @@ import { COLORS, FONTS } from '../../constants';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useNavigation } from '@react-navigation/native';
 import { horizontalScale, verticalScale } from '../../constants/metrices';
+import { ActivityIndicator } from 'react-native';
+import OrderEmpty from '../ExceptionScreens/orderEmpty';
+import { useEffect } from 'react';
 
 
-const OrderList = (orderlist) => {
+const OrderList = ({orderlist}) => {
     const navigation = useNavigation();
+    const [filterdata,setData]=useState(orderlist);
+    //const filterdata =orderlist
+    //console.log("filter data in mapping .........",orderlist.orderlist.data)
+    useEffect(()=>{
+        setData(orderlist)
+},[orderlist])
     return (
         <SafeAreaView >
             <View >
+                {orderlist ?
+                <>
+                { orderlist.message==='success' ?
                 <FlatList
-                    data={orderlist.orderlist}
+                    data={filterdata.data}
                     contentContainerStyle={{ paddingBottom: "5%" }}
                     keyExtractor={item => item._id}
                     renderItem={({ item }) => (
@@ -46,7 +58,6 @@ const OrderList = (orderlist) => {
                                         <Text style={{ fontSize: RFValue(14), ...FONTS.lexendregular, color: "#616161" }}>{item.draws.draw.draw_title}  </Text>
                                         <Text style={{ fontSize: RFValue(14), ...FONTS.lexendregular, color: "red" }}>₹{item.draws.draw.product_price}</Text>
                                         <Text style={{ fontSize: RFValue(14), ...FONTS.lexendregular, color: "#616161", marginTop: RFValue(7) }}>{item.draws.draw_tickets.length} Tickets</Text>
-                                        {/* <Text style={{ fontSize: RFValue(12), ...FONTS.lexendregular, color: "#0B002A" }}>{item.delvery}  </Text> */}
                                     </View>
                                     <View style={{ flexDirection: "row", marginVertical: "2%", marginStart: "3%"}}>
                                         <View style={{ flexDirection: "column", justifyContent: "center", marginStart: horizontalScale(30) }}>
@@ -65,6 +76,15 @@ const OrderList = (orderlist) => {
                         </View>
                     )}
                 />
+                :
+                <View style={{marginTop:"25%"}}>
+                <OrderEmpty value={orderlist.message}/>
+                </View>}
+                </>
+                :
+                <View style={{marginTop:"25%"}}>
+                <OrderEmpty value={"You haven't ordered anything"}/>
+                </View>}
             </View>
         </SafeAreaView>
     )

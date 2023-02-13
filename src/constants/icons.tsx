@@ -40,25 +40,30 @@ export const tabTicketNoColor = require("../assests/icons/ticketNoColor.png")
 export const tabTrolleyColor = require("../assests/icons/trolley-color.png")
 export const tabTrolleyNoColor = require("../assests/icons/trolley-noColor.png")
 export const tabTopSlide = require("../assests/icons/recUp.png")
-export const rupee=require("../assests/icons/rupee.png")
-export const download=require("../assests/icons/download.png")
-export const share=require("../assests/icons/share.png")
-export const loginwhite=require("../assests/icons/grandealz3White.png")
-export const conlogo=require("../assests/icons/conlogo.png")
-export const close=require("../assests/icons/close.png")
-export const back1=require("../assests/icons/back1.png")
-
+export const rupee = require("../assests/icons/rupee.png")
+export const download = require("../assests/icons/download.png")
+export const share = require("../assests/icons/share.png")
+export const loginwhite = require("../assests/icons/grandealz3White.png")
+export const conlogo = require("../assests/icons/conlogo.png")
+export const close = require("../assests/icons/close.png")
+export const back1 = require("../assests/icons/back1.png")
+export const networkGif = require("../assests/icons/noNetworkGif.gif")
+export const confirmTick = require("../assests/icons/confirmTick.png")
+export const threeTickets = require("../assests/icons/Threetickets.png")
 
 export default {
     loginicon,
     loginwhite,
+    networkGif,
     close,
+    confirmTick,
+    threeTickets,
     back1,
     conlogo,
     crcard,
     Upi,
     netBanking,
- download,
+    download,
     stsicon,
     filter,
     user,

@@ -134,14 +134,15 @@ const NotificationList = () => {
                   <View style={{ flexDirection: "column", width: horizontalScale(240) }}>
                     <Text style={{ fontSize: RFValue(14), ...FONTS.lexendsemibold, margin: "2%", color: COLORS.black }}>{item.from}</Text>
                     <Text style={{ fontSize: RFValue(12), margin: "2%", ...FONTS.lexendregular, color: "#000" }}>{item.to}</Text>
-                    <Text style={{ fontSize: RFValue(14), ...FONTS.lexendregular, color: COLORS.gray, marginHorizontal: "2%", paddingBottom: "2%" }}>{item.date}</Text>
+                    <Text style={{ fontSize: RFValue(14), ...FONTS.lexendregular, color: COLORS.gray, marginHorizontal: "2%", paddingBottom: "2%",marginTop:"1%" }}>{item.date}</Text>
                   </View>
-                  <View style={{ flexDirection: "column", width: horizontalScale(70), backgroundColor: COLORS.lightGray, height: verticalScale(85), alignSelf: "center",borderRadius:10 }}>
+                  <View style={{ flexDirection: "column", width: horizontalScale(75), backgroundColor: COLORS.lightGray, height: verticalScale(75), alignSelf: "center",borderRadius:10 }}>
                     <Image
                       source={item.imag}
-                      resizeMode="contain"
+                      resizeMode="cover"
                       style={{
-                        width: 65,
+                        width: 75,
+                        height:50,
                         top:9,
                         left:4
                       }}

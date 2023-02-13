@@ -52,8 +52,9 @@ import Coupons from './src/screens/Tickets/coupon';
 import PlayNow from './src/screens/Myorders/playNow';
 import Playnowquiz from './src/screens/Myorders/playnowquiz';
 import Playnowquizsubmit from './src/screens/Myorders/playnowquizsubmit';
-
+import NetworkError from './src/screens/networkErrorPage';
 import EditAddress from './src/screens/Cart/editAddress';
+import OrderConfirmed from './src/component/orderConfirmed';
 
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -96,7 +97,9 @@ const App = () => {
         <Stack.Screen name="playnowquiz" component={Playnowquiz}/>
         <Stack.Screen name="Playnowquizsubmit" component={Playnowquizsubmit}/>
         <Stack.Screen name="EditAddress" component={EditAddress}/>
-
+        <Stack.Screen name="NetworkError" component={NetworkError}/>
+        <Stack.Screen name="OrderConfirmed" component={OrderConfirmed}/>
+        
         < Stack.Screen
           name="Tabs"
           component={Tabs}

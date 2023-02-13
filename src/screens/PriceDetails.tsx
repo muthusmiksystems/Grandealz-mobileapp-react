@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren,useState } from 'react';
+import React, { type PropsWithChildren,useState, useEffect } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -16,45 +16,104 @@ import image from '../constants/image';
 import { COLORS, FONTS } from '../constants';
 import { verticalScale, horizontalScale, moderateScale } from '../constants/metrices';
 import EntypoIcons from "react-native-vector-icons/Entypo";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from '@react-navigation/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useDispatch, useSelector, useStore } from 'react-redux';
 import moment from "moment";
-
-import { addToWishlistHandle } from '../services/wishlist';
-
-import { addToCartHandler } from '../store/reducers/addToCart';
-import { unwrapResult } from '@reduxjs/toolkit';
+import { addToWishlistHandle, wishlistHandle } from '../services/wishlist';
+import { ourCartPage } from '../services/ourCart';
+import { RemovewishlistHandle } from '../services/deletewishlist';
+import { AddtoCartHandle } from '../services/addtocart';
+import { ToastAndroid } from 'react-native';
 const PriceDetails = ({route}) => {
-  const pricing = route.params
-
-  const[isWished,setIsWished]=useState(false)
-  const dispatch=useDispatch();
-  const store=useStore();
-
-  console.log(pricing,"samuel sham")
+  const pricing = route.params;
   const navigation = useNavigation();
+  const dispatch=useDispatch();
+  const [cartList,setCartList]=useState([]);
+  const[wishedId,setWishedId]=useState<string>("");
   
+  const [heart,setHeart]=useState(false)
+  
+  // console.log("routedData.....................",pricing)
 
-  const handleAdd=()=>{
-    let value=pricing._id;
-    dispatch(addToCartHandler(value))
-    .then(unwrapResult)
-    .then((orginalResult: any)=>{
-      console.log("result of api is ",orginalResult)
+
+  const handleAddtoCart = async () => {
+    const payload = { "draw": pricing._id, "qty": 1 }
+    console.log("payload", payload)
+    let AddItemtoCart = await AddtoCartHandle(payload)
+    if (AddItemtoCart.status === "200") {
+      ToastAndroid.showWithGravity(
+        AddItemtoCart.message,
+        ToastAndroid.SHORT,
+        ToastAndroid.CENTER,
+      );
+      cartStock();
+    }
+    else {
+      ToastAndroid.showWithGravity(
+        AddItemtoCart.message,
+        ToastAndroid.SHORT,
+        ToastAndroid.CENTER,
+      );
+      // setChanger(!changer);
+    }
+  }
+  const RemoveWishlist = async () => {
+    console.log("Removewish........", wishedId);
+    let Removeitems = await RemovewishlistHandle(wishedId)
+    showHeartIfExists();
+
+    console.log("result...........", Removeitems)
+  }
+  const handleAddWishlist = async () => {
+    console.log("Addwish........", pricing._id);
+    const result = await addToWishlistHandle(pricing._id);
+
+    showHeartIfExists();
+    console.log("result...........", result)
+
+  }
+  const showHeartIfExists = async () => {
+    let priceitem = await wishlistHandle();
+    // console.log("priceitem..........",priceitem)
+    var WishIdArray: any[] = [];
+    (priceitem).forEach((element: any) => {
+      var Data = (element.draw._id);
+      if (Data === pricing._id) {
+        console.log("trueeeeeeeeeeeee.........", element._id);
+        setWishedId(element._id);
+      }
+      WishIdArray.push(Data);
     })
+    if (WishIdArray.includes(pricing._id)) {
+      // console.log(`true${pricing._id}`)
+      setHeart(true);
+    } else {
+      //console.log(`false${pricing._id}`)
+      setHeart(false);
+    }
   }
 
-
-  const handleAddWishlist=async()=>{
-        const result=  await addToWishlistHandle(pricing._id);
-        setIsWished(true);
-        console.log("done",pricing._id);
+  const cartStock = async () => {
+    let ourCartStock = await ourCartPage()
+    console.log("CartData List on cart",ourCartStock)
+    var AlreadyInCart:any=[];
+        let data = ourCartStock?.draws;
         
-        console.log("result",result)
-        
-  }
-
+        if (data) {
+            (data).forEach((element: any) => {
+                var Data = (element.draw._id);
+                AlreadyInCart.push(Data);
+            })
+        }
+        setCartList(AlreadyInCart);
+         console.log("dtaaaa.....................", AlreadyInCart)
+}
+ useEffect(()=>{
+  showHeartIfExists();
+  cartStock();
+ },[])
 
   return (
     <View style={{ flex: 1 }} >
@@ -117,18 +176,28 @@ const PriceDetails = ({route}) => {
                     height: 25
                   }}
                 />
-                <TouchableOpacity onPress={()=>handleAddWishlist()}>
-                <Image
-                  source={icons.userHeart}
-                  style={{
+                
+                  {!heart?
+                  <TouchableOpacity onPress={() =>handleAddWishlist()}>
+                    <FontAwesome name="heart-o" style={{
+                      bottom: "40%",
+                      marginRight: "2%",
+                      width: 30,
+                      height: 30,
+
+                    }} size={30} color={"black"} />
+                  </TouchableOpacity>
+                :
+                <TouchableOpacity onPress={()=>RemoveWishlist()}>
+                  <FontAwesome name="heart" style={{
                     bottom: "40%",
                     marginRight: "2%",
-                    width: 25,
-                    height: 25,
+                    width: 30,
+                    height: 30,                  
                     
-                  }}
-                />
+                  }}size={30}  color={"red"} />
                 </TouchableOpacity>
+                       }
               </View>
               <View style={{ flexDirection: 'column', padding: moderateScale(10) }}>
                 <Image
@@ -144,33 +213,33 @@ const PriceDetails = ({route}) => {
           </View>
           <View style={{ marginVertical: "5%",paddingBottom:"10%"}}>
             <View style={{ flexDirection: "row", marginVertical: "2%" }}>
-              <TouchableOpacity style={{ flexDirection: "column", width: "48%", marginEnd: "2%" }}>
-                <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "7%", backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }}> Prize Details</Text>
+              <TouchableOpacity style={{ flexDirection: "column", width: "49%", marginEnd: "2%",borderRadius:5 }}>
+                <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }}> Prize Details</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, width: "49%", borderRadius: 5 }} onPressIn={() => { navigation.navigate("ProductDetails",pricing) }}>
+              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, width: "49%", borderRadius: 5 }} onPressIn={() => { navigation.replace("ProductDetails",pricing) }}>
                 <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}>
                   Product Details
                 </Text>
               </TouchableOpacity>
             </View>
             <Text style={{ fontSize: RFValue(15), ...FONTS.lexendregular, color: COLORS.black, }}>Get a chance to win </Text>
-            <Text style={{ color: "#E70736", fontSize: RFValue(15), ...FONTS.lexendsemibold }}>₹ {pricing.product_price} Cash</Text>
-            <Text style={{ marginVertical: "2%", fontSize: RFValue(10), ...FONTS.lexendregular, color: COLORS.black, }}>{pricing.product_description}</Text>
+            <Text style={{ color: "#E70736", fontSize: RFValue(15), ...FONTS.lexendsemibold }}>₹{pricing.product_price} Cash</Text>
+            <Text style={{ marginVertical: "3%",marginBottom:"7%", fontSize: RFValue(10), ...FONTS.lexendregular, color: COLORS.black, }}>{pricing.product_description}</Text>
             {/* <View style={{ flexDirection: "row", marginVertical: "2%", justifyContent: "space-evenly" }}>
                 <TouchableOpacity style={{ flexDirection: "column", marginLeft: 5, borderWidth: 1,borderRadius:10 }}>
                   <Text style={{ fontSize: 20, padding: 10, backgroundColor: "#fff", color: "#000",...FONTS.lexendregular,borderRadius:10 }}> Go To Home </Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1,borderRadius:10 }}>
-                  <Text style={{ fontSize: 20, padding: 10, backgroundColor: "#fff", color: "#000",...FONTS.lexendregular,borderRadius:10 }}>View Card</Text>
+                  <Text style={{ fontSize: 20, padding: 10, backgroundColor: "#fff", color: "#000",...FONTS.lexendregular,borderRadius:10 }}>View Cart</Text>
                 </TouchableOpacity>
               </View> */}
             <View style={{ flexDirection: "row", marginVertical: "2%",}}>
               <TouchableOpacity style={{ flexDirection: "column", width: "48%", marginEnd: "2%" }} onPressIn={() => {  navigation.navigate("Tabs") }} >
                 <Text style={{ textAlign: "center", fontSize: RFValue(15), borderWidth: 1, padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}> Go to Home</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 5, width: "49%" }}>
+              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 5, width: "49%" }} onPressIn={() => {  navigation.navigate("Tabs",{screen:"Cart"}) }}>
                 <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}>
-                  View Card
+                  View Cart
                 </Text>
               </TouchableOpacity>
             </View>
@@ -179,10 +248,17 @@ const PriceDetails = ({route}) => {
       </View>
       <View style={{ flex: 0.15, backgroundColor: "white" }}>
         <View style={{ flexDirection: "row", marginVertical: "2%", marginHorizontal: "4%" }}>
+        { !(cartList.includes(`${pricing._id}`)) ?
           <TouchableOpacity style={{ flexDirection: "column", borderRadius: 6, width: "48%", marginEnd: "2%" }}>
-            <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "7%", backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }} onPress={()=>{handleAdd()}}>ADD TO CART</Text>
+            <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }} onPress={()=>{handleAddtoCart()}}>ADD TO CART</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 6, width: "49%" }} >
+          :
+          <TouchableOpacity style={{ flexDirection: "column", borderRadius: 6, width: "48%", marginEnd: "2%" }}>
+          <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "7%", backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }} onPress={()=>{navigation.navigate("Tabs",{screen:"Cart"})}}>VIEW CART</Text>
+        </TouchableOpacity>
+        }
+
+          <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 6, width: "49%" }} onPress={()=>console.log("router value",route.params)}>
             <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 8 }}>
               BUY NOW
             </Text>

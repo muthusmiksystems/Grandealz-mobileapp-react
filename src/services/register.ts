@@ -63,7 +63,49 @@ export const drawWinnerGet = async (data: string) => {
     })
 }
 
+export const drawWinnerfilter = async (data: any) => {
+    console.log(data, "inside the filter api")
+    const filterSearch = data.search;
+    const filterDate = data.date;
+    const filterYear = data.year;
+    let paramfilter= "";
+    if(filterSearch)
+    {
+        paramfilter = `search=${filterSearch}`;
+    } 
+    if(filterDate)
+    {
+        paramfilter = paramfilter + `&draw_date=${filterDate}`;
+    }
+    if(filterYear)
+    {
+        paramfilter = paramfilter + `&draw_year=${filterYear}`
+    }
+   const api= `https://api.grandealz.vytech.co/draws/winners?limit=12&skip=0&${paramfilter}`
+   console.log("api data",api)
+    return await axios.get(`${'https://api.grandealz.vytech.co'}/draws/winners?limit=12&skip=0&${paramfilter}`).then(response => {
+         console.log(api,"Responce in Drawgetcall",response.data.message);
+         return response.data
+     }).catch((err) => {
+         console.log("catch error Api error", err);
+     })
+}
 
+
+
+
+
+export const drawCommingfilter = async (data: string) => {
+    const value=data.searcher
+    console.log("data sam",value)
+
+    return await axios.get(`${'https://api.grandealz.vytech.co'}/draws??limit=12&skip=0&status=UpComming&search=${value}`).then(response => {
+        //console.log("Responce in Drawgetcall",response.data.data);
+        return response.data
+    }).catch((err) => {
+        console.log("catch error Api error", err);
+    })
+}
 export const drawCommingGet = async (data: string) => {
 
     return await axios.get(`${'https://api.grandealz.vytech.co'}/draws?${data}`).then(response => {

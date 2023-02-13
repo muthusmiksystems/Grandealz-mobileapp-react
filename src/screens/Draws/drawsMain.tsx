@@ -1,4 +1,4 @@
-import React, { useState, type PropsWithChildren } from 'react';
+import React, { useState, useEffect, type PropsWithChildren } from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -11,6 +11,7 @@ import {
     View,
     TouchableOpacity,
     Modal,
+    TextInput,
     Alert,
     Pressable,
 } from 'react-native';
@@ -20,18 +21,128 @@ import { COLORS, FONTS } from '../../constants';
 import { useNavigation } from '@react-navigation/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import Winners from './winners';
+import moment from 'moment';
 import UpcomingDraws from './upcomingDraws';
 import { horizontalScale, moderateScale, verticalScale } from '../../constants/metrices';
-import { TextInput } from 'react-native-paper';
+// import { TextInput } from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Dropdown } from 'react-native-element-dropdown';
-
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { drawCommingfilter, drawCommingGet, drawWinnerfilter } from '../../services/register';
+import LoaderKit from 'react-native-loader-kit';
 
 
 const DrawsMain = () => {
     const [showWinners, setShowWinners] = useState(true);
     const navigation = useNavigation();
+    const [dateShow, setDateShow] = useState(false);
+    const [date, setDate] = useState(moment(new Date()).toISOString());
     const [modalVisible, setModalVisible] = useState(false);
+    const [searcher, setSearcher] = useState("");
+    const [year, setYear] = useState("");
+    const [winner, setWinner] = useState();
+    const [close, setClose] = useState();
+    const [loaders,setLoader]=useState(true);
+
+    const daily = moment(new Date()).format("YYYY-MM-DD")
+
+    const selectedDateFunction = (event, selectedDate: any) => {
+        setDateShow(!dateShow);
+        const currentDate = selectedDate;
+        console.log("rgerfefefge", currentDate)
+        setDate(currentDate);
+    }
+    const handleFilter = async (search) => {
+        if (showWinners) {
+            let searc = moment(search.date).format("YYYY-MM-DD")
+            setModalVisible(!modalVisible)
+            if (searc === daily) searc = "";
+            const data = {
+                "date": searc,
+                "year": search.year,
+                "search": search.searcher
+            }
+            console.log("date diff", data)
+            const winnerfilter = async (data: any) => {
+                let filterdata = await drawWinnerfilter(data)
+                setWinner(filterdata.data)
+                
+                console.log("winner winner chicken dinner", filterdata)
+            }
+            winnerfilter(data);
+        }
+        else {
+
+            setModalVisible(!modalVisible)
+            const data = {
+                "searcher": search.searcher
+            }
+            console.log("upcomming", data)
+            const upcome = async (data: any) => {
+                let filterdata = await drawCommingfilter(data)
+                setClose(filterdata.data)
+                
+                console.log("upcomming data", filterdata.data);
+            }
+            upcome(data)
+        }
+    }
+    useEffect(()=>{
+        {winner ? setLoader(false): null}
+    },[winner])
+
+    const resetFilter = async () => {
+        if (showWinners) {
+            setModalVisible(!modalVisible)
+            const data = { "date": "", "search": "", "year": "" }
+            const winnerfilter = async (data: any) => {
+                let filterdata = await drawWinnerfilter(data)
+                setWinner(filterdata.data)
+                
+                console.log("winner winner chicken dinner", filterdata.data)
+            }
+            winnerfilter(data);
+        }
+        else {
+            setModalVisible(!modalVisible)
+            const data = { "searcher": "" }
+            const upcome = async (data: any) => {
+                let filterdata = await drawCommingfilter(data)
+                setClose(filterdata.data)
+                setLoader(fasle)
+                console.log("upcomming data", filterdata.data);
+            }
+            upcome(data)
+        }
+    }
+
+    useEffect(() => {
+        //console.log("data..............");
+        const data = {
+            "date": "",
+            "year": "",
+            "search": ""
+        }
+        const win = async () => {
+            let closingData = await drawWinnerfilter(data)
+            let result = closingData.data;
+            console.log("im inside the winner page ", result);
+            setWinner(result)
+            
+            console.log("loader state...........",loader)
+        }
+        win();
+        const value = "status=UpComming"
+        const soon = async () => {
+            let closingData = await drawCommingGet(value)
+            let result = closingData.data;
+            console.log("im inside the upcomming page ", result);
+            setClose(result)
+            
+        }
+        soon();
+
+    }, [])
     return (
         <SafeAreaView>
             <View style={{ flexDirection: "row", width: "94%", alignSelf: "center", height: verticalScale(52) }}>
@@ -68,68 +179,72 @@ const DrawsMain = () => {
                                                         width: 30,
                                                         height: 30,
                                                         marginTop: 0
+                                                        , marginStart: RFValue(15)
                                                     }}
                                                 />
                                             </View>
                                         </Pressable>
                                     </TouchableOpacity>
-                                    <View style={{ width: "35%", marginTop: 10 }}>
+                                    <View style={{ width: "35%", marginTop: 10, marginStart: RFValue(15) }}>
                                         <Text style={{ textAlign: "center", fontFamily: "Lexend-Regular", fontSize: RFValue(20), color: "#000000", marginTop: 0 }}>Filter</Text>
                                     </View>
-                                    <View style={{ width: "35%", marginTop: 10 }}>
+                                    <TouchableOpacity style={{ width: "35%", marginTop: 10 }} onPress={() => { setSearcher(""), setDate(moment(new Date()).toISOString()), setYear(""), resetFilter() }}>
                                         <Text style={{ textAlign: "center", fontFamily: "Lexend-Regular", fontSize: RFValue(15), color: "#E70736", marginTop: 5 }}>RESET</Text>
-                                    </View>
+                                    </TouchableOpacity>
                                 </View>
-                                <TouchableOpacity style={{alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(280), marginTop: verticalScale(5), }}>
+                                <TouchableOpacity style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: "91%", marginTop: verticalScale(5), }}>
                                     <Ionicons name='ios-search-sharp' color={"black"} size={25} style={{ alignSelf: "center" }} />
                                     <TextInput
                                         placeholder="Search Here..."
                                         placeholderTextColor={"black"}
                                         underlineColor="white"
+                                        value={searcher}
+                                        onChangeText={(text: String) => setSearcher(text)}
                                         activeUnderlineColor={'transparent'}
-                                        style={{ backgroundColor: "#FFFFFF", flexDirection: "column", height:verticalScale(45),width: horizontalScale(200), ...FONTS.lexendregular, fontSize: RFValue(14), fontFamily: "Lexend-Regular", fontWeight: "700" }}
+                                        style={{ backgroundColor: "#FFFFFF", height: verticalScale(45), width: horizontalScale(200), ...FONTS.lexendregular, fontSize: RFValue(14) }}
                                     />
                                 </TouchableOpacity>
-                                <View style={{ justifyContent:"space-around", alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 0, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(280), marginTop: verticalScale(10), }}>
+                                {showWinners ?
+                                    <>
+                                        <TouchableOpacity style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width:"91%", marginVertical: verticalScale(5), }}>
+                                            <TextInput
+                                                placeholder="Year"
+                                                keyboardType={"phone-pad"}
+                                                placeholderTextColor={"black"}
+                                                underlineColor="white"
+                                                value={year}
+                                                maxLength={4}
+                                                onChangeText={(text: String) => setYear(text)}
+                                                activeUnderlineColor={'transparent'}
+                                                style={{ backgroundColor: "#FFFFFF", flexDirection: "column", height: verticalScale(45), width: horizontalScale(200), ...FONTS.lexendregular, fontSize: RFValue(14) }}
+                                            />
+                                        </TouchableOpacity>
+                                        <View >
+                                            <TouchableOpacity style={{ width: "91%", borderWidth: 1, borderColor: "#c4c4c2", backgroundColor: COLORS.white, alignSelf: "center", justifyContent: "center", borderRadius: 8, ...FONTS.lexendregular, paddingLeft: 14, height: 50 }}
+                                                onPress={() => setDateShow(true)}
+                                            >
+                                                <Text style={styles.dropText}>{(date) ? moment(date).format('YYYY-MM-DD') : 'YYYY-MM-DD'}</Text>
 
-                                    <TextInput
-                                        placeholder="Year"
-                                        placeholderTextColor={"black"}
-                                        underlineColor="white"
-                                        activeUnderlineColor={'transparent'}
-                                        style={{ marginLeft: -10,height:verticalScale(45), backgroundColor: "#FFFFFF", flexDirection: "column", width: horizontalScale(200), ...FONTS.lexendregular, fontSize: RFValue(14), fontFamily: "Lexend-Regular", fontWeight: "700" }}
-                                    />
-                                    <TouchableOpacity>
-                                        <Image
-                                            source={icons.back1}
-                                            resizeMode='contain'
-                                            style={{
-                                                width: 25,
-                                                height: 25,
-                                                marginTop: 5,
-                                            }}
-                                        />
-                                    </TouchableOpacity>
-                                </View>
-                                <TouchableOpacity style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart:4, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(280), marginTop: verticalScale(10), }}>
+                                            </TouchableOpacity>
+                                            {dateShow ?
+                                                <DateTimePicker
+                                                    value={new Date(date)}
+                                                    mode="date"
+                                                    display="default"
+                                                    onChange={selectedDateFunction}
+                                                    // minimumDate={new Date()}
+                                                    maximumDate={new Date()}
+                                                />
+                                                : null}
+                                        </View>
+                                    </> : null}
 
-                                    <TextInput
-                                        placeholder="MM/DD/YYYY"
-                                        placeholderTextColor={"black"}
-                                        underlineColor="white"
-                                        activeUnderlineColor={'transparent'}
-                                        style={{ backgroundColor: "#FFFFFF", flexDirection: "column", width: horizontalScale(200),height:verticalScale(45),...FONTS.lexendregular, fontSize: RFValue(14), fontFamily: "Lexend-Regular", fontWeight: "700" }}
-                                    />
-                                </TouchableOpacity>
-                                <TouchableOpacity style={{alignItems:"center",marginTop:verticalScale(20)}}>
-                                    <View style={{ width:180, height: 45, borderRadius: 8, backgroundColor: "#E70736" }}>
+
+                                <TouchableOpacity style={{ alignItems: "center", marginTop: verticalScale(20) }} onPress={() => { handleFilter({ searcher, date, year }) }}>
+                                    <View style={{ width: 180, height: 45, borderRadius: 8, backgroundColor: "#E70736" }}>
                                         <Text style={{ marginTop: 3, textAlign: "center", color: "#FFFFFF", fontSize: RFValue(17), fontFamily: "Lexend-Regular", padding: 5 }}>Apply</Text>
                                     </View>
                                 </TouchableOpacity>
-
-
-
-
                             </View>
                         </View>
                     </Modal>
@@ -144,19 +259,27 @@ const DrawsMain = () => {
                         />
                     </TouchableOpacity>
                 </View>
-
-
-
             </View>
+            {!loaders ? 
             <View style={{ marginVertical: "1%", position: "relative", paddingBottom: "10%" }}>
                 {showWinners ?
                     <View>
-                        <Winners />
+                        <Winners win={winner} />
                     </View> :
                     <View>
-                        <UpcomingDraws />
+                        <UpcomingDraws son={close} />
                     </View>}
             </View>
+            : 
+            <View style={{ width: "100%", alignItems: "center", justifyContent: "center" }}>
+            <LoaderKit
+                style={{ width: 100, height: 105,top:"10%" }}
+                name={'BallClipRotatePulse'} // Optional: see list of animations below
+                size={30} // Required on iOS
+                color={COLORS.element} // Optional: color can be: 'red', 'green',... or '#ddd', '#FFFFFF',
+            />
+        </View>
+            }
 
 
         </SafeAreaView>

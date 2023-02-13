@@ -24,16 +24,19 @@ export const capshow= require("../assests/images/capshow.png");
 export const tshirtblack= require("../assests/images/tshirtblack.png");
 export const tshirtgreen= require("../assests/images/tshirtgreen.png");
 export const watches= require("../assests/images/watches.png");
-
+export const OrderEmpty=require("../assests/images/OrderEmpty.png")
 export const group= require("../assests/images/Groupshome.png");
 export const pencilorg= require("../assests/images/pencilorg.png");
 export const profilepic= require("../assests/images/Profile.png");
-export const audicar=require("../assests/images/audicar.png")
+export const audicar=require("../assests/images/audicar.png");
+export const imgbg=require("../assests/images/imgbg.png")
+export const ticketEmpty=require("../assests/images/ticket.png")
 
 export default {
     Android,
     audicar,
     arrowdown,
+    imgbg,
     group,
     pencilorg,
     arrowup,
@@ -44,6 +47,7 @@ export default {
     tshirtblack,
     capshow,
     book,
+    OrderEmpty,
     audi,
     cars,
     cash,
@@ -61,5 +65,6 @@ export default {
     tshirt,
     cap,
     profilepic,
+    ticketEmpty,
 
 }

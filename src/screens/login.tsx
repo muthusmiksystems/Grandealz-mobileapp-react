@@ -126,8 +126,10 @@ const Login = (props: Prop) => {
 
           console.log("successfully returned to login with response ", originalPromiseResult);
           if (originalPromiseResult?.data?.access_token) {
-            console.log("token  sam   ...dddd", originalPromiseResult.data.access_token);
+            // if(isSelected===true){
+              console.log("token  sam   ...dddd", originalPromiseResult.data.access_token);
             await AsyncStorage.setItem('loginToken', originalPromiseResult.data.access_token)
+            // }
             ToastAndroid.showWithGravity(
               "Successfully logged in",
               ToastAndroid.SHORT,
@@ -200,7 +202,7 @@ const Login = (props: Prop) => {
             value={email}
             placeholderTextColor={"black"}
             keyboardType="email-address"
-
+            maxLength={30}
             onChangeText={e => { handleChange(e, "email"), setErrorEmail(""), setErrorLogin(""), setEmail(e) }}
 
             style={{
@@ -224,7 +226,7 @@ const Login = (props: Prop) => {
             value={password}
             secureTextEntry={passShow ? true : false}
             placeholderTextColor={"black"}
-
+            maxLength={15}
             onChangeText={e => { handleChange(e, "password"), setErrorPassword(""), setErrorLogin(""), setPassword(e) }}
 
             style={{

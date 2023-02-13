@@ -117,6 +117,7 @@ const ForgetPassword = () => {
           <View style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), marginTop: verticalScale(32), color: "#000" }}>
             <TextInput
               placeholder="Email"
+              maxLength={30}
               placeholderTextColor={"black"}
               onChangeText={(text: String) => setForgetEmail(text)}
               value={forgetEmail}

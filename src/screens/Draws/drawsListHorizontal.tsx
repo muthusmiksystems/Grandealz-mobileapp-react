@@ -103,13 +103,13 @@ const DrawsHeader = () => {
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
             <View>
-              <TouchableOpacity style={{ backgroundColor: "white",marginHorizontal:"1%" }} onPress={()=>navigation.navigate("PriceDetails",item)}>
+              <TouchableOpacity style={{ backgroundColor: "white",marginHorizontal:"1%",borderRadius:5}} onPress={()=>navigation.navigate("PriceDetails",item)}>
                     <Image
                       source={{uri: item.draw_image}}
                       resizeMode="contain"
                       style={{
-                        height:RFValue(80),
-                        width:RFValue(80),
+                        height:RFValue(85),
+                        width:RFValue(85),                        
                       }}
                     />
               </TouchableOpacity>

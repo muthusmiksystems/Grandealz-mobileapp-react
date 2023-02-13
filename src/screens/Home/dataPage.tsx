@@ -12,6 +12,7 @@ import {
   useColorScheme,
   View,
   TouchableOpacity,
+  ImageBackground,
 } from 'react-native';
 import Banner from '../../component/banner';
 import Carsold from '../../component/Carsold';
@@ -21,30 +22,46 @@ import { COLORS, FONTS } from '../../constants';
 import icons from '../../constants/icons';
 import image from '../../constants/image';
 import { useNavigation } from '@react-navigation/native';
-
+import LoaderKit from 'react-native-loader-kit';
 import { original, unwrapResult } from '@reduxjs/toolkit';
 import { RFValue } from 'react-native-responsive-fontsize';
-import { horizontalScale, verticalScale } from '../../constants/metrices';
+import { horizontalScale, moderateScale, verticalScale } from '../../constants/metrices';
 import { useDispatch ,useSelector } from 'react-redux';
 import { bannerHandler } from '../../store/reducers/Banners';
 import { userDetailsHandler } from '../../store/reducers/userDetails';
-
-
+import { ourCartPage } from '../../services/ourCart';
 import { addressListHandler } from "../../store/reducers/addresslist";
 import { drawgetHandler } from '../../store/reducers/Drawgetcall';
 import { Item } from 'react-native-paper/lib/typescript/components/Drawer/Drawer';
+import NetInfo from "@react-native-community/netinfo";
+import { useIsFocused } from '@react-navigation/native';
+// import Image from 'react-native-image-progress';
+// import Progress from 'react-native-progress'
+
 const DataPage = () => {
-  const navigation = useNavigation();
-  const userData: any = useSelector<any>(state => state.userDetailsHandle.data.data);
+
 
   const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const IsFocused = useIsFocused();
+  const userData: any = useSelector<any>(state => state.userDetailsHandle?.data?.data);
+
+
   const [apiData, setApiData] = useState();
-  // const [userData,setUserData]=useState();
-  const [result, setResult] = useState();
-  const [sold, setSold] = useState<any>();
-  const [camp, setCamp] = useState<any>();
-  const [close, setClose] = useState<any>();
+  const [prodata, setProdata] = useState<any>();
+  const [cartList, setCartList] = useState([]);
+  const [loader, setLoader] = useState(false);
+  const DataInfo = useSelector(state => state?.productDrawHandle?.data)
+
+
   useEffect(() => {
+    NetInfo.addEventListener(state => {
+      if (!state.isConnected) {
+        navigation.navigate("NetworkError")
+      }
+    })
+     cartStock();
+     Addresslist();
     dispatch(bannerHandler())
       .then(unwrapResult).then((originalPromiseResult) => {
         // console.log("successfully returned to login with response ", originalPromiseResult);
@@ -53,94 +70,123 @@ const DataPage = () => {
     dispatch(userDetailsHandler())
   }, [])
 
+  useEffect(() => {
+    if(IsFocused){
+      setLoader(true)
+      cartStock()
+    }
+  },[IsFocused])
 
+  const cartStock = async () => {
+  setLoader(true)
+    let ourCartStock = await ourCartPage()
+    console.log("CartData List on cart", ourCartStock)
+    var AlreadyInCart: any = [];
+    let data = ourCartStock?.draws;
+    if (data) {
+      (data).forEach((element: any) => {
+        var Data = (element.draw._id);
+        AlreadyInCart.push(Data);
+      })
+    }
+    setCartList(AlreadyInCart);
+    console.log("dtaaaa..kumari...................",AlreadyInCart)
+    setLoader(false)
+  }
+console.log("rummer",cartList)
   const Addresslist = () => {
     dispatch(addressListHandler())
   }
 
-  console.log("mmm", apiData)
+
+
+  useEffect(() => {
+    setProdata(DataInfo)
+    console.log("mmm", prodata)
+  }, [DataInfo])
 
   return (
-    <ScrollView >
-      <StatusBar
-        animated={true}
-        backgroundColor={"#0a0127"}
-      />
-      <View style={{ height: "100%" }}>
-        <View
-          style={{
-            backgroundColor: "#0a0127",
-            height: verticalScale(80),
-            justifyContent: "center"
-          }}>
-          <View style={{ flexDirection: 'row', justifyContent: "space-between", marginTop: "4%" }}>
-            <View style={{ flexDirection: "column" }}>
-              <Image
-                source={icons.stsicon}
-                resizeMode="contain"
+    <>
+      {console.log("hhhhh", DataInfo.length, DataInfo)}
+      {!loader && prodata  && prodata.length > 0 ?
+
+        <ScrollView >
+
+          <>
+            <StatusBar
+              animated={true}
+              backgroundColor={"#0a0127"}
+            />
+            <View style={{ height: "100%" }}>
+              <View
                 style={{
-                  width: horizontalScale(140),
-                  height: verticalScale(35),
-                  marginLeft: "8%"
-                }}
-              />
+                  backgroundColor: "#0a0127",
+                  height: verticalScale(80),
+                  justifyContent: "center"
+                }}>
+                <View style={{ flexDirection: 'row', justifyContent: "space-between", marginTop: "4%" }}>
+                  <View style={{ flexDirection: "column" }}>
+                    <Image
+                source={icons.userGrand}
+                      resizeMode="contain"
+                      style={{
+                        width: horizontalScale(140),
+                        height: verticalScale(35),
+                        marginLeft: "8%"
+                      }}
+                    />
+                  </View>
+                  <View style={{ flexDirection: "column" }}>
+            <TouchableOpacity onPress={() => { navigation.navigate('User'), Addresslist() }}
+                style={{borderRadius:moderateScale(40)}}
+              >
+                      {(userData?.profile_pic) ?
+                        <Image
+                          source={{ uri: (userData?.profile_pic) }}
+                          resizeMode="cover"
+                          style={{
+                      width: horizontalScale(40),
+                            height: verticalScale(40),
+                            margin: "3%",
+                            bottom: horizontalScale(7),
+                      borderRadius:moderateScale(40)
+                          }}
+                        /> :
+                        <Image
+                          source={icons.user}
+                          resizeMode="cover"
+                          style={{
+                      width: horizontalScale(40),
+                            height: verticalScale(40),
+                            margin: "3%",
+                      bottom: horizontalScale(7),
+                      borderRadius:moderateScale(40)
+                          }}
+                        />}
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+        <View style={{ padding: "3%",height:verticalScale(220)}}>
+                <Banner data={apiData} />
+              </View>
+              <ClosingSoon />
+              <Product addedCart={cartList}/>
+              <Carsold />
             </View>
-            <View style={{ flexDirection: "column" }}>
-              <TouchableOpacity onPress={() => { navigation.navigate('User'), Addresslist() }}>
-                {(userData?.profile_pic)?
-                  <Image
-                  source={{uri:(userData?.profile_pic)}}
-                  resizeMode="contain"
-                  style={{
-                    width: horizontalScale(50),
-                    height: verticalScale(40),
-                    margin: "3%",
-                    bottom: horizontalScale(7),
-                  }}
-                  />:
-                <Image
-                  source={icons.user}
-                  resizeMode="contain"
-                  style={{
-                    width: horizontalScale(35),
-                    height: verticalScale(40),
-                    margin: "3%",
-                    bottom: horizontalScale(7)
-                  }}
-                />}
-              </TouchableOpacity>
-            </View>
-          </View>
+          </>
+
+        </ScrollView>
+        : <View style={{ width: "100%", alignItems: "center", paddingBottom: "5%", height: "100%", justifyContent: "center" }}>
+          <LoaderKit
+            style={{ width: 100, height: 105 }}
+            name={'BallClipRotatePulse'} // Optional: see list of animations below
+            size={30} // Required on iOS
+            color={COLORS.element} // Optional: color can be: 'red', 'green',... or '#ddd', '#ffffff',
+          />
         </View>
-
-        <View style={{ padding: "3%", flex: 0.4 }}>
-          <Banner data={apiData} />
-        </View>
-
-        <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(18), marginLeft: "4%", ...FONTS.lexendsemibold, color: "black" }}>Closing Soon</Text>
-        <View style={{ marginLeft: "4%", width: horizontalScale(40), borderWidth: 1, backgroundColor: "#E70736", borderColor: "#E70736" }} />
-        <View>
-          {/* {console.log("user Details by sujith set in userData.............",userData.data )} */}
-          <ClosingSoon />
-        </View>
-
-        <Product />
-
-        <View style={{ paddingVertical: verticalScale(10), backgroundColor: "#D10359", height: 150, }}>
-          <Text style={{ color: "white", marginLeft: 25, ...FONTS.lexendregular, fontWeight: "600", color: COLORS.white, fontSize: RFValue(15) }}>
-            SOLD OUT
-          </Text>
-          <View style={{ marginLeft: "7%", width: "10%", height: "2%", borderColor: "white", backgroundColor: "black" }} />
-          <Text style={{ color: "white", marginLeft: 25, ...FONTS.lexendregular, color: COLORS.white, marginTop: "1%" }}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-          </Text>
-        </View>
-        <Carsold />
-
-
-
-      </View>
-    </ScrollView>
+      }
+    </>
   )
 }
 const styles = StyleSheet.create({

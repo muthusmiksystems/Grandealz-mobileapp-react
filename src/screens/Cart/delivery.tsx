@@ -21,10 +21,11 @@ import { RadioButton } from "react-native-paper";
 // import { RadioButton } from "react-native-paper";
 import icons from "../../constants/icons";
 
-const Delivery = () => {
-
+const Delivery = ({route}) => {
+    console.log(route.params);
+    const amount=route.params.amount
     const navigation = useNavigation();
-    const [checked, setChecked] = React.useState('Male');
+    const [checked, setChecked] = React.useState(0);
 
 
     return (
@@ -46,9 +47,9 @@ const Delivery = () => {
                         <View style={{ flexDirection: "column" }}>
                             <View style={{ flexDirection: "row" }}>
                                 <RadioButton
-                                    value="Male"
-                                    status={checked === 'Male' ? 'checked' : 'unchecked'}
-                                    onPress={() => setChecked('Male')}
+                                    value="Female"
+                                    status={checked === 1 ? 'checked' : 'unchecked'}
+                                    onPress={() => setChecked(1)}
                                     uncheckedColor={COLORS.lightGray}
                                     color={COLORS.element}
                                 />
@@ -59,9 +60,11 @@ const Delivery = () => {
                             <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendsemibold, margin: "3%" }}>Deliver at your door step</Text>
 
                             <Text style={{ color: COLORS.gray, fontSize: RFValue(10), ...FONTS.lexendregular, margin: "5%" }}>For INR 50.00 your product(s) delivered to you and your ticker(s) will be used for draws.</Text>
+                            {checked==1 ?
                             <TouchableOpacity style={{ width: "40%", justifyContent: "center", alignItems: "center", borderRadius: 5, borderWidth: 1, padding: "2%", marginStart: "5%" }}>
-                                <Text style={{ textAlign: "center", color: COLORS.textHeader, fontSize: RFValue(10), ...FONTS.lexendsemibold }} onPress={() => navigation.navigate("Address")}>Address</Text>
+                                <Text style={{ textAlign: "center", color: COLORS.textHeader, fontSize: RFValue(10), ...FONTS.lexendsemibold }} onPress={() => navigation.navigate("Address",{type:"payment","amount":amount})}>Address</Text>
                             </TouchableOpacity>
+                               :null }
                         </View>
                         <View style={{ flexDirection: "column", width: "20%", justifyContent: "center", alignItems: "center" }}>
                             <Image
@@ -78,15 +81,21 @@ const Delivery = () => {
                             <View style={{ flexDirection: "row" }}>
                                 <RadioButton
                                     value="Female"
-                                    status={checked === 'Female' ? 'checked' : 'unchecked'}
-                                    onPress={() => setChecked('Female')}
+                                    status={checked === 2 ? 'checked' : 'unchecked'}
+                                    onPress={() => setChecked(2)}
                                     uncheckedColor={COLORS.lightGray}
                                     color={COLORS.element}
                                 />
                             </View>
                         </View>
                         <View style={{ flexDirection: "column", width: "65%", }}>
+                     
                             <Text style={{ color: COLORS.textHeader, fontSize:moderateScale(13), ...FONTS.lexendsemibold, margin: "3%" }}>Self Pickup From Our Outlet</Text>
+                            {checked==2 ?
+                            <TouchableOpacity style={{ width: "40%", justifyContent: "center", alignItems: "center", borderRadius: 5, borderWidth: 1, padding: "2%", marginStart: "5%" }} onPress={() => navigation.navigate("OrderConfirmed")}>
+                                <Text style={{ textAlign: "center", color: COLORS.textHeader, fontSize: RFValue(10), ...FONTS.lexendsemibold }} >Continue</Text>
+                            </TouchableOpacity>
+                            :null}
                         </View>
                     </View>
                 </View>

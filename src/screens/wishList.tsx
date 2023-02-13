@@ -10,10 +10,12 @@ import {
     FlatList,
     TouchableOpacity
 } from 'react-native';
+import LoaderKit from 'react-native-loader-kit';
 import { horizontalScale, verticalScale } from "../constants/metrices";
 import { love } from "../constants/icons"
 import EntypoIcons from "react-native-vector-icons/Entypo";
 import { useNavigation } from "@react-navigation/native";
+
 import icons from "../constants/icons"
 import image from "../constants/image";
 import { RFValue } from "react-native-responsive-fontsize";
@@ -23,26 +25,55 @@ import { wishlistHandle } from "../services/wishlist";
 import { RemovewishlistHandle } from '../services/deletewishlist';
 import { ToastAndroid } from 'react-native';
 import { AddtoCartHandle } from "../services/addtocart";
+import WishListEmpty from "./ExceptionScreens/wishListEmpty";
+import CartEmpty from "./ExceptionScreens/cartEmpty";
+import OrderEmpty from "./ExceptionScreens/orderEmpty";
+import { ourCartPage } from "../services/ourCart";
 const WishList = () => {
     const navigation = useNavigation();
-
     const [Wishlistdata, setWishlistdata] = useState<any>([]);
 
     const [statusChange, setStatusChange] = useState<boolean>(false);
     const [productid, setProductid] = useState()
     const [removeres, setRemoveres] = useState()
     const [drawid, setDrawid] = useState();
+    const [viewlist, setViewlist] = useState(false);
+    const [cartidlist, setCartIdList] = useState([])
+    const [loader, setLoader] = useState(false)
 
 
+    const showViewCart = async () => {
+        let viewitem = await ourCartPage()
+        setViewlist(viewitem)
+        console.log("viewcart page", viewitem)
+        const cartIdList = viewitem?.draws;
+        var viewcartID: any[] = []
+        if(cartIdList)
+        {
+        (cartIdList).forEach((element: any) => {
+            var Viewlistcart = (element.draw._id);
+
+            viewcartID.push(Viewlistcart)
+        });
+        console.log("pppppppppppppppppppp", viewcartID)
+        setCartIdList(viewcartID)
+        setLoader(false)
+    }
+        setCartIdList(viewcartID)
+        setLoader(false)
+    }
 
 
     useEffect(() => {
+        setLoader(true)
         soon()
+        showViewCart()
     }, [])
 
 
     useEffect(() => {
         RemoveWishlist();
+        soon()
     }, [productid])
 
     const RemoveItem = (data: any) => {
@@ -64,13 +95,14 @@ const WishList = () => {
         let WishList = await wishlistHandle()
         console.log("Wishlistdata", WishList)
         setWishlistdata(WishList)
+        setLoader(false)
     }
-
-
-
-
+useEffect(() =>{
+    console.log("drawid...................",drawid)
+    if(drawid){
     const AddtoCartitems = async () => {
-        let AddItemtoCart = await AddtoCartHandle(drawid)
+        const payload={"draw": drawid,"qty":1}
+        let AddItemtoCart = await AddtoCartHandle(payload)
         if (AddItemtoCart.status === "200") {
             navigation.navigate("Tabs", { screen: "Cart" })
         }
@@ -82,23 +114,22 @@ const WishList = () => {
             );
         }
     }
-
-    const changed = () => {
-        console.log("llllkfg")
-    }
-
+    AddtoCartitems()
+}
+}, [drawid])
+    
+   
     return (
         <SafeAreaView>
             <StatusBar
                 animated={true}
-                backgroundColor="#0a0127"
+                backgroundColor="#0A0127"
             />
             <View style={styles.subdivOne}>
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18), flexDirection: "column" }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
                 <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(21), width: "75%", textAlign: "center" }}>Wishlist</Text>
-
             </View>
             {/* <View style={styles.subdivTwo}>
                 <Image
@@ -111,10 +142,12 @@ const WishList = () => {
                 />
                 <Text style={{ fontFamily: "Lexend-Regular", color: "black", fontSize: 16, marginTop: 20 }}>Your wishlist in empty</Text>
             </View> */}
+            {!loader ?
+               (Wishlistdata.length > 0) ?
             <ScrollView style={styles.subdivTwo}>
                 <View style={{ flexDirection: "row" }}>
                     <View style={{ padding: "4%" }}>
-                        {Wishlistdata.length > 0 ?
+                     
                             <FlatList
                                 data={Wishlistdata}
                                 contentContainerStyle={{}}
@@ -143,19 +176,39 @@ const WishList = () => {
                                                             <Text style={{ width: "100%", paddingVertical: "8%", textAlign: "center", ...FONTS.lexendregular, fontSize: RFValue(16), color: COLORS.white }}>-</Text>
                                                         </View>
                                                     </TouchableOpacity>
-                                                    <TouchableOpacity style={{ width: "102%", backgroundColor: COLORS.element, alignSelf: "flex-end", flexDirection: "row", borderBottomEndRadius: 10, borderTopStartRadius: 10 }} onPress={() => { setDrawid(item.draw._id), AddtoCartitems() }} >
-                                                        <Text style={{ width: "100%", textAlign: "center", paddingVertical: "8%", ...FONTS.lexendregular, color: COLORS.white }}>ADD TO CART</Text>
-                                                    </TouchableOpacity>
-                                                </View>
+                                                    {!(cartidlist.includes(`${item.draw._id}`)) ?
+                                                        <TouchableOpacity style={{ width: "102%", backgroundColor: COLORS.element, alignSelf: "flex-end", flexDirection: "row", borderBottomEndRadius: 10, borderTopStartRadius: 10 }} onPress={() => { setDrawid(item.draw._id) }} >
+
+                                                            <Text style={{ width: "100%", textAlign: "center", paddingVertical: "8%", ...FONTS.lexendregular, color: COLORS.white }}>ADD TO CART</Text>
+                                                        </TouchableOpacity>
+                                                        : 
+                                                        <TouchableOpacity style={{ width: "102%", backgroundColor: COLORS.element, alignSelf: "flex-end", flexDirection: "row", borderBottomEndRadius: 10, borderTopStartRadius: 10 }} onPress={() => {setDrawid(item.draw._id),navigation.navigate('Tabs',{screen:'Cart'})} } >
+
+                                                        <Text style={{ width: "100%", textAlign: "center", paddingVertical: "8%", ...FONTS.lexendregular, color: COLORS.white }}>VIEW CART</Text>
+                                                    </TouchableOpacity>}
+
+                                                 </View>
                                             </View>
                                         </TouchableOpacity>
                                     </View>
                                 )}
                             />
-                            : null}
+
+                        </View>
                     </View>
+
+                </ScrollView>
+                : <WishListEmpty />
+                :
+                <View style={{ width: "100%", alignItems: "center", paddingBottom: "5%", height: "92%", justifyContent: "center" }}>
+                    <LoaderKit
+                        style={{ width: 100, height: 105 }}
+                        name={'BallClipRotatePulse'} // Optional: see list of animations below
+                        size={30} // Required on iOS
+                        color={COLORS.element} // Optional: color can be: 'red', 'green',... or '#ddd', '#ffffff',
+                    />
                 </View>
-            </ScrollView>
+                }
         </SafeAreaView>
     );
 }
@@ -163,13 +216,13 @@ const styles = StyleSheet.create({
     subdivOne: {
         width: horizontalScale(375),
         height: verticalScale(80),
-        backgroundColor: "#0a0127",
+        backgroundColor: "#0A0127",
         alignItems: "center",
         // justifyContent: 'center',
         flexDirection: "row"
     },
     subdivTwo: {
-        height: "92%",
+        height: "100%",
         // alignItems: "center",
         // justifyContent: "center",
         // borderWidth:2
@@ -183,7 +236,5 @@ const styles = StyleSheet.create({
     text1: {
         alignContent: "center"
     },
-
-
 })
 export default WishList;

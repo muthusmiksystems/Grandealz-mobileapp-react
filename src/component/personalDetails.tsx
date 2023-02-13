@@ -30,26 +30,27 @@ import moment from 'moment';
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { personalDetailsUpdate } from '../services/personalDetailsUpdate';
 import { userDetailsHandler } from '../store/reducers/userDetails';
+import LoaderKit from 'react-native-loader-kit';
 
 const PersonalDetails = (props) => {
-    console.log("Page props in Personal details..............", props.route.params)
-    const userData: any = useSelector<any>(state => state.userDetailsHandle.data.data);
-    const userDate = moment(userData.date_of_birth).toISOString();
+    // console.log("Page props in Personal details..............", props.route.params)
+    const userData: any = useSelector<any>(state => state.userDetailsHandle?.data?.data);
+    const userDate = moment(userData?.date_of_birth).toISOString();
     const dispatch = useDispatch();
     const navigation = useNavigation();
-    const [firstName, setFirstName] = useState(userData.first_name);
-    const [lastName, setLastName] = useState(userData.last_name);
-    const [email, setEmail] = useState(userData.email);
-    const [mblNumber, setMblNumber] = useState(userData.phone);
-    const [mblCode, setMblCode] = useState(userData.country_phone_code);
-    const [checked, setChecked] = React.useState(userData.gender);
+    const [firstName, setFirstName] = useState(userData?.first_name);
+    const [lastName, setLastName] = useState(userData?.last_name);
+    const [email, setEmail] = useState(userData?.email);
+    const [mblNumber, setMblNumber] = useState(userData?.phone);
+    const [mblCode, setMblCode] = useState(userData?.country_phone_code);
+    const [checked, setChecked] = React.useState(userData?.gender);
     const [firstNameError, setFirstNameError] = useState('');
     const [lastNameError, setLastNameError] = useState('');
     const [emailError, setEmailError] = useState('');
     const [mblCodeError, setMblCodeError] = useState('');
     const [mblNumberError, setMblNumberError] = useState('');
     const [countryListValue, setCountryListValue] = useState([])
-    const [countryValue, setCountryValue] = useState<any>(userData.nationality)
+    const [countryValue, setCountryValue] = useState<any>(userData?.nationality)
     const [stateListValue, setStateListValue] = useState([])
     const [stateValue, setStateValue] = useState<any>('')
     const [cityListValue, setCityListValue] = useState([])
@@ -57,16 +58,20 @@ const PersonalDetails = (props) => {
     const [Gender, setGenderError] = useState("")
     const [countryError, setCountryError] = useState("")
     const [stateError, setStateError] = useState("")
-    const [countryResidenceValue, setCountryResidenceValue] = useState<any>(userData.country_of_residence)
+    const [countryResidenceValue, setCountryResidenceValue] = useState<any>(userData?.country_of_residence)
     const [countryResidenceError, setCountryResidenceError] = useState('')
-    const [date, setDate] = useState(moment(userData.date_of_birth).toISOString())
+    const [date, setDate] = useState(moment(userData?.date_of_birth).toISOString())
     const [dateShow, setDateShow] = useState(false);
     const [dateError, setDateError] = useState("");
+    const [loader, setLoader] = useState(false);
 
-    console.log("userData ..;;;;;;;;;;;;;;;;;;;;;", userData)
+    var url = userData?.profile_pic.split('/');
+
+    // console.log("kaliraaaaaaaaaaaaaaaaaaaaaa", url[3]);
+    // console.log("userData ..;;;;;;;;;;;;;;;;;;;;;", userData)
     const getCountryList = async () => {
         let listCountries = await countryList().then((originalPromiseResult) => {
-            console.log("Personal Details Country....", originalPromiseResult);
+            //console.log("Personal Details Country....", originalPromiseResult);
             // const value = originalPromiseResult
             setCountryListValue(originalPromiseResult);
             console.log("listCoun", originalPromiseResult[56].name)
@@ -74,10 +79,10 @@ const PersonalDetails = (props) => {
     }
     const getStateList = async (data: any) => {
         let listCountries = await stateList(data).then((originalPromiseResult) => {
-            console.log("Personal Details State....", originalPromiseResult);
+            //console.log("Personal Details State....", originalPromiseResult);
             // const value = originalPromiseResult
             setStateListValue(originalPromiseResult);
-            console.log("listCoun", originalPromiseResult)
+            //console.log("listCoun", originalPromiseResult)
         })
     }
 
@@ -105,24 +110,32 @@ const PersonalDetails = (props) => {
     }, [cityValue])
 
     const validateFunction = () => {
-        console.log("values", firstName, lastName, email, mblNumber, mblCode, checked, countryResidenceValue, countryValue, stateValue, date);
+        // console.log("values", firstName, lastName, email, mblNumber, mblCode, checked, countryResidenceValue, countryValue, stateValue, date);
         //firstName
         let errorCount = 0;
-        if (firstName.length <= 3 || firstName === undefined) {
+        if (firstName.length === 0 || firstName === undefined) {
             setFirstNameError('FirstName is mandatory')
             errorCount++;
         }
-        // else {
-        //     setFirstNameError('')
-        // }
+        else if (firstName.length <= 2) {
+            setFirstNameError('FirstName should have minimum 3 characters')
+            errorCount++;
+        }
+        else {
+            setFirstNameError('')
+        }
         //lastName
-        if (lastName.length <= 3 || lastName === undefined) {
+        if (lastName.length === 0 || lastName === undefined) {
             setLastNameError('LastName is mandatory')
             errorCount++;
         }
-        // else {
-        //     setLastNameError('')
-        // }
+        else if (lastName.length <= 2) {
+            setLastNameError('LastName should have minimum 3 characters')
+            errorCount++;
+        }
+        else {
+            setLastNameError('')
+        }
         //email
         // if (email.length === 0 || email === undefined) {
         //     setEmailError('Email id is mandatory')
@@ -153,17 +166,17 @@ const PersonalDetails = (props) => {
             setGenderError('Please select your gender')
             errorCount++;
         }
-        // else {
-        //     setGenderError('')
-        // }
+        else {
+            setGenderError('')
+        }
         //Nationality
         if (countryValue.length == 0) {
             setCountryError('Nationality is required')
             errorCount++;
         }
-        // else {
-        //     setCountryError('')
-        // }
+        else {
+            setCountryError('')
+        }
         //State
         // if (stateValue.length == 0) {
         //     setStateError('State is required')
@@ -177,17 +190,17 @@ const PersonalDetails = (props) => {
             setCountryResidenceError('Country of residence is required')
             errorCount++;
         }
-        // else {
-        //     setCountryResidenceError('')
-        // }
+        else {
+            setCountryResidenceError('')
+        }
         //Date of birth
         if (date.length == 0) {
             setDateError('Date of birth is required')
             errorCount++;
         }
-        // else {
-        //     setDateError('')
-        // }
+        else {
+            setDateError('')
+        }
         if (errorCount === 0) {
             setDateError(""), setCountryResidenceError(""), setStateError(""), setCountryError(""), setGenderError(""), setLastNameError(""), setFirstNameError("");
             return true;
@@ -199,28 +212,30 @@ const PersonalDetails = (props) => {
 
     const uploadpersonalDetails = async () => {
         const validateLetter = validateFunction();
-        console.log("Retrun.............", validateLetter);
+        //console.log("Retrun.............", validateLetter);
         if (validateLetter) {
+            setLoader(true)
             const payload = {
                 "first_name": firstName,
                 "last_name": lastName,
                 "date_of_birth": moment(date).format('YYYY-MM-DD'),
                 "gender": checked,
                 "country_phone_code": "string",
-                "profile_pic": "1675750141561-38402481.jpeg",
+                "profile_pic": url[3],
                 "country_of_residence": countryResidenceValue,
                 "nationality": "Indian",
                 //   "state":"TamilNadu"
             }
-            console.log("payload for update.............", payload)
+           // console.log("payload for update.............", payload)
             let callingAutobot = await personalDetailsUpdate(payload).then((originalPromiseResult) => {
-                console.log("Personal Details Country....", originalPromiseResult);
+               // console.log("Personal Details Country....", originalPromiseResult);
                 if (originalPromiseResult === undefined) {
                     ToastAndroid.showWithGravity(
                         'Something went wrong!, Please try again later',
                         ToastAndroid.SHORT,
                         ToastAndroid.CENTER,
                     );
+                    setLoader(false)
                 }
                 else {
                     ToastAndroid.showWithGravity(
@@ -229,6 +244,7 @@ const PersonalDetails = (props) => {
                         ToastAndroid.CENTER,
                     );
                     dispatch(userDetailsHandler());
+                    setLoader(false)
                 }
             })
         }
@@ -261,33 +277,34 @@ const PersonalDetails = (props) => {
                 </TouchableOpacity>
                 <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), width: "75%", textAlign: "center" }}>Personal Details</Text>
             </View>
-            <ScrollView style={{ backgroundColor: COLORS.pagebackground, height: "90%" }}>
-                <View>
-                    <Text style={{ paddingLeft: "5%", ...FONTS.lexendregular, color: COLORS.gray, fontSize: RFValue(12), paddingTop: "3%" }}>First Name</Text>
-                    <TextInput
-                        placeholder="First Name"
-                        placeholderTextColor={"black"}
-                        onChangeText={(text: String) => setFirstName(text)}
-                        value={firstName}
-                        style={{ width: "91%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, ...FONTS.lexendregular, color: COLORS.black, fontSize: RFValue(16), paddingLeft: 14, marginTop: "1%" }}
-                    />
-                </View>
-                <View style={{ paddingLeft: 19, height:"2%" }}>
-                    {firstNameError ? <Text style={styles.errorText}>{firstNameError}</Text> : null}
-                </View>
-                <View>
-                    <Text style={{ paddingLeft: "5%", ...FONTS.lexendregular, color: COLORS.gray, fontSize: RFValue(12) }}>Last Name</Text>
-                    <TextInput
-                        placeholder="Last Name"
-                        placeholderTextColor={"black"}
-                        onChangeText={(text: String) => setLastName(text)}
-                        value={lastName}
-                        style={{ width: "91%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, ...FONTS.lexendregular, color: COLORS.black, fontSize: RFValue(16), paddingLeft: 14, marginTop: "1%" }}
-                    />
-                </View>
-                <View style={{ paddingLeft: 19, height:"2%" }}>
-                    {lastNameError ? <Text style={styles.errorText}>{lastNameError}</Text> : null}
-                </View>
+            {(!loader) ?
+                <ScrollView style={{ backgroundColor: COLORS.pagebackground, height: "90%" }}>
+                    <View>
+                        <Text style={{ paddingLeft: "5%", ...FONTS.lexendregular, color: COLORS.gray, fontSize: RFValue(12), paddingTop: "3%" }}>First Name</Text>
+                        <TextInput
+                            placeholder="First Name"
+                            placeholderTextColor={"black"}
+                            onChangeText={(text: String) => setFirstName(text)}
+                            value={firstName}
+                            style={{ width: "91%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, ...FONTS.lexendregular, color: COLORS.black, fontSize: RFValue(16), paddingLeft: 14, marginTop: "1%" }}
+                        />
+                    </View>
+                    <View style={{ paddingLeft: 19, height: "2%" }}>
+                        {firstNameError ? <Text style={styles.errorText}>{firstNameError}</Text> : null}
+                    </View>
+                    <View>
+                        <Text style={{ paddingLeft: "5%", ...FONTS.lexendregular, color: COLORS.gray, fontSize: RFValue(12) }}>Last Name</Text>
+                        <TextInput
+                            placeholder="Last Name"
+                            placeholderTextColor={"black"}
+                            onChangeText={(text: String) => setLastName(text)}
+                            value={lastName}
+                            style={{ width: "91%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, ...FONTS.lexendregular, color: COLORS.black, fontSize: RFValue(16), paddingLeft: 14, marginTop: "1%" }}
+                        />
+                    </View>
+                    <View style={{ paddingLeft: 19, height: "2%" }}>
+                        {lastNameError ? <Text style={styles.errorText}>{lastNameError}</Text> : null}
+                    </View>
 
                 {/* <View>
                     <Text style={{ paddingLeft: "5%", ...FONTS.lexendregular, color: COLORS.gray, fontSize: RFValue(12) }}>Email</Text>
@@ -367,8 +384,8 @@ const PersonalDetails = (props) => {
                         itemTextStyle={themeForList}
                         labelField="name"
                         valueField="isoCode"
-                        onChange={item => { setCountryValue(item.isoCode), console.log("dbdgbdfbdg..........", item.isoCode) }}
-                        placeholder={(userData.nationality) ? userData.nationality : "Select Nationality"}
+                        onChange={item => { setCountryValue(item.isoCode) }}
+                        placeholder={(userData?.nationality) ? userData?.nationality : "Select Nationality"}
                     />
                 </View>
                 <View style={{ paddingLeft: 19, height:"2%" }}>
@@ -422,7 +439,7 @@ const PersonalDetails = (props) => {
                         itemTextStyle={themeForList}
                         labelField="name"
                         valueField="name"
-                        onChange={item => { setCountryResidenceValue(item.name), console.log("dbdgbdfbdg..........", item.isoCode) }}
+                        onChange={item => { setCountryResidenceValue(item.name) }}
                         placeholder={(props.route) ? countryResidenceValue : "Select country of residence"}
                     />
                 </View>
@@ -483,13 +500,23 @@ const PersonalDetails = (props) => {
                     // )}
                     />
                 </View> */}
-                <TouchableOpacity style={{ borderWidth: 1, alignSelf: "center", borderColor: COLORS.gray, marginVertical: verticalScale(30), width: "60%", borderRadius: 10 }}
-                    onPress={() => uploadpersonalDetails()}
-                >
-                    <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(18), textAlign: "center", color: COLORS.black, paddingVertical: "6%" }}>Save</Text>
-                </TouchableOpacity>
-                <View style={{ paddingBottom: "30%" }} />
-            </ScrollView>
+                    <TouchableOpacity style={{ borderWidth: 1, alignSelf: "center", borderColor: COLORS.gray, marginVertical: verticalScale(30), width: "60%", borderRadius: 10 }}
+                        onPress={() => uploadpersonalDetails()}
+                    >
+                        <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(18), textAlign: "center", color: COLORS.black, paddingVertical: "6%" }}>Save</Text>
+                    </TouchableOpacity>
+                    <View style={{ paddingBottom: "30%" }} />
+                </ScrollView>
+                :
+                <View style={{ width: "100%", alignItems: "center", height: "92%", justifyContent: "center" }}>
+                    <LoaderKit
+                        style={{ width: 100, height: 105 }}
+                        name={'BallClipRotatePulse'} // Optional: see list of animations below
+                        size={30} // Required on iOS
+                        color={COLORS.element} // Optional: color can be: 'red', 'green',... or '#ddd', '#FFFFFF',
+                    />
+                </View>
+            }
         </SafeAreaView>
     )
 }

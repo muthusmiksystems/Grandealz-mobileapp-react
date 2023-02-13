@@ -13,11 +13,11 @@ export const personalDetailsUpdate = async (payload) => {
 
     const headers = { 'Content-Type': 'Application/json', 'Authorization': "Bearer " + key }
 
-    return await axios.put(`${'https://api.grandealz.vytech.co'}/auth`,payload, { headers: headers }).then(response => {
+    return await axios.put(`${'https://api.grandealz.vytech.co'}/auth`,payload, { headers:headers }).then(response => {
         console.log("personal details update...........", response.data.data);
         return response.data
     }).catch((err) => {
-        console.log("Catch error Api Failed", err)
+        console.log("Catch error Api Failed in personalDetailsUpdate...........", err)
         // return err
     })
 }

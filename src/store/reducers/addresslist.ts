@@ -14,7 +14,7 @@ export const addressListHandler = createAsyncThunk('get/addresslistgetcall', asy
             return result.data.data
         } else if (parseInt(result.data.status) == 404) {
             // console.log({responseData: result.data})
-            return result.data.message
+            return result.data.data
         } else {
             console.log('address Error', result);
             return result.data.message
@@ -32,7 +32,7 @@ export const addressListHandler = createAsyncThunk('get/addresslistgetcall', asy
 export const addressListHandlerSlice = createSlice({
     name: 'AddressHandle',
     initialState: {
-        data: "No data",
+        data: [],
         isSuccess: false,
         message: "",
         loading: false,

@@ -17,8 +17,10 @@ import { COLORS, FONTS } from '../constants';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useNavigation } from '@react-navigation/native';
 import { horizontalScale, verticalScale } from '../constants/metrices';
-import { drawGetCall } from '../services/register';
-
+import { ToastAndroid } from 'react-native';
+import { AddtoCartHandle } from "../services/addtocart";
+import {useSelector} from 'react-redux';
+import moment from 'moment';
 const data = [
     {
         id: '1',
@@ -47,33 +49,42 @@ const data = [
     },
 
 ];
-const Product = () => {
+const Product = ({addedCart}) => {
     const navigation = useNavigation();
 
     const [close, setClose] = useState<any>();
-  //drawGetCall
-  useEffect(() => {
-    //console.log("data..............");
-    const soon = async () => {
-      let campaigns = await drawGetCall()
-      
-      let result = campaigns.data;
-      
-      var a: any[] = [];
-      result.map((e: { total_no_of_sold_out_tickets: number; total_no_of_tickets: number; }) => {
-        var data = (e.total_no_of_sold_out_tickets * 100 / e.total_no_of_tickets);
-        //console.log("samuvel sham.......",data);
-        if (data <80) {
-          a.push(e)
+    const [drawid, setDrawid] = useState(null);
+
+
+    const DataInfo = useSelector(state=>state.productDrawHandle.data)
+
+    console.log("datavvv..of....",addedCart)
+  
+
+  useEffect(() =>{
+    if(drawid){
+    const AddtoCartitems = async () => {
+        const payload={"draw": drawid,"qty":1}
+        let AddItemtoCart = await AddtoCartHandle(payload)
+        if (AddItemtoCart.status === "200") {
+            ToastAndroid.showWithGravity(
+                AddItemtoCart.message,
+                ToastAndroid.SHORT,
+                ToastAndroid.CENTER,
+            );
+            navigation.navigate("Tabs", { screen: "Cart" })
         }
-        //console.log(a, "data to maping")
-        setClose(a)
-      })
-      
+        else {
+            ToastAndroid.showWithGravity(
+                AddItemtoCart.message,
+                ToastAndroid.SHORT,
+                ToastAndroid.CENTER,
+            );
+        }
     }
-    soon();
-   
-  }, [])
+    AddtoCartitems()
+}
+}, [drawid])
 
   const handleSearch = (value: any) => {
     navigation.navigate("PriceDetails", value)
@@ -81,16 +92,15 @@ const Product = () => {
 
     return (
         <SafeAreaView >
-            { close ?
+            { DataInfo ?
             <View >
                 <FlatList
-                    data={close}
+                    data={DataInfo}
                     contentContainerStyle={{}}
-                    onEndReached={drawGetCall}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => (
-                        <View style={{ padding: '5%' }}>
-                            <TouchableOpacity style={{ borderRadius: 9, borderTopWidth: 4, borderTopColor: "red", backgroundColor: "white" }} onPress={() => /* navigation.navigate("PriceDetails") */ handleSearch(item)}>
+                        <View style={{ padding: '4%' }}>
+                            <TouchableOpacity style={{ borderRadius: 9, borderTopWidth: 2, borderTopColor: "red", backgroundColor: "white" }} onPress={() =>handleSearch(item)}>
                                 <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8 }}>
                                     <View style={{alignSelf:"flex-end",marginRight:"5%",borderRightColor:"#7F7E76",borderTopEndRadius:30,borderTopStartRadius:30,borderBottomEndRadius:30,borderBottomStartRadius:30,borderWidth:3,marginTop:"2%",height:verticalScale(55),width:horizontalScale(115),borderColor:"#D8000D",flexDirection:"row"}}>
                                         <View style={{flexDirection:"column",padding:4,marginLeft:"10%"}}>
@@ -115,25 +125,32 @@ const Product = () => {
                                     </View>
                                 </View>
                                 <View style={{ margin: 3, padding: 10, flexDirection: "row" }}>
-                                    <View style={{ flexDirection: "column" }}>
-                                        <Text style={{ ...FONTS.lexendregular, fontSize: RFValue(30), color: "#E70736" }}>Win</Text>
-                                        <Text style={{ fontSize: RFValue(13), color: "black", ...FONTS.lexendsemibold, }}>{item.draw_title} </Text>
-                                        <Text style={{ fontSize: RFValue(14), color: "black", ...FONTS.lexendregular, }}>Buy {item.draw_sub_title}  <Text style={{ color: "red" }}>₹ {item.product_price}</Text> </Text>
+                                    <View style={{ flexDirection: "column",width:"65%",height:"100%"}}>
+                                        <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(30), color: "#E70736" }}>Win</Text>
+                                        <Text style={{ fontSize: RFValue(15), color: "black", ...FONTS.lexendsemibold, }}>{item.draw_title} </Text>
+                                        <Text style={{ fontSize: RFValue(14), color: "black", ...FONTS.lexendregular, }}>Buy {item.draw_sub_title} : <Text style={{ color: "red" }}>₹{item.product_price}</Text> </Text>
                                     </View>
-                                    <View style={{ margin: "5%",alignSelf:"flex-end" }}>
+                                    <View style={{ marginLeft: "5%",alignSelf:"flex-end" }}>
                                         <Image
                                             source={{uri : item.product_image}}
                                             style={{
-                                                height: verticalScale(60),
-                                                width: horizontalScale(60),
+                                                height: verticalScale(80),
+                                                width: horizontalScale(80),
                                                 borderWidth: 1,
                                             }}
                                         />
                                     </View>
                                 </View>
-                                <TouchableOpacity  style={{ padding: "5%", borderWidth: 1, marginHorizontal: 20, borderRadius: 8 }} onPress={()=>navigation.navigate("Tabs",{screen:"Cart"},(item))}>
+                                {
+                                 !(addedCart.includes(`${item._id}`)) ?
+                                <TouchableOpacity  style={{ padding: "5%", borderWidth: 1, marginHorizontal: 20, borderRadius: 8 }} onPress={()=>setDrawid(item._id)}>
                                     <Text style={{ textAlign: "center", color: "black", fontSize: RFValue(15), ...FONTS.lexendsemibold }}>Add to Cart</Text>
                                 </TouchableOpacity>
+                                :
+                                <TouchableOpacity  style={{ padding: "5%", borderWidth: 1, marginHorizontal: 20, borderRadius: 8,backgroundColor:"black" }} onPressIn={() => {navigation.navigate("Tabs",{screen:"Cart"})}}>
+                                <Text style={{ textAlign: "center", color: "white", fontSize: RFValue(15), ...FONTS.lexendsemibold }}>Go To Cart</Text>
+                                </TouchableOpacity>
+                                }
                                 <View style={{ flexDirection: "row", paddingVertical: "5%" }}>
                                     <View style={{ flexDirection: "column", marginLeft: 15 }}>
                                         <Image
@@ -144,9 +161,9 @@ const Product = () => {
                                     </View>
                                     <View style={{ flexDirection: "column" }}>
                                         <Text style={{ ...FONTS.lexendsemibold, fontWeight:"400",fontSize: RFValue(11.5), marginLeft: 6, ...FONTS.lexendsemibold, color: COLORS.black }}>
-                                            Max Draw Date :{item.max_draw_date}
+                                            Max Draw Date :{moment(item.max_draw_date).format('MMMM DD YYYY')}
                                         </Text>
-                                        <Text style={{ fontSize: RFValue(10), marginLeft: 6, ...FONTS.lexendregular, color:" #616161" }}>
+                                        <Text style={{ fontSize: RFValue(10),marginLeft: 6, ...FONTS.lexendregular, color:"gray" }}>
                                             Or Earlier if the Campaign is Sold Out
                                         </Text>
                                     </View>
