@@ -201,7 +201,7 @@ const DrawsMain = () => {
                                         value={searcher}
                                         onChangeText={(text: String) => setSearcher(text)}
                                         activeUnderlineColor={'transparent'}
-                                        style={{ backgroundColor: "#FFFFFF", height: verticalScale(45), width: horizontalScale(200), ...FONTS.lexendregular, fontSize: RFValue(14) }}
+                                        style={{ backgroundColor: "#FFFFFF", color:"black",height: verticalScale(45), width: horizontalScale(200), ...FONTS.lexendregular, fontSize: RFValue(14) }}
                                     />
                                 </TouchableOpacity>
                                 {showWinners ?
@@ -216,7 +216,7 @@ const DrawsMain = () => {
                                                 maxLength={4}
                                                 onChangeText={(text: String) => setYear(text)}
                                                 activeUnderlineColor={'transparent'}
-                                                style={{ backgroundColor: "#FFFFFF", flexDirection: "column", height: verticalScale(45), width: horizontalScale(200), ...FONTS.lexendregular, fontSize: RFValue(14) }}
+                                                style={{ backgroundColor: "#FFFFFF", color:"black", flexDirection: "column", height: verticalScale(45), width: horizontalScale(200), ...FONTS.lexendregular, fontSize: RFValue(14) }}
                                             />
                                         </TouchableOpacity>
                                         <View >

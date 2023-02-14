@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren,useState, useEffect } from 'react';
+import React, { type PropsWithChildren, useState, useEffect } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -21,22 +21,23 @@ import { useNavigation } from '@react-navigation/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useDispatch, useSelector, useStore } from 'react-redux';
 import moment from "moment";
+import Share from 'react-native-share';
 import { addToWishlistHandle, wishlistHandle } from '../services/wishlist';
 import { ourCartPage } from '../services/ourCart';
 import { RemovewishlistHandle } from '../services/deletewishlist';
 import { AddtoCartHandle } from '../services/addtocart';
 import { ToastAndroid } from 'react-native';
-const ProductDetails = ({route}) => {
+const ProductDetails = ({ route }) => {
   const pricing = route.params;
   const navigation = useNavigation();
-  const dispatch=useDispatch();
-  const [cartList,setCartList]=useState([]);
-  const[wishedId,setWishedId]=useState<string>("");
-  const [heart,setHeart]=useState(false)
+  const dispatch = useDispatch();
+  const [cartList, setCartList] = useState([]);
+  const [wishedId, setWishedId] = useState<string>("");
+  const [heart, setHeart] = useState(false)
+
+  console.log("routedData.....................",pricing)
+
   
-  // console.log("routedData.....................",pricing)
-
-
   const handleAddtoCart = async () => {
     const payload = { "draw": pricing._id, "qty": 1 }
     console.log("payload", payload)
@@ -73,8 +74,24 @@ const ProductDetails = ({route}) => {
     console.log("result...........", result)
 
   }
+  const sharePage = async () => {
+    const shareOptions = {
+      title: pricing.draw_title,
+      message: pricing.draw_description,
+      url: pricing.draw_image,
+      social: Share.Social.WHATSAPP,
+      whatsAppNumber: "",  // country code + phone number
+      filename: 'test' , // only for base64 file in Android
+    };
+    Share.open(shareOptions)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        err && console.log(err);
+      });
+  }
 
- 
   const showHeartIfExists = async () => {
     let priceitem = await wishlistHandle();
     setPricelist(priceitem)
@@ -82,15 +99,15 @@ const ProductDetails = ({route}) => {
     var WishIdArray: any[] = [];
     (priceitem).forEach((element: any) => {
       var Data = (element.draw._id);
-      if(Data===pricing._id){
-        console.log("trueeeeeeeeeeeee.........",element._id);
+      if (Data === pricing._id) {
+        console.log("trueeeeeeeeeeeee.........", element._id);
         setWishedId(element._id);
       }
       WishIdArray.push(Data);
     })
     if (WishIdArray.includes(pricing._id)) {
-     // console.log(`true${pricing._id}`)
-     setHeart(true);
+      // console.log(`true${pricing._id}`)
+      setHeart(true);
     } else {
       //console.log(`false${pricing._id}`)
       setHeart(false);
@@ -99,23 +116,52 @@ const ProductDetails = ({route}) => {
 
   const cartStock = async () => {
     let ourCartStock = await ourCartPage()
-    console.log("CartData List on cart",ourCartStock)
-    var AlreadyInCart:any=[];
-        let data = ourCartStock?.draws;
-        
-        if (data) {
-            (data).forEach((element: any) => {
-                var Data = (element.draw._id);
-                AlreadyInCart.push(Data);
-            })
-        }
-        setCartList(AlreadyInCart);
-         console.log("dtaaaa.....................", AlreadyInCart)
-}
- useEffect(()=>{
-  showHeartIfExists();
-  cartStock();
- },[])
+    console.log("CartData List on cart", ourCartStock)
+    var AlreadyInCart: any = [];
+    let data = ourCartStock?.draws;
+
+    if (data) {
+      (data).forEach((element: any) => {
+        var Data = (element.draw._id);
+        AlreadyInCart.push(Data);
+      })
+    }
+    setCartList(AlreadyInCart);
+    console.log("dtaaaa.....................", AlreadyInCart)
+  }
+
+  const goToCart = async () => {
+    if (!(cartList.includes(`${pricing._id}`))) {
+      console.log("data not in cart ")
+      const payload = { "draw": pricing._id, "qty": 1 }
+      let AddItemtoCart = await AddtoCartHandle(payload)
+      if (AddItemtoCart.status === "200") {
+        ToastAndroid.showWithGravity(
+          AddItemtoCart.message,
+          ToastAndroid.SHORT,
+          ToastAndroid.CENTER,
+        );
+        cartStock();
+        navigation.navigate("Tabs", { screen: "Cart" })
+      }
+      else {
+        ToastAndroid.showWithGravity(
+          AddItemtoCart.message,
+          ToastAndroid.SHORT,
+          ToastAndroid.CENTER,
+        );
+      }
+    }
+    else {
+      console.log("cart");
+      navigation.navigate("Tabs", { screen: "Cart" })
+    }
+  }
+
+  useEffect(() => {
+    showHeartIfExists();
+    cartStock();
+  }, [])
 
   return (
     <View style={{ flex: 1 }} >
@@ -152,7 +198,7 @@ const ProductDetails = ({route}) => {
                 />
               </View>
               <View style={{ flexDirection: "column", marginLeft: "2%" }}>
-                <Text style={{ color: COLORS.black, ...FONTS.lexendregular, fontSize: RFValue(13) }}>Max Draw Date: {moment (pricing.max_draw_date).format('Do MMMM, YYYY')}</Text>
+                <Text style={{ color: COLORS.black, ...FONTS.lexendregular, fontSize: RFValue(13) }}>Max Draw Date: {moment(pricing.max_draw_date).format('Do MMMM, YYYY')}</Text>
                 <Text style={{ color: COLORS.black, ...FONTS.lexendregular, fontSize: RFValue(10) }}>Or earlier if the campaign is sold out</Text>
               </View>
             </View>
@@ -161,29 +207,30 @@ const ProductDetails = ({route}) => {
             <View style={{ alignItems: 'center', borderTopEndRadius: 8, }}>
               <View style={{ alignSelf: "flex-start", marginLeft: "2%", borderTopEndRadius: 40, borderTopStartRadius: 40, borderBottomEndRadius: 40, borderBottomStartRadius: 40, borderWidth: 3, marginTop: "2%", height: verticalScale(55), width: horizontalScale(120), borderColor: "#D8000D", flexDirection: "row" }}>
                 <View style={{ flexDirection: "column", padding: 4, marginLeft: "7%" }}>
-                  <Text style={{ color: "#E70736", ...FONTS.lexendregular, fontSize: RFValue(13),textAlign:"center" }}>{pricing.total_no_of_sold_out_tickets}</Text>
+                  <Text style={{ color: "#E70736", ...FONTS.lexendregular, fontSize: RFValue(13), textAlign: "center" }}>{pricing.total_no_of_sold_out_tickets}</Text>
                   <Text style={{ ...FONTS.lexendsemibold, alignSelf: "center", color: "black", fontSize: RFValue(10), }}> Sold</Text>
                 </View>
                 <View style={{ backgroundColor: "#7F7E76B2", height: verticalScale(23), marginTop: verticalScale(15), borderWidth: 1, borderColor: "#7F7E76B2" }} />
                 <View style={{ flexDirection: "column", padding: 4 }}>
                   <Text style={{ ...FONTS.lexendregular, color: " rgba(127, 126, 118, 0.7)", fontSize: RFValue(9) }}> OUT OF</Text>
-                  <Text style={{ color: "#E70736", ...FONTS.lexendregular, fontSize: RFValue(13),textAlign:"center" }}>{pricing.total_no_of_tickets}</Text>
+                  <Text style={{ color: "#E70736", ...FONTS.lexendregular, fontSize: RFValue(13), textAlign: "center" }}>{pricing.total_no_of_tickets}</Text>
                 </View>
 
               </View>
               <View style={{ alignSelf: "flex-end" }}>
-                <Image
-                  source={icons.share}
-                  style={{
-                    bottom: "70%",
-                    marginRight: "2%",
-                    width:25,
-                    height:25
-                  }}
-                />
-                
-                  {!heart?
-                  <TouchableOpacity onPress={() =>handleAddWishlist()}>
+                <TouchableOpacity style={{ bottom: "10%" }} onPress={() => { sharePage() }}>
+                  <Image
+                    source={icons.share}
+                    style={{
+                      bottom: "70%",
+                      marginRight: "2%",
+                      width: 25,
+                      height: 25
+                    }}
+                  />
+                </TouchableOpacity>
+                {!heart ?
+                  <TouchableOpacity onPress={() => handleAddWishlist()}>
                     <FontAwesome name="heart-o" style={{
                       bottom: "40%",
                       marginRight: "2%",
@@ -192,22 +239,22 @@ const ProductDetails = ({route}) => {
 
                     }} size={30} color={"black"} />
                   </TouchableOpacity>
-                :
-                <TouchableOpacity onPress={()=>RemoveWishlist()}>
-                  <FontAwesome name="heart" style={{
-                    bottom: "40%",
-                    marginRight: "2%",
-                    width: 30,
-                    height: 30,                  
-                    
-                  }}size={30}  color={"red"} />
-                </TouchableOpacity>
-                       }
+                  :
+                  <TouchableOpacity onPress={() => RemoveWishlist()}>
+                    <FontAwesome name="heart" style={{
+                      bottom: "40%",
+                      marginRight: "2%",
+                      width: 30,
+                      height: 30,
+
+                    }} size={30} color={"red"} />
+                  </TouchableOpacity>
+                }
               </View>
 
-              <View style={{ flexDirection: 'column', padding: moderateScale(10)  }}>
+              <View style={{ flexDirection: 'column', padding: moderateScale(10) }}>
                 <Image
-                  source={{uri:pricing.draw_image}}
+                  source={{ uri: pricing.draw_image }}
                   style={{
                     borderWidth: 1,
                     width: 257,
@@ -217,26 +264,26 @@ const ProductDetails = ({route}) => {
               </View>
             </View>
           </View>
-          <View style={{ marginVertical: "5%",paddingBottom:"10%"}}>
-           
-          <View style={{ flexDirection: "row", marginVertical: "2%" }}>
-              <TouchableOpacity style={{ flexDirection: "column",borderWidth: 1,width:"49%",marginEnd:"2%",borderRadius: 5  }} onPressIn={() => { navigation.replace("PriceDetails",pricing) }}>
-                <Text style={{ textAlign:"center", fontSize: RFValue(15),padding:"7%", ...FONTS.lexendregular,backgroundColor: "#fff", color: "#000", borderRadius: 5}}> Prize Details</Text>
+          <View style={{ marginVertical: "5%", paddingBottom: "10%" }}>
+
+            <View style={{ flexDirection: "row", marginVertical: "2%" }}>
+              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, width: "49%", marginEnd: "2%", borderRadius: 5 }} onPressIn={() => { navigation.replace("PriceDetails", pricing) }}>
+                <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "7%", ...FONTS.lexendregular, backgroundColor: "#fff", color: "#000", borderRadius: 5 }}> Prize Details</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={{ flexDirection: "column",width:"49%"}} >
-                <Text style={{ textAlign:"center",fontSize: RFValue(15),backgroundColor: "#E70736", color: "white", padding: "7%",...FONTS.lexendregular, borderRadius: 5 }}>
+              <TouchableOpacity style={{ flexDirection: "column", width: "49%" }} >
+                <Text style={{ textAlign: "center", fontSize: RFValue(15), backgroundColor: "#E70736", color: "white", padding: "7%", ...FONTS.lexendregular, borderRadius: 5 }}>
                   Product Details
                 </Text>
               </TouchableOpacity>
             </View>
             <Text style={{ fontSize: RFValue(15), ...FONTS.lexendregular, color: COLORS.black, }}>Grandelz </Text>
-            <Text style={{ color: "#E70736",fontSize: RFValue(15), ...FONTS.lexendsemibold }}>₹{pricing.product_price} Cash</Text>
-            <Text style={{  marginVertical: "3%",marginBottom:"7%", fontSize: RFValue(10) , ...FONTS.lexendregular, color: COLORS.black, }}>{pricing.draw_description}</Text>
-               <View style={{ flexDirection: "row",marginVertical:"2%",paddingBottom:"2%"}}>
-              <TouchableOpacity style={{ flexDirection: "column", width:"48%",marginEnd:"2%" }} onPressIn={() => {  navigation.navigate("Tabs") }}>
-              <Text style={{textAlign:"center", fontSize: RFValue(15),  borderWidth: 1,padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular,borderRadius: 5  }}> Go to Home</Text>
+            <Text style={{ color: "#E70736", fontSize: RFValue(15), ...FONTS.lexendsemibold }}>₹{pricing.product_price} Cash</Text>
+            <Text style={{ marginVertical: "3%", marginBottom: "7%", fontSize: RFValue(10), ...FONTS.lexendregular, color: COLORS.black, }}>{pricing.draw_description}</Text>
+            <View style={{ flexDirection: "row", marginVertical: "2%", paddingBottom: "2%" }}>
+              <TouchableOpacity style={{ flexDirection: "column", width: "48%", marginEnd: "2%" }} onPressIn={() => { navigation.navigate("Tabs") }}>
+                <Text style={{ textAlign: "center", fontSize: RFValue(15), borderWidth: 1, padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}> Go to Home</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 5, width: "49%" }} onPressIn={() => {  navigation.navigate("Tabs",{screen:"Cart"}) }}>
+              <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 5, width: "49%" }} onPressIn={() => { navigation.navigate("Tabs", { screen: "Cart" }) }}>
                 <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 5 }}>
                   View Cart
                 </Text>
@@ -247,17 +294,17 @@ const ProductDetails = ({route}) => {
       </View>
       <View style={{ flex: 0.15, backgroundColor: "white" }}>
         <View style={{ flexDirection: "row", marginVertical: "2%", marginHorizontal: "4%" }}>
-        { !(cartList.includes(`${pricing._id}`)) ?
-          <TouchableOpacity style={{ flexDirection: "column", borderRadius: 6, width: "48%", marginEnd: "2%" }}>
-            <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "7%", backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }} onPress={()=>{handleAddtoCart()}}>ADD TO CART</Text>
-          </TouchableOpacity>
-          :
-          <TouchableOpacity style={{ flexDirection: "column",borderWidth: 1, borderRadius: 6, width: "48%", marginEnd: "2%" }}>
-          <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "7%", backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }} onPress={()=>{navigation.navigate("Tabs",{screen:"Cart"})}}>VIEW CART</Text>
-        </TouchableOpacity>
-        }
+          {!(cartList.includes(`${pricing._id}`)) ?
+            <TouchableOpacity style={{ flexDirection: "column", borderRadius: 6, width: "48%", marginEnd: "2%" }}>
+              <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "7%", backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }} onPress={() => { handleAddtoCart() }}>ADD TO CART</Text>
+            </TouchableOpacity>
+            :
+            <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 6, width: "48%", marginEnd: "2%" }}>
+              <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "7%", backgroundColor: "#E70736", color: "white", ...FONTS.lexendregular, borderRadius: 5 }} onPress={() => { navigation.navigate("Tabs", { screen: "Cart" }) }}>VIEW CART</Text>
+            </TouchableOpacity>
+          }
 
-          <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 6, width: "49%" }} onPress={()=>console.log("router value",route.params)}>
+          <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 6, width: "49%" }} onPress={() => goToCart()}>
             <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 8 }}>
               BUY NOW
             </Text>

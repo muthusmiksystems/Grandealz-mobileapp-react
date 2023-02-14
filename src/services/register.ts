@@ -34,7 +34,7 @@ return await axios.post(Login_Url, payload, { headers: headers }).then(response 
 
 export const drawGetCall = async () => {
 
-    return await axios.get(`${'https://api.grandealz.vytech.co'}/draws`).then(response => {
+    return await  axios.get(`${'https://api.grandealz.vytech.co'}/draws?limit=20&skip=0&status=Publish`).then(response => {
         console.log("Responce in Drawgetcall",response.data.data);
         return response.data
     }).catch((err) => {

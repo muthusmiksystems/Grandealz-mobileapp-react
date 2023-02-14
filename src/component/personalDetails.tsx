@@ -440,7 +440,7 @@ const PersonalDetails = (props) => {
                         labelField="name"
                         valueField="name"
                         onChange={item => { setCountryResidenceValue(item.name) }}
-                        placeholder={(props.route) ? countryResidenceValue : "Select country of residence"}
+                        placeholder={(userData?.country_of_residence) ? countryResidenceValue : "Select country of residence"}
                     />
                 </View>
                 <View style={{ paddingLeft: 19, height:"2%" }}>

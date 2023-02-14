@@ -177,7 +177,7 @@ const CouponDetails = () => {
                                             <Text style={{ ...FONTS.lexendregular, color: COLORS.gray, fontSize: RFValue(12), paddingVertical: 2,marginLeft:10 }}>Use {item.description}</Text>
                                         </View>
                                         <View>
-                                            <Text style={{marginTop:10}}>{item.coupon}</Text>   
+                                            <Text style={{marginTop:10,color:COLORS.gray}}>{item.coupon}</Text>   
                                         </View>
                                     </View>
                                     <View style={{ borderStyle: "dashed", borderBottomWidth: 1, borderColor: "grey",marginStart:"4%" }} />

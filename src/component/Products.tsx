@@ -163,8 +163,8 @@ const Product = ({addedCart}) => {
                                         <Text style={{ ...FONTS.lexendsemibold, fontWeight:"400",fontSize: RFValue(11.5), marginLeft: 6, ...FONTS.lexendsemibold, color: COLORS.black }}>
                                             Max Draw Date :{moment(item.max_draw_date).format('MMMM DD YYYY')}
                                         </Text>
-                                        <Text style={{ fontSize: RFValue(10),marginLeft: 6, ...FONTS.lexendregular, color:"gray" }}>
-                                            Or Earlier if the Campaign is Sold Out
+                                        <Text style={{ fontSize: RFValue(10),marginLeft: 6, ...FONTS.lexendregular, color:"gray",width:horizontalScale(280) }}>
+                                           {(item.max_draw_date_description).substring(0,100)}
                                         </Text>
                                     </View>
                                 </View>

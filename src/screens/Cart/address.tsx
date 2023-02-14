@@ -199,7 +199,7 @@ const Address = ({route}) => {
             {selection!=null?
             <View style={{ flexDirection: "row", height: "8%", backgroundColor: COLORS.white, paddingHorizontal: horizontalScale(8) }}>
                 <View style={{ flexDirection: "column", width: "55%", marginHorizontal: "3%", marginVertical: "4%" }}>
-                    <Text style={{ color: COLORS.element, fontSize: RFValue(14), ...FONTS.lexendregular }} >₹{route.params.amount}</Text>
+                    <Text style={{ color:COLORS.element, fontSize: RFValue(14), ...FONTS.lexendregular }} >₹{route.params.amount}</Text>
                     <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular }} >Total Amount</Text>
                 </View>
                 {/* onPress={() => navigation.navigate("payment")} */}

@@ -97,26 +97,33 @@ const CartRelated = ({cartdts,changer,setChanger}) => {
         console.log("DrawData on cart Draw.............", drawdatalist)
         setSimilarproduct(drawdatalist)
     }
-    const AddtoCartitems = async () => {
-        const payload={"draw": drawid,"qty":1}
-        let AddItemtoCart = await AddtoCartHandle(payload)
-        if (AddItemtoCart.status === "200") {
-            ToastAndroid.showWithGravity(
-                AddItemtoCart.message,
-                ToastAndroid.SHORT,
-                ToastAndroid.CENTER,
-            );
-            setChanger(!changer);
+    
+    useEffect(() => {
+        console.log("drawid...................", drawid)
+        if (drawid) {
+            const AddtoCartitems = async () => {
+                const payload={"draw": drawid,"qty":1}
+                let AddItemtoCart = await AddtoCartHandle(payload)
+                if (AddItemtoCart.status === "200") {
+                    ToastAndroid.showWithGravity(
+                        AddItemtoCart.message,
+                        ToastAndroid.SHORT,
+                        ToastAndroid.CENTER,
+                    );
+                    setChanger(!changer);
+                }
+                else {
+                    ToastAndroid.showWithGravity(
+                        AddItemtoCart.message,
+                        ToastAndroid.SHORT,
+                        ToastAndroid.CENTER,
+                    );
+                    setChanger(!changer);
+                }
+            }
+            AddtoCartitems()
         }
-        else {
-            ToastAndroid.showWithGravity(
-                AddItemtoCart.message,
-                ToastAndroid.SHORT,
-                ToastAndroid.CENTER,
-            );
-            setChanger(!changer);
-        }
-    }
+    }, [drawid])
     const cartIdList=()=>{
         var AlreadyInCart: any[] = [];
         let data = cartdts?.draws;
@@ -172,7 +179,7 @@ const CartRelated = ({cartdts,changer,setChanger}) => {
                             <Text style={{ color: COLORS.element, fontSize: RFValue(13), ...FONTS.lexendregular, }}>₹{item.product_price}</Text>
                         </View>
                         {!(cartList.includes(`${item._id}`)) ?
-                            <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", borderWidth: 1, borderRadius: 5, marginTop: RFValue(5), width: RFValue(113), alignSelf: "center", height: RFValue(26) }} onPress={() => { setDrawid(item._id), AddtoCartitems() }}>
+                            <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", borderWidth: 1, borderRadius: 5, marginTop: RFValue(5), width: RFValue(113), alignSelf: "center", height: RFValue(26) }} onPress={() => { setDrawid(item._id)}}>
                                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, }}>Add</Text>
                             </TouchableOpacity>
                             :

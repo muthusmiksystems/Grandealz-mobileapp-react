@@ -201,7 +201,7 @@ const EditAddress = ({ route }) => {
                 .then(unwrapResult)
                 .then((originalPromiseResult) => {
                     console.log("success samuvel you did itdone", originalPromiseResult);
-                    if (originalPromiseResult === "saved successfully") {
+                    if (originalPromiseResult.message === "saved successfully") {
                         ToastAndroid.showWithGravity(
                             'Successfully added',
                             ToastAndroid.SHORT,
@@ -218,7 +218,7 @@ const EditAddress = ({ route }) => {
                         );
                     }
                 })
-            //    console.log(calling, "Personal Details Country....");
+                console.log(edaddresses, "Personal Details Country....");
             //     if (calling === "Success") {
             //         ToastAndroid.showWithGravity(
             //             'Successfully added',

@@ -120,75 +120,22 @@ const AddAddress = ({route}) => {
             setErrorName('Name is Required')
             errorCount++;
         }
-        // else {
-        //     setFirstNameError('')
-        // }
-        //lastName
+       
         if (address.length <= 3 || address === undefined) {
             setErrorAddress('address is required')
             errorCount++;
         }
-        // else {
-        //     setLastNameError('')
-        // }
-        //email
-        // if (email.length === 0 || email === undefined) {
-        //     setEmailError('Email id is mandatory')
-        // }
-        // else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
-        //     setEmailError('Invalid email format')
-        // }
-        // else {
-        //     setEmailError('')
-        // }
-        // //mblCode
-        // if (mblCode.length == 0) {
-        //     setMblCodeError("Code is required")
-        // }
-        // else {
-        //     setMblCodeError('')
-        // }
-        // //Mbl number
-        // if (mblNumber.length == 0) {
-        //     // console.log("mbl................", mblNumber.length);
-        //     setMblNumberError('Mobile number is required')
-        // }
-        // else {
-        //     setMblNumberError('')
-        // }
-        //Gender
+       
         if (pincode.length < 5) {
             setErrorPin('please enter  valid pincode')
             errorCount++;
         }
-        // else {
-        //     setGenderError('')
-        // }
-        //Nationality
+       
         if (locality.length == 0) {
             setErrorLocality('Please enter Locality')
             errorCount++;
         }
-        // else {
-        //     setCountryError('')
-        // }
-        //State
-        // if (stateValue.length == 0) {
-        //     setStateError('State is required')
-        //     errorCount++;
-        // }
-        // else {
-        //     setStateError('')
-        // }
-        //Country of residence
-        // if (countryResidenceValue.length == 0) {
-        //     setCountryResidenceError('Country of residence is required')
-        //     errorCount++;
-        // }
-        // else {
-        //     setCountryResidenceError('')
-        // }
-        //Date of birth
+        
         if (phone.length < 10) {
             setErrorPhone('please enter valid Number')
             errorCount++;
@@ -204,9 +151,7 @@ const AddAddress = ({route}) => {
         if (stateValue.length == 0) {
             setStateError('State is required')
         }
-        // else {
-        //     setDateError('')
-        // }
+        
         if (errorCount === 0) {
             setErrorAddress(""), setErrorName(""), setErrorLocality(""), setErrorPhone(""), setErrorPin("");
             return true;

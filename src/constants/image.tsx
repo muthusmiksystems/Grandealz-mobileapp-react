@@ -31,10 +31,16 @@ export const profilepic= require("../assests/images/Profile.png");
 export const audicar=require("../assests/images/audicar.png");
 export const imgbg=require("../assests/images/imgbg.png")
 export const ticketEmpty=require("../assests/images/ticket.png")
+export const heartEmpty=require("../assests/images/heartEmpty.png")
+export const backimage=require("../assests/images/backimage.png")
+
+
 
 export default {
     Android,
+    backimage,
     audicar,
+    heartEmpty,
     arrowdown,
     imgbg,
     group,

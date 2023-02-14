@@ -260,7 +260,7 @@ dependencies {
     implementation 'com.facebook.fresco:fresco:2.0.0'
     implementation 'com.facebook.fresco:animated-gif:2.6.0' //for adding gif
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
-
+    implementation project(':react-native-share')
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'
     }

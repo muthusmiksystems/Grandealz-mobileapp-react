@@ -180,7 +180,7 @@ const Signup = () => {
       .then(async (originalPromiseResult) => {
         console.log("im the register",originalPromiseResult)
         if (originalPromiseResult.status === "200") {
-          await AsyncStorage.setItem('loginToken', originalPromiseResult.data.access_token);
+          await AsyncStorage.setItem('Signuptoken', originalPromiseResult.data.access_token);
           ToastAndroid.showWithGravity(
             originalPromiseResult.message,
             ToastAndroid.CENTER,
@@ -203,36 +203,7 @@ const Signup = () => {
     }
   }
 
-  // useEffect(() => {
-  //   if (data && Object.keys(data)) {
-  //     const reg = {
-  //       "first_name": data.firstName,
-  //       "last_name": data.lastName,
-  //       "email": data.email,
-  //       "phone": data.phone,
-  //       "password": data.password,
-  //       "country_phone_code": "+91",
-  //       "term_and_condition": true,
-  //       "referralcode": ""
-  //     }
-  //     console.log("data inside the handle submit", reg);
-  //   }
-
-  // }, [data])
-
-  // const handleSubmited = () => {
-  //   const data = {
-  //     "first_name": firstName,
-  //     "last_name": lastName,
-  //     "email": email,
-  //     "phone": phone,
-  //     "password": password,
-  //     "country_phone_code": "+91",
-  //     "term_and_condition": true,
-  //     "referralcode": ""
-  //   }
-  //   console.log("data inside the handle submit", data);
-  // }
+  
   const handleBox = () => {
     if (errorEmail) {
       setEmail(""),
@@ -437,6 +408,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     flexDirection: "column",
     borderColor: "#c4c4c2",
+    color:"black",
     paddingStart: 10,
     borderRadius: 8,
     width: horizontalScale(45),
@@ -446,6 +418,7 @@ const styles = StyleSheet.create({
   pin: {
     borderWidth: 1,
     paddingStart: 15,
+    color:"black",
     borderColor: "#c4c4c2",
     flexDirection: "column",
     borderRadius: 8,
