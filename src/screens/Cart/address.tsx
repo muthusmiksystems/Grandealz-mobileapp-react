@@ -8,7 +8,8 @@ import {
     StyleSheet,
     Image,
     TouchableOpacity,
-    ToastAndroid
+    ToastAndroid,
+    Alert,
 } from 'react-native';
 import { horizontalScale, moderateScale, verticalScale } from "../../constants/metrices";
 import { shoppingCart } from "../../constants/icons";
@@ -30,7 +31,8 @@ import { unwrapResult } from "@reduxjs/toolkit";
 const Address = ({route}) => {
    
     const typeUser=route.params.type;
-    console.log("typeUser...............",typeUser)
+    const amount=route.params.amount
+    console.log("typeUser...............",typeUser,amount)
     const navigation = useNavigation();
     const dispatch=useDispatch();
     const addresslist = useSelector((state) => state.AddressHandle.data);
@@ -48,7 +50,19 @@ const Address = ({route}) => {
        navigation.navigate("EditAddress",{data:data,type:typeUser})
     }
     const handleDelete=async (data: any)=>{
+        Alert.alert("", "Are you sure you want to delete?", [
+            {
+                text: 'Cancel',
+                // onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+            },
+            {
+                text: 'Delete',
+                onPress: () => deletedacc()
+            },
+        ])
         console.log("deleting page",data)
+        const deletedacc=async ()=>{
         let Removeitems = await RemoveAddressHandle(data)
         console.log("removed stats",Removeitems.message)
         dispatch(addressListHandler())
@@ -60,6 +74,7 @@ const Address = ({route}) => {
                 ToastAndroid.CENTER
               )
         })
+    }
     }
     return (
         <SafeAreaView style={{ backgroundColor: "#F1F1F", height: "100%" }}>
@@ -80,7 +95,7 @@ const Address = ({route}) => {
                 {console.log("addresslist",addresslist)}
                 {/* <RadioButton.Group onValueChange={newValue => { setValue(newValue), parentCallback(newValue) }} value={value} > */}
                 <View style={{ width: "92%", alignSelf: "center", borderRadius: 20, backgroundColor: COLORS.white, margin: "2%", marginTop: "5%", padding: "2%" }}>
-                    <TouchableOpacity style={{ flexDirection: "row", width: "100%", borderRadius: 5, justifyContent: "center" }} onPress={() => navigation.navigate('AddAddress',{type:"payment"})}>
+                    <TouchableOpacity style={{ flexDirection: "row", width: "100%", borderRadius: 5, justifyContent: "center" }} onPress={() => navigation.navigate('AddAddress',{type:"payment","amount":amount})}>
                         <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, margin: "3%" }}>Add new Address</Text>
                     </TouchableOpacity>
                 </View>

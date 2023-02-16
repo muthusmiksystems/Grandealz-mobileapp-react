@@ -66,7 +66,7 @@ const ProductDetails = ({ route }) => {
 
     console.log("result...........", Removeitems)
   }
-  const handleAddWishlist = async () => {
+  const   handleAddWishlist = async () => {
     console.log("Addwish........", pricing._id);
     const result = await addToWishlistHandle(pricing._id);
 

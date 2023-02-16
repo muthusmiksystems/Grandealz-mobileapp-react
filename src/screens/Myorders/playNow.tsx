@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
 import { View, Text, StatusBar, StyleSheet, Image, TouchableOpacity, ToastAndroid } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { horizontalScale, verticalScale } from "../../constants/metrices";
@@ -6,17 +6,18 @@ import { icons } from "../../constants";
 import { RFValue } from "react-native-responsive-fontsize";
 import { audicar } from "../../constants/image";
 import { useNavigation } from "@react-navigation/native";
-import { quizGet } from "../../services/quizGet";
+import { orderdata, quizGet } from "../../services/quizGet";
 const PlayNow = (props) => {
-    
+
     const navigation = useNavigation();
-    const orderId=props.route.params;
-    console.log("Order Id......",orderId)
+    const orderId = props.route.params;
+    const [orderDetails,setOrderDetails]=useState();
+    console.log("Order Id......", orderId)
     const callingApiForQuiz = async () => {
         await quizGet().then((originalPromiseResult) => {
             // console.log("Quiz response in play now.................", originalPromiseResult.data.data)
             if (originalPromiseResult.status == "200") {
-                navigation.replace("playnowquiz", originalPromiseResult?.data?.data,orderId)
+                navigation.replace("playnowquiz", originalPromiseResult?.data?.data, orderId)
             }
             else {
                 ToastAndroid.showWithGravity(
@@ -26,6 +27,25 @@ const PlayNow = (props) => {
                 )
             }
         })
+    }
+    useEffect(() => {
+        console.log("inside ap call");
+            callingOrderId(orderId);
+    }, [])
+
+    const callingOrderId = async (orderId: any) => {
+        let res =await orderdata(orderId) 
+        if (res.status === "200") {
+            setOrderDetails(res.data.draws[0].draw.draw_image);
+           console.log("result in order",res.data.draws[0].draw.draw_image)
+        }
+        else {
+            ToastAndroid.showWithGravity(
+                'Something went wrong!, Please try again later',
+                ToastAndroid.SHORT,
+                ToastAndroid.CENTER
+            )
+        }
     }
     return (
         <SafeAreaView style={{ width: '100%', height: '100%', backgroundColor: "#f1f1f1" }}>
@@ -66,7 +86,7 @@ const PlayNow = (props) => {
                             <View style={{ flexDirection: "row" }}>
                                 <View style={{ flexDirection: "column", width: horizontalScale(120), height: verticalScale(120), borderRadius: 5, margin: 10 }}>
                                     <Image
-                                        source={audicar}
+                                        source={{uri:orderDetails}}
                                         resizeMode={"contain"}
                                         style={{ height: 80, width: 90, justifyContent: "center", margin: "10%" }}
                                     />

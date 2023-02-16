@@ -48,6 +48,7 @@ const DataPage = () => {
 
 
   const [apiData, setApiData] = useState();
+  const [change, setChange] = useState();
   const [prodata, setProdata] = useState<any>();
   const [cartList, setCartList] = useState([]);
   const [loader, setLoader] = useState(false);
@@ -98,7 +99,11 @@ console.log("rummer",cartList)
     dispatch(addressListHandler())
   }
 
-
+  useEffect(() => {
+    setLoader(true),
+    cartStock(),
+    console.log("mmmmkkkkkkkkkkkkkk")
+  }, [change])
 
   useEffect(() => {
     setProdata(DataInfo)
@@ -171,7 +176,7 @@ console.log("rummer",cartList)
                 <Banner data={apiData} />
               </View>
               <ClosingSoon />
-              <Product addedCart={cartList}/>
+              <Product addedCart={cartList} changer={setChange} change={change}/>
               <Carsold />
             </View>
           </>

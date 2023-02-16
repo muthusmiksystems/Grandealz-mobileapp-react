@@ -19,39 +19,13 @@ import { useNavigation } from '@react-navigation/native';
 import { horizontalScale, verticalScale } from '../constants/metrices';
 import { ToastAndroid } from 'react-native';
 import { AddtoCartHandle } from "../services/addtocart";
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import moment from 'moment';
-const data = [
-    {
-        id: '1',
-        imag: image.inputcash,
-        from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-        to: "1689 sold out 1985"
+import { productDrawHandler } from '../store/reducers/productdraw';
 
-    },
-    {
-        id: '2',
-        imag: image.inputcash,
-        from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-        to: "1689 sold out 1985"
-    },
-    {
-        id: '3',
-        imag: image.inputcash,
-        from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-        to: "1689 sold out 1985"
-    },
-    {
-        id: '4',
-        imag: image.inputcash,
-        from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-        to: "1689 sold out 1985"
-    },
-
-];
-const Product = ({addedCart}) => {
+const Product = ({addedCart,changer,change}) => {
     const navigation = useNavigation();
-
+    const dispatch = useDispatch()
     const [close, setClose] = useState<any>();
     const [drawid, setDrawid] = useState(null);
 
@@ -64,15 +38,18 @@ const Product = ({addedCart}) => {
   useEffect(() =>{
     if(drawid){
     const AddtoCartitems = async () => {
+
         const payload={"draw": drawid,"qty":1}
         let AddItemtoCart = await AddtoCartHandle(payload)
         if (AddItemtoCart.status === "200") {
+            changer(!change)
             ToastAndroid.showWithGravity(
                 AddItemtoCart.message,
                 ToastAndroid.SHORT,
                 ToastAndroid.CENTER,
             );
-            navigation.navigate("Tabs", { screen: "Cart" })
+            
+
         }
         else {
             ToastAndroid.showWithGravity(

@@ -46,7 +46,7 @@ const Tickets = () => {
                 backgroundColor="#0A0127"
             />
             <View style={styles.subdivOne}>
-                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), textAlign: "center" }}>Active Tickets</Text>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), textAlign: "center" }}> Tickets</Text>
             </View>
             <View style={styles.subdivTwo}>
                 {(!loader) ?

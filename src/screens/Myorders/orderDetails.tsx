@@ -71,9 +71,6 @@ const OrderDetails = ({ route }) => {
     }, [])
 
     console.log("queen", orderdetailsdata)
-
-
-
     const Data = [
         {
             label: 'Order Confirmed',
@@ -117,7 +114,7 @@ const OrderDetails = ({ route }) => {
                         </View>
                     </View>
                 </View>
-                {(orderdetailsdata) ? (orderdetailsdata.draws.map((data, index) => (
+                {(orderdetailsdata) ? (orderdetailsdata.draws.map((data, index) => (       
                     <View style={{ marginVertical: "4%" }} >
                         <View key={index} style={{ flexDirection: "row", backgroundColor: "white", borderRadius: 10 }}>
                             <View style={{ flexDirection: "row", width: "65%", paddingVertical: "5%", paddingLeft: "3%" }}>
@@ -129,17 +126,20 @@ const OrderDetails = ({ route }) => {
                                     />
                                 </View>
                                 <View style={{ flexDirection: "column", width: "50%", paddingLeft: "4%", marginTop: RFValue(5) }}>
-                                    <Text style={{ fontSize: RFValue(16), ...FONTS.lexendsemibold, color: COLORS.black }}>{data.draw.product_title}</Text>
-                                    <Text style={{ fontSize: RFValue(14), ...FONTS.lexendregular, color: "#616161" }}>{data.draw.product_description}</Text>
-                                    <Text style={{ fontSize: RFValue(20), ...FONTS.lexendregular, color: "red", marginTop: 20 }}>₹{data.draw.product_price}</Text>
+                                    <Text style={{ fontSize: RFValue(16), ...FONTS.lexendsemibold, color: COLORS.black }}>{data.draw.draw_title}</Text>
+                                    <Text style={{ fontSize: RFValue(14), ...FONTS.lexendregular, color: "#616161" }}>{data.draw.product_title}</Text>
+                                    <Text style={{ fontSize: RFValue(20), ...FONTS.lexendregular, color: "red", marginTop: 20 }}>₹{orderdetailsdata.sub_total}</Text>
                                 </View>
                             </View>
+                            {console.log(data.draw_tickets.length === 0?"true":"false","samuuuuuuuuuuu")}
+                            {data.draw_tickets.length > 0 ? null :
                             <View style={{ flexDirection: "column", width: "33%", marginLeft: "2%", justifyContent: "flex-end" }}>
                                 <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(12), color: "#000", textAlign: "right", marginRight: "5%" }}>Avail Your Ticket</Text>
                                 <TouchableOpacity style={{ width: "95%", backgroundColor: COLORS.element, alignSelf: "flex-end", flexDirection: "row", borderBottomEndRadius: 10, borderTopStartRadius: 10 }} onPress={() => navigation.replace("PlayNow",orderid._id)}>
                                     <Text style={{ width: "100%", textAlign: "center", paddingVertical: "8%", ...FONTS.lexendregular, color: COLORS.white }}>Play Now</Text>
                                 </TouchableOpacity>
                             </View>
+                             }
                         </View>
                     </View>
                 ))) : null}

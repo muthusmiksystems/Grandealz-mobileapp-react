@@ -54,118 +54,157 @@ const Login = (props: Prop) => {
   const dispatch = useDispatch();
   const [passShow, setPassShow] = useState("true");
 
-  const [isSelected, setSelection] = useState(false);
+  const [isSelected, setSelection] = useState(true);
 
-  const { handleChange, details, handleSubmit, formErrors, data, formValues } = useForm(validate);
+  //const { handleChange, details, handleSubmit, formErrors, data, formValues ,syncvalue} = useForm(validate);
   const [token, setToken] = useState("");
   const [errorLogin, setErrorLogin] = useState(null);
   const [errorEmail, setErrorEmail] = useState(null);
   const [errorPassword, setErrorPassword] = useState(null);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [error, setError] = useState<any>("");
+
+  useEffect(()=>{
+    async function fetchJSONAsync() {
+      
+      let name = await AsyncStorage.getItem("username");
+      setEmail(name)
+      
+      let pass = await AsyncStorage.getItem("password");
+      setPassword(pass)
+      console.log(name,pass,"password user name",email,password)
+
+    }
+    fetchJSONAsync()
+  },[])
   
-  useEffect(() => {
-    console.log(Object.keys(formValues).length, "kk", formErrors.password)
-    if (formErrors && Object.keys(formErrors).length > 0) {
-      if (formErrors && formErrors.email && formErrors.password) {
-        //setEmail(formErrors.email);
-        setErrorEmail(formErrors.email);
-
-        setErrorPassword(formErrors.password); 
-
-        console.log("email password failed", formErrors.email)
+  const validateFunction = () => {
+    console.log("values", email, password);
+    console.log(email===null," null check")
+    console.log(email===""," empty check")
+    console.log(email?"ture":"false")
+    let errorCount = 0;
+    if ( email === null) {
+      setErrorEmail('please enter valid emailId')
+      errorCount++;
+    }
+    if (email ==="") {
+      setErrorEmail('Please enter your EmailID');
+      errorCount++;
+    }
+    if (email) {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+        console.log("testing ")
+        setErrorEmail("Enter valid EmailID");
+        errorCount++;
       }
-      else if (formErrors && formErrors.password) {
-        console.log("password Validation failed")
-        //setPassword(formErrors.password);
-        setErrorPassword(formErrors.password);
-      }
-
-      else if (formErrors && formErrors.email ){
-
-        setErrorEmail(formErrors.email);
-        console.log("email failed", formErrors.email)
+      else {
+        console.log(" no testing ")
+        setError("");
       }
     }
-    console.log(data, "data........", formValues)
-  }, [formErrors])
+    if (password !== undefined) {
+      if (password ==="") {
+        setErrorPassword("Please enter your password");
+        errorCount++;
+      } else if (!/^[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(password)) {  
+          setErrorPassword("Password must have min 8 characters without spacing");
+          errorCount++;
+      }
+    }
+    if (errorCount === 0) {
+     setErrorEmail(""), setErrorPassword("");
+      return true;
+    }
+    if (errorCount > 0) {
+      if (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+        setErrorEmail("");
+      }
+      if (/^[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(password)) {
+        setErrorPassword("");
+      }
+    }
+    if (errorCount > 0) {
+      console.log("errorcount",errorCount)
+    }
+    else {
+      return false;
+    }
+  }
 
   useEffect(() => {
     navigation.addListener("blur", () => { BackHandler.removeEventListener("hardwareBackPress", handleBackButton); })
     navigation.addListener("focus", () => { BackHandler.addEventListener("hardwareBackPress", handleBackButton); })
   }, [handleBackButton])
 
-
-  //   const Redirecthandle =() =>{
-  //   Alert.alert("","are sure u want app"),[{
-  //     text:"no",
-  //     onPress:()=>null,
-  //     style:"cancel"
-  //   },{
-  //     text:"yes",
-  //     onPress:()=>BackHandler.exitAPP(),
-  //   }]
-  //   }
-
-  // useBackHandler(Redirecthandle)
-
-
-
-  useEffect(() => {
-    if (data && Object.keys(data)) {
-      const reg = {
-        "email": data.email,
-        "password": data.password,
-        "fcm_id": ""
+  const loginPress= async()=>{
+      console.log("e dataaaaaaaaaa",email,password);
+      handleSubmit(), Keyboard.dismiss 
+  }
+  
+  const handleSubmit = async () => {
+    const validateLetter = validateFunction();
+    console.log("Retrun.............", validateLetter);
+    if (validateLetter) {
+        const reg = {
+          "email": email,
+          "password":password,
+          "fcm_id": ""
+        }
+        console.log("data inside the handle submit", reg);
+        dispatch(loginHanlder(reg))
+          .then(unwrapResult)
+          .then(async (originalPromiseResult:any) => {
+            console.log("successfully returned to login with response ", originalPromiseResult);
+            if (originalPromiseResult?.data?.access_token) {
+                console.log("token  sam   ...dddd", originalPromiseResult.data.access_token);
+              await AsyncStorage.setItem('loginToken', originalPromiseResult.data.access_token)
+              ToastAndroid.showWithGravity(
+                "Successfully logged in",
+                ToastAndroid.SHORT,
+                ToastAndroid.CENTER
+              )
+              if(isSelected===true){
+                await AsyncStorage.setItem('username',email),
+                await AsyncStorage.setItem('password',password)
+              }
+              else{
+                await AsyncStorage.setItem('username',""),
+                await AsyncStorage.setItem('password',"")
+              }
+              props.navigation.replace("Tabs")
+  
+            }
+            else if (originalPromiseResult.message) {
+              //setPassword("")
+              ToastAndroid.showWithGravity(
+                originalPromiseResult.message,
+                ToastAndroid.SHORT,
+                ToastAndroid.CENTER
+              )
+            }
+            else {
+              // console.log("setError response ", originalPromiseResult);
+              //setPassword("")
+              ToastAndroid.showWithGravity(
+                originalPromiseResult,
+                ToastAndroid.SHORT,
+                ToastAndroid.CENTER
+              )
+              //  setErrorLogin(originalPromiseResult.message);
+  
+            }
+          }).catch((rejectedValueOrSerializedError) => {
+            console.log(" Inside catch", rejectedValueOrSerializedError);
+            ToastAndroid.showWithGravity(
+              "Something went wrong!, please try again later",
+              ToastAndroid.SHORT,
+              ToastAndroid.CENTER
+            )
+          })
       }
-      console.log("data inside the handle submit", reg);
-      dispatch(loginHanlder(reg))
-        .then(unwrapResult)
-
-        .then(async (originalPromiseResult:any) => {
-
-          console.log("successfully returned to login with response ", originalPromiseResult);
-          if (originalPromiseResult?.data?.access_token) {
-            // if(isSelected===true){
-              console.log("token  sam   ...dddd", originalPromiseResult.data.access_token);
-            await AsyncStorage.setItem('loginToken', originalPromiseResult.data.access_token)
-            // }
-            ToastAndroid.showWithGravity(
-              "Successfully logged in",
-              ToastAndroid.SHORT,
-              ToastAndroid.CENTER
-            )
-            props.navigation.replace("Tabs")
-
-          }
-          else if (originalPromiseResult.message) {
-            ToastAndroid.showWithGravity(
-              originalPromiseResult.message,
-              ToastAndroid.SHORT,
-              ToastAndroid.CENTER
-            )
-          }
-          else {
-            // console.log("setError response ", originalPromiseResult);
-            ToastAndroid.showWithGravity(
-              originalPromiseResult,
-              ToastAndroid.SHORT,
-              ToastAndroid.CENTER
-            )
-            //  setErrorLogin(originalPromiseResult.message);
-
-          }
-        }).catch((rejectedValueOrSerializedError) => {
-          console.log(" Inside catch", rejectedValueOrSerializedError);
-          ToastAndroid.showWithGravity(
-            "Something went wrong!, please try again later",
-            ToastAndroid.SHORT,
-            ToastAndroid.CENTER
-          )
-        })
     }
-  }, [data])
-
   const handlePasswordBox = () => {
     // console.log("box pass")
     if (errorEmail) {
@@ -203,8 +242,8 @@ const Login = (props: Prop) => {
             placeholderTextColor={"black"}
             keyboardType="email-address"
             maxLength={30}
-            onChangeText={e => { handleChange(e, "email"), setErrorEmail(""), setErrorLogin(""), setEmail(e) }}
-
+            //onChangeText={e => { handleChange(e, "email"), setErrorEmail(""), setErrorLogin(""), setEmail(e) }}
+            onChangeText={(text) => setEmail(text)}
             style={{
               flexDirection: "column",
               width: horizontalScale(250),
@@ -217,7 +256,7 @@ const Login = (props: Prop) => {
 
         <View style={{ height: "5%" }}>
 
-          {formErrors.email || formErrors.loginundef ?
+          {errorEmail ?
             <Text style={styles.ErrorText}>{errorEmail}</Text> : null}
         </View>
         <TouchableOpacity style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), color: "#000" }} onPressIn={() => handlePasswordBox()} >
@@ -227,8 +266,8 @@ const Login = (props: Prop) => {
             secureTextEntry={passShow ? true : false}
             placeholderTextColor={"black"}
             maxLength={15}
-            onChangeText={e => { handleChange(e, "password"), setErrorPassword(""), setErrorLogin(""), setPassword(e) }}
-
+            //onChangeText={e => { handleChange(e, "password"), setErrorPassword(""), setErrorLogin(""), setPassword(e) }}
+            onChangeText={(text) => setPassword(text)}
             style={{
               flexDirection: "column",
               width: horizontalScale(250),
@@ -245,11 +284,9 @@ const Login = (props: Prop) => {
         </TouchableOpacity>
 
         <View style={{ height: "6%" }}>
-          {formErrors.password || formErrors.loginundef ?
+          { errorPassword ?
             <Text style={styles.ErrorText}>{errorPassword}</Text> : null}
-          {console.log("uuuuuuuuuuuuuuus", errorLogin ? true : false)}
           {errorLogin ? <Text style={styles.ErrorText}>{errorLogin}</Text> : null}
-
         </View>
         <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginHorizontal: "5%" }}>
           <View style={{ display: 'flex', flexDirection: "column", marginStart: "1.5%" }}>
@@ -265,7 +302,7 @@ const Login = (props: Prop) => {
           </View>
           <TouchableOpacity style={{ display: 'flex', flexDirection: "column", marginEnd: "2.5%" }} onPressIn={() => navigation.navigate("ForgetPassword")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", fontSize: RFValue(12) }}>Forgot Password?</Text></TouchableOpacity>
         </View>
-        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(193), padding: "3%" }} onPress={e => { handleSubmit(e, "1"), Keyboard.dismiss }} disabled={false}>
+        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(193), padding: "3%" }} onPress={e => { loginPress() }} disabled={false}>
 
           <Text style={{ textAlign: "center", fontSize: RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Log In</Text>
 

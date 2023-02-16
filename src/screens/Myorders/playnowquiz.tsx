@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Playnowquiz = (props) => {
    const[questions,setQustions] =useState(props.route.params);
-    console.log("Page props in play now quiz.............", questions)
+    
     const navigation = useNavigation();
     const [answer, setAnswer] = useState<any>('')
     const[quesno,setQuesNo]=useState(0);
@@ -23,18 +23,20 @@ const Playnowquiz = (props) => {
     const [buttonOptionThree, setButtonOptionThree] = useState(false)
     const [buttonOptionFour, setButtonOptionFour] = useState(false)
     const [buttonSubmit, setButtonSubmit] = useState(true)
+    console.log("Page props in play now quiz.............",answer )
     useEffect(() => {
         if (option == 1) {
-            setButtonOptionTwo(true), setButtonOptionThree(true), setButtonOptionFour(true), setButtonSubmit(false)
+            
+            setButtonOptionTwo(false), setButtonOptionThree(false), setButtonOptionFour(false), setButtonSubmit(false)
         }
         else if (option == 2) {
-            setButtonOptionOne(true), setButtonOptionThree(true), setButtonOptionFour(true), setButtonSubmit(false)
+            setButtonOptionOne(false), setButtonOptionThree(false), setButtonOptionFour(false), setButtonSubmit(false)
         }
         else if (option == 3) {
-            setButtonOptionTwo(true), setButtonOptionOne(true), setButtonOptionFour(true), setButtonSubmit(false)
+            setButtonOptionTwo(false), setButtonOptionOne(false), setButtonOptionFour(false), setButtonSubmit(false)
         }
         else if (option == 4) {
-            setButtonOptionTwo(true), setButtonOptionThree(true), setButtonOptionOne(true), setButtonSubmit(false)
+            setButtonOptionTwo(false), setButtonOptionThree(false), setButtonOptionOne(false), setButtonSubmit(false)
         }
         else {
             setButtonOptionTwo(false), setButtonOptionThree(false), setButtonOptionOne(false), setButtonSubmit(false)
@@ -122,16 +124,16 @@ const Playnowquiz = (props) => {
                     <View style={{ width: horizontalScale(300), height: verticalScale(80), marginTop: 20, marginLeft: 15, backgroundColor: "#EEEEEE", justifyContent: "center" }}>
                         <Text style={{ textAlign: "center", lineHeight: 20, color: "#303030", fontFamily: "Lexend-Regular" }}>{questions[quesno].q}</Text>
                     </View>
-                    <Button disabled={buttonOptionOne} style={{ ...Styles.options, ...{ backgroundColor: (option == 1) ? COLORS.element : "none", borderColor: (option == 1) ? COLORS.element : COLORS.black } }} onPress={() => { setAnswer(questions[quesno].options[0]), setOption(1), setError("") }}>
+                    <Button disabled={buttonOptionOne} style={{ ...Styles.options, ...{ backgroundColor: (option === 1) ? COLORS.element : "white", borderColor: (option == 1) ? COLORS.element : COLORS.black } }} onPress={() => { setAnswer(questions[quesno].options[0]), setOption(1), setError("") }}>
                         <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-Regular", color: "#616161" }}>{questions[quesno].options[0]}</Text>
                     </Button>
-                    <Button disabled={buttonOptionTwo} style={{ ...Styles.options, ...{ backgroundColor: (option == 2) ? COLORS.element : "none", borderColor: (option == 2) ? COLORS.element : COLORS.black } }} onPress={() => { setAnswer(questions[quesno].options[1]), setOption(2), setError("") }}>
+                    <Button disabled={buttonOptionTwo} style={{ ...Styles.options, ...{ backgroundColor: (option === 2) ? COLORS.element : "white", borderColor: (option == 2) ? COLORS.element : COLORS.black } }} onPress={() => { setAnswer(questions[quesno].options[1]), setOption(2), setError("") }}>
                         <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-Regular", color: "#616161" }}>{questions[quesno].options[1]}</Text>
                     </Button>
-                    <Button disabled={buttonOptionThree} style={{ ...Styles.options, ...{ backgroundColor: (option == 3) ? COLORS.element : "none", borderColor: (option == 3) ? COLORS.element : COLORS.black } }} onPress={() => { setAnswer(questions[quesno].options[2]), setOption(3), setError("") }}>
+                    <Button disabled={buttonOptionThree} style={{ ...Styles.options, ...{ backgroundColor: (option === 3) ? COLORS.element : "white", borderColor: (option == 3) ? COLORS.element : COLORS.black } }} onPress={() => { setAnswer(questions[quesno].options[2]), setOption(3), setError("") }}>
                         <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-Regular", color: "#616161" }}>{questions[quesno].options[2]}</Text>
                     </Button>
-                    <Button disabled={buttonOptionFour} style={{ ...Styles.options, ...{ backgroundColor: (option == 4) ? COLORS.element : "none", borderColor: (option == 4) ? COLORS.element : COLORS.black } }} onPress={() => { setAnswer(questions[quesno].options[3]), setOption(4), setError("") }}>
+                    <Button disabled={buttonOptionFour} style={{ ...Styles.options, ...{ backgroundColor: (option === 4) ? COLORS.element : "white", borderColor: (option == 4) ? COLORS.element : COLORS.black } }} onPress={() => { setAnswer(questions[quesno].options[3]), setOption(4), setError("") }}>
                         <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-Regular", color: "#616161" }}>{questions[quesno].options[3]}</Text>
                     </Button>
                     <Button disabled={buttonSubmit} style={{ ...Styles.options, borderColor: COLORS.black }} onPress={() => validateAnswer()}>

@@ -89,9 +89,9 @@ const EditAddress = ({ route }) => {
     const [countryListValue, setCountryListValue] = useState([])
     const [countryValue, setCountryValue] = useState<any>(null)
     const [stateListValue, setStateListValue] = useState([])
-    const [stateValue, setStateValue] = useState<any>('')
+    const [stateValue, setStateValue] = useState<any>(null)
     const [cityListValue, setCityListValue] = useState([])
-    const [cityValue, setCityValue] = useState<any>('')
+    const [cityValue, setCityValue] = useState<any>(null)
     const [countryError, setCountryError] = useState("")
     const [stateError, setStateError] = useState("")
     const [cityData, setCityData] = useState();
@@ -110,56 +110,89 @@ const EditAddress = ({ route }) => {
             setCity(address.city.name)
             setStateses(address.state.name)
             setCountry(address.country.name)
-            console.log(address.country.name, "address to edit in this page ")
+            setSelection(address.is_default_address)
+            setAddressType(address.address_type==="Home"? 0 : 1)
+            console.log(address, "address to edit in this page ")
             //console.log("Personal Details Country....", originalPromiseResult);
             // const value = originalPromiseResult
         })
     }
     const validateFunction = () => {
-        console.log("values", Name, address, phone, locality, pincode);
-
+        console.log(cityValue,"values",stateValue,"samuel", Name, address, phone, locality, pincode,countryValue,stateValue,cityValue);
+       
+        //firstName
         let errorCount = 0;
         if (Name.length <= 3 || Name === undefined) {
             setErrorName('Name is Required')
             errorCount++;
         }
-
+       
         if (address.length <= 3 || address === undefined) {
             setErrorAddress('address is required')
             errorCount++;
+            console.log(errorCount,"serambhdvhidv")
         }
+       
         if (pincode.length < 5) {
             setErrorPin('please enter  valid pincode')
             errorCount++;
         }
-
-        if (locality.length == 0) {
+       
+        if (locality.length <=5) {
             setErrorLocality('Please enter Locality')
             errorCount++;
         }
-
+        
         if (phone.length < 10) {
             setErrorPhone('please enter valid Number')
             errorCount++;
         }
-        if (countryValue.length == 0) {
+        if (countryValue ===null) {
             setCountryError('country is required')
             errorCount++;
         }
-        if (cityValue.length == 0) {
+        if (cityValue === null) {
             setCityError('City is required')
             errorCount++;
         }
-        if (stateValue.length == 0) {
+        if (stateValue === null) {
             setStateError('State is required')
         }
+        
         if (errorCount === 0) {
             setErrorAddress(""), setErrorName(""), setErrorLocality(""), setErrorPhone(""), setErrorPin("");
             return true;
         }
+        if (errorCount > 0){
+            if (Name.length > 3 ) {
+                setErrorName('');
+            }
+            if (address.length > 3 ) {
+                setErrorAddress('');
+            }
+            if (pincode.length > 5 ) {
+                setErrorPin('');
+            }
+            if (locality.length > 5 ) {
+                setErrorLocality('');
+            }
+            if (phone.length > 9 ) {
+                setErrorPhone('');
+            }
+            if (countryValue != null ) {
+                setCountryError('');
+            }
+            if (cityValue !=null ) {
+                setCityError('');
+            }
+            if (stateValue !=null ) {
+                setStateError('');
+            }
+        }
         else {
             return false;
         }
+        console.log("errorcount ",errorCount)
     }
     const handleSubmit = async () => {
         const validateLetter = validateFunction();
@@ -491,7 +524,7 @@ const EditAddress = ({ route }) => {
             <View style={{ flexDirection: "row", height: "8%", backgroundColor: COLORS.white, paddingVertical: "1%", paddingHorizontal: "2%" }}>
 
                 <TouchableOpacity style={{ flexDirection: "column", width: "90%", marginHorizontal: "5%", marginVertical: "1%", borderRadius: 5, borderWidth: 1, justifyContent: "center", alignItems: "center" }} onPress={e => { handleSubmit(), Keyboard.dismiss }} disabled={false}>
-                    <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular }}>Add Address</Text>
+                    <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular }}>Save Address</Text>
                 </TouchableOpacity>
 
             </View>

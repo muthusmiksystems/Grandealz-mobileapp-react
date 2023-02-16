@@ -94,8 +94,15 @@ const CartRelated = ({cartdts,changer,setChanger}) => {
     
     const CartDrawlist = async () => {
         let drawdatalist = await CartDrawlistHandle()
-        console.log("DrawData on cart Draw.............", drawdatalist)
-        setSimilarproduct(drawdatalist)
+        
+        var  Alreadysoldout:any=[];
+        (drawdatalist.data).forEach((element:any) => {
+            if(element.total_no_of_sold_out_tickets/element.total_no_of_tickets !=1){
+            Alreadysoldout.push(element);
+            }
+            console.log(element.total_no_of_tickets,"DrawData on cart Draw.............",element.total_no_of_sold_out_tickets)
+        })
+        setSimilarproduct(Alreadysoldout)
     }
     
     useEffect(() => {
@@ -148,7 +155,7 @@ const CartRelated = ({cartdts,changer,setChanger}) => {
             {/* <View style={{borderWidth:2}}> */}
             <FlatList
                 horizontal={true}
-                data={similarproduct?.data}
+                data={similarproduct}
                 showsHorizontalScrollIndicator={false}
                 // contentContainerStyle={{ marginLeft: "4%" }}
                 ItemSeparatorComponent={() => (

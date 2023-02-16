@@ -8,6 +8,7 @@ import {
     StyleSheet,
     Image,
     FlatList,
+    Button,
     TouchableOpacity
 } from 'react-native';
 import { horizontalScale, moderateScale, verticalScale } from "../../constants/metrices";
@@ -17,23 +18,30 @@ import { useNavigation } from "@react-navigation/native";
 
 import image from "../../constants/image";
 import { RFValue } from "react-native-responsive-fontsize";
-import { FONTS } from "../../constants";
+import { COLORS, FONTS, icons } from "../../constants";
 
 
 const TicketEmpty = () => {
     const navigation = useNavigation();
 
     return (
-        <SafeAreaView style={{height:"90%",width:"100%",}}>
-            <View  style={styles.container}>
-            {/* <View style={styles.view1} > */}
-            <Image
-                source={image.ticketEmpty}
-                resizeMode="contain"
-                style={{ height: verticalScale(150), width: horizontalScale(150),top:verticalScale(5) }}
-            />
-            <Text style={styles.text1}>Currently you have no active tickets</Text>
-            {/* </View> */}
+        <SafeAreaView style={{ height: "90%", width: "100%", }}>
+            <View style={styles.container}>
+                {/* <View style={styles.view1} > */}
+                <Image
+                    source={icons.tabTicketColor}
+                    resizeMode="contain"
+                    style={{ height: verticalScale(50), width: horizontalScale(60), top: verticalScale(5) }}
+                />
+                <View>
+                    <Text style={{ paddingHorizontal: "8%", textAlign: "center",paddingTop:"10%",fontSize:RFValue(13),lineHeight:RFValue(16) }}>You can view active coupons here after you make your purchase</Text>
+                    <View style={{paddingHorizontal:"20%",marginTop:"5%"}}>
+                    <TouchableOpacity style={{paddingHorizontal:"20%",marginTop:"2%",borderWidth:1,borderColor:COLORS.black,borderRadius:5}} onPress={()=>{navigation.navigate("DataPage")}}>
+                        <Text style={{padding:"5%",color:COLORS.black,fontSize:RFValue(12),textAlign:"center",fontWeight:"600"}}>Start Shopping</Text>
+                    </TouchableOpacity>
+                    </View>
+                </View>
+                {/* </View> */}
             </View>
         </SafeAreaView>
     );
@@ -55,19 +63,19 @@ const styles = StyleSheet.create({
     },
     container: {
         alignItems: "center",
-        justifyContent:"center",
-        height:"100%",
-        width:"100%",
+        marginTop: "45%",
+        height: "100%",
+        width: "100%",
         // borderWidth:2
     },
     view1: {
         alignContent: "center",
         alignItems: "center",
-        justifyContent:"center",
+        justifyContent: "center",
         flexDirection: "column",
         width: horizontalScale(140),
         alignSelf: "center",
-        backgroundColor: '#EEEEEE' ,
+        backgroundColor: '#EEEEEE',
         height: verticalScale(150),
         borderTopStartRadius: 95,
         borderBottomStartRadius: 95,
@@ -76,10 +84,10 @@ const styles = StyleSheet.create({
     },
     text1: {
         alignContent: "center",
-        color:"black",
+        color: "black",
         ...FONTS.lexendregular,
         fontSize: moderateScale(13),
-        
+
     },
 
 

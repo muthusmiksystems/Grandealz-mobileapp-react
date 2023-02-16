@@ -121,7 +121,7 @@ const MyOrders = () => {
                         transparent={true}
                         visible={modalVisible}
                         onRequestClose={() => {
-                            Alert.alert('Modal has been closed.');
+                           
                             setModalVisible(!modalVisible);
                         }}>
                         <View style={styles.centeredView}>
@@ -229,7 +229,7 @@ const MyOrders = () => {
                                 <Image
                                     source={icons.search}
                                     resizeMode="contain"
-                                    style={{ height: verticalScale(20), width: horizontalScale(20), marginLeft: RFValue(5), top: RFValue(4) }}
+                                    style={{ height: verticalScale(23),width: horizontalScale(25), marginLeft: RFValue(5), top: RFValue(4) }}
                                 />
                                 </TouchableOpacity>
                                 <TextInput
@@ -243,7 +243,7 @@ const MyOrders = () => {
                                         ...FONTS.lexendregular,
                                         fontSize: RFValue(16), color: "black",
                                        padding:1,
-                                       marginStart: RFValue(15)
+                                       marginStart: RFValue(5)
                                     }}
                                 />
                                 {/* <Text style={{ color: COLORS.gray, fontSize: RFValue(16), ...FONTS.lexendregular, marginStart: RFValue(5) }}>Search in orders</Text> */}

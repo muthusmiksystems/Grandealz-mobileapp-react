@@ -103,7 +103,9 @@ const WishList = () => {
                 const payload = { "draw": drawid, "qty": 1 }
                 let AddItemtoCart = await AddtoCartHandle(payload)
                 if (AddItemtoCart.status === "200") {
-                    navigation.navigate("Tabs", { screen: "Cart" })
+                                soon()
+                                showViewCart()
+                    // navigation.navigate("Tabs", { screen: "Cart" })
                 }
                 else {
                     ToastAndroid.showWithGravity(

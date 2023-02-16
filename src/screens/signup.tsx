@@ -18,6 +18,7 @@ import {
   // Button
 } from "react-native";
 import { horizontalScale, verticalScale } from "../constants/metrices";
+import { Button } from 'react-native-paper';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { loginicon } from "../constants/icons";
 // import InputBox from 'react-native-floating-label-inputbox';
@@ -33,6 +34,7 @@ import { registerHandler } from "../store/reducers/register";
 import useForm from "./Auth/useForm";
 import validate from "./Auth/validate";
 import { countryList } from "../services/countryList";
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Signup = () => {
 
@@ -54,59 +56,37 @@ const Signup = () => {
   const [errorLast, setErrorLast] = useState(null);
   const [countryListValue, setCountryListValue] = useState([])
   const [mblCode, setMblCode] = useState("");
+  const [isSelected, setSelection] = useState(false);
+  const [passShow, setPassShow] = useState("true");
 
-  // useEffect(() => {
-  //   console.log(Object.keys(formValues).length, "kk", formErrors)
-  //   if (formErrors && Object.keys(formErrors).length > 0) {
-  //     if (formErrors && formErrors.allerror) {
-  //       setError(formErrors.allerror)
-  //     }
-  //     if (formErrors && formErrors.firstName) {
-  //       //setFirstName(formErrors.firstName)
-  //       setErrorFirst(formErrors.firstName);
-  //       console.log("firstname failed")
-
-  //     }
-  //     if (formErrors && formErrors.lastName) {
-  //       console.log("lastname failed")
-  //       //setLastName(formErrors.lastName);
-  //       setErrorLast(formErrors.lastName);
-  //     }
-  //     if (formErrors && formErrors.email) {
-  //       //setEmail(formErrors.email);
-  //       setErrorEmail(formErrors.email);
-  //       console.log("email failed", formErrors.email)
-  //     }
-  //     if (formErrors && formErrors.password) {
-  //       console.log("password Validation failed")
-  //       //setPassword(formErrors.password);
-  //       setErrorPassword(formErrors.password);
-  //     }
-  //     if (formErrors && formErrors.phone) {
-  //       console.log("phone failed")
-  //       //setPhone(formErrors.phone);
-  //       setErrorPhone(formErrors.phone);
-  //     }
-  //   }
-  //   console.log("im the formerror data........",formValues)
-
-  // }, [formErrors])
+  const agreeFail = () => {
+    if (isSelected) {
+      handleSubmit(), Keyboard.dismiss
+    }
+    else {
+      ToastAndroid.showWithGravity(
+        "Please Agree the terms and conditions",
+        ToastAndroid.CENTER,
+        ToastAndroid.SHORT
+      )
+    }
+  }
 
   const validateFunction = () => {
     console.log("values", firstName, lastName, phone, email, password);
 
     let errorCount = 0;
     if (firstName.length <= 3 || firstName === undefined) {
-      setErrorFirst('FirstName is Required')
+      setErrorFirst('Please Enter First Name')
       errorCount++;
     }
 
     if (lastName.length <= 3 || lastName === undefined) {
-      setErrorLast('LastName is required')
+      setErrorLast('Please Enter LastName')
       errorCount++;
     }
     if (email.length < 5 || email === undefined) {
-      setErrorEmail('please enter valid emailId')
+      setErrorEmail('please enter emailId')
       errorCount++;
     }
     if (email.length == 0) {
@@ -115,7 +95,7 @@ const Signup = () => {
     }
     if (email !== undefined) {
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
-        setErrorEmail("Invalid EmailID");
+        setErrorEmail(" Please Enter valid Email");
         errorCount++;
       }
       else {
@@ -123,18 +103,18 @@ const Signup = () => {
       }
     }
     if (phone.length <= 9) {
-      setErrorPhone('Please enter Mobile No')
+      setErrorPhone('Please Enter Phone')
       errorCount++;
     }
     if (password !== undefined) {
       if (password.length == 0) {
         setErrorPassword("Please enter your password");
         errorCount++;
-      } else if (!/^[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(password)) {  
-          setErrorPassword("password must have 8 charater");
-          errorCount++;
+      } else if (!/^[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(password)) {
+        setErrorPassword("password must have 8 charater");
+        errorCount++;
       }
-      else if(password.length >= 7){
+      else if (password.length >= 7) {
         setErrorPassword("");
       }
     }
@@ -151,6 +131,9 @@ const Signup = () => {
       }
       if (phone.length >= 9) {
         setErrorPhone("");
+      }
+      if (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+        setErrorEmail("");
       }
     }
     else {
@@ -170,40 +153,40 @@ const Signup = () => {
         "phone": phone,
         "password": password,
         "country_phone_code": "+91",
-        "term_and_condition": true,
+        "term_and_condition": isSelected,
         "referralcode": "",
         "fcm_id": ""
       }
       console.log("data inside the handle submit", reg);
       dispatch(registerHandler(reg))
-      .then(unwrapResult)
-      .then(async (originalPromiseResult) => {
-        console.log("im the register",originalPromiseResult)
-        if (originalPromiseResult.status === "200") {
-          await AsyncStorage.setItem('Signuptoken', originalPromiseResult.data.access_token);
-          ToastAndroid.showWithGravity(
-            originalPromiseResult.message,
-            ToastAndroid.CENTER,
-            ToastAndroid.SHORT
-          )
-          navigation.navigate("OtpPage")
-        }
-        else if (originalPromiseResult.status === "400") {
-          console.log("im the error data", originalPromiseResult)
-          ToastAndroid.showWithGravity(
-            originalPromiseResult.message,
-            ToastAndroid.CENTER,
-            ToastAndroid.SHORT
-          )
-        }
-        else {
-          console.log(originalPromiseResult, "error")
-        }
-      })
+        .then(unwrapResult)
+        .then(async (originalPromiseResult) => {
+          console.log("im the register", originalPromiseResult)
+          if (originalPromiseResult.status === "200") {
+            await AsyncStorage.setItem('Signuptoken', originalPromiseResult.data.access_token);
+            ToastAndroid.showWithGravity(
+              originalPromiseResult.message,
+              ToastAndroid.CENTER,
+              ToastAndroid.SHORT
+            )
+            navigation.navigate("OtpPage")
+          }
+          else if (originalPromiseResult.status === "400") {
+            console.log("im the error data", originalPromiseResult)
+            ToastAndroid.showWithGravity(
+              originalPromiseResult.message,
+              ToastAndroid.CENTER,
+              ToastAndroid.SHORT
+            )
+          }
+          else {
+            console.log(originalPromiseResult, "error")
+          }
+        })
     }
   }
 
-  
+
   const handleBox = () => {
     if (errorEmail) {
       setEmail(""),
@@ -227,12 +210,14 @@ const Signup = () => {
     }
   }
   const CheckBoxes = () => {
-    const [isSelected, setSelection] = useState(false);
+    const checkSelection = () => {
+      setSelection(!isSelected)
+    }
     return (
-      <View style={{ flexDirection: "row", right: horizontalScale(4), alignSelf: "center" }}>
+      <View style={{ flexDirection: "row", right: horizontalScale(0), alignItems: "center", bottom: "8%" }}>
         <CheckBox
           value={isSelected}
-          onValueChange={setSelection}
+          onValueChange={checkSelection}
           style={styles.checkBox}
           tintColors={{ true: COLORS.element }}
         />
@@ -271,7 +256,7 @@ const Signup = () => {
 
           <View style={{ paddingBottom: "1%" }}>
             <Text style={{ fontSize: RFValue(26), color: "black", textAlign: "center", marginTop: verticalScale(10), fontFamily: "Lexend-SemiBold" }}>Register</Text>
-            <View style={{ alignItems: "center" }}>
+            <View style={{ alignSelf: "center" }}>
 
               <Pressable onPressIn={() => handleBox()}>
                 <TextInput
@@ -348,17 +333,29 @@ const Signup = () => {
                 {errorPhone ?
                   <Text style={styles.ErrorText}>{errorPhone}</Text> : null}
               </View>
-              <Pressable onPressIn={() => handleBox()}>
+              <TouchableOpacity style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), color: "#000" }} onPressIn={() => handleBox()} >
                 <TextInput
                   placeholder="Password"
                   value={password}
+                  secureTextEntry={passShow ? true : false}
+                  placeholderTextColor={"black"}
                   maxLength={15}
                   onChangeText={(text) => setPassword(text)}
-                  //onChangeText={e => { handleChange(e, "password"), setErrorPassword(""), setPassword(e) }}
-                  //onChangeText={(text) => { setPassword(text), text ? setError("") : setError(...errordata, errordata.password = "enter the password") }}
-                  placeholderTextColor={"black"}
-                  style={{ ...styles.textInput }} />
-              </Pressable>
+                  style={{
+                    flexDirection: "column",
+                    width: horizontalScale(250),
+                    ...FONTS.lexendregular,
+                    fontSize: RFValue(14), color: (errorPassword) ? "red" : "black"
+                  }}
+                  //style={{ ...styles.textInput }}
+                />
+                <TouchableOpacity style={{ alignSelf: "center", flexDirection: "column" }} onPress={() => setPassShow(!passShow)}>
+                  {passShow ? <Ionicons name="eye-outline" size={30} style={{ color: COLORS.gray }} /> :
+                    <Ionicons name='eye-off-outline' size={30} style={{ color: COLORS.gray }} />
+                  }
+                </TouchableOpacity>
+              </TouchableOpacity>
+              
               <View style={{ height: "4%" }}>
                 {errorPassword ?
                   <Text style={styles.ErrorText}>{errorPassword}</Text> : null}
@@ -367,10 +364,12 @@ const Signup = () => {
             <View style={{ alignSelf: "center", width: horizontalScale(300), }}>
               <CheckBoxes />
             </View>
-            <TouchableOpacity style={{ alignSelf: "center", borderWidth: 1, borderRadius: 8, width: horizontalScale(200), padding: "4%" }} onPress={e => { handleSubmit(), Keyboard.dismiss }} disabled={false} /* onPress={() => { handleSubmited() }} */ /* onPress={() => navigation.navigate("OtpPage")} */>
+
+            <Button style={{ alignSelf: "center", borderWidth: 1, borderRadius: 8, width: horizontalScale(190), borderColor: "black" }}
+              onPress={() => { agreeFail() }}>
               <Text style={{ textAlign: "center", fontSize: RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Register</Text>
-            </TouchableOpacity>
-            <View style={{ flexDirection: "row", marginTop: "4%", alignSelf: "center" }}>
+            </Button>
+            <View style={{ flexDirection: "row", marginTop: "2%", alignSelf: "center" }}>
               <Text style={{ flexDirection: "column", alignSelf: "flex-start", fontFamily: "Lexend-Regular", color: "black", fontSize: RFValue(13) }}>Existing User </Text>
               <TouchableOpacity style={{ alignSelf: "flex-end", flexDirection: "column" }} onPressIn={() => navigation.navigate("login")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", fontSize: RFValue(13) }}>Log in</Text></TouchableOpacity>
             </View>
@@ -389,7 +388,7 @@ const styles = StyleSheet.create({
   },
   subdivTwo: {
     width: horizontalScale(342),
-    height: verticalScale(580),
+    height: verticalScale(600),
     backgroundColor: "white",
     bottom: verticalScale(82),
     alignSelf: "center",
@@ -408,7 +407,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     flexDirection: "column",
     borderColor: "#c4c4c2",
-    color:"black",
+    color: "black",
     paddingStart: 10,
     borderRadius: 8,
     width: horizontalScale(45),
@@ -418,7 +417,7 @@ const styles = StyleSheet.create({
   pin: {
     borderWidth: 1,
     paddingStart: 15,
-    color:"black",
+    color: "black",
     borderColor: "#c4c4c2",
     flexDirection: "column",
     borderRadius: 8,
@@ -430,8 +429,8 @@ const styles = StyleSheet.create({
     color: "red",
     ...FONTS.lexendregular,
     fontSize: RFValue(10),
-    marginStart: "7%",
-    textAlign:"left",
+    marginStart: "1%",
+    textAlign: "left",
     //width: horizontalScale(100)
   },
   Errorpass: {

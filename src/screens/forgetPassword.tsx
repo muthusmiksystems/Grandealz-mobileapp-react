@@ -61,7 +61,7 @@ const ForgetPassword = () => {
               ToastAndroid.CENTER,
             );
             setForgetEmail('')
-            navigation.navigate('OtpPage')
+            navigation.navigate('login')
           }
           // else if(originalPromiseResult==="undefined"){
           //   ToastAndroid.showWithGravity(
@@ -129,7 +129,7 @@ const ForgetPassword = () => {
         <View style={{ height: "5%" }}>
           {error ? <Text style={{ ...FONTS.lexendregular, color: COLORS.element, fontSize: RFValue(12), paddingStart: "7%" }}>{error}</Text> : null}
         </View>
-        <TouchableOpacity style={{ alignSelf: "center", marginTop: "12%", borderWidth: 1, borderRadius: 8, width: horizontalScale(200), padding: "4%" }}
+        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(200), padding: "4%" }}
           onPress={() => validateEmail()}
         >
           <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-SemiBold", color: "black" }}>Submit</Text>
