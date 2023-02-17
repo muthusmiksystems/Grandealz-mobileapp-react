@@ -112,11 +112,6 @@ const CartRelated = ({cartdts,changer,setChanger}) => {
                 const payload={"draw": drawid,"qty":1}
                 let AddItemtoCart = await AddtoCartHandle(payload)
                 if (AddItemtoCart.status === "200") {
-                    ToastAndroid.showWithGravity(
-                        AddItemtoCart.message,
-                        ToastAndroid.SHORT,
-                        ToastAndroid.CENTER,
-                    );
                     setChanger(!changer);
                 }
                 else {
@@ -186,12 +181,12 @@ const CartRelated = ({cartdts,changer,setChanger}) => {
                             <Text style={{ color: COLORS.element, fontSize: RFValue(13), ...FONTS.lexendregular, }}>₹{item.product_price}</Text>
                         </View>
                         {!(cartList.includes(`${item._id}`)) ?
-                            <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", borderWidth: 1, borderRadius: 5, marginTop: RFValue(5), width: RFValue(113), alignSelf: "center", height: RFValue(26) }} onPress={() => { setDrawid(item._id)}}>
+                            <TouchableOpacity  style={{ justifyContent: "center", alignItems: "center", borderWidth: 1, borderRadius: 5, marginTop: RFValue(5), width: RFValue(113), alignSelf: "center", height: RFValue(26) }} onPress={() => { setDrawid(item._id)}}>
                                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, }}>Add</Text>
                             </TouchableOpacity>
                             :
-                            <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", borderWidth: 1, borderRadius: 5, marginTop: RFValue(5), width: RFValue(113), alignSelf: "center", height: RFValue(26), backgroundColor: COLORS.black }} >
-                                <Text style={{ color: COLORS.white, fontSize: RFValue(13), ...FONTS.lexendregular, }}>Added</Text>
+                            <TouchableOpacity disabled={true} style={{ justifyContent: "center", alignItems: "center", borderWidth: 1, borderRadius: 5, marginTop: RFValue(5), width: RFValue(113), alignSelf: "center", height: RFValue(26), backgroundColor: COLORS.white }} >
+                                <Text style={{ color: COLORS.black, fontSize: RFValue(13), ...FONTS.lexendregular, }}>Added</Text>
                             </TouchableOpacity>}
                     </View>
                 )}

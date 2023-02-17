@@ -318,7 +318,7 @@ const User = (props: any) => {
                                         borderRadius: 10
                                     }}>
                                     {(imageLoader) ? <LoadingView /> : null}
-                                    <TouchableOpacity style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', height: "27%", bottom: 0, borderBottomEndRadius: moderateScale(4), borderBottomStartRadius: moderateScale(4), width: "100%", position: 'absolute', alignItems: "center", justifyContent: "center" }}
+                                    <TouchableOpacity style={{ backgroundColor: 'rgba(1, 1, 1, 0.5)', height: "27%", bottom: 0, borderBottomEndRadius: moderateScale(4), borderBottomStartRadius: moderateScale(4), width: "100%", position: 'absolute', alignItems: "center", justifyContent: "center" }}
                                         onPress={() => setModalState(true)}
                                     >
                                         <FontA5 name="edit" color="white" size={moderateScale(13)} style={{ margin: "2%" }} />
@@ -357,202 +357,188 @@ const User = (props: any) => {
                             <Text style={styles.fontSizeStyle}>Personal Details</Text>
                             <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
 
-                    </TouchableOpacity>
-                    <View style={styles.divider} />
-                    <TouchableOpacity style={styles.touchButton} onPress={() => navigation.navigate('WishList')}>
-                        <Image
-                            source={icons.userHeart}
-                            resizeMode="contain"
-                            style={{
-                                width: verticalScale(28),
-                                height: horizontalScale(25),
-                                flexDirection: "column"
-                            }}
-                        />
-                        <Text style={styles.fontSizeStyle}>Wishlist</Text>
-                        <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
+                        </TouchableOpacity>
+                        <View style={styles.divider} />
+                        <TouchableOpacity style={styles.touchButton} onPress={() => navigation.navigate('WishList')}>
+                            <Image
+                                source={icons.userHeart}
+                                resizeMode="contain"
+                                style={{
+                                    width: verticalScale(28),
+                                    height: horizontalScale(25),
+                                    flexDirection: "column"
+                                }}
+                            />
+                            <Text style={styles.fontSizeStyle}>Wishlist</Text>
+                            <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
 
-                    </TouchableOpacity>
-                    <View style={styles.divider} />
-                    <TouchableOpacity style={styles.touchButton} onPress={() => navigation.navigate('MyOrders')}>
-                        <Image
-                            source={icons.userBox}
-                            resizeMode="contain"
-                            style={{
-                                width: verticalScale(28),
-                                height: horizontalScale(25),
-                                flexDirection: "column"
-                            }}
-                        />
-                        <Text style={styles.fontSizeStyle}>My Orders</Text>
-                        <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
+                        </TouchableOpacity>
+                        <View style={styles.divider} />
+                        <TouchableOpacity style={styles.touchButton} onPress={() => navigation.navigate('MyOrders')}>
+                            <Image
+                                source={icons.userBox}
+                                resizeMode="contain"
+                                style={{
+                                    width: verticalScale(28),
+                                    height: horizontalScale(25),
+                                    flexDirection: "column"
+                                }}
+                            />
+                            <Text style={styles.fontSizeStyle}>My Orders</Text>
+                            <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
 
-                    </TouchableOpacity>
-                </View>
-                <Text style={styles.fontHeadStyle}>Settings</Text>
-                <View style={{ borderTopWidth: 4, width: "11%", borderTopColor: COLORS.element, marginLeft: "6%", paddingBottom: "2%" }} />
-                <View style={styles.viewBox}>
-                    <TouchableOpacity style={styles.touchButton} onPress={() => navigation.navigate("PaymentOptions")}>
-                        <Image
-                            source={icons.userCreditCard}
-                            resizeMode="contain"
-                            style={{
-                                width: verticalScale(28),
-                                height: horizontalScale(25),
-                                flexDirection: "column"
-                            }}
-                        />
-                        <Text style={styles.fontSizeStyle}>Saved Cards/Payment Options</Text>
-                        <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
+                        </TouchableOpacity>
+                    </View>
+                    <Text style={styles.fontHeadStyle}>Settings</Text>
+                    <View style={{ borderTopWidth: 4, width: "11%", borderTopColor: COLORS.element, marginLeft: "6%", paddingBottom: "2%" }} />
+                    <View style={styles.viewBox}>
+                        <TouchableOpacity style={styles.touchButton} onPress={() => navigation.navigate("PaymentOptions")}>
+                            <Image
+                                source={icons.userCreditCard}
+                                resizeMode="contain"
+                                style={{
+                                    width: verticalScale(28),
+                                    height: horizontalScale(25),
+                                    flexDirection: "column"
+                                }}
+                            />
+                            <Text style={styles.fontSizeStyle}>Saved Cards/Payment Options</Text>
+                            <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
 
-                    </TouchableOpacity>
-                    <View style={styles.divider} />
-                    <TouchableOpacity style={styles.touchButton} onPress={() => navigation.navigate('Address',{type:"user"})}>
-                        <Image
-                            source={icons.userLocation}
-                            resizeMode="contain"
-                            style={{
-                                width: verticalScale(28),
-                                height: horizontalScale(25),
-                                flexDirection: "column"
-                            }}
-                        />
-                        <Text style={styles.fontSizeStyle}>My Address</Text>
-                        <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
+                        </TouchableOpacity>
+                        <View style={styles.divider} />
+                        <TouchableOpacity style={styles.touchButton} onPress={() => navigation.navigate('Address', { type: "user" })}>
+                            <Image
+                                source={icons.userLocation}
+                                resizeMode="contain"
+                                style={{
+                                    width: verticalScale(28),
+                                    height: horizontalScale(25),
+                                    flexDirection: "column"
+                                }}
+                            />
+                            <Text style={styles.fontSizeStyle}>My Address</Text>
+                            <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
 
-                    </TouchableOpacity>
-                    <View style={styles.divider} />
-                    <TouchableOpacity style={styles.touchButton} onPress={() => navigation.navigate("ChangePassword")}>
-                        <Image
-                            source={icons.userChangePassword}
-                            resizeMode="contain"
-                            style={{
-                                width: verticalScale(28),
-                                height: horizontalScale(25),
-                                flexDirection: "column"
-                            }}
-                        />
-                        <Text style={styles.fontSizeStyle}>Change Password</Text>
-                        <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
+                        </TouchableOpacity>
+                        <View style={styles.divider} />
+                        <TouchableOpacity style={styles.touchButton} onPress={() => navigation.navigate("ChangePassword")}>
+                            <Image
+                                source={icons.userChangePassword}
+                                resizeMode="contain"
+                                style={{
+                                    width: verticalScale(28),
+                                    height: horizontalScale(25),
+                                    flexDirection: "column"
+                                }}
+                            />
+                            <Text style={styles.fontSizeStyle}>Change Password</Text>
+                            <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
 
-                    </TouchableOpacity>
-                    <View style={styles.divider} />
-                    <TouchableOpacity style={styles.touchButton} onPress={() => navigation.navigate("Coins")}>
-                        <Image
-                            source={icons.coinDollar}
-                            resizeMode="contain"
-                            style={{
-                                width: verticalScale(28),
-                                height: horizontalScale(25),
-                                flexDirection: "column"
-                            }}
-                        />
-                        <Text style={styles.fontSizeStyle}>Coins</Text>
-                        <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
+                        </TouchableOpacity>
+                        <View style={styles.divider} />
+                    </View>
+                    <Text style={styles.fontHeadStyle}>General</Text>
+                    <View style={{ borderTopWidth: 4, width: "11%", borderTopColor: COLORS.element, marginLeft: "6%", paddingBottom: "2%" }} />
+                    <View style={styles.viewBox}>
+                        <TouchableOpacity style={styles.touchButton} onPress={() => { navigation.navigate("HowItWorks") }}>
+                            <Image
+                                source={icons.userInfo}
+                                resizeMode="contain"
+                                style={{
+                                    width: verticalScale(28),
+                                    height: horizontalScale(25),
+                                    flexDirection: "column"
+                                }}
+                            />
+                            <Text style={styles.fontSizeStyle}>How It Works</Text>
+                            <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
 
-                    </TouchableOpacity>
-                </View>
-                <Text style={styles.fontHeadStyle}>General</Text>
-                <View style={{ borderTopWidth: 4, width: "11%", borderTopColor: COLORS.element, marginLeft: "6%", paddingBottom: "2%" }} />
-                <View style={styles.viewBox}>
-                    <TouchableOpacity style={styles.touchButton} onPress={() => { navigation.navigate("HowItWorks") }}>
-                        <Image
-                            source={icons.userInfo}
-                            resizeMode="contain"
-                            style={{
-                                width: verticalScale(28),
-                                height: horizontalScale(25),
-                                flexDirection: "column"
-                            }}
-                        />
-                        <Text style={styles.fontSizeStyle}>How It Works</Text>
-                        <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
+                        </TouchableOpacity>
+                        <View style={styles.divider} />
+                        <TouchableOpacity style={styles.touchButton} onPress={() => navigation.navigate('OurProducts')}>
+                            <Image
+                                source={icons.userShirt}
+                                resizeMode="contain"
+                                style={{
+                                    width: verticalScale(28),
+                                    height: horizontalScale(25),
+                                    flexDirection: "column"
+                                }}
+                            />
+                            <Text style={styles.fontSizeStyle}>Our Products</Text>
+                            <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
 
+                        </TouchableOpacity>
+                        <View style={styles.divider} />
+                        <TouchableOpacity style={styles.touchButton}>
+                            <Image
+                                source={icons.userHeart}
+                                resizeMode="contain"
+                                style={{
+                                    width: verticalScale(28),
+                                    height: horizontalScale(25),
+                                    flexDirection: "column"
+                                }}
+                            />
+                            <Text style={styles.fontSizeStyle}>Our Charity Work</Text>
+                            <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
+                        </TouchableOpacity>
+                    </View>
+                    <TouchableOpacity style={{ borderWidth: 1, alignSelf: "center", borderColor: COLORS.gray, marginTop: "10%", width: "65%", borderRadius: 10 }} onPress={() => handleLogout()} >
+                        <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(16), textAlign: "center", color: COLORS.black, paddingVertical: "6%" }}>Logout</Text>
                     </TouchableOpacity>
-                    <View style={styles.divider} />
-                    <TouchableOpacity style={styles.touchButton} onPress={() => navigation.navigate('OurProducts')}>
-                        <Image
-                            source={icons.userShirt}
-                            resizeMode="contain"
-                            style={{
-                                width: verticalScale(28),
-                                height: horizontalScale(25),
-                                flexDirection: "column"
-                            }}
-                        />
-                        <Text style={styles.fontSizeStyle}>Our Products</Text>
-                        <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
-
+                    <TouchableOpacity style={{ padding: moderateScale(20), margin: "3%" }} onPress={() => deleteAcc()}>
+                        <Text style={{ ...FONTS.lexendregular, fontSize: RFValue(13), color: COLORS.element, textAlign: "center" }}>Delete my account</Text>
                     </TouchableOpacity>
-                    <View style={styles.divider} />
-                    <TouchableOpacity style={styles.touchButton}>
-                        <Image
-                            source={icons.userHeart}
-                            resizeMode="contain"
-                            style={{
-                                width: verticalScale(28),
-                                height: horizontalScale(25),
-                                flexDirection: "column"
-                            }}
-                        />
-                        <Text style={styles.fontSizeStyle}>Our Charity Work</Text>
-                        <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
-                    </TouchableOpacity>
-                </View>
-                <TouchableOpacity style={{ borderWidth: 1, alignSelf: "center", borderColor: COLORS.gray, marginTop: "10%", width: "65%", borderRadius: 10 }} onPress={() => handleLogout()} >
-                    <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(16), textAlign: "center", color: COLORS.black, paddingVertical: "6%" }}>Logout</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{ padding: moderateScale(20), margin: "3%" }} onPress={() => deleteAcc()}>
-                    <Text style={{ ...FONTS.lexendregular, fontSize: RFValue(13), color: COLORS.element, textAlign: "center" }}>Delete my account</Text>
-                </TouchableOpacity>
-                <View style={{ flexDirection: "row", marginTop: "1%" }}>
-                    <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignSelf: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginStart: "5%", marginEnd: "2%", width: "45%", borderRadius: 10 }}>
-                        <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(16), textAlign: "center", color: COLORS.black, paddingVertical: "8%" }}>Call us</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignSelf: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginEnd: "5%", width: "45%", borderRadius: 10 }}>
-                        <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(16), textAlign: "center", color: COLORS.black, paddingVertical: "8%" }}>Email us</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={{ flexDirection: "row", marginVertical: "8%" }}>
-                    <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignItems: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginLeft: "16%", padding: "4%", borderRadius: 10 }}>
-                        <Image
-                            source={icons.userInstagram}
-                            resizeMode="contain"
-                            style={{
-                                width: 30,
-                                height: 30,
-                                flexDirection: "column"
-                            }}
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignSelf: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginLeft: "10%", padding: "4%", borderRadius: 10 }}>
-                        <Image
-                            source={icons.userFacebook}
-                            resizeMode="contain"
-                            style={{
-                                width: 30,
-                                height: 30,
-                                flexDirection: "column"
-                            }}
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignSelf: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginLeft: "10%", padding: "4%", borderRadius: 10 }}>
-                        <Image
-                            source={icons.userWhatsapp}
-                            resizeMode="contain"
-                            style={{
-                                width: verticalScale(30),
-                                height: horizontalScale(30),
-                                flexDirection: "column"
-                            }}
-                        />
-                    </TouchableOpacity>
-                </View>
-                <View style={{ paddingLeft: "5%", paddingBottom: "5%"}}>
-                    <TouchableOpacity onPress={() => navigation.navigate("UserAgreement")}><Text style={{ ...FONTS.lexendregular, fontSize: RFValue(14), color: "#616161",margin:5 }}>User Agreement</Text></TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigation.navigate("Faq")}><Text style={{ ...FONTS.lexendregular, fontSize: RFValue(14), color: "#616161", paddingVertical: "2%",margin:5 }}>Frequently Asked Questions</Text></TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigation.navigate("PrivacyPolicy")}><Text style={{ ...FONTS.lexendregular, fontSize: RFValue(14), color: "#616161",margin:5 }}>Privacy Policy</Text></TouchableOpacity>
-                </View>
+                    <View style={{ flexDirection: "row", marginTop: "1%" }}>
+                        <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignSelf: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginStart: "5%", marginEnd: "2%", width: "45%", borderRadius: 10 }}>
+                            <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(16), textAlign: "center", color: COLORS.black, paddingVertical: "8%" }}>Call us</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignSelf: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginEnd: "5%", width: "45%", borderRadius: 10 }}>
+                            <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(16), textAlign: "center", color: COLORS.black, paddingVertical: "8%" }}>Email us</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ flexDirection: "row", marginVertical: "8%" }}>
+                        <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignItems: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginLeft: "16%", padding: "4%", borderRadius: 10 }}>
+                            <Image
+                                source={icons.userInstagram}
+                                resizeMode="contain"
+                                style={{
+                                    width: 30,
+                                    height: 30,
+                                    flexDirection: "column"
+                                }}
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignSelf: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginLeft: "10%", padding: "4%", borderRadius: 10 }}>
+                            <Image
+                                source={icons.userFacebook}
+                                resizeMode="contain"
+                                style={{
+                                    width: 30,
+                                    height: 30,
+                                    flexDirection: "column"
+                                }}
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignSelf: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginLeft: "10%", padding: "4%", borderRadius: 10 }}>
+                            <Image
+                                source={icons.userWhatsapp}
+                                resizeMode="contain"
+                                style={{
+                                    width: verticalScale(30),
+                                    height: horizontalScale(30),
+                                    flexDirection: "column"
+                                }}
+                            />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ paddingLeft: "5%", paddingBottom: "5%" }}>
+                        <TouchableOpacity onPress={() => navigation.navigate("UserAgreement")}><Text style={{ ...FONTS.lexendregular, fontSize: RFValue(14), color: "#616161", margin: 5 }}>User Agreement</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate("Faq")}><Text style={{ ...FONTS.lexendregular, fontSize: RFValue(14), color: "#616161", paddingVertical: "2%", margin: 5 }}>Frequently Asked Questions</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate("PrivacyPolicy")}><Text style={{ ...FONTS.lexendregular, fontSize: RFValue(14), color: "#616161", margin: 5 }}>Privacy Policy</Text></TouchableOpacity>
+                    </View>
                 </ScrollView> :
                 <View style={{ width: "100%", alignItems: "center", height: "92%", justifyContent: "center" }}>
                     <LoaderKit
@@ -647,15 +633,15 @@ const styles = StyleSheet.create({
     MainAlertView: {
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: "#FFF",
+        backgroundColor: COLORS.lightGray,
         borderRadius: 10,
         width: '100%',
         borderColor: '#fff',
+        
     }, centeredView: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 22,
+        alignItems: "baseline",
+        justifyContent: "flex-end",
     }
 })
 

@@ -42,14 +42,14 @@ import { EditAddressHandle } from "../../services/editAddress";
 
 
 const EditAddress = ({ route }) => {
-    const typeUser=route.params.type;
+    const typeUser = route.params.type;
     const edit = route.params.data;
 
-    console.log("data..............",route.params.type);
-    
+    console.log("data..............", route.params.type);
+
     const [isSelected, setSelection] = useState(false);
     const CheckBoxes = () => {
-        
+
         return (
             <View style={{ flexDirection: "row", left: horizontalScale(17) }}>
                 <CheckBox
@@ -81,7 +81,7 @@ const EditAddress = ({ route }) => {
     const [errorAddress, setErrorAddress] = useState('');
     const [locality, setLocality] = useState<any>("");
     const [errorLocality, setErrorLocality] = useState('');
-    const [addressType, setAddressType] = useState(0);
+    const [addressType, setAddressType] = useState();
 
     const [stateIso, setStateIso] = useState(null);
     const [country, setCountry] = useState<any>("");
@@ -97,8 +97,12 @@ const EditAddress = ({ route }) => {
     const [cityData, setCityData] = useState();
     const [stateData, setStateData] = useState();
     const [countryData, setCountryData] = useState();
-
+    const [optionHo, setOptionHo] = useState(false)
+    const [optionWo, setOptionWo] = useState(false)
+    const [addressError,setAddressError]=useState();
     const navigation = useNavigation();
+
+    const addresslist = useSelector((state) => state.AddressHandle.data);
 
     const getaddressList = async () => {
         let eacall = await EditAddressHandle(edit).then((address) => {
@@ -111,43 +115,60 @@ const EditAddress = ({ route }) => {
             setStateses(address.state.name)
             setCountry(address.country.name)
             setSelection(address.is_default_address)
-            setAddressType(address.address_type==="Home"? 0 : 1)
+            setAddressType(address.address_type === "Home" ? 0 : 1)
             console.log(address, "address to edit in this page ")
             //console.log("Personal Details Country....", originalPromiseResult);
             // const value = originalPromiseResult
         })
     }
+    useEffect(() => {
+        console.log(addresslist.length, "addresssssssssssssssssssssss")
+        if (addresslist.length === 2) {
+            setOptionHo(true)
+            setOptionWo(true)
+        }
+        if (address) {
+            if (address.address_type === "Home") {
+                setOptionHo(true)
+                console.log("address typr vandhu home so ", address.address_type)
+            }
+            if (address.address_type === "Work") {
+                setOptionWo(true)
+            }
+        }
+    }, [])
+
     const validateFunction = () => {
-        console.log(cityValue,"values",stateValue,"samuel", Name, address, phone, locality, pincode,countryValue,stateValue,cityValue);
-       
+        console.log(cityValue, "values", stateValue, "samuel", Name, address, phone, locality, pincode, countryValue, stateValue, cityValue);
+
         //firstName
         let errorCount = 0;
         if (Name.length <= 3 || Name === undefined) {
             setErrorName('Name is Required')
             errorCount++;
         }
-       
+
         if (address.length <= 3 || address === undefined) {
             setErrorAddress('address is required')
             errorCount++;
-            console.log(errorCount,"serambhdvhidv")
+            console.log(errorCount, "serambhdvhidv")
         }
-       
+
         if (pincode.length < 5) {
             setErrorPin('please enter  valid pincode')
             errorCount++;
         }
-       
-        if (locality.length <=5) {
+
+        if (locality.length <= 5) {
             setErrorLocality('Please enter Locality')
             errorCount++;
         }
-        
+
         if (phone.length < 10) {
             setErrorPhone('please enter valid Number')
             errorCount++;
         }
-        if (countryValue ===null) {
+        if (countryValue === null) {
             setCountryError('country is required')
             errorCount++;
         }
@@ -158,41 +179,47 @@ const EditAddress = ({ route }) => {
         if (stateValue === null) {
             setStateError('State is required')
         }
-        
+        if (addressType === undefined) {
+            setAddressError("Select address type")
+            errorCount++;
+        }
         if (errorCount === 0) {
             setErrorAddress(""), setErrorName(""), setErrorLocality(""), setErrorPhone(""), setErrorPin("");
             return true;
         }
-        if (errorCount > 0){
-            if (Name.length > 3 ) {
+        if (errorCount > 0) {
+            if (Name.length > 3) {
                 setErrorName('');
             }
-            if (address.length > 3 ) {
+            if (address.length > 3) {
                 setErrorAddress('');
             }
-            if (pincode.length > 5 ) {
+            if (pincode.length > 5) {
                 setErrorPin('');
             }
-            if (locality.length > 5 ) {
+            if (locality.length > 5) {
                 setErrorLocality('');
             }
-            if (phone.length > 9 ) {
+            if (phone.length > 9) {
                 setErrorPhone('');
             }
-            if (countryValue != null ) {
+            if (countryValue != null) {
                 setCountryError('');
             }
-            if (cityValue !=null ) {
+            if (cityValue != null) {
                 setCityError('');
             }
-            if (stateValue !=null ) {
+            if (stateValue != null) {
                 setStateError('');
             }
+            if (addressType != undefined ) {
+                setAddressError('');
+           }
         }
         else {
             return false;
         }
-        console.log("errorcount ",errorCount)
+        console.log("errorcount ", errorCount)
     }
     const handleSubmit = async () => {
         const validateLetter = validateFunction();
@@ -223,7 +250,7 @@ const EditAddress = ({ route }) => {
                     "phonecode": countryData.phonecode,
                     "currency": countryData.currency
                 },
-                "address_type": addressType==0?"Home":"Work",
+                "address_type": addressType == 0 ? "Home" : "Work",
                 "is_default_address": isSelected
             }
             const edaddresses = {
@@ -241,7 +268,7 @@ const EditAddress = ({ route }) => {
                             ToastAndroid.CENTER,
                         );
                         dispatch(addressListHandler());
-                        navigation.navigate("Address",{type:typeUser});
+                        navigation.navigate("Address", { type: typeUser });
                     }
                     else {
                         ToastAndroid.showWithGravity(
@@ -251,7 +278,7 @@ const EditAddress = ({ route }) => {
                         );
                     }
                 })
-                console.log(edaddresses, "Personal Details Country....");
+            console.log(edaddresses, "Personal Details Country....");
             //     if (calling === "Success") {
             //         ToastAndroid.showWithGravity(
             //             'Successfully added',
@@ -270,12 +297,12 @@ const EditAddress = ({ route }) => {
             //     }
         }
     }
-    
+
     useEffect(() => {
         getaddressList()
         getCountryList();
-        const india=[{"currency": "INR", "flag": "????", "isoCode": "IN", "name": "India", "phonecode": "91"}];
-    setCountryListValue(india)
+        const india = [{ "currency": "INR", "flag": "????", "isoCode": "IN", "name": "India", "phonecode": "91" }];
+        setCountryListValue(india)
     }, [])
     const getCountryList = async () => {
         let listCountries = await countryList().then((originalPromiseResult) => {
@@ -369,7 +396,7 @@ const EditAddress = ({ route }) => {
                             maxLength={15}
                             placeholderTextColor={COLORS.gray}
                             onChangeText={(text: String) => setName(text)}
-                            style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(13),color:"black" }}
+                            style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(13), color: "black" }}
                         />
                     </Pressable>
                 </View>
@@ -386,7 +413,7 @@ const EditAddress = ({ route }) => {
                             maxLength={10}
                             onChangeText={(text: String) => setPhone(text)}
                             placeholderTextColor={COLORS.gray}
-                            style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(13),color:"black" }}
+                            style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(13), color: "black" }}
                         />
                     </Pressable>
                 </View>
@@ -404,7 +431,7 @@ const EditAddress = ({ route }) => {
                             maxLength={6}
                             placeholderTextColor={COLORS.gray}
                             onChangeText={(text: String) => setPincode(text)}
-                            style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(13),color:"black" }}
+                            style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(13), color: "black" }}
                         />
                     </Pressable>
                 </View>
@@ -420,7 +447,7 @@ const EditAddress = ({ route }) => {
                             value={address}
                             placeholderTextColor={COLORS.gray}
                             onChangeText={(text: String) => setAddress(text)}
-                            style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(14),color:"black" }}
+                            style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(14), color: "black" }}
                         />
                     </Pressable>
                 </View>
@@ -437,7 +464,7 @@ const EditAddress = ({ route }) => {
                             maxLength={40}
                             onChangeText={(text: String) => setLocality(text)}
                             placeholderTextColor={COLORS.gray}
-                            style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(14),color:"black" }}
+                            style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(14), color: "black" }}
                         />
                     </Pressable>
                 </View>
@@ -509,13 +536,18 @@ const EditAddress = ({ route }) => {
 
                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "3%" }}>SAVE ADDRESS AS</Text>
                 <View style={{ marginVertical: "2%", flexDirection: "row", width: "89%", alignSelf: "center", borderRadius: 10, backgroundColor: COLORS.white }}>
-                    <TouchableOpacity style={{ paddingVertical: "5%", marginHorizontal: "5%", }} onPress={()=>setAddressType(0)}>
-                        <Text style={{...styles.switch,backgroundColor:(addressType==0)?COLORS.element:"white",color:(addressType==0)?COLORS.white:COLORS.gray}}>Home</Text>
-                        </TouchableOpacity>
-                    <TouchableOpacity style={{ paddingVertical: "5%", }} onPress={()=>setAddressType(1)}>
-                        <Text style={{...styles.switch,backgroundColor:(addressType==1)?COLORS.element:"white",color:(addressType==1)?COLORS.white:COLORS.gray}}>Work</Text>
-                        </TouchableOpacity>
+                    
+                    <TouchableOpacity disabled={optionHo} style={{ paddingVertical: "5%", marginHorizontal: "5%", }} onPress={() => setAddressType(0)}>
+                        <Text style={{ ...styles.switch, backgroundColor: (addressType == 0) ? COLORS.element : "white", color: (addressType == 0) ? COLORS.white : COLORS.gray }}>Home</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity disabled={optionWo} style={{ paddingVertical: "5%", }} onPress={() => setAddressType(1)}>
+                        <Text style={{ ...styles.switch, backgroundColor: (addressType == 1) ? COLORS.element : "white", color: (addressType == 1) ? COLORS.white : COLORS.gray }}>Work</Text>
+                    </TouchableOpacity>
                 </View>
+                <View>
+                        {addressError ?
+                            <Text style={styles.ErrorText}>{addressError}</Text> : null}
+                    </View>
                 <View style={{ marginHorizontal: "2%", marginBottom: "2%", padding: "2%", flexDirection: "row", width: "90%", borderRadius: 10, backgroundColor: COLORS.white, alignSelf: "center" }}>
                     <View style={{ marginLeft: "-4%" }}><CheckBoxes /></View>
                     <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, paddingHorizontal: "5%", alignSelf: "center" }}>Make this my default address</Text>

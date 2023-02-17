@@ -56,13 +56,15 @@ const MyOrders = () => {
         console.log("order order order",Orderlistdata)
     },[Orderlistdata])
 
-    const handlefilt = async (value: any)=>{
+    const handlefilt = async ()=>{
+        setLoader(true)
         const Orderfilt = async (data: any) => {
             let filterData = await orderlistHandlefilter(data)
             console.log("filter data", filterData);
             setOrderlistdata(filterData)
         }
-        Orderfilt(value);
+        Orderfilt(filt);
+        setLoader(false)
     }
     const resetFilter = async ()=>{
         setModalVisible(!modalVisible)
@@ -236,7 +238,9 @@ const MyOrders = () => {
                                     placeholder="Search in orders"
                                     value={filt}
                                     placeholderTextColor={COLORS.gray}
-                                    onChangeText={e => {setFilt(e)}}
+                                    //onChangeText={e => {setFilt(e)}}
+                                    //onBlur={e=>{setFilt(e),handlefilt()}}
+                                    onEndEditing={ (e) =>{setFilt(e),handlefilt(e)}}
                                     style={{
                                         flexDirection: "column",
                                         width: horizontalScale(300),

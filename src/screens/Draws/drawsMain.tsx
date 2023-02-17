@@ -149,10 +149,10 @@ const DrawsMain = () => {
 
                 <View style={{ flexDirection: "row", width: "80%", marginHorizontal: "1%", backgroundColor: "white", borderRadius: 10, }}>
                     <TouchableOpacity style={{ backgroundColor: showWinners ? COLORS.element : "white", flexDirection: "column", width: "50%", borderRadius: 10, justifyContent: "center", alignItems: "center" }} onPress={() => setShowWinners(!showWinners)}>
-                        <Text style={{ color: showWinners ? "white" : COLORS.textHeader, fontSize: RFValue(15), ...FONTS.lexendregular, }}>Winners</Text>
+                        <Text style={{ color: showWinners ? "white" : COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, }}>Winners</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{ backgroundColor: !showWinners ? COLORS.element : "white", flexDirection: "column", width: "50%", borderRadius: 10, justifyContent: "center", alignItems: "center" }} onPress={() => setShowWinners(!showWinners)}>
-                        <Text style={{ color: !showWinners ? "white" : COLORS.textHeader, fontSize: RFValue(15), ...FONTS.lexendregular, }}>Upcoming Draws</Text>
+                        <Text style={{ color: !showWinners ? "white" : COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, }}>Upcoming Draws</Text>
                     </TouchableOpacity>
                 </View>
 

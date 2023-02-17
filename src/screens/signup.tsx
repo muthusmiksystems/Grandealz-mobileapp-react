@@ -56,7 +56,7 @@ const Signup = () => {
   const [errorLast, setErrorLast] = useState(null);
   const [countryListValue, setCountryListValue] = useState([])
   const [mblCode, setMblCode] = useState("");
-  const [isSelected, setSelection] = useState(false);
+  const [isSelected, setSelection] = useState(true);
   const [passShow, setPassShow] = useState("true");
 
   const agreeFail = () => {
@@ -74,7 +74,6 @@ const Signup = () => {
 
   const validateFunction = () => {
     console.log("values", firstName, lastName, phone, email, password);
-
     let errorCount = 0;
     if (firstName.length <= 3 || firstName === undefined) {
       setErrorFirst('Please Enter First Name')
@@ -85,26 +84,37 @@ const Signup = () => {
       setErrorLast('Please Enter LastName')
       errorCount++;
     }
-    if (email.length < 5 || email === undefined) {
-      setErrorEmail('please enter emailId')
-      errorCount++;
-    }
-    if (email.length == 0) {
+
+    if (email.length == undefined) {
       setErrorEmail('Please enter your EmailID');
       errorCount++;
     }
+    if (email.length < 5) {
+      setErrorEmail('please enter your EmailID')
+      errorCount++;
+    }
     if (email !== undefined) {
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
         setErrorEmail(" Please Enter valid Email");
         errorCount++;
       }
-      else {
-        setError("");
-      }
+      
+    }
+    if (email.length >= 7) {
+      setErrorPassword("");
+    }
+
+    if (email.length < 5) {
+      setErrorEmail('Please enter your EmailID')
+      errorCount++;
     }
     if (phone.length <= 9) {
       setErrorPhone('Please Enter Phone')
       errorCount++;
+    }
+    if (!/^(\+\d{1,3}[- ]?)?\d{10}$/.test(phone)) {
+      setErrorPhone('Please Enter valid Phone No')
+      errorCount++
     }
     if (password !== undefined) {
       if (password.length == 0) {
@@ -130,13 +140,19 @@ const Signup = () => {
         setErrorLast("");
       }
       if (phone.length >= 9) {
-        setErrorPhone("");
+        if (/^(\+\d{1,3}[- ]?)?\d{10}$/.test(phone)) {
+          setErrorPhone("");
+        }
       }
       if (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
         setErrorEmail("");
       }
+      else {
+        console.log(errorCount, "error count")
+      }
     }
     else {
+      console.log(errorCount, "error count")
       return false;
     }
   }
@@ -145,7 +161,6 @@ const Signup = () => {
     const validateLetter = validateFunction();
     console.log("Retrun.............", validateLetter);
     if (validateLetter) {
-
       const reg = {
         "first_name": firstName,
         "last_name": lastName,
@@ -345,9 +360,9 @@ const Signup = () => {
                     flexDirection: "column",
                     width: horizontalScale(250),
                     ...FONTS.lexendregular,
-                    fontSize: RFValue(14), color: (errorPassword) ? "red" : "black"
+                    fontSize: RFValue(14), color: "black"
                   }}
-                  //style={{ ...styles.textInput }}
+                //style={{ ...styles.textInput }}
                 />
                 <TouchableOpacity style={{ alignSelf: "center", flexDirection: "column" }} onPress={() => setPassShow(!passShow)}>
                   {passShow ? <Ionicons name="eye-outline" size={30} style={{ color: COLORS.gray }} /> :
@@ -355,7 +370,7 @@ const Signup = () => {
                   }
                 </TouchableOpacity>
               </TouchableOpacity>
-              
+
               <View style={{ height: "4%" }}>
                 {errorPassword ?
                   <Text style={styles.ErrorText}>{errorPassword}</Text> : null}

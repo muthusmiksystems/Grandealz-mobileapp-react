@@ -45,10 +45,10 @@ import OrderEmpty from "../ExceptionScreens/orderEmpty";
 
 const AddAddress = ({ route }) => {
     const typeUser = route.params.type;
-    const amount=route.params.amount;
+    const amount = route.params.amount;
 
     const CheckBoxes = () => {
-        const [isSelected, setSelection] = useState(false);
+        
         return (
             <View style={{ flexDirection: "row", left: horizontalScale(17) }}>
                 <CheckBox
@@ -65,7 +65,8 @@ const AddAddress = ({ route }) => {
     const navigation = useNavigation();
     //const { handleChange, handleSubmit, formErrors, data, formValues } = useForm(validate);
     const [Name, setName] = useState<any>("");
-    const [addressType, setAddressType] = useState(0);
+    const [isSelected, setSelection] = useState(false);
+    const [addressType, setAddressType] = useState();
     const [errorName, setErrorName] = useState('');
     const [phone, setPhone] = useState<any>("");
     const [errorPhone, setErrorPhone] = useState('');
@@ -89,14 +90,30 @@ const AddAddress = ({ route }) => {
     const [cityData, setCityData] = useState();
     const [stateData, setStateData] = useState();
     const [countryData, setCountryData] = useState();
-    const [option, setOption] = useState(true);
-
+    const [optionHo, setOptionHo] = useState(false);
+    const [optionWo, setOptionWo] = useState(false)
+    const [option, setOption] = useState(false)
+    const [addressError, setAddressError] = useState();
     useEffect(() => {
-        { addresslist ? setAddressType(addresslist.length) : null }
-        console.log("address type is ", addresslist.length)
-        { addressType / 2 != 1 ? setOption(false) : setOption(true) }
-        
-    }, [option])
+        // { addresslist ? setAddressType(addresslist.length) 
+        //     : null }
+        // console.log("address type is ", addresslist.length)
+        // { addressType / 2 != 1 ? setOption(false) : setOption(true) }
+        if (addresslist) {
+           
+            if (addresslist.length > 1) {
+                setOption(true)
+            }
+            if (addresslist[0]&&addresslist[0].address_type === "Home") {
+                setOptionHo(true)
+                console.log("address typr vandhu home so ", optionHo)
+            }
+            if(addresslist[0]&&addresslist[0].address_type === "Work"){
+                setOptionWo(true)
+            }
+        }
+
+    }, [])
 
     const validateFunction = () => {
         console.log(cityValue, "values", stateValue, "samuel", Name, address, phone, locality, pincode, countryValue, stateValue, cityValue);
@@ -138,8 +155,12 @@ const AddAddress = ({ route }) => {
         }
         if (stateValue === null) {
             setStateError('State is required')
+            errorCount++;
         }
-
+        if (addressType === undefined) {
+            setAddressError("Select address type")
+            errorCount++;
+        }
         if (errorCount === 0) {
             setErrorAddress(""), setErrorName(""), setErrorLocality(""), setErrorPhone(""), setErrorPin("");
             return true;
@@ -169,6 +190,9 @@ const AddAddress = ({ route }) => {
             if (stateValue != null) {
                 setStateError('');
             }
+            if (addressType != undefined ) {
+                setAddressError('');
+           }
         }
         else {
             return false;
@@ -178,7 +202,7 @@ const AddAddress = ({ route }) => {
 
     const handleSubmit = async () => {
         const validateLetter = validateFunction();
-        console.log("Retrun.............", validateLetter);
+        console.log("Retrun.............", addressType);
 
         if (validateLetter) {
             const payload = {
@@ -238,7 +262,7 @@ const AddAddress = ({ route }) => {
             //console.log("Personal Details Country....", originalPromiseResult);
             // const value = originalPromiseResult
             //setCountryListValue(originalPromiseResult);
-            console.log("listCoun", originalPromiseResult[56].name)
+            //console.log("listCoun", originalPromiseResult[56].name)
         })
     }
     const getStateList = async (data: any) => {
@@ -246,15 +270,15 @@ const AddAddress = ({ route }) => {
             //console.log("Personal Details State....", originalPromiseResult);
             // const value = originalPromiseResult
             setStateListValue(originalPromiseResult);
-            console.log("listCoun", originalPromiseResult)
+            //console.log("listCoun", originalPromiseResult)
         })
     }
     const getCityList = async (data: any) => {
         let listCity = await cityList(data).then((originalPromiseResult) => {
-            console.log("Personal Details City....", originalPromiseResult);
+            //console.log("Personal Details City....", originalPromiseResult);
             // const value = originalPromiseResult
             setCityListValue(originalPromiseResult);
-            console.log("listCity", originalPromiseResult)
+            //console.log("listCity", originalPromiseResult)
         })
     }
 
@@ -323,8 +347,8 @@ const AddAddress = ({ route }) => {
                 </TouchableOpacity>
                 <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), width: horizontalScale(290), textAlign: "center" }}>Add New Address</Text>
             </View>
-            { option ? 
-                <OrderEmpty value={"Home and Work address available "}/>
+            {option ?
+                <OrderEmpty value={"Home and Work address available "} />
                 :
                 <ScrollView style={{ height: "80%" }}>
                     <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "5%" }}>CONTACT DETAILS</Text>
@@ -482,18 +506,19 @@ const AddAddress = ({ route }) => {
 
                     <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "3%" }}>SAVE ADDRESS AS</Text>
                     <View style={{ marginVertical: "2%", flexDirection: "row", width: "89%", alignSelf: "center", borderRadius: 10, backgroundColor: COLORS.white }}>
-                       
-                            <>
-                                <TouchableOpacity disabled={!option} style={{ paddingVertical: "5%", marginHorizontal: "5%", }} onPress={() => setAddressType(0)}>
-                                    {console.log("option value", option)}
-                                    <Text style={{ ...styles.switch, backgroundColor: (addressType == 0) ? COLORS.element : "white", color: (addressType == 0) ? COLORS.white : COLORS.gray }}>Home</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity disabled={option} style={{ paddingVertical: "5%", }} onPress={() => setAddressType(1)}>
-                                    <Text style={{ ...styles.switch, backgroundColor: (addressType == 1) ? COLORS.element : "white", color: (addressType == 1) ? COLORS.white : COLORS.gray }}>Work</Text>
-                                </TouchableOpacity>
-
-                            </>
-                    
+                        <>
+                        { console.log(optionHo,"option data ",optionWo)}
+                            <TouchableOpacity disabled={optionHo} style={{ paddingVertical: "5%", marginHorizontal: "5%", }} onPress={() => setAddressType(0)}>
+                                <Text style={{ ...styles.switch, backgroundColor: (addressType == 0) ? COLORS.element : "white", color: (addressType == 0) ? COLORS.white : COLORS.gray }}>Home</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity disabled={optionWo} style={{ paddingVertical: "5%", }} onPress={() => setAddressType(1)}>
+                                <Text style={{ ...styles.switch, backgroundColor: (addressType == 1) ? COLORS.element : "white", color: (addressType == 1) ? COLORS.white : COLORS.gray }}>Work</Text>
+                            </TouchableOpacity>
+                        </>
+                    </View>
+                    <View>
+                        {addressError ?
+                            <Text style={styles.ErrorText}>{addressError}</Text> : null}
                     </View>
                     <View style={{ marginHorizontal: "2%", marginBottom: "2%", padding: "2%", flexDirection: "row", width: "90%", borderRadius: 10, backgroundColor: COLORS.white, alignSelf: "center" }}>
                         <View style={{ marginLeft: "-4%" }}><CheckBoxes /></View>

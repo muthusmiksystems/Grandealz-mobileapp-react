@@ -23,15 +23,15 @@ const CartEmpty = () => {
     const navigation = useNavigation();
 
     return (
-        <SafeAreaView style={{height:"90%",width:"100%",}}>
-            <View  style={styles.container}>
-            <View style={styles.view1} >
-            <Image
-                source={image.cartEmpty}
-                resizeMode="contain"
-                style={{ height: verticalScale(100), width: horizontalScale(80),top:verticalScale(5) }}
-            />
-            </View>
+        <SafeAreaView style={{ height: "90%", width: "100%", }}>
+            <View style={styles.container}>
+                <View style={styles.view1} >
+                    <Image
+                        source={image.cartEmpty}
+                        resizeMode="contain"
+                        style={{ height: verticalScale(100), width: horizontalScale(80), top: verticalScale(5) }}
+                    />
+                </View>
             </View>
         </SafeAreaView>
     );
@@ -53,18 +53,18 @@ const styles = StyleSheet.create({
     },
     container: {
         alignItems: "center",
-        justifyContent:"center",
-        height:"100%",
-        width:"100%",
+        justifyContent: "center",
+        height: "100%",
+        width: "100%",
     },
     view1: {
         alignContent: "center",
         alignItems: "center",
-        justifyContent:"center",
+        justifyContent: "center",
         flexDirection: "column",
         width: horizontalScale(140),
         alignSelf: "center",
-        backgroundColor: '#EEEEEE' ,
+        backgroundColor: '#EEEEEE',
         height: verticalScale(150),
         borderTopStartRadius: 95,
         borderBottomStartRadius: 95,

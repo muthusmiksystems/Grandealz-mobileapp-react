@@ -25,16 +25,19 @@ import { COLORS, FONTS } from "../constants";
 import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { forgotPasswordHandler } from "../store/reducers/forgotPassword";
+import LoaderKit from 'react-native-loader-kit';
 
 const ForgetPassword = () => {
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [forgetEmail, setForgetEmail] = useState('')
-  const [error, setError] = useState()
+  const [error, setError] = useState();
+  const [loader, setLoader] = useState(false);
   // console.log("ForgetPAss.........", forgetEmail);
 
   const validateEmail = () => {
+    setLoader(true)
     if (forgetEmail.length == 0) {
       setError('Please enter your EmailID');
     }
@@ -53,7 +56,8 @@ const ForgetPassword = () => {
 
         dispatch(forgotPasswordHandler(value)).then(unwrapResult).then((originalPromiseResult) => {
           console.log("successfully returned to ForgetPassword with response ", originalPromiseResult);
-          if (originalPromiseResult==="Please check your registered email to reset your password.") {
+          if (originalPromiseResult === "Please check your registered email to reset your password.") {
+            setLoader(false)
             ToastAndroid.showWithGravity(
               originalPromiseResult,
               // 'Please check your registered email to reset your password.',
@@ -70,7 +74,8 @@ const ForgetPassword = () => {
           //     ToastAndroid.CENTER,
           //   );
           // }
-          else{
+          else {
+            setLoader(false);
             ToastAndroid.showWithGravity(
               originalPromiseResult,
               ToastAndroid.SHORT,
@@ -80,7 +85,7 @@ const ForgetPassword = () => {
             // console.log("error....",error);
           }
           // console.log(ori);
-          
+
         })
       }
     }
@@ -108,33 +113,44 @@ const ForgetPassword = () => {
         </View>
         {/* <Text style={{ fontSize: 35, color: "white",fontFamily:"Lexend-Regular" }}>Grandealz</Text> */}
       </View>
-      <View style={styles.subdivTwo}>
-        <Text style={{ fontSize: RFValue(25), color: "black", textAlign: "center", marginTop: verticalScale(20), fontFamily: "Lexend-SemiBold" }}>Forgot Password</Text>
-        <View style={{ alignItems: "center" }}>
-          <Text style={{ width: horizontalScale(300), fontSize: RFValue(13), color: "black", marginTop: verticalScale(26), fontFamily: "Lexend-Regular" }}>
-            Enter your registered email address and we will send you a link to reset your password :
-          </Text>
-          <View style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), marginTop: verticalScale(32), color: "#000" }}>
-            <TextInput
-              placeholder="Email"
-              maxLength={30}
-              placeholderTextColor={"black"}
-              onChangeText={(text: String) => setForgetEmail(text)}
-              value={forgetEmail}
-              style={{ flexDirection: "column", width: horizontalScale(250), ...FONTS.lexendregular, fontSize: RFValue(14),color:COLORS.black }}
-            />
-            <Fontisto name='email' size={30} style={{ alignSelf: "center",color:COLORS.gray }} />
+      {loader ?
+        <View style={{ width: "100%", alignItems: "center", height: "92%",  }}>
+          <LoaderKit
+            style={{ width: 100, height: 105 }}
+            name={'BallClipRotatePulse'} // Optional: see list of animations below
+            size={30} // Required on iOS
+            color={COLORS.element} // Optional: color can be: 'red', 'green',... or '#ddd', '#FFFFFF',
+          />
+        </View>
+        :
+        <View style={styles.subdivTwo}>
+          <Text style={{ fontSize: RFValue(25), color: "black", textAlign: "center", marginTop: verticalScale(20), fontFamily: "Lexend-SemiBold" }}>Forgot Password</Text>
+          <View style={{ alignItems: "center" }}>
+            <Text style={{ width: horizontalScale(300), fontSize: RFValue(13), color: "black", marginTop: verticalScale(26), fontFamily: "Lexend-Regular" }}>
+              Enter your registered email address and we will send you a link to reset your password :
+            </Text>
+            <View style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), marginTop: verticalScale(32), color: "#000" }}>
+              <TextInput
+                placeholder="Email"
+                maxLength={30}
+                placeholderTextColor={"black"}
+                onChangeText={(text: String) => setForgetEmail(text)}
+                value={forgetEmail}
+                style={{ flexDirection: "column", width: horizontalScale(250), ...FONTS.lexendregular, fontSize: RFValue(14), color: COLORS.black }}
+              />
+              <Fontisto name='email' size={30} style={{ alignSelf: "center", color: COLORS.gray }} />
+            </View>
           </View>
+          <View style={{ height: "5%" }}>
+            {error ? <Text style={{ ...FONTS.lexendregular, color: COLORS.element, fontSize: RFValue(12), paddingStart: "7%" }}>{error}</Text> : null}
+          </View>
+          <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(200), padding: "4%" }}
+            onPress={() => validateEmail()}
+          >
+            <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-SemiBold", color: "black" }}>Submit</Text>
+          </TouchableOpacity>
         </View>
-        <View style={{ height: "5%" }}>
-          {error ? <Text style={{ ...FONTS.lexendregular, color: COLORS.element, fontSize: RFValue(12), paddingStart: "7%" }}>{error}</Text> : null}
-        </View>
-        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(200), padding: "4%" }}
-          onPress={() => validateEmail()}
-        >
-          <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-SemiBold", color: "black" }}>Submit</Text>
-        </TouchableOpacity>
-      </View>
+      }
     </SafeAreaView>
   )
 }

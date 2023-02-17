@@ -143,7 +143,7 @@ const Playnowquiz = (props) => {
                         {(error) ? <Text style={{ fontFamily: "Lexend-Regular", fontSize: RFValue(12), textAlign: "center", color: COLORS.element }}>{error}</Text> : null}
                     </View>
                     <Button disabled={tryAgainState} style={{ marginTop: 8 }} onPress={() => tryAgainFunction()}>
-                        <Text style={{ fontSize: RFValue(14), textAlign: "center", color: (tryAgainState) ? COLORS.lightGray : COLORS.element, fontFamily: "Lexend-SemiBold" }}>Try Again</Text>
+                        <Text style={{ fontSize: RFValue(14), textAlign: "center", color: (tryAgainState) ? COLORS.white : COLORS.element, fontFamily: "Lexend-SemiBold" }}>Try Again</Text>
                     </Button>
                 </View>
             </View>

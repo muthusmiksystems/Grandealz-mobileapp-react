@@ -57,7 +57,7 @@ const Carsold = () => {
                             keyExtractor={item => item.id}
                             renderItem={({ item }) => (
                                 <View style={{ paddingTop: "5%", paddingHorizontal: "6%" }}>
-                                    <TouchableOpacity style={{ borderRadius: 9, backgroundColor: "white" }}>
+                                    <View style={{ borderRadius: 9, backgroundColor: "white" }}>
                                         <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8, flexDirection: 'column', padding: 10 }}>
                                             <Image
                                                 source={{ uri: item.draw_image }}
@@ -75,7 +75,7 @@ const Carsold = () => {
                                             <Text style={{ ...FONTS.lexendregular, fontSize: RFValue(13), fontWeight: "300", color: "black" }}>{item.draw_sub_title}</Text>
                                             <Text style={{ ...FONTS.lexendregular, fontSize: RFValue(13), fontWeight: "400", color: "#E70736" }}>Draw date to be announced</Text>
                                         </View>
-                                    </TouchableOpacity>
+                                    </View>
                                 </View>
                             )}
                         />

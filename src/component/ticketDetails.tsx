@@ -21,7 +21,7 @@ import moment from 'moment';
 
 
 const TicketDetails = (Ticketdata) => {
-    // console.log("drma.....",Ticketdata.Ticketdata)
+    console.log("drma.....",Ticketdata.Ticketdata)
    
     return (
         <SafeAreaView >

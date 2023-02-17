@@ -43,11 +43,6 @@ const ProductDetails = ({ route }) => {
     console.log("payload", payload)
     let AddItemtoCart = await AddtoCartHandle(payload)
     if (AddItemtoCart.status === "200") {
-      ToastAndroid.showWithGravity(
-        AddItemtoCart.message,
-        ToastAndroid.SHORT,
-        ToastAndroid.CENTER,
-      );
       cartStock();
     }
     else {
@@ -136,11 +131,6 @@ const ProductDetails = ({ route }) => {
       const payload = { "draw": pricing._id, "qty": 1 }
       let AddItemtoCart = await AddtoCartHandle(payload)
       if (AddItemtoCart.status === "200") {
-        ToastAndroid.showWithGravity(
-          AddItemtoCart.message,
-          ToastAndroid.SHORT,
-          ToastAndroid.CENTER,
-        );
         cartStock();
         navigation.navigate("Tabs", { screen: "Cart" })
       }

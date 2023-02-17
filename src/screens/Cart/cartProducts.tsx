@@ -92,11 +92,6 @@ const CartProducts = ({cartval,changer,setChanger}) => {
       const callToCartitems = async (payload:any) => {
         let AddItemtoCart = await AddtoCartHandle(payload)
         if (AddItemtoCart.status === "200") {
-            ToastAndroid.showWithGravity(
-                AddItemtoCart.message,
-                ToastAndroid.SHORT,
-                ToastAndroid.CENTER,
-            );
             setChanger(!changer);
         }
         else {
@@ -126,10 +121,10 @@ const CartProducts = ({cartval,changer,setChanger}) => {
                                         />
                                     </View>
                                     <View style={{ width: "70%", marginHorizontal: "3%" }}>
-                                        <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendsemibold, }}>{item.draw.product_title}</Text>
-                                        <Text style={{ color: COLORS.gray, fontSize: RFValue(13), ...FONTS.lexendregular, }}>{item.draw.draw_sub_title}</Text>
-                                        <Text style={{ color: COLORS.element, fontSize: RFValue(13), ...FONTS.lexendregular, }}>{item.draw.product_price}</Text>
-                                        <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginTop: "5%" }}> {item.draw.coins_redeem} Coupon
+                                        <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendsemibold, }}>{item.draw.draw_title}</Text>
+                                        <Text style={{ color: COLORS.gray, fontSize: RFValue(13), ...FONTS.lexendregular, }}>{item.draw.product_title}</Text>
+                                        <Text style={{ color: COLORS.element, fontSize: RFValue(13), ...FONTS.lexendregular, }}>₹{item.draw.product_price}</Text>
+                                        <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginTop: "5%" }}>{(toggle ?"2": "1")} Ticket
                                             <Text style={{ color: COLORS.gray }}> per unit</Text> </Text>   
                                     </View>
 
@@ -151,7 +146,7 @@ const CartProducts = ({cartval,changer,setChanger}) => {
                     <View style={{ marginTop: RFValue(12), marginLeft: "2%" }}>
                         <ToggleSwitch
                             isOn={toggle}
-                            onColor="#0a0127"
+                            onColor="#FF777F"
                             offColor="#FF777F"
                             size="small"
                             onToggle={isOn => { setToggle(!toggle), DonateButton() }}

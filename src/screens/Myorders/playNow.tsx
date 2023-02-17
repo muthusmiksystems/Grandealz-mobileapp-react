@@ -12,6 +12,7 @@ const PlayNow = (props) => {
     const navigation = useNavigation();
     const orderId = props.route.params;
     const [orderDetails,setOrderDetails]=useState();
+    const [title,setTitle]=useState();
     console.log("Order Id......", orderId)
     const callingApiForQuiz = async () => {
         await quizGet().then((originalPromiseResult) => {
@@ -37,6 +38,7 @@ const PlayNow = (props) => {
         let res =await orderdata(orderId) 
         if (res.status === "200") {
             setOrderDetails(res.data.draws[0].draw.draw_image);
+            setTitle(res.data.draws[0].draw.draw_title)
            console.log("result in order",res.data.draws[0].draw.draw_image)
         }
         else {
@@ -92,7 +94,7 @@ const PlayNow = (props) => {
                                     />
                                 </View>
                                 <View style={{ flexDirection: "column", width: horizontalScale(150), height: verticalScale(70), marginTop: verticalScale(15) }}>
-                                    <Text style={{ fontSize: RFValue(14), color: "#0a0127", marginTop: 10, fontFamily: "Lexend-Regular" }}>The All new Audi Q3</Text>
+                                    <Text style={{ fontSize: RFValue(14), color: "#0a0127", marginTop: 10, fontFamily: "Lexend-Regular" }}>{title}</Text>
                                 </View>
                             </View>
                         </View>
