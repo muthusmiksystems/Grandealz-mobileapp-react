@@ -83,7 +83,7 @@ const Product = ({ addedCart, changer, change }) => {
                                                 <Text style={{ color: "#E70736", ...FONTS.lexendregular, fontSize: RFValue(13), textAlign: "center" }}> {item.total_no_of_tickets}</Text>
                                             </View>
                                         </View>
-                                        <TouchableOpacity style={{ flexDirection: 'column', paddingVertical: 20, bottom: "1%" }} onPress={() => handleSearch(item)}>
+                                        <TouchableOpacity disabled={item.total_no_of_sold_out_tickets / item.total_no_of_tickets != 1 ? false : true} style={{ flexDirection: 'column', paddingVertical: 20, bottom: "1%" }} onPress={() => handleSearch(item)}>
                                             <Image
                                                 source={{ uri: item.draw_image }}
                                                 style={{
@@ -94,7 +94,7 @@ const Product = ({ addedCart, changer, change }) => {
                                             />
                                         </TouchableOpacity>
                                     </View>
-                                    <TouchableOpacity style={{ margin: 3, padding: 10, flexDirection: "row" }} onPress={() => handleSearch(item)}>
+                                    <TouchableOpacity disabled={item.total_no_of_sold_out_tickets / item.total_no_of_tickets != 1 ? false : true} style={{ margin: 3, padding: 10, flexDirection: "row" }} onPress={() => handleSearch(item)}>
                                         <View style={{ flexDirection: "column", width: "65%", height: "100%" }}>
                                             <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(30), color: "#E70736" }}>Win</Text>
                                             <Text style={{ fontSize: RFValue(15), color: "black", ...FONTS.lexendsemibold, }}>{item.draw_title} </Text>

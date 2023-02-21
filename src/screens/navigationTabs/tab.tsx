@@ -81,7 +81,7 @@ const Tabs = () => {
                                                 }}
                                             />}
                                     </View>
-                                    <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(10) }}>Notifications</Text>
+                                    <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(9) }}>Notification</Text>
                                 </View>
                             );
                         case "Draws":
@@ -109,7 +109,7 @@ const Tabs = () => {
                                                 }}
                                             />}
                                     </View>
-                                    <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(10) }}>Draws</Text>
+                                    <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(9) }}>Draws</Text>
                                 </View>
                             );
                         case "DataPage":
@@ -137,7 +137,7 @@ const Tabs = () => {
                                                 }}
                                             />}
                                     </View>
-                                    <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(10) }}>Home</Text>
+                                    <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(9) }}>Home</Text>
                                 </View>
                             );
                         case "Tickets":
@@ -165,7 +165,7 @@ const Tabs = () => {
                                                 }}
                                             />}
                                     </View>
-                                    <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(10) }}>Tickets</Text>
+                                    <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(9) }}>Tickets</Text>
                                 </View>
                             );
                         case "Cart":
@@ -193,7 +193,7 @@ const Tabs = () => {
                                                 }}
                                             />}
                                     </View>
-                                    <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(10) }}>Cart</Text>
+                                    <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(9) }}>Cart</Text>
                                 </View>
 
                             );

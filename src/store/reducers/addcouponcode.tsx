@@ -17,7 +17,7 @@ export const AddCouponHandle = createAsyncThunk('put/addcouponHandlecall', async
         // console.log("Responce in api call",response);
         return result.data
     } catch (err) {
-        console.log("catch error Api error", err.message);
+        console.log("catch error Api error.. .. .. w..", err.message);
         // ToastAndroid.showWithGravity(
         //     'Please try again later',
         //     ToastAndroid.SHORT,

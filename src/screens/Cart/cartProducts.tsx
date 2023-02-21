@@ -88,7 +88,6 @@ const CartProducts = ({cartval,changer,setChanger}) => {
         callToCartitems(payload);
         }
       }
-
       const callToCartitems = async (payload:any) => {
         let AddItemtoCart = await AddtoCartHandle(payload)
         if (AddItemtoCart.status === "200") {
@@ -100,7 +99,6 @@ const CartProducts = ({cartval,changer,setChanger}) => {
                 ToastAndroid.SHORT,
                 ToastAndroid.CENTER,
             );
-            // setChanger(!changer);
         }
     }
     //  console.log("jk.....",toggle,"id",donateid,"res///",donaterep)
@@ -120,14 +118,13 @@ const CartProducts = ({cartval,changer,setChanger}) => {
                                             style={{ height: 80, width: 90, justifyContent: "center", margin: "10%" }}
                                         />
                                     </View>
-                                    <View style={{ width: "70%", marginHorizontal: "3%" }}>
+                                    <View style={{ width: "63%", marginHorizontal: "3%" }}>
                                         <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendsemibold, }}>{item.draw.draw_title}</Text>
                                         <Text style={{ color: COLORS.gray, fontSize: RFValue(13), ...FONTS.lexendregular, }}>{item.draw.product_title}</Text>
                                         <Text style={{ color: COLORS.element, fontSize: RFValue(13), ...FONTS.lexendregular, }}>₹{item.draw.product_price}</Text>
                                         <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginTop: "5%" }}>{(toggle ?"2": "1")} Ticket
                                             <Text style={{ color: COLORS.gray }}> per unit</Text> </Text>   
                                     </View>
-
                                 </View>
                             </View>
                             <View style={{ flexDirection: "column", width: "15%", alignSelf: "center" }}>
@@ -135,7 +132,6 @@ const CartProducts = ({cartval,changer,setChanger}) => {
                                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginStart: "15%" }}>{item.qty}</Text>
                                 <TouchableOpacity onPress={()=>decreaseItemQty(item)}><AntIcon name="minussquare" size={moderateScale(20)} color={COLORS.element} style={{ marginTop: "10%" }} /></TouchableOpacity>
                             </View>
-
                         </View>
                         <View style={{ borderBottomColor: "#F1F1F1", borderBottomWidth: 3 }} />
                     </>
@@ -156,8 +152,6 @@ const CartProducts = ({cartval,changer,setChanger}) => {
                 </View>
             ) : null}
         </View>
-
-
     );
 }
 const styles = StyleSheet.create({

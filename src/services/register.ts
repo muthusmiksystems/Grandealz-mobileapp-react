@@ -38,7 +38,7 @@ export const drawGetCall = async () => {
         console.log("Responce in Drawgetcall",response.data.data);
         return response.data
     }).catch((err) => {
-        console.log("catch error Api error", err);
+        console.log("catch error Api error.. .. .. ..", err);
     })
 }
 
@@ -59,7 +59,7 @@ export const drawWinnerGet = async (data: string) => {
         //console.log("Responce in Drawgetcall",response.data.data);
         return response.data
     }).catch((err) => {
-        console.log("catch error Api error", err);
+        console.log("catch error Api error... DRWIN", err);
     })
 }
 
@@ -87,7 +87,7 @@ export const drawWinnerfilter = async (data: any) => {
          console.log(api,"Responce in Drawgetcall",response.data.message);
          return response.data
      }).catch((err) => {
-         console.log("catch error Api error", err);
+         console.log("catch error Api error DRAWFILT", err);
      })
 }
 
@@ -103,7 +103,7 @@ export const drawCommingfilter = async (data: string) => {
         //console.log("Responce in Drawgetcall",response.data.data);
         return response.data
     }).catch((err) => {
-        console.log("catch error Api error", err);
+        console.log("catch error Api erro r commin", err);
     })
 }
 export const drawCommingGet = async (data: string) => {
@@ -112,7 +112,7 @@ export const drawCommingGet = async (data: string) => {
         //console.log("Responce in Drawgetcall",response.data.data);
         return response.data
     }).catch((err) => {
-        console.log("catch error Api error", err);
+        console.log("catch error Api error .. getcucu", err);
     })
 }
 

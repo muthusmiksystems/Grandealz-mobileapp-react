@@ -25,7 +25,7 @@ export const changepasswordHandle  = createAsyncThunk('post/changepasswordpostca
 
     }
 } catch (err)  {
-        console.log("catch error Api error", err);
+        console.log("catch error Api error.. changepasss", err);
         ToastAndroid.showWithGravity(
             'Please try again later',
             ToastAndroid.SHORT,

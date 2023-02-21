@@ -10,6 +10,6 @@ export const CartDrawlistHandle = async () => {
         console.log("Responce on Cart Draw list",response.data);
          return response.data
     }).catch((err) => {
-        console.log("catch error Api error", err);
+        console.log("catch error Api error.. ..", err);
     })
 }

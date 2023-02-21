@@ -11,6 +11,7 @@ import {
   View,
   Image,
   TouchableOpacity,
+  ToastAndroid,
   // Button
 } from "react-native";
 import { horizontalScale, verticalScale } from "../constants/metrices";
@@ -23,7 +24,10 @@ import { useDispatch } from "react-redux";
 import { VerifyHandler } from "../store/reducers/verify";
 import { unwrapResult } from '@reduxjs/toolkit';
 
-const OtpPage = () => {
+const OtpPage = ({ route }) => {
+  
+  const mobile=route.params;
+  console.log(mobile.value,"mobile number ");
   
   const [otp,setOtp]=useState("");
   const dispatch=useDispatch();
@@ -46,10 +50,19 @@ const OtpPage = () => {
        console.log("successfully returned to login with response ", originalPromiseResult);
          if (originalPromiseResult.status==="200") {
              const param = originalPromiseResult.data;
+             ToastAndroid.showWithGravity(
+              originalPromiseResult.message,
+              ToastAndroid.CENTER,
+              ToastAndroid.SHORT
+            )
              navigation.navigate("login")
         } else {
            console.log("error",originalPromiseResult);
-           ;
+           ToastAndroid.showWithGravity(
+            originalPromiseResult,
+            ToastAndroid.CENTER,
+            ToastAndroid.SHORT
+           )
         }
     })
     }
@@ -82,7 +95,7 @@ const OtpPage = () => {
         <Text style={{ fontSize:  RFValue(26), color: "black", textAlign: "center", fontFamily: "Lexend-SemiBold", marginTop: verticalScale(14) }}>Confirm OTP</Text>
         <View style={{ alignItems: "center" }}>
           <Text style={{ width: horizontalScale(300), textAlign: "justify", fontSize: RFValue(12), color: "black", marginTop: verticalScale(27), fontFamily: "Lexend-Regular" }}>
-            Please  enter  the  verification  code  that  we  have  sent  to  the  mobile  number  +919549878945
+            Please  enter  the  verification  code  that  we  have  sent  to  the  mobile  number +91 {mobile.value}
           </Text> 
           <OTPTextView
            

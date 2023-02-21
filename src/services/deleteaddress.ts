@@ -12,7 +12,7 @@ export const RemoveAddressHandle = async (data: any) => {
         console.log("Responce in delete api call",response.data);
          return response.data
     }).catch((err) => {
-        console.log("catch error Api error", err);
+        console.log("catch error Api error.. dele..", err);
         ToastAndroid.showWithGravity(
             'Please try again later',
             ToastAndroid.SHORT,

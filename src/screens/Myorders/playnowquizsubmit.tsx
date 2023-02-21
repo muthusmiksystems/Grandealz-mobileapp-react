@@ -36,7 +36,7 @@ const Playnowquizsubmit = (props) => {
                             </View>
                         </View>
                         <View style={{ width: horizontalScale(320), height: verticalScale(80) }}>
-                            <Text style={{ fontSize: RFValue(20), fontFamily: "Lexend-SemiBold", textAlign: "center", lineHeight: 30, color: "#303030" }}>Congratulations! Avail your tickets at</Text>
+                            <Text style={{ fontSize: RFValue(16), fontFamily: "Lexend-SemiBold", textAlign: "center", lineHeight: 30, color: "#303030" }}>Congratulations! Avail your tickets at</Text>
                         </View>
                         <TouchableOpacity onPress={() => navigation.replace("Tabs", { screen: 'Tickets' })}>
                             <View style={{ alignItems: "center" }}>

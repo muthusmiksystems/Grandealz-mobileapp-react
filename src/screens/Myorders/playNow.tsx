@@ -72,7 +72,7 @@ const PlayNow = (props) => {
                 </View>
                 <View style={Styles.subdiv2}>
                     <View style={{ width: horizontalScale(330), height: verticalScale(60), backgroundColor: "#FF636C", borderTopLeftRadius: 15, borderTopRightRadius: 15 }}>
-                        <Text style={{ fontSize: RFValue(18), color: "#FFFFFF", textAlign: "center", margin: horizontalScale(15), fontFamily: "Lexend-SemiBold" }}>The All new Audi Q3</Text>
+                        <Text style={{ fontSize: RFValue(18), color: "#FFFFFF", textAlign: "center", margin: horizontalScale(15), fontFamily: "Lexend-SemiBold" }}>{title}</Text>
                     </View>
                     <View style={{ width: horizontalScale(300), height: verticalScale(70), margin: verticalScale(18) }}>
                         <Text style={{ textAlign: "center", lineHeight: verticalScale(30), color: "#303030", fontFamily: "Lexend-Regular", fontWeight: "400" }}>

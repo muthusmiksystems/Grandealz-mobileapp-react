@@ -14,7 +14,7 @@ export const RemoveCouponHandle = async () => {
         // console.log("Resp",response.data);
          return response.data
     }).catch((err) => {
-        console.log("catch error Api error", err);
+        console.log("catch error Api error... remove coup", err);
         ToastAndroid.showWithGravity(
             'Please try again later',
             ToastAndroid.SHORT,

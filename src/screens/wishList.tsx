@@ -180,7 +180,7 @@ const WishList = () => {
                                                         {!(cartidlist.includes(`${item.draw._id}`)) ?
                                                             <TouchableOpacity style={{ width: "102%", backgroundColor: COLORS.element, alignSelf: "flex-end", flexDirection: "row", borderBottomEndRadius: 10, borderTopStartRadius: 10 }} onPress={() => { setDrawid(item.draw._id) }} >
 
-                                                                <Text style={{ width: "100%", textAlign: "center", paddingVertical: "8%", ...FONTS.lexendregular, color: COLORS.white }}>ADD TO CART</Text>
+                                                                <Text style={{ width: "100%", textAlign: "center", paddingVertical: "8%", ...FONTS.lexendregular, color: COLORS.white,fontSize:RFValue(10) }}>ADD TO CART</Text>
                                                             </TouchableOpacity>
                                                             :
                                                             <TouchableOpacity style={{ width: "102%", backgroundColor: COLORS.element, alignSelf: "flex-end", flexDirection: "row", borderBottomEndRadius: 10, borderTopStartRadius: 10 }} onPress={() => { setDrawid(item.draw._id), navigation.navigate('Tabs', { screen: 'Cart' }) }} >

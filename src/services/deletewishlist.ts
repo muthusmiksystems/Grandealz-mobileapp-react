@@ -12,7 +12,7 @@ export const RemovewishlistHandle = async (data: undefined) => {
         console.log("Responce in delete api call",response.data);
          return response.data
     }).catch((err) => {
-        console.log("catch error Api error", err);
+        console.log("catch error Api error.. wishli..", err);
         ToastAndroid.showWithGravity(
             'Please try again later',
             ToastAndroid.SHORT,

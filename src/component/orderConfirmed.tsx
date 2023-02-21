@@ -53,7 +53,7 @@ const OrderConfirmed = () => {
                 </View>
                 <View style={{ width: "100%", height: "25%", alignItems: "center" }}>
                     <TouchableOpacity style={{ borderWidth: 2, borderColor: "white", borderRadius: 8, width: "40%", height: "28%", alignItems: "center", justifyContent: "center" }}
-                        onPress={() => navigation.navigate('MyOrders')}
+                        onPress={() => navigation.navigate('PlayNow')}
                     >
                         <Text style={{ color: "white", ...FONTS.lexendregular, fontSize: RFValue(15) }}>Play now</Text>
                     </TouchableOpacity>

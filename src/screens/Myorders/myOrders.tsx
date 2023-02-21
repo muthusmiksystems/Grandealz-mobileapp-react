@@ -58,6 +58,7 @@ const MyOrders = () => {
 
     const handlefilt = async ()=>{
         setLoader(true)
+        setOrderlistdata("");
         const Orderfilt = async (data: any) => {
             let filterData = await orderlistHandlefilter(data)
             console.log("filter data", filterData);
@@ -238,9 +239,9 @@ const MyOrders = () => {
                                     placeholder="Search in orders"
                                     value={filt}
                                     placeholderTextColor={COLORS.gray}
-                                    //onChangeText={e => {setFilt(e)}}
+                                    onChangeText={e => {setFilt(e)}}
                                     //onBlur={e=>{setFilt(e),handlefilt()}}
-                                    onEndEditing={ (e) =>{setFilt(e),handlefilt(e)}}
+                                    onEndEditing={ (e) =>{handlefilt(e)}}
                                     style={{
                                         flexDirection: "column",
                                         width: horizontalScale(300),
@@ -283,16 +284,7 @@ const MyOrders = () => {
                     }
                 </View>
             </ScrollView>
-            {/* <View style={{ flexDirection: "row", height: "7%", backgroundColor: COLORS.white }}>
-                <TouchableOpacity style={{ flexDirection: "column", width: "45%", marginHorizontal: "3%", marginVertical: "1%", borderRadius: 5, borderWidth: 1, justifyContent: "center", alignItems: "center" }}>
-                    <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular }}>Continue to Shopping</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{ flexDirection: "column", width: "45%", marginHorizontal: "3%", marginVertical: "1%", backgroundColor: COLORS.element, borderRadius: 5, justifyContent: "center", alignItems: "center" }}>
-                    <Text style={{ color: COLORS.white, fontSize: RFValue(14), ...FONTS.lexendregular }} >Process to Checkout </Text>
-                </TouchableOpacity>
-            </View> */}
-
-        </SafeAreaView>
+          </SafeAreaView>
     );
 }
 const styles = StyleSheet.create({

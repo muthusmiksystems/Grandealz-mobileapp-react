@@ -22,63 +22,16 @@ import { CartDrawlistHandle } from "../../services/cartdrawslist";
 import { useIsFocused } from "@react-navigation/core";
 import { ToastAndroid } from 'react-native';
 import { AddtoCartHandle } from "../../services/addtocart";
-const data = [
-    {
-        id: '1',
-        imag: image.cash,
-        from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-        to: "1689 sold out 1985"
-
-    },
-    {
-        id: '2',
-        imag: image.cash,
-        from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-        to: "1689 sold out 1985"
-    },
-    {
-        id: '3',
-        imag: image.cash,
-        from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-        to: "1689 sold out 1985"
-    },
-    {
-        id: '4',
-        imag: image.cash,
-        from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-        to: "1689 sold out 1985"
-    },
-    {
-        id: '5',
-        imag: image.cash,
-        from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-        to: "1689 sold out 1985"
-    },
-    {
-        id: '6',
-        imag: image.cash,
-        from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-        to: "1689 sold out 1985"
-    },
-    {
-        id: '7',
-        imag: image.cash,
-        from: "Lorem ipsum dolor sit amet Lorem ipsum dolor ipsum doolr",
-        to: "1689 sold out 1985"
-    },
-];
-
-
-
 
 const CartRelated = ({cartdts,changer,setChanger}) => {
-
     const navigation = useNavigation();
-
     const isFocused = useIsFocused();
     const [similarproduct, setSimilarproduct] = useState();
     const [drawid, setDrawid] = useState();
     const[cartList,setCartList]=useState(cartdts);
+
+    console.log("similar prod...................", similarproduct)
+    console.log("cart prod...................", cartList)
     useEffect(() => {
         if (isFocused) {
             cartIdList();
@@ -94,19 +47,19 @@ const CartRelated = ({cartdts,changer,setChanger}) => {
     
     const CartDrawlist = async () => {
         let drawdatalist = await CartDrawlistHandle()
-        
         var  Alreadysoldout:any=[];
         (drawdatalist.data).forEach((element:any) => {
             if(element.total_no_of_sold_out_tickets/element.total_no_of_tickets !=1){
             Alreadysoldout.push(element);
             }
-            console.log(element.total_no_of_tickets,"DrawData on cart Draw.............",element.total_no_of_sold_out_tickets)
         })
         setSimilarproduct(Alreadysoldout)
     }
+    useEffect(()=>{
+        console.log("use effect for cartlist")
+    },[cartList])
     
     useEffect(() => {
-        console.log("drawid...................", drawid)
         if (drawid) {
             const AddtoCartitems = async () => {
                 const payload={"draw": drawid,"qty":1}
@@ -129,7 +82,7 @@ const CartRelated = ({cartdts,changer,setChanger}) => {
     const cartIdList=()=>{
         var AlreadyInCart: any[] = [];
         let data = cartdts?.draws;
-        // console.log("dtaaaa.....................", data.length)
+        console.log("dtaaaa.....................", data.length)
         if (data) {
             (data).forEach((element: any) => {
                 var Data = (element.draw._id);
@@ -147,18 +100,20 @@ const CartRelated = ({cartdts,changer,setChanger}) => {
             <View style={{ marginVertical: "5%" }}>
                 <Text style={{ color: "#616161", fontSize: RFValue(14), ...FONTS.lexendregular, }}>People Have also bought this together</Text>
             </View>
-            {/* <View style={{borderWidth:2}}> */}
+           
             <FlatList
                 horizontal={true}
                 data={similarproduct}
                 showsHorizontalScrollIndicator={false}
-                // contentContainerStyle={{ marginLeft: "4%" }}
                 ItemSeparatorComponent={() => (
                     <View style={{ width: 15 }} />
                 )}
                 keyExtractor={item => item.id}
                 renderItem={({ item }) => (
+                    <>
+                    {!(cartList.includes(`${item._id}`)) ?
                     <View style={{ backgroundColor: COLORS.white, borderRadius: 14, width: RFValue(154), height: RFValue(246), padding: RFValue(15) }}>
+                        
                         <TouchableOpacity>
                             {/* <View style={{}}>
 
@@ -189,9 +144,12 @@ const CartRelated = ({cartdts,changer,setChanger}) => {
                                 <Text style={{ color: COLORS.black, fontSize: RFValue(13), ...FONTS.lexendregular, }}>Added</Text>
                             </TouchableOpacity>}
                     </View>
+                    : null }
+                    </>
                 )}
             />
-            {/* </View> */}
+           
+           
         </View>
 
     )

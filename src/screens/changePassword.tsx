@@ -91,6 +91,8 @@ const ChangePassword = () => {
           animated={true}
           backgroundColor="#0a0127"
         />
+        
+        <ScrollView>
         <View style={styles.subdivOne}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={{ flexDirection: "column", marginTop: verticalScale(18), marginLeft: horizontalScale(18) }}>
             <EntypoIcons name="chevron-left" size={30} color={"white"} />
@@ -153,6 +155,7 @@ const ChangePassword = () => {
             <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-SemiBold", color: "black" }}>Update</Text>
           </TouchableOpacity>
         </View>
+        </ScrollView>
       </SafeAreaView>
     )
   }

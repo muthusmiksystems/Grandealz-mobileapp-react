@@ -11,7 +11,7 @@ import {
     Dimensions
 } from 'react-native';
 import { horizontalScale, verticalScale } from "../../constants/metrices";
-import icons, { shoppingCart } from "../../constants/icons";
+import icons, { shoppingCart, userHeart } from "../../constants/icons";
 import EntypoIcons from "react-native-vector-icons/Entypo";
 import { useNavigation } from "@react-navigation/native";
 import { FONTS, COLORS } from "../../constants";
@@ -34,9 +34,9 @@ const customStyles = {
     stepStrokeCurrentColor: '#E70736',
     stepStrokeWidth: 3,
     stepStrokeFinishedColor: '#E70736',
-    stepStrokeUnFinishedColor: '#000',
+    stepStrokeUnFinishedColor: '#E70736',
     separatorFinishedColor: '#E70736',
-    separatorUnFinishedColor: '#000',
+    separatorUnFinishedColor: '#E70736',
     stepIndicatorFinishedColor: '#E70736',
     stepIndicatorUnFinishedColor: '#ffffff',
     stepIndicatorCurrentColor: '#ffffff',
@@ -44,8 +44,8 @@ const customStyles = {
     currentStepIndicatorLabelFontSize: 13,
     stepIndicatorLabelCurrentColor: '#E70736',
     stepIndicatorLabelFinishedColor: '#ffffff',
-    stepIndicatorLabelUnFinishedColor: '#000',
-    labelColor: '#999999',
+    stepIndicatorLabelUnFinishedColor: '#E70736',
+    labelColor: '#E70736',
     labelSize: 13,
     currentStepLabelColor: '#E70736'
 }
@@ -53,12 +53,12 @@ const OrderDetails = ({ route }) => {
 
 
     const [orderdetailsdata, setOrderdetailsdata] = useState()
-    const [currentPosition, setCurrentPosition] = useState(3)
+    const [currentPosition, setCurrentPosition] = useState(0)
     const navigation = useNavigation();
 
     const orderid = route.params;
     console.log("details", orderid._id);
-
+    
    
 
     useEffect(() => {
@@ -248,14 +248,6 @@ const OrderDetails = ({ route }) => {
                 ) : null}
                 <View style={{ padding: "5%" }}></View>
             </ScrollView>
-            {/* <View style={{ flexDirection: "row", height: "7%", backgroundColor: COLORS.white }}>
-                <TouchableOpacity style={{ flexDirection: "column", width: "45%", marginHorizontal: "3%", marginVertical: "1%", borderRadius: 5, borderWidth: 1, justifyContent: "center", alignItems: "center" }}>
-                    <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular }}>Continue to Shopping</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{ flexDirection: "column", width: "45%", marginHorizontal: "3%", marginVertical: "1%", backgroundColor: COLORS.element, borderRadius: 5, justifyContent: "center", alignItems: "center" }}>
-                    <Text style={{ color: COLORS.white, fontSize: RFValue(14), ...FONTS.lexendregular }} >Process to Checkout </Text>
-                </TouchableOpacity>
-            </View> */}
         </SafeAreaView>
     );
 }

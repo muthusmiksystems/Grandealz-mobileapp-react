@@ -61,7 +61,7 @@ const ProductDetails = ({ route }) => {
 
     console.log("result...........", Removeitems)
   }
-  const   handleAddWishlist = async () => {
+  const handleAddWishlist = async () => {
     console.log("Addwish........", pricing._id);
     const result = await addToWishlistHandle(pricing._id);
 
@@ -89,9 +89,9 @@ const ProductDetails = ({ route }) => {
 
   const showHeartIfExists = async () => {
     let priceitem = await wishlistHandle();
-    setPricelist(priceitem)
     // console.log("priceitem..........",priceitem)
     var WishIdArray: any[] = [];
+    
     (priceitem).forEach((element: any) => {
       var Data = (element.draw._id);
       if (Data === pricing._id) {

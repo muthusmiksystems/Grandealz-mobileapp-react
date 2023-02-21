@@ -35,6 +35,7 @@ import useForm from "./Auth/useForm";
 import validate from "./Auth/validate";
 import { countryList } from "../services/countryList";
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import LoaderKit from 'react-native-loader-kit';
 
 const Signup = () => {
 
@@ -58,6 +59,7 @@ const Signup = () => {
   const [mblCode, setMblCode] = useState("");
   const [isSelected, setSelection] = useState(true);
   const [passShow, setPassShow] = useState("true");
+  const [loader, setLoader] = useState(false);
 
   const agreeFail = () => {
     if (isSelected) {
@@ -75,14 +77,23 @@ const Signup = () => {
   const validateFunction = () => {
     console.log("values", firstName, lastName, phone, email, password);
     let errorCount = 0;
-    if (firstName.length <= 3 || firstName === undefined) {
-      setErrorFirst('Please Enter First Name')
+    console.log("satrday", (/^[A-Za-z]+$/i.test(lastName)));
+    if (firstName.length <= 3 || firstName === undefined || firstName.includes(' ')) {
+      setErrorFirst('Please Enter First Name without spacing ')
       errorCount++;
     }
+    if (!/^[A-Za-z]+$/i.test(firstName)) {
+      setErrorFirst("First name must contain only letters")
+      errorCount++
+    }
 
-    if (lastName.length <= 3 || lastName === undefined) {
-      setErrorLast('Please Enter LastName')
+    if (lastName.length <= 3 || lastName === undefined || lastName.includes(' ')) {
+      setErrorLast('Please Enter First Name without spacing')
       errorCount++;
+    }
+    if (!/^[A-Za-z]+$/i.test(lastName)) {
+      setErrorLast("Last name must contain only letters")
+      errorCount++
     }
 
     if (email.length == undefined) {
@@ -94,11 +105,15 @@ const Signup = () => {
       errorCount++;
     }
     if (email !== undefined) {
-      if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-        setErrorEmail(" Please Enter valid Email");
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+
+        setErrorEmail("Enter valid EmailID");
         errorCount++;
       }
-      
+      else {
+        setError("");
+      }
     }
     if (email.length >= 7) {
       setErrorPassword("");
@@ -117,6 +132,7 @@ const Signup = () => {
       errorCount++
     }
     if (password !== undefined) {
+
       if (password.length == 0) {
         setErrorPassword("Please enter your password");
         errorCount++;
@@ -133,13 +149,21 @@ const Signup = () => {
       return true;
     }
     if (errorCount > 0) {
-      if (firstName.length >= 3) {
-        setErrorFirst("");
+      if (firstName.length > 3) {
+        if (!firstName.includes(' ')) {
+          if (/^[A-Za-z]+$/i.test(firstName)) {
+            setErrorFirst("")
+          }
+        }
       }
-      if (lastName.length >= 3) {
-        setErrorLast("");
+      if (lastName.length > 3) {
+        if (!lastName.includes(' ')) {
+          if (/^[A-Za-z]+$/i.test(lastName)) {
+            setErrorLast("")
+          }
+        }
       }
-      if (phone.length >= 9) {
+      if (phone.length > 9) {
         if (/^(\+\d{1,3}[- ]?)?\d{10}$/.test(phone)) {
           setErrorPhone("");
         }
@@ -161,10 +185,11 @@ const Signup = () => {
     const validateLetter = validateFunction();
     console.log("Retrun.............", validateLetter);
     if (validateLetter) {
+      setLoader(true);
       const reg = {
-        "first_name": firstName,
-        "last_name": lastName,
-        "email": email,
+        "first_name": firstName.toLowerCase(),
+        "last_name": lastName.toLowerCase(),
+        "email": email.toLowerCase(),
         "phone": phone,
         "password": password,
         "country_phone_code": "+91",
@@ -179,14 +204,16 @@ const Signup = () => {
           console.log("im the register", originalPromiseResult)
           if (originalPromiseResult.status === "200") {
             await AsyncStorage.setItem('Signuptoken', originalPromiseResult.data.access_token);
+            setLoader(false);
             ToastAndroid.showWithGravity(
               originalPromiseResult.message,
               ToastAndroid.CENTER,
               ToastAndroid.SHORT
             )
-            navigation.navigate("OtpPage")
+            navigation.navigate("OtpPage", { value: phone })
           }
           else if (originalPromiseResult.status === "400") {
+            setLoader(false);
             console.log("im the error data", originalPromiseResult)
             ToastAndroid.showWithGravity(
               originalPromiseResult.message,
@@ -194,8 +221,22 @@ const Signup = () => {
               ToastAndroid.SHORT
             )
           }
+          else if (originalPromiseResult.toString() === "404") {
+            setLoader(false);
+            ToastAndroid.showWithGravity(
+              "something went wrong :)",
+              ToastAndroid.CENTER,
+              ToastAndroid.SHORT
+            )
+          }
           else {
-            console.log(originalPromiseResult, "error")
+            setLoader(false);
+            console.log(originalPromiseResult, "error");
+            ToastAndroid.showWithGravity(
+              "something went wrong :)",
+              ToastAndroid.CENTER,
+              ToastAndroid.SHORT
+            )
           }
         })
     }
@@ -379,11 +420,21 @@ const Signup = () => {
             <View style={{ alignSelf: "center", width: horizontalScale(300), }}>
               <CheckBoxes />
             </View>
-
-            <Button style={{ alignSelf: "center", borderWidth: 1, borderRadius: 8, width: horizontalScale(190), borderColor: "black" }}
-              onPress={() => { agreeFail() }}>
-              <Text style={{ textAlign: "center", fontSize: RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Register</Text>
-            </Button>
+            {loader ?
+              <View style={{ width: "100%", alignItems: "center" }}>
+                <LoaderKit
+                  style={{ width: 50, height: 50 }}
+                  name={'BallPulse'} // Optional: see list of animations below
+                  size={30} // Required on iOS
+                  color={COLORS.element} // Optional: color can be: 'red', 'green',... or '#ddd', '#FFFFFF',
+                />
+              </View>
+              :
+              <Button style={{ alignSelf: "center", borderWidth: 1, borderRadius: 8, width: horizontalScale(190), borderColor: "black" }}
+                onPress={() => { agreeFail() }}>
+                <Text style={{ textAlign: "center", fontSize: RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Register</Text>
+              </Button>
+            }
             <View style={{ flexDirection: "row", marginTop: "2%", alignSelf: "center" }}>
               <Text style={{ flexDirection: "column", alignSelf: "flex-start", fontFamily: "Lexend-Regular", color: "black", fontSize: RFValue(13) }}>Existing User </Text>
               <TouchableOpacity style={{ alignSelf: "flex-end", flexDirection: "column" }} onPressIn={() => navigation.navigate("login")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", fontSize: RFValue(13) }}>Log in</Text></TouchableOpacity>

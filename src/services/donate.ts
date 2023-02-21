@@ -16,7 +16,7 @@ export const DonateHandle = async (donateid: string,toggle:boolean) => {
         console.log("Respon...ggg",response.data);
         return response.data
     }).catch((err) => {
-        console.log("catch error Api error", err);
+        console.log("catch error Api error... don..", err);
         // ToastAndroid.showWithGravity(
         //     'Please try again later',
         //     ToastAndroid.SHORT,
