@@ -1,6 +1,6 @@
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { ToastAndroid } from 'react-native';
+import { Toast } from 'react-native-simple-toast';
 
 
 
@@ -15,10 +15,9 @@ export const RemoveCouponHandle = async () => {
          return response.data
     }).catch((err) => {
         console.log("catch error Api error... remove coup", err);
-        ToastAndroid.showWithGravity(
+        Toast.show(
             'Please try again later',
-            ToastAndroid.SHORT,
-            ToastAndroid.CENTER,
+            Toast.SHORT,
         );
     })
 }

@@ -13,7 +13,6 @@ import {
   Image,
   Keyboard,
   TouchableOpacity,
-  ToastAndroid,
   Pressable,
   // Button
 } from "react-native";
@@ -36,6 +35,7 @@ import validate from "./Auth/validate";
 import { countryList } from "../services/countryList";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import LoaderKit from 'react-native-loader-kit';
+import Toast from 'react-native-simple-toast';
 
 const Signup = () => {
 
@@ -66,11 +66,7 @@ const Signup = () => {
       handleSubmit(), Keyboard.dismiss
     }
     else {
-      ToastAndroid.showWithGravity(
-        "Please Agree the terms and conditions",
-        ToastAndroid.CENTER,
-        ToastAndroid.SHORT
-      )
+      Toast.show( "Please Agree the terms and conditions", Toast.LONG, { backgroundColor: 'red' });
     }
   }
 
@@ -201,42 +197,26 @@ const Signup = () => {
       dispatch(registerHandler(reg))
         .then(unwrapResult)
         .then(async (originalPromiseResult) => {
-          console.log("im the register", originalPromiseResult)
+          console.log("im the register", originalPromiseResult.data.access_token)
           if (originalPromiseResult.status === "200") {
             await AsyncStorage.setItem('Signuptoken', originalPromiseResult.data.access_token);
             setLoader(false);
-            ToastAndroid.showWithGravity(
-              originalPromiseResult.message,
-              ToastAndroid.CENTER,
-              ToastAndroid.SHORT
-            )
+            Toast.show( originalPromiseResult.message, Toast.LONG, { backgroundColor: 'red' });
             navigation.navigate("OtpPage", { value: phone })
           }
           else if (originalPromiseResult.status === "400") {
             setLoader(false);
             console.log("im the error data", originalPromiseResult)
-            ToastAndroid.showWithGravity(
-              originalPromiseResult.message,
-              ToastAndroid.CENTER,
-              ToastAndroid.SHORT
-            )
+            Toast.show( originalPromiseResult.message, Toast.LONG, { backgroundColor: 'red' });
           }
           else if (originalPromiseResult.toString() === "404") {
             setLoader(false);
-            ToastAndroid.showWithGravity(
-              "something went wrong :)",
-              ToastAndroid.CENTER,
-              ToastAndroid.SHORT
-            )
+            Toast.show("something went wrong :)", Toast.LONG, { backgroundColor: 'red' });
           }
           else {
             setLoader(false);
             console.log(originalPromiseResult, "error");
-            ToastAndroid.showWithGravity(
-              "something went wrong :)",
-              ToastAndroid.CENTER,
-              ToastAndroid.SHORT
-            )
+            Toast.show("something went wrong :)", Toast.LONG, { backgroundColor: 'red' });
           }
         })
     }

@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from "react";
-import { View, Text, StatusBar, StyleSheet, Image, TouchableOpacity, ToastAndroid } from "react-native";
+import { View, Text, StatusBar, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { horizontalScale, verticalScale } from "../../constants/metrices";
 import { icons } from "../../constants";
@@ -7,6 +7,8 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { audicar } from "../../constants/image";
 import { useNavigation } from "@react-navigation/native";
 import { orderdata, quizGet } from "../../services/quizGet";
+import Toast from 'react-native-simple-toast';
+
 const PlayNow = (props) => {
 
     const navigation = useNavigation();
@@ -21,11 +23,8 @@ const PlayNow = (props) => {
                 navigation.replace("playnowquiz", originalPromiseResult?.data?.data, orderId)
             }
             else {
-                ToastAndroid.showWithGravity(
-                    'Something went wrong!, Please try again later',
-                    ToastAndroid.SHORT,
-                    ToastAndroid.CENTER
-                )
+                Toast.show( 'Something went wrong!, Please try again later', Toast.LONG, { backgroundColor: 'red' });
+                    
             }
         })
     }
@@ -42,11 +41,7 @@ const PlayNow = (props) => {
            console.log("result in order",res.data.draws[0].draw.draw_image)
         }
         else {
-            ToastAndroid.showWithGravity(
-                'Something went wrong!, Please try again later',
-                ToastAndroid.SHORT,
-                ToastAndroid.CENTER
-            )
+            Toast.show( 'Something went wrong!, Please try again later', Toast.LONG, { backgroundColor: 'red' });
         }
     }
     return (

@@ -1,7 +1,6 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk, } from '@reduxjs/toolkit';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { ToastAndroid } from 'react-native';
 
 
 export const AddCouponHandle = createAsyncThunk('put/addcouponHandlecall', async (data, thunkAPI) => {
@@ -18,11 +17,7 @@ export const AddCouponHandle = createAsyncThunk('put/addcouponHandlecall', async
         return result.data
     } catch (err) {
         console.log("catch error Api error.. .. .. w..", err.message);
-        // ToastAndroid.showWithGravity(
-        //     'Please try again later',
-        //     ToastAndroid.SHORT,
-        //     ToastAndroid.CENTER,
-        // );
+       
     }
 })
 

@@ -11,7 +11,6 @@ import {
     ScrollView,
     Platform,
     PermissionsAndroid,
-    ToastAndroid,
     Modal
 } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
@@ -36,6 +35,7 @@ import { imageUploadService } from '../../services/imageUploadService';
 import { personalDetailsUpdate } from '../../services/personalDetailsUpdate';
 import { userDetailsHandler } from '../../store/reducers/userDetails';
 import { deleteAccount } from '../../services/deleteAccount';
+import Toast from 'react-native-simple-toast';
 
 const User = (props: any) => {
     // console.log("PAge props.............", props.route.params)
@@ -73,22 +73,15 @@ const User = (props: any) => {
                 await imageUploadService(profilePic).then((originalPromiseResult) => {
                     console.log("Original............", originalPromiseResult.status)
                     if (originalPromiseResult.status == "422") {
-                        ToastAndroid.showWithGravity(
-                            '422',
-                            ToastAndroid.SHORT,
-                            ToastAndroid.CENTER
-                        )
+                        Toast.show( 'Please try Different Image', Toast.LONG, { backgroundColor: 'red' });
+                         
                         setLoader(false)
                     }
                     else if (originalPromiseResult.status == "201") {
                         setProfileName(originalPromiseResult.data.file.filename)
                     }
                     else if (originalPromiseResult == undefined) {
-                        ToastAndroid.showWithGravity(
-                            'Something went wrong!, Please try again later',
-                            ToastAndroid.SHORT,
-                            ToastAndroid.CENTER
-                        )
+                        Toast.show(  'Something went wrong!, Please try again later', Toast.LONG, { backgroundColor: 'red' });
                         setLoader(false)
                     }
                 });
@@ -103,11 +96,7 @@ const User = (props: any) => {
             console.log("Userdetails in users...........", userData)
             console.log("Undefined........", (userData.country_of_residence.length === 0) == false)
             if (((userData.date_of_birth).length === 0) || ((userData.gender).length === 0) || ((userData.country_of_residence).length === 0)) {
-                ToastAndroid.showWithGravity(
-                    'Please fill the personal details and try again',
-                    ToastAndroid.SHORT,
-                    ToastAndroid.CENTER
-                )
+                Toast.show(  'Please fill the personal details and try again', Toast.LONG, { backgroundColor: 'red' });
                 setLoader(false)
             }
             else {
@@ -131,19 +120,12 @@ const User = (props: any) => {
         let callingAutobot = await personalDetailsUpdate(imageData).then((originalPromiseResult) => {
             console.log("Personal Details in response for user page....", originalPromiseResult);
             if (originalPromiseResult === undefined) {
-                ToastAndroid.showWithGravity(
-                    'Something went wrong!, Please try again later',
-                    ToastAndroid.SHORT,
-                    ToastAndroid.CENTER,
-                );
+                Toast.show(  'Something went wrong!, Please try again later', Toast.LONG, { backgroundColor: 'red' });
+
                 setLoader(false)
             }
             else {
-                ToastAndroid.showWithGravity(
-                    'Image Updated SuccessFully!',
-                    ToastAndroid.SHORT,
-                    ToastAndroid.CENTER,
-                );
+                Toast.show(  'Image Updated SuccessFully!', Toast.LONG, { backgroundColor: 'red' });
                 dispatch(userDetailsHandler());
                 setLoader(false)
             }
@@ -170,13 +152,7 @@ const User = (props: any) => {
 
 
             else {
-                ToastAndroid.showWithGravity(
-                    "Please try again later!",
-                    ToastAndroid.CENTER,
-                    ToastAndroid.SHORT
-                )
-                // Alert.alert("Please try again later!")
-                // this.props.navigation.pop();
+                Toast.show( "Please try again later!", Toast.LONG, { backgroundColor: 'red' });
             }
         }
 
@@ -202,13 +178,7 @@ const User = (props: any) => {
                 setProfilePic(file)
             }
             else {
-                ToastAndroid.showWithGravity(
-                    "Please try again later!",
-                    ToastAndroid.CENTER,
-                    ToastAndroid.SHORT
-                )
-                // Alert.alert("Please try again later!")
-                // this.props.navigation.pop();
+                Toast.show( "Please try again later!", Toast.LONG, { backgroundColor: 'red' });
             }
         }
     }
@@ -228,20 +198,15 @@ const User = (props: any) => {
                 console.log("Camera permission given");
                 return true;
             } else {
-                ToastAndroid.showWithGravity(
-                    "Camera and gallery permissions required",
-                    ToastAndroid.CENTER,
-                    ToastAndroid.SHORT
-                )
+                Toast.show( "Camera and gallery permissions required", Toast.LONG, { backgroundColor: 'red' });
                 console.log("Camera permission denied");
                 return false;
             }
         } catch (err) {
-            ToastAndroid.showWithGravity(
+            Toast.show(
                 "Camera and gallery permissions required",
-                ToastAndroid.CENTER,
-                ToastAndroid.SHORT
-            )
+                Toast.CENTER,
+                )
             return false;
             // console.warn(err);
         }
@@ -263,17 +228,15 @@ const User = (props: any) => {
         const removeAccount = async () => {
             await deleteAccount().then((originalPromiseResult) => {
                 if (originalPromiseResult === undefined) {
-                    ToastAndroid.showWithGravity(
+                    Toast.show(
                         'Something went wrong!, Please try again later',
-                        ToastAndroid.SHORT,
-                        ToastAndroid.CENTER,
+                        Toast.SHORT,
                     );
                 }
                 else {
-                    ToastAndroid.showWithGravity(
+                    Toast.show(
                         'Your account deleted successfully',
-                        ToastAndroid.SHORT,
-                        ToastAndroid.CENTER,
+                        Toast.SHORT,
                     );
                     navigation.replace("login")
                 }

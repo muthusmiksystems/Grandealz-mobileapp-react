@@ -18,7 +18,7 @@ import { horizontalScale, verticalScale } from '../../constants/metrices';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { drawCommingGet } from '../../services/register';
 import { ActivityIndicator } from 'react-native';
-import OrderEmpty from '../ExceptionScreens/orderEmpty';
+import DrawEmpty from '../ExceptionScreens/DrawEmpty';
 
 const UpcomingDraws = (filter) => {
     console.log("filter",filter.son)
@@ -53,7 +53,7 @@ const UpcomingDraws = (filter) => {
                         </View>
                     )}
                 />
-                : <OrderEmpty value={"There are no Upcoming Draws at the moment. Please try again later."}/>}
+                : <DrawEmpty value={"There are no Upcoming Draws at the moment. Please try again later."}/>}
         </>
     )
 }

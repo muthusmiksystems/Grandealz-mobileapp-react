@@ -8,9 +8,10 @@ import {
     StyleSheet,
     Image,
     TouchableOpacity,
-    ToastAndroid,
     Alert,
 } from 'react-native';
+import Toast from 'react-native-simple-toast';
+
 import { horizontalScale, moderateScale, verticalScale } from "../../constants/metrices";
 import { shoppingCart } from "../../constants/icons";
 import EntypoIcons from "react-native-vector-icons/Entypo";
@@ -76,11 +77,7 @@ const Address = ({ route }) => {
             dispatch(addressListHandler())
                 .then(unwrapResult).then((originalPromiseResult) => {
                     console.log("result data", originalPromiseResult)
-                    ToastAndroid.showWithGravity(
-                        Removeitems.message,
-                        ToastAndroid.SHORT,
-                        ToastAndroid.CENTER
-                    )
+                    Toast.show(  Removeitems.message, Toast.LONG, { backgroundColor: 'red' });
                 })
         }
     }

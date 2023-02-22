@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, } from '@reduxjs/toolkit';
 import axios from 'axios'
-import { ToastAndroid } from 'react-native';
+import { Toast } from 'react-native-simple-toast';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
@@ -26,10 +26,9 @@ export const changepasswordHandle  = createAsyncThunk('post/changepasswordpostca
     }
 } catch (err)  {
         console.log("catch error Api error.. changepasss", err);
-        ToastAndroid.showWithGravity(
+        Toast.show(
             'Please try again later',
-            ToastAndroid.SHORT,
-            ToastAndroid.CENTER,
+            Toast.SHORT,
         );
     }
 })

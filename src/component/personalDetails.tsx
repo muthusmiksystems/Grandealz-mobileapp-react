@@ -9,7 +9,6 @@ import {
     Alert,
     TextInput,
     ScrollView,
-    ToastAndroid
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux'
 import SafeAreaView from 'react-native-safe-area-view';
@@ -31,6 +30,8 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { personalDetailsUpdate } from '../services/personalDetailsUpdate';
 import { userDetailsHandler } from '../store/reducers/userDetails';
 import LoaderKit from 'react-native-loader-kit';
+import Toast from 'react-native-simple-toast';
+
 
 const PersonalDetails = (props) => {
     // console.log("Page props in Personal details..............", props.route.params)
@@ -195,19 +196,13 @@ const PersonalDetails = (props) => {
             let callingAutobot = await personalDetailsUpdate(payload).then((originalPromiseResult) => {
                 // console.log("Personal Details Country....", originalPromiseResult);
                 if (originalPromiseResult === undefined) {
-                    ToastAndroid.showWithGravity(
-                        'Something went wrong!, Please try again later',
-                        ToastAndroid.SHORT,
-                        ToastAndroid.CENTER,
-                    );
+                    Toast.show(  'Something went wrong!, Please try again later', Toast.LONG, { backgroundColor: 'red' });
+                      
                     setLoader(false)
                 }
                 else {
-                    ToastAndroid.showWithGravity(
-                        'Updated SuccessFully!',
-                        ToastAndroid.SHORT,
-                        ToastAndroid.CENTER,
-                    );
+                    Toast.show( 'Updated SuccessFully!', Toast.LONG, { backgroundColor: 'red' });
+
                     dispatch(userDetailsHandler());
                     setLoader(false)
                 }

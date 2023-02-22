@@ -26,7 +26,6 @@ const OrderList = ({ orderlist }) => {
     const navigation = useNavigation();
     const [filterdata, setData] = useState(orderlist);
     //const filterdata =orderlist
-    console.log("filter data in mapping .........",filterdata.data)
     useEffect(() => {
         setData(orderlist)
     }, [orderlist])
@@ -83,7 +82,7 @@ const OrderList = ({ orderlist }) => {
                     </>
                     :
                     <View style={{ marginTop: "25%" }}>
-                        <OrderEmpty value={"You haven't ordered anything"} />
+                        <OrderEmpty value={"You haven't placed any order yet!"} />
                     </View>}
             </View>
         </SafeAreaView>

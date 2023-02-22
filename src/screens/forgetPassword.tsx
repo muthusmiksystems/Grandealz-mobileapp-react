@@ -26,6 +26,7 @@ import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { forgotPasswordHandler } from "../store/reducers/forgotPassword";
 import LoaderKit from 'react-native-loader-kit';
+import Toast from 'react-native-simple-toast';
 
 const ForgetPassword = () => {
 
@@ -54,23 +55,18 @@ const ForgetPassword = () => {
         dispatch(forgotPasswordHandler(value)).then(unwrapResult).then((originalPromiseResult) => {
           console.log("successfully returned to ForgetPassword with response ", originalPromiseResult);
           if (originalPromiseResult === "Please check your registered email to reset your password.") {
-            ToastAndroid.showWithGravity(
+            Toast.show(
               originalPromiseResult,
-              // 'Please check your registered email to reset your password.',
-              ToastAndroid.SHORT,
-              ToastAndroid.CENTER,
-            );
+              Toast.LONG, { backgroundColor: 'red' });
             setForgetEmail('')
             setLoader(false)
             navigation.navigate('login')
           }
           else {
             setLoader(false);
-            ToastAndroid.showWithGravity(
+            Toast.show(
               originalPromiseResult,
-              ToastAndroid.SHORT,
-              ToastAndroid.CENTER,
-            );           
+              Toast.LONG, { backgroundColor: 'red' });    
           }
         })
       }

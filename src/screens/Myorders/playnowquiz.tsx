@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StatusBar, StyleSheet, Image, TouchableOpacity, Alert, ToastAndroid } from "react-native";
+import { View, Text, StatusBar, StyleSheet, Image } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { horizontalScale, verticalScale } from '../../constants/metrices';
 import { COLORS, icons } from '../../constants';
@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Button } from 'react-native-paper';
 import { allocteTickets } from '../../services/allocateTicket';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Toast from 'react-native-simple-toast';
 
 const Playnowquiz = (props) => {
     const [questions, setQustions] = useState(props.route.params);
@@ -70,24 +71,17 @@ const Playnowquiz = (props) => {
                     .then((originalPromiseResult) => {
                         console.log("Response for allocate........", originalPromiseResult)
                         if (originalPromiseResult === undefined) {
-                            ToastAndroid.showWithGravity(
-                                "Something",
-                                ToastAndroid.CENTER,
-                                ToastAndroid.SHORT
-                            )
+                            Toast.show( 'Something went wrong!, Please try again later', Toast.LONG, { backgroundColor: 'red' });
                         }
-                        else if (originalPromiseResult.status === "201") {
+                        else if (originalPromiseResult.status === "200") {
                             navigation.replace("Playnowquizsubmit", originalPromiseResult.data)
                         }
                     })
                 // console.log("enna mapla ok yaaaaa.",result)
             }
             else {
-                ToastAndroid.showWithGravity(
-                    "Oops! Your answer is wrong",
-                    ToastAndroid.CENTER,
-                    ToastAndroid.SHORT
-                )
+                setButtonOptionOne(true), setButtonOptionTwo(true), setButtonOptionThree(true), setButtonOptionFour(true)
+                Toast.show(   "Oops! Your answer is wrong",Toast.LONG, { backgroundColor: 'red' });
                 setTryAgainState(false)
                 setButtonSubmit(true)
             }
@@ -145,11 +139,11 @@ const Playnowquiz = (props) => {
                         <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-Regular", color: "#616161" }}>{questions[quesno].options[3]}</Text>
                     </Button>
 
-
+                    {buttonSubmit ?null :
                     <Button disabled={buttonSubmit} style={{ ...Styles.options, borderColor: COLORS.black }} onPress={() => { validateAnswer() }}>
                         <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-Regular", color: "#0a0127" }}>Submit</Text>
                     </Button>
-
+                    }
                     <View style={{ height: "3%" }}>
                         {(error) ? <Text style={{ fontFamily: "Lexend-Regular", fontSize: RFValue(12), textAlign: "center", color: COLORS.element }}>{error}</Text> : null}
                     </View>

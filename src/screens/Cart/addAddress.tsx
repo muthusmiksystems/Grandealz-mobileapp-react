@@ -10,7 +10,6 @@ import {
     Image, TextInput,
     TouchableOpacity,
     Pressable,
-    ToastAndroid
 } from 'react-native';
 import { horizontalScale, verticalScale } from "../../constants/metrices";
 import { shoppingCart } from "../../constants/icons";
@@ -42,6 +41,8 @@ import { moderateScale } from "../../constants/metrices";
 import { ActivityIndicator } from "react-native-paper";
 import LoaderKit from 'react-native-loader-kit';
 import OrderEmpty from "../ExceptionScreens/orderEmpty";
+import Toast from 'react-native-simple-toast';
+
 
 const AddAddress = ({ route }) => {
     const typeUser = route.params.type;
@@ -55,7 +56,7 @@ const AddAddress = ({ route }) => {
                     value={isSelected}
                     onValueChange={setSelection}
                     style={styles.checkBox}
-                    tintColors={{ true: "green" }}
+                    tintColors={{ true: "red" }}
                 />
             </View>
         )
@@ -136,7 +137,7 @@ const AddAddress = ({ route }) => {
             errorCount++;
         }
 
-        if (locality.length <= 5) {
+        if (locality.length <= 3) {
             setErrorLocality('Please enter Locality')
             errorCount++;
         }
@@ -175,7 +176,7 @@ const AddAddress = ({ route }) => {
             if (pincode.length > 5) {
                 setErrorPin('');
             }
-            if (locality.length > 5) {
+            if (locality.length > 3) {
                 setErrorLocality('');
             }
             if (phone.length > 9) {
@@ -237,22 +238,14 @@ const AddAddress = ({ route }) => {
             let calling = await AddAddressHandle(payload);
             console.log(calling, "Personal Details Country....");
             if (calling === "Success") {
-                ToastAndroid.showWithGravity(
-                    'Successfully added',
-                    ToastAndroid.SHORT,
-                    ToastAndroid.CENTER,
-                );
+                Toast.show( 'Successfully added', Toast.LONG, { backgroundColor: 'red' });
+                   
                 dispatch(addressListHandler());
                 console.log("...........",typeUser,amount )
                 navigation.navigate("Address", { type: typeUser,"amount":amount });
             }
             else {
-                ToastAndroid.showWithGravity(
-                    'Something went wrong!',
-                    ToastAndroid.SHORT,
-                    ToastAndroid.CENTER,
-                );
-
+                Toast.show(  'Something went wrong!', Toast.LONG, { backgroundColor: 'red' });
             }
 
         }
@@ -567,6 +560,7 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         borderWidth: 1,
         borderColor: "black",
+        color:COLORS.element
     },
     dropText: {
         ...FONTS.lexendregular,

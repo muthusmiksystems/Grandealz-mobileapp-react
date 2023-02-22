@@ -17,7 +17,7 @@ import { COLORS, FONTS } from '../constants';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useNavigation } from '@react-navigation/native';
 import { horizontalScale, verticalScale } from '../constants/metrices';
-import { ToastAndroid } from 'react-native';
+import Toast from 'react-native-simple-toast';
 import { AddtoCartHandle } from "../services/addtocart";
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
@@ -45,11 +45,7 @@ const Product = ({ addedCart, changer, change }) => {
                     changer(!change)
                 }
                 else {
-                    ToastAndroid.showWithGravity(
-                        AddItemtoCart.message,
-                        ToastAndroid.SHORT,
-                        ToastAndroid.CENTER,
-                    );
+                    Toast.show(AddItemtoCart.message, Toast.LONG, { backgroundColor: 'red' });
                 }
             }
             AddtoCartitems()

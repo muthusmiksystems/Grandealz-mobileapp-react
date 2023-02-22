@@ -10,8 +10,9 @@ import {
     Image, TextInput,
     TouchableOpacity,
     Pressable,
-    ToastAndroid
 } from 'react-native';
+import Toast from 'react-native-simple-toast';
+
 import { horizontalScale, moderateScale, verticalScale } from "../../constants/metrices";
 import { shoppingCart } from "../../constants/icons";
 import EntypoIcons from "react-native-vector-icons/Entypo";
@@ -44,9 +45,6 @@ import { EditAddressHandle } from "../../services/editAddress";
 const EditAddress = ({ route }) => {
     const typeUser = route.params.type;
     const edit = route.params.data;
-
-    console.log("data..............", route.params.type);
-
     const [isSelected, setSelection] = useState(false);
     const CheckBoxes = () => {
 
@@ -96,6 +94,7 @@ const EditAddress = ({ route }) => {
     const [stateError, setStateError] = useState("")
     const [cityData, setCityData] = useState();
     const [stateData, setStateData] = useState();
+    const [countrycode,setCountryCode]=useState("")
     const [countryData, setCountryData] = useState();
     const [optionHo, setOptionHo] = useState(false)
     const [optionWo, setOptionWo] = useState(false)
@@ -112,6 +111,8 @@ const EditAddress = ({ route }) => {
             setAddress(address.address)
             setLocality(address.locality_town)
             setCity(address.city.name)
+            setCityData(address.city)
+            setStateData(address.state)
             setStateses(address.state.name)
             setCountry(address.country.name)
             setSelection(address.is_default_address)
@@ -159,7 +160,7 @@ const EditAddress = ({ route }) => {
             errorCount++;
         }
 
-        if (locality.length <= 5) {
+        if (locality.length <= 3) {
             setErrorLocality('Please enter Locality')
             errorCount++;
         }
@@ -167,17 +168,6 @@ const EditAddress = ({ route }) => {
         if (phone.length < 10) {
             setErrorPhone('please enter valid Number')
             errorCount++;
-        }
-        if (countryValue === null) {
-            setCountryError('country is required')
-            errorCount++;
-        }
-        if (cityValue === null) {
-            setCityError('City is required')
-            errorCount++;
-        }
-        if (stateValue === null) {
-            setStateError('State is required')
         }
         if (addressType === undefined) {
             setAddressError("Select address type")
@@ -197,20 +187,11 @@ const EditAddress = ({ route }) => {
             if (pincode.length > 5) {
                 setErrorPin('');
             }
-            if (locality.length > 5) {
+            if (locality.length > 3) {
                 setErrorLocality('');
             }
             if (phone.length > 9) {
                 setErrorPhone('');
-            }
-            if (countryValue != null) {
-                setCountryError('');
-            }
-            if (cityValue != null) {
-                setCityError('');
-            }
-            if (stateValue != null) {
-                setStateError('');
             }
             if (addressType != undefined ) {
                 setAddressError('');
@@ -237,18 +218,12 @@ const EditAddress = ({ route }) => {
                     "countryCode": cityData.countryCode
                 },
                 "state": {
-
                     "name": stateData.name,
                     "isoCode": stateData.isoCode,
                     "countryCode": stateData.countryCode
-
                 },
                 "country": {
-                    "name": countryData.name,
-                    "isoCode": countryData.isoCode,
-                    "flag": countryData.flag,
-                    "phonecode": countryData.phonecode,
-                    "currency": countryData.currency
+                    "currency": "INR", "flag": "????", "isoCode": "IN", "name": "India", "phonecode": "91"
                 },
                 "address_type": addressType == 0 ? "Home" : "Work",
                 "is_default_address": isSelected
@@ -262,39 +237,16 @@ const EditAddress = ({ route }) => {
                 .then((originalPromiseResult) => {
                     console.log("success samuvel you did itdone", originalPromiseResult);
                     if (originalPromiseResult.message === "saved successfully") {
-                        ToastAndroid.showWithGravity(
-                            'Successfully added',
-                            ToastAndroid.SHORT,
-                            ToastAndroid.CENTER,
-                        );
+                        Toast.show(  'Successfully added', Toast.LONG, { backgroundColor: 'red' });
+                        
                         dispatch(addressListHandler());
                         navigation.navigate("Address", { type: typeUser });
                     }
                     else {
-                        ToastAndroid.showWithGravity(
-                            'Something went wrong!',
-                            ToastAndroid.SHORT,
-                            ToastAndroid.CENTER,
-                        );
+                        Toast.show(   'Something went wrong!', Toast.LONG, { backgroundColor: 'red' });
                     }
                 })
             console.log(edaddresses, "Personal Details Country....");
-            //     if (calling === "Success") {
-            //         ToastAndroid.showWithGravity(
-            //             'Successfully added',
-            //             ToastAndroid.SHORT,
-            //             ToastAndroid.CENTER,
-            //         );
-            //         dispatch(addressListHandler());
-            //         navigation.navigate("Address");
-            //     }
-            //     else {
-            //         ToastAndroid.showWithGravity(
-            //             'Something went wrong!',
-            //             ToastAndroid.SHORT,
-            //             ToastAndroid.CENTER,
-            //         );
-            //     }
         }
     }
 
@@ -482,7 +434,7 @@ const EditAddress = ({ route }) => {
                                 data={countryListValue}
                                 maxHeight={350}
                                 itemTextStyle={themeForList}
-                                placeholder={/* (country) ? country :*/ "Country"}
+                                placeholder={(country) ? country : "Country"}
                                 labelField="name"
                                 valueField="isoCode"
                                 onChange={item => { setCountryValue(item.isoCode), console.log("dbdgbdfbdg..........", item), setCountryData(item) }}
@@ -505,7 +457,7 @@ const EditAddress = ({ route }) => {
                                 labelField="name"
                                 valueField="name"
                                 onChange={item => { setStateValue(item.name), setStateIso(item.isoCode), console.log("dbdgbdfbdg..........", item), setStateData(item) }}
-                                placeholder={/* (stateses) ? stateses : */ "State*"}
+                                placeholder={(stateses) ? stateses : "State*"}
                             />
                         </View>
                         <View>
@@ -522,7 +474,7 @@ const EditAddress = ({ route }) => {
                         data={cityListValue}
                         maxHeight={350}
                         itemTextStyle={themeForList}
-                        placeholder={/* (city) ? city : */ "Select City"}
+                        placeholder={(city) ? city : "Select City"}
                         labelField="name"
                         valueField="name"
                         onChange={item => { setCityValue(item.name), console.log("dbdgbdfbdg..........", item), setCityData(item) }}
@@ -598,13 +550,15 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         borderWidth: 1,
         borderColor: "black",
+        color:COLORS.element
     },
     ErrorText: {
+        marginStart:"7%",
         color: "red",
         ...FONTS.lexendregular,
         fontSize: RFValue(10),
-        textAlign: "center",
-        width: horizontalScale(100)
+        textAlign: "left",
+        
     },
     dropText: {
         ...FONTS.lexendregular,

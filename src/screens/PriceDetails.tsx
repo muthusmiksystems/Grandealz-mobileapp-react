@@ -26,7 +26,8 @@ import { addToWishlistHandle, wishlistHandle } from '../services/wishlist';
 import { ourCartPage } from '../services/ourCart';
 import { RemovewishlistHandle } from '../services/deletewishlist';
 import { AddtoCartHandle } from '../services/addtocart';
-import { ToastAndroid } from 'react-native';
+import Toast from 'react-native-simple-toast';
+
 const PriceDetails = ({ route }) => {
   const pricing = route.params;
   const navigation = useNavigation();
@@ -44,19 +45,11 @@ const PriceDetails = ({ route }) => {
     console.log("payload", payload)
     let AddItemtoCart = await AddtoCartHandle(payload)
     if (AddItemtoCart.status === "200") {
-      ToastAndroid.showWithGravity(
-        AddItemtoCart.message,
-        ToastAndroid.SHORT,
-        ToastAndroid.CENTER,
-      );
+      Toast.show(  AddItemtoCart.message, Toast.LONG, { backgroundColor: 'red' });
       cartStock();
     }
     else {
-      ToastAndroid.showWithGravity(
-        AddItemtoCart.message,
-        ToastAndroid.SHORT,
-        ToastAndroid.CENTER,
-      );
+      Toast.show(  AddItemtoCart.message, Toast.LONG, { backgroundColor: 'red' });
       // setChanger(!changer);
     }
   }
@@ -134,20 +127,14 @@ const PriceDetails = ({ route }) => {
       const payload = { "draw": pricing._id, "qty": 1 }
       let AddItemtoCart = await AddtoCartHandle(payload)
       if (AddItemtoCart.status === "200") {
-        ToastAndroid.showWithGravity(
-          AddItemtoCart.message,
-          ToastAndroid.SHORT,
-          ToastAndroid.CENTER,
-        );
+        Toast.show( AddItemtoCart.message, Toast.LONG, { backgroundColor: 'red' });
+         
         cartStock();
         navigation.navigate("Tabs", { screen: "Cart" })
       }
       else {
-        ToastAndroid.showWithGravity(
-          AddItemtoCart.message,
-          ToastAndroid.SHORT,
-          ToastAndroid.CENTER,
-        );
+        Toast.show( AddItemtoCart.message, Toast.LONG, { backgroundColor: 'red' });
+
       }
     }
     else {

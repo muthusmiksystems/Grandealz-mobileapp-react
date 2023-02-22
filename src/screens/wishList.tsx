@@ -23,7 +23,7 @@ import { COLORS, FONTS } from "../constants";
 import OrderList from "./Myorders/orderList";
 import { wishlistHandle } from "../services/wishlist";
 import { RemovewishlistHandle } from '../services/deletewishlist';
-import { ToastAndroid } from 'react-native';
+import Toast from 'react-native-simple-toast'
 import { AddtoCartHandle } from "../services/addtocart";
 import WishListEmpty from "./ExceptionScreens/wishListEmpty";
 import CartEmpty from "./ExceptionScreens/cartEmpty";
@@ -77,10 +77,9 @@ const WishList = () => {
 
     const RemoveItem = (data: any) => {
         setProductid(data)
-        ToastAndroid.showWithGravity(
+        Toast.show(
             'Removed successfully',
-            ToastAndroid.SHORT,
-            ToastAndroid.CENTER,
+            Toast.SHORT,
         );
     }
 
@@ -108,10 +107,9 @@ const WishList = () => {
                     // navigation.navigate("Tabs", { screen: "Cart" })
                 }
                 else {
-                    ToastAndroid.showWithGravity(
+                    Toast.show(
                         AddItemtoCart.message,
-                        ToastAndroid.SHORT,
-                        ToastAndroid.CENTER,
+                        Toast.LONG,
                     );
                 }
             }

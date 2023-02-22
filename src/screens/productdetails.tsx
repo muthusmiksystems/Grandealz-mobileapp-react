@@ -26,7 +26,8 @@ import { addToWishlistHandle, wishlistHandle } from '../services/wishlist';
 import { ourCartPage } from '../services/ourCart';
 import { RemovewishlistHandle } from '../services/deletewishlist';
 import { AddtoCartHandle } from '../services/addtocart';
-import { ToastAndroid } from 'react-native';
+import Toast from 'react-native-simple-toast';
+
 const ProductDetails = ({ route }) => {
   const pricing = route.params;
   const navigation = useNavigation();
@@ -46,12 +47,7 @@ const ProductDetails = ({ route }) => {
       cartStock();
     }
     else {
-      ToastAndroid.showWithGravity(
-        AddItemtoCart.message,
-        ToastAndroid.SHORT,
-        ToastAndroid.CENTER,
-      );
-      // setChanger(!changer);
+      Toast.show( AddItemtoCart.message, Toast.LONG, { backgroundColor: 'red' });
     }
   }
   const RemoveWishlist = async () => {
@@ -135,11 +131,7 @@ const ProductDetails = ({ route }) => {
         navigation.navigate("Tabs", { screen: "Cart" })
       }
       else {
-        ToastAndroid.showWithGravity(
-          AddItemtoCart.message,
-          ToastAndroid.SHORT,
-          ToastAndroid.CENTER,
-        );
+        Toast.show( AddItemtoCart.message, Toast.LONG, { backgroundColor: 'red' });
       }
     }
     else {

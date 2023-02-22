@@ -19,6 +19,7 @@ import { horizontalScale, verticalScale } from '../../constants/metrices';
 import { drawWinnerGet } from '../../services/register';
 import { ActivityIndicator } from 'react-native';
 import OrderEmpty from '../ExceptionScreens/orderEmpty';
+import DrawEmpty from '../ExceptionScreens/DrawEmpty';
 
 const Winners = (filters) => {
     console.log("winners",filters.win)
@@ -60,7 +61,7 @@ const Winners = (filters) => {
                     </View>
                 )}
             />
-            :<OrderEmpty value={"There are no Winner Announced at the moment. Please try again later."}/> }
+            :<DrawEmpty value={"There are no Winner Announced at the moment. Please try again later."}/> }
         </>
 
     )

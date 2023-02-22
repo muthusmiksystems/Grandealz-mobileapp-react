@@ -11,7 +11,6 @@ import {
   View,
   Image,
   TouchableOpacity,
-  ToastAndroid,
   // Button
 } from "react-native";
 import { horizontalScale, verticalScale } from "../constants/metrices";
@@ -23,6 +22,9 @@ import EntypoIcons from "react-native-vector-icons/Entypo";
 import { useDispatch } from "react-redux";
 import { VerifyHandler } from "../store/reducers/verify";
 import { unwrapResult } from '@reduxjs/toolkit';
+import Toast from 'react-native-simple-toast';
+import { resendNum } from "../services/changeNumber";
+
 
 const OtpPage = ({ route }) => {
   
@@ -38,6 +40,32 @@ const OtpPage = ({ route }) => {
     width: horizontalScale(40),
     marginTop:verticalScale(9)
   }
+  const Resend=async()=>{
+    let dataChange = await resendNum().then((originalPromiseResult) => {
+     console.log(originalPromiseResult);
+      if (originalPromiseResult.status === "200") {
+        Toast.show(
+          originalPromiseResult.message,
+          Toast.LONG,
+        );
+      }
+      else if (originalPromiseResult.status === "400") {
+        console.log("orginal", originalPromiseResult)
+        Toast.show(
+          originalPromiseResult.message,
+          Toast.SHORT,
+        );
+      }
+      else{
+        Toast.show(
+         "something went Wrong please try again later",
+          Toast.SHORT,
+        );
+      }
+    })
+  }
+
+
   const handleSubmit=()=>{
     const Data={
       "otp":otp,
@@ -50,19 +78,12 @@ const OtpPage = ({ route }) => {
        console.log("successfully returned to login with response ", originalPromiseResult);
          if (originalPromiseResult.status==="200") {
              const param = originalPromiseResult.data;
-             ToastAndroid.showWithGravity(
-              originalPromiseResult.message,
-              ToastAndroid.CENTER,
-              ToastAndroid.SHORT
-            )
+             Toast.show(  originalPromiseResult.message, Toast.LONG, { backgroundColor: 'red' });
+             
              navigation.navigate("login")
         } else {
-           console.log("error",originalPromiseResult);
-           ToastAndroid.showWithGravity(
-            originalPromiseResult,
-            ToastAndroid.CENTER,
-            ToastAndroid.SHORT
-           )
+          
+           Toast.show("Invalid OTP", Toast.LONG, { backgroundColor: 'red' });
         }
     })
     }
@@ -107,7 +128,7 @@ const OtpPage = ({ route }) => {
           />
           <View style={{flexDirection:"row",marginTop:"2%"}}>
           <Text style={{ color: "black", fontFamily: "Lexend-Regular",fontSize:RFValue(13) }}>Time Remaining 2:00</Text>
-          <TouchableOpacity><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular",fontSize:RFValue(13) }}>     Resend</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular",fontSize:RFValue(13) }} onPress={()=>{Resend()}}>     Resend</Text></TouchableOpacity>
           </View>
         </View>
         <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(223), padding: "4%" }}  onPress={() => { handleSubmit() }}>

@@ -20,7 +20,7 @@ import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import ToggleSwitch from 'toggle-switch-react-native';
 import image from "../../constants/image";
-import { ToastAndroid } from 'react-native';
+import Toast from 'react-native-simple-toast';
 import { DonateHandle } from "../../services/donate"
 import { AddtoCartHandle } from "../../services/addtocart";
 const CartProducts = ({cartval,changer,setChanger}) => {
@@ -56,18 +56,11 @@ const CartProducts = ({cartval,changer,setChanger}) => {
 
     const DonateButton = () => {
         if (toggle === true) {
-            ToastAndroid.showWithGravity(
-                'Donate Product Removed successfully',
-                ToastAndroid.SHORT,
-                ToastAndroid.CENTER,
-            );
+            Toast.show( 'Donate Product Removed successfully', Toast.LONG, { backgroundColor: 'red' });
+             
         }
         else{
-            ToastAndroid.showWithGravity(
-                'Donate Product added successfully',
-                ToastAndroid.SHORT,
-                ToastAndroid.CENTER,
-            ); 
+            Toast.show( 'Donate Product added successfully', Toast.LONG, { backgroundColor: 'red' });
         }
     }
 
@@ -94,11 +87,8 @@ const CartProducts = ({cartval,changer,setChanger}) => {
             setChanger(!changer);
         }
         else {
-            ToastAndroid.showWithGravity(
-                AddItemtoCart.message,
-                ToastAndroid.SHORT,
-                ToastAndroid.CENTER,
-            );
+            Toast.show( AddItemtoCart.message, Toast.LONG, { backgroundColor: 'red' });
+            
         }
     }
     //  console.log("jk.....",toggle,"id",donateid,"res///",donaterep)

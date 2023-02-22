@@ -20,11 +20,12 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import { couponPage } from '../services/copoun';
 import { TextInput } from 'react-native-paper';
 import {AddCouponHandle} from "../store/reducers/addcouponcode"
-import { ToastAndroid } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { unwrapResult } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import TicketEmpty from "../screens/ExceptionScreens/ticketEmpty";
+import Toast from 'react-native-simple-toast';
+
 const data = [
     {
         id: '1',
@@ -90,21 +91,12 @@ const CouponDetails = () => {
 
             
             if (originalPromiseResult.status ==="200") {
-              ToastAndroid.showWithGravity(
-                originalPromiseResult.message,
-                ToastAndroid.SHORT,
-                ToastAndroid.CENTER,
-              );
+                Toast.show(  originalPromiseResult.message, Toast.LONG, { backgroundColor: 'red' });
               navigation.navigate("Tabs",{screen:"Cart"})
             }
             else{
                 setError(originalPromiseResult.message)
-                ToastAndroid.showWithGravity(
-                    originalPromiseResult.message,
-                    ToastAndroid.SHORT,
-                    ToastAndroid.CENTER,
-                );
-
+                Toast.show(  originalPromiseResult.message, Toast.LONG, { backgroundColor: 'red' });
             }
           })
             

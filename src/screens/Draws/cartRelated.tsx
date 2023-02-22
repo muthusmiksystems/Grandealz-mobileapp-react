@@ -20,7 +20,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { horizontalScale, moderateScale, verticalScale } from '../../constants/metrices';
 import { CartDrawlistHandle } from "../../services/cartdrawslist";
 import { useIsFocused } from "@react-navigation/core";
-import { ToastAndroid } from 'react-native';
+import Toast from 'react-native-simple-toast';
 import { AddtoCartHandle } from "../../services/addtocart";
 
 const CartRelated = ({cartdts,changer,setChanger}) => {
@@ -68,11 +68,7 @@ const CartRelated = ({cartdts,changer,setChanger}) => {
                     setChanger(!changer);
                 }
                 else {
-                    ToastAndroid.showWithGravity(
-                        AddItemtoCart.message,
-                        ToastAndroid.SHORT,
-                        ToastAndroid.CENTER,
-                    );
+                    Toast.show( AddItemtoCart.message, Toast.LONG, { backgroundColor: 'red' });
                     setChanger(!changer);
                 }
             }
@@ -82,7 +78,7 @@ const CartRelated = ({cartdts,changer,setChanger}) => {
     const cartIdList=()=>{
         var AlreadyInCart: any[] = [];
         let data = cartdts?.draws;
-        console.log("dtaaaa.....................", data.length)
+        //console.log("dtaaaa.....................", data.length)
         if (data) {
             (data).forEach((element: any) => {
                 var Data = (element.draw._id);
@@ -92,11 +88,9 @@ const CartRelated = ({cartdts,changer,setChanger}) => {
         setCartList(AlreadyInCart);
     }
 
-
-
     return (
 
-        <View>
+        <View style={{height:RFValue(360)}}>
             <View style={{ marginVertical: "5%" }}>
                 <Text style={{ color: "#616161", fontSize: RFValue(14), ...FONTS.lexendregular, }}>People Have also bought this together</Text>
             </View>
@@ -112,12 +106,8 @@ const CartRelated = ({cartdts,changer,setChanger}) => {
                 renderItem={({ item }) => (
                     <>
                     {!(cartList.includes(`${item._id}`)) ?
-                    <View style={{ backgroundColor: COLORS.white, borderRadius: 14, width: RFValue(154), height: RFValue(246), padding: RFValue(15) }}>
-                        
+                    <View style={{ backgroundColor: COLORS.white, borderRadius: 14, width: RFValue(154), height:"100%", padding: RFValue(15) }}>
                         <TouchableOpacity>
-                            {/* <View style={{}}>
-
-                            </View> */}
                             <View style={{ backgroundColor: "#F9F9F9", padding: "2%" }}>
                                 <Image
                                     source={{ uri: item.product_image }}
@@ -130,17 +120,17 @@ const CartRelated = ({cartdts,changer,setChanger}) => {
                                 />
                             </View>
                         </TouchableOpacity>
-                        <View style={{}}>
+                        <View style={{height:"25%"}}>
                             <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendsemibold, paddingBottom: "2%", marginTop: RFValue(5) }}>{item.currency} {item.product_price} Cash</Text>
                             <Text style={{ color: "#616161", fontSize: RFValue(13), ...FONTS.lexendregular, paddingBottom: "2%" }}>{item.product_title}</Text>
                             <Text style={{ color: COLORS.element, fontSize: RFValue(13), ...FONTS.lexendregular, }}>₹{item.product_price}</Text>
                         </View>
                         {!(cartList.includes(`${item._id}`)) ?
-                            <TouchableOpacity  style={{ justifyContent: "center", alignItems: "center", borderWidth: 1, borderRadius: 5, marginTop: RFValue(5), width: RFValue(113), alignSelf: "center", height: RFValue(26) }} onPress={() => { setDrawid(item._id)}}>
+                            <TouchableOpacity  style={{ justifyContent: "center", alignItems: "center", borderWidth: 1, borderRadius: 5, marginTop:"40%", width: RFValue(113), alignSelf: "center", height: "10%" }} onPress={() => { setDrawid(item._id)}}>
                                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, }}>Add</Text>
                             </TouchableOpacity>
                             :
-                            <TouchableOpacity disabled={true} style={{ justifyContent: "center", alignItems: "center", borderWidth: 1, borderRadius: 5, marginTop: RFValue(5), width: RFValue(113), alignSelf: "center", height: RFValue(26), backgroundColor: COLORS.white }} >
+                            <TouchableOpacity disabled={true} style={{ justifyContent: "center", alignItems: "center", borderWidth: 1, borderRadius: 5, marginTop:"40%", width: RFValue(113), alignSelf: "center", height: "10%", backgroundColor: COLORS.white }} >
                                 <Text style={{ color: COLORS.black, fontSize: RFValue(13), ...FONTS.lexendregular, }}>Added</Text>
                             </TouchableOpacity>}
                     </View>
