@@ -45,11 +45,11 @@ const PriceDetails = ({ route }) => {
     console.log("payload", payload)
     let AddItemtoCart = await AddtoCartHandle(payload)
     if (AddItemtoCart.status === "200") {
-      Toast.show(  AddItemtoCart.message, Toast.LONG, { backgroundColor: 'red' });
+      
       cartStock();
     }
     else {
-      Toast.show(  AddItemtoCart.message, Toast.LONG, { backgroundColor: 'red' });
+      
       // setChanger(!changer);
     }
   }
@@ -127,7 +127,7 @@ const PriceDetails = ({ route }) => {
       const payload = { "draw": pricing._id, "qty": 1 }
       let AddItemtoCart = await AddtoCartHandle(payload)
       if (AddItemtoCart.status === "200") {
-        Toast.show( AddItemtoCart.message, Toast.LONG, { backgroundColor: 'red' });
+        
          
         cartStock();
         navigation.navigate("Tabs", { screen: "Cart" })

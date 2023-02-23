@@ -26,7 +26,7 @@ import LoaderKit from 'react-native-loader-kit';
 import { original, unwrapResult } from '@reduxjs/toolkit';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { horizontalScale, moderateScale, verticalScale } from '../../constants/metrices';
-import { useDispatch ,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { bannerHandler } from '../../store/reducers/Banners';
 import { userDetailsHandler } from '../../store/reducers/userDetails';
 import { ourCartPage } from '../../services/ourCart';
@@ -61,8 +61,8 @@ const DataPage = () => {
         navigation.navigate("NetworkError")
       }
     })
-     cartStock();
-     Addresslist();
+    cartStock();
+    Addresslist();
     dispatch(bannerHandler())
       .then(unwrapResult).then((originalPromiseResult) => {
         // console.log("successfully returned to login with response ", originalPromiseResult);
@@ -72,14 +72,14 @@ const DataPage = () => {
   }, [])
 
   useEffect(() => {
-    if(IsFocused){
+    if (IsFocused) {
       setLoader(true)
       cartStock()
     }
-  },[IsFocused])
+  }, [IsFocused])
 
   const cartStock = async () => {
-  setLoader(true)
+    setLoader(true)
     let ourCartStock = await ourCartPage()
     console.log("CartData List on cart", ourCartStock)
     var AlreadyInCart: any = [];
@@ -91,18 +91,18 @@ const DataPage = () => {
       })
     }
     setCartList(AlreadyInCart);
-    console.log("dtaaaa..kumari...................",AlreadyInCart)
+    console.log("dtaaaa..kumari...................", AlreadyInCart)
     setLoader(false)
   }
-console.log("rummer",cartList)
+  console.log("rummer", cartList)
   const Addresslist = () => {
     dispatch(addressListHandler())
   }
 
   useEffect(() => {
     setLoader(true),
-    cartStock(),
-    console.log("mmmmkkkkkkkkkkkkkk")
+      cartStock(),
+      console.log("mmmmkkkkkkkkkkkkkk")
   }, [change])
 
   useEffect(() => {
@@ -112,8 +112,8 @@ console.log("rummer",cartList)
 
   return (
     <>
-      {console.log("hhhhh", DataInfo.length, DataInfo)}
-      {!loader && prodata  && prodata.length > 0 ?
+      {/* {console.log("hhhhh", DataInfo.length, DataInfo)} */}
+      {!loader && prodata && prodata.length > 0 ?
 
         <ScrollView >
 
@@ -132,7 +132,7 @@ console.log("rummer",cartList)
                 <View style={{ flexDirection: 'row', justifyContent: "space-between", marginTop: "4%" }}>
                   <View style={{ flexDirection: "column" }}>
                     <Image
-                source={icons.userGrand}
+                      source={icons.userGrand}
                       resizeMode="contain"
                       style={{
                         width: horizontalScale(140),
@@ -141,42 +141,44 @@ console.log("rummer",cartList)
                       }}
                     />
                   </View>
-                  <View style={{ flexDirection: "column" }}>
-            <TouchableOpacity onPress={() => { navigation.navigate('User'), Addresslist() }}
-                style={{borderRadius:moderateScale(40)}}
-              >
+                  <View style={{ flexDirection: "column", }}>
+                    <TouchableOpacity onPress={() => { navigation.navigate('User'), Addresslist() }}
+                      style={{ borderRadius: moderateScale(40),}}
+                    >
                       {(userData?.profile_pic) ?
                         <Image
                           source={{ uri: (userData?.profile_pic) }}
                           resizeMode="cover"
                           style={{
-                      width: horizontalScale(40),
+                            width: horizontalScale(40),
                             height: verticalScale(40),
                             margin: "3%",
                             bottom: horizontalScale(7),
-                      borderRadius:moderateScale(40)
+                            borderRadius: moderateScale(40),
+                            borderWidth:1,
+                            borderColor:"white"
                           }}
                         /> :
                         <Image
                           source={icons.user}
                           resizeMode="cover"
                           style={{
-                      width: horizontalScale(40),
+                            width: horizontalScale(40),
                             height: verticalScale(40),
                             margin: "3%",
-                      bottom: horizontalScale(7),
-                      borderRadius:moderateScale(40)
+                            bottom: horizontalScale(7),
+                            borderRadius: moderateScale(40)
                           }}
                         />}
                     </TouchableOpacity>
                   </View>
                 </View>
               </View>
-        <View style={{ padding: "3%",height:verticalScale(220)}}>
+              <View style={{ padding: "3%", height: verticalScale(220) }}>
                 <Banner data={apiData} />
               </View>
               <ClosingSoon />
-              <Product addedCart={cartList} changer={setChange} change={change}/>
+              <Product addedCart={cartList} changer={setChange} change={change} />
               <Carsold />
             </View>
           </>

@@ -87,19 +87,15 @@ const CouponDetails = () => {
         }
         else{
           dispatch(AddCouponHandle(applycoupon)).then(unwrapResult).then(async(originalPromiseResult) => {
-
-
-            
             if (originalPromiseResult.status ==="200") {
-                Toast.show(  originalPromiseResult.message, Toast.LONG, { backgroundColor: 'red' });
+                Toast.show(originalPromiseResult.message, Toast.LONG, { backgroundColor: 'red' });
               navigation.navigate("Tabs",{screen:"Cart"})
             }
             else{
                 setError(originalPromiseResult.message)
-                Toast.show(  originalPromiseResult.message, Toast.LONG, { backgroundColor: 'red' });
+                Toast.show(originalPromiseResult.message, Toast.LONG, { backgroundColor: 'red' });
             }
           })
-            
         }
     }
 

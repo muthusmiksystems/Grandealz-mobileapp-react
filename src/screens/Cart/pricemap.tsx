@@ -117,7 +117,7 @@ const PriceMap = ({priceval}) => {
                         </View>
                     </View>
                     <View>
-                         <Text style={{ fontSize: RFValue(10),color: COLORS.gray}}>Inclusive of Tax (GST)</Text>
+                         <Text style={{ fontSize: RFValue(10),color: COLORS.gray, ...FONTS.lexendregular}}>Inclusive of Tax (GST)</Text>
                     </View>
                 </View>
             </View>

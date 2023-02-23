@@ -42,7 +42,7 @@ const DrawsMain = () => {
     const [year, setYear] = useState("");
     const [winner, setWinner] = useState();
     const [close, setClose] = useState();
-    const [loaders,setLoader]=useState(true);
+    const [loaders, setLoader] = useState(true);
 
     const daily = moment(new Date()).format("YYYY-MM-DD")
 
@@ -66,13 +66,12 @@ const DrawsMain = () => {
             const winnerfilter = async (data: any) => {
                 let filterdata = await drawWinnerfilter(data)
                 setWinner(filterdata.data)
-                
+
                 console.log("winner winner chicken dinner", filterdata)
             }
             winnerfilter(data);
         }
         else {
-
             setModalVisible(!modalVisible)
             const data = {
                 "searcher": search.searcher
@@ -81,16 +80,14 @@ const DrawsMain = () => {
             const upcome = async (data: any) => {
                 let filterdata = await drawCommingfilter(data)
                 setClose(filterdata.data)
-                
                 console.log("upcomming data", filterdata.data);
             }
             upcome(data)
         }
     }
-    useEffect(()=>{
-        {winner ? setLoader(false): null}
-    },[winner])
-
+    useEffect(() => {
+        { winner ? setLoader(false) : null }
+    }, [winner])
     const resetFilter = async () => {
         if (showWinners) {
             setModalVisible(!modalVisible)
@@ -98,7 +95,6 @@ const DrawsMain = () => {
             const winnerfilter = async (data: any) => {
                 let filterdata = await drawWinnerfilter(data)
                 setWinner(filterdata.data)
-                
                 console.log("winner winner chicken dinner", filterdata.data)
             }
             winnerfilter(data);
@@ -128,8 +124,8 @@ const DrawsMain = () => {
             let result = closingData.data;
             console.log("im inside the winner page ", result);
             setWinner(result)
-            
-            console.log("loader state...........",loader)
+
+            console.log("loader state...........", loader)
         }
         win();
         const value = "status=UpComming"
@@ -138,7 +134,7 @@ const DrawsMain = () => {
             let result = closingData.data;
             console.log("im inside the upcomming page ", result);
             setClose(result)
-            
+
         }
         soon();
 
@@ -162,7 +158,7 @@ const DrawsMain = () => {
                         transparent={true}
                         visible={modalVisible}
                         onRequestClose={() => {
-                           
+
                             setModalVisible(!modalVisible);
                         }}>
                         <View style={styles.centeredView}>
@@ -201,12 +197,12 @@ const DrawsMain = () => {
                                         value={searcher}
                                         onChangeText={(text: String) => setSearcher(text)}
                                         activeUnderlineColor={'transparent'}
-                                        style={{ backgroundColor: "#FFFFFF", color:"black",height: verticalScale(45), width: horizontalScale(200), ...FONTS.lexendregular, fontSize: RFValue(14) }}
+                                        style={{ backgroundColor: "#FFFFFF", color: "black", height: verticalScale(45), width: horizontalScale(200), ...FONTS.lexendregular, fontSize: RFValue(14) }}
                                     />
                                 </TouchableOpacity>
                                 {showWinners ?
                                     <>
-                                        <TouchableOpacity style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width:"91%", marginVertical: verticalScale(5), }}>
+                                        <TouchableOpacity style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: "91%", marginVertical: verticalScale(5), }}>
                                             <TextInput
                                                 placeholder="Year"
                                                 keyboardType={"phone-pad"}
@@ -216,7 +212,7 @@ const DrawsMain = () => {
                                                 maxLength={4}
                                                 onChangeText={(text: String) => setYear(text)}
                                                 activeUnderlineColor={'transparent'}
-                                                style={{ backgroundColor: "#FFFFFF", color:"black", flexDirection: "column", height: verticalScale(45), width: horizontalScale(200), ...FONTS.lexendregular, fontSize: RFValue(14) }}
+                                                style={{ backgroundColor: "#FFFFFF", color: "black", flexDirection: "column", height: verticalScale(45), width: horizontalScale(200), ...FONTS.lexendregular, fontSize: RFValue(14) }}
                                             />
                                         </TouchableOpacity>
                                         <View >
@@ -260,25 +256,25 @@ const DrawsMain = () => {
                     </TouchableOpacity>
                 </View>
             </View>
-            {!loaders ? 
-            <View style={{ marginVertical: "1%", position: "relative", paddingBottom: "10%" }}>
-                {showWinners ?
-                    <View>
-                        <Winners win={winner} />
-                    </View> :
-                    <View>
-                        <UpcomingDraws son={close} />
-                    </View>}
-            </View>
-            : 
-            <View style={{ width: "100%", alignItems: "center", justifyContent: "center" }}>
-            <LoaderKit
-                style={{ width: 100, height: 105,top:"10%" }}
-                name={'BallClipRotatePulse'} // Optional: see list of animations below
-                size={30} // Required on iOS
-                color={COLORS.element} // Optional: color can be: 'red', 'green',... or '#ddd', '#FFFFFF',
-            />
-        </View>
+            {!loaders ?
+                <View style={{ marginVertical: "1%", position: "relative", paddingBottom: "10%" }}>
+                    {showWinners ?
+                        <View>
+                            <Winners win={winner} />
+                        </View> :
+                        <View>
+                            <UpcomingDraws son={close} />
+                        </View>}
+                </View>
+                :
+                <View style={{ width: "100%", alignItems: "center", justifyContent: "center" }}>
+                    <LoaderKit
+                        style={{ width: 100, height: 105, top: "10%" }}
+                        name={'BallClipRotatePulse'} // Optional: see list of animations below
+                        size={30} // Required on iOS
+                        color={COLORS.element} // Optional: color can be: 'red', 'green',... or '#ddd', '#FFFFFF',
+                    />
+                </View>
             }
 
 

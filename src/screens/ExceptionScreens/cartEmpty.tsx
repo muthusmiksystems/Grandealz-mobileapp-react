@@ -17,6 +17,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import image from "../../constants/image";
 import { RFValue } from "react-native-responsive-fontsize";
+import { shoppingCart } from "../../constants/icons";
 
 
 const CartEmpty = () => {
@@ -27,11 +28,13 @@ const CartEmpty = () => {
             <View style={styles.container}>
                 <View style={styles.view1} >
                     <Image
-                        source={image.cartEmpty}
+                        source={shoppingCart}
                         resizeMode="contain"
                         style={{ height: verticalScale(100), width: horizontalScale(80), top: verticalScale(5) }}
                     />
                 </View>
+                <Text style={{ fontFamily: "Lexend-Regular", color: "black", fontSize: 16, marginTop: 20 }}>Your cart is empty</Text>
+
             </View>
         </SafeAreaView>
     );

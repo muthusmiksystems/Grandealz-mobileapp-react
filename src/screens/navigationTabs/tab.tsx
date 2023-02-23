@@ -152,16 +152,16 @@ const Tabs = () => {
                                             source={icons.tabTicketColor}
                                             resizeMode="contain"
                                             style={{
-                                                width: RFValue(30),
-                                                height: RFValue(25),
+                                                width: RFValue(26),
+                                                height: RFValue(26),
                                             }}
                                         /> :
                                             <Image
                                                 source={icons.tabTicketNoColor}
                                                 resizeMode="contain"
                                                 style={{
-                                                    width: RFValue(30),
-                                                    height: RFValue(25),
+                                                    width: RFValue(26),
+                                                    height: RFValue(26),
                                                 }}
                                             />}
                                     </View>

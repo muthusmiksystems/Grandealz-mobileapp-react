@@ -11,7 +11,8 @@ import {
     ScrollView,
     Platform,
     PermissionsAndroid,
-    Modal
+    Modal,
+    Linking
 } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import { icons, COLORS, FONTS } from '../../constants';
@@ -455,15 +456,15 @@ const User = (props: any) => {
                         <Text style={{ ...FONTS.lexendregular, fontSize: RFValue(13), color: COLORS.element, textAlign: "center" }}>Delete my account</Text>
                     </TouchableOpacity>
                     <View style={{ flexDirection: "row", marginTop: "1%" }}>
-                        <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignSelf: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginStart: "5%", marginEnd: "2%", width: "45%", borderRadius: 10 }}>
+                        <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignSelf: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginStart: "5%", marginEnd: "2%", width: "45%", borderRadius: 10 }} onPress={()=>{Linking.openURL(`tel:${2222}`)}}>
                             <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(16), textAlign: "center", color: COLORS.black, paddingVertical: "8%" }}>Call us</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignSelf: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginEnd: "5%", width: "45%", borderRadius: 10 }}>
+                        <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignSelf: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginEnd: "5%", width: "45%", borderRadius: 10 }} onPress={() => Linking.openURL('mailto:support@example.com') }>
                             <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(16), textAlign: "center", color: COLORS.black, paddingVertical: "8%" }}>Email us</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={{ flexDirection: "row", marginVertical: "8%" }}>
-                        <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignItems: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginLeft: "16%", padding: "4%", borderRadius: 10 }}>
+                        <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignItems: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginLeft: "16%", padding: "4%", borderRadius: 10 }} onPress={()=>{Linking.openURL('https://instagram.com/a_optimistic_pessimist?igshid=YmMyMTA2M2Y=');}}>
                             <Image
                                 source={icons.userInstagram}
                                 resizeMode="contain"
@@ -474,7 +475,7 @@ const User = (props: any) => {
                                 }}
                             />
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignSelf: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginLeft: "10%", padding: "4%", borderRadius: 10 }}>
+                        <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignSelf: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginLeft: "10%", padding: "4%", borderRadius: 10 }} onPress={()=> Linking.openURL("https://www.facebook.com/")}>
                             <Image
                                 source={icons.userFacebook}
                                 resizeMode="contain"
@@ -485,7 +486,7 @@ const User = (props: any) => {
                                 }}
                             />
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignSelf: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginLeft: "10%", padding: "4%", borderRadius: 10 }}>
+                        <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, alignSelf: "center", borderColor: COLORS.white, backgroundColor: COLORS.white, marginLeft: "10%", padding: "4%", borderRadius: 10 }} onPress={()=>{Linking.openURL('https://wa.me/<9898888180>')}}>
                             <Image
                                 source={icons.userWhatsapp}
                                 resizeMode="contain"

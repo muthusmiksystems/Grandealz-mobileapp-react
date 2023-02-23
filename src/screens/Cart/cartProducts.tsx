@@ -23,7 +23,7 @@ import image from "../../constants/image";
 import Toast from 'react-native-simple-toast';
 import { DonateHandle } from "../../services/donate"
 import { AddtoCartHandle } from "../../services/addtocart";
-const CartProducts = ({cartval,changer,setChanger}) => {
+const CartProducts = ({cartval,changer,setChanger,swith}) => {
 
     const navigation = useNavigation();
     const [toggle, setToggle] = useState(false);
@@ -54,15 +54,15 @@ const CartProducts = ({cartval,changer,setChanger}) => {
         DonateProduct()
     }, [toggle])
 
-    const DonateButton = () => {
-        if (toggle === true) {
-            Toast.show( 'Donate Product Removed successfully', Toast.LONG, { backgroundColor: 'red' });
+    // const DonateButton = () => {
+    //     if (toggle === true) {
+    //         Toast.show( 'Donate Product Removed successfully', Toast.LONG, { backgroundColor: 'red' });
              
-        }
-        else{
-            Toast.show( 'Donate Product added successfully', Toast.LONG, { backgroundColor: 'red' });
-        }
-    }
+    //     }
+    //     else{
+    //         Toast.show( 'Donate Product added successfully', Toast.LONG, { backgroundColor: 'red' });
+    //     }
+    // }
 
 
     const increaseItemQty=(productDetails:any)=>{
@@ -135,7 +135,7 @@ const CartProducts = ({cartval,changer,setChanger}) => {
                             onColor="#FF777F"
                             offColor="#FF777F"
                             size="small"
-                            onToggle={isOn => { setToggle(!toggle), DonateButton() }}
+                            onToggle={isOn => { setToggle(!toggle),swith(!toggle)}}
                         />
                     </View>
                     <Text style={{ color: COLORS.white, fontSize: moderateScale(14), ...FONTS.lexendregular, marginTop: RFValue(12), marginLeft: RFValue(5) }}>Donate Product(s) & Double Your Tickets</Text>
