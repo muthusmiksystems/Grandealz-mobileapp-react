@@ -12,7 +12,6 @@ import Toast from 'react-native-simple-toast';
 
 const Playnowquiz = (props) => {
     const [questions, setQustions] = useState(props.route.params);
-
     const navigation = useNavigation();
     const [answer, setAnswer] = useState<any>('')
     const [quesno, setQuesNo] = useState(0);
@@ -71,9 +70,9 @@ const Playnowquiz = (props) => {
                     .then((originalPromiseResult) => {
                         console.log("Response for allocate........", originalPromiseResult)
                         if (originalPromiseResult === undefined) {
-                            Toast.show( 'Something went wrong!, Please try again later', Toast.LONG, { backgroundColor: 'red' });
+                            Toast.show('Something went wrong!, Please try again later', Toast.LONG, { backgroundColor: 'red' });
                         }
-                        else if (originalPromiseResult.status === "200") {
+                        else if (originalPromiseResult.message === "Tickets already allocated") {
                             navigation.replace("Playnowquizsubmit", originalPromiseResult.data)
                         }
                     })
@@ -81,7 +80,7 @@ const Playnowquiz = (props) => {
             }
             else {
                 setButtonOptionOne(true), setButtonOptionTwo(true), setButtonOptionThree(true), setButtonOptionFour(true)
-                Toast.show(   "Oops! Your answer is wrong",Toast.LONG, { backgroundColor: 'red' });
+                Toast.show("Oops! Your answer is wrong", Toast.LONG, { backgroundColor: 'red' });
                 setTryAgainState(false)
                 setButtonSubmit(true)
             }
@@ -139,19 +138,19 @@ const Playnowquiz = (props) => {
                         <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-Regular", color: "#616161" }}>{questions[quesno].options[3]}</Text>
                     </Button>
 
-                    {buttonSubmit ?null :
-                    <Button disabled={buttonSubmit} style={{ ...Styles.options, borderColor: COLORS.black }} onPress={() => { validateAnswer() }}>
-                        <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-Regular", color: "#0a0127" }}>Submit</Text>
-                    </Button>
+                    {buttonSubmit ? null :
+                        <Button disabled={buttonSubmit} style={{ ...Styles.options, borderColor: COLORS.black }} onPress={() => { validateAnswer() }}>
+                            <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-Regular", color: "#0a0127" }}>Submit</Text>
+                        </Button>
                     }
                     <View style={{ height: "3%" }}>
                         {(error) ? <Text style={{ fontFamily: "Lexend-Regular", fontSize: RFValue(12), textAlign: "center", color: COLORS.element }}>{error}</Text> : null}
                     </View>
-                    {!tryAgainState ? 
-                    <Button disabled={tryAgainState} onPress={() => tryAgainFunction()}>
-                        <Text style={{ fontSize: RFValue(14), textAlign: "center", color: COLORS.element, fontFamily: "Lexend-SemiBold" }}>Try Again</Text>
-                    </Button>
-                    :null}
+                    {!tryAgainState ?
+                        <Button disabled={tryAgainState} onPress={() => tryAgainFunction()}>
+                            <Text style={{ fontSize: RFValue(14), textAlign: "center", color: COLORS.element, fontFamily: "Lexend-SemiBold" }}>Try Again</Text>
+                        </Button>
+                        : null}
                 </View>
             </View>
         </SafeAreaView >

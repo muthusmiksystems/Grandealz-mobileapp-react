@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -25,29 +25,34 @@ import { unwrapResult } from '@reduxjs/toolkit';
 import Toast from 'react-native-simple-toast';
 import { resendNum } from "../services/changeNumber";
 
+let timer = () => { };
 
 const OtpPage = ({ route }) => {
-  
-  const mobile=route.params;
-  console.log(mobile.value,"mobile number ");
-  
-  const [otp,setOtp]=useState("");
-  const dispatch=useDispatch();
+
+  const mobile = route.params;
+  //console.log(mobile.value,"mobile number ");
+
+  const [otp, setOtp] = useState("");
+  const [time, setTime] = useState(90);
+  const timerRef = useRef(time);
+
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const containerStyle = {
     fontFamily: "Lexend-Regular",
     borderBottomWidth: 3,
     width: horizontalScale(40),
-    marginTop:verticalScale(9)
+    marginTop: verticalScale(9)
   }
-  const Resend=async()=>{
+  const Resend = async () => {
     let dataChange = await resendNum().then((originalPromiseResult) => {
-     console.log(originalPromiseResult);
+      console.log(originalPromiseResult);
       if (originalPromiseResult.status === "200") {
         Toast.show(
           originalPromiseResult.message,
           Toast.LONG,
         );
+        start();
       }
       else if (originalPromiseResult.status === "400") {
         console.log("orginal", originalPromiseResult)
@@ -56,38 +61,55 @@ const OtpPage = ({ route }) => {
           Toast.SHORT,
         );
       }
-      else{
+      else {
         Toast.show(
-         "something went Wrong please try again later",
+          "something went Wrong please try again later",
           Toast.SHORT,
         );
       }
     })
   }
+  const startTimer = () => {
+    timer = setTimeout(() => {
+      if (time <= 0) {
+        clearTimeout(timer);
+        return false;
+      }
+      setTime(time - 1);
+    }, 1000)
+  }
+
+  useEffect(() => {
+    startTimer();
+    return () => clearTimeout(timer);
+  });
+
+  const start = () => {
+    setTime(60);
+    clearTimeout(timer);
+    startTimer();
+  }
 
 
-  const handleSubmit=()=>{
-    const Data={
-      "otp":otp,
+  const handleSubmit = () => {
+    const Data = {
+      "otp": otp,
     }
-    console.log("data for opt verify...........",otp.length);
-    
-    if(otp.length>3){
-    dispatch(VerifyHandler(Data)).then(unwrapResult)
-    .then((originalPromiseResult) => {
-       console.log("successfully returned to login with response ", originalPromiseResult);
-         if (originalPromiseResult.status==="200") {
-             const param = originalPromiseResult.data;
-             Toast.show(  originalPromiseResult.message, Toast.LONG, { backgroundColor: 'red' });
-             
-             navigation.navigate("login")
-        } else {
-          
-           Toast.show("Invalid OTP", Toast.LONG, { backgroundColor: 'red' });
-        }
-    })
+    console.log("data for opt verify...........", otp.length);
+
+    if (otp.length > 3) {
+      dispatch(VerifyHandler(Data)).then(unwrapResult)
+        .then((originalPromiseResult) => {
+          console.log("successfully returned to login with response ", originalPromiseResult);
+          if (originalPromiseResult.status === "200") {
+            const param = originalPromiseResult.data;
+            Toast.show(originalPromiseResult.message, Toast.LONG, { backgroundColor: 'red' });
+            navigation.navigate("login")
+          } else {
+            Toast.show("Invalid OTP", Toast.LONG, { backgroundColor: 'red' });
+          }
+        })
     }
-    
   }
   return (
     <SafeAreaView style={{ width: "100%", height: "100%", backgroundColor: "#f1f1f1" }}>
@@ -96,47 +118,51 @@ const OtpPage = ({ route }) => {
         backgroundColor="#0a0127"
       />
       <View style={styles.subdivOne}>
-      <TouchableOpacity onPress={() => navigation.goBack()} style={{ flexDirection: "column", marginTop: verticalScale(18), marginLeft: horizontalScale(18) }}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={{ flexDirection: "column", marginTop: verticalScale(18), marginLeft: horizontalScale(18) }}>
           <EntypoIcons name="chevron-left" size={30} color={"white"} />
         </TouchableOpacity>
-        <View style={{flexDirection:"column",marginLeft:horizontalScale(78),marginTop:verticalScale(45)}}>
-        <Image
-          source={loginicon}
-          resizeMode='contain'
-          style={{
-            height:verticalScale(150),
-            width:horizontalScale(130)
-           }}
-        
-        />
+        <View style={{ flexDirection: "column", marginLeft: horizontalScale(78), marginTop: verticalScale(45) }}>
+          <Image
+            source={loginicon}
+            resizeMode='contain'
+            style={{
+              height: verticalScale(150),
+              width: horizontalScale(130)
+            }}
+          />
         </View>
         {/* <Text style={{ fontSize: 35, color: "white", fontFamily: "Lexend-Regular" }}>Grandealz</Text> */}
       </View>
       <View style={styles.subdivTwo}>
-        <Text style={{ fontSize:  RFValue(26), color: "black", textAlign: "center", fontFamily: "Lexend-SemiBold", marginTop: verticalScale(14) }}>Confirm OTP</Text>
+        <Text style={{ fontSize: RFValue(26), color: "black", textAlign: "center", fontFamily: "Lexend-SemiBold", marginTop: verticalScale(14) }}>Confirm OTP</Text>
         <View style={{ alignItems: "center" }}>
           <Text style={{ width: horizontalScale(300), textAlign: "justify", fontSize: RFValue(12), color: "black", marginTop: verticalScale(27), fontFamily: "Lexend-Regular" }}>
             Please  enter  the  verification  code  that  we  have  sent  to  the  mobile  number +91 {mobile.value}
-          </Text> 
+          </Text>
           <OTPTextView
-           
             textInputStyle={containerStyle}
             inputCount={4}
             inputCellLength={1}
             tintColor={"#0a0127"}
-            handleTextChange={(text) => {setOtp(text) }}
+            handleTextChange={(text) => { setOtp(text) }}
           />
-          <View style={{flexDirection:"row",marginTop:"2%"}}>
-          <Text style={{ color: "black", fontFamily: "Lexend-Regular",fontSize:RFValue(13) }}>Time Remaining 2:00</Text>
-          <TouchableOpacity><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular",fontSize:RFValue(13) }} onPress={()=>{Resend()}}>     Resend</Text></TouchableOpacity>
+          <View style={{ flexDirection: "row", marginTop: "2%" }}>
+            <Text style={{ color: "black", fontFamily: "Lexend-Regular", fontSize: RFValue(13) }}>Time Remaining : {time}
+            </Text>
+            { time === 0 ?
+            <TouchableOpacity >
+              <Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", fontSize: RFValue(13),marginStart:"10%" }} onPress={() => { Resend() }}>Resend
+              </Text>
+              </TouchableOpacity>:
+              null}
           </View>
         </View>
-        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(223), padding: "4%" }}  onPress={() => { handleSubmit() }}>
-          <Text style={{ textAlign: "center", fontSize:RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Verify</Text>
+        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(223), padding: "4%" }} onPress={() => { handleSubmit() }}>
+          <Text style={{ textAlign: "center", fontSize: RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Verify</Text>
         </TouchableOpacity>
-        <View style={{ flexDirection: "row", marginTop: "7%", alignSelf: "center",paddingBottom:verticalScale(52)}}>
+        <View style={{ flexDirection: "row", marginTop: "7%", alignSelf: "center", paddingBottom: verticalScale(52) }}>
           <TouchableOpacity onPress={() => navigation.navigate("ChangeMobileNumber")} style={{ flexDirection: "column" }}>
-            <Text style={{ color: "#E70736", fontFamily: "Lexend-Regular",fontSize:RFValue(13)}}>Change Mobile Number</Text></TouchableOpacity>
+            <Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", fontSize: RFValue(13) }}>Change Mobile Number</Text></TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>

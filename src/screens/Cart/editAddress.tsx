@@ -94,11 +94,11 @@ const EditAddress = ({ route }) => {
     const [stateError, setStateError] = useState("")
     const [cityData, setCityData] = useState();
     const [stateData, setStateData] = useState();
-    const [countrycode,setCountryCode]=useState("")
+    const [countrycode, setCountryCode] = useState("")
     const [countryData, setCountryData] = useState();
     const [optionHo, setOptionHo] = useState(false)
     const [optionWo, setOptionWo] = useState(false)
-    const [addressError,setAddressError]=useState();
+    const [addressError, setAddressError] = useState();
     const navigation = useNavigation();
 
     const addresslist = useSelector((state) => state.AddressHandle.data);
@@ -144,29 +144,54 @@ const EditAddress = ({ route }) => {
 
         //firstName
         let errorCount = 0;
-        if (Name.length <= 3 || Name === undefined) {
-            setErrorName('Name is Required')
+        if (Name.length < 3) {
+            setErrorName('Please enter maximum 15 characters for Name (Minimum can be 2) as someone has name like Jo (alphabets only)')
+            errorCount++;
+        }
+        if (Name.length < 1) {
+            setErrorName('Please enter Name')
+            errorCount++;
+        }
+        if (address.length <= 1) {
+            setErrorAddress('Please enter Address')
             errorCount++;
         }
 
-        if (address.length <= 3 || address === undefined) {
-            setErrorAddress('address is required')
-            errorCount++;
-            console.log(errorCount, "serambhdvhidv")
-        }
-
-        if (pincode.length < 5) {
-            setErrorPin('please enter  valid pincode')
+        if (address.length >= 60) {
+            setErrorAddress('Please enter maximum 60 characters for Address')
             errorCount++;
         }
-
-        if (locality.length <= 3) {
+        if (pincode.length < 6) {
+            setErrorPin('Please enter Pincode')
+            errorCount++;
+        }
+        if (locality.length > 20) {
+            setErrorLocality("Please enter maximum 20 characters for Locality/Town")
+            errorCount++;
+        }
+        if (locality.length <= 2) {
             setErrorLocality('Please enter Locality')
             errorCount++;
         }
 
         if (phone.length < 10) {
-            setErrorPhone('please enter valid Number')
+            setErrorPhone('Please enter at least 10 digits for Mobile Number')
+            errorCount++;
+        }
+        if (phone.length < 1) {
+            setErrorPhone("Please enter Mobile No")
+            errorCount++;
+        }
+        if (countryValue === null) {
+            setCountryError('Please Choose Country')
+            errorCount++;
+        }
+        if (cityValue === null) {
+            setCityError('Please Choose City')
+            errorCount++;
+        }
+        if (stateValue === null) {
+            setStateError('Please Choose state')
             errorCount++;
         }
         if (addressType === undefined) {
@@ -181,21 +206,30 @@ const EditAddress = ({ route }) => {
             if (Name.length > 3) {
                 setErrorName('');
             }
-            if (address.length > 3) {
+            if (address.length > 1) {
                 setErrorAddress('');
             }
             if (pincode.length > 5) {
                 setErrorPin('');
             }
-            if (locality.length > 3) {
+            if (locality.length > 2) {
                 setErrorLocality('');
             }
             if (phone.length > 9) {
                 setErrorPhone('');
             }
-            if (addressType != undefined ) {
+            if (countryValue != null) {
+                setCountryError('');
+            }
+            if (cityValue != null) {
+                setCityError('');
+            }
+            if (stateValue != null) {
+                setStateError('');
+            }
+            if (addressType != undefined) {
                 setAddressError('');
-           }
+            }
         }
         else {
             return false;
@@ -237,13 +271,13 @@ const EditAddress = ({ route }) => {
                 .then((originalPromiseResult) => {
                     console.log("success samuvel you did itdone", originalPromiseResult);
                     if (originalPromiseResult.message === "saved successfully") {
-                        Toast.show(  'Successfully added', Toast.LONG, { backgroundColor: 'red' });
-                        
+                        Toast.show('Successfully added', Toast.LONG, { backgroundColor: 'red' });
+
                         dispatch(addressListHandler());
                         navigation.navigate("Address", { type: typeUser });
                     }
                     else {
-                        Toast.show(   'Something went wrong!', Toast.LONG, { backgroundColor: 'red' });
+                        Toast.show('Something went wrong!', Toast.LONG, { backgroundColor: 'red' });
                     }
                 })
             console.log(edaddresses, "Personal Details Country....");
@@ -352,10 +386,13 @@ const EditAddress = ({ route }) => {
                         />
                     </Pressable>
                 </View>
-                <View>
-                    {errorName ?
-                        <Text style={styles.ErrorText}>{errorName}</Text> : null}
-                </View>
+                {errorName ?
+                    <View style={{ height: "3%" }}>
+                        {errorName ?
+                            <Text style={styles.ErrorText}>{errorName}</Text> : null}
+                    </View> :
+                    null
+                }
                 <View style={{ marginHorizontal: "3%" }}>
                     <Pressable onPressIn={() => handleBox()}>
                         <TextInput
@@ -369,10 +406,11 @@ const EditAddress = ({ route }) => {
                         />
                     </Pressable>
                 </View>
-                <View>
-                    {errorPhone ?
-                        <Text style={styles.ErrorText}>{errorPhone}</Text> : null}
-                </View>
+                {errorPhone ?
+                    <View style={{ height: "3%" }}>
+                        {errorPhone ?
+                            <Text style={styles.ErrorText}>{errorPhone}</Text> : null}
+                    </View> : null}
                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "3%" }}>ADDRESS</Text>
                 <View style={{ marginHorizontal: "3%", marginVertical: "2%" }}>
                     <Pressable onPressIn={() => handleBox()}>
@@ -387,14 +425,22 @@ const EditAddress = ({ route }) => {
                         />
                     </Pressable>
                 </View>
-                <View>
-                    {errorPin ?
-                        <Text style={styles.ErrorText}>{errorPin}</Text> : null}
-                </View>
+                {errorPin ?
+                    <View style={{ height: "3%" }}>
+                        {errorPin ?
+                            <Text style={styles.ErrorText}>{errorPin}</Text> : null}
+                    </View> :
+                    <View style={{ height: "1%" }}>
+                        {errorPin ?
+                            <Text style={styles.ErrorText}>{errorPin}</Text> : null}
+                    </View>
+                }
                 <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
                     <Pressable onPressIn={() => handleBox()}>
                         <TextInput
                             keyboardType={"default"}
+                            multiline={true}
+                            numberOfLines={4}
                             placeholder="Address (House No, Building, street, Area)*"
                             value={address}
                             placeholderTextColor={COLORS.gray}
@@ -403,10 +449,12 @@ const EditAddress = ({ route }) => {
                         />
                     </Pressable>
                 </View>
-                <View>
-                    {errorAddress ?
-                        <Text style={styles.ErrorText}>{errorAddress}</Text> : null}
-                </View>
+                {errorAddress ?
+                    <View style={{ height: "3%" }}>
+                        {errorAddress ?
+                            <Text style={styles.ErrorText}>{errorAddress}</Text> : null}
+                    </View>
+                    : null}
                 <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
                     <Pressable onPressIn={() => handleBox()}>
                         <TextInput
@@ -420,10 +468,11 @@ const EditAddress = ({ route }) => {
                         />
                     </Pressable>
                 </View>
-                <View>
-                    {errorLocality ?
-                        <Text style={styles.ErrorText}>{errorLocality}</Text> : null}
-                </View>
+                {errorLocality ?
+                    <View style={{height:"3%"}}>
+                        {errorLocality ?
+                            <Text style={styles.ErrorText}>{errorLocality}</Text> : null}
+                    </View> :null }
                 <View style={{ flexDirection: "row", marginHorizontal: "2%" }}>
                     <View style={{ flexDirection: "column", width: "48.5%" }}>
                         <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
@@ -440,7 +489,7 @@ const EditAddress = ({ route }) => {
                                 onChange={item => { setCountryValue(item.isoCode), console.log("dbdgbdfbdg..........", item), setCountryData(item) }}
                             />
                         </View>
-                        <View>
+                        <View style={{height:"1%"}}>
                             {countryError ?
                                 <Text style={styles.ErrorText}>{countryError}</Text> : null}
                         </View>
@@ -460,7 +509,7 @@ const EditAddress = ({ route }) => {
                                 placeholder={(stateses) ? stateses : "State*"}
                             />
                         </View>
-                        <View>
+                        <View style={{height:"1%"}}>
                             {stateError ?
                                 <Text style={styles.ErrorText}>{stateError}</Text> : null}
                         </View>
@@ -481,14 +530,14 @@ const EditAddress = ({ route }) => {
                     />
                 </View>
 
-                <View>
+                <View style={{height:"1%"}}>
                     {cityError ?
                         <Text style={styles.ErrorText}>{cityError}</Text> : null}
                 </View>
 
                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "3%" }}>SAVE ADDRESS AS</Text>
                 <View style={{ marginVertical: "2%", flexDirection: "row", width: "89%", alignSelf: "center", borderRadius: 10, backgroundColor: COLORS.white }}>
-                    
+
                     <TouchableOpacity disabled={optionHo} style={{ paddingVertical: "5%", marginHorizontal: "5%", }} onPress={() => setAddressType(0)}>
                         <Text style={{ ...styles.switch, backgroundColor: (addressType == 0) ? COLORS.element : "white", color: (addressType == 0) ? COLORS.white : COLORS.gray }}>Home</Text>
                     </TouchableOpacity>
@@ -496,10 +545,10 @@ const EditAddress = ({ route }) => {
                         <Text style={{ ...styles.switch, backgroundColor: (addressType == 1) ? COLORS.element : "white", color: (addressType == 1) ? COLORS.white : COLORS.gray }}>Work</Text>
                     </TouchableOpacity>
                 </View>
-                <View>
-                        {addressError ?
-                            <Text style={styles.ErrorText}>{addressError}</Text> : null}
-                    </View>
+                <View style={{height:"1%"}}>
+                    {addressError ?
+                        <Text style={styles.ErrorText}>{addressError}</Text> : null}
+                </View>
                 <View style={{ marginHorizontal: "2%", marginBottom: "2%", padding: "2%", flexDirection: "row", width: "90%", borderRadius: 10, backgroundColor: COLORS.white, alignSelf: "center" }}>
                     <View style={{ marginLeft: "-4%" }}><CheckBoxes /></View>
                     <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, paddingHorizontal: "5%", alignSelf: "center" }}>Make this my default address</Text>
@@ -550,15 +599,15 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         borderWidth: 1,
         borderColor: "black",
-        color:COLORS.element
+        color: COLORS.element
     },
     ErrorText: {
-        marginStart:"7%",
+        marginStart: "7%",
         color: "red",
         ...FONTS.lexendregular,
         fontSize: RFValue(10),
         textAlign: "left",
-        
+
     },
     dropText: {
         ...FONTS.lexendregular,

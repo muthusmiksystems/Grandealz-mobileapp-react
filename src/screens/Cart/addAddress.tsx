@@ -49,7 +49,7 @@ const AddAddress = ({ route }) => {
     const amount = route.params.amount;
 
     const CheckBoxes = () => {
-        
+
         return (
             <View style={{ flexDirection: "row", left: horizontalScale(17) }}>
                 <CheckBox
@@ -101,15 +101,15 @@ const AddAddress = ({ route }) => {
         // console.log("address type is ", addresslist.length)
         // { addressType / 2 != 1 ? setOption(false) : setOption(true) }
         if (addresslist) {
-           
+
             if (addresslist.length > 1) {
                 setOption(true)
             }
-            if (addresslist[0]&&addresslist[0].address_type === "Home") {
+            if (addresslist[0] && addresslist[0].address_type === "Home") {
                 setOptionHo(true)
                 console.log("address typr vandhu home so ", optionHo)
             }
-            if(addresslist[0]&&addresslist[0].address_type === "Work"){
+            if (addresslist[0] && addresslist[0].address_type === "Work") {
                 setOptionWo(true)
             }
         }
@@ -121,41 +121,54 @@ const AddAddress = ({ route }) => {
 
         //firstName
         let errorCount = 0;
-        if (Name.length <= 3 || Name === undefined) {
-            setErrorName('Name is Required')
+        if(Name.length<3){
+            setErrorName('Please enter maximum 15 characters for Name (Minimum can be 2) as someone has name like Jo (alphabets only)')
+            errorCount++;
+        }
+        if (Name.length<1) {
+            setErrorName('Please enter Name')
+            errorCount++;
+        }
+        if (address.length <= 1 ) {
+            setErrorAddress('Please enter Address')
             errorCount++;
         }
 
-        if (address.length <= 3 || address === undefined) {
-            setErrorAddress('address is required')
-            errorCount++;
-            console.log(errorCount, "serambhdvhidv")
-        }
-
-        if (pincode.length < 5) {
-            setErrorPin('please enter  valid pincode')
+        if (address.length >= 60 ) {
+            setErrorAddress('Please enter maximum 60 characters for Address')
             errorCount++;
         }
-
-        if (locality.length <= 3) {
+        if (pincode.length < 6) {
+            setErrorPin('Please enter Pincode')
+            errorCount++;
+        }
+        if(locality.length >20){
+        setErrorLocality("Please enter maximum 20 characters for Locality/Town")
+        errorCount++;
+        }
+        if (locality.length <= 2 ){
             setErrorLocality('Please enter Locality')
             errorCount++;
         }
 
-        if (phone.length < 10) {
-            setErrorPhone('please enter valid Number')
+        if (phone.length < 10) {         
+            setErrorPhone('Please enter at least 10 digits for Mobile Number')
+            errorCount++;
+        }
+        if (phone.length<1){
+            setErrorPhone( "Please enter Mobile No")
             errorCount++;
         }
         if (countryValue === null) {
-            setCountryError('country is required')
+            setCountryError('Please Choose Country')
             errorCount++;
         }
         if (cityValue === null) {
-            setCityError('City is required')
+            setCityError('Please Choose City')
             errorCount++;
         }
         if (stateValue === null) {
-            setStateError('State is required')
+            setStateError('Please Choose state')
             errorCount++;
         }
         if (addressType === undefined) {
@@ -170,13 +183,13 @@ const AddAddress = ({ route }) => {
             if (Name.length > 3) {
                 setErrorName('');
             }
-            if (address.length > 3) {
+            if (address.length >1) {
                 setErrorAddress('');
             }
             if (pincode.length > 5) {
                 setErrorPin('');
             }
-            if (locality.length > 3) {
+            if (locality.length >2 ) {
                 setErrorLocality('');
             }
             if (phone.length > 9) {
@@ -191,9 +204,9 @@ const AddAddress = ({ route }) => {
             if (stateValue != null) {
                 setStateError('');
             }
-            if (addressType != undefined ) {
+            if (addressType != undefined) {
                 setAddressError('');
-           }
+            }
         }
         else {
             return false;
@@ -238,14 +251,14 @@ const AddAddress = ({ route }) => {
             let calling = await AddAddressHandle(payload);
             console.log(calling, "Personal Details Country....");
             if (calling === "Success") {
-                Toast.show( 'Successfully added', Toast.LONG, { backgroundColor: 'red' });
-                   
+                Toast.show('Successfully added', Toast.LONG, { backgroundColor: 'red' });
+
                 dispatch(addressListHandler());
-                console.log("...........",typeUser,amount )
-                navigation.navigate("Address", { type: typeUser,"amount":amount });
+                console.log("...........", typeUser, amount)
+                navigation.navigate("Address", { type: typeUser, "amount": amount });
             }
             else {
-                Toast.show(  'Something went wrong!', Toast.LONG, { backgroundColor: 'red' });
+                Toast.show('Something went wrong!', Toast.LONG, { backgroundColor: 'red' });
             }
 
         }
@@ -343,14 +356,14 @@ const AddAddress = ({ route }) => {
             {option ?
                 <OrderEmpty value={"Home and Work address available "} />
                 :
-                <ScrollView style={{ height: "80%" }}>
+                <ScrollView style={{ height: "100%",paddingBottom:"10%" }}>
                     <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "5%" }}>CONTACT DETAILS</Text>
                     <View style={{ marginHorizontal: "3%", marginVertical: "2%" }}>
                         <Pressable onPressIn={() => handleBox()}>
                             <TextInput
                                 placeholder="Name*"
                                 value={Name}
-                                maxLength={20}
+                                maxLength={16}
                                 placeholderTextColor={COLORS.gray}
                                 onChangeText={(text: String) => setName(text)}
                                 //onChangeText={e => { handleChange(e, "Name"), setErrorName(""), setName(e) }}
@@ -358,11 +371,14 @@ const AddAddress = ({ route }) => {
                             />
                         </Pressable>
                     </View>
-                    <View>
-                        {errorName ?
-                            <Text style={styles.ErrorText}>{errorName}</Text> : null}
-                    </View>
-                    <View style={{ marginHorizontal: "3%" }}>
+                    {errorName ?
+                        <View style={{ height: "3%" }}>
+                            {errorName ?
+                                <Text style={styles.ErrorText}>{errorName}</Text> : null}
+                        </View> :
+                        null
+                    }
+                    <View style={{ marginHorizontal: "3%",marginVertical: "2%" }}>
                         <Pressable onPressIn={() => handleBox()}>
                             <TextInput
                                 keyboardType={"phone-pad"}
@@ -376,10 +392,11 @@ const AddAddress = ({ route }) => {
                             />
                         </Pressable>
                     </View>
-                    <View>
+                    {errorPhone ?
+                    <View style={{height:"3%"}}>
                         {errorPhone ?
                             <Text style={styles.ErrorText}>{errorPhone}</Text> : null}
-                    </View>
+                    </View> : null}
                     <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "3%" }}>ADDRESS</Text>
                     <View style={{ marginHorizontal: "3%", marginVertical: "2%" }}>
                         <Pressable onPressIn={() => handleBox()}>
@@ -395,27 +412,36 @@ const AddAddress = ({ route }) => {
                             />
                         </Pressable>
                     </View>
-                    <View>
-                        {errorPin ?
+                    {errorPin ?
+                        <View style={{ height: "3%" }}>
+                           {errorPin ?
                             <Text style={styles.ErrorText}>{errorPin}</Text> : null}
-                    </View>
+                        </View> :
+                        <View style={{ height: "1%" }}>
+                           {errorPin ?
+                                 <Text style={styles.ErrorText}>{errorPin}</Text> : null}
+                        </View>
+                    }
                     <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
                         <Pressable onPressIn={() => handleBox()}>
                             <TextInput
                                 keyboardType={"default"}
+                                multiline = {true}
+                                numberOfLines = {4}
                                 placeholder="Address (House No, Building, street, Area)*"
                                 value={address}
                                 placeholderTextColor={COLORS.gray}
                                 onChangeText={(text: String) => setAddress(text)}
-                                //onChangeText={e => { handleChange(e, "address"), setErrorAddress(""), setAddress(e) }}
                                 style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(14), color: "black" }}
                             />
                         </Pressable>
                     </View>
-                    <View>
+                    {errorAddress ?
+                    <View style={{height:"3%"}}>
                         {errorAddress ?
                             <Text style={styles.ErrorText}>{errorAddress}</Text> : null}
                     </View>
+                    :null}
                     <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
                         <Pressable onPressIn={() => handleBox()}>
                             <TextInput
@@ -430,10 +456,11 @@ const AddAddress = ({ route }) => {
                             />
                         </Pressable>
                     </View>
-                    <View>
+                    {errorLocality ?
+                    <View style={{height:"3%"}}>
                         {errorLocality ?
                             <Text style={styles.ErrorText}>{errorLocality}</Text> : null}
-                    </View>
+                    </View> :null }
                     <View style={{ flexDirection: "row", marginHorizontal: "2%" }}>
                         <View style={{ flexDirection: "column", width: "48.5%" }}>
                             <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
@@ -446,11 +473,11 @@ const AddAddress = ({ route }) => {
                                     itemTextStyle={themeForList}
                                     labelField="name"
                                     valueField="isoCode"
-                                    onChange={item => { setCountryValue(item.isoCode), console.log("dbdgbdfbdg..........", item), setCountryData(item) }}
+                                    onChange={item => { setCountryValue(item.isoCode),  setCountryData(item) }}
                                     placeholder={(countryValue) ? countryValue : "Country*"}
                                 />
                             </View>
-                            <View>
+                            <View style={{height:"2%"}}>
                                 {countryError ?
                                     <Text style={styles.ErrorText}>{countryError}</Text> : null}
                             </View>
@@ -466,11 +493,11 @@ const AddAddress = ({ route }) => {
                                     itemTextStyle={themeForList}
                                     labelField="name"
                                     valueField="name"
-                                    onChange={item => { setStateValue(item.name), setStateIso(item.isoCode), console.log("dbdgbdfbdg..........", item), setStateData(item) }}
+                                    onChange={item => { setStateValue(item.name), setStateIso(item.isoCode),setStateData(item) }}
                                     placeholder={(stateValue) ? stateValue : "State*"}
                                 />
                             </View>
-                            <View>
+                            <View style={{height:"2%"}}>
                                 {stateError ?
                                     <Text style={styles.ErrorText}>{stateError}</Text> : null}
                             </View>
@@ -487,12 +514,12 @@ const AddAddress = ({ route }) => {
 
                             labelField="name"
                             valueField="name"
-                            onChange={item => { setCityValue(item.name), console.log("dbdgbdfbdg..........", item), setCityData(item) }}
+                            onChange={item => { setCityValue(item.name), setCityData(item) }}
                             placeholder={(cityValue) ? cityValue : "Select City"}
                         />
                     </View>
 
-                    <View>
+                    <View style={{height:"2%"}}>
                         {cityError ?
                             <Text style={styles.ErrorText}>{cityError}</Text> : null}
                     </View>
@@ -500,7 +527,7 @@ const AddAddress = ({ route }) => {
                     <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "3%" }}>SAVE ADDRESS AS</Text>
                     <View style={{ marginVertical: "2%", flexDirection: "row", width: "89%", alignSelf: "center", borderRadius: 10, backgroundColor: COLORS.white }}>
                         <>
-                        { console.log(optionHo,"option data ",optionWo)}
+                           
                             <TouchableOpacity disabled={optionHo} style={{ paddingVertical: "5%", marginHorizontal: "5%", }} onPress={() => setAddressType(0)}>
                                 <Text style={{ ...styles.switch, backgroundColor: (addressType == 0) ? COLORS.element : "white", color: (addressType == 0) ? COLORS.white : COLORS.gray }}>Home</Text>
                             </TouchableOpacity>
@@ -509,7 +536,7 @@ const AddAddress = ({ route }) => {
                             </TouchableOpacity>
                         </>
                     </View>
-                    <View>
+                    <View style={{height:"2%"}}>
                         {addressError ?
                             <Text style={styles.ErrorText}>{addressError}</Text> : null}
                     </View>
@@ -560,7 +587,7 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         borderWidth: 1,
         borderColor: "black",
-        color:COLORS.element
+        color: COLORS.element
     },
     dropText: {
         ...FONTS.lexendregular,
@@ -576,9 +603,7 @@ const styles = StyleSheet.create({
         color: "red",
         ...FONTS.lexendregular,
         fontSize: RFValue(10),
-        textAlign: "left",
-        marginStart: verticalScale(20),
-        width: horizontalScale(300)
+        marginStart: verticalScale(25),
     },
 
 })

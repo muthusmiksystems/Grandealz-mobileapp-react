@@ -127,7 +127,7 @@ const CartProducts = ({cartval,changer,setChanger,swith}) => {
                     </>
                 )
             })}
-            {(cartitem) ? (
+            
                 <View style={{ flexDirection: "row", width: "100%", borderBottomStartRadius: 10, borderBottomEndRadius: 10, backgroundColor: COLORS.element, paddingBottom: RFValue(12) }}>
                     <View style={{ marginTop: RFValue(12), marginLeft: "2%" }}>
                         <ToggleSwitch
@@ -138,9 +138,9 @@ const CartProducts = ({cartval,changer,setChanger,swith}) => {
                             onToggle={isOn => { setToggle(!toggle),swith(!toggle)}}
                         />
                     </View>
-                    <Text style={{ color: COLORS.white, fontSize: moderateScale(14), ...FONTS.lexendregular, marginTop: RFValue(12), marginLeft: RFValue(5) }}>Donate Product(s) & Double Your Tickets</Text>
+                    <Text style={{ color: COLORS.white, fontSize: moderateScale(12), ...FONTS.lexendregular, marginTop: RFValue(12), marginLeft: RFValue(5) }}>Donate Product(s) & Double Your Tickets</Text>
                 </View>
-            ) : null}
+           
         </View>
     );
 }

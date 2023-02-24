@@ -115,11 +115,7 @@ const PersonalDetails = (props) => {
         //firstName
         let errorCount = 0;
         if (firstName.length === 0 || firstName === undefined) {
-            setFirstNameError('FirstName is mandatory')
-            errorCount++;
-        }
-        else if (firstName.length <= 2) {
-            setFirstNameError('FirstName should have minimum 3 characters')
+            setFirstNameError('Please select First Name')
             errorCount++;
         }
         else {
@@ -127,18 +123,14 @@ const PersonalDetails = (props) => {
         }
         //lastName
         if (lastName.length === 0 || lastName === undefined) {
-            setLastNameError('LastName is mandatory')
-            errorCount++;
-        }
-        else if (lastName.length <= 2) {
-            setLastNameError('LastName should have minimum 3 characters')
+            setLastNameError('Please select Last Name')
             errorCount++;
         }
         else {
             setLastNameError('')
         }
         if (checked.length == 0) {
-            setGenderError('Please select your gender')
+            setGenderError('Please select Gender')
             errorCount++;
         }
         else {
@@ -146,14 +138,14 @@ const PersonalDetails = (props) => {
         }
         //Nationality
         if (countryValue.length == 0) {
-            setCountryError('Nationality is required')
+            setCountryError('Please select Nationality')
             errorCount++;
         }
         else {
             setCountryError('')
         }
         if (countryResidenceValue.length == 0) {
-            setCountryResidenceError('Country of residence is required')
+            setCountryResidenceError('Please select Country of residence')
             errorCount++;
         }
         else {
@@ -161,7 +153,7 @@ const PersonalDetails = (props) => {
         }
         //Date of birth
         if (date === null) {
-            setDateError('Date of birth is required')
+            setDateError('Please select date of birth')
             errorCount++;
         }
         else {

@@ -50,12 +50,12 @@ const Winners = (filters) => {
 
                                 <Text style={{ fontSize: RFValue(15), color: COLORS.topBackground, ...FONTS.lexendsemibold, paddingTop: "3%", paddingHorizontal: "3.5%" }}>CONGRATULATIONS </Text>
                                 <Text style={{ fontSize: RFValue(13), color: COLORS.textHeader, marginHorizontal: "1%", ...FONTS.lexendregular, paddingHorizontal: "3%" }}>
-                                    <Text style={{ fontSize: RFValue(16), color: COLORS.textHeader, ...FONTS.lexendsemibold, paddingHorizontal: "3%" }}>{item.winner.user.first_name} </Text>
+                                    <Text style={{ fontSize: RFValue(16), color: COLORS.textHeader, ...FONTS.lexendsemibold, paddingHorizontal: "3%" }}>{item.winner.user.first_name} {item.winner.user.last_name} </Text>
                                     on Winning</Text>
                                 <Text style={{ fontSize: RFValue(13), color: COLORS.textHeader, ...FONTS.lexendsemibold, marginHorizontal: "1%", paddingBottom: "1%", paddingHorizontal: "3%" }}>1 entry our {item.draw_title}</Text>
                                 <Text style={{ fontSize: RFValue(13), color: COLORS.black, marginHorizontal: "1%", ...FONTS.lexendregular, paddingHorizontal: "3%" }}>Coupon no. {item.winner.draw_ticket}</Text>
                             <Text style={{ fontSize: RFValue(10), color: COLORS.gray, paddingTop: "3%", ...FONTS.lexendregular, marginHorizontal: "1%",paddingHorizontal: "3.5%" }}>Announced on</Text>
-                                <Text style={{ fontSize: RFValue(10), color: COLORS.gray, ...FONTS.lexendregular, marginHorizontal: "1%", paddingHorizontal: "3.5%" }}>August 07.2022 8:05 PM</Text>
+                                <Text style={{ fontSize: RFValue(10), color: COLORS.gray, ...FONTS.lexendregular, marginHorizontal: "1%", paddingHorizontal: "3.5%" }}>August 07,2022 8:05 PM</Text>
                             </View>
                         </TouchableOpacity>
                     </View>

@@ -74,37 +74,35 @@ const Signup = () => {
     console.log("values", firstName, lastName, phone, email, password);
     let errorCount = 0;
     console.log("satrday", (/^[A-Za-z]+$/i.test(lastName)));
-    if (firstName.length <= 3 || firstName === undefined || firstName.includes(' ')) {
-      setErrorFirst('Please Enter First Name without spacing ')
+    if (firstName.length < 3 || firstName === undefined || firstName.includes(' ')) {
+      setErrorFirst('Please enter maximum 15 characters for First Name (Minimum can be 2) as someone has name like Jo (alphabets only)')
       errorCount++;
     }
     if (!/^[A-Za-z]+$/i.test(firstName)) {
-      setErrorFirst("First name must contain only letters")
+      setErrorFirst("Please enter First Name")
       errorCount++
     }
 
-    if (lastName.length <= 3 || lastName === undefined || lastName.includes(' ')) {
-      setErrorLast('Please Enter First Name without spacing')
+    if (lastName.length < 3 || lastName === undefined || lastName.includes(' ')) {
+      setErrorLast('Please enter maximum 15 characters for First Name (Minimum can be 2) as someone has name like Jo (alphabets only)')
       errorCount++;
     }
     if (!/^[A-Za-z]+$/i.test(lastName)) {
-      setErrorLast("Last name must contain only letters")
+      setErrorLast("Please enter Last Name  without spacing")
       errorCount++
     }
 
-    if (email.length == undefined) {
-      setErrorEmail('Please enter your EmailID');
-      errorCount++;
-    }
-    if (email.length < 5) {
-      setErrorEmail('please enter your EmailID')
+    if (email ==="") {
+      setErrorEmail('Please enter Email');
       errorCount++;
     }
     if (email !== undefined) {
-
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
-
-        setErrorEmail("Enter valid EmailID");
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {        
+        setErrorEmail("Please enter valid Email");
+        errorCount++;
+      }
+      if(email.length<1){
+        setErrorEmail("Please enter Email");
         errorCount++;
       }
       else {
@@ -114,26 +112,21 @@ const Signup = () => {
     if (email.length >= 7) {
       setErrorPassword("");
     }
-
-    if (email.length < 5) {
-      setErrorEmail('Please enter your EmailID')
-      errorCount++;
-    }
     if (phone.length <= 9) {
-      setErrorPhone('Please Enter Phone')
+      setErrorPhone('Please enter Phone Number')
       errorCount++;
     }
     if (!/^(\+\d{1,3}[- ]?)?\d{10}$/.test(phone)) {
-      setErrorPhone('Please Enter valid Phone No')
+      setErrorPhone('Please enter Phone Number')
       errorCount++
     }
     if (password !== undefined) {
 
       if (password.length == 0) {
-        setErrorPassword("Please enter your password");
+        setErrorPassword("Please enter password");
         errorCount++;
       } else if (!/^[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(password)) {
-        setErrorPassword("password must have 8 charater");
+        setErrorPassword("Passwords must be longer than or equal to 8 characters");
         errorCount++;
       }
       else if (password.length >= 7) {
@@ -145,14 +138,14 @@ const Signup = () => {
       return true;
     }
     if (errorCount > 0) {
-      if (firstName.length > 3) {
+      if (firstName.length >= 3) {
         if (!firstName.includes(' ')) {
           if (/^[A-Za-z]+$/i.test(firstName)) {
             setErrorFirst("")
           }
         }
       }
-      if (lastName.length > 3) {
+      if (lastName.length >= 3) {
         if (!lastName.includes(' ')) {
           if (/^[A-Za-z]+$/i.test(lastName)) {
             setErrorLast("")
@@ -306,7 +299,7 @@ const Signup = () => {
                   style={{ ...styles.textInput, ...{ marginTop: verticalScale(14) } }}
                 />
               </Pressable>
-              <View style={{ height: "4%" }}>
+              <View style={{ height: "6%" }}>
                 {errorFirst ?
                   <Text style={styles.ErrorText}>{errorFirst}</Text> : null}
               </View>
@@ -321,7 +314,7 @@ const Signup = () => {
                   // onChangeText={(text) => { setLastName(text), text ? setError("") : setError(...errordata, errordata.lastname = "enter last name") }}
                   style={{ ...styles.textInput, }} />
               </Pressable>
-              <View style={{ height: "4%" }}>
+              <View style={{ height: "6%" }}>
                 {errorLast ?
                   <Text style={styles.ErrorText}>{errorLast}</Text> : null}
               </View>
@@ -474,10 +467,11 @@ const styles = StyleSheet.create({
   ErrorText: {
     color: "red",
     ...FONTS.lexendregular,
-    fontSize: RFValue(10),
+    fontSize: RFValue(8),
     marginStart: "1%",
     textAlign: "left",
-    //width: horizontalScale(100)
+    width: horizontalScale(300),
+    
   },
   Errorpass: {
     color: "red",

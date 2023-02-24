@@ -24,7 +24,6 @@ const PlayNow = (props) => {
             }
             else {
                 Toast.show( 'Something went wrong!, Please try again later', Toast.LONG, { backgroundColor: 'red' });
-                    
             }
         })
     }

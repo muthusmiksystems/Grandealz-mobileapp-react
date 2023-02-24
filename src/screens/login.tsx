@@ -90,17 +90,17 @@ const Login = (props: Prop) => {
 
     console.log("satrday",(!/^[a-zA-Z0-9!@#$%^&*]{0,10}$/.test(password)));
     if (email === null) {
-      setErrorEmail('please enter valid emailId')
+      setErrorEmail('Please enter email')
       errorCount++;
     }
-    if (email === "") {
-      setErrorEmail('Please enter your EmailID');
+    console.log("testing ",email)
+    if (email.length < 1) {
+      setErrorEmail('Please enter email');
       errorCount++;
     }
     if (email) {
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
-        console.log("testing ")
-        setErrorEmail("Enter valid EmailID");
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { 
+        setErrorEmail("Please enter valid email");
         errorCount++;
       }
       else {
@@ -109,11 +109,11 @@ const Login = (props: Prop) => {
       }
     }
     if (password !== undefined) {
-      if (password === "") {
-        setErrorPassword("Please enter your password");
+      if (password.length<1) {
+        setErrorPassword("Please enter password");
         errorCount++;
       } else if (!/^[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(password)) {
-        setErrorPassword("Password must have min 8 characters without spacing");
+        setErrorPassword("Passwords must be longer than or equal to 8 characters");
         errorCount++;
       }
     }
