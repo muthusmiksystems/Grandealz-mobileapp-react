@@ -17,6 +17,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import image from "../../constants/image";
 import { RFValue } from "react-native-responsive-fontsize";
+import { COLORS } from "../../constants";
 
 
 const WishListEmpty = () => {
@@ -29,9 +30,10 @@ const WishListEmpty = () => {
             <Image
                 source={image.heartEmpty}
                 resizeMode="contain"
-                style={{ height: verticalScale(100), width: horizontalScale(80),top:verticalScale(5) }}
+                style={{ height: verticalScale(90), width: horizontalScale(80),top:verticalScale(5) }}
             />
             </View>
+            <Text style={{textAlign:"center",color:COLORS.gray}}>Your Wishist is Empty</Text>
             </View>
         </SafeAreaView>
     );
@@ -62,10 +64,10 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent:"center",
         flexDirection: "column",
-        width: horizontalScale(140),
+        width: horizontalScale(130),
         alignSelf: "center",
         backgroundColor: '#EEEEEE' ,
-        height: verticalScale(150),
+        height: verticalScale(130),
         borderTopStartRadius: 95,
         borderBottomStartRadius: 95,
         borderTopEndRadius: 95,

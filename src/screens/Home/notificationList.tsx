@@ -99,7 +99,7 @@ const NotificationList = () => {
   return (
     <SafeAreaView style={{ flex: 1 }} >
 
-      <View style={{ flex: 0.8 }}>
+      <View style={{ flex: 0.9 }}>
         <StatusBar
           animated={true}
           backgroundColor={"#0a0127"}
@@ -114,7 +114,7 @@ const NotificationList = () => {
           </View>
         </View>
 
-        <View style={{ padding: "1%", height: verticalScale(700) }}>
+        <View style={{}}>
           <FlatList
             data={data}
             contentContainerStyle={{ paddingBottom: "20%" }}
@@ -122,28 +122,30 @@ const NotificationList = () => {
             renderItem={({ item }) => (
               <View style={{ paddingHorizontal: "3%", paddingTop: "3%" }}>
                 <TouchableOpacity style={{ backgroundColor: "white", borderRadius: 8, elevation: 1, flexDirection: "row", padding: "2%" }}>
-                  <View style={{ flexDirection: "column", marginTop: verticalScale(9) }}>
+                  <View style={{ flexDirection: "column", marginTop: verticalScale(9), width: horizontalScale(20), height: verticalScale(20) }}>
                     <Image
                       source={icons.rect}
                       resizeMode="contain"
                       style={{
-                        borderWidth: 1
+                        height: "100%",
+                        width: "100%"
                       }}
                     />
                   </View>
                   <View style={{ flexDirection: "column", width: horizontalScale(240) }}>
                     <Text style={{ fontSize: RFValue(14), ...FONTS.lexendsemibold, margin: "2%", color: COLORS.black }}>{item.from}</Text>
                     <Text style={{ fontSize: RFValue(12), margin: "2%", ...FONTS.lexendregular, color: "#000" }}>{item.to}</Text>
-                    <Text style={{ fontSize: RFValue(14), ...FONTS.lexendregular, color: COLORS.gray, marginHorizontal: "2%", paddingBottom: "2%" }}>{item.date}</Text>
+                    <Text style={{ fontSize: RFValue(14), ...FONTS.lexendregular, color: COLORS.gray, marginHorizontal: "2%", paddingBottom: "2%", marginTop: "1%" }}>{item.date}</Text>
                   </View>
-                  <View style={{ flexDirection: "column", width: horizontalScale(70), backgroundColor: COLORS.lightGray, height: verticalScale(85), alignSelf: "center",borderRadius:10 }}>
+                  <View style={{ flexDirection: "column", width: horizontalScale(75), backgroundColor: COLORS.lightGray, height: verticalScale(75), alignSelf: "center", borderRadius: 10 }}>
                     <Image
                       source={item.imag}
                       resizeMode="contain"
                       style={{
-                        width: 65,
-                        top:9,
-                        left:4
+                        width: 75,
+                        height: 50,
+                        top: 9,
+                        left: 4
                       }}
                     />
                   </View>
