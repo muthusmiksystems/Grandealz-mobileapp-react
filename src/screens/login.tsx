@@ -15,7 +15,7 @@ import {
   Alert,
   BackHandler,
   TouchableOpacity,
-  ToastAndroid,
+  
   // Button
 } from "react-native";
 // import {useBackHandler} from '@react-native-community/hooks';
@@ -37,7 +37,8 @@ import validate from "./Auth/validate";
 import { unwrapResult } from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import StorageController from "../services/storagectrl";
-
+import LoaderKit from 'react-native-loader-kit';
+import Toast from 'react-native-simple-toast';
 
 function handleBackButton() {
   // if (screen === 'Login') {
@@ -53,119 +54,161 @@ const Login = (props: Prop) => {
   const storage = StorageController
   const dispatch = useDispatch();
   const [passShow, setPassShow] = useState("true");
+  const [loader, setLoader] = useState(false)
 
-  const [isSelected, setSelection] = useState(false);
+  const [isSelected, setSelection] = useState(true);
 
-  const { handleChange, details, handleSubmit, formErrors, data, formValues } = useForm(validate);
+  //const { handleChange, details, handleSubmit, formErrors, data, formValues ,syncvalue} = useForm(validate);
   const [token, setToken] = useState("");
   const [errorLogin, setErrorLogin] = useState(null);
   const [errorEmail, setErrorEmail] = useState(null);
   const [errorPassword, setErrorPassword] = useState(null);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [error, setError] = useState<any>("");
+
   useEffect(() => {
-    console.log(Object.keys(formValues).length, "kk", formErrors.password)
-    if (formErrors && Object.keys(formErrors).length > 0) {
-      if (formErrors && formErrors.email && formErrors.password) {
-        //setEmail(formErrors.email);
-        setErrorEmail(formErrors.email);
+    async function fetchJSONAsync() {
 
-        setErrorPassword(formErrors.password); 
+      let name = await AsyncStorage.getItem("username");
+      setEmail(name)
 
-        console.log("email password failed", formErrors.email)
+      let pass = await AsyncStorage.getItem("password");
+      setPassword(pass)
+      console.log(name, pass, "password user name", email, password)
+
+    }
+    fetchJSONAsync()
+  }, [])
+
+  const validateFunction = () => {
+    console.log("values", email, password);
+    console.log(email === null, " null check")
+    console.log(email === "", " empty check")
+    console.log(email ? "ture" : "false")
+    let errorCount = 0;
+
+    console.log("satrday",(!/^[a-zA-Z0-9!@#$%^&*]{0,10}$/.test(password)));
+    if (email === null) {
+      setErrorEmail('Please enter email')
+      errorCount++;
+    }
+    console.log("testing ",email)
+    if (email.length < 1) {
+      setErrorEmail('Please enter email');
+      errorCount++;
+    }
+    if (email) {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { 
+        setErrorEmail("Please enter valid email");
+        errorCount++;
       }
-      else if (formErrors && formErrors.password) {
-        console.log("password Validation failed")
-        //setPassword(formErrors.password);
-        setErrorPassword(formErrors.password);
-      }
-
-      else if (formErrors && formErrors.email ){
-
-        setErrorEmail(formErrors.email);
-        console.log("email failed", formErrors.email)
+      else {
+        console.log(" no testing ")
+        setError("");
       }
     }
-    console.log(data, "data........", formValues)
-  }, [formErrors])
+    if (password !== undefined) {
+      if (password.length<1) {
+        setErrorPassword("Please enter password");
+        errorCount++;
+      } else if (!/^[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(password)) {
+        setErrorPassword("Passwords must be longer than or equal to 8 characters");
+        errorCount++;
+      }
+    }
+    if (errorCount === 0) {
+      setErrorEmail(""), setErrorPassword("");
+      return true;
+    }
+    if (errorCount > 0) {
+      if (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+        setErrorEmail("");
+      }
+      if (/^[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(password)) {
+        setErrorPassword("");
+      }
+    }
+    if (errorCount > 0) {
+      console.log("errorcount", errorCount)
+    }
+    else {
+      return false;
+    }
+  }
 
   useEffect(() => {
     navigation.addListener("blur", () => { BackHandler.removeEventListener("hardwareBackPress", handleBackButton); })
     navigation.addListener("focus", () => { BackHandler.addEventListener("hardwareBackPress", handleBackButton); })
   }, [handleBackButton])
 
+  const loginPress = async () => {
+    console.log("e dataaaaaaaaaa", email, password);
+    handleSubmit(), Keyboard.dismiss
+  }
 
-  //   const Redirecthandle =() =>{
-  //   Alert.alert("","are sure u want app"),[{
-  //     text:"no",
-  //     onPress:()=>null,
-  //     style:"cancel"
-  //   },{
-  //     text:"yes",
-  //     onPress:()=>BackHandler.exitAPP(),
-  //   }]
-  //   }
-
-  // useBackHandler(Redirecthandle)
-
-
-
-  useEffect(() => {
-    if (data && Object.keys(data)) {
+  const handleSubmit = async () => {
+    const validateLetter = validateFunction();
+    console.log("Retrun.............", validateLetter);
+    
+    if (validateLetter) {
       const reg = {
-        "email": data.email,
-        "password": data.password,
+        "email": email.toLowerCase(),
+        "password": password,
         "fcm_id": ""
       }
+      setLoader(true)
       console.log("data inside the handle submit", reg);
       dispatch(loginHanlder(reg))
         .then(unwrapResult)
-
-        .then(async (originalPromiseResult:any) => {
-
+        .then(async (originalPromiseResult: any) => {
           console.log("successfully returned to login with response ", originalPromiseResult);
           if (originalPromiseResult?.data?.access_token) {
-            // if(isSelected===true){
-              console.log("token  sam   ...dddd", originalPromiseResult.data.access_token);
+           
+            console.log("token  sam   ...dddd", originalPromiseResult.data.access_token);
             await AsyncStorage.setItem('loginToken', originalPromiseResult.data.access_token)
-            // }
-            ToastAndroid.showWithGravity(
-              "Successfully logged in",
-              ToastAndroid.SHORT,
-              ToastAndroid.CENTER
-            )
+            
+            Toast.show( "Successfully logged as grandealz", Toast.LONG, { backgroundColor: 'red' });
+            if (isSelected === true) {
+              await AsyncStorage.setItem('username', email),
+                await AsyncStorage.setItem('password', password)
+            }
+            else {
+              await AsyncStorage.setItem('username', ""),
+                await AsyncStorage.setItem('password', "")
+            }
+            setLoader(false)
             props.navigation.replace("Tabs")
 
           }
           else if (originalPromiseResult.message) {
-            ToastAndroid.showWithGravity(
+            setLoader(false)
+            //setPassword("")
+            Toast.show(
               originalPromiseResult.message,
-              ToastAndroid.SHORT,
-              ToastAndroid.CENTER
+              Toast.LONG,
             )
           }
           else {
             // console.log("setError response ", originalPromiseResult);
-            ToastAndroid.showWithGravity(
+            //setPassword("")
+            setLoader(false)
+            Toast.show( 
               originalPromiseResult,
-              ToastAndroid.SHORT,
-              ToastAndroid.CENTER
+              Toast.LONG,
             )
             //  setErrorLogin(originalPromiseResult.message);
 
           }
         }).catch((rejectedValueOrSerializedError) => {
           console.log(" Inside catch", rejectedValueOrSerializedError);
-          ToastAndroid.showWithGravity(
+          Toast.show( 
             "Something went wrong!, please try again later",
-            ToastAndroid.SHORT,
-            ToastAndroid.CENTER
+            Toast.LONG,
           )
         })
     }
-  }, [data])
-
+  }
   const handlePasswordBox = () => {
     // console.log("box pass")
     if (errorEmail) {
@@ -202,9 +245,9 @@ const Login = (props: Prop) => {
             value={email}
             placeholderTextColor={"black"}
             keyboardType="email-address"
-
-            onChangeText={e => { handleChange(e, "email"), setErrorEmail(""), setErrorLogin(""), setEmail(e) }}
-
+            maxLength={30}
+            //onChangeText={e => { handleChange(e, "email"), setErrorEmail(""), setErrorLogin(""), setEmail(e) }}
+            onChangeText={(text) => setEmail(text)}
             style={{
               flexDirection: "column",
               width: horizontalScale(250),
@@ -217,7 +260,7 @@ const Login = (props: Prop) => {
 
         <View style={{ height: "5%" }}>
 
-          {formErrors.email || formErrors.loginundef ?
+          {errorEmail ?
             <Text style={styles.ErrorText}>{errorEmail}</Text> : null}
         </View>
         <TouchableOpacity style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), color: "#000" }} onPressIn={() => handlePasswordBox()} >
@@ -226,9 +269,9 @@ const Login = (props: Prop) => {
             value={password}
             secureTextEntry={passShow ? true : false}
             placeholderTextColor={"black"}
-
-            onChangeText={e => { handleChange(e, "password"), setErrorPassword(""), setErrorLogin(""), setPassword(e) }}
-
+            maxLength={15}
+            //onChangeText={e => { handleChange(e, "password"), setErrorPassword(""), setErrorLogin(""), setPassword(e) }}
+            onChangeText={(text) => setPassword(text)}
             style={{
               flexDirection: "column",
               width: horizontalScale(250),
@@ -245,11 +288,9 @@ const Login = (props: Prop) => {
         </TouchableOpacity>
 
         <View style={{ height: "6%" }}>
-          {formErrors.password || formErrors.loginundef ?
+          {errorPassword ?
             <Text style={styles.ErrorText}>{errorPassword}</Text> : null}
-          {console.log("uuuuuuuuuuuuuuus", errorLogin ? true : false)}
           {errorLogin ? <Text style={styles.ErrorText}>{errorLogin}</Text> : null}
-
         </View>
         <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginHorizontal: "5%" }}>
           <View style={{ display: 'flex', flexDirection: "column", marginStart: "1.5%" }}>
@@ -265,11 +306,20 @@ const Login = (props: Prop) => {
           </View>
           <TouchableOpacity style={{ display: 'flex', flexDirection: "column", marginEnd: "2.5%" }} onPressIn={() => navigation.navigate("ForgetPassword")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", fontSize: RFValue(12) }}>Forgot Password?</Text></TouchableOpacity>
         </View>
-        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(193), padding: "3%" }} onPress={e => { handleSubmit(e, "1"), Keyboard.dismiss }} disabled={false}>
-
-          <Text style={{ textAlign: "center", fontSize: RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Log In</Text>
-
-        </TouchableOpacity>
+        {loader ?
+          <View style={{ width: "100%", alignItems: "center" }}>
+            <LoaderKit
+              style={{ width: 50, height: 50 }}
+              name={'BallPulse'} // Optional: see list of animations below
+              size={30} // Required on iOS
+              color={COLORS.element} // Optional: color can be: 'red', 'green',... or '#ddd', '#FFFFFF',
+            />
+          </View>
+          :
+          <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(193), padding: "3%" }} onPress={e => { loginPress() }} disabled={false}>
+            <Text style={{ textAlign: "center", fontSize: RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Log In</Text>
+          </TouchableOpacity>
+        }
         <View style={{ flexDirection: "row", marginTop: "10%", alignSelf: "center" }}>
           <Text style={{ flexDirection: "column", alignSelf: "flex-start", fontFamily: "Lexend-Regular", color: "#000", fontSize: RFValue(13) }}>New User? </Text>
           <TouchableOpacity style={{ alignSelf: "flex-end", flexDirection: "column" }} onPressIn={() => navigation.navigate("Signup")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", fontSize: RFValue(13) }}>Create New Account</Text></TouchableOpacity>
@@ -303,7 +353,7 @@ const styles = StyleSheet.create({
     ...FONTS.lexendregular,
     fontSize: RFValue(10),
 
-    marginStart:"7%"
+    marginStart: "7%"
 
   }
 })

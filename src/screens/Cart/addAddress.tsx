@@ -10,7 +10,6 @@ import {
     Image, TextInput,
     TouchableOpacity,
     Pressable,
-    ToastAndroid
 } from 'react-native';
 import { horizontalScale, verticalScale } from "../../constants/metrices";
 import { shoppingCart } from "../../constants/icons";
@@ -39,33 +38,36 @@ import validate from "./address_validation/validate";
 import { AddAddressHandle } from "../../services/addaddress";
 import { addressListHandler } from "../../store/reducers/addresslist";
 import { moderateScale } from "../../constants/metrices";
+import { ActivityIndicator } from "react-native-paper";
+import LoaderKit from 'react-native-loader-kit';
+import OrderEmpty from "../ExceptionScreens/orderEmpty";
+import Toast from 'react-native-simple-toast';
 
 
-const AddAddress = () => {
+const AddAddress = ({ route }) => {
+    const typeUser = route.params.type;
+    const amount = route.params.amount;
+
     const CheckBoxes = () => {
-        const [isSelected, setSelection] = useState(false);
+
         return (
             <View style={{ flexDirection: "row", left: horizontalScale(17) }}>
                 <CheckBox
                     value={isSelected}
                     onValueChange={setSelection}
                     style={styles.checkBox}
-                    tintColors={{ true: "green" }}
+                    tintColors={{ true: "red" }}
                 />
             </View>
         )
     }
-    const userData: any = useSelector<any>(state => state.userDetailsHandle.data.data);
+    const addresslist = useSelector((state) => state.AddressHandle.data);
     const dispatch = useDispatch();
-
+    const navigation = useNavigation();
     //const { handleChange, handleSubmit, formErrors, data, formValues } = useForm(validate);
     const [Name, setName] = useState<any>("");
-    const [error, setError] = useState("");
-    const [city, setCity] = useState<any>("");
-    const [errorCity, setErrorCity] = useState(null);
-    const [stateses, setStateses] = useState<any>("");
-    const [errorStateses, setErrorStateses] = useState(null);
-
+    const [isSelected, setSelection] = useState(false);
+    const [addressType, setAddressType] = useState();
     const [errorName, setErrorName] = useState('');
     const [phone, setPhone] = useState<any>("");
     const [errorPhone, setErrorPhone] = useState('');
@@ -75,147 +77,147 @@ const AddAddress = () => {
     const [errorAddress, setErrorAddress] = useState('');
     const [locality, setLocality] = useState<any>("");
     const [errorLocality, setErrorLocality] = useState('');
-
     const [stateIso, setStateIso] = useState(null);
     const [country, setCountry] = useState<any>("");
     const [cityError, setCityError] = useState('');
     const [countryListValue, setCountryListValue] = useState([])
     const [countryValue, setCountryValue] = useState<any>(null)
     const [stateListValue, setStateListValue] = useState([])
-    const [stateValue, setStateValue] = useState<any>('')
+    const [stateValue, setStateValue] = useState<any>(null)
     const [cityListValue, setCityListValue] = useState([])
-    const [cityValue, setCityValue] = useState<any>('')
-    const [countryError, setCountryError] = useState("")
-    const [stateError, setStateError] = useState("")
+    const [cityValue, setCityValue] = useState<any>(null)
+    const [countryError, setCountryError] = useState('')
+    const [stateError, setStateError] = useState('')
     const [cityData, setCityData] = useState();
     const [stateData, setStateData] = useState();
     const [countryData, setCountryData] = useState();
+    const [optionHo, setOptionHo] = useState(false);
+    const [optionWo, setOptionWo] = useState(false)
+    const [option, setOption] = useState(false)
+    const [addressError, setAddressError] = useState();
+    useEffect(() => {
+        // { addresslist ? setAddressType(addresslist.length) 
+        //     : null }
+        // console.log("address type is ", addresslist.length)
+        // { addressType / 2 != 1 ? setOption(false) : setOption(true) }
+        if (addresslist) {
 
-    const navigation = useNavigation();
+            if (addresslist.length > 1) {
+                setOption(true)
+            }
+            if (addresslist[0] && addresslist[0].address_type === "Home") {
+                setOptionHo(true)
+                console.log("address typr vandhu home so ", optionHo)
+            }
+            if (addresslist[0] && addresslist[0].address_type === "Work") {
+                setOptionWo(true)
+            }
+        }
 
-    // useEffect(() => {
-    //      dispatch(addressEditHandler(edit))
-    //          .then(unwrapResult)
-    //          .then((address: any) => {
-    //              setName(address.name)
-    //              setPhone(address.phone)
-    //              setPincode(address.pincode)
-    //              setAddress(address.address)
-    //              setLocality(address.locality_town)
-    //              setCity(address.city.name)
-    //              setStateses(address.state.name)
-    //              setCountry(address.country.name)
-    //              console.log(address, "address to edit in this page ")
-    //          })
-    // }, [])
+    }, [])
 
     const validateFunction = () => {
-        console.log("values", Name, address, phone, locality, pincode,countryValue,stateValue,cityValue);
+        console.log(cityValue, "values", stateValue, "samuel", Name, address, phone, locality, pincode, countryValue, stateValue, cityValue);
+
         //firstName
         let errorCount = 0;
-        if (Name.length <= 3 || Name === undefined) {
-            setErrorName('Name is Required')
+        if (Name.length < 3) {
+            setErrorName('Please enter maximum 15 characters for Name (Minimum can be 2) as someone has name like Jo (alphabets only)')
             errorCount++;
         }
-        // else {
-        //     setFirstNameError('')
-        // }
-        //lastName
-        if (address.length <= 3 || address === undefined) {
-            setErrorAddress('address is required')
+        if (Name.length < 1) {
+            setErrorName('Please enter Name')
             errorCount++;
         }
-        // else {
-        //     setLastNameError('')
-        // }
-        //email
-        // if (email.length === 0 || email === undefined) {
-        //     setEmailError('Email id is mandatory')
-        // }
-        // else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
-        //     setEmailError('Invalid email format')
-        // }
-        // else {
-        //     setEmailError('')
-        // }
-        // //mblCode
-        // if (mblCode.length == 0) {
-        //     setMblCodeError("Code is required")
-        // }
-        // else {
-        //     setMblCodeError('')
-        // }
-        // //Mbl number
-        // if (mblNumber.length == 0) {
-        //     // console.log("mbl................", mblNumber.length);
-        //     setMblNumberError('Mobile number is required')
-        // }
-        // else {
-        //     setMblNumberError('')
-        // }
-        //Gender
-        if (pincode.length < 5) {
-            setErrorPin('please enter  valid pincode')
+        if (address.length <= 1) {
+            setErrorAddress('Please enter Address')
             errorCount++;
         }
-        // else {
-        //     setGenderError('')
-        // }
-        //Nationality
-        if (locality.length == 0) {
+
+        if (address.length >= 60) {
+            setErrorAddress('Please enter maximum 60 characters for Address')
+            errorCount++;
+        }
+        if (pincode.length < 6) {
+            setErrorPin('Please enter Pincode')
+            errorCount++;
+        }
+        if (locality.length > 20) {
+            setErrorLocality("Please enter maximum 20 characters for Locality/Town")
+            errorCount++;
+        }
+        if (locality.length <= 2) {
             setErrorLocality('Please enter Locality')
             errorCount++;
         }
-        // else {
-        //     setCountryError('')
-        // }
-        //State
-        // if (stateValue.length == 0) {
-        //     setStateError('State is required')
-        //     errorCount++;
-        // }
-        // else {
-        //     setStateError('')
-        // }
-        //Country of residence
-        // if (countryResidenceValue.length == 0) {
-        //     setCountryResidenceError('Country of residence is required')
-        //     errorCount++;
-        // }
-        // else {
-        //     setCountryResidenceError('')
-        // }
-        //Date of birth
+
         if (phone.length < 10) {
-            setErrorPhone('please enter valid Number')
+            setErrorPhone('Please enter at least 10 digits for Mobile Number')
             errorCount++;
         }
-        if (countryValue.length == 0) {
-            setCountryError('country is required')
+        if (phone.length < 1) {
+            setErrorPhone("Please enter Mobile No")
             errorCount++;
         }
-        if (cityValue.length == 0) {
-            setCityError('City is required')
+        if (countryValue === null) {
+            setCountryError('Please Choose Country')
             errorCount++;
         }
-        if (stateValue.length == 0) {
-            setStateError('State is required')
+        if (cityValue === null) {
+            setCityError('Please Choose City')
+            errorCount++;
         }
-        // else {
-        //     setDateError('')
-        // }
+        if (stateValue === null) {
+            setStateError('Please Choose state')
+            errorCount++;
+        }
+        if (addressType === undefined) {
+            setAddressError("Select address type")
+            errorCount++;
+        }
         if (errorCount === 0) {
             setErrorAddress(""), setErrorName(""), setErrorLocality(""), setErrorPhone(""), setErrorPin("");
             return true;
         }
+        if (errorCount > 0) {
+            if (Name.length > 3) {
+                setErrorName('');
+            }
+            if (address.length > 1) {
+                setErrorAddress('');
+            }
+            if (pincode.length > 5) {
+                setErrorPin('');
+            }
+            if (locality.length > 2) {
+                setErrorLocality('');
+            }
+            if (phone.length > 9) {
+                setErrorPhone('');
+            }
+            if (countryValue != null) {
+                setCountryError('');
+            }
+            if (cityValue != null) {
+                setCityError('');
+            }
+            if (stateValue != null) {
+                setStateError('');
+            }
+            if (addressType != undefined) {
+                setAddressError('');
+            }
+        }
         else {
             return false;
         }
+        console.log("errorcount ", errorCount)
     }
 
     const handleSubmit = async () => {
         const validateLetter = validateFunction();
-        console.log("Retrun.............", validateLetter);
+        console.log("Retrun.............", addressType);
+
         if (validateLetter) {
             const payload = {
                 "name": Name,
@@ -242,30 +244,23 @@ const AddAddress = () => {
                     "phonecode": countryData.phonecode,
                     "currency": countryData.currency
                 },
-                "address_type": "Home",
+                "address_type": addressType == 0 ? "Home" : "Work",
                 "is_default_address": false
             }
             console.log("payload for update.............", payload)
             let calling = await AddAddressHandle(payload);
-              console.log(calling,"Personal Details Country....");
-                if (calling === "Success") {
-                    ToastAndroid.showWithGravity(
-                        'Successfully added',
-                        ToastAndroid.SHORT,
-                        ToastAndroid.CENTER,
-                    );
-                    dispatch(addressListHandler());
-                    navigation.navigate("Address");
-                }
-                else {
-                    ToastAndroid.showWithGravity(
-                        'Something went wrong!',
-                        ToastAndroid.SHORT,
-                        ToastAndroid.CENTER,
-                    );
-                    
-                }
-            
+            console.log(calling, "Personal Details Country....");
+            if (calling === "Success") {
+                Toast.show('Successfully added', Toast.LONG, { backgroundColor: 'red' });
+
+                dispatch(addressListHandler());
+                console.log("...........", typeUser, amount)
+                navigation.navigate("Address", { type: typeUser, "amount": amount });
+            }
+            else {
+                Toast.show('Something went wrong!', Toast.LONG, { backgroundColor: 'red' });
+            }
+
         }
     }
     const getCountryList = async () => {
@@ -273,29 +268,29 @@ const AddAddress = () => {
             //console.log("Personal Details Country....", originalPromiseResult);
             // const value = originalPromiseResult
             //setCountryListValue(originalPromiseResult);
-            console.log("listCoun", originalPromiseResult[56].name)
+            //console.log("listCoun", originalPromiseResult[56].name)
         })
     }
     const getStateList = async (data: any) => {
-        let listCountries = await stateList(data).then((originalPromiseResult) => {
+        let listState = await stateList(data).then((originalPromiseResult) => {
             //console.log("Personal Details State....", originalPromiseResult);
             // const value = originalPromiseResult
             setStateListValue(originalPromiseResult);
-            console.log("listCoun", originalPromiseResult)
+            //console.log("listCoun", originalPromiseResult)
         })
     }
     const getCityList = async (data: any) => {
         let listCity = await cityList(data).then((originalPromiseResult) => {
-            console.log("Personal Details City....", originalPromiseResult);
+            //console.log("Personal Details City....", originalPromiseResult);
             // const value = originalPromiseResult
             setCityListValue(originalPromiseResult);
-            console.log("listCity", originalPromiseResult)
+            //console.log("listCity", originalPromiseResult)
         })
     }
 
     useEffect(() => {
         getCountryList();
-        const india=[{"currency": "INR", "flag": "????", "isoCode": "IN", "name": "India", "phonecode": "91"}];
+        const india = [{ "currency": "INR", "flag": "????", "isoCode": "IN", "name": "India", "phonecode": "91" }];
         setCountryListValue(india)
     }, [])
 
@@ -306,10 +301,12 @@ const AddAddress = () => {
         // else { Alert.alert("Select any nationality") }
 
     }, [countryValue])
+
     const themeForList = {
         color: COLORS.black,
         fontFamily: "Lexend-Regular",
     }
+
     useEffect(() => {
         if (countryValue) {
             if (stateValue) {
@@ -356,177 +353,206 @@ const AddAddress = () => {
                 </TouchableOpacity>
                 <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), width: horizontalScale(290), textAlign: "center" }}>Add New Address</Text>
             </View>
-            <ScrollView style={{ height: "80%" }}>
-                <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "5%" }}>CONTACT DETAILS</Text>
-                <View style={{ marginHorizontal: "3%", marginVertical: "2%" }}>
-                    <Pressable onPressIn={() => handleBox()}>
-                        <TextInput
-                            placeholder="Name*"
-                            value={Name}
-                            maxLength={20}
-                            placeholderTextColor={COLORS.gray}
-                            onChangeText={(text: String) => setName(text)}
-                            //onChangeText={e => { handleChange(e, "Name"), setErrorName(""), setName(e) }}
-                            style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(13),color:"black" }}
-                        />
-                    </Pressable>
-                </View>
-                <View>
+            {option ?
+                <OrderEmpty value={"Home and Work address available "} />
+                :
+                <ScrollView style={{ height: "100%",}}
+                contentContainerStyle={{paddingBottom:"12%"}}>
+                    <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "5%" }}>CONTACT DETAILS</Text>
+                    <View style={{ marginHorizontal: "3%", marginVertical: "2%" }}>
+                        <Pressable onPressIn={() => handleBox()}>
+                            <TextInput
+                                placeholder="Name*"
+                                value={Name}
+                                maxLength={16}
+                                placeholderTextColor={COLORS.gray}
+                                onChangeText={(text: String) => setName(text)}
+                                //onChangeText={e => { handleChange(e, "Name"), setErrorName(""), setName(e) }}
+                                style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(13), color: "black" }}
+                            />
+                        </Pressable>
+                    </View>
                     {errorName ?
-                        <Text style={styles.ErrorText}>{errorName}</Text> : null}
-                </View>
-                <View style={{ marginHorizontal: "3%" }}>
-                    <Pressable onPressIn={() => handleBox()}>
-                        <TextInput
-                            keyboardType={"phone-pad"}
-                            placeholder="Mobile No*"
-                            value={phone}
-                            maxLength={10}
-                            onChangeText={(text: String) => setPhone(text)}
-                            //onChangeText={e => { handleChange(e, "mobile"), setErrorPhone(""), setPhone(e) }}
-                            placeholderTextColor={COLORS.gray}
-                            style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(13),color:"black" }}
-                        />
-                    </Pressable>
-                </View>
-                <View>
+                        <View style={{ height: "3%" }}>
+                            {errorName ?
+                                <Text style={styles.ErrorText}>{errorName}</Text> : null}
+                        </View> :
+                        null
+                    }
+                    <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
+                        <Pressable onPressIn={() => handleBox()}>
+                            <TextInput
+                                keyboardType={"phone-pad"}
+                                placeholder="Mobile No*"
+                                value={phone}
+                                maxLength={10}
+                                onChangeText={(text: String) => setPhone(text)}
+                                //onChangeText={e => { handleChange(e, "mobile"), setErrorPhone(""), setPhone(e) }}
+                                placeholderTextColor={COLORS.gray}
+                                style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(13), color: "black" }}
+                            />
+                        </Pressable>
+                    </View>
                     {errorPhone ?
-                        <Text style={styles.ErrorText}>{errorPhone}</Text> : null}
-                </View>
-                <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "3%" }}>ADDRESS</Text>
-                <View style={{ marginHorizontal: "3%", marginVertical: "2%" }}>
-                    <Pressable onPressIn={() => handleBox()}>
-                        <TextInput
-                            keyboardType={"phone-pad"}
-                            placeholder="Pin Code*"
-                            value={pincode}
-                            maxLength={6}
-                            placeholderTextColor={COLORS.gray}
-                            onChangeText={(text: String) => setPincode(text)}
-                            //onChangeText={e => { handleChange(e, "pincode"), setErrorPin(""), setPincode(e) }}
-                            style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(13),color:"black" }}
-                        />
-                    </Pressable>
-                </View>
-                <View>
+                        <View style={{ height: "3%" }}>
+                            {errorPhone ?
+                                <Text style={styles.ErrorText}>{errorPhone}</Text> : null}
+                        </View> : null}
+                    <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "3%" }}>ADDRESS</Text>
+                    <View style={{ marginHorizontal: "3%", marginVertical: "2%" }}>
+                        <Pressable onPressIn={() => handleBox()}>
+                            <TextInput
+                                keyboardType={"phone-pad"}
+                                placeholder="Pin Code*"
+                                value={pincode}
+                                maxLength={6}
+                                placeholderTextColor={COLORS.gray}
+                                onChangeText={(text: String) => setPincode(text)}
+                                //onChangeText={e => { handleChange(e, "pincode"), setErrorPin(""), setPincode(e) }}
+                                style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(13), color: "black" }}
+                            />
+                        </Pressable>
+                    </View>
                     {errorPin ?
-                        <Text style={styles.ErrorText}>{errorPin}</Text> : null}
-                </View>
-                <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
-                    <Pressable onPressIn={() => handleBox()}>
-                        <TextInput
-                            keyboardType={"default"}
-                            placeholder="Address (House No, Building, street, Area)*"
-                            value={address}
-                            placeholderTextColor={COLORS.gray}
-                            onChangeText={(text: String) => setAddress(text)}
-                            //onChangeText={e => { handleChange(e, "address"), setErrorAddress(""), setAddress(e) }}
-                            style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(14),color:"black" }}
-                        />
-                    </Pressable>
-                </View>
-                <View>
+                        <View style={{ height: "3%" }}>
+                            {errorPin ?
+                                <Text style={styles.ErrorText}>{errorPin}</Text> : null}
+                        </View> :
+                        <View style={{ height: "1%" }}>
+                            {errorPin ?
+                                <Text style={styles.ErrorText}>{errorPin}</Text> : null}
+                        </View>
+                    }
+                    <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
+                        <Pressable onPressIn={() => handleBox()}>
+                            <TextInput
+                                keyboardType={"default"}
+                                multiline={true}
+                                numberOfLines={4}
+                                placeholder="Address (House No, Building, street, Area)*"
+                                value={address}
+                                placeholderTextColor={COLORS.gray}
+                                onChangeText={(text: String) => setAddress(text)}
+                                style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(14), color: "black" }}
+                            />
+                        </Pressable>
+                    </View>
                     {errorAddress ?
-                        <Text style={styles.ErrorText}>{errorAddress}</Text> : null}
-                </View>
-                <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
-                    <Pressable onPressIn={() => handleBox()}>
-                        <TextInput
-                            keyboardType={"default"}
-                            placeholder="Locality / Town*"
-                            value={locality}
-                            maxLength={40}
-                            onChangeText={(text: String) => setLocality(text)}
-                            //onChangeText={e => { handleChange(e, "locality"), setErrorLocality(""), setLocality(e) }}
-                            placeholderTextColor={COLORS.gray}
-                            style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(14),color:"black" }}
-                        />
-                    </Pressable>
-                </View>
-                <View>
+                        <View style={{ height: "3%" }}>
+                            {errorAddress ?
+                                <Text style={styles.ErrorText}>{errorAddress}</Text> : null}
+                        </View>
+                        : null}
+                    <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
+                        <Pressable onPressIn={() => handleBox()}>
+                            <TextInput
+                                keyboardType={"default"}
+                                placeholder="Locality / Town*"
+                                value={locality}
+                                maxLength={40}
+                                onChangeText={(text: String) => setLocality(text)}
+                                //onChangeText={e => { handleChange(e, "locality"), setErrorLocality(""), setLocality(e) }}
+                                placeholderTextColor={COLORS.gray}
+                                style={{ paddingStart: 15, borderRadius: 8, width: "95%", backgroundColor: COLORS.white, alignSelf: "center", ...FONTS.lexendregular, fontSize: RFValue(14), color: "black" }}
+                            />
+                        </Pressable>
+                    </View>
                     {errorLocality ?
-                        <Text style={styles.ErrorText}>{errorLocality}</Text> : null}
-                </View>
-                <View style={{ flexDirection: "row", marginHorizontal: "2%" }}>
-                    <View style={{ flexDirection: "column", width: "48.5%" }}>
-                        <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
-                            <Dropdown
-                                style={{ width: "92%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, padding: "2%", marginTop: "1%", paddingHorizontal: 14 }}
-                                placeholderStyle={styles.dropText}
-                                selectedTextStyle={styles.dropText}
-                                data={countryListValue}
-                                maxHeight={350}
-                                itemTextStyle={themeForList}
-                                labelField="name"
-                                valueField="isoCode"
-                                onChange={item => { setCountryValue(item.isoCode), console.log("dbdgbdfbdg..........", item), setCountryData(item) }}
-                                placeholder={(countryValue) ? countryValue : "Country*"}
-                            />
-                        </View>
-                        <View>
+                        <View style={{ height: "3%" }}>
+                            {errorLocality ?
+                                <Text style={styles.ErrorText}>{errorLocality}</Text> : null}
+                        </View> : null}
+                    <View style={{ flexDirection: "row", marginHorizontal: "2%" }}>
+                        <View style={{ flexDirection: "column", width: "48.5%" }}>
+                            <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
+                                <Dropdown
+                                    style={{ width: "92%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, padding: "2%", marginTop: "1%", paddingHorizontal: 14 }}
+                                    placeholderStyle={styles.dropText}
+                                    selectedTextStyle={styles.dropText}
+                                    data={countryListValue}
+                                    maxHeight={350}
+                                    itemTextStyle={themeForList}
+                                    labelField="name"
+                                    valueField="isoCode"
+                                    onChange={item => { setCountryValue(item.isoCode), setCountryData(item) }}
+                                    placeholder={(countryValue) ? countryValue : "Country*"}
+                                />
+                            </View>
                             {countryError ?
-                                <Text style={styles.ErrorText}>{countryError}</Text> : null}
+                                <View >
+                                    <Text style={styles.ErrorText}>{countryError}</Text>
+                                </View> : null}
                         </View>
-                    </View>
-                    <View style={{ flexDirection: "column", width: "50%" }}>
-                        <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
-                            <Dropdown
-                                style={{ width: "91%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, padding: "2%", marginTop: "1%", paddingHorizontal: 14 }}
-                                placeholderStyle={styles.dropText}
-                                selectedTextStyle={styles.dropText}
-                                data={stateListValue}
-                                maxHeight={350}
-                                itemTextStyle={themeForList}
-                                labelField="name"
-                                valueField="name"
-                                onChange={item => { setStateValue(item.name), setStateIso(item.isoCode), console.log("dbdgbdfbdg..........", item), setStateData(item) }}
-                                placeholder={(stateValue) ? stateValue : "State*"}
-                            />
-                        </View>
-                        <View>
+                        <View style={{ flexDirection: "column", width: "50%" }}>
+                            <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
+                                <Dropdown
+                                    style={{ width: "91%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, padding: "2%", marginTop: "1%", paddingHorizontal: 14 }}
+                                    placeholderStyle={styles.dropText}
+                                    selectedTextStyle={styles.dropText}
+                                    data={stateListValue}
+                                    maxHeight={350}
+                                    itemTextStyle={themeForList}
+                                    labelField="name"
+                                    valueField="name"
+                                    onChange={item => { setStateValue(item.name), setStateIso(item.isoCode), setStateData(item) }}
+                                    placeholder={(stateValue) ? stateValue : "State*"}
+                                />
+                            </View>
                             {stateError ?
-                                <Text style={styles.ErrorText}>{stateError}</Text> : null}
+                                <View>
+                                    {stateError ?
+                                        <Text style={styles.ErrorText}>{stateError}</Text> : null}
+                                </View> : null}
                         </View>
                     </View>
-                </View>
-                <View style={{ marginHorizontal: "1%", marginBottom: "2%", marginTop: "2%" }}>
-                    <Dropdown
-                        style={{ width: "91%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, padding: "2%", marginTop: "1%", paddingHorizontal: 14 }}
-                        placeholderStyle={styles.dropText}
-                        selectedTextStyle={styles.dropText}
-                        data={cityListValue}
-                        maxHeight={350}
-                        itemTextStyle={themeForList}
-
-                        labelField="name"
-                        valueField="name"
-                        onChange={item => { setCityValue(item.name), console.log("dbdgbdfbdg..........", item), setCityData(item) }}
-                        placeholder={(cityValue) ? cityValue : "Select City"}
-                    />
-                </View>
-
-                <View>
+                    <View style={{ marginHorizontal: "1%", marginBottom: "2%", marginTop: "2%" }}>
+                        <Dropdown
+                            style={{ width: "91%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, padding: "2%", marginTop: "1%", paddingHorizontal: 14 }}
+                            placeholderStyle={styles.dropText}
+                            selectedTextStyle={styles.dropText}
+                            data={cityListValue}
+                            maxHeight={350}
+                            itemTextStyle={themeForList}
+                            labelField="name"
+                            valueField="name"
+                            onChange={item => { setCityValue(item.name), setCityData(item) }}
+                            placeholder={(cityValue) ? cityValue : "Select City"}
+                        />
+                    </View>
                     {cityError ?
-                        <Text style={styles.ErrorText}>{cityError}</Text> : null}
-                </View>
-
-                <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "3%" }}>SAVE ADDRESS AS</Text>
-                <View style={{ marginVertical: "2%", flexDirection: "row", width: "89%", alignSelf: "center", borderRadius: 10, backgroundColor: COLORS.white }}>
-                    <TouchableOpacity style={{ paddingVertical: "5%", marginHorizontal: "5%" }}><Text style={styles.switch}>Home</Text></TouchableOpacity>
-                    <TouchableOpacity style={{ paddingVertical: "5%" }}><Text style={styles.switch}>Work</Text></TouchableOpacity>
-                </View>
-
-                <View style={{ marginHorizontal: "2%", marginBottom: "2%", padding: "2%", flexDirection: "row", width: "90%", borderRadius: 10, backgroundColor: COLORS.white, alignSelf: "center" }}>
-                    <View style={{ marginLeft: "-4%" }}><CheckBoxes /></View>
-                    <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, paddingHorizontal: "5%", alignSelf: "center" }}>Make this my default address</Text>
-                </View>
+                        <View style={{ height: "2%" }}>
+                            {cityError ?
+                                <Text style={styles.ErrorText}>{cityError}</Text> : null}
+                        </View>
+                        : null}
+                    <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "2%" }}>SAVE ADDRESS AS</Text>
+                    <View style={{ marginVertical: "2%", flexDirection: "row", width: "89%", alignSelf: "center", borderRadius: 10, backgroundColor: COLORS.white }}>
+                        <>
+                            <TouchableOpacity disabled={optionHo} style={{ paddingVertical: "5%", marginHorizontal: "5%", }} onPress={() => setAddressType(0)}>
+                                <Text style={{ ...styles.switch, backgroundColor: (addressType == 0) ? COLORS.element : "white", color: (addressType == 0) ? COLORS.white : COLORS.gray }}>Home</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity disabled={optionWo} style={{ paddingVertical: "5%", }} onPress={() => setAddressType(1)}>
+                                <Text style={{ ...styles.switch, backgroundColor: (addressType == 1) ? COLORS.element : "white", color: (addressType == 1) ? COLORS.white : COLORS.gray }}>Work</Text>
+                            </TouchableOpacity>
+                        </>
+                    </View>
+                    {addressError ?
+                        <View style={{ height: "2%" }}>
+                            {addressError ?
+                                <Text style={styles.ErrorText}>{addressError}</Text> : null}
+                        </View> : null}
+                    <View style={{ marginHorizontal: "2%", marginBottom: "2%", padding: "2%", flexDirection: "row", width: "90%", borderRadius: 10, backgroundColor: COLORS.white, alignSelf: "center" }}>
+                        <View style={{ marginLeft: "-4%" }}><CheckBoxes /></View>
+                        <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, paddingHorizontal: "5%", alignSelf: "center" }}>Make this my default address</Text>
+                    </View>
             </ScrollView>
-            <View style={{ flexDirection: "row", height: "8%", backgroundColor: COLORS.white, paddingVertical: "1%", paddingHorizontal: "2%" }}>
-
-                <TouchableOpacity style={{ flexDirection: "column", width: "90%", marginHorizontal: "5%", marginVertical: "1%", borderRadius: 5, borderWidth: 1, justifyContent: "center", alignItems: "center" }} onPress={e => { handleSubmit() }} disabled={false}>
-                    <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular }}>Add Address</Text>
-                </TouchableOpacity>
-            </View>
+            }
+                    <View style={{ flexDirection: "row", height: "8%", backgroundColor: COLORS.white, paddingVertical: "1%", paddingHorizontal: "2%" }}>
+                        <TouchableOpacity style={{ flexDirection: "column", width: "90%", marginHorizontal: "5%", marginVertical: "1%", borderRadius: 5, borderWidth: 1, justifyContent: "center", alignItems: "center" }} onPress={e => { handleSubmit() }} disabled={false}>
+                            <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular }}>Add Address</Text>
+                        </TouchableOpacity>
+                    </View>
+           
         </SafeAreaView>
     );
 }
@@ -542,7 +568,7 @@ const styles = StyleSheet.create({
 
     },
     switch: {
-        color: COLORS.gray,
+
         textAlign: "center",
         fontSize: RFValue(11),
         ...FONTS.lexendregular,
@@ -563,6 +589,7 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         borderWidth: 1,
         borderColor: "black",
+        color: COLORS.element
     },
     dropText: {
         ...FONTS.lexendregular,
@@ -578,9 +605,7 @@ const styles = StyleSheet.create({
         color: "red",
         ...FONTS.lexendregular,
         fontSize: RFValue(10),
-        textAlign:"left",
-        marginStart:verticalScale(20),
-        width: horizontalScale(300)
+        marginStart: verticalScale(25),
     },
 
 })
