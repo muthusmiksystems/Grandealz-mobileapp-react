@@ -123,7 +123,10 @@ const CartProducts = ({ cartval, changer, setChanger, swith }) => {
                                 <TouchableOpacity onPress={() => decreaseItemQty(item)}><AntIcon name="minussquare" size={moderateScale(20)} color={COLORS.element} style={{ marginTop: "10%" }} /></TouchableOpacity>
                             </View>
                         </View>
-                        {/* <View style={{ borderBottomColor: "#F1F1F1", borderBottomWidth: 3 }} /> */}
+                        {(cartitem.length - 1 != index) ?
+                            <View style={{ borderBottomColor: "#F1F1F1", borderBottomWidth: 3 }} />
+                            : null
+                        }
                     </>
                 )
             })}

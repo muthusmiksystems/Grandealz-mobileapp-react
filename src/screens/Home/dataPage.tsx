@@ -1,7 +1,6 @@
 
 import React, { type PropsWithChildren, useEffect, useState } from 'react';
 
-
 import {
   SafeAreaView,
   ScrollView,
@@ -137,14 +136,23 @@ const DataPage = () => {
                     width: horizontalScale(40), height: verticalScale(40), margin: "3%", bottom: horizontalScale(7), borderRadius: moderateScale(40), borderWidth: 1, borderColor: COLORS.element
                   }}>
                     {(userData?.profile_pic) ?
-                      <Image
+                      <ImageBackground
                         source={{ uri: (userData?.profile_pic) }}
                         resizeMode="cover"
+                        imageStyle={{ borderRadius: moderateScale(40) }}
                         onLoadStart={() => setImageLoader(true)}
                         onLoadEnd={() => setImageLoader(false)}
                         style={{ width: "100%", height: "100%", borderRadius: moderateScale(40) }}
-                      />
-                      // {(imageLoader) ? <LoadingView /> : null}
+                      >
+                        {(imageLoader) ?
+                          <Image
+                            source={icons.user}
+                            resizeMode="cover"
+                            style={{
+                              width: "100%", height: "100%", borderRadius: moderateScale(40)
+                            }}
+                          /> : null}
+                      </ImageBackground>
                       :
                       <Image
                         source={icons.user}
@@ -165,7 +173,7 @@ const DataPage = () => {
                 <Banner data={apiData} />
               </View>
               <ClosingSoon />
-              <View style={{padding:"3%"}}>
+              <View style={{ padding: "3%" }}>
                 <Product addedCart={cartList} changer={setChange} change={change} />
               </View>
               <Carsold />

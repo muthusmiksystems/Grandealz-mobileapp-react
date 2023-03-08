@@ -36,9 +36,9 @@ const Winners = (filters) => {
                     contentContainerStyle={{ width: "91%", alignSelf: "center", marginTop: "5%" }}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => (
-                        <View style={{ borderRadius: 9, backgroundColor: "white", alignItems: "center", padding: "5%", marginBottom: "5%" }}>
-                            <TouchableOpacity>
-                                <View style={{ height: verticalScale(180), width: horizontalScale(300), alignItems: "center" }}>
+                        <View style={{ borderRadius: 9, backgroundColor: "white", paddingVertical: "5%", marginBottom: "5%",width:"100%"}}>
+                            <TouchableOpacity style={{width:"92%",alignSelf:"center"}}>
+                                <View style={{ height: verticalScale(180), width:"100%", alignSelf: "center"}}>
                                     <Image
                                         source={{ uri: item.draw_image }}
                                         resizeMode="contain"

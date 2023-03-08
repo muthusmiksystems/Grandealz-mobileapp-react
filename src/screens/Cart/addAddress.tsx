@@ -47,20 +47,6 @@ import Toast from 'react-native-simple-toast';
 const AddAddress = ({ route }) => {
     const typeUser = route.params.type;
     const amount = route.params.amount;
-
-    const CheckBoxes = () => {
-
-        return (
-            <View style={{ flexDirection: "row", left: horizontalScale(17) }}>
-                <CheckBox
-                    value={isSelected}
-                    onValueChange={setSelection}
-                    style={styles.checkBox}
-                    tintColors={{ true: "red" }}
-                />
-            </View>
-        )
-    }
     const addresslist = useSelector((state) => state.AddressHandle.data);
     const dispatch = useDispatch();
     const navigation = useNavigation();
@@ -115,7 +101,18 @@ const AddAddress = ({ route }) => {
         }
 
     }, [])
-
+    const CheckBoxes = () => {
+        return (
+            <View style={{ flexDirection: "row", left: horizontalScale(17) }}>
+                <CheckBox
+                    value={isSelected}
+                    onValueChange={setSelection}
+                    style={styles.checkBox}
+                    tintColors={{ true: "red" }}
+                />
+            </View>
+        )
+    }
     const validateFunction = () => {
         console.log(cityValue, "values", stateValue, "samuel", Name, address, phone, locality, pincode, countryValue, stateValue, cityValue);
 
@@ -354,10 +351,10 @@ const AddAddress = ({ route }) => {
                 <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), width: horizontalScale(290), textAlign: "center" }}>Add New Address</Text>
             </View>
             {option ?
-                <OrderEmpty value={"Home and Work address available "} />
+                <OrderEmpty value={"Home and Work address available"} />
                 :
-                <ScrollView style={{ height: "100%",}}
-                contentContainerStyle={{paddingBottom:"12%"}}>
+                <ScrollView style={{ height: "100%", }}
+                    contentContainerStyle={{ paddingBottom: "12%" }}>
                     <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "5%" }}>CONTACT DETAILS</Text>
                     <View style={{ marginHorizontal: "3%", marginVertical: "2%" }}>
                         <Pressable onPressIn={() => handleBox()}>
@@ -379,7 +376,7 @@ const AddAddress = ({ route }) => {
                         </View> :
                         null
                     }
-                    <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
+                    <View style={{ marginHorizontal: "3%", marginVertical: "1%" }}>
                         <Pressable onPressIn={() => handleBox()}>
                             <TextInput
                                 keyboardType={"phone-pad"}
@@ -415,15 +412,9 @@ const AddAddress = ({ route }) => {
                     </View>
                     {errorPin ?
                         <View style={{ height: "3%" }}>
-                            {errorPin ?
-                                <Text style={styles.ErrorText}>{errorPin}</Text> : null}
-                        </View> :
-                        <View style={{ height: "1%" }}>
-                            {errorPin ?
-                                <Text style={styles.ErrorText}>{errorPin}</Text> : null}
-                        </View>
-                    }
-                    <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
+                            <Text style={styles.ErrorText}>{errorPin}</Text>
+                        </View> : null}
+                    <View style={{ marginHorizontal: "3%", marginVertical: "1%" }}>
                         <Pressable onPressIn={() => handleBox()}>
                             <TextInput
                                 keyboardType={"default"}
@@ -443,7 +434,7 @@ const AddAddress = ({ route }) => {
                                 <Text style={styles.ErrorText}>{errorAddress}</Text> : null}
                         </View>
                         : null}
-                    <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
+                    <View style={{ marginHorizontal: "3%", marginVertical: "2%" }}>
                         <Pressable onPressIn={() => handleBox()}>
                             <TextInput
                                 keyboardType={"default"}
@@ -462,11 +453,11 @@ const AddAddress = ({ route }) => {
                             {errorLocality ?
                                 <Text style={styles.ErrorText}>{errorLocality}</Text> : null}
                         </View> : null}
-                    <View style={{ flexDirection: "row", marginHorizontal: "2%" }}>
-                        <View style={{ flexDirection: "column", width: "48.5%" }}>
-                            <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
+                    <View style={{ flexDirection: "row", marginHorizontal: "3%", marginVertical: "1%", width: "95%", alignItems: 'center' }}>
+                        <View style={{ flexDirection: "column", width: "46%", marginLeft: "2.5%" }}>
+                            <View>
                                 <Dropdown
-                                    style={{ width: "92%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, padding: "2%", marginTop: "1%", paddingHorizontal: 14 }}
+                                    style={{ width: "100%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, padding: "2%", marginTop: "1%", paddingHorizontal: 14 }}
                                     placeholderStyle={styles.dropText}
                                     selectedTextStyle={styles.dropText}
                                     data={countryListValue}
@@ -479,14 +470,14 @@ const AddAddress = ({ route }) => {
                                 />
                             </View>
                             {countryError ?
-                                <View >
+                                <View style={{ height: "3%",borderWidth:2 }}>
                                     <Text style={styles.ErrorText}>{countryError}</Text>
                                 </View> : null}
                         </View>
-                        <View style={{ flexDirection: "column", width: "50%" }}>
-                            <View style={{ marginHorizontal: "3%", marginBottom: "2%" }}>
+                        <View style={{ flexDirection: "column", width: "49%" }}>
+                            <View style={{ marginHorizontal: "3%", marginBottom: "1%" }}>
                                 <Dropdown
-                                    style={{ width: "91%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, padding: "2%", marginTop: "1%", paddingHorizontal: 14 }}
+                                    style={{ width: "100%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, padding: "2%", marginTop: "1%", paddingHorizontal: 14 }}
                                     placeholderStyle={styles.dropText}
                                     selectedTextStyle={styles.dropText}
                                     data={stateListValue}
@@ -499,13 +490,13 @@ const AddAddress = ({ route }) => {
                                 />
                             </View>
                             {stateError ?
-                                <View>
+                                <View style={{ height: "3%" }}>
                                     {stateError ?
                                         <Text style={styles.ErrorText}>{stateError}</Text> : null}
                                 </View> : null}
                         </View>
                     </View>
-                    <View style={{ marginHorizontal: "1%", marginBottom: "2%", marginTop: "2%" }}>
+                    <View style={{ marginHorizontal: "1%", marginVertical: "1%" }}>
                         <Dropdown
                             style={{ width: "91%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, padding: "2%", marginTop: "1%", paddingHorizontal: 14 }}
                             placeholderStyle={styles.dropText}
@@ -529,10 +520,10 @@ const AddAddress = ({ route }) => {
                     <View style={{ marginVertical: "2%", flexDirection: "row", width: "89%", alignSelf: "center", borderRadius: 10, backgroundColor: COLORS.white }}>
                         <>
                             <TouchableOpacity disabled={optionHo} style={{ paddingVertical: "5%", marginHorizontal: "5%", }} onPress={() => setAddressType(0)}>
-                                <Text style={{ ...styles.switch, backgroundColor: (addressType == 0) ? COLORS.element : "white", color: (addressType == 0) ? COLORS.white : COLORS.gray }}>Home</Text>
+                                <Text style={{ ...styles.switch, backgroundColor: (addressType == 0) ? COLORS.element : "white", color: (addressType == 0) ? COLORS.white : COLORS.gray, borderColor: (addressType == 0) ? COLORS.element : COLORS.gray }}>Home</Text>
                             </TouchableOpacity>
                             <TouchableOpacity disabled={optionWo} style={{ paddingVertical: "5%", }} onPress={() => setAddressType(1)}>
-                                <Text style={{ ...styles.switch, backgroundColor: (addressType == 1) ? COLORS.element : "white", color: (addressType == 1) ? COLORS.white : COLORS.gray }}>Work</Text>
+                                <Text style={{ ...styles.switch, backgroundColor: (addressType == 1) ? COLORS.element : "white", color: (addressType == 1) ? COLORS.white : COLORS.gray, borderColor: (addressType == 1) ? COLORS.element : COLORS.gray }}>Work</Text>
                             </TouchableOpacity>
                         </>
                     </View>
@@ -545,14 +536,14 @@ const AddAddress = ({ route }) => {
                         <View style={{ marginLeft: "-4%" }}><CheckBoxes /></View>
                         <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, paddingHorizontal: "5%", alignSelf: "center" }}>Make this my default address</Text>
                     </View>
-            </ScrollView>
+                </ScrollView>
             }
-                    <View style={{ flexDirection: "row", height: "8%", backgroundColor: COLORS.white, paddingVertical: "1%", paddingHorizontal: "2%" }}>
-                        <TouchableOpacity style={{ flexDirection: "column", width: "90%", marginHorizontal: "5%", marginVertical: "1%", borderRadius: 5, borderWidth: 1, justifyContent: "center", alignItems: "center" }} onPress={e => { handleSubmit() }} disabled={false}>
-                            <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular }}>Add Address</Text>
-                        </TouchableOpacity>
-                    </View>
-           
+            <View style={{ flexDirection: "row", height: "8%", backgroundColor: COLORS.white, paddingVertical: "1%", paddingHorizontal: "2%" }}>
+                <TouchableOpacity style={{ flexDirection: "column", width: "90%", marginHorizontal: "5%", marginVertical: "1%", borderRadius: 5, borderWidth: 1, justifyContent: "center", alignItems: "center" }} onPress={e => { handleSubmit() }} disabled={false}>
+                    <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular }}>Add Address</Text>
+                </TouchableOpacity>
+            </View>
+
         </SafeAreaView>
     );
 }
@@ -568,13 +559,11 @@ const styles = StyleSheet.create({
 
     },
     switch: {
-
         textAlign: "center",
         fontSize: RFValue(11),
         ...FONTS.lexendregular,
         borderRadius: 4,
         borderWidth: 1,
-        borderColor: COLORS.gray,
         paddingVertical: "1%",
         paddingHorizontal: "4%"
     },

@@ -43,7 +43,7 @@ const DrawsMain = () => {
     const [winner, setWinner] = useState();
     const [close, setClose] = useState();
     const [loaders, setLoader] = useState(true);
-
+    const [datePlaceHolder, setDatePlaceHolder] = useState(true);
     const daily = moment(new Date()).format("YYYY-MM-DD")
 
     const selectedDateFunction = (event, selectedDate: any) => {
@@ -157,14 +157,14 @@ const DrawsMain = () => {
                     transparent={true}
                     visible={modalVisible}
                     onRequestClose={() => {
-                        setModalVisible(!modalVisible);
+                        setModalVisible(!modalVisible), setDatePlaceHolder(true);
                     }}>
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
                             <View style={{ flexDirection: "row", justifyContent: "space-between", width: "100%", height: 50, marginTop: 2, alignItems: "center", paddingHorizontal: "4%" }}>
                                 <TouchableOpacity>
                                     <Pressable
-                                        onPress={() => setModalVisible(!modalVisible)}>
+                                        onPress={() => { setModalVisible(!modalVisible), setDatePlaceHolder(true) }}>
                                         <View>
                                             <Image
                                                 source={icons.back1}
@@ -180,7 +180,7 @@ const DrawsMain = () => {
                                 <View style={{}}>
                                     <Text style={{ textAlign: "center", fontFamily: "Lexend-Regular", fontSize: RFValue(20), color: "#000000", marginTop: 0 }}>Filter</Text>
                                 </View>
-                                <TouchableOpacity style={{}} onPress={() => { setSearcher(""), setDate(moment(new Date()).toISOString()), setYear(""), resetFilter() }}>
+                                <TouchableOpacity style={{}} onPress={() => { setSearcher(""), setDate(moment(new Date()).toISOString()), setYear(""), resetFilter(), setDatePlaceHolder(true) }}>
                                     <Text style={{ textAlign: "center", fontFamily: "Lexend-Regular", fontSize: RFValue(14), color: "#E70736", marginTop: 5 }}>RESET</Text>
                                 </TouchableOpacity>
                             </View>
@@ -214,9 +214,9 @@ const DrawsMain = () => {
                                         </TouchableOpacity>
                                         <View >
                                             <TouchableOpacity style={{ width: "100%", borderWidth: 1, borderColor: "#c4c4c2", backgroundColor: COLORS.white, alignSelf: "center", justifyContent: "center", borderRadius: 8, ...FONTS.lexendregular, paddingLeft: 14, height: 50 }}
-                                                onPress={() => setDateShow(true)}
+                                                onPress={() => { setDateShow(true), setDatePlaceHolder(false) }}
                                             >
-                                                <Text style={styles.dropText}>{(date) ? moment(date).format('MM/DD/YYYY') : 'MM/DD/YYYY'}</Text>
+                                                <Text style={styles.dropText}>{(!datePlaceHolder && date) ? moment(date).format('MM/DD/YYYY') : 'MM/DD/YYYY'}</Text>
                                             </TouchableOpacity>
                                             {dateShow ?
                                                 <DateTimePicker
@@ -232,9 +232,9 @@ const DrawsMain = () => {
                                     </> : null}
 
                             </View>
-                            <TouchableOpacity style={{ alignItems: "center", justifyContent: "center", marginTop: verticalScale(20) }} onPress={() => { handleFilter({ searcher, date, year }) }}>
+                            <TouchableOpacity style={{ alignItems: "center", marginTop: verticalScale(20), width: "100%" }} onPress={() => { handleFilter({ searcher, date, year }) }}>
                                 <View style={{ width: "65%", borderRadius: 6, backgroundColor: "#E70736", alignItems: "center", justifyContent: "center", }}>
-                                    <Text style={{ color: "#FFFFFF", fontSize: RFValue(17), fontFamily: "Lexend-Regular", paddingVertical: "4%" }}>Apply</Text>
+                                    <Text style={{ color: "#FFFFFF", fontSize: RFValue(17), fontFamily: "Lexend-Regular", paddingVertical: "5%" }}>Apply</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>

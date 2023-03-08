@@ -121,11 +121,17 @@ const EditAddress = ({ route }) => {
             setSelection(address.is_default_address)
             setCountryValue(address.country)
             setStateValue(address.state)
+            setStateIso(address.state.isoCode),
             setAddressType(address.address_type === "Home" ? 0 : 1)
-            console.log(address, "address to edit in this page ")
+            console.log(address, "address to edit in this page")
+            getCountryList();
+            if (address.country.isoCode) {
+                getStateList(address.country.isoCode);
+            }
 
         })
     }
+
     useEffect(() => {
         if (addresslist.length === 2) {
             setOptionHo(true)
@@ -237,9 +243,7 @@ const EditAddress = ({ route }) => {
                     "isoCode": stateData.isoCode,
                     "countryCode": stateData.countryCode
                 },
-                "country": {
-                    "currency": "INR", "flag": "????", "isoCode": "IN", "name": "India", "phonecode": "91"
-                },
+                "country": countryData,
                 "address_type": addressType == 0 ? "Home" : "Work",
                 "is_default_address": isSelected
             }
@@ -263,23 +267,21 @@ const EditAddress = ({ route }) => {
                 })
         }
     }
-
-    //useEffect(() => {
-
-    //getCountryList();
-    // const india = [{ "currency": "INR", "flag": "????", "isoCode": "IN", "name": "India", "phonecode": "91" }];
-    // setCountryListValue(india)
-    //}, [stateValue])
-    // const getCountryList = async () => {
-    //     let listCountries = await countryList().then((originalPromiseResult) => {
-    //         //console.log("Personal Details Country....", originalPromiseResult);
-    //         // const value = originalPromiseResult
-    //         //setCountryListValue(originalPromiseResult);
-    //         //console.log("listCoun", originalPromiseResult[56].name)
-    //     })
-    // }
-    const getStateList = async () => {
-        const data = "IN";
+    // const getCountry=()=>
+    // getCountryList();
+    // // const india = [{ "currency": "INR", "flag": "????", "isoCode": "IN", "name": "India", "phonecode": "91" }];
+    // // setCountryListValue(india)
+    // }, [stateValue])
+    const getCountryList = async () => {
+        let listCountries = await countryList().then((originalPromiseResult) => {
+            console.log("Personal Details Country....", originalPromiseResult);
+            const value = originalPromiseResult
+            setCountryListValue(originalPromiseResult);
+            console.log("listCoun", originalPromiseResult[56].name)
+        })
+    }
+    const getStateList = async (data: any) => {
+        // const data = "IN";
         console.log("get satet value ..................", data);
         let listState = await stateList(data).then((originalPromiseResult) => {
             console.log(stateValue, "Personal Details State222222222....", originalPromiseResult);
@@ -292,20 +294,21 @@ const EditAddress = ({ route }) => {
             setCityListValue(originalPromiseResult);
         })
     }
-    // useEffect(() => {
-    //     if (countryValue) {
-    //         getStateList(countryValue);
-    //     }
-    //     console.log("im inside the country value page ",stateListValue);
-    // }, [countryValue])
 
     const themeForList = {
         color: COLORS.black,
         fontFamily: "Lexend-Regular",
     }
     useEffect(() => {
-        getStateList()
-        if (stateValue) {
+        if (countryValue) {
+            getStateList(countryValue)
+            console.log("UseEffect for state................");
+
+        }
+    }, [countryValue])
+    useEffect(() => {
+        // getStateList()
+        if (stateIso) {
             console.log("im inside the State ", stateValue);
             console.log("samuuuuuuuuuuuuu", stateValue.countryCode, "county data", stateValue.isoCode)
             const data = { countryValue, stateIso }
@@ -314,7 +317,7 @@ const EditAddress = ({ route }) => {
 
         }
         // else { Alert.alert("Select any state") }
-    }, [stateData])
+    }, [stateIso])
 
     const handleBox = () => {
         if (errorName) {
@@ -448,7 +451,7 @@ const EditAddress = ({ route }) => {
                                 style={{ width: "100%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, padding: "2%", marginTop: "1%", paddingHorizontal: 14 }}
                                 placeholderStyle={styles.dropText}
                                 selectedTextStyle={styles.dropText}
-                                disable={true}
+                                // disable={true}
                                 data={countryListValue}
                                 maxHeight={350}
                                 itemTextStyle={themeForList}

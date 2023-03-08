@@ -11,7 +11,7 @@ export const cityList = async (data) => {
     const key = await fetchJSONAsync()
     const headers = { 'Content-Type': 'Application/json', 'Authorization': "Bearer " + key }
     console.log(data.stateIso,"data of city and state",data)
-    return await axios.get(`${'https://api.grandealz.vytech.co'}/location/get-cities-of-states/${data.countryValue.isoCode}/${data.stateIso}`, { headers: headers }).then(response => {
+    return await axios.get(`${'https://api.grandealz.vytech.co'}/location/get-cities-of-states/${data.countryValue}/${data.stateIso}`, { headers: headers }).then(response => {
 
         console.log("City List with codes", response.data.data);
 

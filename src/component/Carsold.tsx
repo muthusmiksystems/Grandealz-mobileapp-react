@@ -34,23 +34,23 @@ const Carsold = () => {
             }
         })
         setSoldoutdata(Alreadysoldout)
-        // console.log("ermmm", soldoutdata.length == 0)
+        console.log("SoldOut Data in carsold.tsx", soldoutdata)
     }, [DataInfo])
 
     return (
         <SafeAreaView >
-            {(soldoutdata) ? null :
+            {(soldoutdata && soldoutdata.length > 0) &&
                 <>
-                    <View style={{ paddingVertical: verticalScale(10), backgroundColor: "#D10359", height: 150, }}>
+                    <View style={{ paddingVertical: verticalScale(10), backgroundColor: "#D10359", height: verticalScale(200), }}>
                         <Text style={{ marginLeft: 25, ...FONTS.lexendregular, fontWeight: "600", color: COLORS.white, fontSize: RFValue(15) }}>
                             SOLD OUT
                         </Text>
                         <View style={{ marginLeft: "6.5%", width: "10%", height: "2%", borderColor: "white", backgroundColor: "black" }} />
                         <Text style={{ marginLeft: 25, ...FONTS.lexendregular, color: COLORS.white, marginTop: "1%" }}>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industryfghthtrhrthhrthtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt.
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                         </Text>
                     </View>
-                    <View style={{ bottom: 80 }} >
+                    <View style={{ bottom: 120 }} >
                         <FlatList
                             data={soldoutdata}
                             contentContainerStyle={{}}
@@ -64,7 +64,6 @@ const Carsold = () => {
                                                 style={{
                                                     height: verticalScale(150),
                                                     width: horizontalScale(230),
-                                                    borderWidth: 1,
                                                     margin: "3%",
                                                     borderRadius: 5
                                                 }}

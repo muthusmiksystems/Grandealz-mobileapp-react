@@ -39,6 +39,7 @@ import { userDetailsHandler } from '../../store/reducers/userDetails';
 import { deleteAccount } from '../../services/deleteAccount';
 import Toast from 'react-native-simple-toast';
 
+
 const User = (props: any) => {
     // console.log("PAge props.............", props.route.params)
     const userData: any = useSelector<any>(state => state.userDetailsHandle?.data?.data);
@@ -137,7 +138,9 @@ const User = (props: any) => {
         if (Platform.OS == 'android' && await checkForPermissions()) {
             console.log("Camera permission given");
             const options: CameraOptions = {
-                mediaType: 'photo'
+                mediaType: 'photo',
+                maxWidth: 4320,
+                maxHeight: 4320,
             }
             const result = await launchCamera(options);
             console.log("imgdetails.....................", result);
@@ -151,7 +154,6 @@ const User = (props: any) => {
                 setProfilePic(file)
             }
 
-
             else {
                 Toast.show("Please try again later!", Toast.LONG, { backgroundColor: 'red' });
             }
@@ -164,8 +166,6 @@ const User = (props: any) => {
             console.log("Camera permission given");
             const options: ImageLibraryOptions = {
                 mediaType: 'photo',
-                maxWidth: 1080,
-                maxHeight: 1080
             }
             const result = await launchImageLibrary(options);
 

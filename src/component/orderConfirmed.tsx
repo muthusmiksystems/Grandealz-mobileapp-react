@@ -53,8 +53,8 @@ const OrderConfirmed = () => {
                 <View style={{ width: "100%", height: "20%", alignItems: "center", marginTop: "25%" }}>
                     <Image
                         source={icons.confirmTick}
-                        resizeMode="cover"
-                        style={{ width: 70, height: 70 }}
+                        resizeMode="contain"
+                        style={{ width: "20%", height: 70 }}
                     />
                     <Text style={{ color: "white", ...FONTS.lexendregular, fontSize: RFValue(20), marginVertical: "5%" }}>Order Confirmed</Text>
                 </View>

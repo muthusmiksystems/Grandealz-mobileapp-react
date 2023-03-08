@@ -79,7 +79,7 @@ const PriceMap = ({ priceval }) => {
                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendsemibold, alignItems: "flex-start" }}>Price Details</Text>
                 <View style={{ borderBottomColor: "#616161", borderBottomWidth: 1, alignItems: "flex-start", marginTop: "3%" }} />
                 <View style={{ width: "100%", alignSelf: "center" }}>
-                    <View style={{ flexDirection: "row", marginTop: "3%", paddingBottom: "2%" }}>
+                    <View style={{ flexDirection: "row", marginTop: "3%" }}>
                         <View style={{ width: "75%", alignItems: "flex-start" }}>
                             <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular }}>Total MRP </Text>
                         </View>
@@ -87,7 +87,7 @@ const PriceMap = ({ priceval }) => {
                             <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, }}>₹ {cartAmountDetails.sub_total}</Text>
                         </View>
                     </View>
-                    <View style={{ flexDirection: "row", paddingBottom: "2%", marginTop: "3%" }}>
+                    <View style={{ flexDirection: "row", marginTop: "3%" }}>
                         <View style={{ width: "75%", alignItems: "flex-start" }}>
                             <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular }}>Tax(GST) </Text>
                         </View>
@@ -105,12 +105,12 @@ const PriceMap = ({ priceval }) => {
                     </View>
                 </View>
                 <View style={{ borderBottomColor: "#616161", borderBottomWidth: 1, alignItems: "flex-start" }} />
-                <View style={{ width: horizontalScale(310) }}>
-                    <View style={{ flexDirection: "row", paddingBottom: "2%", alignItems: "center" }}>
+                <View style={{ width: "100%" }}>
+                    <View style={{ flexDirection: "row", paddingBottom: "1%", alignItems: "center" }}>
                         <View style={{ width: "80%", alignItems: "flex-start", marginTop: "3%" }}>
                             <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular }}>Total Amount</Text>
                             <Text style={{ fontSize: RFValue(10), color: COLORS.gray, ...FONTS.lexendregular }}>Inclusive of Tax (GST)</Text></View>
-                        <View style={{ width: "25%", alignItems: "flex-end" }}>
+                        <View style={{ width: "20%", alignItems: "flex-end" }}>
                             <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular }}>₹{cartAmountDetails.total}</Text>
                         </View>
                     </View>

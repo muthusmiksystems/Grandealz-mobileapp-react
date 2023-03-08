@@ -33,7 +33,7 @@ const AddNewPayee = () => {
                     value={isSelected}
                     onValueChange={setSelection}
                     style={styles.checkBox}
-                    tintColors={{ true: COLORS.primary }}
+                    tintColors={{ true: COLORS.element }}
                 />
 
             </View>
@@ -46,7 +46,7 @@ const AddNewPayee = () => {
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: horizontalScale(18), flexDirection: "column" }}>
                     <EntypoIcons name="chevron-left" size={30} style={{ flexDirection: "column" }} color={"white"} />
                 </TouchableOpacity>
-                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(24), marginStart: "15%" }}>Add New Card</Text>
+                <Text style={{ fontFamily: "Lexend-SemiBold", color: "white", fontSize: RFValue(20), width: "80%", textAlign: "center" }}>Add New Card</Text>
             </View>
             <View style={{ borderColor: "red", width: "100%", padding: "4%", height: verticalScale(740) }}>
                 <View style={{ borderRadius: 8, width: "100%", backgroundColor: COLORS.white }}>

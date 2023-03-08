@@ -97,7 +97,7 @@ const DrawsHeader = () => {
           horizontal={true}
           data={close}
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ margin: "3.5%", paddingRight: "41%" }}
+          contentContainerStyle={{ margin: "3.5%", paddingRight: 500 }}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
             <View>

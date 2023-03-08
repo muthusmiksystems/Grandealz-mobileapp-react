@@ -27,6 +27,7 @@ import { ourCartPage } from '../services/ourCart';
 import { RemovewishlistHandle } from '../services/deletewishlist';
 import { AddtoCartHandle } from '../services/addtocart';
 import Toast from 'react-native-simple-toast';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const PriceDetails = ({ route }) => {
   const pricing = route.params;
@@ -150,12 +151,12 @@ const PriceDetails = ({ route }) => {
   }, [])
 
   return (
-    <View style={{ flex: 1 }} >
+    <SafeAreaView>
       <StatusBar
         animated={true}
         backgroundColor={"#0a0127"}
       />
-      <View style={{ flex: 1.8 }}>
+      <View style={{ height: "92.3%" }}>
         <View
           style={{
             backgroundColor: "#0a0127",
@@ -207,18 +208,30 @@ const PriceDetails = ({ route }) => {
             <View style={{ borderWidth: 0.5, width: "100%", borderColor: "lightgrey" }} />
             <View style={{ alignItems: 'center' }}>
               <View style={{ width: "100%", flexDirection: "row", justifyContent: "space-between", padding: "4%" }}>
-                <View style={{ flexDirection: "column" }}>
-                  <View style={{ alignSelf: "flex-start", marginLeft: "2%", borderTopEndRadius: 40, borderTopStartRadius: 40, borderBottomEndRadius: 40, borderBottomStartRadius: 40, borderWidth: 3, marginTop: "2%", height: verticalScale(55), width: horizontalScale(120), borderColor: "#D8000D", flexDirection: "row" }}>
-                    <View style={{ flexDirection: "column", padding: 4, marginLeft: "7%" }}>
-                      <Text style={{ color: COLORS.element, ...FONTS.lexendregular, fontSize: RFValue(13), textAlign: "center" }}>{pricing.total_no_of_sold_out_tickets}</Text>
-                      <Text style={{ ...FONTS.lexendsemibold, alignSelf: "center", color: "black", fontSize: RFValue(10), }}> Sold</Text>
-                    </View>
-                    <View style={{ backgroundColor: "#7F7E76B2", height: verticalScale(23), marginTop: verticalScale(15), borderWidth: 1, borderColor: "#7F7E76B2" }} />
-                    <View style={{ flexDirection: "column", padding: 4 }}>
-                      <Text style={{ ...FONTS.lexendregular, color: " rgba(127, 126, 118, 0.7)", fontSize: RFValue(9) }}> OUT OF</Text>
-                      <Text style={{ color: COLORS.element, ...FONTS.lexendregular, fontSize: RFValue(13), textAlign: "center" }}>{pricing.total_no_of_tickets}</Text>
-                    </View>
-                  </View>
+                <View style={{ flexDirection: "column", alignSelf: "flex-start", marginLeft: "2%" }}>
+                  <AnimatedCircularProgress
+                    size={60}
+                    width={4}
+                    fill={pricing.total_no_of_sold_out_tickets / pricing.total_no_of_tickets * 100}
+                    tintColor={COLORS.element}
+                    // onAnimationComplete={() => console.log('onAnimationComplete')}
+                    backgroundColor={COLORS.lightGray}>
+                    {
+                      (fill) => (
+                        <>
+                          <View>
+                            <Text style={{ color: "#E70736", ...FONTS.lexendregular, fontSize: RFValue(10), textAlign: "center" }}>{pricing.total_no_of_sold_out_tickets}
+                              <Text style={{ ...FONTS.lexendsemibold, alignSelf: "center", color: "black", fontSize: RFValue(8), }}>{" "}Sold</Text></Text>
+                          </View>
+                          <View style={{ backgroundColor: "#7F7E76B2", width: "80%", borderWidth: 1, borderColor: "#7F7E76B2" }} />
+                          <View>
+                            <Text style={{ ...FONTS.lexendregular, color: " rgba(127, 126, 118, 0.7)", fontSize: RFValue(8) }}>OUT OF</Text>
+                            <Text style={{ color: "#E70736", ...FONTS.lexendregular, fontSize: RFValue(10), textAlign: "center" }}>{pricing.total_no_of_tickets}</Text>
+                          </View>
+                        </>
+                      )
+                    }
+                  </AnimatedCircularProgress>
                 </View>
                 <View style={{ alignSelf: "flex-end", flexDirection: "column", height: "100%" }}>
                   <TouchableOpacity onPress={() => { sharePage() }}>
@@ -296,7 +309,7 @@ const PriceDetails = ({ route }) => {
           </View>
         </ScrollView>
       </View>
-      <View style={{ flex: 0.18, backgroundColor: "white" }}>
+      <View style={{ backgroundColor: "white" }}>
         <View style={{ flexDirection: "row", marginVertical: "2%", marginHorizontal: "4%", justifyContent: "space-between" }}>
           {!(cartList.includes(`${pricing._id}`)) ?
             <TouchableOpacity style={{ flexDirection: "column", borderRadius: 6, width: "48%" }}>
@@ -325,7 +338,7 @@ const PriceDetails = ({ route }) => {
           </TouchableOpacity>
         </View> */}
       </View>
-    </View>
+    </SafeAreaView>
   )
 }
 const styles = StyleSheet.create({

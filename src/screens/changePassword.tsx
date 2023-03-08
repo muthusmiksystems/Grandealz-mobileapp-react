@@ -26,64 +26,97 @@ import { COLORS, FONTS } from "../constants";
 import { changepasswordHandle } from "../store/reducers/changepassword";
 import Toast from 'react-native-simple-toast';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import validate from "./Auth/validate";
 
 const ChangePassword = () => {
 
   const navigation = useNavigation();
-
   const dispatch = useDispatch();
-
   const [expassword, setExpassword] = useState('')
   const [newpassword, setNewpassword] = useState('')
   const [confirmpassword, setConfirmpassword] = useState('')
   const [passShowEx, setPassShowEx] = useState("true");
   const [passShowNw, setPassShowNw] = useState("true");
   const [passShowCp, setPassShowCp] = useState("true");
-
+  const [exPasswordError, setExpasswordError] = useState("")
+  const [newPasswordError, setNewpasswordError] = useState("")
+  const [confirmpasswordError, setConfirmpasswordError] = useState("")
   const [error, setError] = useState()
 
-
-
+  const validateFunction = () => {
+    let errorCount = 0;
+    if (!expassword) {
+      setExpasswordError("Please enter your existing password")
+      errorCount++;
+    }
+    else if (!/^[a-zA-Z0-9!@#$%^&*~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹]{8,16}$/.test(expassword)) {
+      setExpasswordError("Password should have minimum 8 characters with uppercase,lowercase,numbers and special characters")
+      errorCount++;
+    }
+    else {
+      setExpasswordError('')
+    }
+    if (!newpassword) {
+      setNewpasswordError("Please enter new password")
+      errorCount++;
+    }
+    else if (!/^[a-zA-Z0-9!@#$%^&*~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹]{8,16}$/.test(newpassword)) {
+      setNewpasswordError("Password should have minimum 8 characters with uppercase,lowercase,numbers and special characters")
+      errorCount++;
+    }
+    else if (expassword == newpassword) {
+      setNewpasswordError("Please enter new password")
+      errorCount++;
+    }
+    else {
+      setNewpasswordError("")
+    }
+    if (!confirmpassword) {
+      setConfirmpasswordError("Please enter confirm password")
+      errorCount++;
+    }
+    // else if (!/^[a-zA-Z0-9!@#$%^&*~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹]{8,16}$/.test(confirmpassword)) {
+    //   setConfirmpasswordError("Password should have minimum 8 characters with uppercase,lowercase,numbers and special characters")
+    //   errorCount++;
+    // }
+    else if (newpassword !== confirmpassword) {
+      setConfirmpasswordError("Confirm password doesn't match the new password")
+      errorCount++;
+    }
+    else {
+      setConfirmpasswordError("")
+    }
+    if (errorCount === 0) {
+      setExpasswordError(""), setNewpasswordError(""), setConfirmpasswordError("");
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 
   const validatePassword = () => {
-    if (expassword.length == 0 || newpassword.length == 0 || confirmpassword.length == 0) {
-      setError('Please enter your password');
-    } else {
-      setError('');
+    const validateSuccess = validateFunction()
+    if (validateSuccess) {
+      const value = {
+        "password": expassword,
+        "new_password": confirmpassword
+      };
+      dispatch(changepasswordHandle(value)).then(unwrapResult).then((originalPromiseResult) => {
 
-
-      if ((newpassword !== confirmpassword) || (expassword === newpassword)) {
-        setError("Please Check your password");
-
-      } else {
-        if (!/^[a-zA-Z0-9!@#$%^&*~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹]{8,16}$/.test(newpassword) && !/^[a-zA-Z0-9!@#$%^&*~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹]{8,16}$/.test(confirmpassword)) {
-          setError("minimum 8 characters should be with uppercase,lowercase and number");
+        console.log("successfully returned to change Password with response ", originalPromiseResult);
+        if (originalPromiseResult === "Password has been changed.") {
+          Toast.show('Password has been changed successfully', Toast.LONG, { backgroundColor: 'red' });
+          setExpassword(""),
+            setNewpassword(""),
+            setConfirmpassword("")
+          navigation.navigate('User')
         }
         else {
-          setError("");
-          const value = {
-            "password": expassword,
-            "new_password": confirmpassword
-          };
-          dispatch(changepasswordHandle(value)).then(unwrapResult).then((originalPromiseResult) => {
-
-            console.log("successfully returned to change Password with response ", originalPromiseResult);
-            if (originalPromiseResult === "Password has been changed.") {
-              Toast.show('Password has been changed successfully', Toast.LONG, { backgroundColor: 'red' });
-              setExpassword(""),
-                setNewpassword(""),
-                setConfirmpassword("")
-              navigation.navigate('User')
-            }
-            else {
-              setError(originalPromiseResult)
-              Toast.show(originalPromiseResult, Toast.LONG, { backgroundColor: 'red' });
-            }
-          })
-
+          setError(originalPromiseResult)
+          Toast.show(originalPromiseResult, Toast.LONG, { backgroundColor: 'red' });
         }
-      }
+      })
     }
   }
 
@@ -114,7 +147,7 @@ const ChangePassword = () => {
         <View style={styles.subdivTwo}>
           <Text style={{ fontSize: RFValue(25), color: "black", textAlign: "center", marginTop: verticalScale(20), fontFamily: "Lexend-SemiBold" }}>Change Password</Text>
           <View style={{ alignItems: "center" }}>
-            <View style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), color: "#000", marginTop: verticalScale(20), ...FONTS.lexendregular, }}  >
+            <View style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), marginTop: verticalScale(20), ...FONTS.lexendregular }}  >
               <TextInput
                 placeholder="Existing Password"
                 placeholderTextColor={"black"}
@@ -134,7 +167,10 @@ const ChangePassword = () => {
                 }
               </TouchableOpacity>
             </View>
-            <View style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), color: "#000", marginTop: verticalScale(20), ...FONTS.lexendregular }} >
+            <View style={{ width: "100%", paddingLeft: "8%", marginBottom: verticalScale(14) }}>
+              {exPasswordError ? <Text style={{ ...FONTS.lexendregular, color: COLORS.element, fontSize: RFValue(10), width: "100%" }}>{exPasswordError}</Text> : null}
+            </View>
+            <View style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), ...FONTS.lexendregular }} >
               <TextInput
                 placeholder="New Password"
                 placeholderTextColor={"black"}
@@ -154,7 +190,10 @@ const ChangePassword = () => {
                 }
               </TouchableOpacity>
             </View>
-            <View style={{ marginTop: verticalScale(20), ...FONTS.lexendregular, alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), color: "#000", marginTop: verticalScale(20), ...FONTS.lexendregular }} >
+            <View style={{ width: "100%", paddingLeft: "8%", marginBottom: verticalScale(14) }}>
+              {newPasswordError ? <Text style={{ ...FONTS.lexendregular, color: COLORS.element, fontSize: RFValue(10), width: "100%" }}>{newPasswordError}</Text> : null}
+            </View>
+            <View style={{ ...FONTS.lexendregular, alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), ...FONTS.lexendregular }} >
               <TextInput
                 placeholder="Confirm Password"
                 placeholderTextColor={"black"}
@@ -174,12 +213,15 @@ const ChangePassword = () => {
                 }
               </TouchableOpacity>
             </View>
+            <View style={{ width: "100%", paddingLeft: "8%" }}>
+              {confirmpasswordError ? <Text style={{ ...FONTS.lexendregular, color: COLORS.element, fontSize: RFValue(10), width: "100%" }}>{confirmpasswordError}</Text> : null}
+            </View>
           </View>
 
-          <View style={{ height: "10%", alignItems: "center", marginRight: RFValue(18) }}>
+          {/* <View style={{ height: "10%", alignItems: "center", marginRight: RFValue(18) }}>
             {error ? <Text style={{ ...FONTS.lexendregular, color: COLORS.element, fontSize: RFValue(12), paddingStart: "7%" }}>{error}</Text> : null}
-          </View>
-          <TouchableOpacity style={{ alignSelf: "center", marginTop: "1%", borderWidth: 1, borderRadius: 8, width: verticalScale(200), padding: "3%" }}
+          </View> */}
+          <TouchableOpacity style={{ alignSelf: "center", marginTop: "10%", borderWidth: 1, borderRadius: 8, width: verticalScale(200), padding: "3%" }}
             onPress={() => validatePassword()}
           >
             <Text style={{ textAlign: "center", fontSize: 16, fontFamily: "Lexend-SemiBold", color: "black" }}>Update</Text>

@@ -100,14 +100,14 @@ const CartRelated = ({ cartdts, changer, setChanger }) => {
                         horizontal={true}
                         data={similarproduct}
                         showsHorizontalScrollIndicator={false}
-                        ItemSeparatorComponent={() => (
-                            <View style={{ width: 15 }} />
-                        )}
+                        // ItemSeparatorComponent={() => (
+                        //     <View style={{ width: 10 }} />
+                        // )}
                         keyExtractor={item => item.id}
                         renderItem={({ item }) => (
                             <>
                                 {!(cartList.includes(`${item._id}`)) ?
-                                    <View style={{ height: RFValue(240) }}>
+                                    <View style={{ height: RFValue(240), marginRight: 14 }}>
                                         <View style={{ backgroundColor: COLORS.white, borderRadius: 5, width: RFValue(154), height: "100%", padding: RFValue(15) }}>
                                             <TouchableOpacity>
                                                 <View style={{ backgroundColor: "#F9F9F9", padding: "2%" }}>

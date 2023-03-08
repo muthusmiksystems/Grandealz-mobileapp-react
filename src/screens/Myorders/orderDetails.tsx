@@ -261,8 +261,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         // justifyContent: 'center',
         flexDirection: "row",
-
-
     },
     subdivTwo: {
         height: verticalScale(748),

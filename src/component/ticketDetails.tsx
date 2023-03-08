@@ -32,7 +32,7 @@ const TicketDetails = (Ticketdata) => {
                     keyExtractor={item => item.draw._id}
                     renderItem={({ item }) => (
                         <View style={{ marginBottom: "4%" }}>
-                            <TouchableOpacity style={{ backgroundColor: "white", flexDirection: "row", width: "100%", height: verticalScale(134), borderRadius: 6 }}>
+                            <TouchableOpacity style={{ backgroundColor: "white", flexDirection: "row", width: "100%", height: verticalScale(158), borderRadius: 6 }}>
                                 <View style={{ flexDirection: "column", width: horizontalScale(25), right: horizontalScale(10), alignSelf: "center", backgroundColor: COLORS.lightGray, height: verticalScale(52), borderBottomEndRadius: 55, borderTopEndRadius: 55 }} />
                                 <View style={{ flexDirection: "column", width: horizontalScale(300), right: horizontalScale(10) }}>
                                     <View style={{ flexDirection: "row", padding: 8, borderBottomColor: "#616161", borderBottomWidth: 1 }}>

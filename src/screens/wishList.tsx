@@ -165,7 +165,7 @@ const WishList = () => {
                                                         </View>
                                                         <View style={{ flexDirection: "column", justifyContent: "center", width: "60%", paddingLeft: "4%" }}>
                                                             <Text style={{ color: COLORS.black, ...FONTS.lexendsemibold, fontSize: RFValue(12) }}>{item.draw.product_title}</Text>
-                                                            <Text style={{ color: COLORS.gray, ...FONTS.lexendregular, fontSize: RFValue(12) }}>{(item.draw.product_description).substring(0, 45)}</Text>
+                                                            <Text style={{ color: COLORS.gray, ...FONTS.lexendregular, fontSize: RFValue(12) }}>{(item.draw.draw_title)}</Text>
                                                             <Text style={{ color: COLORS.element, ...FONTS.lexendregular, fontSize: RFValue(12) }}>₹{item.draw.product_price}</Text>
                                                         </View>
                                                     </View>
