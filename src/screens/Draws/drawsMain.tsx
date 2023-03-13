@@ -141,13 +141,13 @@ const DrawsMain = () => {
     }, [])
     return (
         <SafeAreaView>
-            <View style={{ flexDirection: "row", width: "94%", alignSelf: "center", height: verticalScale(46) }}>
+            <View style={{ flexDirection: "row", width: "100%", paddingHorizontal: 18, alignSelf: "center", justifyContent: "space-between", height: verticalScale(46) }}>
 
-                <View style={{ flexDirection: "row", width: "81.5%", marginHorizontal: "1%", backgroundColor: "white", borderRadius: 10, }}>
-                    <TouchableOpacity style={{ backgroundColor: showWinners ? COLORS.element : "white", flexDirection: "column", width: "50%", borderRadius: 10, justifyContent: "center", alignItems: "center" }} onPress={() => setShowWinners(!showWinners)}>
+                <View style={{ flexDirection: "row", width: "82%", backgroundColor: "white", borderRadius: 5 }}>
+                    <TouchableOpacity style={{ backgroundColor: showWinners ? COLORS.element : "white", flexDirection: "column", width: "50%", borderRadius: 5, justifyContent: "center", alignItems: "center" }} onPress={() => setShowWinners(!showWinners)}>
                         <Text style={{ color: showWinners ? "white" : COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, }}>Winners</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{ backgroundColor: !showWinners ? COLORS.element : "white", flexDirection: "column", width: "50%", borderRadius: 10, justifyContent: "center", alignItems: "center" }} onPress={() => setShowWinners(!showWinners)}>
+                    <TouchableOpacity style={{ backgroundColor: !showWinners ? COLORS.element : "white", flexDirection: "column", width: "50%", borderRadius: 5, justifyContent: "center", alignItems: "center" }} onPress={() => setShowWinners(!showWinners)}>
                         <Text style={{ color: !showWinners ? "white" : COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, }}>Upcoming Draws</Text>
                     </TouchableOpacity>
                 </View>
@@ -232,16 +232,16 @@ const DrawsMain = () => {
                                     </> : null}
 
                             </View>
-                            <TouchableOpacity style={{ alignItems: "center", marginTop: verticalScale(20), width: "100%" }} onPress={() => { handleFilter({ searcher, date, year }) }}>
-                                <View style={{ width: "65%", borderRadius: 6, backgroundColor: "#E70736", alignItems: "center", justifyContent: "center", }}>
-                                    <Text style={{ color: "#FFFFFF", fontSize: RFValue(17), fontFamily: "Lexend-Regular", paddingVertical: "5%" }}>Apply</Text>
+                            <TouchableOpacity style={{ alignItems: "center", marginTop: verticalScale(20), width: "100%", height: verticalScale(46) }} onPress={() => { handleFilter({ searcher, date, year }) }}>
+                                <View style={{ width: horizontalScale(223), height: "100%", borderRadius: 5, backgroundColor: "#E70736", alignItems: "center", justifyContent: "center", }}>
+                                    <Text style={{ color: "#FFFFFF", fontSize: RFValue(15), fontFamily: "Lexend-Regular" }}>Apply</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
                     </View>
                 </Modal>
 
-                <View style={{ flexDirection: "row", width: "14%", backgroundColor: "white", borderRadius: 10, height: "100%", marginLeft: "1.5%" }}>
+                <View style={{ flexDirection: "row", width: "14%", backgroundColor: "white", borderRadius: 10 }}>
                     <View style={{ width: "100%", alignItems: "center", justifyContent: "center" }}>
                         <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
                             <Image

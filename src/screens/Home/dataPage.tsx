@@ -50,6 +50,7 @@ const DataPage = () => {
   const [prodata, setProdata] = useState<any>();
   const [cartList, setCartList] = useState([]);
   const [loader, setLoader] = useState(false);
+  const [soldPresence, setsoldPresence] = useState(false);
   const DataInfo = useSelector(state => state?.productDrawHandle?.data)
   const [imageLoader, setImageLoader] = useState(false)
 
@@ -106,6 +107,9 @@ const DataPage = () => {
     setProdata(DataInfo)
     console.log("mmm", prodata)
   }, [DataInfo])
+  useEffect(() => {
+    console.log("hhihiixiexkekeoepee..............", soldPresence)
+  }, [soldPresence])
 
   return (
     <SafeAreaView>
@@ -173,10 +177,10 @@ const DataPage = () => {
                 <Banner data={apiData} />
               </View>
               <ClosingSoon />
-              <View style={{ padding: "3%" }}>
-                <Product addedCart={cartList} changer={setChange} change={change} />
+              <View>
+                <Product  soldPresence={soldPresence} addedCart={cartList} changer={setChange} change={change} />
               </View>
-              <Carsold />
+              <Carsold soldPresence={setsoldPresence} />
             </View>
 
 

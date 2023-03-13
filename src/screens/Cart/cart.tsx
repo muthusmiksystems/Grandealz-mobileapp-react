@@ -104,7 +104,7 @@ const Cart = () => {
                             <View style={{ width: "100%", borderRadius: 10, backgroundColor: COLORS.white, margin: "2%", marginTop: "5%", alignSelf: "center" }}>
                                 <TouchableOpacity onPress={() => { navigation.navigate("Coupons") }}>
                                     <View style={{ flexDirection: "row", width: "100%", borderRadius: 6, padding: "3%", alignItems: "center", marginLeft: "3%" }}>
-                                        <View style={{ flexDirection: "column", width: "85%", }}>
+                                        <View style={{ flexDirection: "column", width: "88%", }}>
                                             <View style={{ flexDirection: "row", alignItems: "center" }}>
                                                 <Image
                                                     source={image.coupon}
@@ -114,13 +114,13 @@ const Cart = () => {
                                                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginStart: "5%" }}>Apply Coupon Code</Text>
                                             </View>
                                         </View>
-                                        <MCIcon name="chevron-right" size={moderateScale(35)} color={COLORS.black} style={{ flexDirection: "column", width: "75%" }} />
+                                        <MCIcon name="chevron-right" size={moderateScale(25)} color={COLORS.black} style={{ flexDirection: "column" }} />
                                     </View>
                                 </TouchableOpacity>
                                 {(couponres) ? (
                                     <View style={{ flexDirection: "row", width: "100%", borderBottomStartRadius: 6, borderBottomEndRadius: 6, backgroundColor: "#FFCACD", alignItems: "center", justifyContent: "space-between" }}>
-                                        <Text style={{ flexDirection: "column", color: COLORS.textHeader, fontSize: RFValue(12), ...FONTS.lexendregular, padding: "3%" }}>{CouponPrice.coupon_code} Applied</Text>
-                                        <Text style={{ flexDirection: "column", color: COLORS.textHeader, fontSize: RFValue(10), ...FONTS.lexendregular, paddingHorizontal: "3%" }}>{"  "}-₹{CouponPrice.coupon_discount}{"\n"}
+                                        <Text style={{ flexDirection: "column", color: COLORS.textHeader, fontSize: RFValue(12), ...FONTS.lexendregular, padding: 10 }}>{CouponPrice.coupon_code} Applied</Text>
+                                        <Text style={{ flexDirection: "column", color: COLORS.textHeader, fontSize: RFValue(10), ...FONTS.lexendregular, paddingHorizontal: 10 }}>{"  "}-₹{CouponPrice.coupon_discount}{"\n"}
                                             <TouchableOpacity onPress={() => { RemoveCoupon() }}>
                                                 <Text style={{ color: COLORS.element, fontSize: RFValue(10), ...FONTS.lexendregular }}>Remove</Text>
                                             </TouchableOpacity>

@@ -92,28 +92,29 @@ const DrawsHeader = () => {
 
   return (
     <SafeAreaView >
-      <View style={{}}>
+      <View style={{ marginStart: 14, marginVertical: 12 }}>
         <FlatList
           horizontal={true}
           data={close}
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ margin: "3.5%", paddingRight: 500 }}
+          contentContainerStyle={{}}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
-            <View>
-              <TouchableOpacity style={{ backgroundColor: "white", marginHorizontal: "1%", borderRadius: 5 }} onPress={() => navigation.navigate("PriceDetails", item)}>
-                <View style={{ height: RFValue(85), width: RFValue(85), padding: "4%" }}>
+            <View style={{ marginRight: 14 }}>
+              <TouchableOpacity style={{ backgroundColor: "white", borderRadius: 5 }} onPress={() => navigation.navigate("PriceDetails", item)}>
+                <View style={{ height: RFValue(85), width: RFValue(85) }}>
                   <Image
                     source={{ uri: item.draw_image }}
                     resizeMode="contain"
                     style={{
                       width: "100%",
-                      height: "100%"
+                      height: "100%",
+                      borderRadius: 5
                     }}
                   />
                 </View>
               </TouchableOpacity>
-              <View style={{ justifyContent: "center", alignItems: "center", padding: "2%" }}>
+              <View style={{ justifyContent: "center", alignItems: "center", marginTop: 4 }}>
                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(10), ...FONTS.lexendregular, }}>{moment(item.draw_date).format('Do MMM,YYYY')}</Text>
                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(10), ...FONTS.lexendregular, }}>06:00 PM</Text>
               </View>

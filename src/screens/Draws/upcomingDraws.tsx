@@ -28,26 +28,26 @@ const UpcomingDraws = (filter) => {
         setClose(filter.son)
     }, [filter])
     return (
-        <View>
+        <View style={{ paddingHorizontal: 18 }}>
             {(filter.son).length > 0 ?
                 <FlatList
                     data={close}
-                    contentContainerStyle={{ width: "91%", alignSelf: "center", marginTop: "5%" }}
+                    contentContainerStyle={{ marginTop: 10 }}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => (
-                        <View style={{ borderRadius: 9, backgroundColor: "white", alignItems: "center", paddingVertical: verticalScale(20), marginBottom: "5%" }}>
-                            <TouchableOpacity>
-                                <View>
+                        <View style={{ borderRadius: 5, backgroundColor: "white", paddingVertical: 16, marginBottom: 14 }}>
+                            <TouchableOpacity style={{ width: "90%", alignSelf: "center" }}>
+                                <View style={{ height: verticalScale(180), width: "100%", alignSelf: "center" }}>
                                     <Image
                                         source={{ uri: item.draw_image }}
-                                        resizeMode={"cover"}
-                                        style={{ height: verticalScale(150), width: horizontalScale(250), borderRadius: 5 }}
+                                        resizeMode="contain"
+                                        style={{ height: "100%", width: "100%", borderRadius: 5 }}
                                     />
                                 </View>
-                                <View style={{ marginLeft: "1%", marginTop: 5 }}>
-                                    <Text style={{ fontSize: RFValue(16), color: COLORS.textHeader, ...FONTS.lexendsemibold, padding: "1%" }}>{item.product_title}</Text>
-                                    <Text style={{ fontSize: RFValue(16), color: COLORS.textHeader, ...FONTS.lexendregular, marginHorizontal: "1%", paddingBottom: "1%" }}>{item.product_description}</Text>
-                                    <Text style={{ fontSize: RFValue(14), color: COLORS.element2, marginHorizontal: "1%", ...FONTS.lexendregular }}>₹{item.product_price}</Text>
+                                <View style={{ marginTop: 5 }}>
+                                    <Text style={{ fontSize: RFValue(13), color: COLORS.textHeader, ...FONTS.lexendsemibold, paddingVertical: 20 }}>{item.product_title}</Text>
+                                    <Text style={{ fontSize: RFValue(13), color: COLORS.textHeader, ...FONTS.lexendregular }}>{item.product_description}</Text>
+                                    <Text style={{ fontSize: RFValue(13), color: COLORS.element2, ...FONTS.lexendregular, paddingVertical: 2 }}>₹{item.product_price}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>

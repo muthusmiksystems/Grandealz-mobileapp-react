@@ -55,7 +55,7 @@ const ClosingSoon = () => {
   const [closingsoondata, setClosingsoondata] = useState<any>();
   const dispatch = useDispatch();
 
-  const DataInfo = useSelector(state=>state.productDrawHandle?.data)
+  const DataInfo = useSelector(state => state.productDrawHandle?.data)
 
   // //drawGetCall
   // useEffect(() => {
@@ -77,23 +77,23 @@ const ClosingSoon = () => {
   // }, [])
 
 
-  useEffect(() => { 
-    var  ClosingSoon:any=[];
-      (DataInfo).forEach((element:any) => {
-        var Data =(element.total_no_of_sold_out_tickets * 100 /element.total_no_of_tickets)
-          if((Data>=80)&&(Data<100)){
-            ClosingSoon.push(element);
-          }
-      })
-      setClosingsoondata(ClosingSoon)
-      console.log("ermmm",ClosingSoon)
+  useEffect(() => {
+    var ClosingSoon: any = [];
+    (DataInfo).forEach((element: any) => {
+      var Data = (element.total_no_of_sold_out_tickets * 100 / element.total_no_of_tickets)
+      if ((Data >= 80) && (Data < 100)) {
+        ClosingSoon.push(element);
+      }
+    })
+    setClosingsoondata(ClosingSoon)
+    console.log("ermmm", ClosingSoon)
   }, [])
 
   const handleSearch = (value: any) => {
     navigation.navigate("PriceDetails", value)
   }
-  const handleProgressActive=(event:any)=>{
-    const val=(event.total_no_of_sold_out_tickets)/(event.total_no_of_tickets)*100
+  const handleProgressActive = (event: any) => {
+    const val = (event.total_no_of_sold_out_tickets) / (event.total_no_of_tickets) * 100
     // console.log(`${val}%`);
     return `${val}%`
   }
@@ -101,24 +101,24 @@ const ClosingSoon = () => {
     <>
 
       <SafeAreaView >
-        {(closingsoondata?.length>0) ? (
+        {(closingsoondata?.length > 0) ? (
           <>
             <View>
               <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(18), marginLeft: "4%", ...FONTS.lexendsemibold, color: "black" }}>Closing Soon</Text>
               <View style={{ marginLeft: "4%", width: horizontalScale(40), borderWidth: 1, backgroundColor: "#E70736", borderColor: "#E70736" }} />
             </View>
-        <View style={{ paddingVertical: "2%" }}>
+            <View style={{ paddingVertical: "2%" }}>
               <FlatList
                 horizontal={true}
                 data={closingsoondata}
                 // ItemSeparatorComponent={() => (
                 //   <View style={{ width: 5 }} />
                 // )}
-            contentContainerStyle={{ marginHorizontal:"1%" }}
+                contentContainerStyle={{ marginHorizontal: "1%" }}
                 keyExtractor={item => item.id}
                 renderItem={({ item }) => (
                   <View style={{ paddingHorizontal: horizontalScale(8) }}>
-                <TouchableOpacity style={{ borderRadius: 9, borderTopWidth: 2, borderTopColor: "#E70736", backgroundColor: "white", height: RFValue(145), width: RFValue(110) }} onPress={() => /* navigation.navigate("PriceDetails") */ handleSearch(item)}>
+                    <TouchableOpacity style={{ borderRadius: 9, borderTopWidth: 2, borderTopColor: "#E70736", backgroundColor: "white", height: RFValue(145), width: RFValue(110) }} onPress={() => /* navigation.navigate("PriceDetails") */ handleSearch(item)}>
                       <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8 }}>
                         <View style={{ flexDirection: 'column', marginTop: RFValue(15) }}>
                           <Image
@@ -138,7 +138,7 @@ const ClosingSoon = () => {
                         <Text style={{ fontSize: RFValue(9), textAlign: "center", color: COLORS.black, ...FONTS.lexendregular }}>{item.total_no_of_sold_out_tickets} sold out of {item.total_no_of_tickets}</Text>
                       </View>
                       <View style={{ marginLeft: "15%", width: "70%", height: "4%", borderColor: "#F1F1F1", borderWidth: 1, margin: 2, borderRadius: 12, backgroundColor: "#F1F1F1" }}>
-                    <Text style={{ backgroundColor: "#EC092D", width: handleProgressActive(item), borderRadius: 12 }}></Text>
+                        <Text style={{ backgroundColor: "#EC092D", width: handleProgressActive(item), borderRadius: 12 }}></Text>
                       </View>
 
                     </TouchableOpacity>
@@ -147,7 +147,7 @@ const ClosingSoon = () => {
               />
             </View>
           </>
-          ): null}
+        ) : null}
       </SafeAreaView>
     </>
   )

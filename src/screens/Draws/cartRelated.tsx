@@ -107,10 +107,10 @@ const CartRelated = ({ cartdts, changer, setChanger }) => {
                         renderItem={({ item }) => (
                             <>
                                 {!(cartList.includes(`${item._id}`)) ?
-                                    <View style={{ height: RFValue(240), marginRight: 14 }}>
-                                        <View style={{ backgroundColor: COLORS.white, borderRadius: 5, width: RFValue(154), height: "100%", padding: RFValue(15) }}>
+                                    <View style={{ marginRight: 14 }}>
+                                        <View style={{ backgroundColor: COLORS.white, borderRadius: 5, width: RFValue(154), padding: RFValue(15) }}>
                                             <TouchableOpacity>
-                                                <View style={{ backgroundColor: "#F9F9F9", padding: "2%" }}>
+                                                <View style={{ backgroundColor: "#F9F9F9", padding: 4 }}>
                                                     <Image
                                                         source={{ uri: item.product_image }}
                                                         resizeMode={'contain'}
@@ -123,12 +123,12 @@ const CartRelated = ({ cartdts, changer, setChanger }) => {
                                                 </View>
                                             </TouchableOpacity>
                                             <View>
-                                                <Text style={{ color: COLORS.textHeader, fontSize: RFValue(12), ...FONTS.lexendsemibold, paddingBottom: "2%", marginTop: "6%" }}>{item.currency} {item.product_price} Cash</Text>
-                                                <Text style={{ color: "#616161", fontSize: RFValue(12), ...FONTS.lexendregular, paddingBottom: "2%" }}>{item.product_title}</Text>
+                                                <Text style={{ color: COLORS.textHeader, fontSize: RFValue(12), ...FONTS.lexendsemibold,marginVertical:4 }}>{item.currency} {item.product_price} Cash</Text>
+                                                <Text style={{ color: "#616161", fontSize: RFValue(12), ...FONTS.lexendregular,marginBottom:2 }}>{item.product_title}</Text>
                                                 <Text style={{ color: COLORS.element, fontSize: RFValue(12), ...FONTS.lexendregular, }}>₹{item.product_price}</Text>
                                             </View>
-                                            <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", borderWidth: 1, borderRadius: 5, marginTop: "8%", width: "90%", alignSelf: "center" }} onPress={() => { setDrawid(item._id), setCount(count + 1) }}>
-                                                <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, paddingVertical: "3%" }}>Add</Text>
+                                            <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", borderWidth: 1, borderRadius: 5, marginTop: 16,height:verticalScale(26), width: "90%", alignSelf: "center" }} onPress={() => { setDrawid(item._id), setCount(count + 1) }}>
+                                                <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular }}>Add</Text>
                                             </TouchableOpacity>
                                         </View>
                                     </View>

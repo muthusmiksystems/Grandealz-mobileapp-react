@@ -24,7 +24,7 @@ import moment from 'moment';
 import { productDrawHandler } from '../store/reducers/productdraw';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
-const Product = ({ addedCart, changer, change }) => {
+const Product = ({ addedCart, changer, change, soldPresence }) => {
     const navigation = useNavigation();
     const dispatch = useDispatch()
     const [close, setClose] = useState<any>();
@@ -59,13 +59,13 @@ const Product = ({ addedCart, changer, change }) => {
     return (
         <SafeAreaView >
             {DataInfo ?
-                <View>
+                <View style={{ paddingHorizontal: "3%" }}>
                     <FlatList
                         data={DataInfo}
-                        contentContainerStyle={{ paddingBottom: 80 }}
+                        contentContainerStyle={{ paddingBottom: soldPresence ? 16 : "25%" }}
                         keyExtractor={item => item.id}
                         renderItem={({ item }) => (
-                            <View style={{ height: verticalScale(426), marginBottom: 10, alignItems: 'center', borderTopEndRadius: 5, borderTopStartRadius: 5, borderTopWidth: 2, borderTopColor: "red", backgroundColor: "white", borderBottomEndRadius: 8, borderBottomStartRadius: 8 }}>
+                            <View style={{ borderTopEndRadius: 5, borderTopStartRadius: 5, borderTopWidth: 2, borderTopColor: "red", backgroundColor: "white", marginBottom: 12, borderBottomEndRadius: 8, borderBottomStartRadius: 8 }}>
                                 <View style={{ alignSelf: "flex-end", marginRight: "5%", marginTop: 10 }}>
                                     <AnimatedCircularProgress
                                         size={60}
@@ -91,32 +91,34 @@ const Product = ({ addedCart, changer, change }) => {
                                         }
                                     </AnimatedCircularProgress>
                                 </View>
-                                <TouchableOpacity disabled={item.total_no_of_sold_out_tickets / item.total_no_of_tickets != 1 ? false : true} style={{ flexDirection: 'column', paddingTop: 6, width: "100%" }} onPress={() => handleSearch(item)}>
-                                    <View style={{ height: verticalScale(130), width: "84%", alignSelf: "center" }}>
+                                <TouchableOpacity disabled={item.total_no_of_sold_out_tickets / item.total_no_of_tickets != 1 ? false : true} style={{ flexDirection: 'column', width: "100%", marginTop: 6 }} onPress={() => handleSearch(item)}>
+                                    <View style={{ height: verticalScale(150), width: horizontalScale(250), alignSelf: "center" }}>
                                         <Image
                                             source={{ uri: item.draw_image }}
                                             resizeMode="contain"
                                             style={{
                                                 height: "100%",
-                                                width: "100%"
+                                                width: "100%",
+                                                borderRadius: 5
                                             }}
                                         />
                                     </View>
                                 </TouchableOpacity>
 
-                                <TouchableOpacity disabled={item.total_no_of_sold_out_tickets / item.total_no_of_tickets != 1 ? false : true} style={{ padding: 10, height: verticalScale(90), flexDirection: "row" }} onPress={() => handleSearch(item)}>
-                                    <View style={{ flexDirection: "column", width: "65%", height: "100%" }}>
+                                <TouchableOpacity disabled={item.total_no_of_sold_out_tickets / item.total_no_of_tickets != 1 ? false : true} style={{ marginTop: 6, flexDirection: "row", width: "94%", alignSelf: "center", justifyContent: "space-between", paddingBottom: 14 }} onPress={() => handleSearch(item)}>
+                                    <View style={{ flexDirection: "column", marginStart: "2%", width: "78%" }}>
                                         <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(24), color: "#E70736" }}>Win</Text>
-                                        <Text style={{ fontSize: RFValue(13), color: "black", ...FONTS.lexendsemibold, }}>{item.draw_title} </Text>
-                                        <Text style={{ fontSize: RFValue(12), color: "black", ...FONTS.lexendregular, }}>Buy {item.draw_sub_title} : <Text style={{ color: "red" }}>₹{item.product_price}</Text> </Text>
+                                        <Text style={{ fontSize: RFValue(13), color: "black", ...FONTS.lexendsemibold, }}>{item.draw_title}</Text>
+                                        <Text style={{ fontSize: RFValue(12), color: "black", ...FONTS.lexendregular, }}>Buy {item.draw_sub_title} : <Text style={{ color: "red" }}>₹{item.product_price}</Text></Text>
                                     </View>
-                                    <View style={{ marginLeft: "5%", alignSelf: "flex-end", justifyContent: "center", borderWidth: 1, borderRadius: 6, borderColor: "#afb3b0" }}>
+                                    <View style={{ padding: 2, alignSelf: "center", justifyContent: "center", width: "20%", borderWidth: 1, borderRadius: 10, borderColor: "#afb3b0" }}>
                                         <Image
                                             source={{ uri: item.product_image }}
                                             resizeMode="contain"
                                             style={{
                                                 height: verticalScale(66),
-                                                width: horizontalScale(66),
+                                                width: "100%",
+                                                borderRadius: 10,
                                             }}
                                         />
                                     </View>
@@ -124,22 +126,22 @@ const Product = ({ addedCart, changer, change }) => {
                                 {item.total_no_of_sold_out_tickets / item.total_no_of_tickets != 1 ?
                                     <>
                                         {!(addedCart.includes(`${item._id}`)) ?
-                                            <TouchableOpacity style={{ padding: "3%", borderWidth: 1, width: "80%", borderRadius: 8, marginTop: 5 }} onPress={() => setDrawid(item._id)}>
+                                            <TouchableOpacity style={{ borderWidth: 1, width: "80%", height: verticalScale(46), borderRadius: 5, alignSelf: "center", justifyContent: "center" }} onPress={() => setDrawid(item._id)}>
                                                 <Text style={{ textAlign: "center", color: "black", fontSize: RFValue(15), ...FONTS.lexendsemibold }}>Add to Cart</Text>
                                             </TouchableOpacity>
                                             :
-                                            <TouchableOpacity style={{ padding: "3%", borderWidth: 1, width: "80%", borderRadius: 8, backgroundColor: "white", marginTop: 5 }} onPressIn={() => { navigation.navigate("Tabs", { screen: "Cart" }) }}>
+                                            <TouchableOpacity style={{ borderWidth: 1, width: "80%", height: verticalScale(46), borderRadius: 5, alignSelf: "center", justifyContent: "center" }} onPressIn={() => { navigation.navigate("Tabs", { screen: "Cart" }) }}>
                                                 <Text style={{ textAlign: "center", color: "black", fontSize: RFValue(15), ...FONTS.lexendsemibold }}>Go To Cart</Text>
                                             </TouchableOpacity>
                                         }
                                     </>
                                     :
-                                    <TouchableOpacity disabled={true} style={{ padding: "4%", borderWidth: 1, width: "80%", borderRadius: 8, marginTop: 5 }} onPress={() => setDrawid(item._id)}>
+                                    <TouchableOpacity disabled={true} style={{ borderWidth: 1, width: "80%", height: verticalScale(46), borderRadius: 5, alignSelf: "center", justifyContent: "center" }} onPress={() => setDrawid(item._id)}>
                                         <Text style={{ textAlign: "center", color: "black", fontSize: RFValue(15), ...FONTS.lexendsemibold }}>Add to Cart</Text>
                                     </TouchableOpacity>
                                 }
-                                <View style={{ flexDirection: "row", paddingVertical: "5%" }}>
-                                    <View style={{ flexDirection: "column", marginLeft: 15, width: horizontalScale(50), height: verticalScale(42) }}>
+                                <View style={{ flexDirection: "row", paddingVertical: "4%", width: "100%" }}>
+                                    <View style={{ flexDirection: "column", marginLeft: 10, width: horizontalScale(29), height: verticalScale(29), alignSelf: "center" }}>
                                         <Image
                                             source={image.calander}
                                             resizeMode="contain"
@@ -148,11 +150,11 @@ const Product = ({ addedCart, changer, change }) => {
                                                 height: "100%"
                                             }} />
                                     </View>
-                                    <View style={{ flexDirection: "column", alignSelf: "center" }}>
+                                    <View style={{ flexDirection: "column", alignSelf: "center", width: "88%" }}>
                                         <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(12), marginLeft: 6, ...FONTS.lexendsemibold, color: COLORS.black }}>
                                             Max Draw Date: {moment(item.max_draw_date).format('MMMM DD YYYY')}
                                         </Text>
-                                        <Text style={{ fontSize: RFValue(10), marginLeft: 6, ...FONTS.lexendregular, color: "gray", width: horizontalScale(280) }}>
+                                        <Text style={{ fontSize: RFValue(10), marginLeft: 6, ...FONTS.lexendregular, color: "gray" }}>
                                             {(item.max_draw_date_description).substring(0, 100)}
                                         </Text>
                                     </View>

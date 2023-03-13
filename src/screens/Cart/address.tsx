@@ -97,12 +97,12 @@ const Address = ({ route }) => {
 
 
             <ScrollView style={{ height: "80%" }}>
-                <View style={{ width: "92%", alignSelf: "center", borderRadius: 10, backgroundColor: COLORS.white, margin: "2%", marginTop: "5%", padding: "2%" }}>
+                <View style={{ width: "92%", alignSelf: "center", borderRadius: 10, backgroundColor: COLORS.white, marginTop: 14, padding: 6 }}>
                     <TouchableOpacity disabled={listing} style={{ flexDirection: "row", width: "100%", borderRadius: 5, justifyContent: "center" }} onPress={() => navigation.navigate('AddAddress', { type: "payment", "amount": amount })}>
-                        <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, margin: "3%" }}>Add new Address</Text>
+                        <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, margin: 14 }}>Add new Address</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={{ paddingBottom: "5%" }}>
+                <View style={{ paddingBottom: 12 }}>
                     {(addresslist.length > 0) ?
                         (typeUser === "payment") ?
                             (addresslist).map((data, index) => (

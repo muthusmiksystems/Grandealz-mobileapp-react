@@ -93,7 +93,6 @@ const data = [
     date: "20 october, 08:20PM"
   },
 
-
 ];
 const NotificationList = () => {
   return (
@@ -120,9 +119,9 @@ const NotificationList = () => {
             contentContainerStyle={{ paddingBottom: "20%" }}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
-              <View style={{ paddingHorizontal: "3%", paddingTop: "3%" }}>
-                <TouchableOpacity style={{ backgroundColor: "white", borderRadius: 8, elevation: 1, flexDirection: "row", padding: "2%" }}>
-                  <View style={{ flexDirection: "column", marginTop: verticalScale(9), width: horizontalScale(20), height: verticalScale(20) }}>
+              <View style={{ paddingHorizontal: "3%", paddingTop: verticalScale(12) }}>
+                <TouchableOpacity style={{ backgroundColor: "white", borderRadius: 8, elevation: 1, flexDirection: "row", padding: moderateScale(6) }}>
+                  <View style={{ flexDirection: "column", marginTop: verticalScale(5), width: horizontalScale(20), height: verticalScale(20) }}>
                     <Image
                       source={icons.rect}
                       resizeMode="contain"
@@ -133,9 +132,9 @@ const NotificationList = () => {
                     />
                   </View>
                   <View style={{ flexDirection: "column", width: horizontalScale(240) }}>
-                    <Text style={{ fontSize: RFValue(14), ...FONTS.lexendsemibold, margin: "2%", color: COLORS.black }}>{item.from}</Text>
-                    <Text style={{ fontSize: RFValue(12), margin: "2%", ...FONTS.lexendregular, color: "#000" }}>{item.to}</Text>
-                    <Text style={{ fontSize: RFValue(14), ...FONTS.lexendregular, color: COLORS.gray, marginHorizontal: "2%", paddingBottom: "2%", marginTop: "1%" }}>{item.date}</Text>
+                    <Text style={{ fontSize: RFValue(13), ...FONTS.lexendsemibold, margin: moderateScale(4), color: COLORS.black }}>{item.from}</Text>
+                    <Text style={{ fontSize: RFValue(10), marginHorizontal: moderateScale(4), marginBottom: 4, ...FONTS.lexendregular, color: "#000" }}>{item.to}</Text>
+                    <Text style={{ fontSize: RFValue(13), ...FONTS.lexendregular, color: COLORS.gray, marginHorizontal: 4, paddingBottom: 4, marginTop: 2 }}>{item.date}</Text>
                   </View>
                   <View style={{ flexDirection: "column", width: horizontalScale(75), backgroundColor: COLORS.lightGray, height: verticalScale(75), alignSelf: "center", borderRadius: 10 }}>
                     <Image
