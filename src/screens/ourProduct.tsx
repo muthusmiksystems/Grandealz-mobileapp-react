@@ -85,7 +85,7 @@ const OurProducts = () => {
                         <Text style={{ color: "black" }}> No Products Available</Text>
                     </View>
                 :
-                <View style={{ width: "100%", alignItems: "center", height: "92%", justifyContent: "center" }}>
+                <View style={{ width: "100%", alignItems: "center", height: "100%", justifyContent: "center" }}>
                     <LoaderKit
                         style={{ width: 100, height: 105 }}
                         name={'BallClipRotatePulse'} // Optional: see list of animations below

@@ -30,11 +30,9 @@ const Product = ({ addedCart, changer, change, soldPresence }) => {
     const [close, setClose] = useState<any>();
     const [drawid, setDrawid] = useState(null);
 
-    const percentage = 66;
     const DataInfo = useSelector(state => state.productDrawHandle.data)
 
     // console.log("datavvv..of....", addedCart)
-
 
     useEffect(() => {
         if (drawid) {

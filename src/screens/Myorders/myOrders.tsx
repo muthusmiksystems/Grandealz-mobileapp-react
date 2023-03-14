@@ -32,14 +32,14 @@ const MyOrders = () => {
 
     const navigation = useNavigation();
 
-    const [dated, setDated] = useState(new Date());
-    const [value, setValue] = useState(null);
-    const [timeValue, setTimeValue] = useState();
-    const [filt, setFilt] = useState();
-    const [loader, setLoader] = useState(true);
+    const [dated, setDated] = useState<any>(new Date());
+    const [value, setValue] = useState<any>(null);
+    const [timeValue, setTimeValue] = useState<any>();
+    const [filt, setFilt] = useState<any>();
+    const [loader, setLoader] = useState<any>(true);
     const [Orderlistdata, setOrderlistdata] = useState<any>();
 
-    const [modalVisible, setModalVisible] = useState(false);
+    const [modalVisible, setModalVisible] = useState<any>(false);
     const mydate = (moment(dated).format('YYYY-MM-DD'))
 
     useEffect(() => {
@@ -199,11 +199,11 @@ const MyOrders = () => {
                                         </RadioButton.Group>
                                     </SafeAreaView>
                                     <View style={{ flexDirection: "row", width: "100%", marginVertical: "4%", alignItems: 'center', justifyContent: "space-between" }}>
-                                        <TouchableOpacity style={{ borderWidth: 1, width: "48%",height:46, borderRadius: 8 }} onPress={() => { setValue(null), setTimeValue(null), resetFilter() }}>
-                                            <Text style={{ marginTop: 8, textAlign: "center", color: "#000000", fontSize: RFValue(15), fontFamily: "Lexend-Regular" }}>Clear Filters</Text>
+                                        <TouchableOpacity style={{ borderWidth: 1, width: "48%", height: 46, borderRadius: 8, alignItems: "center", justifyContent: "center" }} onPress={() => { setValue(null), setTimeValue(null), resetFilter() }}>
+                                            <Text style={{ color: "#000000", fontSize: RFValue(15), fontFamily: "Lexend-Regular" }}>Clear Filters</Text>
                                         </TouchableOpacity>
-                                        <TouchableOpacity style={{ width: "48%", borderRadius: 8,height:46, backgroundColor: "#E70736" }} onPress={() => { handleFilter({ value }, { timeValue }) }}>
-                                            <Text style={{ marginTop: 8, textAlign: "center", color: "#FFFFFF", fontSize: RFValue(15), fontFamily: "Lexend-Regular" }}>Apply</Text>
+                                        <TouchableOpacity style={{ width: "48%", borderRadius: 8, height: 46, backgroundColor: "#E70736", alignItems: "center", justifyContent: "center" }} onPress={() => { handleFilter({ value }, { timeValue }) }}>
+                                            <Text style={{ color: "#FFFFFF", fontSize: RFValue(15), fontFamily: "Lexend-Regular" }}>Apply</Text>
                                         </TouchableOpacity>
                                     </View>
                                 </View>
@@ -260,9 +260,9 @@ const MyOrders = () => {
                         </View>
                     </View>
                 </View>
-                <View >
+                <View>
                     {loader ?
-                        <View style={{ width: "100%", alignItems: "center", height: "92%", justifyContent: "center" }}>
+                        <View style={{ width: "100%", alignItems: "center", height: 500, justifyContent: "center" }}>
                             <LoaderKit
                                 style={{ width: 100, height: 105 }}
                                 name={'BallClipRotatePulse'} // Optional: see list of animations below

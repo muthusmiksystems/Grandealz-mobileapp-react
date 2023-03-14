@@ -44,19 +44,19 @@ const TicketEmpty = () => {
                 </View>
             </View> */}
             <View style={styles.subdivTwo}>
-                        <Image
-                            source={icons.tabTicketColor}
-                            resizeMode='contain'
-                            style={{
-                                width: horizontalScale(80),
-                                height: verticalScale(80),
-                            }}
-                        />
-                        <Text style={{ paddingHorizontal: "8%",fontFamily: "Lexend-Regular", color: "black", fontSize: 14,textAlign:"center", marginTop: 20 }}>You can view active Tickets here after you make your purchase</Text>
-                        <TouchableOpacity style={{paddingHorizontal:"20%",marginTop:20,borderWidth:1,borderColor:COLORS.black,borderRadius:5}} onPress={()=>{navigation.navigate("DataPage")}}>
-                        <Text style={{padding:"5%",color:COLORS.black,fontSize:RFValue(12),textAlign:"center",fontWeight:"600"}}>Start Shopping</Text>
-                    </TouchableOpacity>
-                    </View>
+                <Image
+                    source={icons.tabTicketColor}
+                    resizeMode='contain'
+                    style={{
+                        width: horizontalScale(80),
+                        height: verticalScale(80),
+                    }}
+                />
+                <Text style={{ paddingHorizontal: "8%", fontFamily: "Lexend-Regular", color: "black", fontSize: 14, textAlign: "center", marginTop: 20 }}>You can view active Tickets here after you make your purchase</Text>
+                <TouchableOpacity style={{ paddingHorizontal: "20%", marginTop: 20, borderWidth: 1, borderColor: COLORS.black, borderRadius: 5 }} onPress={() => { navigation.navigate("DataPage") }}>
+                    <Text style={{ padding: "5%", color: COLORS.black, fontSize: RFValue(10), textAlign: "center", ...FONTS.lexendsemibold }}>Start Shopping</Text>
+                </TouchableOpacity>
+            </View>
         </SafeAreaView>
     );
 }
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         flexDirection: "row"
     },
     subdivTwo: {
-        height: verticalScale(748),
+        height: "100%",
         alignItems: "center",
         justifyContent: "center",
         // borderWidth:2

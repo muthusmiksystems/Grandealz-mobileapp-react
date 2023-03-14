@@ -45,7 +45,7 @@ const UpcomingDraws = (filter) => {
                                     />
                                 </View>
                                 <View style={{ marginTop: 5 }}>
-                                    <Text style={{ fontSize: RFValue(13), color: COLORS.textHeader, ...FONTS.lexendsemibold, paddingVertical: 20 }}>{item.product_title}</Text>
+                                    <Text style={{ fontSize: RFValue(13), color: COLORS.textHeader, ...FONTS.lexendsemibold, paddingVertical: 2 }}>{item.product_title}</Text>
                                     <Text style={{ fontSize: RFValue(13), color: COLORS.textHeader, ...FONTS.lexendregular }}>{item.product_description}</Text>
                                     <Text style={{ fontSize: RFValue(13), color: COLORS.element2, ...FONTS.lexendregular, paddingVertical: 2 }}>₹{item.product_price}</Text>
                                 </View>

@@ -37,7 +37,11 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import LoaderKit from 'react-native-loader-kit';
 import Toast from 'react-native-simple-toast';
 
-const Signup = () => {
+export interface SignupProps {
+
+}
+
+const Signup = (props: SignupProps) => {
 
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -50,31 +54,31 @@ const Signup = () => {
   const [phone, setPhone] = useState<any>("");
   const [password, setPassword] = useState<any>("");
   const [error, setError] = useState<any>("");
-  const [errorFirst, setErrorFirst] = useState(null);
-  const [errorEmail, setErrorEmail] = useState(null);
-  const [errorPassword, setErrorPassword] = useState(null);
-  const [errorPhone, setErrorPhone] = useState(null);
-  const [errorLast, setErrorLast] = useState(null);
-  const [countryListValue, setCountryListValue] = useState([])
-  const [mblCode, setMblCode] = useState("");
-  const [isSelected, setSelection] = useState(true);
-  const [passShow, setPassShow] = useState("true");
-  const [loader, setLoader] = useState(false);
+  const [errorFirst, setErrorFirst] = useState<any>(null);
+  const [errorEmail, setErrorEmail] = useState<any>(null);
+  const [errorPassword, setErrorPassword] = useState<any>(null);
+  const [errorPhone, setErrorPhone] = useState<any>(null);
+  const [errorLast, setErrorLast] = useState<any>(null);
+  const [countryListValue, setCountryListValue] = useState<any>([])
+  const [mblCode, setMblCode] = useState<any>("");
+  const [isSelected, setSelection] = useState<any>(true);
+  const [passShow, setPassShow] = useState<any>("true");
+  const [loader, setLoader] = useState<any>(false);
 
   const agreeFail = () => {
     if (isSelected) {
       handleSubmit(), Keyboard.dismiss
     }
     else {
-      Toast.show( "Please Agree the terms and conditions", Toast.LONG, { backgroundColor: 'red' });
+      Toast.show("Please Agree the terms and conditions", Toast.LONG, { backgroundColor: 'red' });
     }
   }
 
   const validateFunction = () => {
-    console.log("values",firstName.length);
+    console.log("values", firstName.length);
     let errorCount = 0;
     console.log("satrday", (/^[A-Za-z]+$/i.test(lastName)));
-    
+
     if (!/^[A-Za-z]+$/i.test(firstName)) {
       setErrorFirst('Please enter maximum 15 characters for First Name (Minimum can be 2) as someone has name like Jo (alphabets only)')
       errorCount++
@@ -83,7 +87,7 @@ const Signup = () => {
       setErrorFirst("Please enter First Name")
       errorCount++;
     }
-     if (!(/^[A-Za-z]+$/i.test(lastName))) {
+    if (!(/^[A-Za-z]+$/i.test(lastName))) {
       setErrorLast("Please enter maximum 15 characters for First Name (Minimum can be 2) as someone has name like Jo (alphabets only)")
       errorCount++
     }
@@ -91,16 +95,16 @@ const Signup = () => {
       setErrorLast('Please enter Last Name')
       errorCount++;
     }
-    if (email ==="") {
+    if (email === "") {
       setErrorEmail('Please enter Email');
       errorCount++;
     }
     if (email !== undefined) {
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {        
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
         setErrorEmail("Please enter valid Email");
         errorCount++;
       }
-      if(email.length<1){
+      if (email.length < 1) {
         setErrorEmail("Please enter Email");
         errorCount++;
       }
@@ -193,13 +197,13 @@ const Signup = () => {
           if (originalPromiseResult.status === "200") {
             await AsyncStorage.setItem('Signuptoken', originalPromiseResult.data.access_token);
             setLoader(false);
-            Toast.show( originalPromiseResult.message, Toast.LONG, { backgroundColor: 'red' });
+            Toast.show(originalPromiseResult.message, Toast.LONG, { backgroundColor: 'red' });
             navigation.navigate("OtpPage", { value: phone })
           }
           else if (originalPromiseResult.status === "400") {
             setLoader(false);
             console.log("im the error data", originalPromiseResult)
-            Toast.show( originalPromiseResult.message, Toast.LONG, { backgroundColor: 'red' });
+            Toast.show(originalPromiseResult.message, Toast.LONG, { backgroundColor: 'red' });
           }
           else if (originalPromiseResult.toString() === "404") {
             setLoader(false);
@@ -242,14 +246,14 @@ const Signup = () => {
       setSelection(!isSelected)
     }
     return (
-      <View style={{ flexDirection: "row", bottom: "8%"}}>
+      <View style={{ flexDirection: "row", bottom: "8%", alignItems: "center" }}>
         <CheckBox
           value={isSelected}
           onValueChange={checkSelection}
           style={styles.checkBox}
           tintColors={{ true: COLORS.element }}
         />
-        <View style={{ flexDirection: "column",width:"90%" }}>
+        <View style={{ flexDirection: "column", width: "90%" }}>
           <Text style={{ fontFamily: "Lexend-Regular", color: "black", fontSize: RFValue(12) }}>I agree to <Text style={styles.underLineText}>Usage Terms</Text> and <Text style={styles.underLineText}>Privacy Policy</Text></Text>
         </View>
       </View>
@@ -308,7 +312,7 @@ const Signup = () => {
                   value={lastName}
                   maxLength={20}
                   placeholderTextColor={"black"}
-                  onChangeText={(text) =>setLastName(text.replace(/ /g, ''))}
+                  onChangeText={(text) => setLastName(text.replace(/ /g, ''))}
                   //onChangeText={e => { handleChange(e, "lastName"), setErrorLast(""), setLastName(e) }}
                   // onChangeText={(text) => { setLastName(text), text ? setError("") : setError(...errordata, errordata.lastname = "enter last name") }}
                   style={{ ...styles.textInput, }} />
@@ -470,7 +474,7 @@ const styles = StyleSheet.create({
     marginStart: "1%",
     textAlign: "left",
     width: horizontalScale(300),
-    
+
   },
   Errorpass: {
     color: "red",

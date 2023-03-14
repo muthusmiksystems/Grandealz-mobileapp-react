@@ -51,9 +51,9 @@ const Tickets = () => {
             <View style={styles.subdivTwo}>
                 {(!loader) ?
                     (Ticketlistdata) ?
-                    <TicketDetails Ticketdata={Ticketlistdata}/>
-                    :
-                    <TicketEmpty/>
+                        <TicketDetails Ticketdata={Ticketlistdata} />
+                        :
+                        <TicketEmpty />
                     :
                     <View style={{ width: "100%", alignItems: "center", height: "92%", justifyContent: "center" }}>
                         <LoaderKit

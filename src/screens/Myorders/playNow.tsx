@@ -46,7 +46,7 @@ const PlayNow = (props: any) => {
         }
     }
     return (
-        <SafeAreaView style={{ width: '100%', height: '100%', backgroundColor: "#474745" }}>
+        <SafeAreaView style={{ width: '100%', height: '100%', backgroundColor: "rgba(0,0,0,0.5)" }}>
             <StatusBar
                 animated={true}
                 backgroundColor="#0a0127"
@@ -73,7 +73,7 @@ const PlayNow = (props: any) => {
                             <Text style={{ fontSize: RFValue(16), color: "#FFFFFF", textAlign: "center", ...FONTS.lexendregular, padding: "4%" }}>{(title) ? title : "The All new Audi Q3"}</Text>
                         </View>
                         <View style={{ width: "90%", marginVertical: verticalScale(18), alignSelf: 'center' }}>
-                            <Text style={{ textAlign: "center", color: "#303030", fontFamily: "Lexend-Regular" }}>
+                            <Text style={{ textAlign: "center", color: "#303030", fontFamily: "Lexend-Regular", fontSize: 13 }}>
                                 Please provide an answer to the question and avail your ticket.
                             </Text>
                         </View>
@@ -106,7 +106,7 @@ const PlayNow = (props: any) => {
                             <Text style={{ textAlign: "center", fontSize: 15, fontFamily: "Lexend-SemiBold", color: "black" }}>Start</Text>
                         </TouchableOpacity>
                         <View style={{ marginVertical: "5%" }}>
-                            <Text style={{ fontSize: 16, textAlign: "center", color: "#E70736", fontFamily: "Lexend-Regular" }}>Terms and conditions</Text>
+                            <Text style={{ fontSize: 15, textAlign: "center", color: "#E70736", fontFamily: "Lexend-Regular" }}>Terms and conditions</Text>
                         </View>
                     </View>
                 </View>
@@ -150,9 +150,10 @@ const Style = StyleSheet.create({
         marginTop: "22%",
         alignSelf: 'center',
         // backgroundColor: "rgba(11, 0, 41, 0.8)",
-        backgroundColor: "#2A2141",
+        backgroundColor: COLORS.primary,
         width: "90%",
-        height: "75%",
+        height: "auto",
+        paddingBottom: "20%",
         borderRadius: 20
     },
     subdiv2: {

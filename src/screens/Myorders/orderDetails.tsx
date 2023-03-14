@@ -194,8 +194,8 @@ const OrderDetails = ({ route }) => {
                                 <Text style={{ ...FONTS.lexendsemibold, color: "black", padding: 10, fontSize: RFValue(13) }}>
                                     Price Details
                                 </Text>
-                                <View style={{ borderTopWidth: 0.5, borderColor: "#616161", width: "95%", marginLeft: RFValue(9) }} />
-                                <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10 }}>
+                                <View style={{ borderTopWidth: 1, borderColor: "#616161", width: "95%", marginLeft: RFValue(9) }} />
+                                <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10, paddingVertical: 6 }}>
                                     <View style={{ flexDirection: "column" }}>
                                         <Text style={{ color: "gray", fontSize: RFValue(13), ...FONTS.lexendregular }}>Total MRP</Text>
                                     </View>
@@ -203,7 +203,7 @@ const OrderDetails = ({ route }) => {
                                         <Text style={{ color: "gray", fontSize: RFValue(13), ...FONTS.lexendregular }}>₹{orderdetailsdata.sub_total}</Text>
                                     </View>
                                 </View>
-                                <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10, paddingVertical: "1%" }}>
+                                <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10 }}>
                                     <View style={{ flexDirection: "column" }}>
                                         <Text style={{ color: "gray", fontSize: RFValue(13), ...FONTS.lexendregular }}>Tax (GST)</Text>
                                     </View>
@@ -211,7 +211,7 @@ const OrderDetails = ({ route }) => {
                                         <Text style={{ color: "gray", fontSize: RFValue(13), ...FONTS.lexendregular }}>₹{orderdetailsdata.tax}</Text>
                                     </View>
                                 </View>
-                                <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10 }}>
+                                <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10, paddingVertical: 6 }}>
                                     <View style={{ flexDirection: "column" }}>
                                         <Text style={{ color: "gray", fontSize: RFValue(13), ...FONTS.lexendregular }}>Promo Code</Text>
                                     </View>
@@ -219,7 +219,7 @@ const OrderDetails = ({ route }) => {
                                         <Text style={{ color: "gray", fontSize: RFValue(13), ...FONTS.lexendregular }}>₹{orderdetailsdata.coupon_discount}</Text>
                                     </View>
                                 </View>
-                                <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10, paddingVertical: "1%" }}>
+                                <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10, paddingBottom: 6 }}>
                                     <View style={{ flexDirection: "column" }}>
                                         <Text style={{ color: "gray", fontSize: RFValue(13), ...FONTS.lexendregular }}>Coins</Text>
                                     </View>
@@ -227,8 +227,8 @@ const OrderDetails = ({ route }) => {
                                         <Text style={{ color: "gray", fontSize: RFValue(13), ...FONTS.lexendregular }}>₹{orderdetailsdata.coin_redeem}</Text>
                                     </View>
                                 </View>
-                                <View style={{ borderTopWidth: 0.5, borderColor: "#616161", width: "95%", marginLeft: RFValue(9) }} />
-                                <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10, paddingVertical: "1%" }}>
+                                <View style={{ borderTopWidth: 1, borderColor: "#616161", width: "95%", marginLeft: RFValue(9) }} />
+                                <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10, paddingVertical: 6 }}>
                                     <View style={{ flexDirection: "column" }}>
                                         <Text style={{ color: "gray", fontSize: RFValue(13), ...FONTS.lexendregular }}>Total Amount</Text>
                                         <Text style={{ color: "gray", fontSize: RFValue(10), ...FONTS.lexendregular }}>Inclusive of Tax (GST)</Text>
@@ -241,14 +241,14 @@ const OrderDetails = ({ route }) => {
 
                         </View>
                         <View style={{ marginBottom: "4%", borderRadius: 8, backgroundColor: "white", height: RFValue(40) }}>
-                            <View style={{ margin: RFValue(10), flexDirection: "row" }}>
-                                <Text style={{ flexDirection: "column", color: "black", marginTop: RFValue(2) }}>{'\u2B24'}</Text>
-                                <Text style={{ ...FONTS.lexendregular, fontWeight: "400", color: "black", fontSize: RFValue(15), flexDirection: "column" }}> Debit Card ₹{orderdetailsdata.total}</Text>
+                            <View style={{ margin: RFValue(10), flexDirection: "row", alignItems: "center" }}>
+                                <Text style={{ flexDirection: "column", color: "black", fontSize: 9 }}>{'\u2B24'}</Text>
+                                <Text style={{ ...FONTS.lexendregular, fontWeight: "400", color: "black", fontSize: RFValue(13), flexDirection: "column" }}> Debit Card ₹{orderdetailsdata.total}</Text>
                             </View>
                         </View>
                     </>
                 ) : null}
-                <View style={{ padding: "5%" }}></View>
+                <View style={{ padding: 20 }}></View>
             </ScrollView>
         </SafeAreaView>
     );

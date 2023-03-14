@@ -32,13 +32,13 @@ const ForgetPassword = () => {
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const [forgetEmail, setForgetEmail] = useState('')
-  const [error, setError] = useState();
-  const [loader, setLoader] = useState(false);
+  const [forgetEmail, setForgetEmail] = useState<any>('')
+  const [error, setError] = useState<any>();
+  const [loader, setLoader] = useState<any>(false);
   // console.log("ForgetPAss.........", forgetEmail);
 
   const validateEmail = () => {
-    
+
     if (forgetEmail.length == 0) {
       setError('Please enter your EmailID');
     }
@@ -47,7 +47,7 @@ const ForgetPassword = () => {
         setError("Invalid EmailID");
       }
       else {
-        setError("");        
+        setError("");
         const value = {
           "email": forgetEmail.toLowerCase()
         };
@@ -66,7 +66,7 @@ const ForgetPassword = () => {
             setLoader(false);
             Toast.show(
               originalPromiseResult,
-              Toast.LONG, { backgroundColor: 'red' });    
+              Toast.LONG, { backgroundColor: 'red' });
           }
         })
       }
@@ -101,7 +101,7 @@ const ForgetPassword = () => {
           <Text style={{ width: horizontalScale(300), fontSize: RFValue(13), color: "black", marginTop: verticalScale(26), fontFamily: "Lexend-Regular" }}>
             Enter your registered email address and we will send you a link to reset your password :
           </Text>
-          <View style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), marginTop: verticalScale(32), color: "#000" }}>
+          <View style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), marginTop: verticalScale(32) }}>
             <TextInput
               placeholder="Email"
               maxLength={30}

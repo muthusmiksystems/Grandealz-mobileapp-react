@@ -33,8 +33,9 @@ import { addressListHandler } from "../../store/reducers/addresslist";
 import { drawgetHandler } from '../../store/reducers/Drawgetcall';
 import { Item } from 'react-native-paper/lib/typescript/components/Drawer/Drawer';
 import NetInfo from "@react-native-community/netinfo";
-import { useIsFocused } from '@react-navigation/native';
+import { useIsFocused, useFocusEffect } from '@react-navigation/native';
 import LoadingView from '../../component/imageLoader';
+import { productDrawHandler } from '../../store/reducers/productdraw';
 
 const DataPage = () => {
 
@@ -43,8 +44,6 @@ const DataPage = () => {
   const navigation = useNavigation();
   const IsFocused = useIsFocused();
   const userData: any = useSelector<any>(state => state.userDetailsHandle?.data?.data);
-
-
   const [apiData, setApiData] = useState();
   const [change, setChange] = useState();
   const [prodata, setProdata] = useState<any>();
@@ -72,8 +71,8 @@ const DataPage = () => {
 
   useEffect(() => {
     if (IsFocused) {
-      setLoader(true)
       cartStock()
+      dispatch(productDrawHandler())
     }
   }, [IsFocused])
 
@@ -105,11 +104,8 @@ const DataPage = () => {
 
   useEffect(() => {
     setProdata(DataInfo)
-    console.log("mmm", prodata)
+    // console.log("mmm", prodata)
   }, [DataInfo])
-  useEffect(() => {
-    console.log("hhihiixiexkekeoepee..............", soldPresence)
-  }, [soldPresence])
 
   return (
     <SafeAreaView>
@@ -178,7 +174,7 @@ const DataPage = () => {
               </View>
               <ClosingSoon />
               <View>
-                <Product  soldPresence={soldPresence} addedCart={cartList} changer={setChange} change={change} />
+                <Product soldPresence={soldPresence} addedCart={cartList} changer={setChange} change={change} />
               </View>
               <Carsold soldPresence={setsoldPresence} />
             </View>

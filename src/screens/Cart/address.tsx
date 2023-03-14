@@ -56,7 +56,7 @@ const Address = ({ route }) => {
     const handledata = (data: any) => {
 
         console.log("editing page", { data: data, type: typeUser })
-        navigation.navigate("EditAddress", { data: data, type: typeUser })
+        navigation.navigate("EditAddress", { data: data, type: typeUser, totalAmount:amount })
     }
     const handleDelete = async (data: any) => {
         Alert.alert("", "Are you sure you want to delete?", [
@@ -105,7 +105,7 @@ const Address = ({ route }) => {
                 <View style={{ paddingBottom: 12 }}>
                     {(addresslist.length > 0) ?
                         (typeUser === "payment") ?
-                            (addresslist).map((data, index) => (
+                            (addresslist).map((data: any, index: any) => (
                                 <TouchableOpacity onPress={() => setSelection(index)} key={index} style={{ width: "92%", alignSelf: "center", borderRadius: 10, backgroundColor: COLORS.white, marginHorizontal: "2%", marginTop: "5%", marginBottom: "0%", borderColor: (selection == index) ? COLORS.element : COLORS.white, borderWidth: 1, }}>
                                     <View style={{ flexDirection: "row", width: "90%", borderRadius: 10, padding: "1%" }}>
                                         <View style={{ flexDirection: "column", width: "90%", }}>
@@ -142,7 +142,7 @@ const Address = ({ route }) => {
 
                             ))
                             :
-                            (addresslist).map((data, index) => (
+                            (addresslist).map((data: any, index: any) => (
                                 <View key={index} style={{ width: "92%", alignSelf: "center", borderRadius: 10, backgroundColor: COLORS.white, marginHorizontal: "2%", marginTop: "5%", marginBottom: "0%", borderColor: (selection == index) ? COLORS.element : COLORS.white, borderWidth: 1, }}>
                                     <View style={{ flexDirection: "row", width: "90%", borderRadius: 10, padding: "1%" }}>
                                         <View style={{ flexDirection: "column", width: "90%", }}>

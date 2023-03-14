@@ -30,24 +30,19 @@ let timer = () => { };
 const OtpPage = ({ route }) => {
 
   const mobile = route.params;
- 
-
   const [otp, setOtp] = useState("");
- 
-
-  const [minutes, setMinutes] = useState(1);
-  const [seconds, setSeconds] = useState(59);
-
-
-
+  const [minutes, setMinutes] = useState<any>(1);
+  const [seconds, setSeconds] = useState<any>(59);
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
   const containerStyle = {
     fontFamily: "Lexend-Regular",
     borderBottomWidth: 3,
     width: horizontalScale(40),
     marginTop: verticalScale(9)
   }
+
   const Resend = async () => {
     let dataChange = await resendNum().then((originalPromiseResult) => {
       console.log(originalPromiseResult);
@@ -56,8 +51,8 @@ const OtpPage = ({ route }) => {
           originalPromiseResult.message,
           Toast.LONG,
         );
-          setMinutes(1);
-          setSeconds(59);
+        setMinutes(1);
+        setSeconds(59);
       }
       else if (originalPromiseResult.status === "400") {
         console.log("orginal", originalPromiseResult)
@@ -74,6 +69,7 @@ const OtpPage = ({ route }) => {
       }
     })
   }
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (seconds > 0) {
@@ -99,12 +95,12 @@ const OtpPage = ({ route }) => {
     const Data = {
       "otp": otp,
     }
-    console.log("data for opt verify...........", otp.length);
+    // console.log("data for opt verify...........", otp.length);
 
     if (otp.length > 3) {
       dispatch(VerifyHandler(Data)).then(unwrapResult)
         .then((originalPromiseResult) => {
-          console.log("successfully returned to login with response ", originalPromiseResult);
+          // console.log("successfully returned to login with response ", originalPromiseResult);
           if (originalPromiseResult.status === "200") {
             const param = originalPromiseResult.data;
             Toast.show(originalPromiseResult.message, Toast.LONG, { backgroundColor: 'red' });
@@ -150,26 +146,25 @@ const OtpPage = ({ route }) => {
             tintColor={"#0a0127"}
             handleTextChange={(text) => { setOtp(text) }}
           />
-          <View style={{ flexDirection: "row", marginTop: "2%" }}>
-          {seconds > 0 || minutes > 0 ? (
-            <Text style={{ color: "black", fontFamily: "Lexend-Regular", fontSize: RFValue(13) }}> Time Remaining : {minutes < 10 ?  `0${minutes}` : minutes}:{seconds < 10 ?  `0${seconds}` : seconds}
-            </Text>
-            ) :(
+          <View style={{ flexDirection: "row", marginTop: "2%", alignSelf: "center" }}>
+            {seconds > 0 || minutes > 0 ? (
+              <Text style={{ color: "black", fontFamily: "Lexend-Regular", fontSize: RFValue(13) }}>Time Remaining : {minutes < 10 ? `0${minutes}` : minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+              </Text>
+            ) : (
               <TouchableOpacity >
-                <Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", fontSize: RFValue(13), marginStart: "10%" }} onPress={() => { Resend() }}>Resend
-                </Text>
-              </TouchableOpacity>               
+                <Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", fontSize: RFValue(13), marginTop: 6 }} onPress={() => { Resend() }}>Resend</Text>
+              </TouchableOpacity>
             )}
-            </View>
-        </View>
-          <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(223), padding: "4%" }} onPress={() => { handleSubmit() }}>
-            <Text style={{ textAlign: "center", fontSize: RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Verify</Text>
-          </TouchableOpacity>
-          <View style={{ flexDirection: "row", marginTop: "7%", alignSelf: "center", paddingBottom: verticalScale(52) }}>
-            <TouchableOpacity onPress={() => navigation.navigate("ChangeMobileNumber")} style={{ flexDirection: "column" }}>
-              <Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", fontSize: RFValue(13) }}>Change Mobile Number</Text></TouchableOpacity>
           </View>
         </View>
+        <TouchableOpacity style={{ alignSelf: "center", marginTop: "8%", borderWidth: 1, borderRadius: 8, width: horizontalScale(223), padding: "4%" }} onPress={() => { handleSubmit() }}>
+          <Text style={{ textAlign: "center", fontSize: RFValue(16), fontFamily: "Lexend-SemiBold", color: "black" }}>Verify</Text>
+        </TouchableOpacity>
+        <View style={{ flexDirection: "row", marginTop: "7%", alignSelf: "center", paddingBottom: verticalScale(52) }}>
+          <TouchableOpacity onPress={() => navigation.navigate("ChangeMobileNumber")} style={{ flexDirection: "column" }}>
+            <Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", fontSize: RFValue(13) }}>Change Mobile Number</Text></TouchableOpacity>
+        </View>
+      </View>
     </SafeAreaView>
   )
 }

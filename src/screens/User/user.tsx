@@ -452,8 +452,8 @@ const User = (props: any) => {
                             <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity style={{ borderWidth: 1, alignSelf: "center", borderColor: COLORS.gray, marginTop: "10%", width: "65%", borderRadius: 10 }} onPress={() => handleLogout()} >
-                        <Text style={{ ...FONTS.lexendregular, fontSize: RFValue(16), textAlign: "center", color: COLORS.black, paddingVertical: "5%" }}>Logout</Text>
+                    <TouchableOpacity style={{ borderWidth: 1, alignSelf: "center", borderColor: COLORS.gray, marginTop: "10%", width: "65%", height: 45, justifyContent: "center", borderRadius: 5 }} onPress={() => handleLogout()} >
+                        <Text style={{ ...FONTS.lexendregular, fontSize: RFValue(16), textAlign: "center", color: COLORS.black }}>Logout</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{ padding: moderateScale(20), margin: "3%" }} onPress={() => deleteAcc()}>
                         <Text style={{ ...FONTS.lexendregular, fontSize: RFValue(13), color: COLORS.element, textAlign: "center" }}>Delete my account</Text>

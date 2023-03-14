@@ -52,35 +52,35 @@ const AddAddress = ({ route }) => {
     const navigation = useNavigation();
     //const { handleChange, handleSubmit, formErrors, data, formValues } = useForm(validate);
     const [Name, setName] = useState<any>("");
-    const [isSelected, setSelection] = useState(false);
-    const [addressType, setAddressType] = useState();
-    const [errorName, setErrorName] = useState('');
+    const [isSelected, setSelection] = useState<any>(false);
+    const [addressType, setAddressType] = useState<any>();
+    const [errorName, setErrorName] = useState<any>('');
     const [phone, setPhone] = useState<any>("");
-    const [errorPhone, setErrorPhone] = useState('');
+    const [errorPhone, setErrorPhone] = useState<any>('');
     const [pincode, setPincode] = useState<any>("");
-    const [errorPin, setErrorPin] = useState('');
+    const [errorPin, setErrorPin] = useState<any>('');
     const [address, setAddress] = useState<any>("");
-    const [errorAddress, setErrorAddress] = useState('');
+    const [errorAddress, setErrorAddress] = useState<any>('');
     const [locality, setLocality] = useState<any>("");
-    const [errorLocality, setErrorLocality] = useState('');
-    const [stateIso, setStateIso] = useState(null);
+    const [errorLocality, setErrorLocality] = useState<any>('');
+    const [stateIso, setStateIso] = useState<any>(null);
     const [country, setCountry] = useState<any>("");
-    const [cityError, setCityError] = useState('');
-    const [countryListValue, setCountryListValue] = useState([])
+    const [cityError, setCityError] = useState<any>('');
+    const [countryListValue, setCountryListValue] = useState<any>([])
     const [countryValue, setCountryValue] = useState<any>(null)
-    const [stateListValue, setStateListValue] = useState([])
+    const [stateListValue, setStateListValue] = useState<any>([])
     const [stateValue, setStateValue] = useState<any>(null)
-    const [cityListValue, setCityListValue] = useState([])
+    const [cityListValue, setCityListValue] = useState<any>([])
     const [cityValue, setCityValue] = useState<any>(null)
-    const [countryError, setCountryError] = useState('')
-    const [stateError, setStateError] = useState('')
-    const [cityData, setCityData] = useState();
-    const [stateData, setStateData] = useState();
-    const [countryData, setCountryData] = useState();
-    const [optionHo, setOptionHo] = useState(false);
-    const [optionWo, setOptionWo] = useState(false)
-    const [option, setOption] = useState(false)
-    const [addressError, setAddressError] = useState();
+    const [countryError, setCountryError] = useState<any>('')
+    const [stateError, setStateError] = useState<any>('')
+    const [cityData, setCityData] = useState<any>();
+    const [stateData, setStateData] = useState<any>();
+    const [countryData, setCountryData] = useState<any>();
+    const [optionHo, setOptionHo] = useState<any>(false);
+    const [optionWo, setOptionWo] = useState<any>(false)
+    const [option, setOption] = useState<any>(false)
+    const [addressError, setAddressError] = useState<any>();
     useEffect(() => {
         // { addresslist ? setAddressType(addresslist.length) 
         //     : null }
@@ -356,7 +356,7 @@ const AddAddress = ({ route }) => {
                 <ScrollView style={{ height: "100%", }}
                     contentContainerStyle={{ paddingBottom: "12%" }}>
                     <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "5%" }}>CONTACT DETAILS</Text>
-                    <View style={{ marginHorizontal: "3%", marginVertical: "2%" }}>
+                    <View style={{ marginHorizontal: "3%", marginTop: "2%" }}>
                         <Pressable onPressIn={() => handleBox()}>
                             <TextInput
                                 placeholder="Name*"
@@ -369,14 +369,11 @@ const AddAddress = ({ route }) => {
                             />
                         </Pressable>
                     </View>
-                    {errorName ?
-                        <View style={{ height: "3%" }}>
-                            {errorName ?
-                                <Text style={styles.ErrorText}>{errorName}</Text> : null}
-                        </View> :
-                        null
-                    }
-                    <View style={{ marginHorizontal: "3%", marginVertical: "1%" }}>
+                    <View style={{ height: (errorName) ? 16 : 8 }}>
+                        {errorName ?
+                            <Text style={styles.ErrorText}>{errorName}</Text> : null}
+                    </View>
+                    <View style={{ marginHorizontal: "3%", marginTop: "2%" }}>
                         <Pressable onPressIn={() => handleBox()}>
                             <TextInput
                                 keyboardType={"phone-pad"}
@@ -390,13 +387,12 @@ const AddAddress = ({ route }) => {
                             />
                         </Pressable>
                     </View>
-                    {errorPhone ?
-                        <View style={{ height: "3%" }}>
-                            {errorPhone ?
-                                <Text style={styles.ErrorText}>{errorPhone}</Text> : null}
-                        </View> : null}
-                    <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "3%" }}>ADDRESS</Text>
-                    <View style={{ marginHorizontal: "3%", marginVertical: "2%" }}>
+                    <View style={{ height: (errorPhone) ? 16 : 8 }}>
+                        {errorPhone ?
+                            <Text style={styles.ErrorText}>{errorPhone}</Text> : null}
+                    </View>
+                    <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "2%" }}>ADDRESS</Text>
+                    <View style={{ marginHorizontal: "3%", marginTop: "2%" }}>
                         <Pressable onPressIn={() => handleBox()}>
                             <TextInput
                                 keyboardType={"phone-pad"}
@@ -410,11 +406,10 @@ const AddAddress = ({ route }) => {
                             />
                         </Pressable>
                     </View>
-                    {errorPin ?
-                        <View style={{ height: "3%" }}>
-                            <Text style={styles.ErrorText}>{errorPin}</Text>
-                        </View> : null}
-                    <View style={{ marginHorizontal: "3%", marginVertical: "1%" }}>
+                    <View style={{ height: (errorPin) ? 16 : 8 }}>
+                        <Text style={styles.ErrorText}>{errorPin}</Text>
+                    </View>
+                    <View style={{ marginHorizontal: "3%", marginTop: "2%" }}>
                         <Pressable onPressIn={() => handleBox()}>
                             <TextInput
                                 keyboardType={"default"}
@@ -428,13 +423,13 @@ const AddAddress = ({ route }) => {
                             />
                         </Pressable>
                     </View>
-                    {errorAddress ?
-                        <View style={{ height: "3%" }}>
-                            {errorAddress ?
-                                <Text style={styles.ErrorText}>{errorAddress}</Text> : null}
-                        </View>
-                        : null}
-                    <View style={{ marginHorizontal: "3%", marginVertical: "2%" }}>
+
+                    <View style={{ height: (errorAddress) ? 16 : 8 }}>
+                        {errorAddress ?
+                            <Text style={styles.ErrorText}>{errorAddress}</Text> : null}
+                    </View>
+
+                    <View style={{ marginHorizontal: "3%", marginTop: "2%" }}>
                         <Pressable onPressIn={() => handleBox()}>
                             <TextInput
                                 keyboardType={"default"}
@@ -448,12 +443,12 @@ const AddAddress = ({ route }) => {
                             />
                         </Pressable>
                     </View>
-                    {errorLocality ?
-                        <View style={{ height: "3%" }}>
-                            {errorLocality ?
-                                <Text style={styles.ErrorText}>{errorLocality}</Text> : null}
-                        </View> : null}
-                    <View style={{ flexDirection: "row", marginHorizontal: "3%", marginVertical: "1%", width: "95%", alignItems: 'center' }}>
+
+                    <View style={{ height: (errorLocality) ? 16 : 8 }}>
+                        {errorLocality ?
+                            <Text style={styles.ErrorText}>{errorLocality}</Text> : null}
+                    </View>
+                    <View style={{ flexDirection: "row", marginHorizontal: "3%", marginTop: "2%", width: "95%" }}>
                         <View style={{ flexDirection: "column", width: "46%", marginLeft: "2.5%" }}>
                             <View>
                                 <Dropdown
@@ -469,13 +464,12 @@ const AddAddress = ({ route }) => {
                                     placeholder={(countryValue) ? countryValue : "Country*"}
                                 />
                             </View>
-                            {countryError ?
-                                <View style={{ height: "3%",borderWidth:2 }}>
-                                    <Text style={styles.ErrorText}>{countryError}</Text>
-                                </View> : null}
+                            <View style={{ height: (countryError) ? 16 : 8 }}>
+                                <Text style={styles.ErrorText}>{countryError}</Text>
+                            </View>
                         </View>
                         <View style={{ flexDirection: "column", width: "49%" }}>
-                            <View style={{ marginHorizontal: "3%", marginBottom: "1%" }}>
+                            <View style={{ marginHorizontal: "3%" }}>
                                 <Dropdown
                                     style={{ width: "100%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, padding: "2%", marginTop: "1%", paddingHorizontal: 14 }}
                                     placeholderStyle={styles.dropText}
@@ -489,14 +483,14 @@ const AddAddress = ({ route }) => {
                                     placeholder={(stateValue) ? stateValue : "State*"}
                                 />
                             </View>
-                            {stateError ?
-                                <View style={{ height: "3%" }}>
-                                    {stateError ?
-                                        <Text style={styles.ErrorText}>{stateError}</Text> : null}
-                                </View> : null}
+
+                            <View style={{ height: (stateError) ? 16 : 8 }}>
+                                {stateError ?
+                                    <Text style={styles.ErrorText}>{stateError}</Text> : null}
+                            </View>
                         </View>
                     </View>
-                    <View style={{ marginHorizontal: "1%", marginVertical: "1%" }}>
+                    <View style={{ marginHorizontal: "1%", marginTop: "2%" }}>
                         <Dropdown
                             style={{ width: "91%", backgroundColor: COLORS.white, alignSelf: "center", borderRadius: 8, padding: "2%", marginTop: "1%", paddingHorizontal: 14 }}
                             placeholderStyle={styles.dropText}
@@ -510,14 +504,14 @@ const AddAddress = ({ route }) => {
                             placeholder={(cityValue) ? cityValue : "Select City"}
                         />
                     </View>
-                    {cityError ?
-                        <View style={{ height: "2%" }}>
-                            {cityError ?
-                                <Text style={styles.ErrorText}>{cityError}</Text> : null}
-                        </View>
-                        : null}
+
+                    <View style={{ height: (cityError) ? 16 : 8 }}>
+                        {cityError ?
+                            <Text style={styles.ErrorText}>{cityError}</Text> : null}
+                    </View>
+
                     <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "2%" }}>SAVE ADDRESS AS</Text>
-                    <View style={{ marginVertical: "2%", flexDirection: "row", width: "89%", alignSelf: "center", borderRadius: 10, backgroundColor: COLORS.white }}>
+                    <View style={{ marginTop: "2%", flexDirection: "row", width: "89%", alignSelf: "center", borderRadius: 10, backgroundColor: COLORS.white }}>
                         <>
                             <TouchableOpacity disabled={optionHo} style={{ paddingVertical: "5%", marginHorizontal: "5%", }} onPress={() => setAddressType(0)}>
                                 <Text style={{ ...styles.switch, backgroundColor: (addressType == 0) ? COLORS.element : "white", color: (addressType == 0) ? COLORS.white : COLORS.gray, borderColor: (addressType == 0) ? COLORS.element : COLORS.gray }}>Home</Text>
@@ -527,13 +521,13 @@ const AddAddress = ({ route }) => {
                             </TouchableOpacity>
                         </>
                     </View>
-                    {addressError ?
-                        <View style={{ height: "2%" }}>
-                            {addressError ?
-                                <Text style={styles.ErrorText}>{addressError}</Text> : null}
-                        </View> : null}
-                    <View style={{ marginHorizontal: "2%", marginBottom: "2%", padding: "2%", flexDirection: "row", width: "90%", borderRadius: 10, backgroundColor: COLORS.white, alignSelf: "center" }}>
-                        <View style={{ marginLeft: "-4%" }}><CheckBoxes /></View>
+
+                    <View style={{ height: (addressError) ? 16 : 8 }}>
+                        {addressError ?
+                            <Text style={styles.ErrorText}>{addressError}</Text> : null}
+                    </View>
+                    <View style={{ marginHorizontal: "2%", marginTop: "2%", paddingVertical: "2%", flexDirection: "row", width: "90%", borderRadius: 10, backgroundColor: COLORS.white, alignSelf: "center" }}>
+                        <View><CheckBoxes /></View>
                         <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, paddingHorizontal: "5%", alignSelf: "center" }}>Make this my default address</Text>
                     </View>
                 </ScrollView>

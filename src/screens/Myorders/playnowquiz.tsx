@@ -160,7 +160,7 @@ const Playnowquiz = (props) => {
             <View>
                 <Modal
                     animationType="slide"
-                    transparent={false}
+                    transparent={true}
                     visible={congratState}
                     onRequestClose={() => navigation.goBack()}
                 >
@@ -245,9 +245,10 @@ const Style = StyleSheet.create({
         marginTop: "22%",
         alignSelf: 'center',
         // backgroundColor: "rgba(11, 0, 41, 0.8)",
-        backgroundColor: "#2A2141",
+        backgroundColor: COLORS.primary,
         width: "90%",
-        height: "80%",
+        height: "auto",
+        paddingBottom: "16%",
         borderRadius: 20
     },
     subdiv2: {

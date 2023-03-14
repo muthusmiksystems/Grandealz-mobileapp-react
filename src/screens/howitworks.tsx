@@ -33,12 +33,12 @@ const HowItWorks = () => {
             </View>
             <ScrollView>
                 <View style={{ padding: "2%", backgroundColor: COLORS.lightGray, width: "100%" }}>
-                    <View style={{ marginTop: "3%" }}>
+                    <View style={{ marginTop: 14 }}>
                         <View style={{ alignItems: "center" }}>
                             <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(20), color: "#E70736" }}>How It Work in 3 Steps</Text>
-                            <Text style={{ ...FONTS.lexendregular, fontSize: RFValue(13), textAlign: "center", width: "88%", color: "#616161" }}>Simply buy our products and get a chance to win luxury prizes</Text>
+                            <Text style={{ ...FONTS.lexendregular, fontSize: RFValue(13), textAlign: "center", width: "88%", color: "#616161", marginTop: 10 }}>Simply buy our products and get a chance to win luxury prizes</Text>
                         </View>
-                        <View style={{ backgroundColor: "white", borderRadius: 5, width: "72%", height: verticalScale(348), alignSelf: "center", marginTop: "3%" }}>
+                        <View style={{ backgroundColor: "white", borderRadius: 5, width: "72%", height: verticalScale(348), alignSelf: "center", marginTop: 14 }}>
                             <View style={{ alignSelf: "flex-start", marginLeft: "4%", alignItems: "center", borderRightColor: "#7F7E76", borderTopEndRadius: 30, borderTopStartRadius: 30, borderBottomEndRadius: 30, borderBottomStartRadius: 30, borderWidth: 3, marginTop: "4%", height: verticalScale(46), width: "44%", borderColor: "#D8000D", flexDirection: "row" }}>
                                 <View style={{ flexDirection: "column", marginLeft: "8%" }}>
                                     <Text style={{ color: "#E70736", ...FONTS.lexendregular, fontSize: RFValue(13), textAlign: "center" }}>1000</Text>
@@ -197,10 +197,10 @@ const HowItWorks = () => {
                                     }}
                                 />
                             </View>
-                            <TouchableOpacity style={{ borderWidth: 1, alignSelf: "center", padding: "4%", marginVertical: "4%", borderRadius: 5, width: "85%" }}
+                            <TouchableOpacity style={{ borderWidth: 1, alignSelf: "center", marginVertical: 12, justifyContent: "center", borderRadius: 5, width: "85%", height: 45 }}
                                 onPress={() => navigation.navigate("Faq")}
                             >
-                                <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(15), color: COLORS.black, textAlign: "center" }}>Have Question? Read Our Faqs</Text>
+                                <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(15), color: COLORS.black, width: "100%", textAlign: "center" }}>Have Question? Read Our Faqs</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

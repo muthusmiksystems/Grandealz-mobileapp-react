@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { Image, View, Text, Button, TouchableOpacity, Platform } from 'react-native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
@@ -42,8 +42,8 @@ const Tabs = () => {
     const dispatch = useDispatch();
     const navigation = useNavigation();
     useEffect(() => {
-    dispatch(productDrawHandler())
-}, [])
+        dispatch(productDrawHandler())
+    }, [])
 
     return (
         <Tab.Navigator
@@ -51,7 +51,7 @@ const Tabs = () => {
             initialRouteName={'DataPage'}
             tabBarOptions={tabOptions}
             screenOptions={({ route }) => ({
-                tabBarStyle: { height: Platform.OS==="ios" ?RFValue(88) :RFValue(65) },
+                tabBarStyle: { height: Platform.OS === "ios" ? RFValue(88) : RFValue(65) },
                 tabBarIcon: ({ focused }) => {
                     const tintColor = focused ? COLORS.element : COLORS.gray;
 
@@ -317,7 +317,7 @@ const Tabs = () => {
                     //     fontSize: RFValue(16, 580)
                     // }
                 }}
-                // {...backBehavior:'none'}
+            // {...backBehavior:'none'}
 
             />
 

@@ -24,7 +24,7 @@ import { useEffect } from 'react';
 
 const OrderList = ({ orderlist }) => {
     const navigation = useNavigation();
-    const [filterdata, setData] = useState(orderlist);
+    const [filterdata, setData] = useState<any>(orderlist);
     //const filterdata =orderlist
     useEffect(() => {
         setData(orderlist)
