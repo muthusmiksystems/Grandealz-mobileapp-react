@@ -14,7 +14,6 @@ import {
     Modal,
     Linking
 } from 'react-native';
-import ImagePicker from 'react-native-image-crop-picker';
 import SafeAreaView from 'react-native-safe-area-view';
 import { icons, COLORS, FONTS } from '../../constants';
 import { horizontalScale, moderateScale, verticalScale } from '../../constants/metrices';

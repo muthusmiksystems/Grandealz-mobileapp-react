@@ -101,7 +101,7 @@ const Playnowquiz = (props) => {
         // setButtonOptionOne(false), setButtonOptionTwo(false), setButtonOptionThree(false), setButtonOptionFour(false), setButtonSubmit(false), setOption(0), setTryAgainState(true)
     }
     return (
-        <SafeAreaView style={{ width: '100%', height: '100%', backgroundColor: "#474745" }}>
+        <SafeAreaView style={{ width: '100%', height: '100%', backgroundColor: "rgba(0,0,0,0.5)" }}>
             <StatusBar
                 animated={true}
                 backgroundColor="#0a0127"

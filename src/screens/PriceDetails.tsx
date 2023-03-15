@@ -33,18 +33,18 @@ const PriceDetails = ({ route }) => {
   const pricing = route.params;
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const [cartList, setCartList] = useState([]);
+  const [cartList, setCartList] = useState<any>([]);
   const [wishedId, setWishedId] = useState<string>("");
-  const [tabPrize, setTabPrize] = useState(true);
-  const [tabProd, setTabProd] = useState(false);
-  const [heart, setHeart] = useState(false);
+  const [tabPrize, setTabPrize] = useState<any>(true);
+  const [tabProd, setTabProd] = useState<any>(false);
+  const [heart, setHeart] = useState<any>(false);
 
-  console.log("routedData.....................", pricing)
+  // console.log("routedData.....................", pricing)
 
 
   const handleAddtoCart = async () => {
     const payload = { "draw": pricing._id, "qty": 1 }
-    console.log("payload", payload)
+    // console.log("payload", payload)
     let AddItemtoCart = await AddtoCartHandle(payload)
     if (AddItemtoCart.status === "200") {
 
@@ -56,18 +56,18 @@ const PriceDetails = ({ route }) => {
     }
   }
   const RemoveWishlist = async () => {
-    console.log("Removewish........", wishedId);
+    // console.log("Removewish........", wishedId);
     let Removeitems = await RemovewishlistHandle(wishedId)
     showHeartIfExists();
 
-    console.log("result...........", Removeitems)
+    // console.log("result...........", Removeitems)
   }
   const handleAddWishlist = async () => {
-    console.log("Addwish........", pricing._id);
+    // console.log("Addwish........", pricing._id);
     const result = await addToWishlistHandle(pricing._id);
 
     showHeartIfExists();
-    console.log("result...........", result)
+    // console.log("result...........", result)
 
   }
   const sharePage = async () => {
@@ -94,7 +94,7 @@ const PriceDetails = ({ route }) => {
     (priceitem).forEach((element: any) => {
       var Data = (element.draw._id);
       if (Data === pricing._id) {
-        console.log("trueeeeeeeeeeeee.........", element._id);
+        // console.log("trueeeeeeeeeeeee.........", element._id);
         setWishedId(element._id);
       }
       WishIdArray.push(Data);
@@ -110,7 +110,7 @@ const PriceDetails = ({ route }) => {
 
   const cartStock = async () => {
     let ourCartStock = await ourCartPage()
-    console.log("CartData List on cart", ourCartStock)
+    // console.log("CartData List on cart", ourCartStock)
     var AlreadyInCart: any = [];
     let data = ourCartStock?.draws;
 
@@ -121,16 +121,14 @@ const PriceDetails = ({ route }) => {
       })
     }
     setCartList(AlreadyInCart);
-    console.log("dtaaaa.....................", AlreadyInCart)
+    // console.log("dtaaaa.....................", AlreadyInCart)
   }
   const goToCart = async () => {
     if (!(cartList.includes(`${pricing._id}`))) {
-      console.log("data not in cart ")
+      // console.log("data not in cart ")
       const payload = { "draw": pricing._id, "qty": 1 }
       let AddItemtoCart = await AddtoCartHandle(payload)
       if (AddItemtoCart.status === "200") {
-
-
         cartStock();
         navigation.navigate("Tabs", { screen: "Cart" })
       }
@@ -140,7 +138,7 @@ const PriceDetails = ({ route }) => {
       }
     }
     else {
-      console.log("cart");
+      // console.log("cart");
       navigation.navigate("Tabs", { screen: "Cart" })
     }
   }
@@ -156,7 +154,7 @@ const PriceDetails = ({ route }) => {
         animated={true}
         backgroundColor={"#0a0127"}
       />
-      <View style={{ height: "92.3%" }}>
+      <View style={{ height: "92%", width: "100%" }}>
         <View
           style={{
             backgroundColor: "#0a0127",
@@ -309,25 +307,25 @@ const PriceDetails = ({ route }) => {
           </View>
         </ScrollView>
       </View>
-      <View style={{ backgroundColor: "white" }}>
-        <View style={{ flexDirection: "row", marginVertical: "2%", marginHorizontal: "4%", justifyContent: "space-between" }}>
-          {!(cartList.includes(`${pricing._id}`)) ?
-            <TouchableOpacity style={{ flexDirection: "column", borderRadius: 6, width: "48%" }}>
-              <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: COLORS.element, color: "white", ...FONTS.lexendregular, borderRadius: 5 }} onPress={() => { handleAddtoCart() }}>ADD TO CART</Text>
-            </TouchableOpacity>
-            :
-            <TouchableOpacity style={{ flexDirection: "column", borderRadius: 6, width: "48%" }}>
-              <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "7%", backgroundColor: COLORS.element, color: "white", ...FONTS.lexendregular, borderRadius: 5 }} onPress={() => { navigation.navigate("Tabs", { screen: "Cart" }) }}>VIEW CART</Text>
-            </TouchableOpacity>
-          }
-
-          <TouchableOpacity style={{ flexDirection: "column", borderWidth: 1, borderRadius: 6, width: "48%" }} onPress={() => goToCart(/* route.params */)}>
-            <Text style={{ textAlign: "center", fontSize: RFValue(15), padding: "6%", backgroundColor: "#fff", color: "#000", ...FONTS.lexendregular, borderRadius: 8 }}>
-              BUY NOW
-            </Text>
+      {/* <View style={{ backgroundColor: "white",borderWidth:2 }}> */}
+      <View style={{ backgroundColor: "white", flexDirection: "row", justifyContent: "space-between", height: "8%", paddingHorizontal: "4%", alignItems: "center" }}>
+        {!(cartList.includes(`${pricing._id}`)) ?
+          <TouchableOpacity style={{ flexDirection: "column", alignItems: "center", justifyContent: "center", borderWidth: 1, borderRadius: 5, width: "48%", height: verticalScale(46), backgroundColor: COLORS.element, borderColor: COLORS.element }}>
+            <Text style={{ fontSize: RFValue(15), color: "white", ...FONTS.lexendregular }} onPress={() => { handleAddtoCart() }}>ADD TO CART</Text>
           </TouchableOpacity>
-        </View>
-        {/* <View style={{ flexDirection: "row", marginVertical: "2%", justifyContent: "space-evenly" }}>
+          :
+          <TouchableOpacity style={{ flexDirection: "column", alignItems: "center", justifyContent: "center", borderWidth: 1, borderRadius: 5, width: "48%", height: verticalScale(46), backgroundColor: COLORS.element, borderColor: COLORS.element }}>
+            <Text style={{ fontSize: RFValue(15), color: "white", ...FONTS.lexendregular }} onPress={() => { navigation.navigate("Tabs", { screen: "Cart" }) }}>VIEW CART</Text>
+          </TouchableOpacity>
+        }
+
+        <TouchableOpacity style={{ flexDirection: "column", alignItems: "center", justifyContent: "center", borderWidth: 1, borderRadius: 5, width: "48%", height: verticalScale(46) }} onPress={() => goToCart(/* route.params */)}>
+          <Text style={{ fontSize: RFValue(15), color: "#000", ...FONTS.lexendregular }}>
+            BUY NOW
+          </Text>
+        </TouchableOpacity>
+      </View>
+      {/* <View style={{ flexDirection: "row", marginVertical: "2%", justifyContent: "space-evenly" }}>
           <TouchableOpacity style={{ flexDirection: "column", borderRadius: 6 }}>
             <Text style={{ fontSize: RFValue(15), paddingHorizontal: 35, padding: 10, backgroundColor: COLORS.element, color: "white", ...FONTS.lexendregular, borderRadius: 8 }}> ADD TO CART</Text>
           </TouchableOpacity>
@@ -337,7 +335,7 @@ const PriceDetails = ({ route }) => {
             </Text>
           </TouchableOpacity>
         </View> */}
-      </View>
+      {/* </View> */}
     </SafeAreaView>
   )
 }

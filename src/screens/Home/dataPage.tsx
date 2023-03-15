@@ -1,6 +1,5 @@
 
 import React, { type PropsWithChildren, useEffect, useState } from 'react';
-
 import {
   SafeAreaView,
   ScrollView,
@@ -10,6 +9,7 @@ import {
   Image,
   useColorScheme,
   View,
+  Dimensions,
   TouchableOpacity,
   ImageBackground,
 } from 'react-native';
@@ -39,19 +39,18 @@ import { productDrawHandler } from '../../store/reducers/productdraw';
 
 const DataPage = () => {
 
-
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const IsFocused = useIsFocused();
   const userData: any = useSelector<any>(state => state.userDetailsHandle?.data?.data);
-  const [apiData, setApiData] = useState();
-  const [change, setChange] = useState();
+  const [apiData, setApiData] = useState<any>();
+  const [change, setChange] = useState<any>();
   const [prodata, setProdata] = useState<any>();
-  const [cartList, setCartList] = useState([]);
-  const [loader, setLoader] = useState(false);
-  const [soldPresence, setsoldPresence] = useState(false);
-  const DataInfo = useSelector(state => state?.productDrawHandle?.data)
-  const [imageLoader, setImageLoader] = useState(false)
+  const [cartList, setCartList] = useState<any>([]);
+  const [loader, setLoader] = useState<any>(false);
+  const [soldPresence, setsoldPresence] = useState<any>(false);
+  const DataInfo = useSelector<any>(state => state?.productDrawHandle?.data)
+  const [imageLoader, setImageLoader] = useState<any>(false)
 
   useEffect(() => {
     NetInfo.addEventListener(state => {
@@ -79,7 +78,7 @@ const DataPage = () => {
   const cartStock = async () => {
     setLoader(true)
     let ourCartStock = await ourCartPage()
-    console.log("CartData List on cart", ourCartStock)
+    // console.log("CartData List on cart", ourCartStock)
     var AlreadyInCart: any = [];
     let data = ourCartStock?.draws;
     if (data) {
@@ -89,10 +88,10 @@ const DataPage = () => {
       })
     }
     setCartList(AlreadyInCart);
-    console.log("dtaaaa..kumari...................", AlreadyInCart)
+    // console.log("dtaaaa..kumari...................", AlreadyInCart)
     setLoader(false)
   }
-  console.log("rummer", cartList)
+  // console.log("rummer", cartList)
   const Addresslist = () => {
     dispatch(addressListHandler())
   }
@@ -115,8 +114,8 @@ const DataPage = () => {
             animated={true}
             backgroundColor={"#0a0127"}
           />
-          <View style={{ backgroundColor: "#0a0127", height: verticalScale(80), justifyContent: "center" }}>
-            <View style={{ flexDirection: 'row', justifyContent: "space-between", marginTop: "4%" }}>
+          <View style={{ backgroundColor: "#0a0127", width: "100%", height: verticalScale(80), justifyContent: "space-between", alignItems: "center" }}>
+            <View style={{ flexDirection: 'row', justifyContent: "space-between", alignItems: "center", width: "100%", paddingHorizontal: "6%", height: "100%" }}>
               <View style={{ flexDirection: "column" }}>
                 <Image
                   source={icons.userGrand}
@@ -124,44 +123,39 @@ const DataPage = () => {
                   style={{
                     width: horizontalScale(140),
                     height: verticalScale(35),
-                    marginLeft: "8%"
                   }}
                 />
               </View>
-              <View style={{ flexDirection: "column", }}>
+              <View style={{ flexDirection: "column" }}>
                 <TouchableOpacity onPress={() => { navigation.navigate('User'), Addresslist() }}
-                  style={{ borderRadius: moderateScale(40), }}
+                  style={styles.roundedCircle}
                 >
-                  <View style={{
-                    width: horizontalScale(40), height: verticalScale(40), margin: "3%", bottom: horizontalScale(7), borderRadius: moderateScale(40), borderWidth: 1, borderColor: COLORS.element
-                  }}>
-                    {(userData?.profile_pic) ?
-                      <ImageBackground
-                        source={{ uri: (userData?.profile_pic) }}
-                        resizeMode="cover"
-                        imageStyle={{ borderRadius: moderateScale(40) }}
-                        onLoadStart={() => setImageLoader(true)}
-                        onLoadEnd={() => setImageLoader(false)}
-                        style={{ width: "100%", height: "100%", borderRadius: moderateScale(40) }}
-                      >
-                        {(imageLoader) ?
-                          <Image
-                            source={icons.user}
-                            resizeMode="cover"
-                            style={{
-                              width: "100%", height: "100%", borderRadius: moderateScale(40)
-                            }}
-                          /> : null}
-                      </ImageBackground>
-                      :
-                      <Image
-                        source={icons.user}
-                        resizeMode="cover"
-                        style={{
-                          width: "100%", height: "100%", borderRadius: moderateScale(40)
-                        }}
-                      />}
-                  </View>
+                  {(userData?.profile_pic) ?
+                    <ImageBackground
+                      source={{ uri: (userData?.profile_pic) }}
+                      resizeMode="cover"
+                      imageStyle={{ borderRadius: Math.round(Dimensions.get('screen').width + Dimensions.get('screen').height) / 2 }}
+                      onLoadStart={() => setImageLoader(true)}
+                      onLoadEnd={() => setImageLoader(false)}
+                      style={{ width: "100%", height: "100%" }}
+                    >
+                      {(imageLoader) ?
+                        <Image
+                          source={icons.user}
+                          resizeMode="cover"
+                          style={{
+                            width: "100%", height: "100%", borderRadius: Math.round(Dimensions.get('screen').width + Dimensions.get('screen').height) / 2
+                          }}
+                        /> : null}
+                    </ImageBackground>
+                    :
+                    <Image
+                      source={icons.user}
+                      resizeMode="cover"
+                      style={{
+                        width: "100%", height: "100%", borderRadius: Math.round(Dimensions.get('screen').width + Dimensions.get('screen').height) / 2
+                      }}
+                    />}
                 </TouchableOpacity>
               </View>
             </View>
@@ -206,6 +200,15 @@ const styles = StyleSheet.create({
     alignContent: "center",
     ...FONTS.lexendregular
   },
+  roundedCircle: {
+    borderRadius: Math.round(Dimensions.get('screen').width + Dimensions.get('screen').height) / 2,
+    width: Dimensions.get('screen').width * 0.1,
+    height: Dimensions.get("screen").width * 0.1,
+    borderWidth: 1,
+    borderColor: COLORS.element,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 
 })
 export default DataPage;

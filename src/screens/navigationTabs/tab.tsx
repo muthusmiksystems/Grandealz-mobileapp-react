@@ -9,33 +9,15 @@ import NotificationList from "../Home/notificationList";
 import Tickets from "../Tickets/tickets";
 import Cart from "../Cart/cart";
 import { icons, COLORS, FONTS } from "../../constants";
-import Icon from 'react-native-vector-icons/FontAwesome'
-import BrandIcons from "react-native-vector-icons/Ionicons"
-import EntypoIcons from "react-native-vector-icons/Entypo";
 import { useDispatch, useSelector } from 'react-redux';
-
 import { RFValue } from "react-native-responsive-fontsize";
-import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons'
-import SLIcon from 'react-native-vector-icons/SimpleLineIcons'
+
 const Tab = createBottomTabNavigator();
 
 const tabOptions = {
     showLabel: false,
-
     tabStyle:
-        [{ backgroundColor: COLORS.white }],
-    style: {
-        height: 95,
-        shadowColor: COLORS.white,
-        shadowOffset: {
-            width: 0,
-            height: 10,
-        },
-        shadowOpacity: 0.53,
-        shadowRadius: 13.97,
-
-        elevation: 21,
-    },
+        [{ backgroundColor: COLORS.white, borderWidth: 2 }],
 };
 
 const Tabs = () => {
@@ -49,8 +31,9 @@ const Tabs = () => {
         <Tab.Navigator
             backBehavior="initialRoute"
             initialRouteName={'DataPage'}
-            tabBarOptions={tabOptions}
+            // tabBarOptions={tabOptions}
             screenOptions={({ route }) => ({
+                tabBarShowLabel: false,
                 tabBarStyle: { height: Platform.OS === "ios" ? RFValue(88) : RFValue(65) },
                 tabBarIcon: ({ focused }) => {
                     const tintColor = focused ? COLORS.element : COLORS.gray;
@@ -58,7 +41,7 @@ const Tabs = () => {
                     switch (route.name) {
                         case "Notification":
                             return (
-                                <View style={{ alignItems: "center", bottom: "16%" }}>
+                                <View style={{ alignItems: "center", bottom: "19%", position: "relative" }}>
                                     <View>{focused ? <Image source={icons.tabTopSlide}
                                         resizeMode="contain"
                                         style={{ width: 30, height: 20 }}
@@ -86,7 +69,7 @@ const Tabs = () => {
                             );
                         case "Draws":
                             return (
-                                <View style={{ alignItems: "center", bottom: "16%" }}>
+                                <View style={{ alignItems: "center", bottom: "19%" }}>
                                     <View>{focused ? <Image source={icons.tabTopSlide}
                                         resizeMode="contain"
                                         style={{ width: 30, height: 20 }}
@@ -114,7 +97,7 @@ const Tabs = () => {
                             );
                         case "DataPage":
                             return (
-                                <View style={{ alignItems: "center", bottom: "16%" }}>
+                                <View style={{ alignItems: "center", bottom: "19%" }}>
                                     <View>{focused ? <Image source={icons.tabTopSlide}
                                         resizeMode="contain"
                                         style={{ width: 30, height: 20 }}
@@ -142,7 +125,7 @@ const Tabs = () => {
                             );
                         case "Tickets":
                             return (
-                                <View style={{ alignItems: "center", bottom: "16%" }}>
+                                <View style={{ alignItems: "center", bottom: "19%" }}>
                                     <View>{focused ? <Image source={icons.tabTopSlide}
                                         resizeMode="contain"
                                         style={{ width: 30, height: 20 }}
@@ -170,7 +153,7 @@ const Tabs = () => {
                             );
                         case "Cart":
                             return (
-                                <View style={{ alignItems: "center", bottom: "16%" }}>
+                                <View style={{ alignItems: "center", bottom: "19%" }}>
                                     <View>{focused ? <Image source={icons.tabTopSlide}
                                         resizeMode="contain"
                                         style={{ width: 30, height: 20 }}
@@ -195,9 +178,7 @@ const Tabs = () => {
                                     </View>
                                     <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(9) }}>Cart</Text>
                                 </View>
-
                             );
-
                     }
                 }
             })}
@@ -318,9 +299,7 @@ const Tabs = () => {
                     // }
                 }}
             // {...backBehavior:'none'}
-
             />
-
         </Tab.Navigator>
     );
 };

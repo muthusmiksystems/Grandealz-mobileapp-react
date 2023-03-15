@@ -19,7 +19,6 @@ import icons from "../constants/icons"
 import image from "../constants/image";
 import { RFValue } from "react-native-responsive-fontsize";
 import { COLORS, FONTS } from "../constants";
-import LoderKit from ""
 import OrderList from "./Myorders/orderList";
 import WishlistData from "./wishListData";
 import { productGetCall } from "../../src test sasi/services/register";
@@ -85,7 +84,7 @@ const OurProducts = () => {
                         <Text style={{ color: "black" }}> No Products Available</Text>
                     </View>
                 :
-                <View style={{ width: "100%", alignItems: "center", height: "100%", justifyContent: "center" }}>
+                <View style={{ width: "100%", alignItems: "center", height: "90%", justifyContent: "center" }}>
                     <LoaderKit
                         style={{ width: 100, height: 105 }}
                         name={'BallClipRotatePulse'} // Optional: see list of animations below

@@ -90,7 +90,7 @@ const Product = ({ addedCart, changer, change, soldPresence }) => {
                                     </AnimatedCircularProgress>
                                 </View>
                                 <TouchableOpacity disabled={item.total_no_of_sold_out_tickets / item.total_no_of_tickets != 1 ? false : true} style={{ flexDirection: 'column', width: "100%", marginTop: 6 }} onPress={() => handleSearch(item)}>
-                                    <View style={{ height: verticalScale(150), width: horizontalScale(250), alignSelf: "center" }}>
+                                    <View style={{ height: verticalScale(162), width: horizontalScale(257), alignSelf: "center" }}>
                                         <Image
                                             source={{ uri: item.draw_image }}
                                             resizeMode="contain"
@@ -102,8 +102,7 @@ const Product = ({ addedCart, changer, change, soldPresence }) => {
                                         />
                                     </View>
                                 </TouchableOpacity>
-
-                                <TouchableOpacity disabled={item.total_no_of_sold_out_tickets / item.total_no_of_tickets != 1 ? false : true} style={{ marginTop: 6, flexDirection: "row", width: "94%", alignSelf: "center", justifyContent: "space-between", paddingBottom: 14 }} onPress={() => handleSearch(item)}>
+                                <TouchableOpacity disabled={item.total_no_of_sold_out_tickets / item.total_no_of_tickets != 1 ? false : true} style={{ marginVertical: 12, flexDirection: "row", width: "94%", alignSelf: "center", justifyContent: "space-between" }} onPress={() => handleSearch(item)}>
                                     <View style={{ flexDirection: "column", marginStart: "2%", width: "78%" }}>
                                         <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(24), color: "#E70736" }}>Win</Text>
                                         <Text style={{ fontSize: RFValue(13), color: "black", ...FONTS.lexendsemibold, }}>{item.draw_title}</Text>
@@ -148,13 +147,25 @@ const Product = ({ addedCart, changer, change, soldPresence }) => {
                                                 height: "100%"
                                             }} />
                                     </View>
-                                    <View style={{ flexDirection: "column", alignSelf: "center", width: "88%" }}>
+                                    <View style={{ flexDirection: "column", alignSelf: "center", width: "83%" }}>
                                         <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(12), marginLeft: 6, ...FONTS.lexendsemibold, color: COLORS.black }}>
                                             Max Draw Date: {moment(item.max_draw_date).format('MMMM DD YYYY')}
                                         </Text>
                                         <Text style={{ fontSize: RFValue(10), marginLeft: 6, ...FONTS.lexendregular, color: "gray" }}>
                                             {(item.max_draw_date_description).substring(0, 100)}
                                         </Text>
+                                    </View>
+                                    <View style={{ flexDirection: "column", alignSelf: "center" }}>
+                                        <Image
+                                            source={icons.ellipsePink}
+                                            resizeMode="contain"
+                                            style={{ width: 8, height: 8, flexDirection: "row", bottom: 2 }}
+                                        />
+                                        <Image
+                                            source={icons.ellipseGray}
+                                            resizeMode="contain"
+                                            style={{ width: 8, height: 8, flexDirection: "row", top: 2 }}
+                                        />
                                     </View>
                                 </View>
                             </View>

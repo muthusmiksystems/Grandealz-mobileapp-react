@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { FONTS } from '../constants';
 import icons from '../constants/icons';
 import image from '../constants/image';
-import { horizontalScale, moderateScale } from '../constants/metrices';
+import { verticalScale, horizontalScale, moderateScale } from '../constants/metrices';
 import { bannerHandler } from '../store/reducers/Banners';
 import { unwrapResult } from '@reduxjs/toolkit';
 
@@ -70,7 +70,7 @@ const Banner = (data) => {
                     source={{ uri: banner[0].image }}
                     resizeMode="contain"
                     style={{
-                      width: 170,
+                      width: verticalScale(170),
                       height: 105,
                       // right: 40
                     }}

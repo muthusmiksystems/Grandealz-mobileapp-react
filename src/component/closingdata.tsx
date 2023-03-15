@@ -86,7 +86,7 @@ const ClosingSoon = () => {
       }
     })
     setClosingsoondata(ClosingSoon)
-    console.log("ermmm", ClosingSoon)
+    // console.log("ermmm", ClosingSoon)
   }, [])
 
   const handleSearch = (value: any) => {
@@ -140,7 +140,6 @@ const ClosingSoon = () => {
                       <View style={{ marginLeft: "15%", width: "70%", height: "4%", borderColor: "#F1F1F1", borderWidth: 1, margin: 2, borderRadius: 12, backgroundColor: "#F1F1F1" }}>
                         <Text style={{ backgroundColor: "#EC092D", width: handleProgressActive(item), borderRadius: 12 }}></Text>
                       </View>
-
                     </TouchableOpacity>
                   </View>
                 )}

@@ -46,7 +46,7 @@ const PlayNow = (props: any) => {
         }
     }
     return (
-        <SafeAreaView style={{ width: '100%', height: '100%', backgroundColor: "rgba(0,0,0,0.5)" }}>
+        <SafeAreaView style={{ width: '100%', height: '100%', backgroundColor: "rgba(0,0,0,0.5)", alignItems: "center", justifyContent: "center" }}>
             <StatusBar
                 animated={true}
                 backgroundColor="#0a0127"
@@ -112,8 +112,6 @@ const PlayNow = (props: any) => {
                 </View>
             </Modal>
         </SafeAreaView>
-
-
     )
 }
 const Styles = StyleSheet.create({
@@ -148,11 +146,12 @@ const Style = StyleSheet.create({
     },
     maindiv: {
         marginTop: "22%",
+        justifyContent: "center",
         alignSelf: 'center',
         // backgroundColor: "rgba(11, 0, 41, 0.8)",
         backgroundColor: COLORS.primary,
         width: "90%",
-        height: "auto",
+        // height: "auto",
         paddingBottom: "20%",
         borderRadius: 20
     },

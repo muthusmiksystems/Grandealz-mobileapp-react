@@ -50,23 +50,23 @@ const OrderConfirmed = () => {
                 backgroundColor={"#0a0127"}
             />
             <View style={styles.container}>
-                <View style={{ width: "100%", height: "20%", alignItems: "center", marginTop: "25%" }}>
+                <View style={{ width: "100%", height: "20%", alignItems: "center", justifyContent: "space-evenly" }}>
                     <Image
                         source={icons.confirmTick}
                         resizeMode="contain"
-                        style={{ width: "20%", height: 70 }}
+                        style={{ width: "20%", height: "36%" }}
                     />
-                    <Text style={{ color: "white", ...FONTS.lexendregular, fontSize: RFValue(20), marginVertical: "5%" }}>Order Confirmed</Text>
+                    <Text style={{ color: "white", ...FONTS.lexendregular, fontSize: RFValue(20) }}>Order Confirmed</Text>
                 </View>
-                <View style={{ width: "100%", height: "25%", alignItems: "center", marginTop: "2%" }}>
+                <View style={{ width: "100%", height: "25%", alignItems: "center", justifyContent: "space-between" }}>
                     <Image
                         source={icons.threeTickets}
                         resizeMode="contain"
-                        style={{ width: 200, height: 150 }}
+                        style={{ width: "80%", height: "80%" }}
                     />
-                    <Text style={{ color: "white", ...FONTS.lexendregular, fontSize: RFValue(14), marginVertical: "5%" }}>Answer this question and avail your tickets</Text>
+                    <Text style={{ color: "white", ...FONTS.lexendregular, fontSize: RFValue(14) }}>Answer this question and avail your tickets</Text>
                 </View>
-                <View style={{ width: "100%", height: "25%", alignItems: "center", marginTop: "6%" }}>
+                <View style={{ width: "100%", height: "25%", alignItems: "center", justifyContent: "space-around" }}>
                     <TouchableOpacity style={{ borderWidth: 2, borderColor: "white", borderRadius: 8, width: "40%", height: "24%", alignItems: "center", justifyContent: "center" }}
                         onPress={() => { navigation.navigate("MyOrders") }}
                     >
