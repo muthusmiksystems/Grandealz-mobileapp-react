@@ -258,7 +258,8 @@ const PriceDetails = ({ route }) => {
                   resizeMode="contain"
                   style={{
                     width: 257,
-                    height: 162
+                    height: 162,
+                    borderRadius:5
                   }}
                 /> : null}
                 {tabProd ?
@@ -267,7 +268,8 @@ const PriceDetails = ({ route }) => {
                     source={{ uri: pricing.product_image }}
                     style={{
                       width: 257,
-                      height: 162
+                      height: 162,
+                      borderRadius:5
                     }}
                   />
                   : null}

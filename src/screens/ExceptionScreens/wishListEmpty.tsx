@@ -17,23 +17,23 @@ import { useNavigation } from "@react-navigation/native";
 
 import image from "../../constants/image";
 import { RFValue } from "react-native-responsive-fontsize";
-import { COLORS } from "../../constants";
+import { COLORS, FONTS } from "../../constants";
 
 
 const WishListEmpty = () => {
     const navigation = useNavigation();
 
     return (
-        <SafeAreaView style={{height:"90%",width:"100%",}}>
-            <View  style={styles.container}>
-            <View style={styles.view1} >
-            <Image
-                source={image.heartEmpty}
-                resizeMode="contain"
-                style={{ height: verticalScale(90), width: horizontalScale(80),top:verticalScale(5) }}
-            />
-            </View>
-            <Text style={{textAlign:"center",color:COLORS.gray}}>Your Wishist is Empty</Text>
+        <SafeAreaView style={{ height: "90%", width: "100%" }}>
+            <View style={styles.container}>
+                <View style={styles.view1} >
+                    <Image
+                        source={image.heartEmpty}
+                        resizeMode="contain"
+                        style={{ height: verticalScale(90), width: horizontalScale(80) }}
+                    />
+                </View>
+                <Text style={{ textAlign: "center", color: COLORS.gray, ...FONTS.lexendregular }}>Your Wishist is Empty</Text>
             </View>
         </SafeAreaView>
     );
@@ -55,18 +55,18 @@ const styles = StyleSheet.create({
     },
     container: {
         alignItems: "center",
-        justifyContent:"center",
-        height:"100%",
-        width:"100%",
+        justifyContent: "center",
+        height: "100%",
+        width: "100%",
     },
     view1: {
         alignContent: "center",
         alignItems: "center",
-        justifyContent:"center",
+        justifyContent: "center",
         flexDirection: "column",
         width: horizontalScale(130),
         alignSelf: "center",
-        backgroundColor: '#EEEEEE' ,
+        backgroundColor: '#EEEEEE',
         height: verticalScale(130),
         borderTopStartRadius: 95,
         borderBottomStartRadius: 95,

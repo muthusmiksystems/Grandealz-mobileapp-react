@@ -102,8 +102,8 @@ const WishList = () => {
                 const payload = { "draw": drawid, "qty": 1 }
                 let AddItemtoCart = await AddtoCartHandle(payload)
                 if (AddItemtoCart.status === "200") {
-                                soon()
-                                showViewCart()
+                    soon()
+                    showViewCart()
                     // navigation.navigate("Tabs", { screen: "Cart" })
                 }
                 else {
@@ -146,7 +146,6 @@ const WishList = () => {
                     <ScrollView style={styles.subdivTwo}>
                         <View style={{ flexDirection: "row" }}>
                             <View style={{ padding: "4%" }}>
-
                                 <FlatList
                                     data={Wishlistdata}
                                     contentContainerStyle={{}}
@@ -156,7 +155,7 @@ const WishList = () => {
                                             <TouchableOpacity>
                                                 <View style={{ flexDirection: "row" }}>
                                                     <View style={{ flexDirection: "row", width: "70%", paddingVertical: "5%", paddingLeft: "3%" }}>
-                                                        <View style={{ flexDirection: "column", backgroundColor: COLORS.pagebackground, padding: "4%", width: "45%", alignItems: "center" }}>
+                                                        <View style={{ flexDirection: "column", backgroundColor: COLORS.pagebackground, padding: "4%", width: "45%", alignItems: "center", borderRadius: 5, justifyContent: "center" }}>
                                                             <Image
                                                                 source={{ uri: item.draw.product_image }}
                                                                 resizeMode="contain"
@@ -178,12 +177,12 @@ const WishList = () => {
                                                         {!(cartidlist.includes(`${item.draw._id}`)) ?
                                                             <TouchableOpacity style={{ width: "102%", backgroundColor: COLORS.element, alignSelf: "flex-end", flexDirection: "row", borderBottomEndRadius: 10, borderTopStartRadius: 10 }} onPress={() => { setDrawid(item.draw._id) }} >
 
-                                                                <Text style={{ width: "100%", textAlign: "center", paddingVertical: "8%", ...FONTS.lexendregular, color: COLORS.white,fontSize:RFValue(10) }}>ADD TO CART</Text>
+                                                                <Text style={{ width: "100%", textAlign: "center", paddingVertical: "8%", ...FONTS.lexendregular, color: COLORS.white, fontSize: RFValue(10) }}>ADD TO CART</Text>
                                                             </TouchableOpacity>
                                                             :
                                                             <TouchableOpacity style={{ width: "102%", backgroundColor: COLORS.element, alignSelf: "flex-end", flexDirection: "row", borderBottomEndRadius: 10, borderTopStartRadius: 10 }} onPress={() => { setDrawid(item.draw._id), navigation.navigate('Tabs', { screen: 'Cart' }) }} >
 
-                                                                <Text style={{ width: "100%", textAlign: "center", paddingVertical: "8%", ...FONTS.lexendregular, color: COLORS.white,fontSize:RFValue(10) }}>VIEW CART</Text>
+                                                                <Text style={{ width: "100%", textAlign: "center", paddingVertical: "8%", ...FONTS.lexendregular, color: COLORS.white, fontSize: RFValue(10) }}>VIEW CART</Text>
                                                             </TouchableOpacity>}
 
                                                     </View>
@@ -192,10 +191,8 @@ const WishList = () => {
                                         </View>
                                     )}
                                 />
-
                             </View>
                         </View>
-
                     </ScrollView>
                     : <WishListEmpty />
                 :
@@ -221,7 +218,7 @@ const styles = StyleSheet.create({
         flexDirection: "row"
     },
     subdivTwo: {
-        height: "100%",
+        height: "90%",
         // alignItems: "center",
         // justifyContent: "center",
         // borderWidth:2
