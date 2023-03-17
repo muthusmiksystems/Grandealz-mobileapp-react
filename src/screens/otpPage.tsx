@@ -95,16 +95,18 @@ const OtpPage = ({ route }) => {
     const Data = {
       "otp": otp,
     }
-    // console.log("data for opt verify...........", otp.length);
 
     if (otp.length > 3) {
       dispatch(VerifyHandler(Data)).then(unwrapResult)
         .then((originalPromiseResult) => {
           // console.log("successfully returned to login with response ", originalPromiseResult);
-          if (originalPromiseResult.status === "200") {
+          if (originalPromiseResult.message === "User Verified Successfully") {
             const param = originalPromiseResult.data;
             Toast.show(originalPromiseResult.message, Toast.LONG, { backgroundColor: 'red' });
             navigation.navigate("login")
+          }
+          else if (originalPromiseResult.message === "OTP has been Expired.Please resend the otp and try again.") {
+            Toast.show(originalPromiseResult.message, Toast.LONG, { backgroundColor: 'red' });
           } else {
             Toast.show("Invalid OTP", Toast.LONG, { backgroundColor: 'red' });
           }

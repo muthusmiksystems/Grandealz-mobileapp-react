@@ -44,7 +44,7 @@ const OrderList = ({ orderlist }) => {
                                         <TouchableOpacity onPress={() => navigation.navigate("OrderDetails", item)}>
                                             <View style={{ flexDirection: "row", backgroundColor: "#fff", borderRadius: 10 }} >
                                                 <View style={{ alignItems: 'center', width: "30%", padding: "2%" }}>
-                                                    <View style={{ flexDirection: 'column', width: "100%", height: verticalScale(100), backgroundColor: COLORS.lightGray, alignItems: "center" }}>
+                                                    <View style={{ flexDirection: 'column', width: "100%", height: verticalScale(100), borderRadius: 5, backgroundColor: COLORS.lightGray, alignItems: "center" }}>
                                                         <Image
                                                             source={{ uri: item.draws.draw.product_image }}
                                                             resizeMode="contain"

@@ -37,18 +37,19 @@ import { personalDetailsUpdate } from '../../services/personalDetailsUpdate';
 import { userDetailsHandler } from '../../store/reducers/userDetails';
 import { deleteAccount } from '../../services/deleteAccount';
 import Toast from 'react-native-simple-toast';
-
+import ImagePicker from 'react-native-image-crop-picker';
+import { err } from 'react-native-svg/lib/typescript/xml';
 
 const User = (props: any) => {
     // console.log("PAge props.............", props.route.params)
     const userData: any = useSelector<any>(state => state.userDetailsHandle?.data?.data);
-    const [modalState, setModalState] = useState(false)
+    const [modalState, setModalState] = useState<any>(false)
     const [profilePic, setProfilePic] = useState<any>()
     const [profileName, setProfileName] = useState<any>()
     console.log("UseSelector.................", userData)
     const navigation = useNavigation();
-    const [loader, setLoader] = useState(false);
-    const [imageLoader, setImageLoader] = useState(false)
+    const [loader, setLoader] = useState<any>(false);
+    const [imageLoader, setImageLoader] = useState<any>(false)
     const handleLogout = () => {
 
         Alert.alert("", "Are you sure you want to logout? ", [
@@ -135,53 +136,89 @@ const User = (props: any) => {
     const openCamera = async () => {
         setModalState(false)
         if (Platform.OS == 'android' && await checkForPermissions()) {
-            console.log("Camera permission given");
-            const options: CameraOptions = {
-                mediaType: 'photo',
-                maxWidth: 4320,
-                maxHeight: 4320,
-            }
-            const result = await launchCamera(options);
-            console.log("imgdetails.....................", result);
-            if (result.assets) {
-                console.log("imgdetails.....................", result.assets[0].fileName);
+            console.log("Camera permission given for camera");
+            ImagePicker.openCamera({
+                width: 400,
+                height: 400,
+                cropping: true,
+                freeStyleCropEnabled: true
+            }).then(image => {
+                // console.log("Image details.....................", image);
+                let url = image?.path.split('/');
+                // console.log("Url............", url[11]);
+                // console.log("Image details.....................", image.mime);
+                // console.log("Image details.....................", image.path);
                 const file = {
-                    "name": result.assets[0].fileName,
-                    "type": result.assets[0].type,
-                    "uri": result.assets[0].uri
+                    "name": url[11],
+                    "type": image.mime,
+                    "uri": image.path
                 }
                 setProfilePic(file)
-            }
+            }).catch(err => console.log(err));
+            // const options: CameraOptions = {
+            //     mediaType: 'photo',
+            //     maxWidth: 4320,
+            //     maxHeight: 4320,
+            // }
+            // const result = await launchCamera(options);
+            // console.log("imgdetails.....................", result);
+            // if (result.assets) {
+            //     console.log("imgdetails.....................", result.assets[0].fileName);
+            //     const file = {
+            //         "name": result.assets[0].fileName,
+            //         "type": result.assets[0].type,
+            //         "uri": result.assets[0].uri
+            //     }
+            //     setProfilePic(file)
+            // }
 
-            else {
-                Toast.show("Please try again later!", Toast.LONG, { backgroundColor: 'red' });
-            }
+            // else {
+            //     Toast.show("Please try again later!", Toast.LONG, { backgroundColor: 'red' });
+            // }
         }
 
     }
     const openGallery = async () => {
         setModalState(false)
         if (Platform.OS == 'android' && await checkForPermissions()) {
-            console.log("Camera permission given");
-            const options: ImageLibraryOptions = {
-                mediaType: 'photo',
-            }
-            const result = await launchImageLibrary(options);
-
-
-            console.log("imgdetails.....................", result)
-            if (result.assets) {
-                console.log("imgdetails.....................", result.assets[0].fileName);
+            // console.log("Camera permission given for gallery");
+            ImagePicker.openPicker({
+                width: 400,
+                height: 400,
+                cropping: true,
+                freeStyleCropEnabled: true
+            }).then(image => {
+                // console.log("Image details.....................", image);
+                let url = image?.path.split('/');
+                // console.log("Url............", url[11]);
+                // console.log("Image details.....................", image.mime);
+                // console.log("Image details.....................", image.path);
                 const file = {
-                    "name": result.assets[0].fileName,
-                    "type": result.assets[0].type,
-                    "uri": result.assets[0].uri
+                    "name": url[11],
+                    "type": image.mime,
+                    "uri": image.path
                 }
                 setProfilePic(file)
-            }
-            else {
-                Toast.show("Please try again later!", Toast.LONG, { backgroundColor: 'red' });
-            }
+            }).catch(err => console.log(err));
+            // const options: ImageLibraryOptions = {
+            //     mediaType: 'photo',
+            // }
+            // const result = await launchImageLibrary(options);
+
+
+            // console.log("imgdetails.....................", result)
+            // if (result.assets) {
+            //     console.log("imgdetails.....................", result.assets[0].fileName);
+            //     const file = {
+            //         "name": result.assets[0].fileName,
+            //         "type": result.assets[0].type,
+            //         "uri": result.assets[0].uri
+            //     }
+            //     setProfilePic(file)
+            // }
+            // else {
+            //     Toast.show("Please try again later!", Toast.LONG, { backgroundColor: 'red' });
+            // }
         }
     }
     const checkForPermissions = async () => {

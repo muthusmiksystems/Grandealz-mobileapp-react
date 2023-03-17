@@ -72,7 +72,7 @@ const Carsold = (props: CarSoldProps) => {
                             contentContainerStyle={{}}
                             keyExtractor={item => item.id}
                             renderItem={({ item }) => (
-                                <View style={{ paddingHorizontal: "6%" }}>
+                                <View style={{ paddingHorizontal: "6%",marginBottom:14 }}>
                                     <View style={{ borderRadius: 9, backgroundColor: "white", paddingVertical: 20 }}>
                                         <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8, flexDirection: 'column' }}>
                                             <Image
