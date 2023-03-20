@@ -6,6 +6,7 @@ import {
     StyleSheet,
     Text,
     Image,
+    Keyboard,
     FlatList,
     useColorScheme,
     View,
@@ -30,6 +31,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { drawCommingfilter, drawCommingGet, drawWinnerfilter } from '../../services/register';
 import LoaderKit from 'react-native-loader-kit';
+import { useKeyboard } from '@react-native-community/hooks';
 
 
 const DrawsMain = () => {
@@ -53,6 +55,7 @@ const DrawsMain = () => {
         setDate(currentDate);
     }
     const handleFilter = async (search) => {
+
         if (showWinners) {
             let searc = moment(search.date).format("YYYY-MM-DD")
             setModalVisible(!modalVisible)
@@ -232,7 +235,7 @@ const DrawsMain = () => {
                                     </> : null}
 
                             </View>
-                            <TouchableOpacity style={{ alignItems: "center", marginTop: verticalScale(20), width: "100%", height: verticalScale(46) }} onPress={() => { handleFilter({ searcher, date, year }) }}>
+                            <TouchableOpacity style={{ alignItems: "center", marginTop: verticalScale(20), width: "100%", height: verticalScale(46) }} onPress={() => { handleFilter({ searcher, date, year }), Keyboard.dismiss() }}>
                                 <View style={{ width: horizontalScale(223), height: "100%", borderRadius: 5, backgroundColor: "#E70736", alignItems: "center", justifyContent: "center", }}>
                                     <Text style={{ color: "#FFFFFF", fontSize: RFValue(15), fontFamily: "Lexend-Regular" }}>Apply</Text>
                                 </View>

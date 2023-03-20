@@ -15,7 +15,7 @@ import {
   Alert,
   BackHandler,
   TouchableOpacity,
-  
+
   // Button
 } from "react-native";
 // import {useBackHandler} from '@react-native-community/hooks';
@@ -87,36 +87,54 @@ const Login = (props: Prop) => {
     console.log(email === "", " empty check")
     console.log(email ? "ture" : "false")
     let errorCount = 0;
-
-    console.log("satrday",(!/^[a-zA-Z0-9!@#$%^&*]{0,10}$/.test(password)));
-    if (email === null) {
+    console.log("satrday", (!/^[a-zA-Z0-9!@#$%^&*]{0,10}$/.test(password)));
+    if (!email) {
       setErrorEmail('Please enter email')
       errorCount++;
     }
-    console.log("testing ",email)
-    if (email.length < 1) {
-      setErrorEmail('Please enter email');
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      setErrorEmail('Please enter valid email')
+    }
+    else {
+      console.log(" no testing ")
+      setErrorEmail("");
+    }
+    if (!password) {
+      setErrorPassword("Please enter password");
       errorCount++;
     }
-    if (email) {
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { 
-        setErrorEmail("Please enter valid email");
-        errorCount++;
-      }
-      else {
-        console.log(" no testing ")
-        setError("");
-      }
+    else if (!/^[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(password)) {
+      setErrorPassword("Passwords must be longer than or equal to 8 characters");
+      errorCount++;
     }
-    if (password !== undefined) {
-      if (password.length<1) {
-        setErrorPassword("Please enter password");
-        errorCount++;
-      } else if (!/^[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(password)) {
-        setErrorPassword("Passwords must be longer than or equal to 8 characters");
-        errorCount++;
-      }
+    else {
+      console.log(" no testing ")
+      setErrorPassword("")
     }
+    // console.log("testing ",email)
+    // if (email.length < 1) {
+    //   setErrorEmail('Please enter email');
+    //   errorCount++;
+    // }
+    // if (email) {
+    //   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+    //     setErrorEmail("Please enter valid email");
+    //     errorCount++;
+    //   }
+    //   else {
+    //     console.log(" no testing ")
+    //     setErrorEmail("");
+    //   }
+    // }
+    // if (password !== undefined) {
+    //   if (password.length < 1) {
+    //     setErrorPassword("Please enter password");
+    //     errorCount++;
+    //   } else if (!/^[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(password)) {
+    //     setErrorPassword("Passwords must be longer than or equal to 8 characters");
+    //     errorCount++;
+    //   }
+    // }
     if (errorCount === 0) {
       setErrorEmail(""), setErrorPassword("");
       return true;
@@ -150,7 +168,7 @@ const Login = (props: Prop) => {
   const handleSubmit = async () => {
     const validateLetter = validateFunction();
     console.log("Retrun.............", validateLetter);
-    
+
     if (validateLetter) {
       const reg = {
         "email": email.toLowerCase(),
@@ -164,11 +182,11 @@ const Login = (props: Prop) => {
         .then(async (originalPromiseResult: any) => {
           console.log("successfully returned to login with response ", originalPromiseResult);
           if (originalPromiseResult?.data?.access_token) {
-           
+
             console.log("token  sam   ...dddd", originalPromiseResult.data.access_token);
             await AsyncStorage.setItem('loginToken', originalPromiseResult.data.access_token)
-            
-            Toast.show( "Successfully logged as grandealz", Toast.LONG, { backgroundColor: 'red' });
+
+            Toast.show("Successfully logged as grandealz", Toast.LONG, { backgroundColor: 'red' });
             if (isSelected === true) {
               await AsyncStorage.setItem('username', email),
                 await AsyncStorage.setItem('password', password)
@@ -193,7 +211,7 @@ const Login = (props: Prop) => {
             // console.log("setError response ", originalPromiseResult);
             //setPassword("")
             setLoader(false)
-            Toast.show( 
+            Toast.show(
               originalPromiseResult,
               Toast.LONG,
             )
@@ -202,7 +220,7 @@ const Login = (props: Prop) => {
           }
         }).catch((rejectedValueOrSerializedError) => {
           console.log(" Inside catch", rejectedValueOrSerializedError);
-          Toast.show( 
+          Toast.show(
             "Something went wrong!, please try again later",
             Toast.LONG,
           )

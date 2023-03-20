@@ -264,7 +264,7 @@ const EditAddress = ({ route }) => {
                 .then((originalPromiseResult) => {
                     console.log("success samuvel you did itdone", originalPromiseResult);
                     if (originalPromiseResult.message === "saved successfully") {
-                        Toast.show('Successfully added', Toast.LONG, { backgroundColor: 'red' });
+                        Toast.show('Successfully Saved', Toast.LONG, { backgroundColor: 'red' });
 
                         dispatch(addressListHandler());
                         navigation.navigate("Address", { type: typeUser, amount: totalAmount });
@@ -379,7 +379,7 @@ const EditAddress = ({ route }) => {
                 <View style={{ marginHorizontal: "3%", marginTop: "2%" }}>
                     <Pressable onPressIn={() => handleBox()}>
                         <TextInput
-                            keyboardType={"phone-pad"}
+                            keyboardType={"number-pad"}
                             placeholder="MobileNo*"
                             value={phone}
                             maxLength={10}
@@ -534,7 +534,7 @@ const EditAddress = ({ route }) => {
                     <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, paddingHorizontal: "5%", alignSelf: "center" }}>Make this my default address</Text>
                 </View>
             </ScrollView>
-            <View style={{ flexDirection: "row", height: "8%", backgroundColor: COLORS.white, paddingVertical: "1%", paddingHorizontal: "2%" }}>
+            <View style={{ flexDirection: "row", height: 62, backgroundColor: COLORS.white, paddingVertical: "1%", paddingHorizontal: "2%" }}>
 
                 <TouchableOpacity style={{ flexDirection: "column", width: "90%", marginHorizontal: "5%", marginVertical: "1%", borderRadius: 5, borderWidth: 1, justifyContent: "center", alignItems: "center" }} onPress={e => { handleSubmit(), Keyboard.dismiss }} disabled={false}>
                     <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular }}>Save Address</Text>

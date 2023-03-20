@@ -84,7 +84,7 @@ const PriceMap = ({ priceval }) => {
                             <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular }}>Total MRP </Text>
                         </View>
                         <View style={{ width: "25%", alignItems: "flex-end" }}>
-                            <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, }}>₹ {cartAmountDetails.sub_total}</Text>
+                            <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, }}>₹ {Number(cartAmountDetails.sub_total).toFixed(2)}</Text>
                         </View>
                     </View>
                     <View style={{ flexDirection: "row", marginTop: "3%" }}>
@@ -92,7 +92,7 @@ const PriceMap = ({ priceval }) => {
                             <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular }}>Tax(GST) </Text>
                         </View>
                         <View style={{ width: "25%", alignItems: "flex-end" }}>
-                            <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, }}>₹ {cartAmountDetails.tax}</Text>
+                            <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, }}>₹ {Number(cartAmountDetails.tax).toFixed(2)}</Text>
                         </View>
                     </View>
                     <View style={{ flexDirection: "row", paddingBottom: "2%", marginTop: "3%" }}>
@@ -100,7 +100,7 @@ const PriceMap = ({ priceval }) => {
                             <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, }}>Promo Code </Text>
                         </View>
                         <View style={{ width: "25%", alignItems: "flex-end" }}>
-                            <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, }}>-₹ {cartAmountDetails.coupon_discount}</Text>
+                            <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, }}>-₹ {Number(cartAmountDetails.coupon_discount).toFixed(2)}</Text>
                         </View>
                     </View>
                 </View>
@@ -111,7 +111,7 @@ const PriceMap = ({ priceval }) => {
                             <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular }}>Total Amount</Text>
                             <Text style={{ fontSize: RFValue(10), color: COLORS.gray, ...FONTS.lexendregular }}>Inclusive of Tax (GST)</Text></View>
                         <View style={{ width: "20%", alignItems: "flex-end" }}>
-                            <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular }}>₹{cartAmountDetails.total}</Text>
+                            <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular }}>₹{Number(cartAmountDetails.total).toFixed(2)}</Text>
                         </View>
                     </View>
                     {/* <View>

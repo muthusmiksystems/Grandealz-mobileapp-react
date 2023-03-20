@@ -121,7 +121,7 @@ const OrderDetails = ({ route }) => {
                         {(orderdetailsdata?.draws[0]?.draw_tickets && orderdetailsdata?.draws[0]?.draw_tickets.length > 0) ? null :
                             <View style={{ width: "100%", borderRadius: 8, backgroundColor: "#FFFFFF", paddingLeft: "3%", flexDirection: "row", marginBottom: "4%", alignItems: "center" }}>
                                 <Text style={{ ...FONTS.lexendregular, color: COLORS.black, justifyContent: "center", width: "60%", paddingVertical: "2%" }}>To avail your tickets</Text>
-                                <TouchableOpacity style={{ width: "40%", height: verticalScale(40), backgroundColor: COLORS.element, alignSelf: "flex-end", alignItems: "center", justifyContent: "center", flexDirection: "row", borderBottomEndRadius: 10, borderTopStartRadius: 10 }} onPress={() => navigation.replace("PlayNow", orderid._id)}>
+                                <TouchableOpacity style={{ width: "40%", height: verticalScale(40), backgroundColor: COLORS.element, alignSelf: "flex-end", alignItems: "center", justifyContent: "center", flexDirection: "row", borderBottomEndRadius: 10, borderTopStartRadius: 10 }} onPress={() => navigation.navigate("PlayNow", orderid._id)}>
                                     <Text style={{ ...FONTS.lexendregular, color: COLORS.white, fontSize: RFValue(12) }}>Play Now</Text>
                                 </TouchableOpacity>
                             </View>
@@ -140,7 +140,7 @@ const OrderDetails = ({ route }) => {
                                         <View style={{ flexDirection: "column", width: "100%", paddingLeft: "4%", marginTop: RFValue(5) }}>
                                             <Text style={{ fontSize: RFValue(13), ...FONTS.lexendsemibold, color: COLORS.black }}>{data.draw.draw_title}</Text>
                                             <Text style={{ fontSize: RFValue(13), ...FONTS.lexendregular, color: "#616161" }}>{data.draw.product_title}</Text>
-                                            <Text style={{ fontSize: RFValue(20), ...FONTS.lexendregular, color: "red", marginTop: "8%" }}>₹{orderdetailsdata.sub_total}</Text>
+                                            <Text style={{ fontSize: RFValue(20), ...FONTS.lexendregular, color: "red", marginTop: "8%" }}>₹{Number(orderdetailsdata.sub_total).toFixed(2)}</Text>
                                         </View>
                                     </View>
                                     {data.draw_tickets.length > 0 ?
@@ -214,7 +214,7 @@ const OrderDetails = ({ route }) => {
                                                 <Text style={{ color: "gray", fontSize: RFValue(13), ...FONTS.lexendregular }}>Total MRP</Text>
                                             </View>
                                             <View style={{ flexDirection: "column" }}>
-                                                <Text style={{ color: "gray", fontSize: RFValue(13), ...FONTS.lexendregular }}>₹{orderdetailsdata.sub_total}</Text>
+                                                <Text style={{ color: "gray", fontSize: RFValue(13), ...FONTS.lexendregular }}>₹{Number(orderdetailsdata.sub_total).toFixed(2)}</Text>
                                             </View>
                                         </View>
                                         <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10 }}>
@@ -222,7 +222,7 @@ const OrderDetails = ({ route }) => {
                                                 <Text style={{ color: "gray", fontSize: RFValue(13), ...FONTS.lexendregular }}>Tax (GST)</Text>
                                             </View>
                                             <View style={{ flexDirection: "column" }}>
-                                                <Text style={{ color: "gray", fontSize: RFValue(13), ...FONTS.lexendregular }}>₹{orderdetailsdata.tax}</Text>
+                                                <Text style={{ color: "gray", fontSize: RFValue(13), ...FONTS.lexendregular }}>₹{Number(orderdetailsdata.tax).toFixed(2)}</Text>
                                             </View>
                                         </View>
                                         <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10, paddingVertical: 6 }}>
@@ -230,17 +230,17 @@ const OrderDetails = ({ route }) => {
                                                 <Text style={{ color: "gray", fontSize: RFValue(13), ...FONTS.lexendregular }}>Promo Code</Text>
                                             </View>
                                             <View style={{ flexDirection: "column" }}>
-                                                <Text style={{ color: "gray", fontSize: RFValue(13), ...FONTS.lexendregular }}>₹{orderdetailsdata.coupon_discount}</Text>
+                                                <Text style={{ color: "gray", fontSize: RFValue(13), ...FONTS.lexendregular }}>₹{Number(orderdetailsdata.coupon_discount).toFixed(2)}</Text>
                                             </View>
                                         </View>
-                                        <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10, paddingBottom: 6 }}>
+                                        {/* <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10, paddingBottom: 6 }}>
                                             <View style={{ flexDirection: "column" }}>
                                                 <Text style={{ color: "gray", fontSize: RFValue(13), ...FONTS.lexendregular }}>Coins</Text>
                                             </View>
                                             <View style={{ flexDirection: "column" }}>
-                                                <Text style={{ color: "gray", fontSize: RFValue(13), ...FONTS.lexendregular }}>₹{orderdetailsdata.coin_redeem}</Text>
+                                                <Text style={{ color: "gray", fontSize: RFValue(13), ...FONTS.lexendregular }}>₹{Number(orderdetailsdata.coin_redeem).toFixed(2)}</Text>
                                             </View>
-                                        </View>
+                                        </View> */}
                                         <View style={{ borderTopWidth: 1, borderColor: "#616161", width: "95%", marginLeft: RFValue(9) }} />
                                         <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10, paddingVertical: 6 }}>
                                             <View style={{ flexDirection: "column" }}>
@@ -248,7 +248,7 @@ const OrderDetails = ({ route }) => {
                                                 <Text style={{ color: "gray", fontSize: RFValue(10), ...FONTS.lexendregular }}>Inclusive of Tax (GST)</Text>
                                             </View>
                                             <View style={{ flexDirection: "column" }}>
-                                                <Text style={{ color: "gray", fontSize: RFValue(13), ...FONTS.lexendregular }}>₹{orderdetailsdata.total}</Text>
+                                                <Text style={{ color: "gray", fontSize: RFValue(13), ...FONTS.lexendregular }}>₹{Number(orderdetailsdata.total).toFixed(2)}</Text>
                                             </View>
                                         </View>
                                     </View>
@@ -257,7 +257,7 @@ const OrderDetails = ({ route }) => {
                                 <View style={{ marginBottom: "4%", borderRadius: 8, backgroundColor: "white", height: RFValue(40) }}>
                                     <View style={{ margin: RFValue(10), flexDirection: "row", alignItems: "center" }}>
                                         <Text style={{ flexDirection: "column", color: "black", fontSize: 9 }}>{'\u2B24'}</Text>
-                                        <Text style={{ ...FONTS.lexendregular, fontWeight: "400", color: "black", fontSize: RFValue(13), flexDirection: "column" }}> Debit Card ₹{orderdetailsdata.total}</Text>
+                                        <Text style={{ ...FONTS.lexendregular, fontWeight: "400", color: "black", fontSize: RFValue(13), flexDirection: "column" }}> Debit Card ₹{Number(orderdetailsdata.total).toFixed(2)}</Text>
                                     </View>
                                 </View>
                             </>

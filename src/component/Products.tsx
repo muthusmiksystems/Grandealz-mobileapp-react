@@ -75,15 +75,15 @@ const Product = ({ addedCart, changer, change, soldPresence }) => {
                                         {
                                             (fill) => (
                                                 <>
-                                                    <View>
-                                                        <Text style={{ color: "#E70736", ...FONTS.lexendregular, fontSize: RFValue(10), textAlign: "center" }}>{item.total_no_of_sold_out_tickets}
-                                                            <Text style={{ ...FONTS.lexendsemibold, alignSelf: "center", color: "black", fontSize: RFValue(8), }}>{" "}Sold</Text></Text>
-                                                    </View>
-                                                    <View style={{ backgroundColor: "#7F7E76B2", width: "80%", borderWidth: 1, borderColor: "#7F7E76B2" }} />
-                                                    <View>
-                                                        <Text style={{ ...FONTS.lexendregular, color: " rgba(127, 126, 118, 0.7)", fontSize: RFValue(8) }}>OUT OF</Text>
-                                                        <Text style={{ color: "#E70736", ...FONTS.lexendregular, fontSize: RFValue(10), textAlign: "center" }}>{item.total_no_of_tickets}</Text>
-                                                    </View>
+                                                    {(item.total_no_of_sold_out_tickets !== item.total_no_of_tickets) ?
+                                                        <View>
+                                                            <Text style={{ color: "#E70736", ...FONTS.lexendregular, fontSize: 10, textAlign: "center" }}>{item.total_no_of_sold_out_tickets}</Text>
+                                                            {/* <View style={{ backgroundColor: "#7F7E76B2", width: "80%", borderWidth: 1, borderColor: "#7F7E76B2" }} /> */}
+                                                            <Text style={{ ...FONTS.lexendsemibold, alignSelf: "center", color: "black", fontSize: 8 }}>{" "}Sold</Text>
+                                                            <Text style={{ ...FONTS.lexendregular, color: " rgba(127, 126, 118, 0.7)", fontSize: 8 }}>OUT OF</Text>
+                                                            <Text style={{ color: "#E70736", ...FONTS.lexendregular, fontSize: 10, textAlign: "center" }}>{item.total_no_of_tickets}</Text>
+                                                        </View> : <Text style={{ ...FONTS.lexendregular, textAlign: "center", fontSize: 12, color: COLORS.element }}>All Sold</Text>
+                                                    }
                                                 </>
                                             )
                                         }

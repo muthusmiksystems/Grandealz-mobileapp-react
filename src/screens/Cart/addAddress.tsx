@@ -532,7 +532,7 @@ const AddAddress = ({ route }) => {
                     </View>
                 </ScrollView>
             }
-            <View style={{ flexDirection: "row", height: "8%", backgroundColor: COLORS.white, paddingVertical: "1%", paddingHorizontal: "2%" }}>
+            <View style={{ flexDirection: "row", height: 62, backgroundColor: COLORS.white, paddingVertical: "1%", paddingHorizontal: "2%" }}>
                 <TouchableOpacity style={{ flexDirection: "column", width: "90%", marginHorizontal: "5%", marginVertical: "1%", borderRadius: 5, borderWidth: 1, justifyContent: "center", alignItems: "center" }} onPress={e => { handleSubmit() }} disabled={false}>
                     <Text style={{ color: COLORS.textHeader, fontSize: RFValue(14), ...FONTS.lexendregular }}>Add Address</Text>
                 </TouchableOpacity>

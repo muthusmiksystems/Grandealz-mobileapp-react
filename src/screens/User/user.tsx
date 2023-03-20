@@ -38,18 +38,17 @@ import { userDetailsHandler } from '../../store/reducers/userDetails';
 import { deleteAccount } from '../../services/deleteAccount';
 import Toast from 'react-native-simple-toast';
 import ImagePicker from 'react-native-image-crop-picker';
-import { err } from 'react-native-svg/lib/typescript/xml';
 
 const User = (props: any) => {
     // console.log("PAge props.............", props.route.params)
     const userData: any = useSelector<any>(state => state.userDetailsHandle?.data?.data);
-    const [modalState, setModalState] = useState<any>(false)
+    const [modalState, setModalState] = useState(false)
     const [profilePic, setProfilePic] = useState<any>()
     const [profileName, setProfileName] = useState<any>()
     console.log("UseSelector.................", userData)
     const navigation = useNavigation();
-    const [loader, setLoader] = useState<any>(false);
-    const [imageLoader, setImageLoader] = useState<any>(false)
+    const [loader, setLoader] = useState(false);
+    const [imageLoader, setImageLoader] = useState(false)
     const handleLogout = () => {
 
         Alert.alert("", "Are you sure you want to logout? ", [
@@ -136,18 +135,14 @@ const User = (props: any) => {
     const openCamera = async () => {
         setModalState(false)
         if (Platform.OS == 'android' && await checkForPermissions()) {
-            console.log("Camera permission given for camera");
+            console.log("Camera permission given");
             ImagePicker.openCamera({
                 width: 400,
                 height: 400,
                 cropping: true,
                 freeStyleCropEnabled: true
             }).then(image => {
-                // console.log("Image details.....................", image);
                 let url = image?.path.split('/');
-                // console.log("Url............", url[11]);
-                // console.log("Image details.....................", image.mime);
-                // console.log("Image details.....................", image.path);
                 const file = {
                     "name": url[11],
                     "type": image.mime,
@@ -181,18 +176,14 @@ const User = (props: any) => {
     const openGallery = async () => {
         setModalState(false)
         if (Platform.OS == 'android' && await checkForPermissions()) {
-            // console.log("Camera permission given for gallery");
+            console.log("Camera permission given");
             ImagePicker.openPicker({
                 width: 400,
                 height: 400,
                 cropping: true,
                 freeStyleCropEnabled: true
             }).then(image => {
-                // console.log("Image details.....................", image);
                 let url = image?.path.split('/');
-                // console.log("Url............", url[11]);
-                // console.log("Image details.....................", image.mime);
-                // console.log("Image details.....................", image.path);
                 const file = {
                     "name": url[11],
                     "type": image.mime,
@@ -395,7 +386,7 @@ const User = (props: any) => {
                     <Text style={styles.fontHeadStyle}>Settings</Text>
                     <View style={{ borderTopWidth: 4, width: "11%", borderTopColor: COLORS.element, marginLeft: "6%", paddingBottom: "2%" }} />
                     <View style={styles.viewBox}>
-                        <TouchableOpacity style={styles.touchButton} onPress={() => navigation.navigate("PaymentOptions")}>
+                        {/* <TouchableOpacity style={styles.touchButton} onPress={() => navigation.navigate("PaymentOptions")}>
                             <Image
                                 source={icons.userCreditCard}
                                 resizeMode="contain"
@@ -409,7 +400,7 @@ const User = (props: any) => {
                             <EntypoIcons name="chevron-right" size={25} style={{ flexDirection: "column" }} color={"black"} />
 
                         </TouchableOpacity>
-                        <View style={styles.divider} />
+                        <View style={styles.divider} /> */}
                         <TouchableOpacity style={styles.touchButton} onPress={() => navigation.navigate('Address', { type: "user" })}>
                             <Image
                                 source={icons.userLocation}

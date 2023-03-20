@@ -120,11 +120,13 @@ const Cart = () => {
                                 {(couponres) ? (
                                     <View style={{ flexDirection: "row", width: "100%", borderBottomStartRadius: 6, borderBottomEndRadius: 6, backgroundColor: "#FFCACD", alignItems: "center", justifyContent: "space-between" }}>
                                         <Text style={{ flexDirection: "column", color: COLORS.textHeader, fontSize: RFValue(12), ...FONTS.lexendregular, padding: 10 }}>{CouponPrice.coupon_code} Applied</Text>
-                                        <Text style={{ flexDirection: "column", color: COLORS.textHeader, fontSize: RFValue(10), ...FONTS.lexendregular, paddingHorizontal: 10 }}>{"  "}-₹{CouponPrice.coupon_discount}{"\n"}
-                                            <TouchableOpacity onPress={() => { RemoveCoupon() }}>
-                                                <Text style={{ color: COLORS.element, fontSize: RFValue(10), ...FONTS.lexendregular }}>Remove</Text>
-                                            </TouchableOpacity>
-                                        </Text>
+                                        <View style={{ flexDirection: "column", alignItems: "center" }}>
+                                            <Text style={{ flexDirection: "column", color: COLORS.textHeader, fontSize: RFValue(10), ...FONTS.lexendregular, paddingHorizontal: 10 }}>-₹{CouponPrice.coupon_discount.toFixed(2)}{"\n"}
+                                                <TouchableOpacity onPress={() => { RemoveCoupon() }}>
+                                                    <Text style={{ color: COLORS.element, fontSize: RFValue(10), ...FONTS.lexendregular }}>Remove</Text>
+                                                </TouchableOpacity>
+                                            </Text>
+                                        </View>
                                     </View>
                                 ) : null}
                             </View>

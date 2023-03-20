@@ -289,7 +289,6 @@ const Signup = (props: SignupProps) => {
           <View style={{ paddingBottom: "1%" }}>
             <Text style={{ fontSize: RFValue(26), color: "black", textAlign: "center", marginTop: verticalScale(10), fontFamily: "Lexend-SemiBold" }}>Register</Text>
             <View style={{ alignSelf: "center" }}>
-
               <Pressable onPressIn={() => handleBox()}>
                 <TextInput
                   placeholder="First Name"
@@ -302,9 +301,10 @@ const Signup = (props: SignupProps) => {
                   style={{ ...styles.textInput, ...{ marginTop: verticalScale(14) } }}
                 />
               </Pressable>
-              <View style={{ height: "6%" }}>
+              <View style={{ height: errorFirst ? "auto" : 14 }}>
                 {errorFirst ?
-                  <Text style={styles.ErrorText}>{errorFirst}</Text> : null}
+                  <Text style={styles.ErrorText}>{errorFirst}</Text>
+                  : null}
               </View>
               <Pressable onPressIn={() => handleBox()}>
                 <TextInput
@@ -317,7 +317,7 @@ const Signup = (props: SignupProps) => {
                   // onChangeText={(text) => { setLastName(text), text ? setError("") : setError(...errordata, errordata.lastname = "enter last name") }}
                   style={{ ...styles.textInput, }} />
               </Pressable>
-              <View style={{ height: "6%" }}>
+              <View style={{ height: errorLast ? "auto" : 14 }}>
                 {errorLast ?
                   <Text style={styles.ErrorText}>{errorLast}</Text> : null}
               </View>
@@ -334,7 +334,7 @@ const Signup = (props: SignupProps) => {
                   style={{ ...styles.textInput, }} />
 
               </Pressable>
-              <View style={{ height: "4%" }}>
+              <View style={{ height: errorEmail ? "auto" : 14 }}>
                 {errorEmail ?
                   <Text style={styles.ErrorText}>{errorEmail}</Text> : null}
               </View>
@@ -361,7 +361,7 @@ const Signup = (props: SignupProps) => {
                 </Pressable>
 
               </View>
-              <View style={{ height: "4%" }}>
+              <View style={{ height: errorPhone ? "auto" : 14 }}>
                 {errorPhone ?
                   <Text style={styles.ErrorText}>{errorPhone}</Text> : null}
               </View>
@@ -388,12 +388,12 @@ const Signup = (props: SignupProps) => {
                 </TouchableOpacity>
               </TouchableOpacity>
 
-              <View style={{ height: "4%" }}>
+              <View style={{ height: errorPassword ? "auto" : 14 }}>
                 {errorPassword ?
                   <Text style={styles.ErrorText}>{errorPassword}</Text> : null}
               </View>
             </View>
-            <View style={{ alignSelf: "center", width: horizontalScale(300), }}>
+            <View style={{ alignSelf: "center", width: horizontalScale(300), marginTop: 22 }}>
               <CheckBoxes />
             </View>
             {loader ?
@@ -474,7 +474,7 @@ const styles = StyleSheet.create({
     marginStart: "1%",
     textAlign: "left",
     width: horizontalScale(300),
-
+    marginBottom: 4
   },
   Errorpass: {
     color: "red",

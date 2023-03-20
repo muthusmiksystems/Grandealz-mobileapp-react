@@ -54,7 +54,7 @@ const TicketDetails = (Ticketdata) => {
                                             <Image
                                                 source={{ uri: item.draw.draw_image }}
                                                 resizeMode="contain"
-                                                style={{ height: verticalScale(68), width: horizontalScale(98) }}
+                                                style={{ height: verticalScale(68), width: horizontalScale(98), borderRadius: 5 }}
                                             />
                                         </View>
                                     </View>

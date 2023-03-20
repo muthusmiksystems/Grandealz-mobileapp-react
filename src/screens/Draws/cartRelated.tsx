@@ -123,11 +123,11 @@ const CartRelated = ({ cartdts, changer, setChanger }) => {
                                                 </View>
                                             </TouchableOpacity>
                                             <View>
-                                                <Text style={{ color: COLORS.textHeader, fontSize: RFValue(12), ...FONTS.lexendsemibold,marginVertical:4 }}>{item.currency} {item.product_price} Cash</Text>
-                                                <Text style={{ color: "#616161", fontSize: RFValue(12), ...FONTS.lexendregular,marginBottom:2 }}>{item.product_title}</Text>
-                                                <Text style={{ color: COLORS.element, fontSize: RFValue(12), ...FONTS.lexendregular, }}>₹{item.product_price}</Text>
+                                                <Text style={{ color: COLORS.textHeader, fontSize: RFValue(12), ...FONTS.lexendsemibold, marginVertical: 4 }}>{item.currency} {item.product_price} Cash</Text>
+                                                <Text style={{ color: "#616161", fontSize: RFValue(12), ...FONTS.lexendregular, marginBottom: 2 }}>{item.product_title}</Text>
+                                                <Text style={{ color: COLORS.element, fontSize: RFValue(12), ...FONTS.lexendregular, }}>₹{Number(item.product_price).toFixed(2)}</Text>
                                             </View>
-                                            <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", borderWidth: 1, borderRadius: 5, marginTop: 16,height:verticalScale(26), width: "90%", alignSelf: "center" }} onPress={() => { setDrawid(item._id), setCount(count + 1) }}>
+                                            <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", borderWidth: 1, borderRadius: 5, marginTop: 16, height: verticalScale(26), width: "90%", alignSelf: "center" }} onPress={() => { setDrawid(item._id), setCount(count + 1) }}>
                                                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular }}>Add</Text>
                                             </TouchableOpacity>
                                         </View>

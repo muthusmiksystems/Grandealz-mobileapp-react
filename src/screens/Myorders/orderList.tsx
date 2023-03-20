@@ -55,7 +55,7 @@ const OrderList = ({ orderlist }) => {
                                                 <View style={{ padding: 10, width: "45%", alignSelf: "center" }}>
                                                     <Text style={{ fontSize: RFValue(13), ...FONTS.lexendsemibold, color: COLORS.black }}>{(item.draws.draw.draw_title).substring(0, 15)}{(item.draws.draw.draw_title).length > 20 ? "..." : ""} </Text>
                                                     <Text style={{ fontSize: RFValue(13), ...FONTS.lexendregular, color: "#616161" }}>{(item.draws.draw.product_title).substring(0, 15)}{(item.draws.draw.product_title).length > 20 ? "..." : ""}  </Text>
-                                                    <Text style={{ fontSize: RFValue(13), ...FONTS.lexendregular, color: "red" }}>₹{item.draws.draw.product_price}</Text>
+                                                    <Text style={{ fontSize: RFValue(13), ...FONTS.lexendregular, color: "red" }}>₹{Number(item.draws.draw.product_price).toFixed(2)}</Text>
                                                     <Text style={{ fontSize: RFValue(13), ...FONTS.lexendregular, color: "#616161", marginTop: RFValue(7) }}>{item.draws.draw_tickets.length === 0 ? 1 : item.draws.draw_tickets.length} Tickets</Text>
                                                 </View>
                                                 <View style={{ flexDirection: "row", marginVertical: "2%", marginStart: "3%" }}>

@@ -55,7 +55,7 @@ const Carsold = (props: CarSoldProps) => {
                     <View>
                         <LinearGradient
                             colors={["#D10359", "#EC092D"]}
-                            style={{ paddingVertical: verticalScale(10), backgroundColor: "#D10359" }}
+                            style={{ paddingVertical: verticalScale(10), backgroundColor: "#D10359", height: verticalScale(250), width: "100%" }}
                         >
                             <Text style={{ marginLeft: 24, ...FONTS.lexendregular, fontWeight: "600", color: COLORS.white, fontSize: RFValue(15) }}>
                                 SOLD OUT
@@ -66,13 +66,13 @@ const Carsold = (props: CarSoldProps) => {
                             </Text>
                         </LinearGradient>
                     </View>
-                    <View style={{ bottom: 100, position: "relative" }} >
+                    <View style={{ bottom: 142, position: "relative" }} >
                         <FlatList
                             data={soldoutdata}
                             contentContainerStyle={{}}
                             keyExtractor={item => item.id}
                             renderItem={({ item }) => (
-                                <View style={{ paddingHorizontal: "6%",marginBottom:14 }}>
+                                <View style={{ paddingHorizontal: "6%", marginBottom: 14 }}>
                                     <View style={{ borderRadius: 9, backgroundColor: "white", paddingVertical: 20 }}>
                                         <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8, flexDirection: 'column' }}>
                                             <Image

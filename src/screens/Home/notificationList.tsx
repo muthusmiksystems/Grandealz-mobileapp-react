@@ -121,7 +121,7 @@ const NotificationList = () => {
             renderItem={({ item }) => (
               <View style={{ paddingHorizontal: "3%", paddingTop: verticalScale(12) }}>
                 <TouchableOpacity style={{ backgroundColor: "white", borderRadius: 8, elevation: 1, flexDirection: "row", padding: moderateScale(6) }}>
-                  <View style={{ flexDirection: "column", marginTop: verticalScale(5), width: horizontalScale(20), height: verticalScale(20) }}>
+                  <View style={{ flexDirection: "column", marginTop: verticalScale(6), width: horizontalScale(15), height: verticalScale(15) }}>
                     <Image
                       source={icons.rect}
                       resizeMode="contain"

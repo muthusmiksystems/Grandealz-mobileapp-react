@@ -155,17 +155,17 @@ const WishList = () => {
                                             <TouchableOpacity>
                                                 <View style={{ flexDirection: "row" }}>
                                                     <View style={{ flexDirection: "row", width: "70%", paddingVertical: "5%", paddingLeft: "3%" }}>
-                                                        <View style={{ flexDirection: "column", backgroundColor: COLORS.pagebackground, padding: "4%", width: "45%", alignItems: "center", borderRadius: 5, justifyContent: "center" }}>
+                                                        <View style={{ flexDirection: "column", backgroundColor: COLORS.pagebackground, alignSelf: "center", padding: 4, width: 97, height: 86, alignItems: "center", borderRadius: 5, justifyContent: "center" }}>
                                                             <Image
                                                                 source={{ uri: item.draw.product_image }}
                                                                 resizeMode="contain"
-                                                                style={{ height: verticalScale(100), width: horizontalScale(80) }}
+                                                                style={{ height: "100%", width: "100%" }}
                                                             />
                                                         </View>
                                                         <View style={{ flexDirection: "column", justifyContent: "center", width: "60%", paddingLeft: "4%" }}>
                                                             <Text style={{ color: COLORS.black, ...FONTS.lexendsemibold, fontSize: RFValue(12) }}>{item.draw.product_title}</Text>
                                                             <Text style={{ color: COLORS.gray, ...FONTS.lexendregular, fontSize: RFValue(12) }}>{(item.draw.draw_title)}</Text>
-                                                            <Text style={{ color: COLORS.element, ...FONTS.lexendregular, fontSize: RFValue(12) }}>₹{item.draw.product_price}</Text>
+                                                            <Text style={{ color: COLORS.element, ...FONTS.lexendregular, fontSize: RFValue(12) }}>₹{Number(item.draw.product_price).toFixed(2)}</Text>
                                                         </View>
                                                     </View>
                                                     <View style={{ flexDirection: "column", width: "30%", borderColor: "green", justifyContent: "space-between" }}>

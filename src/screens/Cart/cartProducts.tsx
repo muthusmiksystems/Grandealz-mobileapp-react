@@ -99,9 +99,9 @@ const CartProducts = ({ cartval, changer, setChanger, swith }) => {
                 return (
                     <>
                         <View style={{ flexDirection: "row", width: "100%", borderRadius: 10, padding: "2%" }}>
-                            <View style={{ flexDirection: "column", width: "90%", }}>
+                            <View style={{ flexDirection: "column", width: "87%", }}>
                                 <View style={{ flexDirection: "row", }}>
-                                    <View style={{ width: "35%", backgroundColor: "#F9F9F9" }}>
+                                    <View style={{ width: "35%", backgroundColor: "#F9F9F9", borderRadius: 5 }}>
                                         <Image
                                             source={{ uri: item.draw.product_image }}
                                             resizeMode={"cover"}
@@ -111,15 +111,15 @@ const CartProducts = ({ cartval, changer, setChanger, swith }) => {
                                     <View style={{ width: "63%", marginHorizontal: "3%", alignSelf: "center" }}>
                                         <Text style={{ color: COLORS.textHeader, fontSize: RFValue(12), ...FONTS.lexendsemibold, }}>{item.draw.draw_title}</Text>
                                         <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, }}>{item.draw.product_title}</Text>
-                                        <Text style={{ color: COLORS.element, fontSize: RFValue(12), ...FONTS.lexendregular, }}>₹{item.draw.product_price}</Text>
+                                        <Text style={{ color: COLORS.element, fontSize: RFValue(12), ...FONTS.lexendregular, }}>₹{Number(item.draw.product_price).toFixed(2)}</Text>
                                         <Text style={{ color: COLORS.textHeader, fontSize: RFValue(12), ...FONTS.lexendregular, marginTop: "5%" }}>{(toggle ? "2" : "1")} Ticket
                                             <Text style={{ color: COLORS.gray }}> per unit</Text> </Text>
                                     </View>
                                 </View>
                             </View>
-                            <View style={{ flexDirection: "column", width: "15%", alignSelf: "center" }}>
+                            <View style={{ flexDirection: "column", width: "10%", alignSelf: "center", alignItems: "center" }}>
                                 <TouchableOpacity onPress={() => increaseItemQty(item)} ><AntIcon name="plussquare" size={moderateScale(20)} color={COLORS.element} style={{ marginBottom: "10%" }} /></TouchableOpacity>
-                                <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginStart: "15%" }}>{item.qty}</Text>
+                                <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular }}>{item.qty}</Text>
                                 <TouchableOpacity onPress={() => decreaseItemQty(item)}><AntIcon name="minussquare" size={moderateScale(20)} color={COLORS.element} style={{ marginTop: "10%" }} /></TouchableOpacity>
                             </View>
                         </View>
