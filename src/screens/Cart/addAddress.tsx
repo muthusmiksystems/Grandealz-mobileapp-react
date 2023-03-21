@@ -42,7 +42,7 @@ import { ActivityIndicator } from "react-native-paper";
 import LoaderKit from 'react-native-loader-kit';
 import OrderEmpty from "../ExceptionScreens/orderEmpty";
 import Toast from 'react-native-simple-toast';
-
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const AddAddress = ({ route }) => {
     const typeUser = route.params.type;
@@ -353,7 +353,7 @@ const AddAddress = ({ route }) => {
             {option ?
                 <OrderEmpty value={"Home and Work address available"} />
                 :
-                <ScrollView style={{ height: "100%", }}
+                <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ height: "100%" }}
                     contentContainerStyle={{ paddingBottom: "12%" }}>
                     <Text style={{ color: COLORS.textHeader, fontSize: RFValue(13), ...FONTS.lexendregular, marginLeft: "5%", marginTop: "5%" }}>CONTACT DETAILS</Text>
                     <View style={{ marginHorizontal: "3%", marginTop: "2%" }}>
@@ -465,7 +465,7 @@ const AddAddress = ({ route }) => {
                                 />
                             </View>
                             <View style={{ height: (countryError) ? 16 : 8 }}>
-                                <Text style={styles.ErrorText}>{countryError}</Text>
+                                <Text style={styles.ErrorTextCountry}>{countryError}</Text>
                             </View>
                         </View>
                         <View style={{ flexDirection: "column", width: "49%" }}>
@@ -486,7 +486,7 @@ const AddAddress = ({ route }) => {
 
                             <View style={{ height: (stateError) ? 16 : 8 }}>
                                 {stateError ?
-                                    <Text style={styles.ErrorText}>{stateError}</Text> : null}
+                                    <Text style={styles.ErrorTextState}>{stateError}</Text> : null}
                             </View>
                         </View>
                     </View>
@@ -530,7 +530,7 @@ const AddAddress = ({ route }) => {
                         <View><CheckBoxes /></View>
                         <Text style={{ color: COLORS.gray, fontSize: RFValue(12), ...FONTS.lexendregular, paddingHorizontal: "5%", alignSelf: "center" }}>Make this my default address</Text>
                     </View>
-                </ScrollView>
+                </KeyboardAwareScrollView>
             }
             <View style={{ flexDirection: "row", height: 62, backgroundColor: COLORS.white, paddingVertical: "1%", paddingHorizontal: "2%" }}>
                 <TouchableOpacity style={{ flexDirection: "column", width: "90%", marginHorizontal: "5%", marginVertical: "1%", borderRadius: 5, borderWidth: 1, justifyContent: "center", alignItems: "center" }} onPress={e => { handleSubmit() }} disabled={false}>
@@ -549,7 +549,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         // justifyContent: 'center',
         flexDirection: "row",
-
 
     },
     switch: {
@@ -589,6 +588,18 @@ const styles = StyleSheet.create({
         ...FONTS.lexendregular,
         fontSize: RFValue(10),
         marginStart: verticalScale(25),
+    },
+    ErrorTextState: {
+        color: "red",
+        ...FONTS.lexendregular,
+        fontSize: RFValue(10),
+        marginStart: verticalScale(10),
+    },
+    ErrorTextCountry: {
+        color: "red",
+        ...FONTS.lexendregular,
+        fontSize: RFValue(10),
+        marginStart: verticalScale(4),
     },
 
 })

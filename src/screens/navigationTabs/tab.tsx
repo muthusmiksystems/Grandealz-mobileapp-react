@@ -68,7 +68,7 @@ const Tabs = () => {
                                                     height: RFValue(26)
                                                 }}
                                             />}
-                                        <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(9) }}>Notification</Text>
+                                        <Text style={{ color: tintColor, ...FONTS.lexendregular, fontSize: RFValue(9) }}>Notifications</Text>
                                     </View>
                                 </View>
                             );

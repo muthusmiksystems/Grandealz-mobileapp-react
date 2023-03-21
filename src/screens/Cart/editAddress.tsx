@@ -470,7 +470,7 @@ const EditAddress = ({ route }) => {
 
                         <View style={{ height: (countryError) ? 16 : 8 }}>
                             {countryError ?
-                                <Text style={styles.ErrorText}>{countryError}</Text> : null}
+                                <Text style={styles.ErrorTextCountry}>{countryError}</Text> : null}
                         </View>
                     </View>
                     <View style={{ flexDirection: "column", width: "49%" }}>
@@ -491,7 +491,7 @@ const EditAddress = ({ route }) => {
 
                         <View style={{ height: (stateError) ? 16 : 8 }}>
                             {stateError ?
-                                <Text style={styles.ErrorText}>{stateError}</Text> : null}
+                                <Text style={styles.ErrorTextState}>{stateError}</Text> : null}
                         </View>
                     </View>
                 </View>
@@ -587,6 +587,18 @@ const styles = StyleSheet.create({
         fontSize: RFValue(10),
         textAlign: "left",
 
+    },
+    ErrorTextState: {
+        color: "red",
+        ...FONTS.lexendregular,
+        fontSize: RFValue(10),
+        marginStart: verticalScale(10),
+    },
+    ErrorTextCountry: {
+        color: "red",
+        ...FONTS.lexendregular,
+        fontSize: RFValue(10),
+        marginStart: verticalScale(4),
     },
     dropText: {
         ...FONTS.lexendregular,

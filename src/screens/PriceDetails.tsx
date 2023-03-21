@@ -212,19 +212,20 @@ const PriceDetails = ({ route }) => {
                     width={4}
                     fill={pricing.total_no_of_sold_out_tickets / pricing.total_no_of_tickets * 100}
                     tintColor={COLORS.element}
+                    rotation={0}
                     // onAnimationComplete={() => console.log('onAnimationComplete')}
                     backgroundColor={COLORS.lightGray}>
                     {
                       (fill) => (
                         <>
                           {(pricing.total_no_of_sold_out_tickets !== pricing.total_no_of_tickets) ?
-                            <View>
+                            <View style={{ alignItems: "center" }}>
                               <Text style={{ color: "#E70736", ...FONTS.lexendregular, fontSize: 10, textAlign: "center" }}>{pricing.total_no_of_sold_out_tickets}</Text>
                               {/* <View style={{ backgroundColor: "#7F7E76B2", width: "80%", borderWidth: 1, borderColor: "#7F7E76B2" }} /> */}
-                              <Text style={{ ...FONTS.lexendsemibold, alignSelf: "center", color: "black", fontSize: 8 }}>{" "}Sold</Text>
-                              <Text style={{ ...FONTS.lexendregular, color: " rgba(127, 126, 118, 0.7)", fontSize: 8 }}>OUT OF</Text>
+                              <Text style={{ ...FONTS.lexendsemibold, alignSelf: "center", color: "black", fontSize: 8 }}>Sold
+                                <Text style={{ ...FONTS.lexendregular, color: "black", fontSize: 8 }}> out of</Text></Text>
                               <Text style={{ color: "#E70736", ...FONTS.lexendregular, fontSize: 10, textAlign: "center" }}>{pricing.total_no_of_tickets}</Text>
-                            </View> : <Text style={{ ...FONTS.lexendregular, textAlign: "center", fontSize: 12, color: COLORS.element }}>All Sold</Text>
+                            </View> : <Text style={{ ...FONTS.lexendregular, alignSelf: "center", fontSize: 12, color: COLORS.element }}>All Sold</Text>
                           }
                         </>
                       )

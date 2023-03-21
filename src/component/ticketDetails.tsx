@@ -46,7 +46,7 @@ const TicketDetails = (Ticketdata) => {
                                             </View>
                                             <Text style={{ ...FONTS.lexendsemibold, color: COLORS.black, fontSize: RFValue(10), paddingVertical: "1%" }}><Text style={{ ...FONTS.lexendregular }}>{(item.draw.draw_title).substring(0, 30)}{(item.draw.draw_title).length > 20 ? "..." : ""}</Text></Text>
                                             <Text style={{ ...FONTS.lexendsemibold, color: COLORS.black, fontSize: RFValue(10) }}>product :- <Text style={{ ...FONTS.lexendregular }}>{(item.draw.product_description).substring(0, 20)}{(item.draw.product_description).length > 20 ? "..." : ""}</Text></Text>
-                                            <Text style={{ ...FONTS.lexendsemibold, color: COLORS.black, fontSize: RFValue(10), paddingVertical: "1%" }}>Purchased on :- <Text style={{ ...FONTS.lexendregular, color: COLORS.gray }}>{item.draw.createdAt}</Text></Text>
+                                            <Text style={{ ...FONTS.lexendsemibold, color: COLORS.black, fontSize: RFValue(10), paddingVertical: "1%" }}>Purchased on :- <Text style={{ ...FONTS.lexendregular, color: COLORS.gray }}>{item.purchased_on}</Text></Text>
                                             {/* {console.log("timebeing",moment(item.draw.createdAt).format("MMM-DD-YYYY HH:mm:ss"))} */}
                                         </View>
                                         <View style={{ flexDirection: "column", borderRadius: 10, marginLeft: 10, width: horizontalScale(100), right: horizontalScale(16), height: verticalScale(88), top: verticalScale(10) }}>

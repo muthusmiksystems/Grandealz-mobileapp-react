@@ -51,7 +51,7 @@ const User = (props: any) => {
     const [imageLoader, setImageLoader] = useState(false)
     const handleLogout = () => {
 
-        Alert.alert("", "Are you sure you want to logout? ", [
+        Alert.alert("Logout", "Are you sure you want to logout? ", [
             {
                 text: 'Cancel',
                 onPress: () => console.log('Cancel Pressed'),
@@ -243,7 +243,7 @@ const User = (props: any) => {
     }
 
     const deleteAcc = () => {
-        Alert.alert("", "Are you sure you want to delete your account?", [
+        Alert.alert("Deactivate Account", "Are you sure you want to delete your account?", [
             {
                 text: 'Cancel',
                 // onPress: () => console.log('Cancel Pressed'),

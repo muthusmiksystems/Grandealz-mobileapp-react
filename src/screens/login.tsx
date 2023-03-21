@@ -61,8 +61,8 @@ const Login = (props: Prop) => {
   //const { handleChange, details, handleSubmit, formErrors, data, formValues ,syncvalue} = useForm(validate);
   const [token, setToken] = useState("");
   const [errorLogin, setErrorLogin] = useState(null);
-  const [errorEmail, setErrorEmail] = useState(null);
-  const [errorPassword, setErrorPassword] = useState(null);
+  const [errorEmail, setErrorEmail] = useState<any>(null);
+  const [errorPassword, setErrorPassword] = useState<any>(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [error, setError] = useState<any>("");
@@ -82,21 +82,23 @@ const Login = (props: Prop) => {
   }, [])
 
   const validateFunction = () => {
-    console.log("values", email, password);
-    console.log(email === null, " null check")
-    console.log(email === "", " empty check")
-    console.log(email ? "ture" : "false")
+    // console.log("values", email, password);
+    // console.log(email === null, " null check")
+    // console.log(email === "", " empty check")
+    // console.log(email ? "ture" : "false")
     let errorCount = 0;
-    console.log("satrday", (!/^[a-zA-Z0-9!@#$%^&*]{0,10}$/.test(password)));
+    // console.log("satrday", (!/^[a-zA-Z0-9!@#$%^&*]{0,10}$/.test(password)));
     if (!email) {
       setErrorEmail('Please enter email')
       errorCount++;
     }
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+    else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       setErrorEmail('Please enter valid email')
+      // console.log("hiii");
+      errorCount++;
     }
     else {
-      console.log(" no testing ")
+      // console.log(" no testing in email")
       setErrorEmail("");
     }
     if (!password) {
@@ -108,7 +110,7 @@ const Login = (props: Prop) => {
       errorCount++;
     }
     else {
-      console.log(" no testing ")
+      // console.log(" no testing in password")
       setErrorPassword("")
     }
     // console.log("testing ",email)
@@ -139,17 +141,17 @@ const Login = (props: Prop) => {
       setErrorEmail(""), setErrorPassword("");
       return true;
     }
-    if (errorCount > 0) {
-      if (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
-        setErrorEmail("");
-      }
-      if (/^[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(password)) {
-        setErrorPassword("");
-      }
-    }
-    if (errorCount > 0) {
-      console.log("errorcount", errorCount)
-    }
+    // if (errorCount > 0) {
+    //   if (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+    //     setErrorEmail("");
+    //   }
+    //   if (/^[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(password)) {
+    //     setErrorPassword("");
+    //   }
+    // }
+    // if (errorCount > 0) {
+    //   console.log("errorcount", errorCount)
+    // }
     else {
       return false;
     }

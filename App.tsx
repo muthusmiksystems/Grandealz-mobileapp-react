@@ -91,13 +91,13 @@ const App = () => {
         <Stack.Screen name="PersonalDetails" component={PersonalDetails} />
         <Stack.Screen name="HowItWorks" component={HowItWorks} />
         <Stack.Screen name="Coupons" component={Coupons} />
-        <Stack.Screen name="PlayNow" component={PlayNow}/>
-        <Stack.Screen name="playnowquiz" component={Playnowquiz}/>
-        <Stack.Screen name="Playnowquizsubmit" component={Playnowquizsubmit}/>
-        <Stack.Screen name="EditAddress" component={EditAddress}/>
-        <Stack.Screen name="NetworkError" component={NetworkError}/>
-        <Stack.Screen name="OrderConfirmed" component={OrderConfirmed}/>
-        
+        <Stack.Screen name="PlayNow" component={PlayNow} />
+        <Stack.Screen name="playnowquiz" component={Playnowquiz} />
+        <Stack.Screen name="Playnowquizsubmit" component={Playnowquizsubmit} />
+        <Stack.Screen name="EditAddress" component={EditAddress} />
+        <Stack.Screen name="NetworkError" component={NetworkError} />
+        <Stack.Screen name="OrderConfirmed" component={OrderConfirmed} />
+
         < Stack.Screen
           name="Tabs"
           component={Tabs}

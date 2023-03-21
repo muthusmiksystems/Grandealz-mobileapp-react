@@ -116,12 +116,12 @@ const NotificationList = () => {
         <View style={{}}>
           <FlatList
             data={data}
-            contentContainerStyle={{ paddingBottom: "20%" }}
+            contentContainerStyle={{ paddingBottom: 40 }}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
-              <View style={{ paddingHorizontal: "3%", paddingTop: verticalScale(12) }}>
-                <TouchableOpacity style={{ backgroundColor: "white", borderRadius: 8, elevation: 1, flexDirection: "row", padding: moderateScale(6) }}>
-                  <View style={{ flexDirection: "column", marginTop: verticalScale(6), width: horizontalScale(15), height: verticalScale(15) }}>
+              <View style={{ paddingHorizontal: "4%", marginTop: 14 }}>
+                <TouchableOpacity style={{ backgroundColor: "white", borderRadius: 5, elevation: 1, flexDirection: "row", paddingVertical: moderateScale(10) }}>
+                  <View style={{ flexDirection: "column", width: horizontalScale(10), height: verticalScale(10), marginStart: 6, marginTop: 3 }}>
                     <Image
                       source={icons.rect}
                       resizeMode="contain"
@@ -131,20 +131,21 @@ const NotificationList = () => {
                       }}
                     />
                   </View>
-                  <View style={{ flexDirection: "column", width: horizontalScale(240) }}>
-                    <Text style={{ fontSize: RFValue(13), ...FONTS.lexendsemibold, margin: moderateScale(4), color: COLORS.black }}>{item.from}</Text>
-                    <Text style={{ fontSize: RFValue(10), marginHorizontal: moderateScale(4), marginBottom: 4, ...FONTS.lexendregular, color: "#000" }}>{item.to}</Text>
-                    <Text style={{ fontSize: RFValue(13), ...FONTS.lexendregular, color: COLORS.gray, marginHorizontal: 4, paddingBottom: 4, marginTop: 2 }}>{item.date}</Text>
+                  <View style={{ flexDirection: "column", width: "72%", paddingStart: 4 }}>
+                    <Text style={{ fontSize: 13, ...FONTS.lexendsemibold, color: COLORS.black }}>{item.from}</Text>
+                    <Text style={{ fontSize: 10, ...FONTS.lexendregular, color: "#000", marginTop: 4, marginBottom: 8 }}>{item.to}</Text>
+                    <Text style={{ fontSize: 13, ...FONTS.lexendregular, color: COLORS.gray }}>{item.date}</Text>
                   </View>
-                  <View style={{ flexDirection: "column", width: horizontalScale(75), backgroundColor: COLORS.lightGray, height: verticalScale(75), alignSelf: "center", borderRadius: 10 }}>
+                  <View style={{ flexDirection: "column", width: horizontalScale(70), backgroundColor: COLORS.lightGray, height: verticalScale(70), alignSelf: "center", alignItems: "center", justifyContent: "center", borderRadius: 5 }}>
                     <Image
                       source={item.imag}
                       resizeMode="contain"
                       style={{
-                        width: 75,
-                        height: 50,
-                        top: 9,
-                        left: 4
+                        width: 70,
+                        height: 43,
+                        borderRadius: 2
+                        // top: 9,
+                        // left: 4
                       }}
                     />
                   </View>
