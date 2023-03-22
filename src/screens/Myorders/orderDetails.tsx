@@ -72,7 +72,7 @@ const OrderDetails = ({ route }) => {
         orderDetail();
     }, [])
     useEffect(() => {
-        console.log("queen Order", orderdetailsdata?.draws[0]?.draw_tickets);
+        console.log("queen Order", orderdetailsdata?.draws.product_price);
     }, [orderdetailsdata])
     const Data = [
         {
@@ -138,9 +138,9 @@ const OrderDetails = ({ route }) => {
                                             />
                                         </View>
                                         <View style={{ flexDirection: "column", width: "100%", paddingLeft: "4%", marginTop: RFValue(5) }}>
-                                            <Text style={{ fontSize: RFValue(13), ...FONTS.lexendsemibold, color: COLORS.black }}>{data.draw.draw_title}</Text>
-                                            <Text style={{ fontSize: RFValue(13), ...FONTS.lexendregular, color: "#616161" }}>{data.draw.product_title}</Text>
-                                            <Text style={{ fontSize: RFValue(20), ...FONTS.lexendregular, color: "red", marginTop: "8%" }}>₹{Number(orderdetailsdata.sub_total).toFixed(2)}</Text>
+                                            <Text style={{ fontSize: RFValue(13), ...FONTS.lexendsemibold, color: COLORS.black }}>{data.draw.product_title}</Text>
+                                            <Text style={{ fontSize: RFValue(13), ...FONTS.lexendregular, color: "#616161" }}>{data.draw.draw_title}</Text>
+                                            <Text style={{ fontSize: RFValue(20), ...FONTS.lexendregular, color: "red", marginTop: "8%" }}>₹{Number(data.draw.product_price).toFixed(2)}</Text>
                                         </View>
                                     </View>
                                     {data.draw_tickets.length > 0 ?

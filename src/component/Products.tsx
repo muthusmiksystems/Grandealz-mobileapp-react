@@ -134,7 +134,7 @@ const Product = ({ addedCart, changer, change, soldPresence }) => {
                                         }
                                     </>
                                     :
-                                    <TouchableOpacity disabled={true} style={{ borderWidth: 1, width: "80%", height: verticalScale(46), borderRadius: 5, alignSelf: "center", justifyContent: "center" }} onPress={() => setDrawid(item._id)}>
+                                    <TouchableOpacity disabled={true} style={{ borderWidth: 1, width: "80%", height: verticalScale(46), borderRadius: 5, backgroundColor: COLORS.lightGray, alignSelf: "center", justifyContent: "center" }} onPress={() => setDrawid(item._id)}>
                                         <Text style={{ textAlign: "center", color: "black", fontSize: RFValue(15), ...FONTS.lexendsemibold }}>Add to Cart</Text>
                                     </TouchableOpacity>
                                 }

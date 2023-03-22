@@ -132,7 +132,7 @@ const DrawsMain = () => {
             console.log("im inside the winner page ", result);
             setWinner(result)
 
-            console.log("loader state...........", loader)
+            // console.log("loader state...........", loader)
         }
         win();
         const value = "status=UpComming"

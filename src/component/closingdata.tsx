@@ -99,15 +99,14 @@ const ClosingSoon = () => {
   }
   return (
     <>
-
-      <SafeAreaView >
+      <SafeAreaView>
         {(closingsoondata?.length > 0) ? (
           <>
-            <View>
-              <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(18), marginLeft: "4%", ...FONTS.lexendsemibold, color: "black" }}>Closing Soon</Text>
-              <View style={{ marginLeft: "4%", width: horizontalScale(40), borderWidth: 1, backgroundColor: "#E70736", borderColor: "#E70736" }} />
+            <View style={{ marginLeft: "4%" }}>
+              <Text style={{ ...FONTS.lexendsemibold, fontSize: RFValue(18), ...FONTS.lexendsemibold, color: "black" }}>Closing Soon</Text>
+              <View style={{ width: horizontalScale(40), borderWidth: 1, backgroundColor: "#E70736", borderColor: "#E70736" }} />
             </View>
-            <View style={{ paddingVertical: "2%" }}>
+            <View style={{ paddingVertical: 10 }}>
               <FlatList
                 horizontal={true}
                 data={closingsoondata}
@@ -123,15 +122,23 @@ const ClosingSoon = () => {
                         <View style={{ flexDirection: 'column', marginTop: RFValue(15) }}>
                           <Image
                             source={{ uri: item.product_image }}
+                            // resizeMode="cover"
                             style={{
                               height: verticalScale(50),
                               width: horizontalScale(86),
-                              borderWidth: 1,
+                              borderRadius: 5
                             }}
                           />
                         </View>
                       </View>
-                      <View style={{ flexDirection: "row", justifyContent: "center", marginTop: RFValue(20), padding: 5 }}>
+                      <View style={{ width: "90%", borderRadius: 5, backgroundColor: "#f9f9f9", alignSelf: "center", alignItems: "center", marginTop: 20 }}>
+                        <Text style={{ fontSize: RFValue(10), color: COLORS.black, ...FONTS.lexendregular, marginVertical: 6 }}>{item.product_title}</Text>
+                        <Text style={{ fontSize: RFValue(9), textAlign: "center", color: COLORS.black, ...FONTS.lexendregular }}>{item.total_no_of_sold_out_tickets} sold out of {item.total_no_of_tickets}</Text>
+                        <View style={{ width: "70%", height: 6, borderColor: "#F1F1F1", borderWidth: 1, marginVertical: 6, borderRadius: 12, backgroundColor: COLORS.lightGray }}>
+                          <Text style={{ backgroundColor: "#EC092D", width: handleProgressActive(item), borderRadius: 12 }}></Text>
+                        </View>
+                      </View>
+                      {/* <View style={{ flexDirection: "row", justifyContent: "center", marginTop: RFValue(20), padding: 5 }}>
                         <Text style={{ fontSize: RFValue(10), color: COLORS.black, ...FONTS.lexendregular, lineHeight: 11.25, }}>{item.product_title}</Text>
                       </View>
                       <View>
@@ -139,7 +146,7 @@ const ClosingSoon = () => {
                       </View>
                       <View style={{ marginLeft: "15%", width: "70%", height: "4%", borderColor: "#F1F1F1", borderWidth: 1, margin: 2, borderRadius: 12, backgroundColor: "#F1F1F1" }}>
                         <Text style={{ backgroundColor: "#EC092D", width: handleProgressActive(item), borderRadius: 12 }}></Text>
-                      </View>
+                      </View> */}
                     </TouchableOpacity>
                   </View>
                 )}
