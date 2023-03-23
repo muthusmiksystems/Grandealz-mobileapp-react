@@ -22,6 +22,19 @@ import moment from 'moment';
 
 const TicketDetails = (Ticketdata) => {
     console.log("drma.....", Ticketdata.Ticketdata)
+    const handleItemPurchasedDate = (data: any) => {
+        var newDate = data.replace(',', '').replace('PM', '').replace('AM', '').replaceAll("/", ".")
+        //let ticketDate = newDate.length;
+        // let length=data.length
+        // var newStr = data.replace('PM','')
+        // var newStr2 = newStr.replace('AM','')
+
+        //var formattedDate = moment(newDate,"DD.MM.YYYY")
+        // console.log("Ticket date..............", data, "New date..........", newDate);
+        // moment(new Date(newStr3)).format("dd/mm/yyyy")
+
+        return (newDate.substring(0, newDate.length - 4))
+    }
 
     return (
         <SafeAreaView >
@@ -45,8 +58,8 @@ const TicketDetails = (Ticketdata) => {
                                                 />
                                             </View>
                                             <Text style={{ ...FONTS.lexendsemibold, color: COLORS.black, fontSize: RFValue(10), paddingVertical: "1%" }}><Text style={{ ...FONTS.lexendregular }}>{(item.draw.draw_title).substring(0, 30)}{(item.draw.draw_title).length > 20 ? "..." : ""}</Text></Text>
-                                            <Text style={{ ...FONTS.lexendsemibold, color: COLORS.black, fontSize: RFValue(10) }}>product :- <Text style={{ ...FONTS.lexendregular }}>{(item.draw.product_description).substring(0, 20)}{(item.draw.product_description).length > 20 ? "..." : ""}</Text></Text>
-                                            <Text style={{ ...FONTS.lexendsemibold, color: COLORS.black, fontSize: RFValue(10), paddingVertical: "1%" }}>Purchased on :- <Text style={{ ...FONTS.lexendregular, color: COLORS.gray }}>{item.purchased_on}</Text></Text>
+                                            <Text style={{ ...FONTS.lexendsemibold, color: COLORS.black, fontSize: RFValue(10) }}>product :- <Text style={{ ...FONTS.lexendregular }}>{item.draw.product_title}</Text></Text>
+                                            <Text style={{ ...FONTS.lexendsemibold, color: COLORS.black, fontSize: RFValue(10), paddingVertical: "1%" }}>Purchased on :- <Text style={{ ...FONTS.lexendregular, color: COLORS.gray }}>{handleItemPurchasedDate(item.purchased_on)}</Text></Text>
                                             {/* {console.log("timebeing",moment(item.draw.createdAt).format("MMM-DD-YYYY HH:mm:ss"))} */}
                                         </View>
                                         <View style={{ flexDirection: "column", borderRadius: 10, marginLeft: 10, width: horizontalScale(100), right: horizontalScale(16), height: verticalScale(88), top: verticalScale(10) }}>

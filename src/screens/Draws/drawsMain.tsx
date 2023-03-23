@@ -48,16 +48,18 @@ const DrawsMain = () => {
     const [close, setClose] = useState();
     const [loaders, setLoader] = useState(true);
     const [datePlaceHolder, setDatePlaceHolder] = useState(true);
-    const daily = moment(new Date()).format("YYYY-MM-DD")
+    const daily = moment(new Date()).format("YYYY-MM-DD");
+    const [viewMore, setViewMore] = useState(true);
+    const [winnersMore, setWinnerMore] = useState<any>();
 
     const selectedDateFunction = (event, selectedDate: any) => {
         setDateShow(!dateShow);
         const currentDate = selectedDate;
-        console.log("rgerfefefge", currentDate)
+        // console.log("rgerfefefge", currentDate)
         setDate(currentDate);
     }
     const handleFilter = async (search) => {
-        console.log("helloo");
+        // console.log("helloo");
 
         Keyboard.dismiss()
         if (showWinners) {
@@ -69,12 +71,12 @@ const DrawsMain = () => {
                 "year": search.year,
                 "search": search.searcher
             }
-            console.log("date diff", data)
+            // console.log("date diff", data)
             const winnerfilter = async (data: any) => {
                 let filterdata = await drawWinnerfilter(data)
                 setWinner(filterdata.data)
 
-                console.log("winner winner chicken dinner", filterdata)
+                // console.log("winner winner chicken dinner", filterdata)
             }
             winnerfilter(data);
         }
@@ -83,18 +85,26 @@ const DrawsMain = () => {
             const data = {
                 "searcher": search.searcher
             }
-            console.log("upcomming", data)
+            // console.log("upcomming", data)
             const upcome = async (data: any) => {
                 let filterdata = await drawCommingfilter(data)
                 setClose(filterdata.data)
-                console.log("upcomming data", filterdata.data);
+                // console.log("upcomming data", filterdata.data);
             }
             upcome(data)
         }
     }
+
     useEffect(() => {
         { winner ? setLoader(false) : null }
     }, [winner])
+
+    var winnerData = winner;
+    if (winnersMore) {
+        var winnerData = winnerData.concat(winnersMore)
+    }
+    // console.log("WinnnerData...............", winnerData);
+
     const resetFilter = async () => {
         if (showWinners) {
             setModalVisible(!modalVisible)
@@ -102,7 +112,7 @@ const DrawsMain = () => {
             const winnerfilter = async (data: any) => {
                 let filterdata = await drawWinnerfilter(data)
                 setWinner(filterdata.data)
-                console.log("winner winner chicken dinner", filterdata.data)
+                // console.log("winner winner chicken dinner", filterdata.data)
             }
             winnerfilter(data);
         }
@@ -112,8 +122,8 @@ const DrawsMain = () => {
             const upcome = async (data: any) => {
                 let filterdata = await drawCommingfilter(data)
                 setClose(filterdata.data)
-                setLoader(fasle)
-                console.log("upcomming data", filterdata.data);
+                setLoader(false)
+                // console.log("upcomming data", filterdata.data);
             }
             upcome(data)
         }
@@ -129,7 +139,7 @@ const DrawsMain = () => {
         const win = async () => {
             let closingData = await drawWinnerfilter(data)
             let result = closingData.data;
-            console.log("im inside the winner page ", result);
+            console.log("im inside the winner page ", closingData);
             setWinner(result)
 
             // console.log("loader state...........", loader)
@@ -139,17 +149,27 @@ const DrawsMain = () => {
         const soon = async () => {
             let closingData = await drawCommingGet(value)
             let result = closingData.data;
-            console.log("im inside the upcomming page ", result);
+            // console.log("im inside the upcomming page ", result);
             setClose(result)
 
         }
         soon();
 
     }, [])
+
+    const remainingData = async () => {
+        setViewMore(false);
+        let data = {
+            "skip": 1
+        }
+        let closingData = await drawWinnerfilter(data)
+        // console.log(closingData.data);
+        setWinnerMore(closingData.data);
+    }
     return (
         <>
             <ScrollView
-                keyboardShouldPersistTaps={'handled'}
+            // keyboardShouldPersistTaps={'handled'}
             >
                 <View style={{ flexDirection: "row", width: "100%", paddingHorizontal: 18, alignSelf: "center", justifyContent: "space-between", height: verticalScale(46) }}>
 
@@ -164,7 +184,7 @@ const DrawsMain = () => {
 
                     <View style={{ flexDirection: "row", width: "14%", backgroundColor: "white", borderRadius: 10 }}>
                         <View style={{ width: "100%", alignItems: "center", justifyContent: "center" }}>
-                            <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+                            <TouchableOpacity onPress={() => { setModalVisible(!modalVisible), setWinnerMore(""), setViewMore(true) }}>
                                 <Image
                                     source={icons.filter}
                                     resizeMode={"contain"}
@@ -178,7 +198,8 @@ const DrawsMain = () => {
                     <View style={{ marginVertical: "1%", position: "relative", paddingBottom: "8%" }}>
                         {showWinners ?
                             <View>
-                                <Winners win={winner} />
+                                <Winners win={winnerData} />
+                                {/* {viewMore && <TouchableOpacity style={{ paddingStart: 18 }} onPress={() => remainingData()}><Text style={{ ...FONTS.lexendregular, color: COLORS.element, fontSize: 10, textDecorationLine: "underline" }}>View more</Text></TouchableOpacity>} */}
                             </View> :
                             <View>
                                 <UpcomingDraws son={close} />
@@ -198,9 +219,9 @@ const DrawsMain = () => {
             <Modal
                 animationType="none"
                 transparent={true}
-                style={{position:"absolute"}}
+                style={{ position: "absolute" }}
                 visible={modalVisible}
-                presentationStyle={'fullScreen'}
+                // presentationStyle={'fullScreen'}
                 onRequestClose={() => {
                     setModalVisible(!modalVisible), setDatePlaceHolder(true);
                 }}>
@@ -227,7 +248,7 @@ const DrawsMain = () => {
                             <View style={{}}>
                                 <Text style={{ textAlign: "center", fontFamily: "Lexend-Regular", fontSize: RFValue(20), color: "#000000", marginTop: 0 }}>Filter</Text>
                             </View>
-                            <TouchableOpacity style={{}} onPress={() => { setSearcher(""), setDate(moment(new Date()).toISOString()), setYear(""), resetFilter(), setDatePlaceHolder(true) }}>
+                            <TouchableOpacity style={{}} onPress={() => { setSearcher(""), setDate(moment(new Date()).toISOString()), setYear(""), resetFilter(), setDatePlaceHolder(true), setViewMore(true) }}>
                                 <Text style={{ textAlign: "center", fontFamily: "Lexend-Regular", fontSize: RFValue(14), color: "#E70736", marginTop: 5 }}>RESET</Text>
                             </TouchableOpacity>
                         </View>
@@ -281,7 +302,7 @@ const DrawsMain = () => {
 
                         </View>
                         <View style={{ alignItems: "center", marginTop: verticalScale(20), width: "100%", height: verticalScale(46) }} >
-                            <TouchableOpacity style={{ width: horizontalScale(223), height: "100%", borderRadius: 5, backgroundColor: "#E70736", alignItems: "center", justifyContent: "center" }} onPress={() => { handleFilter({ searcher, date, year }) }}>
+                            <TouchableOpacity style={{ width: horizontalScale(223), height: "100%", borderRadius: 5, backgroundColor: "#E70736", alignItems: "center", justifyContent: "center" }} onPress={() => { handleFilter({ searcher, date, year }), setViewMore(false) }}>
                                 <Text style={{ color: "#FFFFFF", fontSize: RFValue(15), fontFamily: "Lexend-Regular" }}>Apply</Text>
                             </TouchableOpacity>
                         </View>

@@ -178,7 +178,7 @@ const OrderDetails = ({ route }) => {
                                 />
                             </View>
                         </View>
-                        <View style={{ marginVertical: "4%", borderRadius: 8, padding: 10, backgroundColor: "white", flexDirection: "row" }}>
+                        {/* <View style={{ marginVertical: "4%", borderRadius: 8, padding: 10, backgroundColor: "white", flexDirection: "row" }}>
                             <Image
                                 source={icons.download}
                                 style={{
@@ -190,8 +190,8 @@ const OrderDetails = ({ route }) => {
                                 }}
                             />
                             <Text style={{ flexDirection: "column", ...FONTS.lexendregular, color: COLORS.black }}>  Invoice <Text style={{ color: "#E70736" }}>{" "}download</Text> </Text>
-                        </View>
-                        <View style={{ borderRadius: 8, padding: 10, backgroundColor: "white", flexDirection: "row" }}>
+                        </View> */}
+                        <View style={{ borderRadius: 8, padding: 10, backgroundColor: "white", flexDirection: "row", marginTop: "4%" }}>
                             <View style={{ padding: 7 }}>
                                 <Text style={{ ...FONTS.lexendsemibold, color: "black", fontSize: RFValue(15) }}>
                                     Shipping Details

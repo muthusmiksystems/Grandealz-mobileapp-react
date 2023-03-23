@@ -20,20 +20,31 @@ import { drawWinnerGet } from '../../services/register';
 import { ActivityIndicator } from 'react-native';
 import OrderEmpty from '../ExceptionScreens/orderEmpty';
 import DrawEmpty from '../ExceptionScreens/DrawEmpty';
-
+import { drawWinnerfilter } from '../../services/register';
 const Winners = (filters) => {
     console.log("winners", filters.win)
     const [close, setClose] = useState<any>();
-
+    const [flalistRefresh, setFlatListRefresh] = useState<any>();
     useEffect(() => {
         setClose(filters.win)
     }, [filters])
+
+    // const remainingData = async () => {
+    //     let data = {
+    //         "skip": 1
+    //     }
+    //     let closingData = await drawWinnerfilter(data)
+    //     console.log(closingData.data);
+    //     setFlatListRefresh(closingData.data);
+    // }
     return (
         <View style={{ paddingHorizontal: 18 }}>
             {close ?
                 <FlatList
                     data={close}
                     contentContainerStyle={{ marginTop: 10 }}
+                    // extraData={flalistRefresh}
+                    // overScrollMode={'never'}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => (
                         <View style={{ borderRadius: 5, backgroundColor: "white", paddingVertical: 16, marginBottom: 14 }}>
@@ -58,6 +69,8 @@ const Winners = (filters) => {
                             </TouchableOpacity>
                         </View>
                     )}
+                // onEndReachedThreshold={0.2}
+                // onEndReached={remainingData}
                 />
                 : <DrawEmpty value={"There are no Winner Announced at the moment. Please try again later."} />}
         </View>

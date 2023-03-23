@@ -101,21 +101,21 @@ const CouponDetails = () => {
                     </View>
                     <FlatList
                         data={dataoff}
-                        contentContainerStyle={{ marginLeft: horizontalScale(12), paddingBottom: "5%" }}
+                        contentContainerStyle={{ marginLeft: horizontalScale(12) }}
                         keyExtractor={item => item.id}
                         renderItem={({ item }) => (
                             <View style={{ paddingTop: verticalScale(14) }}>
                                 <TouchableOpacity style={{ backgroundColor: "white", flexDirection: "row", width: "96.5%", borderRadius: 10, }}>
                                     <View style={{ flexDirection: "column", width: horizontalScale(30), right: horizontalScale(10), marginTop: "17%", backgroundColor: COLORS.lightGray, height: verticalScale(35), borderBottomEndRadius: 55, borderTopEndRadius: 55 }} />
                                     <View style={{ flexDirection: "column", width: horizontalScale(300), right: horizontalScale(10) }}>
-                                        <View style={{ flexDirection: "row", padding: 15,justifyContent:"space-between",/* paddingBottom:25, borderBottomColor: "#616161", borderBottomWidth: 1 */ }}>
+                                        <View style={{ flexDirection: "row", padding: 15, justifyContent: "space-between",/* paddingBottom:25, borderBottomColor: "#616161", borderBottomWidth: 1 */ }}>
                                             <View style={{ flexDirection: "column", width: horizontalScale(208), }}>
                                                 <View style={{ marginBottom: "0%", borderLeftWidth: 4, borderColor: 'red', borderRightWidth: 4, marginLeft: -35, height: 30, borderRadius: 3, width: horizontalScale(348) }}>
                                                     <Text style={{ ...FONTS.lexendsemibold, color: COLORS.black, fontSize: RFValue(14), padding: 2, marginLeft: 10 }}>Flat {item.discount}% OFF</Text>
                                                 </View>
                                                 <Text style={{ ...FONTS.lexendregular, color: COLORS.gray, fontSize: RFValue(12), paddingVertical: 2, marginLeft: 10 }}>Use {item.description}</Text>
                                             </View>
-                                            <View style={{flexDirection:"column",paddingRight:"10%"}}>
+                                            <View style={{ flexDirection: "column", paddingRight: "10%" }}>
                                                 <Text style={{ marginTop: 10, color: COLORS.gray }}>{item.coupon}</Text>
                                             </View>
                                         </View>
@@ -137,6 +137,7 @@ const CouponDetails = () => {
                             </View>
                         )}
                     />
+                    <View style={{ padding: "22%" }}></View>
                 </View>
             ) : <TicketEmpty />}
         </SafeAreaView>

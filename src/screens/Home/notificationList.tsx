@@ -121,7 +121,7 @@ const NotificationList = () => {
             renderItem={({ item }) => (
               <View style={{ paddingHorizontal: "4%", marginTop: 14 }}>
                 <TouchableOpacity style={{ backgroundColor: "white", borderRadius: 5, elevation: 1, flexDirection: "row", paddingVertical: moderateScale(10) }}>
-                  <View style={{ flexDirection: "column", width: horizontalScale(10), height: verticalScale(10), marginStart: 6, marginTop: 3 }}>
+                  <View style={{ flexDirection: "column", width: horizontalScale(10), height: verticalScale(10), marginStart: 6,marginTop:5 }}>
                     <Image
                       source={icons.rect}
                       resizeMode="contain"
@@ -131,7 +131,7 @@ const NotificationList = () => {
                       }}
                     />
                   </View>
-                  <View style={{ flexDirection: "column", width: "72%", paddingStart: 4 }}>
+                  <View style={{ flexDirection: "column", width: "72%", marginLeft: 6,marginTop:0  }}>
                     <Text style={{ fontSize: 13, ...FONTS.lexendsemibold, color: COLORS.black }}>{item.from}</Text>
                     <Text style={{ fontSize: 10, ...FONTS.lexendregular, color: "#000", marginTop: 4, marginBottom: 8 }}>{item.to}</Text>
                     <Text style={{ fontSize: 13, ...FONTS.lexendregular, color: COLORS.gray }}>{item.date}</Text>
