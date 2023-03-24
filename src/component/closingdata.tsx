@@ -86,7 +86,7 @@ const ClosingSoon = () => {
       }
     })
     setClosingsoondata(ClosingSoon)
-    // console.log("ermmm", ClosingSoon)
+    console.log("ermmm", ClosingSoon)
   }, [])
 
   const handleSearch = (value: any) => {
@@ -119,14 +119,26 @@ const ClosingSoon = () => {
                   <View style={{ paddingHorizontal: horizontalScale(8) }}>
                     <TouchableOpacity style={{ borderRadius: 9, borderTopWidth: 2, borderTopColor: "#E70736", backgroundColor: "white", height: RFValue(145), width: RFValue(110) }} onPress={() => /* navigation.navigate("PriceDetails") */ handleSearch(item)}>
                       <View style={{ alignItems: 'center', borderTopEndRadius: 8, borderTopStartRadius: 8 }}>
-                        <View style={{ flexDirection: 'column', marginTop: RFValue(15) }}>
+                        <View style={{ flexDirection: 'column', marginTop: RFValue(12) }}>
                           <Image
                             source={{ uri: item.product_image }}
                             // resizeMode="cover"
                             style={{
-                              height: verticalScale(50),
+                              height: verticalScale(53),
                               width: horizontalScale(86),
                               borderRadius: 5
+                            }}
+                          />
+                          <Image
+                            source={{ uri: item.draw_image }}
+                            resizeMode="cover"
+                            style={{
+                              height: verticalScale(53),
+                              width: horizontalScale(34),
+                              borderRadius: 4,
+                              position: "absolute",
+                              alignSelf: "flex-end",
+                              justifyContent: "center"
                             }}
                           />
                         </View>

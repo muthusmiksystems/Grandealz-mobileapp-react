@@ -23,6 +23,9 @@ import moment from 'moment';
 const TicketDetails = (Ticketdata) => {
     console.log("drma.....", Ticketdata.Ticketdata)
     const handleItemPurchasedDate = (data: any) => {
+        var noon = data.substring(data.length - 2, data.length)
+        // console.log("Noon.......", noon, data);
+
         var newDate = data.replace(',', '').replace('PM', '').replace('AM', '').replaceAll("/", ".")
         //let ticketDate = newDate.length;
         // let length=data.length
@@ -33,7 +36,7 @@ const TicketDetails = (Ticketdata) => {
         // console.log("Ticket date..............", data, "New date..........", newDate);
         // moment(new Date(newStr3)).format("dd/mm/yyyy")
 
-        return (newDate.substring(0, newDate.length - 4))
+        return (newDate.substring(0, newDate.length - 4) + " " + noon)
     }
 
     return (
