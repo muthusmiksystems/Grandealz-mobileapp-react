@@ -15,7 +15,6 @@ import {
   Alert,
   BackHandler,
   TouchableOpacity,
-
   // Button
 } from "react-native";
 // import {useBackHandler} from '@react-native-community/hooks';
@@ -54,38 +53,29 @@ const Login = (props: Prop) => {
   const storage = StorageController
   const dispatch = useDispatch();
   const [passShow, setPassShow] = useState("true");
-  const [loader, setLoader] = useState(false)
-
-  const [isSelected, setSelection] = useState(true);
-
+  const [loader, setLoader] = useState<any>(false)
+  const [isSelected, setSelection] = useState<any>(true);
   //const { handleChange, details, handleSubmit, formErrors, data, formValues ,syncvalue} = useForm(validate);
-  const [token, setToken] = useState("");
-  const [errorLogin, setErrorLogin] = useState(null);
+  const [token, setToken] = useState<any>("");
+  const [errorLogin, setErrorLogin] = useState<any>(null);
   const [errorEmail, setErrorEmail] = useState<any>(null);
   const [errorPassword, setErrorPassword] = useState<any>(null);
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [email, setEmail] = useState<any>(null);
+  const [password, setPassword] = useState<any>(null);
   const [error, setError] = useState<any>("");
 
   useEffect(() => {
     async function fetchJSONAsync() {
-
       let name = await AsyncStorage.getItem("username");
       setEmail(name)
-
       let pass = await AsyncStorage.getItem("password");
       setPassword(pass)
       console.log(name, pass, "password user name", email, password)
-
     }
     fetchJSONAsync()
   }, [])
 
   const validateFunction = () => {
-    // console.log("values", email, password);
-    // console.log(email === null, " null check")
-    // console.log(email === "", " empty check")
-    // console.log(email ? "ture" : "false")
     let errorCount = 0;
     // console.log("satrday", (!/^[a-zA-Z0-9!@#$%^&*]{0,10}$/.test(password)));
     if (!email) {
@@ -94,11 +84,9 @@ const Login = (props: Prop) => {
     }
     else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       setErrorEmail('Please enter valid email')
-      // console.log("hiii");
       errorCount++;
     }
     else {
-      // console.log(" no testing in email")
       setErrorEmail("");
     }
     if (!password) {
@@ -110,48 +98,12 @@ const Login = (props: Prop) => {
       errorCount++;
     }
     else {
-      // console.log(" no testing in password")
       setErrorPassword("")
     }
-    // console.log("testing ",email)
-    // if (email.length < 1) {
-    //   setErrorEmail('Please enter email');
-    //   errorCount++;
-    // }
-    // if (email) {
-    //   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
-    //     setErrorEmail("Please enter valid email");
-    //     errorCount++;
-    //   }
-    //   else {
-    //     console.log(" no testing ")
-    //     setErrorEmail("");
-    //   }
-    // }
-    // if (password !== undefined) {
-    //   if (password.length < 1) {
-    //     setErrorPassword("Please enter password");
-    //     errorCount++;
-    //   } else if (!/^[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(password)) {
-    //     setErrorPassword("Passwords must be longer than or equal to 8 characters");
-    //     errorCount++;
-    //   }
-    // }
     if (errorCount === 0) {
       setErrorEmail(""), setErrorPassword("");
       return true;
     }
-    // if (errorCount > 0) {
-    //   if (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
-    //     setErrorEmail("");
-    //   }
-    //   if (/^[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(password)) {
-    //     setErrorPassword("");
-    //   }
-    // }
-    // if (errorCount > 0) {
-    //   console.log("errorcount", errorCount)
-    // }
     else {
       return false;
     }
@@ -184,10 +136,11 @@ const Login = (props: Prop) => {
         .then(async (originalPromiseResult: any) => {
           console.log("successfully returned to login with response ", originalPromiseResult);
           if (originalPromiseResult?.data?.access_token) {
-
-            console.log("token  sam   ...dddd", originalPromiseResult.data.access_token);
+            console.log("Successfully logged in with access_token and roles........", originalPromiseResult.data.access_token, "..........", originalPromiseResult.data.user.roles);
             await AsyncStorage.setItem('loginToken', originalPromiseResult.data.access_token)
-
+            // let userDetails = JSON.parse(originalPromiseResult)
+            await AsyncStorage.setItem('userDetails', JSON.stringify(originalPromiseResult))
+            // console.log("JsonStringify............", JSON.stringify(originalPromiseResult));
             Toast.show("Successfully logged as grandealz", Toast.LONG, { backgroundColor: 'red' });
             if (isSelected === true) {
               await AsyncStorage.setItem('username', email),
@@ -218,7 +171,6 @@ const Login = (props: Prop) => {
               Toast.LONG,
             )
             //  setErrorLogin(originalPromiseResult.message);
-
           }
         }).catch((rejectedValueOrSerializedError) => {
           console.log(" Inside catch", rejectedValueOrSerializedError);
@@ -258,7 +210,7 @@ const Login = (props: Prop) => {
       </View>
       <View style={styles.subdivTwo}>
         <Text style={{ fontSize: RFValue(26), color: "black", textAlign: "center", fontFamily: "Lexend-SemiBold", marginTop: verticalScale(16) }}>Log In</Text>
-        <TouchableOpacity style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), marginTop: verticalScale(40), color: "#000" }}
+        <TouchableOpacity style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingHorizontal: 10, borderRadius: 8, borderColor: (errorEmail) ? "red" : "#c4c4c2", width: horizontalScale(300), marginTop: verticalScale(40), justifyContent: "space-between" }}
           onPressIn={() => handlePasswordBox()}>
           <TextInput
             placeholder="Email"
@@ -267,23 +219,24 @@ const Login = (props: Prop) => {
             keyboardType="email-address"
             maxLength={30}
             //onChangeText={e => { handleChange(e, "email"), setErrorEmail(""), setErrorLogin(""), setEmail(e) }}
-            onChangeText={(text) => setEmail(text)}
+            onChangeText={(text) => { setEmail(text), setErrorEmail("") }}
             style={{
               flexDirection: "column",
-              width: horizontalScale(250),
+              width: horizontalScale(220),
               ...FONTS.lexendregular,
-              fontSize: RFValue(14), color: (errorEmail) ? "red" : "black"
+              fontSize: RFValue(14),
+              color: (errorEmail) ? "red" : "black"
             }}
           />
           <Fontisto name='email' size={30} style={{ alignSelf: "center", color: COLORS.gray }} />
         </TouchableOpacity>
 
         <View style={{ height: "5%" }}>
-
           {errorEmail ?
             <Text style={styles.ErrorText}>{errorEmail}</Text> : null}
         </View>
-        <TouchableOpacity style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingStart: 10, borderRadius: 8, borderColor: "#c4c4c2", width: horizontalScale(300), color: "#000" }} onPressIn={() => handlePasswordBox()} >
+
+        <TouchableOpacity style={{ alignSelf: "center", flexDirection: "row", borderWidth: 1, paddingHorizontal: 10, borderRadius: 8, borderColor: (errorPassword) ? "red" : "#c4c4c2", width: horizontalScale(300), justifyContent: "space-between" }} onPressIn={() => handlePasswordBox()} >
           <TextInput
             placeholder="Password"
             value={password}
@@ -291,12 +244,13 @@ const Login = (props: Prop) => {
             placeholderTextColor={"black"}
             maxLength={15}
             //onChangeText={e => { handleChange(e, "password"), setErrorPassword(""), setErrorLogin(""), setPassword(e) }}
-            onChangeText={(text) => setPassword(text)}
+            onChangeText={(text) => { setPassword(text), setErrorPassword("") }}
             style={{
               flexDirection: "column",
-              width: horizontalScale(250),
+              width: horizontalScale(220),
               ...FONTS.lexendregular,
-              fontSize: RFValue(14), color: (errorPassword) ? "red" : "black"
+              fontSize: RFValue(14),
+              color: (errorPassword) ? "red" : "black"
             }}
           />
           <TouchableOpacity style={{ alignSelf: "center", flexDirection: "column" }} onPress={() => setPassShow(!passShow)}>
@@ -304,12 +258,10 @@ const Login = (props: Prop) => {
               <Ionicons name='eye-off-outline' size={30} style={{ color: COLORS.gray }} />
             }
           </TouchableOpacity>
-
         </TouchableOpacity>
 
         <View style={{ height: "6%" }}>
-          {errorPassword ?
-            <Text style={styles.ErrorText}>{errorPassword}</Text> : null}
+          {errorPassword ? <Text style={styles.ErrorText}>{errorPassword}</Text> : null}
           {errorLogin ? <Text style={styles.ErrorText}>{errorLogin}</Text> : null}
         </View>
         <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginHorizontal: "5%" }}>
@@ -341,8 +293,8 @@ const Login = (props: Prop) => {
           </TouchableOpacity>
         }
         <View style={{ flexDirection: "row", marginTop: "10%", alignSelf: "center" }}>
-          <Text style={{ flexDirection: "column", alignSelf: "flex-start", fontFamily: "Lexend-Regular", color: "#000", fontSize: RFValue(13) }}>New User? </Text>
-          <TouchableOpacity style={{ alignSelf: "flex-end", flexDirection: "column" }} onPressIn={() => navigation.navigate("Signup")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", fontSize: RFValue(13) }}>Create New Account</Text></TouchableOpacity>
+          <Text style={{ flexDirection: "column", fontFamily: "Lexend-Regular", color: "#000", fontSize: RFValue(13) }}>New User? </Text>
+          <TouchableOpacity style={{ flexDirection: "column" }} onPressIn={() => navigation.navigate("Signup")}><Text style={{ color: "#E70736", fontFamily: "Lexend-Regular", fontSize: RFValue(13) }}>Create New Account</Text></TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
@@ -372,9 +324,7 @@ const styles = StyleSheet.create({
     color: "red",
     ...FONTS.lexendregular,
     fontSize: RFValue(10),
-
     marginStart: "7%"
-
   }
 })
 export default Login;

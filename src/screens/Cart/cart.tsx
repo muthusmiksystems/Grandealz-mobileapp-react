@@ -30,6 +30,7 @@ import { useIsFocused } from "@react-navigation/core";
 import { ourCartPage } from "../../services/ourCart";
 import CartEmpty from "../ExceptionScreens/cartEmpty";
 import { removeCoup } from "../../services/copoun";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Cart = () => {
 
@@ -88,6 +89,22 @@ const Cart = () => {
         setLoader(false);
     }
 
+    const processCheckOut = async (value: any) => {
+        let userType = await AsyncStorage.getItem('userDetails');
+        let userDetails = JSON.parse(userType)
+        console.log("User Type........", userDetails.data.user.phone, ".................", value);
+        if (userDetails?.data?.user?.roles === "user") {
+            // navigation.navigate("Delivery", { "amount": cartdata?.total })
+            console.log("cartD", cartdata?.total);
+        }
+        else {
+            // navigation.navigate("OtpPage", { value: phone })
+            requestOtp(userDetails.data.user.phone)
+        }
+    }
+    const requestOtp = (mblNumber: any) => {
+
+    }
     return (
         <SafeAreaView style={{ backgroundColor: "#F1F1F", height: "100%" }}>
             <StatusBar
@@ -139,7 +156,7 @@ const Cart = () => {
                                 <Text style={{ color: COLORS.textHeader, fontSize: RFValue(11), ...FONTS.lexendregular }}>Continue to Shopping</Text>
                             </TouchableOpacity>
                             {!toggle ?
-                                <TouchableOpacity style={{ flexDirection: "column", width: "45%", backgroundColor: COLORS.element, borderRadius: 5, justifyContent: "center", alignItems: "center", marginLeft: "4%", }} onPress={() => { navigation.navigate("Delivery", { "amount": cartdata?.total }) }}>
+                                <TouchableOpacity style={{ flexDirection: "column", width: "45%", backgroundColor: COLORS.element, borderRadius: 5, justifyContent: "center", alignItems: "center", marginLeft: "4%", }} onPress={() => processCheckOut({ "amount": cartdata?.total })/* navigation.navigate("Delivery", { "amount": cartdata?.total }) */}>
                                     <Text style={{ color: COLORS.white, fontSize: RFValue(11), ...FONTS.lexendregular }} >Process to Checkout</Text>
                                 </TouchableOpacity>
                                 :
